@@ -1,0 +1,24 @@
+.button.pootle {
+    background: #ef4832;
+    border-color: #b32 !important;
+    color: #fff;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .25), 0 1px 0 rgba(0, 0, 0, .25);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .52), 0 1px 0 rgba(0, 0, 0, .25);
+}
+
+.button.pootle:hover {
+    background: #e04025;
+    color: #fff;
+}
+div.pootle.updated {
+    border-left-color: #ef4832;
+}
+
+#toplevel_page_page_builder a.wp-first-item {
+    text-indent: -1000px;
+}
+#toplevel_page_page_builder a.wp-first-item:before {
+    content: 'Home';
+    position: absolute;
+    text-indent: 1000px;
+}

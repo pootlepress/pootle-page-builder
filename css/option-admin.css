@@ -1,0 +1,146 @@
+.form-table tr > th {
+    width: 0;
+}
+
+/* The Panel Type List */
+
+.panel-type-list {
+    margin: 0 -5px 10px -5px;
+    min-height: 70px;
+    background: white;
+    padding: 10px 5px 1px;
+    box-shadow: 0 0 1px gray;
+}
+
+.panel-type-list:after {
+    content: '';
+    display: table;
+    clear: both;
+}
+
+.panel-type-list .panel-type {
+    width: 25%;
+
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left;
+    margin-bottom: 10px;
+    padding: 0 5px;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.panel-type-list .panel-type h3 {
+    height: 1.2em;
+
+    color: #333333;
+    font-size: 14px;
+    margin: 0 0 7px 0;
+}
+
+.panel-type-list .panel-type small {
+    height: 2.5em;
+
+    display: block;
+    font-size: 11px;
+    line-height: 1.25em;
+    overflow: hidden;
+}
+
+.panel-type-list .panel-type-wrapper {
+    background: #ececec;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ececec), color-stop(1, #f8f8f8));
+    background: -ms-linear-gradient(bottom, #ececec, #f8f8f8);
+    background: -moz-linear-gradient(center bottom, #ececec 0%, #f8f8f8 100%);
+    background: -o-linear-gradient(#f8f8f8, #ececec);
+    border: 1px solid #cccccc;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    cursor: move;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f8f8f8', endColorstr='#ececec', GradientType=0);
+    padding: 8px;
+}
+
+.panel-type-list .panel-type-wrapper:hover {
+    border-color: #C0C0C0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+span.logo img {
+    display: none;
+}
+
+.wrap .useful-links {
+    display: none;
+}
+
+.wrap > form > h3 {
+    font-size: 23px;
+}
+.settings_page_page_builder h3 {
+    display: none
+}
+
+/* Welcome Page */
+.ppb-badge {
+    float: right;
+    width: 250px;
+    height: 70px;
+    margin: 0;
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: -5px;
+    right: 0;
+    background: url(images/pootle-logo.png) center/contain no-repeat;
+}
+
+.ppb-badge .dashicons {
+    font-size: 7em;
+    height: auto;
+    width: auto;
+    margin: 0 0 10px;
+}
+
+.ppb-video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 25px;
+    height: 0;
+    margin-bottom: 40px;
+}
+
+.ppb-video-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+/* New page */
+.page_builder_add a{
+    text-decoration: none;
+}
+
+.page-builder_page_page_builder_settings .wrap h3 {
+    display: none;
+}
+
+table.form-table th, table.form-table td {
+    padding: 7px 5px;
+}
+.about-wrap .about-text {
+  margin-right: 0px;
+}
+.about-wrap h1 {
+  margin-right: 270px;
+}

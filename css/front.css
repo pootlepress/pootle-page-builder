@@ -1,0 +1,221 @@
+.panel-grid {
+    zoom: 1;
+}
+
+.panel-grid .panel-row-style {
+    position: relative;
+    overflow: hidden;
+}
+
+.panel-grid:before {
+    content: '';
+    display: block;
+}
+
+.panel-grid:after {
+    clear: both;
+    content: '';
+    display: table;
+}
+
+.panel-grid-cell {
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    min-height: 1em;
+    font-size: 15px;
+}
+
+@media only screen and (min-width: 768px) {
+    .panel-grid-cell {
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+    }
+}
+
+.panel-grid-cell .panel {
+    min-height: 1em;
+    zoom: 1;
+}
+
+.panel-grid-cell > .panel {
+    border: none;
+    box-shadow: none !important;
+}
+
+.panel-grid-cell .panel:before {
+    content: '';
+    display: block;
+}
+
+.panel-grid-cell .panel:after {
+    clear: both;
+    content: '';
+    display: table;
+}
+
+.panel-grid-cell .panel.panel-last-child {
+    margin-bottom: 0;
+}
+
+.panel-grid-cell .widget-title {
+    margin-top: 0;
+}
+
+/* Canvas Slider Compat */
+.panel-grid-cell .widget_woo_component .business .slider-pagination {
+    position: relative;
+}
+
+.panel-grid-cell .widget_woo_component .business .slider-pagination .flex-control-nav {
+    padding: 0;
+}
+
+.panel-grid-cell .widget_woo_component .business #loopedSlider .slides {
+    padding: 0;
+}
+
+.panel-grid-cell .widget_woo_component .business #loopedSlider .slides > li > img {
+    padding: 0;
+}
+
+.panel-grid-cell .widget_woo_component .business ul.flex-direction-nav {
+    list-style-type: none;
+}
+
+.panel-grid-cell .widget_woo_component .business ul.flex-direction-nav li {
+    list-style-type: none;
+}
+
+.panel-grid #tabs .list li {
+    list-style-type: none;
+}
+
+.panel-grid-cell > .widget_woo_component > .magazine ul {
+    clear: none;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.panel-grid-cell > .widget_woo_component > .magazine ul > li {
+    list-style-type: none;
+}
+
+.panel-grid-cell > .widget_woo_component > .magazine .flex-direction-nav {
+    height: 0;
+}
+
+.panel-grid-cell > .widget_woo_component > .magazine > .pagination-wrap {
+    text-align: center;
+}
+
+.panel-grid-cell > .widget_woo_component > .magazine > .pagination-wrap > .flex-control-nav {
+    position: relative;
+    top: 10px;
+}
+
+.panel-grid-cell > .widget_pootle-text-widget ul {
+    list-style-position: outside;
+}
+
+/* fix Canvas set ol calendar element within .entry with a padding left */
+.entry > .panel-grid > .panel-row-style > .panel-grid-cell > .panel > ol.vcalendar {
+    padding-left: 0;
+}
+
+/* fix Canvas set ul tweets element within .entry with a padding left */
+.entry > .panel-grid > .panel-row-style > .panel-grid-cell > .panel > ul.tweets {
+    padding-left: 0;
+}
+
+.panel-grid-cell-container {
+    font-size: 0;
+    position: relative;
+}
+
+/* WooSlider slideshow in PB has margin in <p>, padding in <a>, and extra <br>  */
+.panel-grid-cell > .widget_wooslider_slideshow_slides > .wooslider > .wooslider-viewport > .slides > .slide > .slide-content > .entry > p {
+    margin-bottom: 0;
+}
+
+.panel-grid-cell > .widget_wooslider_slideshow_slides > .wooslider > .wooslider-viewport > .slides > .slide > .slide-content > .entry > p > a {
+    padding: 0;
+}
+
+.panel-grid-cell > .widget_wooslider_slideshow_slides > .wooslider > .wooslider-viewport > .slides > .slide br {
+    display: none;
+}
+
+.panel-grid .widget ul, .panel-grid .widget ol {
+    list-style-position: inside;
+}
+
+ul.wooTabs {
+    margin-bottom: 0 !important;
+}
+
+video.ppb-bg-video {
+    position: absolute;
+    top: -999px;
+    bottom: -999px;
+    left: -999px;
+    right: -999px;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    margin: auto;
+    object-fit: cover;
+}
+
+img.ppb-bg-parallax {
+    position: absolute;
+    left: -999px;
+    right: -999px;
+    margin: auto;
+    top:0;
+    max-width: none;
+    width: auto;
+    height: auto;
+}
+
+/* Overlay */
+.panel-row-style:before {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: "";
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.panel-row-style {
+    position: relative;
+    z-index: 10;
+}
+
+.panel-grid-cell-container {
+    position: relative;
+    z-index: 30; /* row content needs to be on top of row background color */
+}
+
+.ppb-full-width-no-bg, .ppb-full-width-no-bg:before{
+    background: none !important;
+}
+
+@media only screen and (min-width: 769px) {
+    .panel-row-style.video-bg {
+        background: initial !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .hide-on-mobile {
+        display: none;
+    }
+}

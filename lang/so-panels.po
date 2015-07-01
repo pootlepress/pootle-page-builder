@@ -1,0 +1,746 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2014-01-02 17:05+0200\n"
+"PO-Revision-Date: 2014-01-02 17:05+0200\n"
+"Last-Translator: Greg Priday <greg@siteorigin.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;esc_attr_e;esc_html_e\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../ppb-panels.php:92
+msgid "Custom Home Page Builder"
+msgstr ""
+
+#: ../ppb-panels.php:93
+msgid "Home Page"
+msgstr ""
+
+#: ../ppb-panels.php:105 ../ppb-panels.php:114
+#: ../ppb-panels.php:369 ../inc/options.php:7
+msgid "Page Builder"
+msgstr ""
+
+#: ../ppb-panels.php:282
+msgid "Insert"
+msgstr ""
+
+#: ../ppb-panels.php:283
+msgid "cancel"
+msgstr ""
+
+#: ../ppb-panels.php:284
+msgid "Delete"
+msgstr ""
+
+#: ../ppb-panels.php:285
+msgid "Duplicate"
+msgstr ""
+
+#: ../ppb-panels.php:286
+msgid "Edit"
+msgstr ""
+
+#: ../ppb-panels.php:287
+msgid "Done"
+msgstr ""
+
+#: ../ppb-panels.php:288
+msgid "Undo"
+msgstr ""
+
+#: ../ppb-panels.php:289
+msgid "Add"
+msgstr ""
+
+#: ../ppb-panels.php:292
+msgid "Columns deleted"
+msgstr ""
+
+#: ../ppb-panels.php:293
+msgid "Widget deleted"
+msgstr ""
+
+#: ../ppb-panels.php:294
+msgid ""
+"Are you sure you want to load this layout? It will overwrite your current "
+"page."
+msgstr ""
+
+#: ../ppb-panels.php:295
+#, php-format
+msgid "Edit %s Widget"
+msgstr ""
+
+#: ../ppb-panels.php:858
+msgid "Edit Home Page"
+msgstr ""
+
+#: ../ppb-panels.php:960
+msgid "Untitled"
+msgstr ""
+
+#: ../ppb-panels.php:961
+msgid "Unpublished"
+msgstr ""
+
+#: ../ppb-panels.php:966
+#, php-format
+msgid "Clone Page: %s"
+msgstr ""
+
+#: ../ppb-panels.php:979
+msgid "Clone: Current Home Page"
+msgstr ""
+
+#: ../ppb-panels.php:997
+msgid "Recommended Plugins and Widgets"
+msgstr ""
+
+#: ../ppb-panels.php:998
+msgid "Free plugins that work well with Page Builder"
+msgstr ""
+
+#: ../inc/options.php:7 ../tpl/options.php:3
+msgid "SiteOrigin Page Builder"
+msgstr ""
+
+#: ../inc/options.php:25
+msgid "General"
+msgstr ""
+
+#: ../inc/options.php:26
+msgid "Display"
+msgstr ""
+
+#: ../inc/options.php:28
+msgid "Post Types"
+msgstr ""
+
+#: ../inc/options.php:29
+msgid "Copy Content to Post Content"
+msgstr ""
+
+#: ../inc/options.php:30
+msgid "Animations"
+msgstr ""
+
+#: ../inc/options.php:32
+msgid "Disable animations to improve Page Builder interface performance"
+msgstr ""
+
+#: ../inc/options.php:34
+msgid "Bundled Widgets"
+msgstr ""
+
+#: ../inc/options.php:37
+msgid "Responsive"
+msgstr ""
+
+#: ../inc/options.php:38
+msgid "Mobile Width"
+msgstr ""
+
+#: ../inc/options.php:39
+msgid "Margin Sides"
+msgstr ""
+
+#: ../inc/options.php:40
+msgid "Margin Bottom"
+msgstr ""
+
+#: ../inc/options.php:41
+msgid "Inline CSS"
+msgstr ""
+
+#: ../inc/options.php:43
+msgid "Disabling this will generate CSS using a separate query."
+msgstr ""
+
+#: ../inc/options.php:76
+msgid "Post types that will have the page builder available"
+msgstr ""
+
+#: ../inc/options.php:92
+msgid "Enabled"
+msgstr ""
+
+#: ../inc/options.php:97
+msgid "px"
+msgstr ""
+
+#: ../inc/revisions.php:43
+msgid "Page Builder Content"
+msgstr ""
+
+#: ../tpl/admin-home-page.php:7
+msgid "Custom Home Page"
+msgstr ""
+
+#: ../tpl/admin-home-page.php:10
+msgid "ON"
+msgstr ""
+
+#: ../tpl/admin-home-page.php:11
+msgid "OFF"
+msgstr ""
+
+#: ../tpl/admin-home-page.php:18
+#, php-format
+msgid "Home page updated. <a href=\"%s\">View page</a>"
+msgstr ""
+
+#: ../tpl/admin-home-page.php:25
+msgid "Preview Changes"
+msgstr ""
+
+#: ../tpl/admin-home-page.php:30
+msgid "Save Home Page"
+msgstr ""
+
+#: ../tpl/admin-home-page.php:38
+msgid "This interface requires Javascript"
+msgstr ""
+
+#: ../tpl/help.php:2
+msgid ""
+"You can use SiteOrigin Page Builder to create home and sub pages, filled "
+"your own widgets."
+msgstr ""
+
+#: ../tpl/help.php:3
+msgid "The page layouts are responsive and fully customizable."
+msgstr ""
+
+#: ../tpl/help.php:6
+#, php-format
+msgid ""
+"Read the <a href='%s' target='_blank'>full documentation</a> on SiteOrigin."
+msgstr ""
+
+#: ../tpl/metabox-panels.php:24
+msgid "Add Widget"
+msgstr ""
+
+#: ../tpl/metabox-panels.php:25 ../tpl/metabox-panels.php:66
+msgid "Add Row"
+msgstr ""
+
+#: ../tpl/metabox-panels.php:27
+msgid "Prebuilt Layouts"
+msgstr ""
+
+#: ../tpl/metabox-panels.php:34
+msgid "Add New Widget"
+msgstr ""
+
+#: ../tpl/metabox-panels.php:67 ../widgets/basic.php:76
+msgid "Columns"
+msgstr ""
+
+#: ../tpl/metabox-panels.php:74
+msgid "Insert Prebuilt Page Layout"
+msgstr ""
+
+#: ../tpl/metabox-panels.php:75
+msgid "Page Layout"
+msgstr ""
+
+#: ../tpl/metabox-panels.php:77
+msgid "Select Layout"
+msgstr ""
+
+#: ../tpl/metabox-panels.php:81
+msgid "Untitled Layout"
+msgstr ""
+
+#: ../tpl/metabox-panels.php:93
+msgid "none"
+msgstr ""
+
+#: ../video/jplayer/skins/premium/gui.php:3
+#: ../video/jplayer/skins/siteorigin/gui.php:3
+msgid "play"
+msgstr ""
+
+#: ../video/jplayer/skins/premium/gui.php:4
+#: ../video/jplayer/skins/siteorigin/gui.php:4
+msgid "pause"
+msgstr ""
+
+#: ../video/jplayer/skins/premium/gui.php:5
+#: ../video/jplayer/skins/siteorigin/gui.php:5
+msgid "stop"
+msgstr ""
+
+#: ../video/jplayer/skins/premium/gui.php:7
+#: ../video/jplayer/skins/siteorigin/gui.php:7
+msgid "full screen"
+msgstr ""
+
+#: ../video/jplayer/skins/premium/gui.php:8
+#: ../video/jplayer/skins/siteorigin/gui.php:8
+msgid "restore screen"
+msgstr ""
+
+#: ../video/jplayer/skins/premium/gui.php:10
+msgid "mute"
+msgstr ""
+
+#: ../video/jplayer/skins/premium/gui.php:11
+msgid "unmute"
+msgstr ""
+
+#: ../widgets/basic.php:7
+msgid "Gallery (PB)"
+msgstr ""
+
+#: ../widgets/basic.php:9
+msgid "Displays a gallery."
+msgstr ""
+
+#: ../widgets/basic.php:48
+msgid "Gallery Images"
+msgstr ""
+
+#: ../widgets/basic.php:49
+msgid "edit gallery"
+msgstr ""
+
+#: ../widgets/basic.php:53
+msgid ""
+"Comma separated attachment IDs. Defaults to all current page's attachments."
+msgstr ""
+
+#: ../widgets/basic.php:57
+msgid "Image Size"
+msgstr ""
+
+#: ../widgets/basic.php:59 ../widgets/basic.php:459 ../widgets/widgets.php:638
+msgid "Default"
+msgstr ""
+
+#: ../widgets/basic.php:60
+msgid "Large"
+msgstr ""
+
+#: ../widgets/basic.php:61
+msgid "Medium"
+msgstr ""
+
+#: ../widgets/basic.php:62
+msgid "Thumbnail"
+msgstr ""
+
+#: ../widgets/basic.php:63
+msgid "Full"
+msgstr ""
+
+#: ../widgets/basic.php:71
+msgid "Gallery Type"
+msgstr ""
+
+#: ../widgets/basic.php:81
+msgid "Link To"
+msgstr ""
+
+#: ../widgets/basic.php:83
+msgid "Attachment Page"
+msgstr ""
+
+#: ../widgets/basic.php:84
+msgid "File"
+msgstr ""
+
+#: ../widgets/basic.php:85 ../widgets/basic.php:145 ../widgets/basic.php:433
+#: ../widgets/widgets.php:611
+msgid "None"
+msgstr ""
+
+#: ../widgets/basic.php:97
+msgid "Post Content (PB)"
+msgstr ""
+
+#: ../widgets/basic.php:99
+msgid "Displays some form of post content form the current post."
+msgstr ""
+
+#: ../widgets/basic.php:146 ../widgets/basic.php:398
+#: ../widgets/widgets/call-to-action/call-to-action.php:15
+#: ../widgets/widgets/list/list.php:15
+#: ../widgets/widgets/price-box/price-box.php:15
+msgid "Title"
+msgstr ""
+
+#: ../widgets/basic.php:147
+msgid "Featured Image"
+msgstr ""
+
+#: ../widgets/basic.php:152
+msgid "Display Content"
+msgstr ""
+
+#: ../widgets/basic.php:167
+msgid "Image (PB)"
+msgstr ""
+
+#: ../widgets/basic.php:169
+msgid "Displays a simple image."
+msgstr ""
+
+#: ../widgets/basic.php:202
+#: ../widgets/widgets/animated-image/animated-image.php:15
+msgid "Image URL"
+msgstr ""
+
+#: ../widgets/basic.php:206 ../widgets/widgets/button/button.php:19
+msgid "Destination URL"
+msgstr ""
+
+#: ../widgets/basic.php:222
+msgid "Post Loop (PB)"
+msgstr ""
+
+#: ../widgets/basic.php:224
+msgid "Displays a post loop."
+msgstr ""
+
+#: ../widgets/basic.php:387
+msgid "Unfortunately your theme doesn't have any post loops."
+msgstr ""
+
+#: ../widgets/basic.php:402
+msgid "Template"
+msgstr ""
+
+#: ../widgets/basic.php:417 ../widgets/widgets.php:597
+msgid "Post Type"
+msgstr ""
+
+#: ../widgets/basic.php:426 ../widgets/widgets.php:604
+msgid "Posts Per Page"
+msgstr ""
+
+#: ../widgets/basic.php:431 ../widgets/widgets.php:609
+msgid "Order By"
+msgstr ""
+
+#: ../widgets/basic.php:434 ../widgets/widgets.php:612
+msgid "Post ID"
+msgstr ""
+
+#: ../widgets/basic.php:435 ../widgets/widgets.php:613
+msgid "Author"
+msgstr ""
+
+#: ../widgets/basic.php:436 ../widgets/basic.php:437
+#: ../widgets/widgets.php:614 ../widgets/widgets.php:615
+#: ../widgets/widgets/testimonial/testimonial.php:15
+msgid "Name"
+msgstr ""
+
+#: ../widgets/basic.php:438 ../widgets/widgets.php:616
+msgid "Date"
+msgstr ""
+
+#: ../widgets/basic.php:439 ../widgets/widgets.php:617
+msgid "Modified"
+msgstr ""
+
+#: ../widgets/basic.php:440 ../widgets/widgets.php:618
+msgid "Parent"
+msgstr ""
+
+#: ../widgets/basic.php:441 ../widgets/widgets.php:619
+msgid "Random"
+msgstr ""
+
+#: ../widgets/basic.php:442 ../widgets/widgets.php:620
+msgid "Comment Count"
+msgstr ""
+
+#: ../widgets/basic.php:443 ../widgets/basic.php:444
+#: ../widgets/widgets.php:621
+msgid "Menu Order"
+msgstr ""
+
+#: ../widgets/basic.php:449 ../widgets/widgets.php:627
+msgid "Order"
+msgstr ""
+
+#: ../widgets/basic.php:451 ../widgets/widgets.php:630
+msgid "Descending"
+msgstr ""
+
+#: ../widgets/basic.php:452 ../widgets/widgets.php:629
+msgid "Ascending"
+msgstr ""
+
+#: ../widgets/basic.php:457 ../widgets/widgets.php:636
+msgid "Sticky Posts"
+msgstr ""
+
+#: ../widgets/basic.php:460 ../widgets/widgets.php:639
+msgid "Ignore Sticky"
+msgstr ""
+
+#: ../widgets/basic.php:461 ../widgets/widgets.php:640
+msgid "Exclude Sticky"
+msgstr ""
+
+#: ../widgets/basic.php:462 ../widgets/widgets.php:641
+msgid "Only Sticky"
+msgstr ""
+
+#: ../widgets/basic.php:467
+msgid "Additional "
+msgstr ""
+
+#: ../widgets/basic.php:469 ../widgets/widgets.php:648
+#, php-format
+msgid ""
+"Additional query arguments. See <a href=\"%s\" target=\"_blank"
+"\">query_posts</a>."
+msgstr ""
+
+#: ../widgets/basic.php:482
+msgid "Embedded Video (PB)"
+msgstr ""
+
+#: ../widgets/basic.php:484
+msgid "Embeds a video."
+msgstr ""
+
+#: ../widgets/basic.php:516
+msgid "Video"
+msgstr ""
+
+#: ../widgets/basic.php:532
+msgid "Self Hosted Video (PB)"
+msgstr ""
+
+#: ../widgets/basic.php:534
+msgid "A self hosted video player."
+msgstr ""
+
+#: ../widgets/basic.php:609
+msgid "Video URL"
+msgstr ""
+
+#: ../widgets/basic.php:613
+msgid "Poster URL"
+msgstr ""
+
+#: ../widgets/basic.php:615
+msgid "An image that displays before the video starts playing."
+msgstr ""
+
+#: ../widgets/basic.php:618
+msgid "Skin"
+msgstr ""
+
+#: ../widgets/basic.php:620
+msgid "SiteOrigin"
+msgstr ""
+
+#: ../widgets/basic.php:621
+msgid "Premium Pixels"
+msgstr ""
+
+#: ../widgets/basic.php:625
+msgid "Aspect Ratio"
+msgstr ""
+
+#: ../widgets/basic.php:627
+msgid "1.777 is HD standard."
+msgstr ""
+
+#: ../widgets/basic.php:632
+msgid "Auto Play Video"
+msgstr ""
+
+#: ../widgets/widgets.php:156
+msgid ""
+"We're moving this widget into a separate plugin in order to keep Page "
+"Builder core light weight."
+msgstr ""
+
+#: ../widgets/widgets.php:159
+#, php-format
+msgid ""
+"Either find an alternative in our <a href='%s' target='_blank'>recommended "
+"widgets</a> or install the <a href='%s' target='_blank'>Legacy Widgets "
+"plugin</a> to continue using it."
+msgstr ""
+
+#: ../widgets/widgets.php:217
+msgid "Style"
+msgstr ""
+
+#: ../widgets/widgets.php:241
+#, php-format
+msgid "%s Style"
+msgstr ""
+
+#: ../widgets/widgets.php:647
+msgid "Additional Arguments"
+msgstr ""
+
+#: ../widgets/widgets/animated-image/animated-image.php:6
+msgid "Animated Image (PB)"
+msgstr ""
+
+#: ../widgets/widgets/animated-image/animated-image.php:8
+msgid "An image that animates in when it enters the screen."
+msgstr ""
+
+#: ../widgets/widgets/animated-image/animated-image.php:19
+msgid "Animation"
+msgstr ""
+
+#: ../widgets/widgets/animated-image/animated-image.php:21
+msgid "Fade In"
+msgstr ""
+
+#: ../widgets/widgets/animated-image/animated-image.php:22
+msgid "Slide Up"
+msgstr ""
+
+#: ../widgets/widgets/animated-image/animated-image.php:23
+msgid "Slide Down"
+msgstr ""
+
+#: ../widgets/widgets/animated-image/animated-image.php:24
+msgid "Slide Left"
+msgstr ""
+
+#: ../widgets/widgets/animated-image/animated-image.php:25
+msgid "Slide Right"
+msgstr ""
+
+#: ../widgets/widgets/button/button.php:6
+msgid "Button (PB)"
+msgstr ""
+
+#: ../widgets/widgets/button/button.php:8
+msgid "A simple button"
+msgstr ""
+
+#: ../widgets/widgets/button/button.php:15 ../widgets/widgets/list/list.php:19
+#: ../widgets/widgets/testimonial/testimonial.php:27
+msgid "Text"
+msgstr ""
+
+#: ../widgets/widgets/button/button.php:23
+#: ../widgets/widgets/call-to-action/call-to-action.php:31
+#: ../widgets/widgets/price-box/price-box.php:44
+#: ../widgets/widgets/testimonial/testimonial.php:35
+msgid "Open In New Window"
+msgstr ""
+
+#: ../widgets/widgets/button/button.php:27
+msgid "Button Alignment"
+msgstr ""
+
+#: ../widgets/widgets/button/button.php:29
+msgid "Left"
+msgstr ""
+
+#: ../widgets/widgets/button/button.php:30
+msgid "Right"
+msgstr ""
+
+#: ../widgets/widgets/button/button.php:31
+msgid "Center"
+msgstr ""
+
+#: ../widgets/widgets/button/button.php:32
+msgid "Justify"
+msgstr ""
+
+#: ../widgets/widgets/call-to-action/call-to-action.php:6
+msgid "Call To Action (PB)"
+msgstr ""
+
+#: ../widgets/widgets/call-to-action/call-to-action.php:8
+msgid "A Call to Action block"
+msgstr ""
+
+#: ../widgets/widgets/call-to-action/call-to-action.php:19
+msgid "Sub Title"
+msgstr ""
+
+#: ../widgets/widgets/call-to-action/call-to-action.php:23
+#: ../widgets/widgets/price-box/price-box.php:36
+msgid "Button Text"
+msgstr ""
+
+#: ../widgets/widgets/call-to-action/call-to-action.php:27
+#: ../widgets/widgets/price-box/price-box.php:40
+msgid "Button URL"
+msgstr ""
+
+#: ../widgets/widgets/call-to-action/call-to-action.php:37
+#: ../widgets/widgets/price-box/price-box.php:49
+msgid "Button"
+msgstr ""
+
+#: ../widgets/widgets/list/list.php:6
+msgid "List (PB)"
+msgstr ""
+
+#: ../widgets/widgets/list/list.php:8
+#: ../widgets/widgets/price-box/price-box.php:8
+#: ../widgets/widgets/testimonial/testimonial.php:8
+msgid "Displays a bullet list of elements"
+msgstr ""
+
+#: ../widgets/widgets/list/list.php:20
+#: ../widgets/widgets/price-box/price-box.php:32
+msgid "Start each new point with an asterisk (*)"
+msgstr ""
+
+#: ../widgets/widgets/price-box/price-box.php:6
+msgid "Price Box (PB)"
+msgstr ""
+
+#: ../widgets/widgets/price-box/price-box.php:19
+msgid "Price"
+msgstr ""
+
+#: ../widgets/widgets/price-box/price-box.php:23
+msgid "Per"
+msgstr ""
+
+#: ../widgets/widgets/price-box/price-box.php:27
+msgid "Information Text"
+msgstr ""
+
+#: ../widgets/widgets/price-box/price-box.php:31
+msgid "Features Text"
+msgstr ""
+
+#: ../widgets/widgets/price-box/price-box.php:50
+msgid "Feature List"
+msgstr ""
+
+#: ../widgets/widgets/testimonial/testimonial.php:6
+msgid "Testimonial (PB)"
+msgstr ""
+
+#: ../widgets/widgets/testimonial/testimonial.php:19
+msgid "Location"
+msgstr ""
+
+#: ../widgets/widgets/testimonial/testimonial.php:23
+msgid "Image"
+msgstr ""
+
+#: ../widgets/widgets/testimonial/testimonial.php:31
+msgid "URL"
+msgstr ""
