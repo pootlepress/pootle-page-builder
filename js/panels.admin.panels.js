@@ -622,6 +622,11 @@
                 if ( text.match( /\[.+]/gi ) && 0 < text.match( /\[.+]/gi ).length ) {
                     var shortcode = text.match( /\[.+]/g )[0].replace( /[\[]/g, '' ).split( /[^\w]/g )[0];
                     title = 'Shortcode: <span class="extra">' + shortcode + '</span>';
+                    if ( 'caption' == shortcode.toLowerCase() ) {
+                        $txt = $( '<p>' + text );
+                        var imgMatch = $txt.find('a').eq(0).find('img');
+                        title = 'Image<span class="extra">: ' + $(imgMatch[0]).attr('alt') + '</span>';
+                    }
                 } else {
                     title = detectText(text, title);
                 }
