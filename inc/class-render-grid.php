@@ -107,7 +107,7 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 		/**
 		 * Fires in pootle page builder row
 		 * @hooked Pootle_Page_Builder_Render_Layout::row_bg_video
-		 * @hooked Pootle_Page_Builder_Render_Layout::row_bg_video
+		 * @hooked Pootle_Page_Builder_Render_Layout::row_embed_css
 		 */
 		do_action( 'pootlepb_before_cells', $styleArray, $rowID );
 

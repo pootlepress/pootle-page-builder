@@ -339,11 +339,14 @@
                         active: 0
                     })
                     .addClass("ui-tabs-vertical ui-helper-clearfix")
-                    .find('span:not(.wp-picker-input-wrap) > input').each(function () {
+                    .find('input[data-style-field-type="color"]').each(function () {
                         $t = $(this);
-                        if ($t.attr('data-style-field-type') == 'color') {
-                            $t.wpColorPicker();
+                        var wpPkrContnr = $t.closest('.wp-picker-container');
+                        if ( wpPkrContnr.length > 0 ) {
+                            wpPkrContnr.after($t);
+                            wpPkrContnr.remove();
                         }
+                        $t.wpColorPicker();
                     });
 
                 var $t = $('.ppb-cool-panel-wrap'),

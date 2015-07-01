@@ -1322,8 +1322,13 @@ when editing event widget from Event Calendar Pro */
     overflow: hidden;
 }
 
-.ppb-cool-panel-container .ui-dialog-titlebar, .ppb-cool-panel-container .ui-dialog-buttonpane {
+.ui-dialog.ppb-cool-panel-container .ui-dialog-titlebar,
+.ui-dialog.ppb-cool-panel-container .ui-dialog-buttonpane {
     margin-left: 200px;
+}
+
+.ui-dialog.ppb-cool-panel-container .ui-dialog-buttonpane {
+    padding: 16px;    
 }
 
 .ppb-cool-panel-container .ui-dialog-content {
@@ -1357,6 +1362,7 @@ when editing event widget from Event Calendar Pro */
     height: 100%;
     overflow: auto;
     box-sizing: border-box;
+    background: #fff;
 }
 
 .ppb-cool-panel-wrap > ul > li > a {
