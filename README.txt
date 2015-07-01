@@ -64,6 +64,8 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 5. Row display settings / Background video
 
+6. Row display settings / Layout
+
 == Upgrade Notice ==
 
 = 0.1 =
