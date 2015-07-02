@@ -27,6 +27,18 @@
     font-size: 15px;
 }
 
+.panel-grid-cell:first-child {
+    padding-left: 0 !important;
+}
+
+.panel-grid-cell:last-child {
+    padding-right: 0 !important;
+}
+
+.panel-grid .panel p {
+    color: inherit;
+}
+
 @media only screen and (min-width: 768px) {
     .panel-grid-cell {
         display: inline-block;

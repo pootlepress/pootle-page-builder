@@ -82,6 +82,10 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 			$classes[] = 'panel-last-child';
 		}
 
+		if ( ! empty( $styleArray['class'] ) ) {
+			$classes[] = $styleArray['class'];
+		}
+
 		//Id for this content block
 		$id = 'panel-' . $post_id . '-' . $gi . '-' . $ci . '-' . $pi;
 

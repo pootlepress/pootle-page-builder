@@ -37,6 +37,7 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_height' ), 10, 3 );
 		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_hide_row' ), 10, 2 );
 		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_bg_vid_css' ), 10, 2 );
+		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_inline_css' ), 10, 2 );
 	}
 
 	/**
@@ -228,13 +229,28 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 	 */
 	public function row_bg_vid_css( $attr, $style ) {
 
-		if ( ! empty( $style['background_toggle'] ) && '.bg_video' == $style['background_toggle'] ) {
+		if ( '.bg_video' == $this->row_bg_type ) {
 
 			$attr['class'][] = 'video-bg';
 
 			if ( ! empty( $style['bg_mobile_image'] ) ) {
 				$attr['style'] .= 'background: url( ' . esc_url( $style['bg_mobile_image'] ) . ' ) center/cover; ';
 			}
+		}
+
+		return $attr;
+	}
+
+	/**
+	 * Row bg video class and video mobile image
+	 * @param array $attr
+	 * @param array $style
+	 * @return array
+	 */
+	public function row_inline_css( $attr, $style ) {
+
+		if ( ! empty( $style['style'] ) ) {
+			$attr['style'] .= preg_replace( "/\r|\n/", ";", $style['style'] );;
 		}
 
 		return $attr;

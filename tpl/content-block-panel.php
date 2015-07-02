@@ -42,7 +42,7 @@
 
 		<div id="pootle-advanced-tab" class="pootle-style-fields pootle-content-module tab-contents">
 			<?php
-			pootlepb_widget_styles_dialog_form( 'inline-css' );
+			pootlepb_widget_styles_dialog_form( 'advanced' );
 			?>
 		</div>
 

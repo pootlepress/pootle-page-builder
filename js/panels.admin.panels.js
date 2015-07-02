@@ -618,13 +618,9 @@
                 if ( text.match( /\[.+]/gi ) && 0 < text.match( /\[.+]/gi ).length ) {
                     var shortcode = text.match( /\[.+]/g )[0].replace( /[\[]/g, '' ).split( /[^\w]/g )[0];
                     title = 'Shortcode: <span class="extra">' + shortcode + '</span>';
-                    if ( 'caption' == shortcode.toLowerCase() ) {
-                        $txt = $( '<p>' + text );
-                        var imgMatch = $txt.find('a').eq(0).find('img');
-                        title = 'Image<span class="extra">: ' + $(imgMatch[0]).attr('alt') + '</span>';
-                    }
+                    title = ppbSmartTitle.processShortcodes(shortcode, text, title);
                 } else {
-                    title = detectText(text, title);
+                    title = ppbSmartTitle.detectText(text, title);
                 }
                 break;
             case '<':
@@ -634,7 +630,7 @@
                     var imgMatch = $txt.find('a').eq(0).find('img');
                     title = 'Image<span class="extra">: ' + $(imgMatch[0]).attr('alt') + '</span>';
                 } else {
-                    title = detectText(text, title);
+                    title = ppbSmartTitle.detectText(text, title);
                 }
                 break;
             case 'h':
@@ -644,31 +640,52 @@
                 } else if ( 0 == text.indexOf('https://www.youtube.com/') ||  0 == text.indexOf('https://youtube.com/' ) ) {
                     title = 'Video<span class="extra">: YouTube</span>';
                 } else {
-                    title = detectText(text, title);
+                    title = ppbSmartTitle.detectText(text, title);
                 }
                 break;
             default:
                 //Text
-                title = detectText(text, title);
+                title = ppbSmartTitle.detectText(text, title);
         }
         $t.find('h4').html(title);
     };
 
-    detectText = function( text, title ) {
+    ppbSmartTitle = {
+        detectText : function( text, title ) {
 
-        //Remove shortcodes
-        text = text.replace( /\[.+]/gi, '' );
+            //Remove shortcodes
+            text = text.replace( /\[.+]/gi, '' );
 
-        //Removing HTML tags
-        text = $('<p>' + text + '</p>').text();
+            //Removing HTML tags
+            text = $('<p>' + text + '</p>').text();
 
-        if ( text ) {
-            if (text.length > 10) text = text.substring(0, 14);
-            return 'Text<span class="extra">: ' + text + '...</span>';
-        } else {
+            if ( text ) {
+                if (text.length > 10) text = text.substring(0, 14);
+                return 'Text<span class="extra">: ' + text + '...</span>';
+            } else {
+                return title;
+            }
+        },
+        processShortcodes : function( code, text, title ) {
+            code = code.toLowerCase();
+            if ( 'caption' == code ) {
+                $txt = $( '<p>' + text );
+                var imgMatch = $txt.find('a').eq(0).find('img');
+                title = 'Image<span class="extra">: ' + $(imgMatch[0]).attr('alt') + '</span>';
+            } else if ( 'embed' == code ) {
+                var end = text.indexOf('[/embed]');
+                text = text.substring(7, end);
+
+                if ( text.match(/vimeo\.com/i) ) {
+                    title = 'Video<span class="extra">: Vimeo</span>';
+                } else if ( 0 < text.match(/youtube.com\//i).length ) {
+                    title = 'Video<span class="extra">: YouTube</span>';
+                }
+            }
+
             return title;
         }
-    }
+    };
 
     /**
      * Loads panel data
@@ -735,6 +752,7 @@
         // it will be set to unchecked,
         // this is to set hide widget title checkbox
         $styleForm.find('input[type=checkbox]').prop('checked', false);
+        $styleForm.find('input:not([type=checkbox])').val('').change();
 
         // from style data in hidden field, set the widget style dialog fields with data
         for (var key in styleData) {

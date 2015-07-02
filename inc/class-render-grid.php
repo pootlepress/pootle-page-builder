@@ -19,10 +19,10 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 	protected static $instance;
 
 	/**
-	 * Magic __construct
+	 * Adds the hooks for rows html
 	 * @since 0.1.0
 	 */
-	protected function __construct() {
+	protected function row_hooks() {
 		require_once POOTLEPB_DIR . 'inc/class-custom-styles.php';
 
 		/* Puts stuff in row */
@@ -88,7 +88,8 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 
 		$style_attributes = array();
 		$style_attributes['class'] = array(
-			'panel-row-style' . $panels_data['grids'][ $gi ]['style']['class'],
+			'panel-row-style-' . $panels_data['grids'][ $gi ]['style']['class'],
+			$panels_data['grids'][ $gi ]['style']['class'],
 			'panel-row-style',
 		);
 
@@ -118,8 +119,8 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 		foreach ( $cells as $ci => $widgets ) {
 			// Themes can add their own styles to cells
 			$cellId          = 'pgc-' . $post_id . '-' . $gi . '-' . $ci;
-
-			$cell_classes    = apply_filters( 'pootlepb_row_cell_classes', array( 'panel-grid-cell' ), $panels_data );
+			$panels_data['grids'][ $gi ]['style']['col_class'] = empty( $panels_data['grids'][ $gi ]['style']['col_class'] ) ? '' : $panels_data['grids'][ $gi ]['style']['col_class'];
+			$cell_classes    = apply_filters( 'pootlepb_row_cell_classes', array( 'panel-grid-cell', $panels_data['grids'][ $gi ]['style']['col_class'] ), $panels_data );
 			$cell_attributes = array(
 				'class' => implode( ' ', $cell_classes ),
 				'id'    => $cellId

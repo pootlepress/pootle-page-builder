@@ -21,6 +21,11 @@ $pootlepb_content_block_styling_fields = array(
 		'type' => 'color',
 		'css'  => 'background-color',
 	),
+	'text-color'   => array(
+		'name' => 'Text color',
+		'type' => 'color',
+		'css'  => 'color',
+	),
 	'border'             => array(
 		'name' => 'Border',
 		'type' => 'border',
@@ -45,9 +50,16 @@ $pootlepb_content_block_styling_fields = array(
 		'css'  => 'border-radius'
 	),
 	'inline-css'         => array(
-		'name' => 'Inline Styles',
+		'name' => 'Inline CSS styles',
 		'type' => 'textarea',
-		'css'  => ''
+		'css'  => '',
+		'advanced'=> true,
+	),
+	'class'         => array(
+		'name' => 'CSS Class',
+		'type' => 'textarea',
+		'css'  => '',
+		'advanced'=> true,
 	),
 );
 
@@ -71,7 +83,7 @@ $pootlepb_row_styling_fields = array(
 			'.bg_image' => 'Background image',
 			'.bg_video' => 'Background video'
 		),
-		'default' => 'bg_image',
+		'default' => '',
 	),
 	'full_width' => array(
 		'name' => 'Make row go full width',
@@ -133,18 +145,19 @@ $pootlepb_row_styling_fields = array(
 		'help-text' => "If you add an image here it will replace the video on mobile site. <br> If you don't it won't!",
 	),
 	'style'                       => array(
-		'name'    => __( 'Inline Styles', 'ppb-panels' ),
+		'name'    => __( 'Inline CSS Styles', 'ppb-panels' ),
 		'type'    => 'textarea',
 		'default' => '',
 	),
 	'class'                       => array(
-		'name'    => __( 'Class', 'ppb-panels' ),
+		'name'    => __( 'Row CSS Class', 'ppb-panels' ),
 		'type'    => 'text',
 		'default' => '',
 	),
-	'id'                          => array(
-		'name' => __( 'ID', 'vantage' ),
-		'type' => 'text',
+	'col_class'                       => array(
+		'name'    => __( 'Column CSS Class', 'ppb-panels' ),
+		'type'    => 'text',
+		'default' => '',
 	),
 );
 

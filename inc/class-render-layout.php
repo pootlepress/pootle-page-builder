@@ -31,7 +31,6 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 	 */
 	protected function __construct() {
 		$this->hooks();
-		parent::__construct();
 	}
 
 	/**
@@ -41,6 +40,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 	private function hooks() {
 		/* Main content filter */
 		add_filter( 'the_content', array( $this, 'content_filter' ) );
+		parent::row_hooks();
 	}
 
 	/**

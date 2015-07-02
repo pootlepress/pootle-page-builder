@@ -143,7 +143,7 @@ function pootlepb_style_dialog_form() {
 
 	$sections['Advanced'][]   = 'style';
 	$sections['Advanced'][]   = 'class';
-	$sections['Advanced'][]   = 'id';
+	$sections['Advanced'][]   = 'col_class';
 	/** @hook pootlepb_row_styles_section_bg_image Add field id in advanced section */
 	$sections['Advanced'] = apply_filters( 'pootlepb_row_styles_section_advanced', $sections['Advanced'] );
 
@@ -279,17 +279,17 @@ function pootlepb_render_single_field( $name, $attr ) {
 	}
 }
 
-function pootlepb_widget_styles_dialog_form( $specific = null ) {
+function pootlepb_widget_styles_dialog_form( $advanced = null ) {
 	$fields = pootlepb_block_styling_fields();
 
 	foreach ( $fields as $key => $field ) {
 
-		if ( empty( $specific ) ) {
-			if ( 'inline-css' == $key ) {
+		if ( empty( $advanced ) ) {
+			if ( ! empty( $field['advanced'] ) ) {
 				continue;
 			}
 		} else {
-			if ( $specific != $key ) {
+			if ( empty( $field['advanced'] ) ) {
 				continue;
 			}
 		}
