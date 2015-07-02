@@ -44,7 +44,7 @@
 			</div>
 			<div class="last-feature">
 				<h4>Amazing Rows</h4>
-				<p>Rows in Page Builder all you to add background colors, images or autoplay videos. Row background images can have a parallax effect. They can also be full width.</p>
+				<p>Rows in page builder allow you to add background colors, images or autoplay videos. Row background images can have a parallax effect. They can also be full width.</p>
 			</div>
 		</div>
 	</div>

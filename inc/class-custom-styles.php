@@ -198,7 +198,7 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 		}
 
 		if ( ! $contains_widgets ) {
-			$attr['style'] .= ! empty( $style['row_height'] ) ? 'height:' . $style['row_height'] . 'px' : '';
+			$attr['style'] .= ! empty( $style['row_height'] ) ? 'height:' . $style['row_height'] . 'px;' : '';
 		}
 
 		return $attr;
