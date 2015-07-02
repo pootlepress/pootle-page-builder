@@ -42,7 +42,7 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 	 * @since 0.1.0
 	 */
 	public function metabox() {
-		foreach ( pootlepb__settings( 'post-types' ) as $type ) {
+		foreach ( pootlepb_settings( 'post-types' ) as $type ) {
 			add_meta_box( 'pootlepb-panels', __( 'Page Builder', 'ppb-panels' ), array( $this, 'metabox_render' ), $type, 'advanced', 'high' );
 		}
 	}
@@ -66,7 +66,7 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 	 */
 	public function enqueue_styles() {
 		$screen = get_current_screen();
-		if ( in_array( $screen->id, pootlepb__settings( 'post-types' ) ) || $screen->base == 'appearance_page_so_panels_home_page' ) {
+		if ( in_array( $screen->id, pootlepb_settings( 'post-types' ) ) || $screen->base == 'appearance_page_so_panels_home_page' ) {
 			wp_enqueue_style( 'so-panels-admin', POOTLEPB_URL . 'css/admin.css', array(), POOTLEPB_VERSION );
 			wp_enqueue_style( 'ppb-chosen-style', POOTLEPB_URL . 'js/chosen/chosen.css' );
 
@@ -92,7 +92,7 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 	public function enqueue_scripts() {
 		$screen = get_current_screen();
 
-		if ( $screen->base == 'post' && in_array( $screen->id, pootlepb__settings( 'post-types' ) ) ) {
+		if ( $screen->base == 'post' && in_array( $screen->id, pootlepb_settings( 'post-types' ) ) ) {
 			wp_enqueue_script( 'jquery-ui-resizable' );
 			wp_enqueue_script( 'jquery-ui-sortable' );
 			wp_enqueue_script( 'jquery-ui-slider' );

@@ -722,6 +722,23 @@ jQuery(function ($) {
                     $gc = $(this).closest('.grid-container');
 
                 setTimeoutConst = setTimeout(function(){
+                    var most_cells = 0;
+                    $gc.find('.cell').each(function() {
+                        var $t = $(this);
+                        if( $t.find('.panel').length > most_cells ) {
+                            most_cells = $t.find('.panel').length
+                        }
+                    });
+
+                    if ( $t.find('.panel').length < most_cells ) {
+                        $t.find('.add-content-button')
+                            .css({
+                                top: 'initial',
+                                bottom: '13px'
+                            })
+                            .show();
+                        return;
+                    }
                     if ( 0 != $t.find('.panel').length ) {
                         $gc
                             .find('.grid').animate(
@@ -729,7 +746,8 @@ jQuery(function ($) {
                                 160,
                                 'linear',
                                 function () {
-                                    $t.find('.add-content-button').show();
+                                    $t.find('.add-content-button')
+                                        .show();
                                 }
                             )
                             .find('.cell').animate(
@@ -751,35 +769,37 @@ jQuery(function ($) {
                 $t.css("cursor", "default");
 
                 if (numPanels > 0) {
-                    var $grids = $t.find('.grid'),
-                        $cells = $t.find('.cell');
-                    $grids
-                        .stop()
-                        .animate(
-                        {
-                            marginBottom: '3'
-                        }, 160, 'linear'
-                    );
-                    $cells
-                        .stop()
-                        .animate(
-                        {
-                            paddingBottom: '3'
-                        }, {
-                            duration: 160,
-                            easing: 'linear',
-                            progress: function () {
-                                $(this).find('.add-content-button').hide();
-                            }
-                        }
-                    );
+                    panels.removePaddingAnimated( $t );
                 }
             }
         );
     };
-    panels.ppbGridExpandHandler = function ($t) {
+    panels.ppbGridExpandHandler = function ( $t ) {
         var numPanels = $t.find('.panel-wrapper').length;
         if (numPanels > 0) {
         }
+    }
+    panels.removePaddingAnimated = function ( $t ) {
+        var $grids = $t.find('.grid'),
+            $cells = $t.find('.cell');
+        $grids
+            .stop()
+            .animate( {
+                marginBottom: '3'
+            }, 160, 'linear' );
+        $cells
+            .stop()
+            .animate(
+            {
+                paddingBottom: '3'
+            }, {
+                duration: 160,
+                easing: 'linear',
+                progress: function () {
+                    $(this).find('.add-content-button').attr('style', '').hide();
+                }
+            }
+        );
+
     }
 });

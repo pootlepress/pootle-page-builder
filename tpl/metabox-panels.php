@@ -83,21 +83,11 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 		<p>Are you sure?</p>
 	</div>
 
-	<div id="page-setting-dialog" data-title="<?php esc_attr_e( 'Page Settings', 'ppb-panels' ) ?>"
-	     class="panels-admin-dialog">
-
-		<?php
-		$pageSettingsFields = pootlepb_page_settings_fields();
-		pootlepb_dialog_form_echo( $pageSettingsFields );
-		?>
-
-	</div>
-
 	<div id="hide-element-dialog" data-title="<?php esc_attr_e( 'Hide Elements', 'ppb-panels' ) ?>"
 	     class="panels-admin-dialog">
 
 		<?php
-		$hideElementsFields = pootlepb_hide_elements_fields();
+		$hideElementsFields = ppb_pc_hide_elements_fields();
 		pootlepb_hide_elements_dialog_echo( $hideElementsFields );
 		?>
 
@@ -164,31 +154,7 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 	<?php
 	global $post;
 	$panels_data = get_post_meta( $post->ID, 'panels_data', true );
-
-	$pageSettings = get_post_meta( $post->ID, 'pootlepage-page-settings', true );
-	if ( empty( $pageSettings ) ) {
-		$pageSettings = '{}';
-	}
-
-	$pageSettings = get_post_meta( $post->ID, 'pootlepage-page-settings', true );
-	if ( empty( $pageSettings ) ) {
-		$pageSettings = '{}';
-	}
-
-	$hideElements = get_post_meta( $post->ID, 'pootlepage-hide-elements', true );
-	if ( empty( $hideElements ) ) {
-		$hideElements = '{}';
-	}
 	?>
-	<input type="hidden" id="page-settings" name="page-settings" value="<?php esc_attr_e( $pageSettings ) ?>"/>
-	<input type="hidden" id="hide-elements" name="hide-elements" value="<?php esc_attr_e( $hideElements ) ?>"/>
-
-	<div class="ppb-hidden-editor-container" style="display:none;">
-		<?php
-		$request = null;
-		require POOTLEPB_DIR . 'tpl/content-block-panel.php';
-		?>
-	</div>
 
 	<?php wp_nonce_field( 'save', '_sopanels_nonce' ) ?>
 	<?php do_action( 'pootlepb_metabox_end' ); ?>

@@ -45,7 +45,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 			return;
 		}
 
-		$settings = pootlepb__settings();
+		$settings = pootlepb_settings();
 
 		$panels_mobile_width  = $settings['mobile-width'];
 		$panels_margin_bottom = $settings['margin-bottom'];
@@ -238,7 +238,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 	 */
 	public function enqueue_scripts() {
 
-		wp_enqueue_script( 'pootle-page-builder-front-js', POOTLEPB_URL . '/js/front-end.js', array( 'jquery' ) );
+		wp_enqueue_script( 'pootle-page-builder-front-js', POOTLEPB_URL . '/js/admin.js', array( 'jquery' ) );
 
 	}
 }

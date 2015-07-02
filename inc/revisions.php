@@ -67,10 +67,9 @@ function pootlepb_revisions_fields( $fields ) {
 		return $fields;
 	}
 
-	$fields['panels_data_field'] = __( 'Page Builder Content', 'ppb-panels' );
+	$fields['grids'] = __( 'Page Builder', 'ppb-panels' );
 
 	return $fields;
-
 }
 
 add_filter( '_wp_post_revision_fields', 'pootlepb_revisions_fields' );

@@ -100,7 +100,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 		if ( empty( $post ) ) {
 			return $content;
 		}
-		if ( in_array( $post->post_type, pootlepb__settings( 'post-types' ) ) ) {
+		if ( in_array( $post->post_type, pootlepb_settings( 'post-types' ) ) ) {
 			$panel_content = $this->panels_render( $post->ID );
 
 			if ( ! empty( $panel_content ) ) {

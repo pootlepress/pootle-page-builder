@@ -519,13 +519,6 @@ h4 {}
     visibility: visible;
 }
 
-#pootlepb-panels h3.hndle button.page-settings,
-#pootlepb-panels h3.hndle button.hide-elements {
-    float: right;
-    margin-top: 0;
-    margin-left: 3px;
-}
-
 #pootlepb-panels h3.hndle button:not(.add-button):not(.page-settings):hover {
     background: #FFFFFF;
 }
@@ -1153,7 +1146,7 @@ button.wp-switch-editor {
     position: absolute;
     left: 10px;
     right: 10px;
-    min-height: 50px;
+    min-height: 45px;
     text-align: center;
     top: 10px;
     bottom: 10px;
@@ -1173,7 +1166,7 @@ button.wp-switch-editor {
 
 #panels-container .grid .cell .cell-wrapper > .add-content-button:not(:last-child) {
     opacity: 1;
-    height: 50px;
+    height: 45px;
     top: 100%;
     bottom: initial;
 }

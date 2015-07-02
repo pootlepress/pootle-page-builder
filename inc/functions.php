@@ -176,7 +176,7 @@ function pootlepb_wp_import_post_meta_map( $val ) {
  * @return mixed
  * @since 0.1.0
  */
-function pootlepb__settings( $key = '' ) {
+function pootlepb_settings( $key = '' ) {
 
 	if ( has_action( 'after_setup_theme' ) ) {
 		// Only use static settings if we've initialized the theme

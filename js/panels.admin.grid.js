@@ -178,14 +178,8 @@
         // setup add widget icons click handler
         container.find('.cell-wrapper .add-content-button').each(function () {
             $(this).click(function () {
-                var $t = $(this);
 
-                console.log($t.siblings('.panel').length);
-
-
-                if( $t.siblings('.panel').length == 0 ) {
-                    $t.hide();
-                }
+                panels.removePaddingAnimated( $(this).closest('.grid-container') );
 
                 panels.addContentModule(this);
             });
@@ -286,11 +280,7 @@
             // setup add widget icons click handler
             $newGridContainer.find('.cell-wrapper .add-content-button').each(function () {
                 $(this).click(function () {
-                    var $t = $(this);
-
-                    if( $t.siblings('.panel').length == 0 ) {
-                        $t.hide();
-                    }
+                    panels.removePaddingAnimated( $(this).closest('.grid-container') );
 
                     panels.addContentModule(this);
                 });

@@ -69,7 +69,7 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	 */
 	public function add_help_tab( $prefix ) {
 		$screen = get_current_screen();
-		if ( $screen->base == 'post' && in_array( $screen->id, pootlepb__settings( 'post-types' ) ) ) {
+		if ( $screen->base == 'post' && in_array( $screen->id, pootlepb_settings( 'post-types' ) ) ) {
 			$screen->add_help_tab( array(
 				'id'       => 'panels-help-tab', //unique id for the tab
 				'title'    => __( 'Page Builder', 'ppb-panels' ), //unique visible title for the tab
@@ -201,7 +201,7 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	 * @since 0.1.0
 	 */
 	public function options_field_generic( $args, $groupName = 'siteorigin_panels_display' ) {
-		$settings = pootlepb__settings();
+		$settings = pootlepb_settings();
 		switch ( $args['type'] ) {
 			case 'responsive' :
 				?><label><input type="checkbox"

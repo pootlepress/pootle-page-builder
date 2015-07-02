@@ -10,6 +10,11 @@
     background: #e04025;
     color: #fff;
 }
+
+div.pootle.updated .button.pootle {
+    margin: 5px 0 0;
+}
+
 div.pootle.updated {
     border-left-color: #ef4832;
 }
