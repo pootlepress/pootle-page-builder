@@ -83,16 +83,6 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 		<p>Are you sure?</p>
 	</div>
 
-	<div id="hide-element-dialog" data-title="<?php esc_attr_e( 'Hide Elements', 'ppb-panels' ) ?>"
-	     class="panels-admin-dialog">
-
-		<?php
-		$hideElementsFields = ppb_pc_hide_elements_fields();
-		pootlepb_hide_elements_dialog_echo( $hideElementsFields );
-		?>
-
-	</div>
-
 	<?php // The layouts dialog ?>
 
 	<?php if ( ! empty( $layouts ) ) : ?>
@@ -159,6 +149,14 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 	<?php wp_nonce_field( 'save', '_sopanels_nonce' ) ?>
 	<?php do_action( 'pootlepb_metabox_end' ); ?>
 </div>
+
+<div class="ppb-hidden-editor-container" style="display:none;">
+	<?php
+	$request = null;
+	require POOTLEPB_DIR . 'tpl/content-block-panel.php';
+	?>
+</div>
+
 <?php
 if ( 'post-new.php' == $pagenow || ! empty( $panels_data['grids'] ) ) {
 ?>

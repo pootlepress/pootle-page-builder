@@ -170,17 +170,12 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 
 		// This is for the side margins
 		$magin_half    = $settings['margin-sides'] / 2;
-		$side_margins  = "margin: 0 -{$magin_half}px 0";
 		$side_paddings = "padding: 0 {$magin_half}px 0";
 
-		if ( empty( $css[1920][ $side_margins ] ) ) {
-			$css[1920][ $side_margins ] = array();
-		}
 		if ( empty( $css[1920][ $side_paddings ] ) ) {
 			$css[1920][ $side_paddings ] = array();
 		}
 
-		$css[1920][ $side_margins ][]  = '.panel-grid';
 		$css[1920][ $side_paddings ][] = '.panel-grid-cell';
 
 		if ( ! defined( 'POOTLEPB_OLD_V' ) ) {

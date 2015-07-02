@@ -39,11 +39,6 @@ function pootlepb_panels_panels_row_attributes( $attr, $row ) {
 			$attr['style'] = '';
 		}
 
-		if ( ! empty( $row['style']['col_gutter'] ) || '0' === ( $row['style']['col_gutter'] ) ) {
-			$attr['style'] .= 'margin-left: -' . $row['style']['col_gutter'] / 2 . 'px;';
-			$attr['style'] .= 'margin-right: -' . $row['style']['col_gutter'] / 2 . 'px;';
-		}
-
 		$marginBottom = pootlepb_settings( 'margin-bottom' );
 		if ( ! empty( $row['style']['margin_bottom'] ) || '0' === ( $row['style']['margin_bottom'] ) ) {
 			$attr['style'] .= "margin-bottom: {$row['style']['margin_bottom']}px;";
