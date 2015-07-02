@@ -11,7 +11,7 @@ jQuery(function ($) {
         $('#panels-container .cell-wrapper').each(function () {
 
             $t = $(this);
-            $add_content = $t.find('.add-widget-button');
+            $add_content = $t.find('.add-content-button');
 
             $add_content.find('span').css('display', 'inline');
 
@@ -499,7 +499,7 @@ jQuery(function ($) {
         });
 
 
-    $('#so-panels-panels .handlediv').click(function () {
+    $('#pootlepb-panels .handlediv').click(function () {
         // Trigger the resize to reorganise the columns
         setTimeout(function () {
             $(window).resize();
@@ -555,7 +555,7 @@ jQuery(function ($) {
             var $$ = $(this);
 
             $('#wp-content-editor-container, #post-status-info').show();
-            $('#so-panels-panels').hide();
+            $('#pootlepb-panels').hide();
             $('#wp-content-wrap').removeClass('panels-active');
 
             $('#content-resize-handle').show();
@@ -598,7 +598,7 @@ jQuery(function ($) {
         $('#wp-content-editor-container, #post-status-info').hide();
 
         // Show panels and the inside div
-        $('#so-panels-panels').show().find('> .inside').show();
+        $('#pootlepb-panels').show().find('> .inside').show();
         $('#wp-content-wrap').addClass('panels-active');
 
         // Triggers full refresh
@@ -628,16 +628,12 @@ jQuery(function ($) {
     $('#panels-home-page #post-body-wrapper').css('background', 'none');
 
     // Move the panels box into a tab of the content editor
-    $('#so-panels-panels')
+    $('#pootlepb-panels')
         .insertAfter('#wp-content-editor-container')
         .addClass('wp-editor-container')
         .hide()
-        .find('.handlediv').remove()
-        .end()
-        .find('.hndle').html('').append(
-        $('#add-to-panels')
-    );
-
+        .find('.hndle span').remove().end()
+        .find('.hndle').removeClass('hndle').addClass('pootlepb-toolbar').append($('#add-to-panels'));
     // When the content panels button is clicked, trigger a window resize to set up the columns
     $('#content-panels').click(function () {
         $(window).resize();
@@ -714,16 +710,10 @@ jQuery(function ($) {
     panels.ppbGridEvents = function (container) {
 
         var numPanels = container.find('.panel-wrapper').length;
-
-        if (numPanels > 0) {
-            container
-                .find('.grid').css({marginBottom: '3px'})
-                .find('.cell').css('padding-bottom', '3px')
-                .find('.add-widget-button').hide();
-        } else {
-            container
-                .find('.add-widget-button').css('bottom', '-50');
-        }
+        container
+            .find('.grid').css({marginBottom: '3px'})
+            .find('.cell').css('padding-bottom', '3px')
+            .find('.add-content-button').hide();
         var delay=500, ppbSetTimeout;
         container.find('.cell').hover(
             //MOUSE IN
@@ -739,7 +729,7 @@ jQuery(function ($) {
                                 160,
                                 'linear',
                                 function () {
-                                    $t.find('.add-widget-button').show();
+                                    $t.find('.add-content-button').show();
                                 }
                             )
                             .find('.cell').animate(
@@ -748,7 +738,7 @@ jQuery(function ($) {
                                 'linear'
                             );
                     } else {
-                        $t.find('.add-widget-button').show();
+                        $t.find('.add-content-button').show();
                     }
                 }, 500);
 
@@ -757,8 +747,8 @@ jQuery(function ($) {
             function () {
                 clearTimeout( setTimeoutConst );
                 var $t = $(this).closest('.grid-container'),
-                    numPanels = $t.find('.panel-wrapper').length;
-                $t.css("cursor", "default")
+                    numPanels = $t.find('.panel').length;
+                $t.css("cursor", "default");
 
                 if (numPanels > 0) {
                     var $grids = $t.find('.grid'),
@@ -779,7 +769,7 @@ jQuery(function ($) {
                             duration: 160,
                             easing: 'linear',
                             progress: function () {
-                                $(this).find('.add-widget-button').hide();
+                                $(this).find('.add-content-button').hide();
                             }
                         }
                     );
@@ -790,8 +780,6 @@ jQuery(function ($) {
     panels.ppbGridExpandHandler = function ($t) {
         var numPanels = $t.find('.panel-wrapper').length;
         if (numPanels > 0) {
-            //$t.find('.cell').css('padding-bottom', '61px');
-            $t.find('.cell').css('padding-bottom', '61px');
         }
     }
 });

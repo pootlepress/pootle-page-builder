@@ -533,11 +533,7 @@
                                 gridContainer.panelsResizeCells();
                             };
 
-                            if (panels.animations) $panel.slideUp(remove);
-                            else {
-                                $panel.hide();
-                                remove();
-                            }
+                            if (panels.animations) $panel.addClass('removed').slideUp(remove);
                         };
 
                         deleteFunction($currentPanel);

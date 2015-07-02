@@ -86,6 +86,10 @@ html {
     margin: 0 0 61px;
 }
 
+#panels-container .grid, #panels-container .cell {
+    min-height: 59px;
+}
+
 #panels-container .grid .ui-resizable-handle.ui-resizable-w {
     left: -11px;
     width: 10px;
@@ -267,12 +271,12 @@ video.ppb-bg-video {
     cursor: move;
 }
 
-#so-panels-panels {
+#pootlepb-panels {
     background: #F8F8F8;
     margin-top: 5px;
 }
 
-#so-panels-panels .ui-resizable-helper {
+#pootlepb-panels .ui-resizable-helper {
     position: absolute;
     border: 1px solid #ecd800;
     -ms-box-sizing: border-box;
@@ -282,14 +286,10 @@ video.ppb-bg-video {
     min-height: 100px;
 }
 
-#so-panels-panels .hndle {
-    margin-top: 0 !important;
+#pootlepb-panels .panels-container {
 }
 
-#so-panels-panels .panels-container {
-}
-
-#so-panels-panels .panels-container .panel {
+#pootlepb-panels .panels-container .panel {
     background: #fafafa;
     border: 1px solid;
     border-color: #dadada;
@@ -299,17 +299,17 @@ video.ppb-bg-video {
     margin-bottom: 5px;
 }
 
-#so-panels-panels .panels-container .panel:hover {
+#pootlepb-panels .panels-container .panel:hover {
     border-color: #999;
 }
 
-#so-panels-panels .panels-container .panel .panel-wrapper {
+#pootlepb-panels .panels-container .panel .panel-wrapper {
     position: relative;
     overflow: hidden;
     padding: 15px;
 }
 
-#so-panels-panels .panels-container .panel h4 {
+#pootlepb-panels .panels-container .panel h4 {
     position: absolute;
     top: 9px;
     height: auto;
@@ -327,22 +327,22 @@ video.ppb-bg-video {
 
 h4 {}
 
-#so-panels-panels .panels-container .panel h4 span {
+#pootlepb-panels .panels-container .panel h4 span {
     display: inline-block;
     margin: 0;
     text-shadow: 0 1px 0 #FFF;
 }
 
-#so-panels-panels .small-cell .panels-container .panel h4 span {
+#pootlepb-panels .small-cell .panels-container .panel h4 span {
     display: none;
 }
 
-#so-panels-panels .panels-container .panel .title a {
+#pootlepb-panels .panels-container .panel .title a {
     display: none;
     margin-right: 5px;
 }
 
-#so-panels-panels .panels-container .panel .title .actions {
+#pootlepb-panels .panels-container .panel .title .actions {
     position: relative;
     float: right;
     margin: -5px -16px -5px 0;
@@ -354,39 +354,39 @@ h4 {}
     color: #b4b9be;
 }
 
-#so-panels-panels .panels-container .panel .title .actions a {
+#pootlepb-panels .panels-container .panel .title .actions a {
     display: inline-block;
     color: #b4b9be;
     opacity: 0;
 }
 
-#so-panels-panels .panels-container .panel:hover .title .actions a {
+#pootlepb-panels .panels-container .panel:hover .title .actions a {
     opacity: 1;
 }
 
-#so-panels-panels .panels-container .panel .title .actions a:hover {
+#pootlepb-panels .panels-container .panel .title .actions a:hover {
     color: #ef4832;
 }
 
-#so-panels-panels .panels-container .panel.panel-being-dragged .title .actions {
+#pootlepb-panels .panels-container .panel.panel-being-dragged .title .actions {
     display: none;
 }
 
-#so-panels-panels .panels-container .panel small {
+#pootlepb-panels .panels-container .panel small {
     height: 16px;
     display: block;
     overflow: hidden;
 }
 
-#so-panels-panels .panels-container .panel .form {
+#pootlepb-panels .panels-container .panel .form {
     display: none;
 }
 
-#so-panels-panels .panels-container .panel.ui-sortable-helper h4 {
+#pootlepb-panels .panels-container .panel.ui-sortable-helper h4 {
     cursor: move;
 }
 
-#so-panels-panels .panels-container .ui-state-highlight,
+#pootlepb-panels .panels-container .ui-state-highlight,
 .cell-selected .panels-container .ui-state-highlight {
     position: relative;
     height: 44px;
@@ -457,28 +457,50 @@ h4 {}
     margin: 0 1px 5px 5px;
 }
 
-#so-panels-panels {
+#pootlepb-panels {
     position: relative;
     padding-top: 37px;
     border: 1px solid #e5e5e5;
     z-index: 9;
 }
 
-#so-panels-panels h3.hndle {
+#pootlepb-panels h3.pootlepb-toolbar {
     background: #F5F5F5;
     border-bottom: 1px solid #dedede;
     padding: 4px 9px 4px 9px;
     z-index: 97;
     position: absolute;
     top: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.sticky #so-panels-panels .hndle {
-    position: fixed !important;
-    top: 85px !important;
+#pootlepb-panels .handlediv {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 99;
 }
 
-#so-panels-panels h3.hndle button:not(.add-button):not(.page-settings):not(.hide-elements) {
+#pootlepb-panels .handlediv:before {
+    content: '\f142';
+    right: 12px;
+    font: 400 20px/1 dashicons;
+    speak: none;
+    display: inline-block;
+    padding: 8px 10px;
+    top: 0;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-decoration: none!important;
+}
+
+#pootlepb-panels.closed .handlediv:before {
+    content: '\f140';
+}
+
+#pootlepb-panels h3.hndle button:not(.add-button):not(.page-settings):not(.hide-elements) {
     background: #f0f0f0;
     background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #f0f0f0), color-stop(1, #f6f6f6));
     background: -ms-linear-gradient(bottom, #f0f0f0, #f6f6f6);
@@ -497,28 +519,28 @@ h4 {}
     visibility: visible;
 }
 
-#so-panels-panels h3.hndle button.page-settings,
-#so-panels-panels h3.hndle button.hide-elements {
+#pootlepb-panels h3.hndle button.page-settings,
+#pootlepb-panels h3.hndle button.hide-elements {
     float: right;
     margin-top: 0;
     margin-left: 3px;
 }
 
-#so-panels-panels h3.hndle button:not(.add-button):not(.page-settings):hover {
+#pootlepb-panels h3.hndle button:not(.add-button):not(.page-settings):hover {
     background: #FFFFFF;
 }
 
-#so-panels-panels h3.hndle button:not(.add-button):not(.page-settings):active {
+#pootlepb-panels h3.hndle button:not(.add-button):not(.page-settings):active {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
 }
 
-#so-panels-panels h3.hndle button.preview {
+#pootlepb-panels h3.hndle button.preview {
     float: right;
 }
 
-#so-panels-panels .inside {
+#pootlepb-panels .inside {
     padding: 0 10px 10px;
 }
 
@@ -530,22 +552,14 @@ h4 {}
     -moz-background-clip: padding-box;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-    -webkit-border-bottom-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    -webkit-border-bottom-right-radius: 3px;
-    border-bottom-right-radius: 3px;
     border-top: none;
-    -webkit-border-top-left-radius: 0;
-    border-top-left-radius: 0;
-    -webkit-border-top-right-radius: 0;
-    border-top-right-radius: 0;
     margin-left: -125px;
     text-align: center;
     z-index: 100;
-    -moz-border-radius-topright: 0;
-    -moz-border-radius-bottomright: 3px;
-    -moz-border-radius-bottomleft: 3px;
-    -moz-border-radius-topleft: 0;
+    -moz-border-radius: 0 0 3px 3px;
+    -webkit-border-radius: 0 0 3px 3px;
+    border-radius: 0 0 3px 3px;
+    border-color: #ef4832;
 }
 
 #panels-home-page #post-body {
@@ -557,7 +571,7 @@ h4 {}
     min-height: 100px;
 }
 
-#so-panels-panels .dialog-form a {
+#pootlepb-panels .dialog-form a {
     outline: 0;
 }
 
@@ -1135,7 +1149,7 @@ button.wp-switch-editor {
     z-index: 97;
     background-size: cover;
 }
-#panels-container .cell-wrapper .add-widget-button {
+#panels-container .cell-wrapper .add-content-button {
     position: absolute;
     left: 10px;
     right: 10px;
@@ -1152,26 +1166,31 @@ button.wp-switch-editor {
     box-sizing: border-box;
 }
 
-#panels-container .grid .cell .cell-wrapper > .add-widget-button:not(:nth-last-child(1)) {
+#panels-container .grid .cell .cell-wrapper > .add-content-button:last-child {
+    opacity: 1;
+    display: block !important;
+}
+
+#panels-container .grid .cell .cell-wrapper > .add-content-button:not(:last-child) {
     opacity: 1;
     height: 50px;
     top: 100%;
     bottom: initial;
 }
 
-#panels-container .grid .cell .cell-wrapper > .add-widget-button:hover {
+#panels-container .grid .cell .cell-wrapper > .add-content-button:hover {
     opacity: 1;
     background-color: #ef4832;
     border-color: #ef4832;
 }
 
-#panels-container .grid .cell .cell-wrapper > .add-widget-button:hover:before {
+#panels-container .grid .cell .cell-wrapper > .add-content-button:hover:before {
     background-color: #fff;
     color: #ef4832;
     border-color: #ef4832;
 }
 
-#panels-container .cell:hover .add-widget-button span {
+#panels-container .cell:hover .add-content-button span {
     vertical-align: middle;
     line-height: 25px;
 }
@@ -1180,7 +1199,7 @@ button.wp-switch-editor {
     color: #c00;
 }
 
-#panels-container .cell-wrapper .add-widget-button:before {
+#panels-container .cell-wrapper .add-content-button:before {
     background: #e5e5e5;
     background: rgba(153, 153, 153, .1);
     -webkit-border-radius: 50%;
@@ -1207,12 +1226,12 @@ button.wp-switch-editor {
 }
 
 /* Main module dialog styles */
-#so-panels-panels {
+#pootlepb-panels {
     margin-top: 0;
     border-top-style: none;
 }
 
-#so-panels-panels .add-row-container {
+#pootlepb-panels .add-row-container {
     text-align: right;
     padding: 0 12px 10px;
 }
@@ -1235,26 +1254,26 @@ div#pootle-content-module-tabs li.ui-tabs-active a:focus {
     color: #23282d;
 }
 
-#so-panels-panels .add-row-button {
+#pootlepb-panels .add-row-button {
     padding: 0;
     width: 18px;
     height: 18px;
     cursor: pointer;
 }
 
-#so-panels-panels .add-row-button:before {
+#pootlepb-panels .add-row-button:before {
     width: 16px;
     height: 16px;
     line-height: 16px;
     font-size: 16px;
 }
 
-#so-panels-panels .field,
+#pootlepb-panels .field,
 .pootle-style-fields .field {
     margin-bottom: 15px;
 }
 
-#so-panels-panels .field > label,
+#pootlepb-panels .field > label,
 .pootle-style-fields .field > label {
     width: 200px;
     display: inline-block;
@@ -1262,18 +1281,18 @@ div#pootle-content-module-tabs li.ui-tabs-active a:focus {
     font-weight: bold;
 }
 
-#so-panels-panels .field > span > .wp-picker-container,
+#pootlepb-panels .field > span > .wp-picker-container,
 .pootle-style-fields .field > span > .wp-picker-container {
     margin: 0;
     vertical-align: middle;
 }
 
-#so-panels-panels .field > span > .wp-picker-container > .wp-color-result,
+#pootlepb-panels .field > span > .wp-picker-container > .wp-color-result,
 .pootle-style-fields .field > span > .wp-picker-container > .wp-color-result {
     margin: 0;
 }
 
-#so-panels-panels .field > span > input,
+#pootlepb-panels .field > span > input,
 .pootle-style-fields .field > span > input {
     vertical-align: middle;
 }
@@ -1311,7 +1330,7 @@ when editing event widget from Event Calendar Pro */
     top: 32px !important;
 }
 
-.sticky #so-panels-panels .hndle {
+.sticky #pootlepb-panels .pootlepb-toolbar {
     position: fixed !important;
     top: 85px !important;
     z-index: 97;

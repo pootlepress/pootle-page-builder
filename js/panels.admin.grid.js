@@ -152,7 +152,7 @@
             var cell = $(
                 '<div class="' + element_class + '" data-percent="' + (weights[i] / weightSum) + '">' +
                 '<div class="cell-wrapper panels-container">' +
-                '<div class="add-widget-button dashicons-before dashicons-plus"> </div>' +
+                '<div class="add-content-button dashicons-before dashicons-plus"> </div>' +
                 '</div>' +
                 '<div class="cell-width"><div class="cell-width-left"></div><div class="cell-width-right"></div><div class="cell-width-line"></div><div class="cell-width-value"><span></span></div></div>' +
                 '</div>'
@@ -176,8 +176,17 @@
         panels.setupGrid(container);
 
         // setup add widget icons click handler
-        container.find('.cell-wrapper .add-widget-button').each(function () {
+        container.find('.cell-wrapper .add-content-button').each(function () {
             $(this).click(function () {
+                var $t = $(this);
+
+                console.log($t.siblings('.panel').length);
+
+
+                if( $t.siblings('.panel').length == 0 ) {
+                    $t.hide();
+                }
+
                 panels.addContentModule(this);
             });
         });
@@ -275,8 +284,14 @@
             panels.setupGridButtons($newGridContainer);
 
             // setup add widget icons click handler
-            $newGridContainer.find('.cell-wrapper .add-widget-button').each(function () {
+            $newGridContainer.find('.cell-wrapper .add-content-button').each(function () {
                 $(this).click(function () {
+                    var $t = $(this);
+
+                    if( $t.siblings('.panel').length == 0 ) {
+                        $t.hide();
+                    }
+
                     panels.addContentModule(this);
                 });
             });
@@ -611,11 +626,10 @@
      */
     panels.addContentModule = function (tis) {
 
-        $t = $(tis);
+        var $t = $(tis);
 
         $('.cell').removeClass('cell-selected')
-
-        $t.parents('.cell').eq(0).addClass('cell-selected')
+        $t.closest('.cell').addClass('cell-selected')
 
         var panel = panelsCreatePanel('Pootle_PB_Content_Block');
         panels.addPanel(panel, null, null, true);

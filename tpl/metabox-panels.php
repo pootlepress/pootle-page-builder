@@ -163,6 +163,13 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 
 	<?php
 	global $post;
+	$panels_data = get_post_meta( $post->ID, 'panels_data', true );
+
+	$pageSettings = get_post_meta( $post->ID, 'pootlepage-page-settings', true );
+	if ( empty( $pageSettings ) ) {
+		$pageSettings = '{}';
+	}
+
 	$pageSettings = get_post_meta( $post->ID, 'pootlepage-page-settings', true );
 	if ( empty( $pageSettings ) ) {
 		$pageSettings = '{}';
@@ -187,7 +194,7 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 	<?php do_action( 'pootlepb_metabox_end' ); ?>
 </div>
 <?php
-if ( 'post-new.php' == $pagenow ) {
+if ( 'post-new.php' == $pagenow || ! empty( $panels_data['grids'] ) ) {
 ?>
 	<style>.wrap{opacity:0;}</style>
 	<script>

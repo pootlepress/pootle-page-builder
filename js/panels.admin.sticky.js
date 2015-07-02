@@ -7,12 +7,12 @@ jQuery(document).ready(function ($) {
     //Our fixitigation element caching for better performance
     var fixit = $('#wp-content-editor-tools'),
         container = $('#postdivrich'),
-        panelsBar = $('#so-panels-panels .hndle');
+        panelsBar = $('#pootlepb-panels .pootlepb-toolbar');
 
     //fixit offset cached since it will change later
     var stickyFixitTop = fixit.offset().top;
 
-    panelsBar.outerWidth(container.width() - 2);
+    panelsBar.css( 'width', container.width()-2);
 
     //stickyfixit function
     function stickyfixit() {
@@ -44,5 +44,7 @@ jQuery(document).ready(function ($) {
     $(window).scroll(function () {
         stickyfixit();
     });
-
+    $(window).resize(function(){
+        panelsBar.css( 'width', container.width()-2);
+    });
 });

@@ -43,7 +43,7 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 	 */
 	public function metabox() {
 		foreach ( pootlepb__settings( 'post-types' ) as $type ) {
-			add_meta_box( 'so-panels-panels', __( 'Page Builder', 'ppb-panels' ), array( $this, 'metabox_render' ), $type, 'advanced', 'high' );
+			add_meta_box( 'pootlepb-panels', __( 'Page Builder', 'ppb-panels' ), array( $this, 'metabox_render' ), $type, 'advanced', 'high' );
 		}
 	}
 
