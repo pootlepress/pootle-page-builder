@@ -789,11 +789,11 @@
                 // if the field is checkbox, only store value if it is checked
                 if ($(this).prop('checked')) {
                     var key = $(this).attr('dialog-field');
-                    styleData[key] = $(this).val();
+                    styleData[key] = $(this).val().change();
                 }
             } else {
                 var key = $(this).attr('dialog-field');
-                styleData[key] = $(this).val();
+                styleData[key] = $(this).val().change();
             }
 
         });
