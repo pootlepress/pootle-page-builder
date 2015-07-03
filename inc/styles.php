@@ -109,14 +109,6 @@ function pootlepb_hide_elements_dialog_echo( $fields ) {
 function pootlepb_style_dialog_form() {
 	$fields = pootlepb_style_get_fields();
 
-	$sections['Layout'][]     = 'full_width';
-	$sections['Layout'][]     = 'row_height';
-	$sections['Layout'][]     = 'hide_row';
-	$sections['Layout'][]     = 'margin_bottom';
-	$sections['Layout'][]     = 'col_gutter';
-	/** @hook pootlepb_row_styles_section_bg_image Add field id in layout section */
-	$sections['Layout'] = apply_filters( 'pootlepb_row_styles_section_layout', $sections['Layout'] );
-
 	$sections['Background'][] = 'background_toggle';
 
 	$sections['Background'][] = array( '<div class="bg_section bg_color">' );
@@ -140,6 +132,14 @@ function pootlepb_style_dialog_form() {
 	/** @hook pootlepb_row_styles_section_bg_image Add field id in background video sub section */
 	$sections['Background'] = apply_filters( 'pootlepb_row_styles_section_bg_video', $sections['Background'] );
 	$sections['Background'][] = array( '</div>' );
+
+	$sections['Layout'][]     = 'full_width';
+	$sections['Layout'][]     = 'row_height';
+	$sections['Layout'][]     = 'hide_row';
+	$sections['Layout'][]     = 'margin_bottom';
+	$sections['Layout'][]     = 'col_gutter';
+	/** @hook pootlepb_row_styles_section_bg_image Add field id in layout section */
+	$sections['Layout'] = apply_filters( 'pootlepb_row_styles_section_layout', $sections['Layout'] );
 
 	$sections['Advanced'][]   = 'style';
 	$sections['Advanced'][]   = 'class';
@@ -323,6 +323,10 @@ function pootlepb_widget_styles_dialog_form( $advanced = null ) {
 				<?php
 				break;
 			case 'textarea':
+				?><textarea dialog-field="<?php echo $key ?>" class="widget-<?php echo $key ?>" data-style-field-type="text"></textarea>
+				<?php
+				break;
+			default:
 				?><input dialog-field="<?php echo $key ?>" class="widget-<?php echo $key ?>" type="text"
 				         data-style-field-type="text"/>
 				<?php
@@ -333,7 +337,6 @@ function pootlepb_widget_styles_dialog_form( $advanced = null ) {
 		echo '</div>';
 	}
 }
-
 
 /**
  * Check if we're using a color in any of the style fields.

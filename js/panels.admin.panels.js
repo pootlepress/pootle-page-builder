@@ -752,13 +752,13 @@
         // it will be set to unchecked,
         // this is to set hide widget title checkbox
         $styleForm.find('input[type=checkbox]').prop('checked', false);
-        $styleForm.find('input[type=text], input[type=number]').val('').change();
+        $styleForm.find('input[type=text], input[type=number], textarea').val('').change();
 
         // from style data in hidden field, set the widget style dialog fields with data
         for (var key in styleData) {
             if (styleData.hasOwnProperty(key)) {
 
-                var $field = $styleForm.find('input[dialog-field="' + key + '"]');
+                var $field = $styleForm.find('[dialog-field="' + key + '"]');
 
                 if ($field.attr('data-style-field-type') == "color" ) {
                     $field
@@ -784,7 +784,7 @@
 
         // from values in dialog fields, set style data into hidden fields
         var styleData = {};
-        $styleForm.find('input[dialog-field]').each(function () {
+        $styleForm.find('[dialog-field]').each(function () {
             if ($(this).attr('type') == 'checkbox') {
                 // if the field is checkbox, only store value if it is checked
                 if ($(this).prop('checked')) {

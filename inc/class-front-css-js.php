@@ -57,6 +57,12 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 		// Add the grid sizing
 		$this->grid_styles( $css, $settings, $panels_margin_bottom, $panels_mobile_width, $panels_data, $post_id );
 
+		$panel_grid_cell_css = 'box-sizing: border-box !important; display: inline-block !important; vertical-align: top !important;';
+
+		$css[1920][ $panel_grid_cell_css ][] = '.panel-grid-cell';
+
+		$css[1920][ 'font-size: 0;' ][] = '.panel-grid-cell-container';
+
 		if ( $settings['responsive'] ) {
 			// Add CSS to prevent overflow on mobile resolution.
 			$panel_grid_css      = 'margin-left: 0 !important; margin-right: 0 !important;';

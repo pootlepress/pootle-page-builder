@@ -57,7 +57,7 @@ $pootlepb_content_block_styling_fields = array(
 	),
 	'class'         => array(
 		'name' => 'CSS Class',
-		'type' => 'textarea',
+		'type' => 'text',
 		'css'  => '',
 		'advanced'=> true,
 	),
