@@ -722,7 +722,8 @@ jQuery(function ($) {
                     $gc = $(this).closest('.grid-container');
 
                 setTimeoutConst = setTimeout(function(){
-                    var most_cells = 0;
+                    var this_cells = $t.find('.panel').length,
+                        most_cells = 0;
                     $gc.find('.cell').each(function() {
                         var $t = $(this);
                         if( $t.find('.panel').length > most_cells ) {
@@ -730,11 +731,11 @@ jQuery(function ($) {
                         }
                     });
 
-                    if ( $t.find('.panel').length < most_cells ) {
+                    if ( this_cells < most_cells ) {
                         $t.find('.add-content-button')
                             .css({
-                                top: 'initial',
-                                bottom: '13px'
+                                top: 10 + ( this_cells * 51 ),
+                                bottom: '10px'
                             })
                             .show();
                         return;

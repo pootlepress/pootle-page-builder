@@ -110,26 +110,27 @@
             $('<div class="controls" />')
                 // Add the move/reorder button
                 .append(
-                $('<div class="row-button row-bg-preview sort-button dashicons-before dashicons-visibility"></div>')
-            )
+                    $('<div class="row-button row-bg-preview sort-button dashicons-before dashicons-visibility"></div>')
+                    .attr('data-tooltip', 'Row is hidden')
+                )
                 .append(
-                $('<div class="row-button sort-button dashicons-before dashicons-sort grid-handle"></div>')
-            )
+                    $('<div class="row-button sort-button dashicons-before dashicons-sort grid-handle"></div>')
+                )
                 // Add the duplicate button
                 .append(
-                $('<div class="row-button duplicate-button dashicons-before dashicons-admin-page"></div>')
-                    .attr('data-tooltip', 'Duplicate')
-            )
+                    $('<div class="row-button duplicate-button dashicons-before dashicons-admin-page"></div>')
+                        .attr('data-tooltip', 'Duplicate')
+                )
                 // Add the button for selecting the row style
                 .append(
-                $('<div class="row-button style-button dashicons-before dashicons-admin-generic panels-visual-style"></div>')
-                    .attr('data-tooltip', 'Row display settings')
-            )
+                    $('<div class="row-button style-button dashicons-before dashicons-admin-generic panels-visual-style"></div>')
+                        .attr('data-tooltip', 'Row display settings')
+                )
                 // Add the remove button
                 .append(
-                $('<div class="row-button delete-button dashicons-before dashicons-dismiss"></div>')
-                    .attr('data-tooltip', panels.i10n.buttons['delete'])
-            )
+                    $('<div class="row-button delete-button dashicons-before dashicons-dismiss"></div>')
+                        .attr('data-tooltip', panels.i10n.buttons['delete'])
+                )
         );
 
         panels.setupGridButtons(container);
