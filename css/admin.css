@@ -943,8 +943,9 @@ input:disabled{
     background: #f5f5f5;
 }
 
-#grid-styles-dialog .field .ui-slider{
+#grid-styles-dialog .field > .ui-slider{
     margin: 3px 0 0;
+    width: 200px;
 }
 
 .dashicons-editor-help.tooltip {
