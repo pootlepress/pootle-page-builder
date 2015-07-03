@@ -48,8 +48,6 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 	 */
 	public function row_style_vars( $attr, $style ) {
 
-		print_awesome_r( $style );
-
 		//Setting row bg type property
 		$this->row_bg_type = '.bg_image';
 		if ( isset( $style['background_toggle'] ) ) {
