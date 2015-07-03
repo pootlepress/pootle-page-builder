@@ -88,9 +88,9 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 
 		$style_attributes = array();
 		$style_attributes['class'] = array(
+			'panel-row-style',
 			'panel-row-style-' . $panels_data['grids'][ $gi ]['style']['class'],
 			$panels_data['grids'][ $gi ]['style']['class'],
-			'panel-row-style',
 		);
 
 		$styleArray = ! empty( $panels_data['grids'][ $gi ]['style'] ) ? $panels_data['grids'][ $gi ]['style'] : array();

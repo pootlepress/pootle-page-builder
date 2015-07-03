@@ -48,6 +48,8 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 	 */
 	public function row_style_vars( $attr, $style ) {
 
+		print_awesome_r( $style );
+
 		//Setting row bg type property
 		$this->row_bg_type = '.bg_image';
 		if ( isset( $style['background_toggle'] ) ) {
@@ -68,7 +70,7 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 	 */
 	public function row_bg_color( $attr, $style ) {
 
-		if ( ! empty( $style['background'] ) && empty( $style['bg_overlay_color'] ) ) {
+		if ( ! empty( $style['background'] ) ) {
 			$attr['style'] .= 'background-color: ' . $style['background'] . ';';
 		}
 
@@ -171,6 +173,8 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 	 * @since 0.1.0
 	 */
 	public function row_bg_parallax( $attr, $style ) {
+
+		if ( '.bg_image' != $this->row_bg_type ) { return $attr; }
 
 		if ( ! empty( $style['background_parallax'] ) ) {
 			$attr['class'][] = 'ppb-parallax';

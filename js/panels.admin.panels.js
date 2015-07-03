@@ -752,7 +752,7 @@
         // it will be set to unchecked,
         // this is to set hide widget title checkbox
         $styleForm.find('input[type=checkbox]').prop('checked', false);
-        $styleForm.find('input:not([type=checkbox])').val('').change();
+        $styleForm.find('input[type=text], input[type=number]').val('').change();
 
         // from style data in hidden field, set the widget style dialog fields with data
         for (var key in styleData) {
