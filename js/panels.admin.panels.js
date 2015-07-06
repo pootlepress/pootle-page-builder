@@ -761,9 +761,7 @@
                 var $field = $styleForm.find('[dialog-field="' + key + '"]');
 
                 if ($field.attr('data-style-field-type') == "color" ) {
-                    $field
-                        .val( styleData[key] )
-                        .change();
+                    $field.wpColorPicker('color', styleData[key]);
                 } else if ($field.attr('data-style-field-type') == "checkbox") {
                     if (styleData[key] == $field.val()) {
                         $field.prop('checked', true);
