@@ -116,7 +116,7 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 			return;
 		}
 
-		$panels_data = pootlepb_get_panels_data_from_post( $_POST );
+		$panels_data = pootlepb_get_panels_data_from_post();
 
 		if ( function_exists( 'wp_slash' ) ) {
 			$panels_data = wp_slash( $panels_data );
@@ -182,7 +182,7 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 		register_setting( 'pootlepage-add-ons', 'pootlepb_add_ons' );
 		register_setting( 'pootlepage-display', 'siteorigin_panels_display', array(
 			$this,
-			'pootlepb_options_sanitize_display'
+			'pootlepb_options_sanitize_display',
 		) );
 
 		add_settings_section( 'display', __( 'Display', 'ppb-panels' ), '__return_false', 'pootlepage-display' );

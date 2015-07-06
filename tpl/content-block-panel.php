@@ -12,7 +12,7 @@
 
 			<li>
 				<a class="ppb-tabs-anchors ppb-block-anchor ppb-editor" <?php selected( true ) ?> href="#pootle-editor-tab">
-					<?php echo apply_filters( 'pootlepb_content_block_editor_title', 'Editor', $request ); ?>
+					<?php echo esc_attr( apply_filters( 'pootlepb_content_block_editor_title', 'Editor', $request ) ); ?>
 				</a>
 			</li>
 
@@ -30,7 +30,7 @@
 		<?php ?>
 		<div id="pootle-editor-tab" class="pootle-content-module tab-contents content-block">
 
-			<?php echo do_action( 'pootlepb_content_block_editor_form', $request ); ?>
+			<?php do_action( 'pootlepb_content_block_editor_form', $request ); ?>
 
 		</div>
 

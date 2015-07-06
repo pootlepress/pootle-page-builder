@@ -55,9 +55,9 @@ add_action( 'admin_notices', 'pootlepb_no_admin_notices', 0 );
  */
 function pootlepb_wp_import_post_meta( $post_meta ) {
 	foreach ( $post_meta as $i => $meta ) {
-		if ( $meta['key'] == 'panels_data' ) {
+		if ( 'panels_data' == $meta['key'] ) {
 			$value = $meta['value'];
-			$value = preg_replace( "/[\r\n]/", "<<<br>>>", $value );
+			$value = preg_replace( "/[\r\n]/", '<<<br>>>', $value );
 			$value = preg_replace( '!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $value );
 			$value = unserialize( $value );
 			$value = array_map( 'pootlepb_wp_import_post_meta_map', $value );

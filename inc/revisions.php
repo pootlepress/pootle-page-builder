@@ -9,13 +9,10 @@
 
 /**
  * Store the Page Builder meta in the revision.
- *
  * @param $post_id
- * @param $post
- *
  * @since 0.1.0
  */
-function pootlepb_revisions_save_post( $post_id, $post ) {
+function pootlepb_revisions_save_post( $post_id) {
 	$parent_id = wp_is_post_revision( $post_id );
 
 	if ( $parent_id ) {
@@ -65,7 +62,7 @@ function pootlepb_revisions_fields( $fields ) {
 	}
 
 	$screen = get_current_screen();
-	if ( ! empty( $screen ) && $screen->base == 'post' ) {
+	if ( ! empty( $screen ) && 'post' == $screen->base ) {
 		return $fields;
 	}
 

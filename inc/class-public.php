@@ -52,7 +52,7 @@ final class Pootle_Page_Builder_Public extends Pootle_Page_Builder_Abstract {
 	 * @return array
 	 * @since 0.1.0
 	 */
-	function body_class( $classes ) {
+	public function body_class( $classes ) {
 
 		if ( pootlepb_is_panel() ) {
 			$classes[] = 'ppb-panels';

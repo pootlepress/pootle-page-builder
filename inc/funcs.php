@@ -231,7 +231,12 @@ function pootlepb_settings( $key = '' ) {
  * @return array
  * @since 0.1.0
  */
-function pootlepb_get_panels_data_from_post( $form_post ) {
+function pootlepb_get_panels_data_from_post( $form_post = null ) {
+
+	if ( null == $form_post ) {
+		$form_post = $_POST;
+	}
+
 	$panels_data            = array();
 	$panels_data['widgets'] = array_values( stripslashes_deep( isset( $form_post['widgets'] ) ? $form_post['widgets'] : array() ) );
 

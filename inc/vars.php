@@ -7,9 +7,9 @@
  * @since 0.1.0
  */
 
-global $pootlepb_content_block_styling_fields,
-       $pootlepb_row_styling_fields,
-       $pootlepb_font;
+global	$pootlepb_content_block_styling_fields,
+		$pootlepb_row_styling_fields,
+		$pootlepb_font;
 
 /**
  * Content block styling fields
@@ -81,7 +81,7 @@ $pootlepb_row_styling_fields = array(
 			''          => 'Please choose...',
 			'.bg_color' => 'Background color',
 			'.bg_image' => 'Background image',
-			'.bg_video' => 'Background video'
+			'.bg_video' => 'Background video',
 		),
 		'default' => '',
 	),
@@ -131,7 +131,7 @@ $pootlepb_row_styling_fields = array(
 		'options' => array(
 			''          => 'No setting',
 			'100% auto' => '100% width',
-			'cover'     => 'Cover'
+			'cover'     => 'Cover',
 		),
 		'default' => 'cover',
 	),

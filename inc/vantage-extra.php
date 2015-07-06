@@ -50,7 +50,6 @@ function pootlepb_panels_panels_row_attributes( $attr, $row ) {
 		} else {
 			$attr['style'] .= 'margin-bottom: 0;';
 		}
-
 	}
 
 	if ( isset( $row['style']['id'] ) && ! empty( $row['style']['id'] ) ) {

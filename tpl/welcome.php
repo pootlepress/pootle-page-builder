@@ -18,9 +18,9 @@
 	<div class="ppb-badge"></div>
 
 	<p class="ppb-actions">
-		<a href="<?php echo admin_url( 'admin.php?page=page_builder_settings' ) ?>" class="button pootle">Settings</a>
+		<a href="<?php echo esc_url( admin_url( 'admin.php?page=page_builder_settings' ) ); ?>" class="button pootle">Settings</a>
 		<a href="http://docs.pootlepress.com/" class="button pootle">Docs</a>
-		<b>Version <?php echo POOTLEPB_VERSION ?></b>
+		<b>Version <?php echo esc_attr( POOTLEPB_VERSION ); ?></b>
 	</p>
 
 	<hr>
@@ -52,6 +52,6 @@
 	<hr>
 
 	<div class="return-to-dashboard">
-		<a href="<?php echo admin_url( 'admin.php?page=page_builder_settings' ) ?>">Go to Page Builder Settings</a>
+		<a href="<?php echo esc_url( admin_url( 'admin.php?page=page_builder_settings' ) ); ?>">Go to Page Builder Settings</a>
 	</div>
 </div>

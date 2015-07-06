@@ -65,7 +65,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 	 * @return string CSS to output
 	 * @since 0.1.0
 	 */
-	function panels_generate_css( $post_id, $panels_data ) {
+	public function panels_generate_css( $post_id, $panels_data ) {
 		// Exit if we don't have panels data
 		if ( empty( $panels_data ) || empty( $panels_data['grids'] ) ) {
 			return;

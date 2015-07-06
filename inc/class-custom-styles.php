@@ -17,7 +17,7 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 	 */
 	protected static $instance;
 
-	/** @var Current bg type video */
+	/** @var string Current bg type video */
 	protected $row_bg_type;
 
 	/**
@@ -279,7 +279,7 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 	public function row_inline_css( $attr, $style ) {
 
 		if ( ! empty( $style['style'] ) ) {
-			$attr['style'] .= preg_replace( "/\r|\n/", ";", $style['style'] );;
+			$attr['style'] .= preg_replace( "/\r|\n/", ';', $style['style'] );;
 		}
 
 		return $attr;
