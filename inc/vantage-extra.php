@@ -12,6 +12,7 @@ function pootlepb_panels_row_styles( $styles ) {
 
 	return $styles;
 }
+
 add_filter( 'pootlepb_row_styles', 'pootlepb_panels_row_styles' );
 
 /**
@@ -22,8 +23,10 @@ add_filter( 'pootlepb_row_styles', 'pootlepb_panels_row_styles' );
 function pootlepb_block_styling_fields() {
 
 	global $pootlepb_content_block_styling_fields;
+
 	return $pootlepb_content_block_styling_fields;
 }
+
 add_filter( 'pootlepb_row_style_fields', 'pootlepb_row_style_fields' );
 
 function pootlepb_panels_panels_row_attributes( $attr, $row ) {
@@ -56,4 +59,5 @@ function pootlepb_panels_panels_row_attributes( $attr, $row ) {
 
 	return $attr;
 }
+
 add_filter( 'pootlepb_row_attributes', 'pootlepb_panels_panels_row_attributes', 10, 2 );

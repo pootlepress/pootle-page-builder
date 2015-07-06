@@ -34,6 +34,7 @@ add_action( 'template_redirect', 'pootlepb_preview' );
  */
 function pootlepb_is_preview() {
 	global $pootlepb_is_preview;
+
 	return (bool) $pootlepb_is_preview;
 }
 
@@ -41,6 +42,7 @@ function pootlepb_is_preview() {
  * This is a way to show previews of panels, especially for the home page.
  *
  * @param $val
+ *
  * @return array
  * @since 0.1.0
  */

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: shramee
@@ -36,11 +37,12 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 
 	/**
 	 * Adds a style entry to Pootle_Page_Builder_Front_Css_Js::$style
+	 *
 	 * @param string $style Style to apply to element
 	 * @param string $lmn The element selector
 	 * @param int $res Resolution
 	 */
-	private function css( $style, $lmn, $res=1920 ) {
+	private function css( $style, $lmn, $res = 1920 ) {
 
 		if ( empty( $this->styles[ $res ] ) ) {
 			$this->styles[ $res ] = array();
@@ -59,6 +61,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 	 *
 	 * @param int|string $post_id
 	 * @param array $panels_data
+	 *
 	 * @return string CSS to output
 	 * @since 0.1.0
 	 */
@@ -78,21 +81,21 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 
 		$panel_grid_cell_css = 'box-sizing: border-box !important; display: inline-block !important; vertical-align: top !important;';
 
-		$this->css(  $panel_grid_cell_css , '.panel-grid-cell' );
+		$this->css( $panel_grid_cell_css, '.panel-grid-cell' );
 
-		$this->css(  'font-size: 0;' , '.panel-grid-cell-container' );
+		$this->css( 'font-size: 0;', '.panel-grid-cell-container' );
 
 		if ( $settings['responsive'] ) {
 			// Add CSS to prevent overflow on mobile resolution.
 			$panel_grid_css      = 'margin-left: 0 !important; margin-right: 0 !important;';
 			$panel_grid_cell_css = 'padding: 0 !important; width: 100% !important;';
 
-			$this->css(  $panel_grid_css , '.panel-grid', $panels_mobile_width );
-			$this->css(  $panel_grid_cell_css , '.panel-grid-cell', $panels_mobile_width );
+			$this->css( $panel_grid_css, '.panel-grid', $panels_mobile_width );
+			$this->css( $panel_grid_cell_css, '.panel-grid-cell', $panels_mobile_width );
 		} else {
 			$panel_grid_cell_css = 'display: inline-block !important; vertical-align: top !important;';
 
-			$this->css(  $panel_grid_cell_css , '.panel-grid-cell', $panels_mobile_width );
+			$this->css( $panel_grid_cell_css, '.panel-grid-cell', $panels_mobile_width );
 		}
 
 		//Margin and padding
@@ -110,9 +113,11 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 
 	/**
 	 * Outputs style for rows and cells
+	 *
 	 * @param $settings
 	 * @param $panels_data
 	 * @param $post_id
+	 *
 	 * @since 0.1.0
 	 */
 	public function grid_styles( $settings, $panels_data, $post_id ) {
@@ -131,11 +136,13 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 
 	/**
 	 * Outputs column width css
+	 *
 	 * @param int $ci Cell Index
 	 * @param int $gi Grid Index
 	 * @param int $post_id
 	 * @param int $cell_count
 	 * @param array $panels_data
+	 *
 	 * @since 0.1.0
 	 */
 	private function col_widths( &$ci, $gi, $post_id, $cell_count, $panels_data ) {
@@ -144,19 +151,21 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 
 			if ( $cell_count > 1 ) {
 				$css_new = 'width:' . round( $cell['weight'] * 100, 3 ) . '%';
-				$this->css(  $css_new , '#pgc-' . $post_id . '-' . $gi . '-' . $i );
+				$this->css( $css_new, '#pgc-' . $post_id . '-' . $gi . '-' . $i );
 			}
 
-			$ci++;
+			$ci ++;
 		}
 	}
 
 	/**
 	 * Outputs margin bottom style for rows
+	 *
 	 * @param array $settings PPB settings
 	 * @param int $gi Grid Index
 	 * @param int $post_id
 	 * @param array $panels_data
+	 *
 	 * @since 0.1.0
 	 */
 	private function row_bottom_margin( $settings, $gi, $post_id, $panels_data ) {
@@ -165,7 +174,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 
 		// Add the bottom margin to any grids that aren't the last
 		if ( $gi != count( $panels_data['grids'] ) - 1 ) {
-			$this->css(  'margin-bottom: ' . $panels_margin_bottom . 'px' , '#pg-' . $post_id . '-' . $gi );
+			$this->css( 'margin-bottom: ' . $panels_margin_bottom . 'px', '#pg-' . $post_id . '-' . $gi );
 		}
 	}
 
@@ -177,13 +186,13 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 		if ( $settings['responsive'] ) {
 			// Mobile Responsive
 
-			$this->css(  'float:none' , '#pg-' . $post_id . '-' . $gi . ' .panel-grid-cell', $panels_mobile_width );
-			$this->css(  'width:auto' , '#pg-' . $post_id . '-' . $gi . ' .panel-grid-cell', $panels_mobile_width );
+			$this->css( 'float:none', '#pg-' . $post_id . '-' . $gi . ' .panel-grid-cell', $panels_mobile_width );
+			$this->css( 'width:auto', '#pg-' . $post_id . '-' . $gi . ' .panel-grid-cell', $panels_mobile_width );
 
 			for ( $i = 0; $i < $cell_count; $i ++ ) {
 				if ( $i != $cell_count - 1 ) {
 					$css_new = 'margin-bottom:' . $panels_margin_bottom . 'px';
-					$this->css(  $css_new , '#pgc-' . $post_id . '-' . $gi . '-' . $i, $panels_mobile_width );
+					$this->css( $css_new, '#pgc-' . $post_id . '-' . $gi . '-' . $i, $panels_mobile_width );
 				}
 			}
 		}
@@ -191,8 +200,10 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 
 	/**
 	 * Margin padding for rows and columns
+	 *
 	 * @param array $settings
 	 * @param array $panels_margin_bottom
+	 *
 	 * @since 0.1.0
 	 */
 	public function grid_elements_margin_padding( $settings, $panels_margin_bottom ) {
@@ -201,14 +212,14 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 		$bottom_margin      = 'margin-bottom: ' . $panels_margin_bottom . 'px';
 		$bottom_margin_last = 'margin-bottom: 0 !important';
 
-		$this->css(  $bottom_margin , '.panel-grid-cell .panel' );
-		$this->css(  $bottom_margin_last , '.panel-grid-cell .panel:last-child' );
+		$this->css( $bottom_margin, '.panel-grid-cell .panel' );
+		$this->css( $bottom_margin_last, '.panel-grid-cell .panel:last-child' );
 
 		// This is for the side margins
 		$magin_half    = $settings['margin-sides'] / 2;
 		$side_paddings = "padding: 0 {$magin_half}px 0";
 
-		$this->css(  $side_paddings , '.panel-grid-cell' );
+		$this->css( $side_paddings, '.panel-grid-cell' );
 
 		if ( ! defined( 'POOTLEPB_OLD_V' ) ) {
 

@@ -16,50 +16,50 @@ global $pootlepb_content_block_styling_fields,
  * @since 0.1.0
  */
 $pootlepb_content_block_styling_fields = array(
-	'background-color'  => array(
+	'background-color' => array(
 		'name' => 'Background color',
 		'type' => 'color',
-		'css' => 'background-color',
+		'css'  => 'background-color',
 	),
-	'text-color'        => array(
+	'text-color'       => array(
 		'name' => 'Text color',
 		'type' => 'color',
-		'css' => 'color',
+		'css'  => 'color',
 	),
-	'border'            => array(
+	'border'           => array(
 		'name' => 'Border',
 		'type' => 'border',
-		'css' => 'border',
+		'css'  => 'border',
 	),
-	'padding'           => array(
+	'padding'          => array(
 		'name' => 'Padding',
 		'type' => 'number',
-		'min' => '0',
-		'max' => '100',
+		'min'  => '0',
+		'max'  => '100',
 		'step' => '1',
 		'unit' => 'px',
-		'css' => 'padding',
+		'css'  => 'padding',
 	),
-	'rounded-corners'   => array(
+	'rounded-corners'  => array(
 		'name' => 'Rounded corners',
 		'type' => 'number',
-		'min' => '0',
-		'max' => '100',
+		'min'  => '0',
+		'max'  => '100',
 		'step' => '1',
 		'unit' => 'px',
-		'css' => 'border-radius',
+		'css'  => 'border-radius',
 	),
-	'inline-css'        => array(
-		'name' => 'Inline CSS styles',
-		'type' => 'textarea',
-		'css' => '',
-		'advanced'=> true,
+	'inline-css'       => array(
+		'name'     => 'Inline CSS styles',
+		'type'     => 'textarea',
+		'css'      => '',
+		'advanced' => true,
 	),
-	'class'             => array(
-		'name' => 'CSS Class',
-		'type' => 'text',
-		'css'  => '',
-		'advanced'=> true,
+	'class'            => array(
+		'name'     => 'CSS Class',
+		'type'     => 'text',
+		'css'      => '',
+		'advanced' => true,
 	),
 );
 
@@ -68,64 +68,64 @@ $pootlepb_content_block_styling_fields = array(
  * @since 0.1.0
  */
 $pootlepb_row_styling_fields = array(
-	'row_height' => array(
+	'row_height'              => array(
 		'name'      => __( 'Empty Row Height', 'ppb-panels' ),
 		'type'      => 'px',
 		'default'   => '',
 		'help-text' => 'Row height can only be set when there is no content in a row.',
 	),
-	'background_toggle'           => array(
+	'background_toggle'       => array(
 		'name'    => __( 'Set Background', 'vantage' ),
 		'type'    => 'select',
 		'options' => array(
-			'' => 'Please choose...',
+			''          => 'Please choose...',
 			'.bg_color' => 'Background color',
 			'.bg_image' => 'Background image',
 			'.bg_video' => 'Background video'
 		),
 		'default' => '',
 	),
-	'full_width' => array(
+	'full_width'              => array(
 		'name' => 'Make row go full width',
 		'type' => 'checkbox',
 	),
-	'hide_row' => array(
+	'hide_row'                => array(
 		'name' => 'Hide row',
 		'type' => 'checkbox',
 	),
-	'margin_bottom' => array(
+	'margin_bottom'           => array(
 		'name' => 'Row Bottom Margin',
 		'type' => 'px',
 	),
-	'col_gutter' => array(
+	'col_gutter'              => array(
 		'name' => 'Column Gutters',
 		'type' => 'px',
 	),
-	'background' => array(
+	'background'              => array(
 		'name' => __( 'Background Color', 'vantage' ),
 		'type' => 'color',
 	),
-	'bg_overlay_color' => array(
-		'name'      => 'Overlay color on image',
-		'type'      => 'color',
+	'bg_overlay_color'        => array(
+		'name' => 'Overlay color on image',
+		'type' => 'color',
 	),
-	'bg_overlay_opacity' => array(
-		'name'      => 'Overlay color opacity',
-		'type'      => 'slider',
+	'bg_overlay_opacity'      => array(
+		'name' => 'Overlay color opacity',
+		'type' => 'slider',
 	),
-	'background_image'            => array(
+	'background_image'        => array(
 		'name' => __( 'Background Image', 'vantage' ),
 		'type' => 'upload',
 	),
-	'background_image_repeat'     => array(
+	'background_image_repeat' => array(
 		'name' => __( 'Repeat Background Image', 'vantage' ),
 		'type' => 'checkbox',
 	),
-	'background_parallax'         => array(
+	'background_parallax'     => array(
 		'name' => __( 'Parallax Background Image', 'vantage' ),
 		'type' => 'checkbox',
 	),
-	'background_image_size'       => array(
+	'background_image_size'   => array(
 		'name'    => __( 'Background Image Size', 'vantage' ),
 		'type'    => 'select',
 		'options' => array(
@@ -135,26 +135,26 @@ $pootlepb_row_styling_fields = array(
 		),
 		'default' => 'cover',
 	),
-	'bg_video'                    => array(
+	'bg_video'                => array(
 		'name' => __( 'Background Video', 'vantage' ),
 		'type' => 'uploadVid',
 	),
-	'bg_mobile_image'             => array(
+	'bg_mobile_image'         => array(
 		'name'      => __( 'Responsive Image', 'vantage' ),
 		'type'      => 'upload',
 		'help-text' => "If you add an image here it will replace the video on mobile site. <br> If you don't it won't!",
 	),
-	'style'                       => array(
+	'style'                   => array(
 		'name'    => __( 'Inline CSS Styles', 'ppb-panels' ),
 		'type'    => 'textarea',
 		'default' => '',
 	),
-	'class'                       => array(
+	'class'                   => array(
 		'name'    => __( 'Row CSS Class', 'ppb-panels' ),
 		'type'    => 'text',
 		'default' => '',
 	),
-	'col_class'                       => array(
+	'col_class'               => array(
 		'name'    => __( 'Column CSS Class', 'ppb-panels' ),
 		'type'    => 'text',
 		'default' => '',

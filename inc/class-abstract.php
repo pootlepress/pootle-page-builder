@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: shramee
@@ -6,7 +7,7 @@
  * Time: 6:41 PM
  * @since 0.1.0
  */
-abstract class Pootle_Page_Builder_Abstract{
+abstract class Pootle_Page_Builder_Abstract {
 
 	/**
 	 * Get instance of Pootle Page Builder
@@ -20,6 +21,7 @@ abstract class Pootle_Page_Builder_Abstract{
 		if ( empty( $class::$instance ) ) {
 			static::$instance = new $class();
 		}
+
 		return static::$instance;
 	}
 
@@ -28,6 +30,7 @@ abstract class Pootle_Page_Builder_Abstract{
 	 * @access private
 	 * @since 0.1.0
 	 */
-	protected function __construct() {}
+	protected function __construct() {
+	}
 
 }

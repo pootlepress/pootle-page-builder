@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: shramee
@@ -66,7 +67,9 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 
 	/**
 	 * Add a help tab to pages with panels.
+	 *
 	 * @param $prefix
+	 *
 	 * @action load-post-new.php, load-page.php
 	 * @since 0.1.0
 	 */
@@ -127,6 +130,7 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	/**
 	 * @param bool|null $pass
 	 * @param object $post
+	 *
 	 * @return bool
 	 */
 	public function save_post_or_not( $pass, $post ) {
@@ -155,10 +159,22 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	 * @since 0.1.0
 	 */
 	public function admin_menu() {
-		add_menu_page( 'Home', 'Page Builder', 'manage_options', 'page_builder', array( $this, 'menu_page' ), 'dashicons-screenoptions', 26 );
-		add_submenu_page( 'page_builder', 'Add New', 'Add New', 'manage_options', 'page_builder_add', array( $this, 'menu_page' ) );
-		add_submenu_page( 'page_builder', 'Settings', 'Settings', 'manage_options', 'page_builder_settings', array( $this, 'menu_page' ) );
-		add_submenu_page( 'page_builder', 'Add-ons', 'Add-ons', 'manage_options', 'page_builder_addons', array( $this, 'menu_page' ) );
+		add_menu_page( 'Home', 'Page Builder', 'manage_options', 'page_builder', array(
+			$this,
+			'menu_page'
+		), 'dashicons-screenoptions', 26 );
+		add_submenu_page( 'page_builder', 'Add New', 'Add New', 'manage_options', 'page_builder_add', array(
+			$this,
+			'menu_page'
+		) );
+		add_submenu_page( 'page_builder', 'Settings', 'Settings', 'manage_options', 'page_builder_settings', array(
+			$this,
+			'menu_page'
+		) );
+		add_submenu_page( 'page_builder', 'Add-ons', 'Add-ons', 'manage_options', 'page_builder_addons', array(
+			$this,
+			'menu_page'
+		) );
 	}
 
 	/**
@@ -167,13 +183,22 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	 */
 	public function options_init() {
 		register_setting( 'pootlepage-add-ons', 'pootlepb_add_ons' );
-		register_setting( 'pootlepage-display', 'siteorigin_panels_display', array( $this, 'pootlepb_options_sanitize_display' ) );
+		register_setting( 'pootlepage-display', 'siteorigin_panels_display', array(
+			$this,
+			'pootlepb_options_sanitize_display'
+		) );
 
 		add_settings_section( 'display', __( 'Display', 'ppb-panels' ), '__return_false', 'pootlepage-display' );
 
 		// The display fields
-		add_settings_field( 'responsive', __( 'Responsive', 'ppb-panels' ), array( $this, 'options_field_generic' ), 'pootlepage-display', 'display', array( 'type' => 'responsive' ) );
-		add_settings_field( 'mobile-width', __( 'Mobile Width', 'ppb-panels' ), array( $this, 'options_field_generic' ), 'pootlepage-display', 'display', array( 'type' => 'mobile-width' ) );
+		add_settings_field( 'responsive', __( 'Responsive', 'ppb-panels' ), array(
+			$this,
+			'options_field_generic'
+		), 'pootlepage-display', 'display', array( 'type' => 'responsive' ) );
+		add_settings_field( 'mobile-width', __( 'Mobile Width', 'ppb-panels' ), array(
+			$this,
+			'options_field_generic'
+		), 'pootlepage-display', 'display', array( 'type' => 'mobile-width' ) );
 	}
 
 	/**
@@ -206,8 +231,10 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 
 	/**
 	 * Output settings field
+	 *
 	 * @param array $args
 	 * @param string $groupName
+	 *
 	 * @since 0.1.0
 	 */
 	public function options_field_generic( $args, $groupName = 'siteorigin_panels_display' ) {
@@ -232,7 +259,9 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 
 	/**
 	 * Sanitize display options
+	 *
 	 * @param $vals
+	 *
 	 * @return mixed
 	 * @since 0.1.0
 	 */

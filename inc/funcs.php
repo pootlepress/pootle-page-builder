@@ -13,7 +13,7 @@ function pootlepb_add_admin_notice( $id, $message, $type = 'updated' ) {
 
 	$notices = get_option( 'pootlepb_admin_notices', array() );
 
-	$notices[$id] = array(
+	$notices[ $id ] = array(
 		'type'    => $type,
 		'message' => $message,
 	);
@@ -28,6 +28,7 @@ function pootlepb_add_admin_notice( $id, $message, $type = 'updated' ) {
  * @param string $value
  * @param string $default_color
  * @param string $link
+ *
  * @since 0.1.0
  */
 function pootlepb_color_control( $label, $value, $default_color, $link ) {
@@ -135,7 +136,9 @@ function pootlepb_hex2rgb( $hex ) {
 
 /**
  * Check if we're currently viewing a panel.
+ *
  * @param bool $can_edit Also check if the user can edit this page
+ *
  * @return bool
  * @since 0.1.0
  */
@@ -149,6 +152,7 @@ function pootlepb_is_panel( $can_edit = false ) {
 function pootlepb_row_style_fields( $fields ) {
 
 	global $pootlepb_row_styling_fields;
+
 	return array_merge( $fields, $pootlepb_row_styling_fields );
 }
 
@@ -197,17 +201,17 @@ function pootlepb_settings( $key = '' ) {
 
 
 		$settings = wp_parse_args( $settings, array(
-			'post-types'        => apply_filters( 'pootlepb_builder_post_types', array( 'page' ) ),
+			'post-types'    => apply_filters( 'pootlepb_builder_post_types', array( 'page' ) ),
 			// Post types that can be edited using panels.
-			'responsive'        => ! isset( $display_settings['responsive'] ) ? true : $display_settings['responsive'] == '1',
+			'responsive'    => ! isset( $display_settings['responsive'] ) ? true : $display_settings['responsive'] == '1',
 			// Should we use a responsive layout
-			'mobile-width'      => ! isset( $display_settings['mobile-width'] ) ? 780 : $display_settings['mobile-width'],
+			'mobile-width'  => ! isset( $display_settings['mobile-width'] ) ? 780 : $display_settings['mobile-width'],
 			// What is considered a mobile width?
-			'margin-bottom'     => ! isset( $display_settings['margin-bottom'] ) ? 0 : $display_settings['margin-bottom'],
+			'margin-bottom' => ! isset( $display_settings['margin-bottom'] ) ? 0 : $display_settings['margin-bottom'],
 			// Bottom margin of a cell
-			'margin-sides'      => ! isset( $display_settings['margin-sides'] ) ? 10 : $display_settings['margin-sides'],
+			'margin-sides'  => ! isset( $display_settings['margin-sides'] ) ? 10 : $display_settings['margin-sides'],
 			// Spacing between 2 cells
-			'inline-css'        => true,
+			'inline-css'    => true,
 			// How to display CSS
 		) );
 	}
@@ -221,7 +225,9 @@ function pootlepb_settings( $key = '' ) {
 
 /**
  * Convert form post data into more efficient panels data.
+ *
  * @param $form_post
+ *
  * @return array
  * @since 0.1.0
  */

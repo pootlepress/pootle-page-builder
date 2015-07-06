@@ -42,8 +42,10 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Initiates vars and properties for row styling
+	 *
 	 * @param array $attr
 	 * @param array $style
+	 *
 	 * @return array
 	 */
 	public function row_style_vars( $attr, $style ) {
@@ -62,8 +64,10 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Set's row background color
+	 *
 	 * @param array $attr
 	 * @param array $style
+	 *
 	 * @return array
 	 */
 	public function row_bg_color( $attr, $style ) {
@@ -77,8 +81,10 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Set's row border
+	 *
 	 * @param array $attr
 	 * @param array $style
+	 *
 	 * @return array
 	 */
 	public function row_border( $attr, $style ) {
@@ -95,13 +101,17 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Set's row background image
+	 *
 	 * @param array $attr
 	 * @param array $style
+	 *
 	 * @return array
 	 */
 	public function row_bg_image( $attr, $style ) {
 
-		if ( '.bg_image' != $this->row_bg_type ) { return $attr; }
+		if ( '.bg_image' != $this->row_bg_type ) {
+			return $attr;
+		}
 
 		if ( ! empty( $style['background_image'] ) ) {
 			$attr['style'] .= 'background-image: url( ' . esc_url( $style['background_image'] ) . ' ); ';
@@ -114,8 +124,10 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Set's row bg image repeat
+	 *
 	 * @param array $attr
 	 * @param array $style
+	 *
 	 * @return array
 	 */
 	public function row_bg_img_repeat( $attr, $style ) {
@@ -135,6 +147,7 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 	 *
 	 * @param array $attr
 	 * @param array $style
+	 *
 	 * @return array
 	 */
 	public function row_bg_img_size( $attr, $style ) {
@@ -148,8 +161,10 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Row full width class
+	 *
 	 * @param array $attr
 	 * @param array $style
+	 *
 	 * @return array
 	 * @since 0.1.0
 	 */
@@ -165,14 +180,18 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Row bg parallax class
+	 *
 	 * @param array $attr
 	 * @param array $style
+	 *
 	 * @return array
 	 * @since 0.1.0
 	 */
 	public function row_bg_parallax( $attr, $style ) {
 
-		if ( '.bg_image' != $this->row_bg_type ) { return $attr; }
+		if ( '.bg_image' != $this->row_bg_type ) {
+			return $attr;
+		}
 
 		if ( ! empty( $style['background_parallax'] ) ) {
 			$attr['class'][] = 'ppb-parallax';
@@ -184,9 +203,11 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Row bg video class and video mobile image
+	 *
 	 * @param array $attr
 	 * @param array $style
 	 * @param array $cells
+	 *
 	 * @return array
 	 * @since 0.1.0
 	 */
@@ -209,8 +230,10 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Row bg video class and video mobile image
+	 *
 	 * @param array $attr
 	 * @param array $style
+	 *
 	 * @return array
 	 * @since 0.1.0
 	 */
@@ -225,8 +248,10 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Row bg video class and video mobile image
+	 *
 	 * @param array $attr
 	 * @param array $style
+	 *
 	 * @return array
 	 */
 	public function row_bg_vid_css( $attr, $style ) {
@@ -245,8 +270,10 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Row bg video class and video mobile image
+	 *
 	 * @param array $attr
 	 * @param array $style
+	 *
 	 * @return array
 	 */
 	public function row_inline_css( $attr, $style ) {

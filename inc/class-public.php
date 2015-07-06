@@ -39,14 +39,16 @@ final class Pootle_Page_Builder_Public extends Pootle_Page_Builder_Abstract {
 	 * Adds the actions anf filter hooks for plugin
 	 * @since 0.1.0
 	 */
-	protected function actions(){
+	protected function actions() {
 
 		add_filter( 'body_class', array( $this, 'body_class' ) );
 	}
 
 	/**
 	 * Add all the necessary body classes.
+	 *
 	 * @param $classes
+	 *
 	 * @return array
 	 * @since 0.1.0
 	 */

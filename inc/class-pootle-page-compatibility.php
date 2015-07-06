@@ -250,6 +250,7 @@ class Pootle_Page_Compatibility {
 	 * @param string $property ID of deprecated property
 	 * @param null $css_property
 	 * @param string $unit
+	 *
 	 * @since 0.1.0
 	 */
 	private function set_as_inline_css( &$styles, $property, $css_property = null, $unit = '' ) {
@@ -258,7 +259,7 @@ class Pootle_Page_Compatibility {
 			$css_property = $property;
 		}
 
-		if ( is_array( $css_property ) ){
+		if ( is_array( $css_property ) ) {
 
 			foreach ( $css_property as $prop ) {
 
@@ -266,6 +267,7 @@ class Pootle_Page_Compatibility {
 			}
 
 			unset( $styles[ $property ] );
+
 			return;
 		}
 
@@ -276,7 +278,7 @@ class Pootle_Page_Compatibility {
 
 	private function set_inline_css_property( &$styles, $property, $css_property = null, $unit = '' ) {
 
-		if ( !empty( $styles[ $property ] ) ) {
+		if ( ! empty( $styles[ $property ] ) ) {
 
 			$styles['inline-css'] .= "$css_property: {$styles[ $property ]}{$unit}; ";
 		}

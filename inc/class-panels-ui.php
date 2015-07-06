@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: shramee
@@ -43,7 +44,10 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 	 */
 	public function metabox() {
 		foreach ( pootlepb_settings( 'post-types' ) as $type ) {
-			add_meta_box( 'pootlepb-panels', __( 'Page Builder', 'ppb-panels' ), array( $this, 'metabox_render' ), $type, 'advanced', 'high' );
+			add_meta_box( 'pootlepb-panels', __( 'Page Builder', 'ppb-panels' ), array(
+				$this,
+				'metabox_render'
+			), $type, 'advanced', 'high' );
 		}
 	}
 
@@ -51,6 +55,7 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 	 * Render a panel metabox.
 	 *
 	 * @param $post
+	 *
 	 * @since 0.1.0
 	 */
 	public function metabox_render( $post ) {
@@ -223,7 +228,9 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 
 	/**
 	 * Add current pages as cloneable pages
+	 *
 	 * @param $layouts
+	 *
 	 * @return mixed
 	 * @since 0.1.0
 	 */
@@ -248,9 +255,11 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 
 	/**
 	 * Add current pages as cloneable pages
+	 *
 	 * @param object $page Post object
 	 * @param array $panels_data
 	 * @param array $layouts Prebuilt layouts
+	 *
 	 * @return mixed
 	 * @since 0.1.0
 	 */

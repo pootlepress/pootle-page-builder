@@ -123,27 +123,27 @@ function pootlepb_style_dialog_form() {
 	$sections['Background'][] = 'bg_overlay_color';
 	$sections['Background'][] = 'bg_overlay_opacity';
 	/** @hook pootlepb_row_styles_section_bg_image Add field id in background image sub section */
-	$sections['Background'] = apply_filters( 'pootlepb_row_styles_section_bg_image', $sections['Background'] );
+	$sections['Background']   = apply_filters( 'pootlepb_row_styles_section_bg_image', $sections['Background'] );
 	$sections['Background'][] = array( '</div>' );
 
 	$sections['Background'][] = array( '<div class="bg_section bg_video">' );
 	$sections['Background'][] = 'bg_video';
 	$sections['Background'][] = 'bg_mobile_image';
 	/** @hook pootlepb_row_styles_section_bg_image Add field id in background video sub section */
-	$sections['Background'] = apply_filters( 'pootlepb_row_styles_section_bg_video', $sections['Background'] );
+	$sections['Background']   = apply_filters( 'pootlepb_row_styles_section_bg_video', $sections['Background'] );
 	$sections['Background'][] = array( '</div>' );
 
-	$sections['Layout'][]     = 'full_width';
-	$sections['Layout'][]     = 'row_height';
-	$sections['Layout'][]     = 'hide_row';
-	$sections['Layout'][]     = 'margin_bottom';
-	$sections['Layout'][]     = 'col_gutter';
+	$sections['Layout'][] = 'full_width';
+	$sections['Layout'][] = 'row_height';
+	$sections['Layout'][] = 'hide_row';
+	$sections['Layout'][] = 'margin_bottom';
+	$sections['Layout'][] = 'col_gutter';
 	/** @hook pootlepb_row_styles_section_bg_image Add field id in layout section */
 	$sections['Layout'] = apply_filters( 'pootlepb_row_styles_section_layout', $sections['Layout'] );
 
-	$sections['Advanced'][]   = 'style';
-	$sections['Advanced'][]   = 'class';
-	$sections['Advanced'][]   = 'col_class';
+	$sections['Advanced'][] = 'style';
+	$sections['Advanced'][] = 'class';
+	$sections['Advanced'][] = 'col_class';
 	/** @hook pootlepb_row_styles_section_bg_image Add field id in advanced section */
 	$sections['Advanced'] = apply_filters( 'pootlepb_row_styles_section_advanced', $sections['Advanced'] );
 
@@ -323,7 +323,8 @@ function pootlepb_widget_styles_dialog_form( $advanced = null ) {
 				<?php
 				break;
 			case 'textarea':
-				?><textarea dialog-field="<?php echo $key ?>" class="widget-<?php echo $key ?>" data-style-field-type="text"></textarea>
+				?><textarea dialog-field="<?php echo $key ?>" class="widget-<?php echo $key ?>"
+				            data-style-field-type="text"></textarea>
 				<?php
 				break;
 			default:
@@ -386,6 +387,7 @@ add_filter( 'pootlepb_prebuilt_layout', 'pootlepb_style_update_data' );
  * Sanitize all the data that's come from post data
  *
  * @param $panels_data
+ *
  * @since 0.1.0
  */
 function pootlepb_style_sanitize_data( $panels_data ) {

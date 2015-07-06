@@ -12,6 +12,7 @@
  *
  * @param $post_id
  * @param $post
+ *
  * @since 0.1.0
  */
 function pootlepb_revisions_save_post( $post_id, $post ) {
@@ -34,6 +35,7 @@ add_action( 'save_post', 'pootlepb_revisions_save_post', 11, 2 );
  *
  * @param $post_id
  * @param $revision_id
+ *
  * @since 0.1.0
  */
 function pootlepb_revisions_restore( $post_id, $revision_id ) {

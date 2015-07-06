@@ -102,6 +102,7 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Sets content block embed and inline css
+	 *
 	 * @param string $inlineStyle
 	 * @param array $styleWithSelector
 	 * @param array $styleArray
@@ -130,6 +131,7 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Renders border for the content block
+	 *
 	 * @param string $inlineStyle
 	 * @param array $styleArray
 	 * @param string $key
@@ -150,6 +152,7 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Fallback content block style renderer
+	 *
 	 * @param string $inlineStyle
 	 * @param array $styleWithSelector
 	 * @param array $styleArray
@@ -179,7 +182,9 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Render the Content Panel.
+	 *
 	 * @param string $widget_info The widget class name.
+	 *
 	 * @since 0.1.0
 	 */
 	public function render_content_block( $block_info ) {
@@ -214,7 +219,9 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Output TMCE Editor
+	 *
 	 * @param $request
+	 *
 	 * @since 0.1.0
 	 */
 	public function panels_editor( $request ) {
@@ -242,7 +249,9 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 
 	/**
 	 * Display a widget form with the provided data
+	 *
 	 * @param array|null $request Request data ($_POST/$_GET)
+	 *
 	 * @since 0.1.0
 	 */
 	public function editor_panel( $request = null ) {
