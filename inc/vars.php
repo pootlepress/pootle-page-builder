@@ -16,46 +16,46 @@ global $pootlepb_content_block_styling_fields,
  * @since 0.1.0
  */
 $pootlepb_content_block_styling_fields = array(
-	'background-color'   => array(
+	'background-color'  => array(
 		'name' => 'Background color',
 		'type' => 'color',
-		'css'  => 'background-color',
+		'css' => 'background-color',
 	),
-	'text-color'   => array(
+	'text-color'        => array(
 		'name' => 'Text color',
 		'type' => 'color',
-		'css'  => 'color',
+		'css' => 'color',
 	),
-	'border'             => array(
+	'border'            => array(
 		'name' => 'Border',
 		'type' => 'border',
-		'css'  => 'border'
+		'css' => 'border',
 	),
-	'padding' => array(
+	'padding'           => array(
 		'name' => 'Padding',
 		'type' => 'number',
-		'min'  => '0',
-		'max'  => '100',
+		'min' => '0',
+		'max' => '100',
 		'step' => '1',
 		'unit' => 'px',
-		'css'  => array( 'padding' )
+		'css' => 'padding',
 	),
-	'rounded-corners'    => array(
+	'rounded-corners'   => array(
 		'name' => 'Rounded corners',
 		'type' => 'number',
-		'min'  => '0',
-		'max'  => '100',
+		'min' => '0',
+		'max' => '100',
 		'step' => '1',
 		'unit' => 'px',
-		'css'  => 'border-radius'
+		'css' => 'border-radius',
 	),
-	'inline-css'         => array(
+	'inline-css'        => array(
 		'name' => 'Inline CSS styles',
 		'type' => 'textarea',
-		'css'  => '',
+		'css' => '',
 		'advanced'=> true,
 	),
-	'class'         => array(
+	'class'             => array(
 		'name' => 'CSS Class',
 		'type' => 'text',
 		'css'  => '',

@@ -75,12 +75,6 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 
 		//Classes for this content block
 		$classes = array( 'panel' );
-		if ( 0 == $pi ) {
-			$classes[] = 'panel-first-child';
-		}
-		if ( ( $blocks_num - 1 ) == $pi ) {
-			$classes[] = 'panel-last-child';
-		}
 
 		if ( ! empty( $styleArray['class'] ) ) {
 			$classes[] = $styleArray['class'];
@@ -142,32 +136,15 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 	 * @param array $field
 	 */
 	private function content_block_border( &$inlineStyle, $styleArray, $key, $field ) {
-		// a border field has 2 settings
-		$key1 = $key . '-width';
-		$key2 = $key . '-color';
 
-		if ( ! empty( $styleArray[ $key1 ] ) ) {
-			if ( ! is_array( $field['css'] ) ) {
-				$cssArr = array( $field['css'] );
-			} else {
-				$cssArr = $field['css'];
-			}
-
-			foreach ( $cssArr as $cssProperty ) {
-				$inlineStyle .= $cssProperty . '-width: ' . $styleArray[ $key1 ] . 'px; border-style: solid;';
-			}
+		//Border width
+		if ( ! empty( $styleArray[ $key . '-width' ] ) ) {
+			$inlineStyle .= $field['css'] . ': ' . $styleArray[ $key . '-width' ] . 'px solid;';
 		}
 
-		if ( isset( $styleArray[ $key2 ] ) && $styleArray[ $key2 ] != '' ) {
-			if ( ! is_array( $field['css'] ) ) {
-				$cssArr = array( $field['css'] );
-			} else {
-				$cssArr = $field['css'];
-			}
-
-			foreach ( $cssArr as $cssProperty ) {
-				$inlineStyle .= $cssProperty . '-color: ' . $styleArray[ $key2 ] . ';';
-			}
+		//Border color
+		if ( ! empty( $styleArray[ $key . '-color' ] ) ) {
+			$inlineStyle .= $field['css'] . '-color: ' . $styleArray[ $key . '-color' ] . ';';
 		}
 	}
 
@@ -182,25 +159,20 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 	 */
 	private function default_block_field( &$inlineStyle, &$styleWithSelector, $styleArray, $id, $key, $field ) {
 
-		if ( isset( $styleArray[ $key ] ) && $styleArray[ $key ] != '' ) {
-			if ( ! is_array( $field['css'] ) ) {
-				$cssArr = array( $field['css'] );
-			} else {
-				$cssArr = $field['css'];
+		if ( ! empty( $styleArray[ $key ] ) ) {
+
+			$unit = '';
+			//Assign Unit if not empty
+			if ( ! empty( $field['unit'] ) ) {
+				$unit = $field['unit'];
 			}
 
-			foreach ( $cssArr as $cssProperty ) {
-				if ( isset( $field['unit'] ) ) {
-					$unit = $field['unit'];
-				} else {
-					$unit = '';
-				}
-
-				if ( ! isset( $field['selector'] ) ) {
-					$inlineStyle .= $cssProperty . ': ' . $styleArray[ $key ] . $unit . ';';
-				} else {
-					$styleWithSelector .= '#' . $id . ' > ' . $field['selector'] . ' { ' . $cssProperty . ': ' . $styleArray[ $key ] . $unit . '; }';
-				}
+			if ( ! isset( $field['selector'] ) ) {
+				//No selector
+				$inlineStyle .= $field['css'] . ': ' . $styleArray[ $key ] . $unit . ';';
+			} else {
+				//Has a selector
+				$styleWithSelector .= '#' . $id . ' > ' . $field['selector'] . ' { ' . $field['css'] . ': ' . $styleArray[ $key ] . $unit . '; }';
 			}
 		}
 	}
