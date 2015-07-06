@@ -19,7 +19,6 @@ function pootlepb_preview() {
 		if ( empty( $post_id ) ) {
 			$GLOBALS['pootlepb_is_panels_home'] = true;
 		}
-		add_action( 'option_pootlepb_home_page', 'pootlepb_preview_load_data' );
 		locate_template( pootlepb_settings( 'home-template' ), true );
 		exit();
 	}

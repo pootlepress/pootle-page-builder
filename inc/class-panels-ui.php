@@ -227,56 +227,57 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 	 * @return mixed
 	 * @since 0.1.0
 	 */
-	function cloned_page_layouts( $layouts ) {
+	public function cloned_page_layouts( $layouts ) {
 		$pages = get_posts( array(
-			'post_type'   => 'page',
+			'post_type'   => pootlepb_settings( 'post-types' ),
 			'post_status' => array( 'publish', 'draft' ),
-			'numberposts' => 200,
+			'numberposts' => 250,
 		) );
 
 		foreach ( $pages as $page ) {
-			$panels_data = get_post_meta( $page->ID, 'panels_data', true );
-			$panels_data = apply_filters( 'pootlepb_data', $panels_data, $page->ID );
+			$panels_data = apply_filters( 'pootlepb_data', get_post_meta( $page->ID, 'panels_data', true ), $page->ID );
 
-			if ( empty( $panels_data ) ) {
-				continue;
+			if ( ! empty( $panels_data ) ) {
+
+				$this->get_layout_from_post( $page, $panels_data, $layouts );
 			}
-
-			$name = empty( $page->post_title ) ? __( 'Untitled', 'ppb-panels' ) : $page->post_title;
-			if ( $page->post_status != 'publish' ) {
-				$name .= ' ( ' . __( 'Unpublished', 'ppb-panels' ) . ' )';
-			}
-
-			if ( current_user_can( 'edit_post', $page->ID ) ) {
-				$layouts[ 'post-' . $page->ID ] = wp_parse_args(
-					array(
-						'name' => sprintf( __( 'Clone Page: %s', 'ppb-panels' ), $name )
-					),
-					$panels_data
-				);
-			}
-		}
-
-		// Include the current home page in the clone pages.
-		$home_data = get_option( 'pootlepb_home_page', null );
-		if ( ! empty( $home_data ) ) {
-
-			$layouts['current-home-page'] = wp_parse_args(
-				array(
-					'name' => __( 'Clone: Current Home Page', 'ppb-panels' ),
-				),
-				$home_data
-			);
 		}
 
 		return $layouts;
 	}
 
 	/**
+	 * Add current pages as cloneable pages
+	 * @param object $page Post object
+	 * @param array $panels_data
+	 * @param array $layouts Prebuilt layouts
+	 * @return mixed
+	 * @since 0.1.0
+	 */
+	protected function get_layout_from_post( $page, $panels_data, &$layouts ) {
+
+		$name = empty( $page->post_title ) ? __( 'Untitled', 'ppb-panels' ) : $page->post_title;
+
+		if ( $page->post_status != 'publish' ) {
+			$name .= ' ( ' . __( 'Unpublished', 'ppb-panels' ) . ' )';
+		}
+
+		if ( current_user_can( 'edit_post', $page->ID ) ) {
+
+			$layouts[ 'post-' . $page->ID ] = wp_parse_args(
+				array(
+					'name' => sprintf( __( 'Clone Page: %s', 'ppb-panels' ), $name )
+				),
+				$panels_data
+			);
+		}
+	}
+
+	/**
 	 * Admin ajax handler for loading a prebuilt layout.
 	 * @since 0.1.0
 	 */
-	function ajax_action_prebuilt() {
+	public function ajax_action_prebuilt() {
 		// Get any layouts that the current user could edit.
 		$layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 
