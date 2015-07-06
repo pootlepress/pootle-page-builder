@@ -785,15 +785,17 @@
         // from values in dialog fields, set style data into hidden fields
         var styleData = {};
         $styleForm.find('[dialog-field]').each(function () {
-            if ($(this).attr('type') == 'checkbox') {
+            var $t = $(this);
+
+            if ($t.attr('type') == 'checkbox') {
                 // if the field is checkbox, only store value if it is checked
-                if ($(this).prop('checked')) {
-                    var key = $(this).attr('dialog-field');
-                    styleData[key] = $(this).val().change();
+                if ($t.prop('checked')) {
+                    var key = $t.attr('dialog-field');
+                    styleData[key] = $t.val();
                 }
             } else {
-                var key = $(this).attr('dialog-field');
-                styleData[key] = $(this).val().change();
+                var key = $t.attr('dialog-field');
+                styleData[key] = $t.val();
             }
 
         });

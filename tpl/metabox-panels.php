@@ -146,7 +146,7 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 	$panels_data = get_post_meta( $post->ID, 'panels_data', true );
 	?>
 
-	<?php wp_nonce_field( 'save', '_sopanels_nonce' ) ?>
+	<?php wp_nonce_field( 'pootlepb_save', 'pootlepb_nonce' ) ?>
 	<?php do_action( 'pootlepb_metabox_end' ); ?>
 </div>
 

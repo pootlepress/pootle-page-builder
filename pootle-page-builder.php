@@ -75,7 +75,7 @@ final class Pootle_Page_Builder extends Pootle_Page_Builder_Abstract {
 		/** Variables used throughout the plugin */
 		require_once POOTLEPB_DIR . 'inc/vars.php';
 		/** Functions used throughout the plugin */
-		require_once POOTLEPB_DIR . 'inc/functions.php';
+		require_once POOTLEPB_DIR . 'inc/funcs.php';
 		/** Enhancements and fixes */
 		require_once POOTLEPB_DIR . 'inc/enhancements-and-fixes.php';
 		/** PPB Admin Class */

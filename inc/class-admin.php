@@ -53,6 +53,9 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 		//Save panel data on post save
 		add_action( 'save_post', array( $this, 'save_post' ), 10, 2 );
 
+		//Allow the save post to save panels data
+		add_filter( 'pootlepb_save_post_pass', array( $this, 'save_post_or_not' ), 10, 2 );
+
 		//Settings
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'options_init' ) );
@@ -100,15 +103,13 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	 * @since 0.1.0
 	 */
 	public function save_post( $post_id, $post ) {
-		if ( empty( $_POST['_sopanels_nonce'] ) || ! wp_verify_nonce( $_POST['_sopanels_nonce'], 'save' ) ) {
+
+		$pass = apply_filters( 'pootlepb_save_post_pass', ! empty( $_POST['pootlepb_nonce'] ), $post );
+
+		if ( empty( $pass ) ) {
 			return;
 		}
-		if ( empty( $_POST['panels_js_complete'] ) ) {
-			return;
-		}
-		if ( ! current_user_can( 'edit_post', $post_id ) ) {
-			return;
-		}
+
 		// Don't Save panels if Post Type for $post_id is not same as current post ID type
 		// (Prevents population product panels data in saving Tabs via Meta)
 		if ( get_post_type( $_POST['post_ID'] ) != 'wc_product_tab' and get_post_type( $post_id ) == 'wc_product_tab' ) {
@@ -124,14 +125,40 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	}
 
 	/**
+	 * @param bool|null $pass
+	 * @param object $post
+	 * @return bool
+	 */
+	public function save_post_or_not( $pass, $post ) {
+
+		//Check nonce
+		if ( ! wp_verify_nonce( filter_input( INPUT_POST, 'pootlepb_nonce' ), 'pootlepb_save' ) ) {
+			return false;
+		}
+
+		//Check if js was properly loaded
+		if ( ! filter_input( INPUT_POST, 'panels_js_complete' ) ) {
+			return false;
+		}
+
+		//User capability
+		if ( ! current_user_can( 'edit_post', $post->id ) ) {
+			return false;
+		}
+
+		return $pass;
+
+	}
+
+	/**
 	 * Add the options page
 	 * @since 0.1.0
 	 */
 	public function admin_menu() {
 		add_menu_page( 'Home', 'Page Builder', 'manage_options', 'page_builder', array( $this, 'menu_page' ), 'dashicons-screenoptions', 26 );
-		add_submenu_page( 'page_builder', 'Add New', 'Add New', 'manage_options', 'page_builder_add', array( $this, 'submenu_page' ) );
-		add_submenu_page( 'page_builder', 'Settings', 'Settings', 'manage_options', 'page_builder_settings', array( $this, 'submenu_page' ) );
-		add_submenu_page( 'page_builder', 'Add-ons', 'Add-ons', 'manage_options', 'page_builder_addons', array( $this, 'submenu_page' ) );
+		add_submenu_page( 'page_builder', 'Add New', 'Add New', 'manage_options', 'page_builder_add', array( $this, 'menu_page' ) );
+		add_submenu_page( 'page_builder', 'Settings', 'Settings', 'manage_options', 'page_builder_settings', array( $this, 'menu_page' ) );
+		add_submenu_page( 'page_builder', 'Add-ons', 'Add-ons', 'manage_options', 'page_builder_addons', array( $this, 'menu_page' ) );
 	}
 
 	/**
@@ -153,32 +180,15 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	 * Display the admin page.
 	 * @since 0.1.0
 	 */
-	public function submenu_page() {
-		if ( 'page_builder_settings' == filter_input( INPUT_GET, 'page' ) ) {
-
-			include plugin_dir_path( POOTLEPB_BASE_FILE ) . '/tpl/options.php';
-
-		} elseif ( 'page_builder_addons' == filter_input( INPUT_GET, 'page' ) ) {
-
-			include plugin_dir_path( POOTLEPB_BASE_FILE ) . '/tpl/add-ons.php';
-
-		} elseif ( 'page_builder_add' == filter_input( INPUT_GET, 'page' ) ) {
-
-			?>
-			<div class="wrap">
-				<h2 class="page_builder_add">If you are not automatically redirected. <a href="<?php echo admin_url( '/post-new.php?post_type=page&page_builder=pootle' ); ?>"> Click Here to Create New page with Pootle Page Builder.</a><h2>
-			</div>
-		<?php
-
-		}
-	}
-
-	/**
-	 * Display the admin page.
-	 * @since 0.1.0
-	 */
 	public function menu_page() {
-		include POOTLEPB_DIR . '/tpl/welcome.php';
+
+		//Replace prefix for submenu pages
+		$inc_file = str_replace( 'page_builder_', '', filter_input( INPUT_GET, 'page' ) );
+
+		//Replace main menu page with welcome
+		$inc_file = str_replace( 'page_builder', 'welcome', $inc_file );
+
+		include POOTLEPB_DIR . "tpl/$inc_file.php";
 	}
 
 	/**
