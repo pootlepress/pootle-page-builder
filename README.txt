@@ -69,11 +69,11 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 == Upgrade Notice ==
 
 = 0.1 =
-* 2015-06-29
+* 2015-07-06
 * Initial release. It's alive!
 
 == Changelog ==
 
 = 0.1 =
-* 2015-06-29
+* 2015-07-06
 * Initial release. It's alive!
