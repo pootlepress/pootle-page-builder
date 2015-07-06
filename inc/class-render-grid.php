@@ -19,23 +19,6 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 	protected static $instance;
 
 	/**
-	 * Adds the hooks for rows html
-	 * @since 0.1.0
-	 */
-	protected function row_hooks() {
-		require_once POOTLEPB_DIR . 'inc/class-custom-styles.php';
-
-		/* Puts stuff in row */
-		add_action( 'pootlepb_before_cells', array( $this, 'row_embed_css' ), 10, 2 );
-		add_action( 'pootlepb_before_cells', array( $this, 'row_bg_video' ) );
-
-		/* Embed styles */
-		add_action( 'pootlepb_row_embed_style', array( $this, 'row_col_gutter' ), 10, 3 );
-		add_action( 'pootlepb_row_embed_style', array( $this, 'row_overlay' ), 10, 3 );
-
-	}
-
-	/**
 	 * Outputs the pootle page builder grids
 	 * @param array $grids
 	 * @param array $panels_data
@@ -234,70 +217,6 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 		}
 
 		return $css;
-	}
-
-
-	/**
-	 * Set's panels data if empty
-	 * @param array|bool $panels_data
-	 * @param int $post_id
-	 * @return bool
-	 * @since 0.1.0
-	 */
-	protected function any_problem( &$panels_data, &$post_id ) {
-
-		if ( empty( $post_id ) ) {
-			$post_id = get_the_ID();
-		}
-
-		if ( empty( $panels_data ) ) {
-			$panels_data = get_post_meta( $post_id, 'panels_data', true );
-		}
-
-		$panels_data = apply_filters( 'pootlepb_data', $panels_data, $post_id );
-
-		if ( empty( $panels_data ) || empty( $panels_data['grids'] ) ) {
-			return true;
-		}
-	}
-
-	/**
-	 * Convert panels data into grid>cell>widget format
-	 * @param array $grids
-	 * @param array $panels_data
-	 * @since 0.1.0
-	 */
-	protected function grids_array( &$grids, $panels_data ) {
-
-		if ( ! empty( $panels_data['grids'] ) ) {
-			foreach ( $panels_data['grids'] as $gi => $grid ) {
-				$gi           = intval( $gi );
-				$grids[ $gi ] = array();
-				for ( $i = 0; $i < $grid['cells']; $i ++ ) {
-					$grids[ $gi ][ $i ] = array();
-				}
-			}
-		}
-
-		$this->grids_array_add_widgets( $grids, $panels_data );
-	}
-
-	/**
-	 * Adds widgets to grid array from panels data
-	 * @param array $grids
-	 * @param array $panels_data
-	 * @since 0.1.0
-	 */
-	protected function grids_array_add_widgets( &$grids, $panels_data ) {
-
-		if ( ! empty( $panels_data['widgets'] ) && is_array( $panels_data['widgets'] ) ) {
-			foreach ( $panels_data['widgets'] as $widget ) {
-
-				if ( ! empty( $widget['info'] ) ) {
-					$grids[ intval( $widget['info']['grid'] ) ][ intval( $widget['info']['cell'] ) ][] = $widget;
-				}
-			}
-		}
 	}
 }
 

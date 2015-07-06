@@ -30,17 +30,19 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 	 * @since 0.1.0
 	 */
 	protected function __construct() {
-		$this->hooks();
-	}
-
-	/**
-	 * Adds the actions and filter hooks for plugin functioning
-	 * @since 0.1.0
-	 */
-	private function hooks() {
 		/* Main content filter */
 		add_filter( 'the_content', array( $this, 'content_filter' ) );
-		parent::row_hooks();
+
+		//Row custom styles
+		require_once POOTLEPB_DIR . 'inc/class-custom-styles.php';
+
+		/* Puts stuff in row */
+		add_action( 'pootlepb_before_cells', array( $this, 'row_embed_css' ), 10, 2 );
+		add_action( 'pootlepb_before_cells', array( $this, 'row_bg_video' ) );
+
+		/* Embed styles */
+		add_action( 'pootlepb_row_embed_style', array( $this, 'row_col_gutter' ), 10, 3 );
+		add_action( 'pootlepb_row_embed_style', array( $this, 'row_overlay' ), 10, 3 );
 	}
 
 	/**
@@ -50,65 +52,48 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 	 * @filter the_content
 	 * @since 0.1.0
 	 */
-	function content_filter( $content ) {
+	public function content_filter( $content ) {
 
-		$postID = get_the_ID();
+		$postID = apply_filters( 'pootlepb_the_content_id', get_the_ID() );
 
-		$isWooCommerceInstalled =
-			function_exists( 'is_shop' ) && function_exists( 'wc_get_page_id' );
+		$pass = apply_filters( 'pootlepb_the_content_pass', is_page() );
 
-		if ( $isWooCommerceInstalled ) {
-			// prevent Page Builder overwrite taxonomy description with widget content
-			if ( ( is_tax( array( 'product_cat', 'product_tag' ) ) && get_query_var( 'paged' ) == 0 ) || ( is_post_type_archive() && ! is_shop() ) ) {
-				return $content;
-			}
-
-			if ( is_shop() ) {
-				$postID = wc_get_page_id( 'shop' );
-			}
-		} else {
-			if ( is_post_type_archive() ) {
-				return $content;
-			}
-		}
-
-		//If product done once set $postID to Tabs Post ID
-		if ( isset( $GLOBALS['canvasPB_ProductDoneOnce'] ) ) {
-			global $wpdb;
-			$results = $wpdb->get_results(
-				"SELECT ID FROM "
-				. $wpdb->posts
-				. " WHERE "
-				. "post_content LIKE '"
-				. esc_sql( $content )
-				. "'"
-				. " AND post_type LIKE 'wc_product_tab'"
-				. " AND post_status LIKE 'publish'" );
-			foreach ( $results as $id ) {
-				$postID = $id->ID;
-			}
-		}
-		//If its product set canvasPB_ProductDoneOnce to skip this for TAB
-		if ( function_exists( 'is_product' ) ) {
-			if ( is_single() && is_product() ) {
-				$GLOBALS['canvasPB_ProductDoneOnce'] = true;
-			}
+		if ( ! $pass ) {
+			return $content;
 		}
 
 		$post = get_post( $postID );
+		$panel_content = $this->panels_render( $post->ID );
 
-		if ( empty( $post ) ) {
-			return $content;
-		}
-		if ( in_array( $post->post_type, pootlepb_settings( 'post-types' ) ) ) {
-			$panel_content = $this->panels_render( $post->ID );
-
-			if ( ! empty( $panel_content ) ) {
-				$content = $panel_content;
-			}
+		if ( ! empty( $panel_content ) ) {
+			$content = $panel_content;
 		}
 
 		return $content;
+	}
+
+	/**
+	 * Set's panels data if empty
+	 * @param array|bool $panels_data
+	 * @param int $post_id
+	 * @return bool
+	 * @since 0.1.0
+	 */
+	protected function any_problem( &$panels_data, &$post_id ) {
+
+		if ( empty( $post_id ) ) {
+			$post_id = get_the_ID();
+		}
+
+		if ( empty( $panels_data ) ) {
+			$panels_data = get_post_meta( $post_id, 'panels_data', true );
+		}
+
+		$panels_data = apply_filters( 'pootlepb_data', $panels_data, $post_id );
+
+		if ( empty( $panels_data ) || empty( $panels_data['grids'] ) ) {
+			return true;
+		}
 	}
 
 	/**
@@ -161,6 +146,45 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 		$pootlepb_current_post = $old_current_post;
 
 		return apply_filters( 'pootlepb_render', $html, $post_id, null );
+	}
+
+	/**
+	 * Convert panels data into grid>cell>widget format
+	 * @param array $grids
+	 * @param array $panels_data
+	 * @since 0.1.0
+	 */
+	protected function grids_array( &$grids, $panels_data ) {
+
+		if ( ! empty( $panels_data['grids'] ) ) {
+			foreach ( $panels_data['grids'] as $gi => $grid ) {
+				$gi           = intval( $gi );
+				$grids[ $gi ] = array();
+				for ( $i = 0; $i < $grid['cells']; $i ++ ) {
+					$grids[ $gi ][ $i ] = array();
+				}
+			}
+		}
+
+		$this->grids_array_add_widgets( $grids, $panels_data );
+	}
+
+	/**
+	 * Adds widgets to grid array from panels data
+	 * @param array $grids
+	 * @param array $panels_data
+	 * @since 0.1.0
+	 */
+	protected function grids_array_add_widgets( &$grids, $panels_data ) {
+
+		if ( ! empty( $panels_data['widgets'] ) && is_array( $panels_data['widgets'] ) ) {
+			foreach ( $panels_data['widgets'] as $widget ) {
+
+				if ( ! empty( $widget['info'] ) ) {
+					$grids[ intval( $widget['info']['grid'] ) ][ intval( $widget['info']['cell'] ) ][] = $widget;
+				}
+			}
+		}
 	}
 }
 
