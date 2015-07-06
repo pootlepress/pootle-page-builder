@@ -193,11 +193,11 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 		// The display fields
 		add_settings_field( 'responsive', __( 'Responsive', 'ppb-panels' ), array(
 			$this,
-			'options_field_generic'
+			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'responsive' ) );
 		add_settings_field( 'mobile-width', __( 'Mobile Width', 'ppb-panels' ), array(
 			$this,
-			'options_field_generic'
+			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'mobile-width' ) );
 	}
 

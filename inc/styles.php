@@ -13,7 +13,7 @@
 function pootlepb_style_get_fields() {
 	static $fields = false;
 
-	if ( $fields === false ) {
+	if ( false === $fields ) {
 		$fields = array();
 
 		$fields = apply_filters( 'pootlepb_row_style_fields', $fields );
@@ -27,7 +27,7 @@ function pootlepb_dialog_form_echo( $fields ) {
 	foreach ( $fields as $name => $attr ) {
 
 		echo '<p class="field_' . esc_attr( $name ) . '">';
-		echo '<label>' . $attr['name'] . '</label>';
+		echo '<label>' . esc_attr( $attr['name'] ) . '</label>';
 
 		switch ( $attr['type'] ) {
 			case 'select':
@@ -54,7 +54,7 @@ function pootlepb_dialog_form_echo( $fields ) {
 				break;
 
 			case 'number' :
-				?><input type="number" min="<?php echo $attr['min'] ?>" value="<?php echo $attr['default'] ?>"
+				?><input type="number" min="<?php echo esc_attr( $attr['min'] ) ?>" value="<?php echo $attr['default'] ?>"
 				         name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
 				         data-style-field="<?php echo esc_attr( $name ) ?>"
 				         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" /> <?php
@@ -85,7 +85,7 @@ function pootlepb_hide_elements_dialog_echo( $fields ) {
 	foreach ( $fields as $name => $attr ) {
 
 		echo '<p>';
-		echo '<label>' . $attr['name'] . '</label>';
+		echo '<label>' . esc_attr( $attr['name'] ) . '</label>';
 
 		switch ( $attr['type'] ) {
 			case 'checkbox' :
@@ -108,6 +108,8 @@ function pootlepb_hide_elements_dialog_echo( $fields ) {
 
 function pootlepb_style_dialog_form() {
 	$fields = pootlepb_style_get_fields();
+
+	$sections = array();
 
 	$sections['Background'][] = 'background_toggle';
 
@@ -161,16 +163,16 @@ function pootlepb_style_dialog_form() {
 
 		$sec = strtolower( $Sec );
 
-		echo "<li><a href='#ppb-style-section-{$sec}'>$Sec</a></li>";
+		echo '<li><a href="' . esc_attr( "#ppb-style-section-{$sec}" ) . '">' . $Sec . '</a></li>';
 
 		ob_start();
 
-		echo "<div id='ppb-style-section-{$sec}' class='ppb-style-section'>";
+		echo '<div id="' . esc_attr( "ppb-style-section-{$sec}" ) . '" class="ppb-style-section">';
 
 		foreach ( $secFields as $name ) {
 
 			if ( is_array( $name ) ) {
-				echo $name[0];
+				echo wp_kses( $name[0], wp_kses_allowed_html( 'post' ) );
 				continue;
 			}
 
@@ -178,16 +180,16 @@ function pootlepb_style_dialog_form() {
 
 			echo '<div class="field field_' . esc_attr( $name ) . '">';
 
-			echo '<label>' . $attr['name'];
+			echo '<label>' . esc_html( $attr['name'] );
 			echo '</label>';
 			pootlepb_render_single_field( $name, $attr );
 			if ( isset( $attr['help-text'] ) ) {
-				echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . htmlentities( $attr['help-text'] ) . '"></span>';
+				echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $attr['help-text'] ) . '"></span>';
 			}
 			echo '</div>';
 		}
 
-		echo "</div>";
+		echo '</div>';
 
 		$fields_output .= ob_get_clean();
 	}
@@ -207,7 +209,7 @@ function pootlepb_render_single_field( $name, $attr ) {
 			        data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>">
 				<?php foreach ( $attr['options'] as $ov => $on ) : ?>
 					<option
-						value="<?php echo esc_attr( $ov ) ?>" <?php if ( isset( $attr['default'] ) ) selected( $ov, $attr['default'] ) ?>  ><?php echo esc_html( $on ) ?></option>
+						value="<?php echo esc_attr( $ov ) ?>" <?php if ( isset( $attr['default'] ) ) { selected( $ov, $attr['default'] ); } ?>  ><?php echo esc_html( $on ) ?></option>
 				<?php endforeach ?>
 			</select>
 			<?php
@@ -217,7 +219,7 @@ function pootlepb_render_single_field( $name, $attr ) {
 			$checked = ( isset( $attr['default'] ) ? checked( $attr['default'], true, false ) : '' );
 			?>
 			<label class="ppb-panels-checkbox-label">
-				<input type="checkbox" <?php echo $checked ?> name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
+				<input type="checkbox" <?php echo esc_html( $checked ) ?> name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
 				       data-style-field="<?php echo esc_attr( $name ) ?>"
 				       data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>"/>
 			</label>
@@ -225,14 +227,14 @@ function pootlepb_render_single_field( $name, $attr ) {
 			break;
 
 		case 'number' :
-			?><input type="number" min="<?php echo $attr['min'] ?>" value="<?php echo $attr['default'] ?>"
+			?><input type="number" min="<?php echo $attr['min'] ?>" value="<?php echo esc_attr( $attr['default'] ) ?>"
 			         name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
 			         data-style-field="<?php echo esc_attr( $name ) ?>"
 			         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" />
 			<?php
 			if ( isset( $attr['help-text'] ) ) {
 				// don't use div for this or else div will appear outside of <p>
-				echo "<span class='small-help-text'>" . esc_html( $attr['help-text'] ) . "</span>";
+				echo "<span class='small-help-text'>" . esc_html( $attr['help-text'] ) . '</span>';
 			}
 			break;
 
@@ -295,46 +297,46 @@ function pootlepb_widget_styles_dialog_form( $advanced = null ) {
 		}
 
 		echo "<div class='field'>";
-		echo "<label>" . esc_html( $field['name'] ) . "</label>";
-		echo "<span>";
+		echo '<label>' . esc_html( $field['name'] ) . '</label>';
+		echo '<span>';
 
 		switch ( $field['type'] ) {
 			case 'color' :
-				?><input dialog-field="<?php echo $key ?>" class="widget-<?php echo $key ?>" type="text"
+				?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="text"
 				         data-style-field-type="color"/>
 				<?php
 				break;
 			case 'border' :
-				?><input dialog-field="<?php echo $key ?>-width" class="widget-<?php echo $key ?>-width" type="number"
+				?><input dialog-field="<?php echo esc_attr( $key ) ?>-width" class="widget-<?php echo esc_attr( $key ) ?>-width" type="number"
 				         min="0" max="100" step="1" value="" /> px
-				<input dialog-field="<?php echo $key ?>-color" class="widget-<?php echo $key ?>-color" type="text"
+				<input dialog-field="<?php echo esc_attr( $key ) ?>-color" class="widget-<?php echo esc_attr( $key ) ?>-color" type="text"
 				       data-style-field-type="color"/>
 				<?php
 				break;
 			case 'number' :
-				?><input dialog-field="<?php echo $key ?>" class="widget-<?php echo $key ?>" type="number"
+				?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="number"
 				         min="<?php esc_attr_e( $field['min'] ) ?>" max="<?php esc_attr_e( $field['max'] ) ?>"
 				         step="<?php esc_attr_e( $field['step'] ) ?>" value="" /> <?php esc_html_e( $field['unit'] ) ?>
 				<?php
 				break;
 			case 'checkbox':
-				?><input dialog-field="<?php echo $key ?>" class="widget-<?php echo $key ?>" type="checkbox"
+				?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="checkbox"
 				         value="<?php esc_attr_e( $field['value'] ) ?>" data-style-field-type="checkbox" />
 				<?php
 				break;
 			case 'textarea':
-				?><textarea dialog-field="<?php echo $key ?>" class="widget-<?php echo $key ?>"
+				?><textarea dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>"
 				            data-style-field-type="text"></textarea>
 				<?php
 				break;
 			default:
-				?><input dialog-field="<?php echo $key ?>" class="widget-<?php echo $key ?>" type="text"
+				?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="text"
 				         data-style-field-type="text"/>
 				<?php
 				break;
 		}
 
-		echo "</span>";
+		echo '</span>';
 		echo '</div>';
 	}
 }
@@ -349,7 +351,7 @@ function pootlepb_style_is_using_color() {
 	$fields = pootlepb_style_get_fields();
 
 	foreach ( $fields as $id => $attr ) {
-		if ( isset( $attr['type'] ) && $attr['type'] == 'color' ) {
+		if ( isset( $attr['type'] ) && 'color' == $attr['type'] ) {
 			return true;
 		}
 	}
@@ -370,7 +372,9 @@ function pootlepb_style_update_data( $panels_data ) {
 		return $panels_data;
 	}
 
-	for ( $i = 0; $i < count( $panels_data['grids'] ); $i ++ ) {
+	$num_grids = count( $panels_data['grids'] );
+
+	for ( $i = 0; $i < $num_grids; $i ++ ) {
 
 		if ( isset( $panels_data['grids'][ $i ]['style'] ) && is_string( $panels_data['grids'][ $i ]['style'] ) ) {
 			$panels_data['grids'][ $i ]['style'] = array( 'class' => $panels_data['grids'][ $i ]['style'] );
@@ -400,7 +404,9 @@ function pootlepb_style_sanitize_data( $panels_data ) {
 		return $panels_data;
 	}
 
-	for ( $i = 0; $i < count( $panels_data['grids'] ); $i ++ ) {
+	$num_grids = count( $panels_data['grids'] );
+
+	for ( $i = 0; $i < $num_grids; $i ++ ) {
 
 		foreach ( $fields as $name => $attr ) {
 			switch ( $attr['type'] ) {
