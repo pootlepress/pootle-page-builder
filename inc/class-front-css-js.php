@@ -35,7 +35,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 	}
 
 	/**
-	 * Adds style entry to Pootle_Page_Builder_Front_Css_Js::$style property
+	 * Adds a style entry to Pootle_Page_Builder_Front_Css_Js::$style
 	 * @param string $style Style to apply to element
 	 * @param string $lmn The element selector
 	 * @param int $res Resolution
@@ -59,6 +59,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 	 *
 	 * @param int|string $post_id
 	 * @param array $panels_data
+	 * @return string CSS to output
 	 * @since 0.1.0
 	 */
 	function panels_generate_css( $post_id, $panels_data ) {
@@ -124,8 +125,6 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 			$this->row_bottom_margin( $settings, $gi, $post_id, $panels_data );
 
 			$this->mobile_styles( $settings, $gi, $post_id, $cell_count );
-
-			$ci++;
 		}
 
 	}
@@ -139,7 +138,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 	 * @param array $panels_data
 	 * @since 0.1.0
 	 */
-	private function col_widths( $ci, $gi, $post_id, $cell_count, $panels_data ) {
+	private function col_widths( &$ci, $gi, $post_id, $cell_count, $panels_data ) {
 		for ( $i = 0; $i < $cell_count; $i ++ ) {
 			$cell = $panels_data['grid_cells'][ $ci ];
 
@@ -147,6 +146,8 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 				$css_new = 'width:' . round( $cell['weight'] * 100, 3 ) . '%';
 				$this->css(  $css_new , '#pgc-' . $post_id . '-' . $gi . '-' . $i );
 			}
+
+			$ci++;
 		}
 	}
 
