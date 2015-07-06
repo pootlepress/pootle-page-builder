@@ -137,14 +137,14 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 	 */
 	private function content_block_border( &$inlineStyle, $styleArray, $key, $field ) {
 
-		//Border width
-		if ( ! empty( $styleArray[ $key . '-width' ] ) ) {
-			$inlineStyle .= $field['css'] . ': ' . $styleArray[ $key . '-width' ] . 'px solid;';
+		//Set border color key if not set
+		if ( empty( $styleArray[ $key . '-color' ] ) ) {
+			$styleArray[ $key . '-color' ] = '';
 		}
 
-		//Border color
-		if ( ! empty( $styleArray[ $key . '-color' ] ) ) {
-			$inlineStyle .= $field['css'] . '-color: ' . $styleArray[ $key . '-color' ] . ';';
+		//Border
+		if ( ! empty( $styleArray[ $key . '-width' ] ) ) {
+			$inlineStyle .= $field['css'] . ': ' . $styleArray[ $key . '-width' ] . 'px solid ' . $styleArray[ $key . '-color' ] . ';';
 		}
 	}
 
