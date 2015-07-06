@@ -349,7 +349,7 @@
                         $t.wpColorPicker();
                     });
 
-                var $t = $('.ppb-cool-panel-wrap'),
+                var $t = $('.ppb-add-content-panel'),
                     title = $t.find('.ui-tabs-active a').html();
                 $('.ppb-add-content-panel .ui-dialog-titlebar .ui-dialog-title').html(title);
 
@@ -406,7 +406,7 @@
                                 }
                             });
 
-                        var $t = $('.ppb-cool-panel-wrap'),
+                        var $t = $('.ppb-add-content-panel'),
                             title = $t.find('.ui-tabs-active a').html();
                         $('.ppb-add-content-panel .ui-dialog-titlebar .ui-dialog-title').html(title);
 
