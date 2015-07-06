@@ -67,15 +67,12 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 
 	/**
 	 * Add a help tab to pages with panels.
-	 *
-	 * @param $prefix
-	 *
 	 * @action load-post-new.php, load-page.php
 	 * @since 0.1.0
 	 */
-	public function add_help_tab( $prefix ) {
+	public function add_help_tab() {
 		$screen = get_current_screen();
-		if ( $screen->base == 'post' && in_array( $screen->id, pootlepb_settings( 'post-types' ) ) ) {
+		if ( 'post' == $screen->base && in_array( $screen->id, pootlepb_settings( 'post-types' ) ) ) {
 			$screen->add_help_tab( array(
 				'id'       => 'panels-help-tab', //unique id for the tab
 				'title'    => __( 'Page Builder', 'ppb-panels' ), //unique visible title for the tab
@@ -107,7 +104,7 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	 */
 	public function save_post( $post_id, $post ) {
 
-		$pass = apply_filters( 'pootlepb_save_post_pass', ! empty( $_POST['pootlepb_nonce'] ), $post );
+		$pass = apply_filters( 'pootlepb_save_post_pass', true, $post );
 
 		if ( empty( $pass ) ) {
 			return;
@@ -115,7 +112,7 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 
 		// Don't Save panels if Post Type for $post_id is not same as current post ID type
 		// (Prevents population product panels data in saving Tabs via Meta)
-		if ( get_post_type( $_POST['post_ID'] ) != 'wc_product_tab' and get_post_type( $post_id ) == 'wc_product_tab' ) {
+		if ( 'wc_product_tab' != get_post_type( filter_input( INPUT_POST, 'post_ID' ) ) && 'wc_product_tab' == get_post_type( $post_id ) ) {
 			return;
 		}
 
@@ -161,19 +158,19 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	public function admin_menu() {
 		add_menu_page( 'Home', 'Page Builder', 'manage_options', 'page_builder', array(
 			$this,
-			'menu_page'
+			'menu_page',
 		), 'dashicons-screenoptions', 26 );
 		add_submenu_page( 'page_builder', 'Add New', 'Add New', 'manage_options', 'page_builder_add', array(
 			$this,
-			'menu_page'
+			'menu_page',
 		) );
 		add_submenu_page( 'page_builder', 'Settings', 'Settings', 'manage_options', 'page_builder_settings', array(
+			'menu_page',
 			$this,
-			'menu_page'
 		) );
 		add_submenu_page( 'page_builder', 'Add-ons', 'Add-ons', 'manage_options', 'page_builder_addons', array(
 			$this,
-			'menu_page'
+			'menu_page',
 		) );
 	}
 
@@ -242,11 +239,11 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 		switch ( $args['type'] ) {
 			case 'responsive' :
 				?><label><input type="checkbox"
-				                name="<?php echo $groupName ?>[<?php echo esc_attr( $args['type'] ) ?>]" <?php checked( $settings[ $args['type'] ] ) ?>
+				                name="<?php echo esc_attr( $groupName ) ?>[<?php echo esc_attr( $args['type'] ) ?>]" <?php checked( $settings[ $args['type'] ] ) ?>
 				                value="1"/> <?php _e( 'Enabled', 'ppb-panels' ) ?></label><?php
 				break;
 			case 'mobile-width' :
-				?><input type="text" name="<?php echo $groupName ?>[<?php echo esc_attr( $args['type'] ) ?>]"
+				?><input type="text" name="<?php echo esc_attr( $groupName ) ?>[<?php echo esc_attr( $args['type'] ) ?>]"
 				         value="<?php echo esc_attr( $settings[ $args['type'] ] ) ?>"
 				         class="small-text" /> <?php _e( 'px', 'ppb-panels' ) ?><?php
 				break;
