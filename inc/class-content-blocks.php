@@ -71,7 +71,9 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 	 */
 	public function open_block( $block_info, $gi, $ci, $pi, $blocks_num, $post_id ) {
 
-		$styleArray = isset( $block_info['info']['style'] ) ? json_decode( $block_info['info']['style'], true ) : pootlepb_default_content_block_style();;
+		if ( isset( $block_info['info']['style'] ) ) {
+			$styleArray = json_decode( $block_info['info']['style'], true );
+		}
 
 		//Classes for this content block
 		$classes = array( 'panel' );
@@ -91,12 +93,6 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 
 		$this->set_inline_embed_styles( $inlineStyle, $styleWithSelector, $styleArray, $widgetStyleFields, $id );
 
-		if ( $styleWithSelector != '' ) {
-			echo "<style>\n";
-			echo str_replace( 'display', 'display:none;display', $styleWithSelector );
-			echo "</style>\n";
-		}
-
 		echo '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" id="' . $id . '" style="' . $inlineStyle . '" >';
 	}
 
@@ -115,12 +111,6 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 			if ( $field['type'] == 'border' ) {
 				//Border field
 				$this->content_block_border( $inlineStyle, $styleArray, $key, $field );
-
-			} elseif ( $key == 'inline-css' ) {
-
-				if ( ! empty( $styleArray[ $key ] ) ) {
-					$inlineStyle .= $styleArray[ $key ];
-				}
 
 			} else {
 				//Default for fields
@@ -164,11 +154,12 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 
 		if ( ! empty( $styleArray[ $key ] ) ) {
 
-			$unit = '';
-			//Assign Unit if not empty
-			if ( ! empty( $field['unit'] ) ) {
-				$unit = $field['unit'];
+			if ( $key == 'inline-css' ) {
+				$inlineStyle .= $styleArray[ $key ];
+				return;
 			}
+
+			$unit = $this->get_unit( $field );
 
 			if ( ! isset( $field['selector'] ) ) {
 				//No selector
@@ -178,6 +169,18 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 				$styleWithSelector .= '#' . $id . ' > ' . $field['selector'] . ' { ' . $field['css'] . ': ' . $styleArray[ $key ] . $unit . '; }';
 			}
 		}
+	}
+
+	private function get_unit( $field ){
+
+		$unit = '';
+
+		//Assign Unit if not empty
+		if ( ! empty( $field['unit'] ) ) {
+			$unit = $field['unit'];
+		}
+
+		return $unit;
 	}
 
 	/**

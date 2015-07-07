@@ -258,9 +258,6 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	 */
 	public function pootlepb_options_sanitize_display( $vals ) {
 
-		//Resolution for mobile layout
-		$vals['mobile-width']      = ! empty( $vals['mobile-width'] );
-
 		//Enable Responsive media queries
 		$vals['responsive']      = ! empty( $vals['responsive'] );
 

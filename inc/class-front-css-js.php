@@ -67,7 +67,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 	 */
 	public function panels_generate_css( $post_id, $panels_data ) {
 		// Exit if we don't have panels data
-		if ( empty( $panels_data ) || empty( $panels_data['grids'] ) ) {
+		if ( empty( $panels_data['grids'] ) ) {
 			return;
 		}
 
@@ -78,25 +78,6 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 
 		// Add the grid sizing
 		$this->grid_styles( $settings, $panels_data, $post_id );
-
-		$panel_grid_cell_css = 'box-sizing: border-box !important; display: inline-block !important; vertical-align: top !important;';
-
-		$this->css( $panel_grid_cell_css, '.panel-grid-cell' );
-
-		$this->css( 'font-size: 0;', '.panel-grid-cell-container' );
-
-		if ( $settings['responsive'] ) {
-			// Add CSS to prevent overflow on mobile resolution.
-			$panel_grid_css      = 'margin-left: 0 !important; margin-right: 0 !important;';
-			$panel_grid_cell_css = 'padding: 0 !important; width: 100% !important;';
-
-			$this->css( $panel_grid_css, '.panel-grid', $panels_mobile_width );
-			$this->css( $panel_grid_cell_css, '.panel-grid-cell', $panels_mobile_width );
-		} else {
-			$panel_grid_cell_css = 'display: inline-block !important; vertical-align: top !important;';
-
-			$this->css( $panel_grid_cell_css, '.panel-grid-cell', $panels_mobile_width );
-		}
 
 		//Margin and padding
 		$this->grid_elements_margin_padding( $settings, $panels_margin_bottom );
@@ -131,6 +112,12 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 
 			$this->mobile_styles( $settings, $gi, $post_id, $cell_count );
 		}
+
+		$panel_grid_cell_css = 'box-sizing: border-box !important; display: inline-block !important; vertical-align: top !important;';
+
+		$this->css( $panel_grid_cell_css, '.panel-grid-cell' );
+
+		$this->css( 'font-size: 0;', '.panel-grid-cell-container' );
 
 	}
 
@@ -178,7 +165,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 		}
 	}
 
-	private function mobile_styles( $settings, $gi, $post_id, $cell_count ) {
+	private function mobile_styles( $settings, $gi, $post_id ) {
 
 		$panels_margin_bottom = $settings['margin-bottom'];
 		$panels_mobile_width  = $settings['mobile-width'];
@@ -189,13 +176,16 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 			$this->css( 'float:none', '#pg-' . $post_id . '-' . $gi . ' .panel-grid-cell', $panels_mobile_width );
 			$this->css( 'width:auto', '#pg-' . $post_id . '-' . $gi . ' .panel-grid-cell', $panels_mobile_width );
 
-			for ( $i = 0; $i < $cell_count; $i ++ ) {
-				if ( $i != $cell_count - 1 ) {
-					$css_new = 'margin-bottom:' . $panels_margin_bottom . 'px';
-					$this->css( $css_new, '#pgc-' . $post_id . '-' . $gi . '-' . $i, $panels_mobile_width );
-				}
-			}
+			$this->css( 'margin-bottom: 1' . $panels_margin_bottom . 'px', '.panel-grid-cell:not(:last-child)', $panels_mobile_width );
+
+			// Add CSS to prevent overflow on mobile resolution.
+			$panel_grid_css      = 'margin-left: 0 !important; margin-right: 0 !important;';
+			$panel_grid_cell_css = 'padding: 0 !important; width: 100% !important;';
+
+			$this->css( $panel_grid_css, '.panel-grid', $panels_mobile_width );
+			$this->css( $panel_grid_cell_css, '.panel-grid-cell', $panels_mobile_width );
 		}
+
 	}
 
 	/**
@@ -240,18 +230,12 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 		krsort( $this->styles );
 		foreach ( $this->styles as $res => $def ) {
 
-			if ( empty( $def ) ) {
-				continue;
-			}
-
 			if ( $res < 1920 ) {
 				$css_text .= '@media ( max-width:' . $res . 'px ) { ';
 			}
 
-			foreach ( $def as $property => $selector ) {
-				$selector = array_unique( $selector );
-				$css_text .= implode( ' , ', $selector ) . ' { ' . $property . ' } ';
-			}
+			//Add styles from def to css string
+			$this->output_styles( $def, $css_text );
 
 			if ( $res < 1920 ) {
 				$css_text .= ' } ';
@@ -259,6 +243,20 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 		}
 
 		return $css_text;
+	}
+
+	/**
+	 * Adds css styles from $styles array to string $css_text
+	 * @param array $styles
+	 * @param string $css_text
+	 */
+	protected function output_styles( $styles, &$css_text ) {
+
+		foreach ( $styles as $property => $selector ) {
+			//Remove duplicates
+			$selector = array_unique( $selector );
+			$css_text .= implode( ' , ', $selector ) . ' { ' . $property . ' } ';
+		}
 	}
 
 	/**

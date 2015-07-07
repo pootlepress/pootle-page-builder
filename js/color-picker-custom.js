@@ -1,4 +1,4 @@
-/* global wpColorPickerL10n */
+/* global wpColorPicker_i18n */
 ( function ($, undef) {
 
     var ColorPicker,
@@ -36,14 +36,14 @@
             // Set up HTML structure, hide things
             el.addClass('wp-color-picker').hide().wrap(_wrap);
             self.wrap = el.parent();
-            self.toggler = $(_before).insertBefore(el).css({backgroundColor: self.initialValue}).attr('title', wpColorPickerL10n.pick).attr('data-current', wpColorPickerL10n.current);
+            self.toggler = $(_before).insertBefore(el).css({backgroundColor: self.initialValue}).attr('title', wpColorPicker_i18n.pick).attr('data-current', wpColorPicker_i18n.current);
             self.pickerContainer = $(_after).insertAfter(el);
             self.button = $(_button);
 
             if (self.options.defaultColor) {
-                self.button.addClass('wp-picker-default').val(wpColorPickerL10n.defaultString);
+                self.button.addClass('wp-picker-default').val(wpColorPicker_i18n.defaultString);
             } else {
-                self.button.addClass('wp-picker-clear').val(wpColorPickerL10n.clear);
+                self.button.addClass('wp-picker-clear').val(wpColorPicker_i18n.clear);
             }
 
             el.wrap('<span class="wp-picker-input-wrap" />').after(self.button);

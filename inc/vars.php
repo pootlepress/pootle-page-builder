@@ -9,7 +9,11 @@
 
 global	$pootlepb_content_block_styling_fields,
 		$pootlepb_row_styling_fields,
-		$pootlepb_font;
+		$pootlepb_font,
+	    $pootlepb_ui_i18n,
+	    $pootlepb_ui_js_deps,
+	    $pootlepb_color_i18n,
+		$pootlepb_color_deps;
 
 /**
  * Content block styling fields
@@ -843,4 +847,48 @@ $pootlepb_font = array(
 	'Yeseva One'                                                        => 'Yeseva One',
 	'Yesteryear'                                                        => 'Yesteryear',
 	'Zeyada'                                                            => 'Zeyada',
+);
+
+$pootlepb_ui_i18n = array(
+	'buttons'  => array(
+		'insert'    => __( 'Insert', 'ppb-panels' ),
+		'cancel'    => __( 'cancel', 'ppb-panels' ),
+		'delete'    => __( 'Delete', 'ppb-panels' ),
+		'duplicate' => __( 'Duplicate', 'ppb-panels' ),
+		'style'     => __( 'Style', 'ppb-panels' ),
+		'edit'      => __( 'Edit', 'ppb-panels' ),
+		'done'      => __( 'Done', 'ppb-panels' ),
+		'undo'      => __( 'Want to undo?', 'ppb-panels' ),
+		'add'       => __( 'Add', 'ppb-panels' ),
+	),
+	'messages' => array(
+		'deleteColumns' => __( 'Columns deleted', 'ppb-panels' ),
+		'deleteWidget'  => __( 'Content deleted', 'ppb-panels' ),
+		'confirmLayout' => __( 'Are you sure you want to load this layout? It will overwrite your current page.', 'ppb-panels' ),
+		'editWidget'    => __( 'Edit %s Widget', 'ppb-panels' ),
+		'styleWidget'   => __( 'Style Widget', 'ppb-panels' )
+	),
+);
+
+$pootlepb_ui_js_deps = array(
+	'jquery',
+	'jquery-ui-resizable',
+	'jquery-ui-sortable',
+	'jquery-ui-slider',
+	'jquery-ui-dialog',
+	'jquery-ui-button',
+	'jquery-ui-tabs',
+);
+
+$pootlepb_color_i18n = array(
+	'clear'         => __( 'Clear' ),
+	'defaultString' => __( 'Default' ),
+	'pick'          => __( 'Select Color' ),
+	'current'       => __( 'Current Color' ),
+);
+
+$pootlepb_color_deps = array(
+	'jquery-ui-draggable',
+	'jquery-ui-slider',
+	'jquery-touch-punch'
 );
