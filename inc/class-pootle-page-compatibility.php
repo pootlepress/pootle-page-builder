@@ -136,10 +136,10 @@ class Pootle_Page_Compatibility {
 
 			}
 
-			//Loop through the widgets
+			//Loop through the content blocks
 			foreach ( $panels_data['widgets'] as $i => $wid ) {
 
-				$panels_data['widgets'][ $i ]['info']['style'] = $this->new_widget_style_format( $wid['info']['style'] );
+				$panels_data['widgets'][ $i ]['info']['style'] = $this->new_block_style_format( $wid['info']['style'] );
 
 			}
 
@@ -224,7 +224,7 @@ class Pootle_Page_Compatibility {
 	 * @return array New styles format
 	 * @since 0.1.0
 	 */
-	private function new_widget_style_format( $styles ) {
+	private function new_block_style_format( $styles ) {
 
 		//Decoding styles JSON
 		$styles = json_decode( $styles, true );

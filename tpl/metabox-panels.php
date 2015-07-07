@@ -1,5 +1,4 @@
 <?php
-global $wp_widget_factory;
 $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 ?>
 
@@ -117,7 +116,7 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 	</div>
 
 	<div id="widget-styles-dialog" data-title="Style Widget" class="panels-admin-dialog">
-		<?php pootlepb_widget_styles_dialog_form() ?>
+		<?php pootlepb_block_styles_dialog_form() ?>
 	</div>
 
 	<div id="content-loss-dialog" data-title="<?php esc_attr_e( 'Changing to Page Builder', 'ppb-panels' ) ?>"
@@ -164,9 +163,17 @@ if ( 'post-new.php' == $pagenow || ! empty( $panels_data['grids'] ) ) {
 	<script>
 		jQuery(document).ready(function($){
 			$('#content-panels').click();
-			pootlePBShowWrap = function() {
-				$('.wrap').css('opacity', '1');
+			<?php
+			if ( empty( $panels_data['grids'] ) ) {
+				echo "$('.wrap').css('opacity', '1');";
+			} else {
+				?>
+				pootlePBShowWrap = function () {
+					$('.wrap').css('opacity', '1');
+				};
+				<?php
 			}
+			?>
 		});
 	</script>
 <?php

@@ -223,6 +223,25 @@ function pootlepb_settings( $key = '' ) {
 	return $settings;
 }
 
+function pootlepb_default_content_block_style( ) {
+	global $pootlepb_content_block_styling_fields;
+
+	$result = array( );
+	foreach ( $pootlepb_content_block_styling_fields as $key => $field ) {
+		if ( $field['type'] == 'border' ) {
+			$result[$key . '-width'] = 0;
+			$result[$key . '-color'] = '';
+		} elseif ( $field['type'] == 'number' ) {
+			$result[$key] = 0;
+		} elseif ( $field['type'] == 'checkbox' ) {
+			$result[$key] = '';
+		} else{
+			$result[$key] = '';
+		}
+	}
+	return $result;
+}
+
 /**
  * Convert form post data into more efficient panels data.
  *
@@ -251,9 +270,9 @@ function pootlepb_get_panels_data_from_post( $form_post = null ) {
 		$widget = json_decode( $widget['data'], true );
 
 		if ( class_exists( $info['class'] ) ) {
-			$the_widget = new $info['class'];
-			if ( method_exists( $the_widget, 'update' ) && ! empty( $info['raw'] ) ) {
-				$widget = $the_widget->update( $widget, $widget );
+			$the_block = new $info['class'];
+			if ( method_exists( $the_block, 'update' ) && ! empty( $info['raw'] ) ) {
+				$widget = $the_block->update( $widget, $widget );
 			}
 		}
 

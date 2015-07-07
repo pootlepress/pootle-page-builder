@@ -801,11 +801,11 @@ h4 {}
     margin: 0;
 }
 
-#so-panels-recommended-plugins {
+#pootlepb-recommended-plugins {
     text-align: center;
 }
 
-#so-panels-recommended-plugins a {
+#pootlepb-recommended-plugins a {
     background: #3288d4;
     background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #3288d4), color-stop(1, #43aee0));
     background: -ms-linear-gradient(bottom, #3288d4, #43aee0);
@@ -828,7 +828,7 @@ h4 {}
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 
-#so-panels-recommended-plugins small {
+#pootlepb-recommended-plugins small {
     color: #666;
     display: block;
     font-size: 11px;
@@ -1297,15 +1297,6 @@ div#pootle-content-module-tabs li.ui-tabs-active a:focus {
 a.wp-switch-editor {
     text-decoration: none;
     float: none;
-}
-
-.widget-dialog-siteorigin_panels_widgets_postloop > p > label[for] {
-    display: inline-block;
-    width: 200px;
-}
-
-.widget-dialog-siteorigin_panels_widgets_postloop > p > input[type=checkbox] {
-    margin-left: 1px;
 }
 
 #pootle-editor-tab .old-widget {

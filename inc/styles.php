@@ -281,7 +281,7 @@ function pootlepb_render_single_field( $name, $attr ) {
 	}
 }
 
-function pootlepb_widget_styles_dialog_form( $advanced = null ) {
+function pootlepb_block_styles_dialog_form( $advanced = null ) {
 	$fields = pootlepb_block_styling_fields();
 
 	foreach ( $fields as $key => $field ) {

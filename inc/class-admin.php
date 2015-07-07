@@ -110,12 +110,6 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 			return;
 		}
 
-		// Don't Save panels if Post Type for $post_id is not same as current post ID type
-		// (Prevents population product panels data in saving Tabs via Meta)
-		if ( 'wc_product_tab' != get_post_type( filter_input( INPUT_POST, 'post_ID' ) ) && 'wc_product_tab' == get_post_type( $post_id ) ) {
-			return;
-		}
-
 		$panels_data = pootlepb_get_panels_data_from_post();
 
 		if ( function_exists( 'wp_slash' ) ) {
@@ -263,22 +257,12 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	 * @since 0.1.0
 	 */
 	public function pootlepb_options_sanitize_display( $vals ) {
-		foreach ( $vals as $f => $v ) {
-			switch ( $f ) {
-				case 'responsive' :
-				case 'bundled-widgets' :
-					$vals[ $f ] = ! empty( $vals[ $f ] );
-					break;
-				case 'mobile-width' :
-					$vals[ $f ] = intval( $vals[ $f ] );
-					break;
-			}
-		}
-		$vals['copy-content']    = false;
-		$vals['animations']      = true;
-		$vals['inline-css']      = true;
+
+		//Resolution for mobile layout
+		$vals['mobile-width']      = ! empty( $vals['mobile-width'] );
+
+		//Enable Responsive media queries
 		$vals['responsive']      = ! empty( $vals['responsive'] );
-		$vals['bundled-widgets'] = ! empty( $vals['bundled-widgets'] );
 
 		return $vals;
 	}

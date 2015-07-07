@@ -46,7 +46,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 	}
 
 	/**
-	 * Filter the content of the panel, adding all the widgets.
+	 * Filter the content of the panel, adding all the content blocks.
 	 *
 	 * @param string $content Post content
 	 *
@@ -170,18 +170,18 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 			}
 		}
 
-		$this->grids_array_add_widgets( $grids, $panels_data );
+		$this->grids_array_add_blocks( $grids, $panels_data );
 	}
 
 	/**
-	 * Adds widgets to grid array from panels data
+	 * Adds content blocks to grid array from panels data
 	 *
 	 * @param array $grids
 	 * @param array $panels_data
 	 *
 	 * @since 0.1.0
 	 */
-	protected function grids_array_add_widgets( &$grids, $panels_data ) {
+	protected function grids_array_add_blocks( &$grids, $panels_data ) {
 
 		if ( ! empty( $panels_data['widgets'] ) && is_array( $panels_data['widgets'] ) ) {
 			foreach ( $panels_data['widgets'] as $widget ) {

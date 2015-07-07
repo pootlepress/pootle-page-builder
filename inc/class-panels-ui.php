@@ -72,13 +72,13 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 	public function enqueue_styles() {
 		$screen = get_current_screen();
 		if ( in_array( $screen->id, pootlepb_settings( 'post-types' ) ) || $screen->base == 'appearance_page_so_panels_home_page' ) {
-			wp_enqueue_style( 'so-panels-admin', POOTLEPB_URL . 'css/admin.css', array(), POOTLEPB_VERSION );
+			wp_enqueue_style( 'pootlepb-admin', POOTLEPB_URL . 'css/admin.css', array(), POOTLEPB_VERSION );
 			wp_enqueue_style( 'ppb-chosen-style', POOTLEPB_URL . 'js/chosen/chosen.css' );
 
 			global $wp_version;
 			if ( version_compare( $wp_version, '3.9.beta.1', '<' ) ) {
 				// Versions before 3.9 need some custom jQuery UI styling
-				wp_enqueue_style( 'so-panels-admin-jquery-ui', POOTLEPB_URL . 'css/jquery-ui.css', array(), POOTLEPB_VERSION );
+				wp_enqueue_style( 'pootlepb-admin-jquery-ui', POOTLEPB_URL . 'css/jquery-ui.css', array(), POOTLEPB_VERSION );
 			} else {
 				wp_enqueue_style( 'wp-jquery-ui-dialog' );
 			}
@@ -91,89 +91,18 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 	 *
 	 * @action admin_print_scripts-post-new.php
 	 * @action admin_print_scripts-post.php
-	 * @uses Pootle_Page_Builder_Admin_UI::enqueue_color_picker()
+	 * @uses Pootle_Page_Builder_Admin_UI::enqueue_ui_scripts()
+	 * @uses Pootle_Page_Builder_Admin_UI::localize_ui_scripts()
 	 * @since 0.1.0
 	 */
 	public function enqueue_scripts() {
 		$screen = get_current_screen();
 
 		if ( $screen->base == 'post' && in_array( $screen->id, pootlepb_settings( 'post-types' ) ) ) {
-			wp_enqueue_script( 'jquery-ui-resizable' );
-			wp_enqueue_script( 'jquery-ui-sortable' );
-			wp_enqueue_script( 'jquery-ui-slider' );
-			wp_enqueue_script( 'jquery-ui-dialog' );
-			wp_enqueue_script( 'jquery-ui-button' );
 
-			wp_enqueue_script( 'so-undomanager', POOTLEPB_URL . 'js/undomanager.min.js', array(), 'fb30d7f' );
-			wp_enqueue_script( 'ppb-chosen', POOTLEPB_URL . 'js/chosen/chosen.jquery.min.min.js', array( 'jquery' ), POOTLEPB_VERSION );
+			$this->enqueue_ui_scripts();
 
-			$deps = array(
-				'jquery',
-				'jquery-ui-resizable',
-				'jquery-ui-sortable',
-				'jquery-ui-slider',
-				'jquery-ui-dialog',
-				'jquery-ui-button',
-				'jquery-ui-tabs',
-			);
-
-			wp_enqueue_script( 'so-panels-admin', POOTLEPB_URL . 'js/panels.admin.js', $deps, POOTLEPB_VERSION );
-			wp_enqueue_script( 'so-panels-admin-sticky', POOTLEPB_URL . 'js/panels.admin.sticky.js', array( 'jquery' ), POOTLEPB_VERSION );
-			wp_enqueue_script( 'so-panels-admin-panels', POOTLEPB_URL . 'js/panels.admin.panels.js', array( 'jquery' ), POOTLEPB_VERSION );
-			wp_enqueue_script( 'so-panels-admin-grid', POOTLEPB_URL . 'js/panels.admin.grid.js', array( 'jquery' ), POOTLEPB_VERSION );
-			wp_enqueue_script( 'so-panels-admin-prebuilt', POOTLEPB_URL . 'js/panels.admin.prebuilt.js', array( 'jquery' ), POOTLEPB_VERSION );
-			wp_enqueue_script( 'so-panels-admin-tooltip', POOTLEPB_URL . 'js/panels.admin.tooltip.min.js', array( 'jquery' ), POOTLEPB_VERSION );
-			wp_enqueue_script( 'so-panels-admin-media', POOTLEPB_URL . 'js/panels.admin.media.min.js', array( 'jquery' ), POOTLEPB_VERSION );
-			wp_enqueue_script( 'so-panels-admin-styles', POOTLEPB_URL . 'js/panels.admin.styles.js', array( 'jquery' ), POOTLEPB_VERSION );
-
-			wp_enqueue_script( 'row-options', POOTLEPB_URL . 'js/row.options.admin.js', array( 'jquery' ) );
-
-			wp_localize_script( 'so-panels-admin', 'panels', array(
-				'previewUrl' => wp_nonce_url( add_query_arg( 'pootlepb_preview', 'true', get_home_url() ), 'ppb-panels-preview' ),
-				'i10n'       => array(
-					'buttons'  => array(
-						'insert'    => __( 'Insert', 'ppb-panels' ),
-						'cancel'    => __( 'cancel', 'ppb-panels' ),
-						'delete'    => __( 'Delete', 'ppb-panels' ),
-						'duplicate' => __( 'Duplicate', 'ppb-panels' ),
-						'style'     => __( 'Style', 'ppb-panels' ),
-						'edit'      => __( 'Edit', 'ppb-panels' ),
-						'done'      => __( 'Done', 'ppb-panels' ),
-						'undo'      => __( 'Want to undo?', 'ppb-panels' ),
-						'add'       => __( 'Add', 'ppb-panels' ),
-					),
-					'messages' => array(
-						'deleteColumns' => __( 'Columns deleted', 'ppb-panels' ),
-						'deleteWidget'  => __( 'Content deleted', 'ppb-panels' ),
-						'confirmLayout' => __( 'Are you sure you want to load this layout? It will overwrite your current page.', 'ppb-panels' ),
-						'editWidget'    => __( 'Edit %s Widget', 'ppb-panels' ),
-						'styleWidget'   => __( 'Style Widget', 'ppb-panels' )
-					),
-				),
-			) );
-
-			// this is the data of the widget and row that have been setup
-			$panels_data = $this->get_current_admin_panels_data();
-
-			// Add in the forms
-			if ( count( $panels_data ) > 0 ) {
-				// load all data even if no widget inside, so row styling will be loaded
-				wp_localize_script( 'so-panels-admin', 'panelsData', $panels_data );
-			}
-
-			// Set up the row styles
-			wp_localize_script( 'so-panels-admin', 'panelsStyleFields', pootlepb_style_get_fields() );
-
-			$this->enqueue_color_picker();
-
-			wp_localize_script( 'pp-pb-color-picker', 'wpColorPickerL10n', array(
-				'clear'         => __( 'Clear' ),
-				'defaultString' => __( 'Default' ),
-				'pick'          => __( 'Select Color' ),
-				'current'       => __( 'Current Color' ),
-			) );
-
-			wp_enqueue_style( 'wp-color-picker' );
+			$this->localize_ui_scripts();
 
 			// This gives panels a chance to enqueue scripts too, without having to check the screen ID.
 			do_action( 'pootlepb_enqueue_admin_scripts' );
@@ -182,46 +111,104 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 	}
 
 	/**
-	 * Get the Page Builder data for the current admin page.
-	 * @return array
+	 * Enqueue UI scripts and their dependencies
 	 * @since 0.1.0
 	 */
-	public function get_current_admin_panels_data() {
-		global $post;
+	public function enqueue_ui_scripts() {
 
-		$panels_data = get_post_meta( $post->ID, 'panels_data', true );
-		$panels_data = apply_filters( 'pootlepb_data', $panels_data, $post->ID );
-
-		if ( empty( $panels_data ) ) {
-			$panels_data = array();
-		}
-
-		//Set default styles if none
-		if ( isset( $panels_data['widgets'] ) ) {
-			foreach ( $panels_data['widgets'] as &$widget ) {
-				if ( isset( $widget['info'] ) ) {
-					if ( ! isset( $widget['info']['style'] ) ) {
-						$widget['info']['style'] = pootlepb_default_content_block_style();
-					}
-				}
-			}
-		}
-
-		return $panels_data;
-	}
-
-	/**
-	 * Enqueue rgba supporting color picker
-	 * @since 0.1.0
-	 */
-	public function enqueue_color_picker() {
+		//Dependencies
+		wp_enqueue_script( 'jquery-ui-resizable' );
+		wp_enqueue_script( 'jquery-ui-sortable' );
+		wp_enqueue_script( 'jquery-ui-slider' );
+		wp_enqueue_script( 'jquery-ui-dialog' );
+		wp_enqueue_script( 'jquery-ui-button' );
+		wp_enqueue_script( 'jquery-ui-tabs' );
 		wp_dequeue_script( "iris" );
+
 		wp_enqueue_script( "pp-pb-iris", POOTLEPB_URL . 'js/iris.js', array(
 			'jquery-ui-draggable',
 			'jquery-ui-slider',
 			'jquery-touch-punch'
 		) );
 		wp_enqueue_script( 'pp-pb-color-picker', POOTLEPB_URL . 'js/color-picker-custom.js', array( 'pp-pb-iris' ) );
+		wp_enqueue_style( 'wp-color-picker' );
+
+		wp_enqueue_script( 'pootlepb-chosen', POOTLEPB_URL . 'js/chosen/chosen.jquery.min.min.js', array( 'jquery' ), POOTLEPB_VERSION );
+
+		$deps = array(
+			'jquery',
+			'jquery-ui-resizable',
+			'jquery-ui-sortable',
+			'jquery-ui-slider',
+			'jquery-ui-dialog',
+			'jquery-ui-button',
+			'jquery-ui-tabs',
+		);
+
+		//UI Scripts
+		wp_enqueue_script( 'pootlepb-ui-undomanager', POOTLEPB_URL . 'js/ui.admin.undomanager.min.js', array(), 'fb30d7f' );
+		wp_enqueue_script( 'pootlepb-ui-admin', POOTLEPB_URL . 'js/ui.admin.js', $deps, POOTLEPB_VERSION );
+		wp_enqueue_script( 'pootlepb-ui-admin-sticky', POOTLEPB_URL . 'js/ui.admin.sticky.js', array( 'jquery' ), POOTLEPB_VERSION );
+		wp_enqueue_script( 'pootlepb-ui-admin-panels', POOTLEPB_URL . 'js/ui.admin.panels.js', array( 'jquery' ), POOTLEPB_VERSION );
+		wp_enqueue_script( 'pootlepb-ui-admin-grid', POOTLEPB_URL . 'js/ui.admin.grid.js', array( 'jquery' ), POOTLEPB_VERSION );
+		wp_enqueue_script( 'pootlepb-ui-admin-prebuilt', POOTLEPB_URL . 'js/ui.admin.prebuilt.js', array( 'jquery' ), POOTLEPB_VERSION );
+		wp_enqueue_script( 'pootlepb-ui-admin-tooltip', POOTLEPB_URL . 'js/ui.admin.tooltip.min.js', array( 'jquery' ), POOTLEPB_VERSION );
+		wp_enqueue_script( 'pootlepb-ui-admin-media', POOTLEPB_URL . 'js/ui.admin.media.min.js', array( 'jquery' ), POOTLEPB_VERSION );
+		wp_enqueue_script( 'pootlepb-ui-admin-styles', POOTLEPB_URL . 'js/ui.admin.styles.js', array( 'jquery' ), POOTLEPB_VERSION );
+		wp_enqueue_script( 'row-options', POOTLEPB_URL . 'js/ui.admin.style-buttons.js', array( 'jquery' ) );
+
+	}
+
+
+	/**
+	 * Localizes UI scripts with panels data, i18n stuff and style fields
+	 * @since 0.1.0
+	 */
+	protected function localize_ui_scripts() {
+
+		wp_localize_script( 'pootlepb-ui-admin', 'panels', array(
+			'previewUrl' => wp_nonce_url( add_query_arg( 'pootlepb_preview', 'true', get_home_url() ), 'ppb-panels-preview' ),
+			'i10n'       => array(
+				'buttons'  => array(
+					'insert'    => __( 'Insert', 'ppb-panels' ),
+					'cancel'    => __( 'cancel', 'ppb-panels' ),
+					'delete'    => __( 'Delete', 'ppb-panels' ),
+					'duplicate' => __( 'Duplicate', 'ppb-panels' ),
+					'style'     => __( 'Style', 'ppb-panels' ),
+					'edit'      => __( 'Edit', 'ppb-panels' ),
+					'done'      => __( 'Done', 'ppb-panels' ),
+					'undo'      => __( 'Want to undo?', 'ppb-panels' ),
+					'add'       => __( 'Add', 'ppb-panels' ),
+				),
+				'messages' => array(
+					'deleteColumns' => __( 'Columns deleted', 'ppb-panels' ),
+					'deleteWidget'  => __( 'Content deleted', 'ppb-panels' ),
+					'confirmLayout' => __( 'Are you sure you want to load this layout? It will overwrite your current page.', 'ppb-panels' ),
+					'editWidget'    => __( 'Edit %s Widget', 'ppb-panels' ),
+					'styleWidget'   => __( 'Style Widget', 'ppb-panels' )
+				),
+			),
+		) );
+
+		// this is the data of the widget and row that have been setup
+		$panels_data = $this->get_current_admin_panels_data();
+
+		// Add in the forms
+		if ( count( $panels_data ) > 0 ) {
+			// load all data even if no widget inside, so row styling will be loaded
+			wp_localize_script( 'pootlepb-ui-admin', 'panelsData', $panels_data );
+		}
+
+		// Set up the row styles
+		wp_localize_script( 'pootlepb-ui-admin', 'panelsStyleFields', pootlepb_style_get_fields() );
+
+		wp_localize_script( 'pp-pb-color-picker', 'wpColorPickerL10n', array(
+			'clear'         => __( 'Clear' ),
+			'defaultString' => __( 'Default' ),
+			'pick'          => __( 'Select Color' ),
+			'current'       => __( 'Current Color' ),
+		) );
+
 	}
 
 	/**
@@ -249,6 +236,49 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 		}
 
 		return $layouts;
+	}
+
+	/**
+	 * Get the Page Builder data for the current admin page.
+	 * @return array
+	 * @since 0.1.0
+	 */
+	public function get_current_admin_panels_data() {
+		global $post;
+
+		$panels_data = get_post_meta( $post->ID, 'panels_data', true );
+		$panels_data = apply_filters( 'pootlepb_data', $panels_data, $post->ID );
+
+		if ( empty( $panels_data ) ) {
+			$panels_data = array();
+		}
+
+		//Set default styles if none
+		if ( isset( $panels_data['widgets'] ) ) {
+			//Add styles to content blocks if not set
+			$this->add_default_styles_to_blocks( $panels_data['widgets'] );
+		}
+
+		return $panels_data;
+	}
+
+
+	/**
+	 * Adds default styles to content block if not set
+	 * @param $widgets
+	 * @return array
+	 * @since 0.1.0
+	 */
+	public function add_default_styles_to_blocks( &$widgets ) {
+
+		//Set default styles if none
+		foreach ( $widgets as &$widget ) {
+			//If content block info is set but style info ain't
+			if ( ! empty( $widget['info'] ) && empty( $widget['info']['style'] ) ) {
+				//Set default style
+				$widget['info']['style'] = pootlepb_default_content_block_style();
+			}
+		}
 	}
 
 	/**

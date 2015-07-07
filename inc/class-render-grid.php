@@ -126,7 +126,7 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 				/**
 				 * Render the content block via this hook
 				 *
-				 * @param array $widget_info - Info for this block - backwards compatible with widgets
+				 * @param array $widget_info - Info for this block - backwards compatible with content blocks
 				 * @param int $gi - Grid Index
 				 * @param int $ci - Cell Index
 				 * @param int $pi - Panel/Content Block Index

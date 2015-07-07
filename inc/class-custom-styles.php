@@ -212,20 +212,36 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 	 * @since 0.1.0
 	 */
 	public function row_height( $attr, $style, $cells = array() ) {
-		//Apply height if row doesn't contain widgets
-		$contains_widgets = false;
-		foreach ( $cells as $cell ) {
 
-			if ( ! empty( $cell ) ) {
-				$contains_widgets = true;
+		$row_empty = ! $this->row_has_content( $cells );
+
+		if ( $row_empty ) {
+			if ( ! empty( $style['row_height'] ) ) {
+				$attr['style'] .= 'height:' . $style['row_height'] . 'px;';
 			}
 		}
 
-		if ( ! $contains_widgets ) {
-			$attr['style'] .= ! empty( $style['row_height'] ) ? 'height:' . $style['row_height'] . 'px;' : '';
+		return $attr;
+	}
+
+	/**
+	 * Return true if row contains content blocks in any cell
+	 * @param array $cells Cells of the row to search for content blocks in
+	 * @return bool
+	 */
+	protected function row_has_content( $cells ) {
+
+		//Loop through the cells
+		foreach ( $cells as $cell ) {
+
+			//If cell contains content blocks
+			if ( ! empty( $cell ) ) {
+				return true;
+			}
 		}
 
-		return $attr;
+		//No content blocks found in the cells of the row
+		return false;
 	}
 
 	/**

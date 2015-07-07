@@ -36,13 +36,13 @@
 
 		<div id="pootle-style-tab" class="pootle-style-fields pootle-content-module tab-contents">
 			<?php
-			pootlepb_widget_styles_dialog_form();
+			pootlepb_block_styles_dialog_form();
 			?>
 		</div>
 
 		<div id="pootle-advanced-tab" class="pootle-style-fields pootle-content-module tab-contents">
 			<?php
-			pootlepb_widget_styles_dialog_form( 'advanced' );
+			pootlepb_block_styles_dialog_form( 'advanced' );
 			?>
 		</div>
 

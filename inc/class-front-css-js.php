@@ -239,6 +239,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 		$css_text = '';
 		krsort( $this->styles );
 		foreach ( $this->styles as $res => $def ) {
+
 			if ( empty( $def ) ) {
 				continue;
 			}
