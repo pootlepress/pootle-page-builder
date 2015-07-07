@@ -165,8 +165,8 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 			'menu_page',
 		) );
 		add_submenu_page( 'page_builder', 'Settings', 'Settings', 'manage_options', 'page_builder_settings', array(
-			'menu_page',
 			$this,
+			'menu_page',
 		) );
 		add_submenu_page( 'page_builder', 'Add-ons', 'Add-ons', 'manage_options', 'page_builder_addons', array(
 			$this,

@@ -39,4 +39,4 @@ delete_option( 'siteorigin_panels_display' );
 
 //Removing usermeta for visit count to new page
 global $wpdb;
-$wpdb->query("DELETE FROM $wpdb->usermeta WHERE meta_key LIKE 'pootlepb_visit_count';");
+$wpdb->query( "DELETE FROM $wpdb->usermeta WHERE meta_key LIKE 'pootlepb_visit_count';" );

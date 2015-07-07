@@ -187,11 +187,9 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 	 * @since 0.1.0
 	 */
 	public function get_current_admin_panels_data() {
-		$screen = get_current_screen();
-
 		global $post;
-		$panels_data = get_post_meta( $post->ID, 'panels_data', true );
 
+		$panels_data = get_post_meta( $post->ID, 'panels_data', true );
 		$panels_data = apply_filters( 'pootlepb_data', $panels_data, $post->ID );
 
 		if ( empty( $panels_data ) ) {

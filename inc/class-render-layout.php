@@ -102,16 +102,13 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 
 	/**
 	 * Render the panels
-	 *
 	 * @param int|string|bool $post_id The Post ID or 'home'.
-	 * @param bool $enqueue_css Should we also enqueue the layout CSS.
 	 * @param array|bool $panels_data Existing panels data. By default load from settings or post meta.
-	 *
 	 * @uses Pootle_Page_Builder_Front_Css_Js::panels_generate_css()
 	 * @return string
 	 * @since 0.1.0
 	 */
-	function panels_render( $post_id = false, $panels_data = false ) {
+	function panels_render( $post_id = false, $panels_data = array() ) {
 		//Post ID and Panels Data
 		if ( $this->any_problem( $panels_data, $post_id ) ) {
 			return '';
@@ -122,7 +119,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 		$pootlepb_current_post = $post_id;
 
 		if ( post_password_required( $post_id ) && get_post_type( $post_id ) != 'wc_product_tab' ) {
-			return false;
+			return '';
 		}
 
 		//Removing filters for proper functionality

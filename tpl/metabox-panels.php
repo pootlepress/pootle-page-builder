@@ -62,7 +62,7 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 		}
 
 		//Print the message
-		echo "<div id='ppb-hello-user' class='visit-count-{$visit_count}'> $message </div>";
+		echo "<div id='ppb-hello-user' class='visit-count-" . esc_attr( $visit_count ) . "'> " . esc_html( $message ) . " </div>";
 
 		//Update user visit count
 		$visit_count++;
@@ -164,7 +164,9 @@ if ( 'post-new.php' == $pagenow || ! empty( $panels_data['grids'] ) ) {
 	<script>
 		jQuery(document).ready(function($){
 			$('#content-panels').click();
-			$('.wrap').css( 'opacity', '1' );
+			pootlePBShowWrap = function() {
+				$('.wrap').css('opacity', '1');
+			}
 		});
 	</script>
 <?php

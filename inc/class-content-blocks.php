@@ -71,7 +71,7 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 	 */
 	public function open_block( $block_info, $gi, $ci, $pi, $blocks_num, $post_id ) {
 
-		$styleArray = $widgetStyle = isset( $block_info['info']['style'] ) ? json_decode( $block_info['info']['style'], true ) : pootlepb_default_content_block_style();;
+		$styleArray = isset( $block_info['info']['style'] ) ? json_decode( $block_info['info']['style'], true ) : pootlepb_default_content_block_style();;
 
 		//Classes for this content block
 		$classes = array( 'panel' );

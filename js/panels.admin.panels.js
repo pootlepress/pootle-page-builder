@@ -727,6 +727,10 @@
                 panels.ppbGridEvents(grid);
 
             }
+
+            if (typeof pootlePBShowWrap == "function") {
+                pootlePBShowWrap();
+            }
         }
 
         $('#panels-container .panels-container')
