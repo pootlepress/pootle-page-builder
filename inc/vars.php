@@ -7,13 +7,14 @@
  * @since 0.1.0
  */
 
-global	$pootlepb_content_block_styling_fields,
+global $pootlepb_content_block_styling_fields,
 		$pootlepb_row_styling_fields,
 		$pootlepb_font,
-	    $pootlepb_ui_i18n,
-	    $pootlepb_ui_js_deps,
-	    $pootlepb_color_i18n,
-		$pootlepb_color_deps;
+		$pootlepb_ui_i18n,
+		$pootlepb_ui_js_deps,
+		$pootlepb_color_i18n,
+		$pootlepb_color_deps,
+		$pootlepb_content_block_tabs;
 
 /**
  * Content block styling fields
@@ -891,4 +892,24 @@ $pootlepb_color_deps = array(
 	'jquery-ui-draggable',
 	'jquery-ui-slider',
 	'jquery-touch-punch'
+);
+
+$pootlepb_content_block_tabs = array(
+	'editor' => array(
+		'label' => 'Editor',
+		'priority' => 10,
+	),
+	'editor-separator' => array(
+		'priority' => 30,
+	),
+	'style' => array(
+		'label' => 'Style',
+		'class' => 'pootle-style-fields',
+		'priority' => 40,
+	),
+	'advanced' => array(
+		'label' => 'Advanced',
+		'class' => 'pootle-style-fields',
+		'priority' => 50,
+	),
 );

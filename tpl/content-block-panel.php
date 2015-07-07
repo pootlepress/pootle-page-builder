@@ -6,50 +6,60 @@
  * Time: 11:56 PM
  * @since 0.1.0
  */
+global $pootlepb_content_block_tabs;
+$pootlepb_content_block_tabs = apply_filters( 'pootlepb_content_block_tabs', $pootlepb_content_block_tabs );
+
+$panel_tabs = array();
+
+foreach ( $pootlepb_content_block_tabs as $k => $tab ) {
+	if ( empty( $tab['priority'] ) ) {
+		$tab['priority'] = '';
+	}
+	$panel_tabs[ $tab['priority'] ][ $k ] = $tab;
+}
+
+ksort( $panel_tabs );
 ?>
 	<div class="ppb-cool-panel-wrap">
 		<ul class="ppb-acp-sidebar">
 
-			<li>
-				<a class="ppb-tabs-anchors ppb-block-anchor ppb-editor" <?php selected( true ) ?> href="#pootle-editor-tab">
-					<?php echo esc_attr( apply_filters( 'pootlepb_content_block_editor_title', 'Editor', $request ) ); ?>
-				</a>
-			</li>
-
-			<?php if ( class_exists( 'WooCommerce' ) ) { ?>
-				<li><a class="ppb-tabs-anchors" href="#pootle-wc-tab">WooCommerce</a></li>
-			<?php } ?>
-
-			<li class="ppb-seperator"></li>
-
-			<li><a class="ppb-tabs-anchors" href="#pootle-style-tab">Style</a></li>
-
-			<li><a class="ppb-tabs-anchors" href="#pootle-advanced-tab">Advanced</a></li>
+			<?php
+			//Output the tabs
+			foreach ( $panel_tabs as $tabs ) {
+				foreach ( $tabs as $k => $tab ) {
+					if ( empty( $tab['label'] ) ) {
+						echo '<li class="ppb-seperator"></li>';
+						continue;
+					}
+				?>
+					<li>
+						<a class="ppb-tabs-anchors ppb-content-block-tab-<?php echo $k; ?>"
+							href="#pootle-<?php echo $k; ?>-tab">
+							<?php echo $tab['label']; ?>
+						</a>
+					</li>
+				<?php
+				}
+			}
+			?>
 		</ul>
 
 		<?php ?>
-		<div id="pootle-editor-tab" class="pootle-content-module tab-contents content-block">
+		<?php
+		//Output the tabs
+		foreach ( $panel_tabs as $tabs ) {
+			foreach ( $tabs as $k => $tab ) {
+				if ( empty( $tab['label'] ) ) { continue; }
+				if ( empty( $tab['class'] ) ) { $tab['class'] = ''; }
+				?>
+				<div id="pootle-<?php echo $k; ?>-tab" class="tab-contents <?php echo $tab['class']; ?>">
 
-			<?php do_action( 'pootlepb_content_block_editor_form', $request ); ?>
+					<?php do_action( 'pootlepb_content_block_' . $k . '_tab', $request ); ?>
 
-		</div>
-
-		<div id="pootle-style-tab" class="pootle-style-fields pootle-content-module tab-contents">
+				</div>
 			<?php
-			pootlepb_block_styles_dialog_form();
-			?>
-		</div>
-
-		<div id="pootle-advanced-tab" class="pootle-style-fields pootle-content-module tab-contents">
-			<?php
-			pootlepb_block_styles_dialog_form( 'advanced' );
-			?>
-		</div>
-
-		<?php if ( class_exists( 'WooCommerce' ) ) { ?>
-			<div id="pootle-wc-tab" class="pootle-content-module tab-contents">
-				<?php do_action( 'pootlepb_add_content_woocommerce_tab' ); ?>
-			</div>
-		<?php } ?>
+			}
+		}
+		?>
 
 	</div>

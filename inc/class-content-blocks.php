@@ -30,9 +30,13 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 		add_action( 'pootlepb_render_content_block', array( $this, 'close_block' ), 99 );
 		add_action( 'wp_head', array( $this, 'print_inline_css' ), 12 );
 		add_action( 'wp_footer', array( $this, 'print_inline_css' ) );
-		add_action( 'pootlepb_content_block_editor_form', array( $this, 'panels_editor' ) );
+		add_action( 'pootlepb_content_block_tabs', array( $this, 'add_wc_tab' ) );
+
+		add_action( 'pootlepb_content_block_editor_tab', array( $this, 'panels_editor' ) );
+		add_action( 'pootlepb_content_block_style_tab', 'pootlepb_block_styles_dialog_form' );
+		add_action( 'pootlepb_content_block_advanced_tab', array( $this, 'advanced_styles_tab' ) );
+		add_action( 'pootlepb_content_block_woocommerce_tab', array( $this, 'wc_tab' ) );
 		add_action( 'wp_ajax_pootlepb_editor_form', array( $this, 'ajax_content_panel' ) );
-		add_action( 'pootlepb_add_content_woocommerce_tab', array( $this, 'wc_tab' ) );
 	}
 
 	/**
@@ -257,6 +261,14 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 	}
 
 	/**
+	 * Outputs advanced style fields
+	 * @action pootlepb_content_block_advanced_tab
+	 */
+	public function advanced_styles_tab() {
+		pootlepb_block_styles_dialog_form( 'advanced' );
+	}
+
+	/**
 	 * Handles ajax requests for the content panel
 	 * @uses Pootle_Page_Builder_Content_Block::editor_panel()
 	 * @since 0.1.0
@@ -268,15 +280,29 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 	}
 
 	/**
-	 * Output woo commerce tab
+	 * Adds Woocommerce tab
 	 * @since 0.1.0
 	 */
-	public function wc_tab() {
-		//Using WooCommerce? You can now build a stunning shop with Page Builder. Just get our WooCommerce extension and start building!
-		?>
-		Using WooCommerce? Will we soon be launching a WooCommerce Add-on for page builder!
-	<?php
+	public function add_wc_tab( $tabs ) {
+
+		$tabs['woocommerce'] = array(
+			'label' => 'Woocommerce',
+			'priority' => 20,
+		);
+
+		return $tabs;
 	}
+
+/**
+ * Output woo commerce tab
+ * @since 0.1.0
+ */
+public function wc_tab() {
+	//Using WooCommerce? You can now build a stunning shop with Page Builder. Just get our WooCommerce extension and start building!
+	?>
+	Using WooCommerce? Will we soon be launching a WooCommerce Add-on for page builder!
+<?php
+}
 }
 
 //Instantiating Pootle_Page_Builder_Content_Block class
