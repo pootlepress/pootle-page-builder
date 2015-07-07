@@ -62,25 +62,19 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 	 * @param int|string $post_id
 	 * @param array $panels_data
 	 *
-	 * @return string CSS to output
+	 * @return string|null CSS to output
 	 * @since 0.1.0
 	 */
 	public function panels_generate_css( $post_id, $panels_data ) {
 		// Exit if we don't have panels data
-		if ( empty( $panels_data['grids'] ) ) {
-			return;
-		}
+		if ( empty( $panels_data['grids'] ) ) { return null; }
 
-		$settings = pootlepb_settings();
-
-		$panels_mobile_width  = $settings['mobile-width'];
-		$panels_margin_bottom = $settings['margin-bottom'];
+		$settings = pootlepb_settings(); // Pootle page builder settings
 
 		// Add the grid sizing
 		$this->grid_styles( $settings, $panels_data, $post_id );
-
 		//Margin and padding
-		$this->grid_elements_margin_padding( $settings, $panels_margin_bottom );
+		$this->grid_elements_margin_padding( $settings );
 
 		/**
 		 * Filter the unprocessed CSS array
@@ -196,28 +190,26 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 	 *
 	 * @since 0.1.0
 	 */
-	public function grid_elements_margin_padding( $settings, $panels_margin_bottom ) {
+	public function grid_elements_margin_padding( $settings ) {
 
 		// Add the bottom margin
-		$bottom_margin      = 'margin-bottom: ' . $panels_margin_bottom . 'px';
+		$bottom_margin      = 'margin-bottom: ' . $settings['margin-bottom'] . 'px';
 		$bottom_margin_last = 'margin-bottom: 0 !important';
 
 		$this->css( $bottom_margin, '.panel-grid-cell .panel' );
 		$this->css( $bottom_margin_last, '.panel-grid-cell .panel:last-child' );
 
 		// This is for the side margins
-		$magin_half    = $settings['margin-sides'] / 2;
-		$side_paddings = "padding: 0 {$magin_half}px 0";
+		$margin_half    = $settings['margin-sides'] / 2;
+		$side_padding = "padding: 0 {$margin_half}px 0";
 
-		$this->css( $side_paddings, '.panel-grid-cell' );
+		$this->css( $side_padding, '.panel-grid-cell' );
 
 		if ( ! defined( 'POOTLEPB_OLD_V' ) ) {
 
 			$this->css( 'padding: 10px', '.panel' );
 			$this->css( 'padding: 5px', '.panel', 768 );
-
 		}
-
 	}
 
 	/**

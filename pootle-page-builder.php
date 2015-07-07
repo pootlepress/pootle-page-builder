@@ -86,9 +86,6 @@ final class Pootle_Page_Builder extends Pootle_Page_Builder_Abstract {
 		require_once POOTLEPB_DIR . 'inc/class-public.php';
 		/** Instantiating PPB Public Class */
 		$this->public = Pootle_Page_Builder_Public::instance();
-
-		//@TODO Get rid of these
-		require_once POOTLEPB_DIR . 'inc/cxpb-support.php';
 	}
 
 	/**

@@ -19,6 +19,25 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 	protected static $instance;
 
 	/**
+	 * Converts attributes array into html attributes string
+	 * @param array $attributes Associative ( multidimensional ) array attributes
+	 * @return string HTML attributes
+	 */
+	public function stringify_attributes( $attributes ) {
+		$attr = '';
+
+		foreach ( $attributes as $name => $value ) {
+			if ( is_array( $value ) ) {
+				$value = implode( " ", array_unique( $value ) );
+			}
+
+			$attr .= esc_attr( $name ) . '="' . esc_attr( $value ) . '" ';
+		}
+
+		return $attr;
+	}
+
+	/**
 	 * Outputs the pootle page builder grids
 	 *
 	 * @param array $grids
@@ -33,17 +52,7 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 
 			$rowID = 'pg-' . $post_id . '-' . $gi;
 
-			$grid_classes    = apply_filters( 'pootlepb_row_classes', array( 'panel-grid' ), $panels_data['grids'][ $gi ] );
-			$grid_attributes = apply_filters( 'pootlepb_row_attributes', array(
-				'class' => implode( ' ', $grid_classes ),
-				'id'    => $rowID
-			), $panels_data['grids'][ $gi ] );
-
-			echo '<div ';
-			foreach ( $grid_attributes as $name => $value ) {
-				echo $name . '="' . esc_attr( $value ) . '" ';
-			}
-			echo '>';
+			echo '<div ' . $this->get_row_attributes( $gi, $rowID, $panels_data ) . '>';
 
 			//ROW STYLE WRAPPER
 			$this->row_style_wrapper( $rowID, $gi, $cells, $panels_data );
@@ -62,6 +71,24 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 	}
 
 	/**
+	 * Returns the row attributes in string
+	 * @param int $gi
+	 * @param string $rowID
+	 * @param array $panels_data
+	 * @return string
+	 */
+	private function get_row_attributes( $gi, $rowID, $panels_data ) {
+
+		$grid_classes    = apply_filters( 'pootlepb_row_classes', array( 'panel-grid' ), $panels_data['grids'][ $gi ] );
+		$grid_attributes = apply_filters( 'pootlepb_row_attributes', array(
+			'class' => implode( ' ', $grid_classes ),
+			'id'    => $rowID
+		), $panels_data['grids'][ $gi ] );
+
+		return $this->stringify_attributes( $grid_attributes );
+	}
+
+	/**
 	 * Outputs the rows style wrapper and calls pootlepb_before_cells hook
 	 *
 	 * @param string $rowID
@@ -71,24 +98,9 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 	 */
 	private function row_style_wrapper( $rowID, $gi, $cells, $panels_data ) {
 
-		$style_attributes          = array();
-		$style_attributes['class'] = array(
-			'panel-row-style',
-			'panel-row-style-' . $panels_data['grids'][ $gi ]['style']['class'],
-			$panels_data['grids'][ $gi ]['style']['class'],
-		);
-
 		$styleArray       = ! empty( $panels_data['grids'][ $gi ]['style'] ) ? $panels_data['grids'][ $gi ]['style'] : array();
-		$style_attributes = apply_filters( 'pootlepb_row_style_attributes', $style_attributes, $styleArray, $cells );
 
-		echo '<div ';
-		foreach ( $style_attributes as $name => $value ) {
-			if ( is_array( $value ) ) {
-				$value = implode( " ", array_unique( $value ) );
-			}
-			echo $name . '="' . esc_attr( $value ) . '" ';
-		}
-		echo '>';
+		echo '<div ' . $this->get_row_style_attributes( $gi, $styleArray, $cells, $panels_data ) . '>';
 
 		/**
 		 * Fires in pootle page builder row
@@ -99,48 +111,78 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 
 	}
 
+	/**
+	 * Returns the row style attributes in string
+	 * @param int $gi
+	 * @param array $styleArray
+	 * @param array $cells
+	 * @param array $panels_data
+	 * @return string
+	 */
+	private function get_row_style_attributes( $gi, $styleArray, $cells, $panels_data ) {
+
+		$style_attributes          = array();
+
+		$style_attributes['class'] = array(
+			'panel-row-style',
+			'panel-row-style-' . $panels_data['grids'][ $gi ]['style']['class'],
+			$panels_data['grids'][ $gi ]['style']['class'],
+		);
+
+		$style_attributes = apply_filters( 'pootlepb_row_style_attributes', $style_attributes, $styleArray, $cells );
+
+		return $this->stringify_attributes( $style_attributes );
+	}
+
+	/**
+	 * Outputs the cells
+	 * @param array $cells
+	 * @param int $gi
+	 * @param int $post_id
+	 * @param array $panels_data
+	 */
 	private function output_cells( $cells, $gi, $post_id, $panels_data ) {
-
 		foreach ( $cells as $ci => $widgets ) {
-			// Themes can add their own styles to cells
-			$cellId                                            = 'pgc-' . $post_id . '-' . $gi . '-' . $ci;
-			$panels_data['grids'][ $gi ]['style']['col_class'] = empty( $panels_data['grids'][ $gi ]['style']['col_class'] ) ? '' : $panels_data['grids'][ $gi ]['style']['col_class'];
-			$cell_classes                                      = apply_filters( 'pootlepb_row_cell_classes', array(
-				'panel-grid-cell',
-				$panels_data['grids'][ $gi ]['style']['col_class']
-			), $panels_data );
-			$cell_attributes                                   = array(
-				'class' => implode( ' ', $cell_classes ),
-				'id'    => $cellId
-			);
-			$cell_attributes                                   = apply_filters( 'pootlepb_row_cell_attributes', $cell_attributes, $panels_data );
-
-			echo '<div ';
-			foreach ( $cell_attributes as $name => $value ) {
-				echo $name . '="' . esc_attr( $value ) . '" ';
-			}
-			echo '>';
-
+			echo '<div '. $this->get_cell_attributes( $ci, $gi, $post_id, $panels_data ) . '>';
 			foreach ( $widgets as $pi => $widget_info ) {
-
 				/**
 				 * Render the content block via this hook
-				 *
 				 * @param array $widget_info - Info for this block - backwards compatible with content blocks
 				 * @param int $gi - Grid Index
 				 * @param int $ci - Cell Index
 				 * @param int $pi - Panel/Content Block Index
 				 * @param int $blocks_num - Total number of Blocks in cell
 				 * @param int $post_id - The current post ID
-				 *
 				 * @since 0.1.0
 				 */
 				do_action( 'pootlepb_render_content_block', $widget_info, $gi, $ci, $pi, count( $widgets ), $post_id );
 			}
-
 			echo '</div>';
 		}
+	}
 
+	/**
+	 * Returns the cell attributes in string
+	 * @param int $ci
+	 * @param int $gi
+	 * @param int $post_id
+	 * @param array $panels_data
+	 * @return string
+	 */
+	private function get_cell_attributes( $ci, $gi, $post_id, $panels_data ) {
+		$cellId = 'pgc-' . $post_id . '-' . $gi . '-' . $ci;
+
+		$col_class = '';
+		if ( ! empty( $panels_data['grids'][ $gi ]['style']['col_class'] ) ) {
+			$col_class = $panels_data['grids'][ $gi ]['style']['col_class'];
+		}
+
+		$cell_classes = apply_filters( 'pootlepb_row_cell_classes', array( "panel-grid-cell $col_class" ), $panels_data );
+
+		$cell_attributes = array( 'class' => implode( ' ', $cell_classes ), 'id'    => $cellId,	);
+		$cell_attributes = apply_filters( 'pootlepb_row_cell_attributes', $cell_attributes, $ci, $gi, $panels_data );
+
+		return $this->stringify_attributes( $cell_attributes );
 	}
 
 	/**

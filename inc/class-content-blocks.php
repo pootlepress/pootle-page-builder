@@ -75,25 +75,18 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 			$styleArray = json_decode( $block_info['info']['style'], true );
 		}
 
-		//Classes for this content block
-		$classes = array( 'panel' );
+			//Classes for this content block
+			$classes = array( 'panel' );
+			if ( ! empty( $styleArray['class'] ) ) { $classes[] = $styleArray['class']; }
+			//Id for this content block
+			$id = 'panel-' . $post_id . '-' . $gi . '-' . $ci . '-' . $pi;
 
-		if ( ! empty( $styleArray['class'] ) ) {
-			$classes[] = $styleArray['class'];
-		}
+			$inlineStyle       = ''; // Passed with reference
+			$styleWithSelector = ''; // Passed with reference
 
-		//Id for this content block
-		$id = 'panel-' . $post_id . '-' . $gi . '-' . $ci . '-' . $pi;
+			$this->set_inline_embed_styles( $inlineStyle, $styleWithSelector, $styleArray, $id ); // Get Styles
 
-		$widgetStyleFields = pootlepb_block_styling_fields();
-
-		$inlineStyle = '';
-
-		$styleWithSelector = '';
-
-		$this->set_inline_embed_styles( $inlineStyle, $styleWithSelector, $styleArray, $widgetStyleFields, $id );
-
-		echo '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" id="' . $id . '" style="' . $inlineStyle . '" >';
+			echo '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" id="' . $id . '" style="' . $inlineStyle . '" >';
 	}
 
 	/**
@@ -105,7 +98,9 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 	 * @param array $widgetStyleFields
 	 * @param string $id
 	 */
-	private function set_inline_embed_styles( &$inlineStyle, &$styleWithSelector, $styleArray, $widgetStyleFields, $id ) {
+	private function set_inline_embed_styles( &$inlineStyle, &$styleWithSelector, $styleArray, $id ) {
+
+		$widgetStyleFields = pootlepb_block_styling_fields();
 
 		foreach ( $widgetStyleFields as $key => $field ) {
 			if ( $field['type'] == 'border' ) {
