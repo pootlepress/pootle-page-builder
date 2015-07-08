@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.2.2
-Stable tag: 
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -28,6 +28,8 @@ We have made sure the plugin:
 
  * Feels as much like WordPress as possible making it easy to use for site owners.
  * Code is well written & fully optimized for performance.
+
+[vimeo http://vimeo.com/131757773]
 
 == Usage ==
 
@@ -73,6 +75,13 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Initial release. It's alive!
 
 == Changelog ==
+
+= 0.1.1 =
+* 2015-07-08
+* Tweak - add new plugin icon (for WordPress.org)
+* Tweak - optimization of multiple classes and operations for enhanced performance
+* Fix - showing message in edit area before content blocks being displayed
+* Fix - page defaulting back to page builder after being used as a page with default editor
 
 = 0.1 =
 * 2015-07-06
