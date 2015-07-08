@@ -110,13 +110,13 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 	     class="panels-admin-dialog">
 		<div class="ppb-cool-panel-wrap">
 
-			<?php pootlepb_style_dialog_form() ?>
+			<?php require POOTLEPB_DIR . 'tpl/row-settings-panel.php'; ?>
 
 		</div>
 	</div>
 
 	<div id="widget-styles-dialog" data-title="Style Widget" class="panels-admin-dialog">
-		<?php pootlepb_block_styles_dialog_form() ?>
+		<?php pootlepb_block_dialog_fields_output() ?>
 	</div>
 
 	<div id="content-loss-dialog" data-title="<?php esc_attr_e( 'Changing to Page Builder', 'ppb-panels' ) ?>"

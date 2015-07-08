@@ -15,20 +15,6 @@ function pootlepb_panels_row_styles( $styles ) {
 
 add_filter( 'pootlepb_row_styles', 'pootlepb_panels_row_styles' );
 
-/**
- * Returns content block styling fields
- * @return array Style fields
- * @since 0.1.0
- */
-function pootlepb_block_styling_fields() {
-
-	global $pootlepb_content_block_styling_fields;
-
-	return $pootlepb_content_block_styling_fields;
-}
-
-add_filter( 'pootlepb_row_style_fields', 'pootlepb_row_style_fields' );
-
 function pootlepb_panels_panels_row_attributes( $attr, $row ) {
 	if ( ! empty( $row['style']['no_margin'] ) ) {
 		if ( empty( $attr['style'] ) ) {

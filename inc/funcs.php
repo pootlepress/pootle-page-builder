@@ -149,11 +149,32 @@ function pootlepb_is_panel( $can_edit = false ) {
 	return $is_panel && ( ! $can_edit || ( is_singular() && current_user_can( 'edit_post', get_the_ID() ) ) );
 }
 
-function pootlepb_row_style_fields( $fields ) {
+/**
+ * Returns content block styling fields
+ * @return array Style fields
+ * @since 0.1.0
+ */
+function pootlepb_block_styling_fields() {
+	global $pootlepb_content_block_styling_fields;
+
+	$fields = apply_filters( 'pootlepb_content_block_fields', $pootlepb_content_block_styling_fields );
+
+	return $fields;
+}
+
+/**
+ * Get all the row styles.
+ *
+ * @return array An array defining the row fields.
+ * @since 0.1.0
+ */
+function pootlepb_row_settings_fields() {
 
 	global $pootlepb_row_styling_fields;
 
-	return array_merge( $fields, $pootlepb_row_styling_fields );
+	$fields = apply_filters( 'pootlepb_row_settings_fields', $pootlepb_row_styling_fields );
+
+	return $fields;
 }
 
 /**

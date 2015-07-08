@@ -159,7 +159,7 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 		}
 
 		// Row styles
-		wp_localize_script( 'pootlepb-ui-admin', 'panelsStyleFields', pootlepb_style_get_fields() );
+		wp_localize_script( 'pootlepb-ui-admin', 'panelsStyleFields', pootlepb_row_settings_fields() );
 
 		//Color picker i18n
 		wp_localize_script( 'pp-pb-color-picker', 'wpColorPicker_i18n', $pootlepb_color_i18n );

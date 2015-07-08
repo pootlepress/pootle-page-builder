@@ -4,24 +4,6 @@
  * @since 0.1.0
  */
 
-/**
- * Get all the row styles.
- *
- * @return array An array defining the row fields.
- * @since 0.1.0
- */
-function pootlepb_style_get_fields() {
-	static $fields = false;
-
-	if ( false === $fields ) {
-		$fields = array();
-
-		$fields = apply_filters( 'pootlepb_row_style_fields', $fields );
-	}
-
-	return $fields;
-}
-
 function pootlepb_dialog_form_echo( $fields ) {
 
 	foreach ( $fields as $name => $attr ) {
@@ -106,96 +88,7 @@ function pootlepb_hide_elements_dialog_echo( $fields ) {
 	}
 }
 
-function pootlepb_style_dialog_form() {
-	$fields = pootlepb_style_get_fields();
-
-	$sections = array();
-
-	$sections['Background'][] = 'background_toggle';
-
-	$sections['Background'][] = array( '<div class="bg_section bg_color">' );
-	$sections['Background'][] = 'background';
-	$sections['Background'][] = array( '</div>' );
-
-	$sections['Background'][] = array( '<div class="bg_section bg_image">' );
-	$sections['Background'][] = 'background_image';
-	$sections['Background'][] = 'background_image_repeat';
-	$sections['Background'][] = 'background_parallax';
-	$sections['Background'][] = 'background_image_size';
-	$sections['Background'][] = 'bg_overlay_color';
-	$sections['Background'][] = 'bg_overlay_opacity';
-	/** @hook pootlepb_row_styles_section_bg_image Add field id in background image sub section */
-	$sections['Background']   = apply_filters( 'pootlepb_row_styles_section_bg_image', $sections['Background'] );
-	$sections['Background'][] = array( '</div>' );
-
-	$sections['Background'][] = array( '<div class="bg_section bg_video">' );
-	$sections['Background'][] = 'bg_video';
-	$sections['Background'][] = 'bg_mobile_image';
-	/** @hook pootlepb_row_styles_section_bg_image Add field id in background video sub section */
-	$sections['Background']   = apply_filters( 'pootlepb_row_styles_section_bg_video', $sections['Background'] );
-	$sections['Background'][] = array( '</div>' );
-
-	$sections['Layout'][] = 'full_width';
-	$sections['Layout'][] = 'row_height';
-	$sections['Layout'][] = 'hide_row';
-	$sections['Layout'][] = 'margin_bottom';
-	$sections['Layout'][] = 'col_gutter';
-	/** @hook pootlepb_row_styles_section_bg_image Add field id in layout section */
-	$sections['Layout'] = apply_filters( 'pootlepb_row_styles_section_layout', $sections['Layout'] );
-
-	$sections['Advanced'][] = 'style';
-	$sections['Advanced'][] = 'class';
-	$sections['Advanced'][] = 'col_class';
-	/** @hook pootlepb_row_styles_section_bg_image Add field id in advanced section */
-	$sections['Advanced'] = apply_filters( 'pootlepb_row_styles_section_advanced', $sections['Advanced'] );
-
-	if ( empty( $fields ) ) {
-		_e( "Your theme doesn't provide any visual style fields. " );
-
-		return;
-	}
-
-	$fields_output = '';
-
-	echo '<ul class="ppb-acp-sidebar">';
-
-	foreach ( $sections as $Sec => $secFields ) {
-
-		$sec = strtolower( $Sec );
-
-		echo '<li><a href="' . esc_attr( "#ppb-style-section-{$sec}" ) . '">' . $Sec . '</a></li>';
-
-		ob_start();
-
-		echo '<div id="' . esc_attr( "ppb-style-section-{$sec}" ) . '" class="ppb-style-section">';
-
-		foreach ( $secFields as $name ) {
-
-			if ( is_array( $name ) ) {
-				echo wp_kses( $name[0], wp_kses_allowed_html( 'post' ) );
-				continue;
-			}
-
-			$attr = $fields[ $name ];
-
-			echo '<div class="field field_' . esc_attr( $name ) . '">';
-
-			echo '<label>' . esc_html( $attr['name'] );
-			echo '</label>';
-			pootlepb_render_single_field( $name, $attr );
-			if ( isset( $attr['help-text'] ) ) {
-				echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $attr['help-text'] ) . '"></span>';
-			}
-			echo '</div>';
-		}
-
-		echo '</div>';
-
-		$fields_output .= ob_get_clean();
-	}
-
-	echo '</ul>';
-	echo $fields_output;
+function pootlepb_row_dialog_fields_output() {
 
 }
 
@@ -281,17 +174,13 @@ function pootlepb_render_single_field( $name, $attr ) {
 	}
 }
 
-function pootlepb_block_styles_dialog_form( $advanced = null ) {
+function pootlepb_block_dialog_fields_output( $tab = null ) {
 	$fields = pootlepb_block_styling_fields();
 
 	foreach ( $fields as $key => $field ) {
 
-		if ( empty( $advanced ) ) {
-			if ( ! empty( $field['advanced'] ) ) {
-				continue;
-			}
-		} else {
-			if ( empty( $field['advanced'] ) ) {
+		if ( ! empty( $tab ) ) {
+			if ( $tab != $field['tab'] ) {
 				continue;
 			}
 		}
@@ -348,7 +237,7 @@ function pootlepb_block_styles_dialog_form( $advanced = null ) {
  * @since 0.1.0
  */
 function pootlepb_style_is_using_color() {
-	$fields = pootlepb_style_get_fields();
+	$fields = pootlepb_row_settings_fields();
 
 	foreach ( $fields as $id => $attr ) {
 		if ( isset( $attr['type'] ) && 'color' == $attr['type'] ) {
@@ -395,7 +284,7 @@ add_filter( 'pootlepb_prebuilt_layout', 'pootlepb_style_update_data' );
  * @since 0.1.0
  */
 function pootlepb_style_sanitize_data( $panels_data ) {
-	$fields = pootlepb_style_get_fields();
+	$fields = pootlepb_row_settings_fields();
 
 	if ( empty( $fields ) ) {
 		return $panels_data;
