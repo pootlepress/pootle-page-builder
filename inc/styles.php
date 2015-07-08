@@ -88,11 +88,36 @@ function pootlepb_hide_elements_dialog_echo( $fields ) {
 	}
 }
 
-function pootlepb_row_dialog_fields_output() {
+function pootlepb_row_dialog_fields_output( $tab = null ) {
 
+	//Row settings panel fields
+	$fields = pootlepb_row_settings_fields();
+
+	foreach ( $fields as $key => $field ) {
+
+		//Skip if current fields doesn't belong to the specified tab
+		if ( ! empty( $tab ) && $tab != $field['tab'] ) { continue; }
+
+		//Output html field
+		if ( 'html' == $field['type'] ) {
+			echo wp_kses( $field['name'], wp_kses_allowed_html( 'post' ) );
+			continue;
+		}
+
+		echo '<div class="field field_' . esc_attr( $key ) . '">';
+
+		echo '<label>' . esc_html( $field['name'] );
+		echo '</label>';
+		pootlepb_render_row_settings_field( $key, $field );
+		if ( isset( $field['help-text'] ) ) {
+			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
+		}
+		echo '</div>';
+
+	}
 }
 
-function pootlepb_render_single_field( $name, $attr ) {
+function pootlepb_render_row_settings_field( $name, $attr ) {
 
 	switch ( $attr['type'] ) {
 		case 'select':
@@ -189,44 +214,53 @@ function pootlepb_block_dialog_fields_output( $tab = null ) {
 		echo '<label>' . esc_html( $field['name'] ) . '</label>';
 		echo '<span>';
 
-		switch ( $field['type'] ) {
-			case 'color' :
-				?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="text"
-				         data-style-field-type="color"/>
-				<?php
-				break;
-			case 'border' :
-				?><input dialog-field="<?php echo esc_attr( $key ) ?>-width" class="widget-<?php echo esc_attr( $key ) ?>-width" type="number"
-				         min="0" max="100" step="1" value="" /> px
-				<input dialog-field="<?php echo esc_attr( $key ) ?>-color" class="widget-<?php echo esc_attr( $key ) ?>-color" type="text"
-				       data-style-field-type="color"/>
-				<?php
-				break;
-			case 'number' :
-				?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="number"
-				         min="<?php esc_attr_e( $field['min'] ) ?>" max="<?php esc_attr_e( $field['max'] ) ?>"
-				         step="<?php esc_attr_e( $field['step'] ) ?>" value="" /> <?php esc_html_e( $field['unit'] ) ?>
-				<?php
-				break;
-			case 'checkbox':
-				?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="checkbox"
-				         value="<?php esc_attr_e( $field['value'] ) ?>" data-style-field-type="checkbox" />
-				<?php
-				break;
-			case 'textarea':
-				?><textarea dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>"
-				            data-style-field-type="text"></textarea>
-				<?php
-				break;
-			default:
-				?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="text"
-				         data-style-field-type="text"/>
-				<?php
-				break;
-		}
+		pootlepb_render_content_field( $key, $field );
 
 		echo '</span>';
 		echo '</div>';
+	}
+}
+
+function pootlepb_render_content_field( $key, $field ) {
+	switch ( $field['type'] ) {
+		case 'color' :
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="text"
+			         data-style-field-type="color"/>
+			<?php
+			break;
+		case 'border' :
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>-width" class="widget-<?php echo esc_attr( $key ) ?>-width" type="number"
+			         min="0" max="100" step="1" value="" /> px
+			<input dialog-field="<?php echo esc_attr( $key ) ?>-color" class="widget-<?php echo esc_attr( $key ) ?>-color" type="text"
+			       data-style-field-type="color"/>
+			<?php
+			break;
+		case 'number' :
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="number"
+			         min="<?php esc_attr_e( $field['min'] ) ?>" max="<?php esc_attr_e( $field['max'] ) ?>"
+			         step="<?php esc_attr_e( $field['step'] ) ?>" value="" /> <?php esc_html_e( $field['unit'] ) ?>
+			<?php
+			break;
+		case 'checkbox':
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="checkbox"
+			         value="<?php esc_attr_e( $field['value'] ) ?>" data-style-field-type="checkbox" />
+			<?php
+			break;
+		case 'textarea':
+			?><textarea dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>"
+			            data-style-field-type="text"></textarea>
+			<?php
+			break;
+		case 'upload':
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="text"
+			         data-style-field-type="upload"/>
+			<button class="button upload-button">Select Image</button><?php
+			break;
+		default:
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="text"
+			         data-style-field-type="text"/>
+			<?php
+			break;
 	}
 }
 

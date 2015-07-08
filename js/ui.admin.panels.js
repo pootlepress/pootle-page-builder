@@ -349,6 +349,8 @@
                         $t.wpColorPicker();
                     });
 
+                window.setRowOptionUploadButton($('.ppb-add-content-panel'));
+
                 var $t = $('.ppb-add-content-panel'),
                     title = $t.find('.ui-tabs-active a').html();
                 $('.ppb-add-content-panel .ui-dialog-titlebar .ui-dialog-title').html(title);
@@ -406,16 +408,16 @@
                                 }
                             });
 
+                        window.setRowOptionUploadButton($('.ppb-add-content-panel'));
+
                         var $t = $('.ppb-add-content-panel'),
                             title = $t.find('.ui-tabs-active a').html();
                         $('.ppb-add-content-panel .ui-dialog-titlebar .ui-dialog-title').html(title);
 
-                        //$('.ppb-cool-panel-wrap [selected]').click();
-
                         $(".ppb-cool-panel-wrap li").removeClass("ui-corner-top").addClass("ui-corner-left");
 
                         //Get style data in fields
-                        panels.pootlePageGetWidgetStyles($('.pootle-style-fields'));
+                        panels.pootlePageGetWidgetStyles($('.pootle-style-fields:not(#pootle-editor-tab)'));
 
                         $(window).resize();
 

@@ -77,31 +77,38 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 			$styleArray = json_decode( $block_info['info']['style'], true );
 		}
 
-		//Classes for this content block
-		$classes = array( 'panel' );
-		if ( ! empty( $styleArray['class'] ) ) { $classes[] = $styleArray['class']; }
 		//Id for this content block
 		$id = 'panel-' . $post_id . '-' . $gi . '-' . $ci . '-' . $pi;
 
-		$inlineStyle       = ''; // Passed with reference
+		$attr = array( 'id' => $id );
+
+		//Classes for this content block
+		$attr['classes'] = array( 'panel' );
+		if ( ! empty( $styleArray['class'] ) ) { $attr['classes'][] = $styleArray['class']; }
+
 		$styleWithSelector = ''; // Passed with reference
+		$this->set_inline_embed_styles( $attr, $styleWithSelector, $styleArray, $id ); // Get Styles
 
-		$this->set_inline_embed_styles( $inlineStyle, $styleWithSelector, $styleArray, $id ); // Get Styles
+		$attr['classes'] = implode( ' ', $attr['classes'] );
 
-		echo '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" id="' . $id . '" style="' . $inlineStyle . '" >';
+		echo '<div';
+		foreach ( $attr as $k => $v ) {
+			echo " $k='$v''";
+		}
+		echo '>';
 	}
 
 	/**
 	 * Sets content block embed and inline css
 	 *
-	 * @param string $inlineStyle
+	 * @param string $attr
 	 * @param array $styleWithSelector
 	 * @param array $styleArray
-	 * @param array $widgetStyleFields
 	 * @param string $id
 	 */
-	private function set_inline_embed_styles( &$inlineStyle, &$styleWithSelector, $styleArray, $id ) {
+	private function set_inline_embed_styles( &$attr, &$styleWithSelector, $styleArray, $id ) {
 
+		$inlineStyle = '';
 		//Inline styles
 		if ( ! empty( $styleArray['inline-css'] ) ) { $inlineStyle .= $styleArray['inline-css']; }
 
@@ -115,6 +122,10 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 				$this->default_block_field( $inlineStyle, $styleWithSelector, $styleArray, $id, $key, $field );
 			}
 		}
+
+		$attr['style'] = $inlineStyle;
+
+		$attr = apply_filters( 'pootlepb_content_block_attributes', $attr, $styleArray, $id );
 	}
 
 	/**

@@ -4,6 +4,8 @@
  * At: 7:59 PM 8/7/15
  */
 
+global $pootlepb_row_settings_tabs;
+
 /**
  * Add your own tabs to Content block editor panel
  *	'tabName' => array(
@@ -11,63 +13,60 @@
  *		'priority' => 10,
  *	),
  */
-$pootlepb_content_block_tabs = apply_filters( 'pootlepb_content_block_tabs', $pootlepb_content_block_tabs );
+$pootlepb_row_settings_tabs = apply_filters( 'pootlepb_row_settings_tabs', $pootlepb_row_settings_tabs );
 
-$fields = pootlepb_row_settings_fields();
+$panel_tabs = array();
 
-$sections = array();
-
-foreach ( $fields as $k => $f ) {
-	$sections[ $f['tab'] ][ $k ] = $f['priority'];
-}
-
-//print_awesome_r( $sections, 'Sections' );
-
-if ( empty( $fields ) ) {
-	_e( "Your theme doesn't provide any visual style fields. " );
-	return;
-}
-
-$fields_output = '';
-
-echo '<ul class="ppb-acp-sidebar">';
-
-foreach ( $sections as $Sec => $secFields ) {
-
-	asort( $secFields );
-
-	$sec = strtolower( $Sec );
-
-	echo '<li><a href="' . esc_attr( "#ppb-style-section-{$sec}" ) . '">' . $Sec . '</a></li>';
-
-	ob_start();
-
-	echo '<div id="' . esc_attr( "ppb-style-section-{$sec}" ) . '" class="ppb-style-section">';
-
-	foreach ( $secFields as $name => $priority ) {
-
-		$attr = $fields[ $name ];
-
-		if ( 'html' == $attr['type'] ) {
-			echo wp_kses( $attr['name'], wp_kses_allowed_html( 'post' ) );
-			continue;
-		}
-
-		echo '<div class="field field_' . esc_attr( $name ) . '">';
-
-		echo '<label>' . esc_html( $attr['name'] );
-		echo '</label>';
-		pootlepb_render_single_field( $name, $attr );
-		if ( isset( $attr['help-text'] ) ) {
-			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $attr['help-text'] ) . '"></span>';
-		}
-		echo '</div>';
+foreach ( $pootlepb_row_settings_tabs as $k => $tab ) {
+	if ( empty( $tab['priority'] ) ) {
+		$tab['priority'] = 10;
 	}
-
-	echo '</div>';
-
-	$fields_output .= ob_get_clean();
+	$panel_tabs[ $tab['priority'] ][ $k ] = $tab;
 }
 
-echo '</ul>';
-echo $fields_output;
+ksort( $panel_tabs );
+?>
+<div class="ppb-cool-panel-wrap">
+	<ul class="ppb-acp-sidebar">
+		<?php
+		//Output the tabs
+		foreach ( $panel_tabs as $tabs ) {
+			foreach ( $tabs as $k => $tab ) {
+				//Separator
+				if ( empty( $tab['label'] ) ) {
+					echo '<li class="ppb-separator"></li>';
+					continue;
+				}
+				?>
+				<li>
+					<a href="#pootle-<?php echo $k; ?>-tab">
+						<?php echo $tab['label']; ?>
+					</a>
+				</li>
+			<?php
+			}
+		}
+		?>
+	</ul>
+
+	<?php
+	//Output the tab panels
+	foreach ( $panel_tabs as $tabs ) {
+		foreach ( $tabs as $k => $tab ) {
+			if ( empty( $tab['label'] ) ) { continue; }
+			if ( empty( $tab['class'] ) ) { $tab['class'] = ''; }
+			?>
+			<div id="pootle-<?php echo $k; ?>-tab" class="ppb-style-section <?php echo $tab['class']; ?>">
+
+				<?php
+				do_action( 'pootlepb_row_settings_' . $k . '_tab' );
+				pootlepb_row_dialog_fields_output( $tab['label'] );
+				?>
+
+			</div>
+		<?php
+		}
+	}
+	?>
+
+</div>

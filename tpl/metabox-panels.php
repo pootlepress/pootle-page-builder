@@ -108,11 +108,7 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 	<?php // The styles dialog ?>
 	<div id="grid-styles-dialog" data-title="<?php esc_attr_e( 'Row Visual Style', 'ppb-panels' ) ?>"
 	     class="panels-admin-dialog">
-		<div class="ppb-cool-panel-wrap">
-
 			<?php require POOTLEPB_DIR . 'tpl/row-settings-panel.php'; ?>
-
-		</div>
 	</div>
 
 	<div id="widget-styles-dialog" data-title="Style Widget" class="panels-admin-dialog">
