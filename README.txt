@@ -29,6 +29,8 @@ We have made sure the plugin:
  * Feels as much like WordPress as possible making it easy to use for site owners.
  * Code is well written & fully optimized for performance.
 
+[vimeo http://vimeo.com/131757773]
+
 == Usage ==
 
 Install and activate the plugin. In your WordPress dashboard simply add a new page to start using page builder.
@@ -77,6 +79,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 = 0.1.1 =
 * 2015-07-08
 * Tweak - add new plugin icon (for WordPress.org)
+* Tweak - optimization of multiple classes and operations for enhanced performance
 * Fix - showing message in edit area before content blocks being displayed
 * Fix - page defaulting back to page builder after being used as a page with default editor
 
