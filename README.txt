@@ -82,6 +82,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Tweak - optimization of multiple classes and operations for enhanced performance
 * Fix - showing message in edit area before content blocks being displayed
 * Fix - page defaulting back to page builder after being used as a page with default editor
+* Fix - issue with color picker not updating in content block style options
 
 = 0.1 =
 * 2015-07-06
