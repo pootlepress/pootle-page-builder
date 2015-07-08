@@ -74,6 +74,12 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Changelog ==
 
+= 0.1.1 =
+* 2015-07-08
+* Tweak - add new plugin icon (for WordPress.org)
+* Fix - showing message in edit area before content blocks being displayed
+* Fix - page defaulting back to page builder after being used as a page with default editor
+
 = 0.1 =
 * 2015-07-06
 * Initial release. It's alive!
