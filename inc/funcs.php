@@ -257,6 +257,11 @@ function pootlepb_get_panels_data_from_post( $form_post = null ) {
 	}
 
 	$panels_data            = array();
+
+	if ( ! empty( $_POST['pootlepb_noPB'] ) ) {
+		return $panels_data;
+	}
+
 	$panels_data['widgets'] = array_values( stripslashes_deep( isset( $form_post['widgets'] ) ? $form_post['widgets'] : array() ) );
 
 	foreach ( $panels_data['widgets'] as $i => $widget ) {

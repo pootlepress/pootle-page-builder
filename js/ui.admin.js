@@ -486,6 +486,11 @@ jQuery(function ($) {
                         $('#wp-content-wrap').addClass('tmce-active');
 
                         $(this).dialog("close");
+
+                        $('#pootlepb-panels').append(
+                            $('<input type="hidden" value="1" name="pootlepb_noPB">').attr( 'id', 'pootlepb_noPB')
+                        );
+
                     }
                 },
                 {
@@ -604,6 +609,8 @@ jQuery(function ($) {
         // Triggers full refresh
         $(window).resize();
         $('#content-resize-handle').hide();
+
+        $('#pootlepb_noPB').remove();
 
         return false;
     }
