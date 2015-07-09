@@ -76,6 +76,11 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Changelog ==
 
+= 0.1.2 =
+* 2015-07-09
+ * Tweak - improved column gutter settings
+ * Fix - WooCommerce Products item in main nav disappearing
+
 = 0.1.1 =
 * 2015-07-08
 * Tweak - add new plugin icon (for WordPress.org)
