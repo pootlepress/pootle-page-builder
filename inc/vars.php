@@ -113,11 +113,18 @@ $pootlepb_row_styling_fields = array(
 		'tab' => 'Layout',
 		'priority' => 4,
 	),
-	'col_gutter'              => array(
-		'name' => 'Column Gutters',
-		'type' => 'px',
+	'col_gutter' => array(
+		'name' => __( 'Column Gutters', 'vantage' ),
 		'tab' => 'Layout',
+		'type' => 'select',
 		'priority' => 5,
+		'options' => array(
+			'0' => 'None',
+			'0.5' => 'Small',
+			'1' => 'Medium',
+			'2' => 'Large',
+		),
+		'default' => '1',
 	),
 
 	//Background

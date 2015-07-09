@@ -243,7 +243,7 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 	public function row_col_gutter( $css, $style, $rowID ) {
 
 		if ( isset( $style['col_gutter'] ) && is_numeric( $style['col_gutter'] ) ) {
-			$css .= $rowID . ' .panel-grid-cell { padding: 0 ' . ( $style['col_gutter'] / 2 ) . 'px 0; }';
+			$css .= $rowID . ' .panel-grid-cell { padding: 0 ' . ( $style['col_gutter'] / 2 ) . '% 0; }';
 		}
 
 		return $css;
