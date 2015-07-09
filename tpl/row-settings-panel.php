@@ -14,7 +14,6 @@ global $pootlepb_row_settings_tabs;
  *	),
  */
 $pootlepb_row_settings_tabs = apply_filters( 'pootlepb_row_settings_tabs', $pootlepb_row_settings_tabs );
-
 $panel_tabs = array();
 
 foreach ( $pootlepb_row_settings_tabs as $k => $tab ) {

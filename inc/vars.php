@@ -14,7 +14,8 @@ global $pootlepb_content_block_styling_fields,
 		$pootlepb_ui_js_deps,
 		$pootlepb_color_i18n,
 		$pootlepb_color_deps,
-		$pootlepb_content_block_tabs;
+		$pootlepb_content_block_tabs,
+		$pootlepb_row_settings_tabs;
 
 /**
  * Content block styling fields
@@ -990,6 +991,21 @@ $pootlepb_content_block_tabs = array(
 	'advanced' => array(
 		'label' => 'Advanced',
 		'class' => 'pootle-style-fields',
-		'priority' => 5,
+		'priority' => 10,
+	),
+);
+
+$pootlepb_row_settings_tabs = array(
+	'background' => array(
+		'label' => 'Background',
+		'priority' => 1,
+	),
+	'layout' => array(
+		'label' => 'Layout',
+		'priority' => 2,
+	),
+	'advanced' => array(
+		'label' => 'Advanced',
+		'priority' => 10,
 	),
 );
