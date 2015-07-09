@@ -79,6 +79,9 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 = 0.1.2 =
 * 2015-07-09
  * Tweak - improved column gutter settings
+ * Tweak - add slider field type to content edit panel
+ * Tweak - tabbing fields now based on index of tab
+ * Tweak - global function pootlepb_stringify_attributes
  * Fix - WooCommerce Products item in main nav disappearing
 
 = 0.1.1 =
