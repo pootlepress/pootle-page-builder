@@ -157,7 +157,7 @@
             .end().find('.title h4').html('Editor');
 
         // Set the title
-        panel.panelsSetPanelTitle(data);
+        $('html').trigger( 'pootlepb_admin_content_block_title', [ panel, data ] );
 
         // Add the action buttons
         panel
@@ -231,8 +231,6 @@
                         //Set the widget styles
                         panels.pootlePageSetWidgetStyles($('.pootle-style-fields'));
 
-                        $currentPanel.panelsSetPanelTitle( $currentPanel.panelsGetPanelData() );
-
                         // Destroy the dialog and remove it
                         $(this).data('overlay').remove();
                         $(this).dialog('destroy').remove();
@@ -255,6 +253,9 @@
 
                                 $currentPanel.find('input[name$="[data]"]').val(JSON.stringify(panelData));
                                 $currentPanel.find('input[name$="[info][raw]"]').val(1);
+
+                                //Smart titles
+                                $('html').trigger( 'pootlepb_admin_content_block_title', [ $currentPanel, $currentPanel.panelsGetPanelData() ] );
 
                                 // Change the title of the panel
                                 activeDialog.dialog('close');
@@ -604,8 +605,7 @@
      * Set the title of the panel
      * @since 0.1.0
      */
-    $.fn.panelsSetPanelTitle = function (data) {
-        var $t = $(this);
+    panelsSetPanelTitle = function (e, $t, data) {
 
         if ( typeof data == 'undefined' || typeof data.text == 'undefined' || data.text == '') {
             $t.find('h4').html('Editor');
@@ -651,6 +651,8 @@
         }
         $t.find('h4').html(title);
     };
+
+    $('html').on('pootlepb_admin_content_block_title', panelsSetPanelTitle);
 
     ppbSmartTitle = {
         detectText : function( text, title ) {

@@ -178,6 +178,7 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 			$this,
 			'pootlepb_options_sanitize_display',
 		) );
+		register_setting( 'pootlepage-display', 'pootlepb-hard-uninstall' );
 
 		add_settings_section( 'display', __( 'Display', 'ppb-panels' ), '__return_false', 'pootlepage-display' );
 
@@ -186,10 +187,16 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 			$this,
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'responsive' ) );
+		//Mobile width
 		add_settings_field( 'mobile-width', __( 'Mobile Width', 'ppb-panels' ), array(
 			$this,
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'mobile-width' ) );
+		// The display fields
+		add_settings_field( 'hard-uninstall', __( 'Uninstall on Delete', 'ppb-panels' ), array(
+			$this,
+			'options_field_generic',
+		), 'pootlepage-display', 'display', array( 'type' => 'hard-uninstall' ) );
 	}
 
 	/**
@@ -231,6 +238,12 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	public function options_field_generic( $args, $groupName = 'siteorigin_panels_display' ) {
 		$settings = pootlepb_settings();
 		switch ( $args['type'] ) {
+			case 'hard-uninstall' :
+				?><label><input type="checkbox"
+				                name="pootlepb-hard-uninstall" <?php checked( get_option( 'pootlepb-hard-uninstall' ) ) ?>
+				                value="1"/> <?php _e( 'Enabled', 'ppb-panels' ) ?></label><?php
+				break;
+				break;
 			case 'responsive' :
 				?><label><input type="checkbox"
 				                name="<?php echo esc_attr( $groupName ) ?>[<?php echo esc_attr( $args['type'] ) ?>]" <?php checked( $settings[ $args['type'] ] ) ?>

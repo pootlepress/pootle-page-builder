@@ -7,7 +7,7 @@
  */
 
 //Don't proceed any further if it ain't called by uninstall
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) || ! get_option( 'pootlepb-hard-uninstall' ) ) {
 	exit;
 }
 

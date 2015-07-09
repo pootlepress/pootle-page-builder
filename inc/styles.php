@@ -243,7 +243,7 @@ function pootlepb_render_content_field( $key, $field ) {
 			break;
 		case 'checkbox':
 			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="checkbox"
-			         value="<?php esc_attr_e( $field['value'] ) ?>" data-style-field-type="checkbox" />
+			         value="1" data-style-field-type="checkbox" />
 			<?php
 			break;
 		case 'textarea':
