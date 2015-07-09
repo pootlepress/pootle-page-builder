@@ -153,7 +153,7 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 		add_menu_page( 'Home', 'Page Builder', 'manage_options', 'page_builder', array(
 			$this,
 			'menu_page',
-		), 'dashicons-screenoptions', 26 );
+		), 'dashicons-screenoptions', '20.275' );
 		add_submenu_page( 'page_builder', 'Add New', 'Add New', 'manage_options', 'page_builder_add', array(
 			$this,
 			'menu_page',
