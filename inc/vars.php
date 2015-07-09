@@ -123,6 +123,7 @@ $pootlepb_row_styling_fields = array(
 			'0.5' => 'Small',
 			'1' => 'Medium',
 			'2' => 'Large',
+			'4' => 'Extra large',
 		),
 		'default' => '1',
 	),
