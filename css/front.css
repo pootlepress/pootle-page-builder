@@ -19,10 +19,10 @@
 }
 
 .panel-grid-cell {
-    -ms-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
+    -ms-box-sizing: initial;
+    -moz-box-sizing: initial;
+    -webkit-box-sizing: initial;
+    box-sizing: initial;
     min-height: 1em;
     font-size: 15px;
 }

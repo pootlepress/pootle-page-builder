@@ -107,7 +107,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 			$this->mobile_styles( $settings, $gi, $post_id, $cell_count );
 		}
 
-		$panel_grid_cell_css = 'box-sizing: border-box !important; display: inline-block !important; vertical-align: top !important;';
+		$panel_grid_cell_css = 'display: inline-block !important; vertical-align: top !important;';
 
 		$this->css( $panel_grid_cell_css, '.panel-grid-cell' );
 
@@ -127,11 +127,17 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 	 * @since 0.1.0
 	 */
 	private function col_widths( &$ci, $gi, $post_id, $cell_count, $panels_data ) {
+
+		$col_gutts = 0;
+		if ( ! empty( $panels_data['grids'][ $gi ]['style']['col_gutter'] ) ) {
+			$col_gutts = $panels_data['grids'][ $gi ]['style']['col_gutter'];
+		}
+
 		for ( $i = 0; $i < $cell_count; $i ++ ) {
 			$cell = $panels_data['grid_cells'][ $ci ];
 
 			if ( $cell_count > 1 ) {
-				$css_new = 'width:' . round( $cell['weight'] * 100, 3 ) . '%';
+				$css_new = 'width:' . round( $cell['weight'] * ( 100 - ( ( $cell_count - 1 ) * $col_gutts ) ), 3 ) . '%';
 				$this->css( $css_new, '#pgc-' . $post_id . '-' . $gi . '-' . $i );
 			}
 
