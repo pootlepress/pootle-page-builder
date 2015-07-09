@@ -81,6 +81,23 @@
             ppbMP4VideoFrame.open();
         });
 
+        $this.find('.ppb-slider').each(function() {
+            var $t = $(this),
+                $f = $t.siblings('input'),
+                $spn = $(this).siblings('.slider-val');
+            $spn.text(($f.val() * 100) + '%');
+            $t.slider({
+                min: 0,
+                max: 1,
+                step: 0.05,
+                value: $f.val(),
+                slide: function (e, ui) {
+                    $f.val(ui.value);
+                    $spn.text(Math.round(ui.value * 100) + '%');
+                }
+            });
+        });
+
     };
 
 })(jQuery);

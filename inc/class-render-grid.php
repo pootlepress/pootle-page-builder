@@ -19,25 +19,6 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 	protected static $instance;
 
 	/**
-	 * Converts attributes array into html attributes string
-	 * @param array $attributes Associative ( multidimensional ) array attributes
-	 * @return string HTML attributes
-	 */
-	public function stringify_attributes( $attributes ) {
-		$attr = '';
-
-		foreach ( $attributes as $name => $value ) {
-			if ( is_array( $value ) ) {
-				$value = implode( " ", array_unique( $value ) );
-			}
-
-			$attr .= esc_attr( $name ) . '="' . esc_attr( $value ) . '" ';
-		}
-
-		return $attr;
-	}
-
-	/**
 	 * Outputs the pootle page builder grids
 	 *
 	 * @param array $grids
@@ -85,7 +66,7 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 			'id'    => $rowID
 		), $panels_data['grids'][ $gi ] );
 
-		return $this->stringify_attributes( $grid_attributes );
+		return pootlepb_stringify_attributes( $grid_attributes );
 	}
 
 	/**
@@ -131,7 +112,7 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 
 		$style_attributes = apply_filters( 'pootlepb_row_style_attributes', $style_attributes, $styleArray, $cells );
 
-		return $this->stringify_attributes( $style_attributes );
+		return pootlepb_stringify_attributes( $style_attributes );
 	}
 
 	/**
@@ -182,7 +163,7 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 		$cell_attributes = array( 'class' => implode( ' ', $cell_classes ), 'id'    => $cellId,	);
 		$cell_attributes = apply_filters( 'pootlepb_row_cell_attributes', $cell_attributes, $ci, $gi, $panels_data );
 
-		return $this->stringify_attributes( $cell_attributes );
+		return pootlepb_stringify_attributes( $cell_attributes );
 	}
 
 	/**

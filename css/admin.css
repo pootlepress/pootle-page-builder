@@ -935,7 +935,7 @@ h4 {}
     width: 70px;
 }
 
-#grid-styles-dialog .field > .slider-val{
+.ppb-slider + .slider-val{
     padding: 1px 5px;
 }
 
@@ -943,9 +943,9 @@ input:disabled{
     background: #f5f5f5;
 }
 
-#grid-styles-dialog .field > .ui-slider{
+.ppb-slider.ui-slider{
     margin: 3px 0 0;
-    width: 200px;
+    width: 200px;   
 }
 
 .dashicons-editor-help.tooltip {
@@ -1266,12 +1266,6 @@ div#pootle-content-module-tabs li.ui-tabs-active a:focus {
     margin-bottom: 15px;
 }
 
-#pootlepb-panels .field > *,
-.pootle-style-fields .field > * {
-    display: inline-block;
-    vertical-align: middle;
-}
-
 #pootlepb-panels .field > label,
 .pootle-style-fields .field > label {
     width: 200px;
@@ -1289,9 +1283,10 @@ div#pootle-content-module-tabs li.ui-tabs-active a:focus {
     margin: 0;
 }
 
-#pootlepb-panels .field > span > input,
-.pootle-style-fields .field > span > input {
+#pootlepb-panels .field > *,
+.pootle-style-fields .field * {
     vertical-align: middle;
+    display: inline-block;
 }
 
 a.wp-switch-editor {

@@ -182,7 +182,7 @@ function pootlepb_render_row_settings_field( $name, $attr ) {
 			?><input type="hidden" name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
 			         data-style-field="<?php echo esc_attr( $name ) ?>"
 			         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" />
-			<div data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>"></div><span class="slider-val"></span>
+			<div class="ppb-slider"></div><span class="slider-val"></span>
 			<?php
 			break;
 
@@ -224,40 +224,46 @@ function pootlepb_block_dialog_fields_output( $tab = null ) {
 function pootlepb_render_content_field( $key, $field ) {
 	switch ( $field['type'] ) {
 		case 'color' :
-			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="text"
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="text"
 			         data-style-field-type="color"/>
 			<?php
 			break;
 		case 'border' :
-			?><input dialog-field="<?php echo esc_attr( $key ) ?>-width" class="widget-<?php echo esc_attr( $key ) ?>-width" type="number"
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>-width" class="content-block-<?php echo esc_attr( $key ) ?>-width" type="number"
 			         min="0" max="100" step="1" value="" /> px
-			<input dialog-field="<?php echo esc_attr( $key ) ?>-color" class="widget-<?php echo esc_attr( $key ) ?>-color" type="text"
+			<input dialog-field="<?php echo esc_attr( $key ) ?>-color" class="content-block-<?php echo esc_attr( $key ) ?>-color" type="text"
 			       data-style-field-type="color"/>
 			<?php
 			break;
 		case 'number' :
-			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="number"
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="number"
 			         min="<?php esc_attr_e( $field['min'] ) ?>" max="<?php esc_attr_e( $field['max'] ) ?>"
 			         step="<?php esc_attr_e( $field['step'] ) ?>" value="" /> <?php esc_html_e( $field['unit'] ) ?>
 			<?php
 			break;
 		case 'checkbox':
-			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="checkbox"
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="checkbox"
 			         value="<?php esc_attr_e( $field['value'] ) ?>" data-style-field-type="checkbox" />
 			<?php
 			break;
 		case 'textarea':
-			?><textarea dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>"
+			?><textarea dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>"
 			            data-style-field-type="text"></textarea>
 			<?php
 			break;
 		case 'upload':
-			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="text"
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="text"
 			         data-style-field-type="upload"/>
 			<button class="button upload-button">Select Image</button><?php
 			break;
+		case 'slider':
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="hidden"
+			         data-style-field-type="slider"/>
+			<div class="ppb-slider"></div><span class="slider-val"></span>
+			<?php
+			break;
 		default:
-			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="widget-<?php echo esc_attr( $key ) ?>" type="text"
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="text"
 			         data-style-field-type="text"/>
 			<?php
 			break;

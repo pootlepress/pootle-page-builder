@@ -135,6 +135,25 @@ function pootlepb_hex2rgb( $hex ) {
 }
 
 /**
+ * Converts attributes array into html attributes string
+ * @param array $attributes Associative ( multidimensional ) array attributes
+ * @return string HTML attributes
+ */
+function pootlepb_stringify_attributes( $attributes ) {
+	$attr = '';
+
+	foreach ( $attributes as $name => $value ) {
+		if ( is_array( $value ) ) {
+			$value = implode( " ", array_unique( $value ) );
+		}
+
+		$attr .= esc_attr( $name ) . '="' . esc_attr( $value ) . '" ';
+	}
+
+	return $attr;
+}
+
+/**
  * Check if we're currently viewing a panel.
  *
  * @param bool $can_edit Also check if the user can edit this page

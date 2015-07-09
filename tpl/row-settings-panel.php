@@ -59,7 +59,7 @@ ksort( $panel_tabs );
 
 				<?php
 				do_action( 'pootlepb_row_settings_' . $k . '_tab' );
-				pootlepb_row_dialog_fields_output( $tab['label'] );
+				pootlepb_row_dialog_fields_output( $k );
 				?>
 
 			</div>

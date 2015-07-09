@@ -26,7 +26,7 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 	protected function __construct() {
 		add_filter( 'pootlepb_content_block', array( $this, 'auto_embed' ), 8 );
 		add_action( 'pootlepb_render_content_block', array( $this, 'open_block' ), 5, 6 );
-		add_action( 'pootlepb_render_content_block', array( $this, 'render_content_block' ) );
+		add_action( 'pootlepb_render_content_block', array( $this, 'render_content_block' ), 50 );
 		add_action( 'pootlepb_render_content_block', array( $this, 'close_block' ), 99 );
 		add_action( 'wp_head', array( $this, 'print_inline_css' ), 12 );
 		add_action( 'wp_footer', array( $this, 'print_inline_css' ) );

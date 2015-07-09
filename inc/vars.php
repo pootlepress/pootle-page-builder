@@ -27,21 +27,21 @@ $pootlepb_content_block_styling_fields = array(
 		'type' => 'color',
 		'priority' => 1,
 		'css'  => 'background-color',
-		'tab' => 'Style',
+		'tab' => 'style',
 	),
 	'text-color'       => array(
 		'name' => 'Text color',
 		'type' => 'color',
 		'priority' => 2,
 		'css'  => 'color',
-		'tab' => 'Style',
+		'tab' => 'style',
 	),
 	'border'           => array(
 		'name' => 'Border',
 		'type' => 'border',
 		'priority' => 3,
 		'css'  => 'border',
-		'tab' => 'Style',
+		'tab' => 'style',
 	),
 	'padding'          => array(
 		'name' => 'Padding',
@@ -52,7 +52,7 @@ $pootlepb_content_block_styling_fields = array(
 		'step' => '1',
 		'unit' => 'px',
 		'css'  => 'padding',
-		'tab' => 'Style',
+		'tab' => 'style',
 	),
 	'rounded-corners'  => array(
 		'name' => 'Rounded corners',
@@ -63,21 +63,21 @@ $pootlepb_content_block_styling_fields = array(
 		'step' => '1',
 		'unit' => 'px',
 		'css'  => 'border-radius',
-		'tab' => 'Style',
+		'tab' => 'style',
 	),
 	'inline-css'       => array(
 		'name'     => 'Inline CSS styles',
 		'type'     => 'textarea',
 		'priority' => 6,
 		'css'      => '',
-		'tab' => 'Advanced',
+		'tab' => 'advanced',
 	),
 	'class'            => array(
 		'name'     => 'CSS Class',
 		'type'     => 'text',
 		'priority' => 7,
 		'css'      => '',
-		'tab' => 'Advanced',
+		'tab' => 'advanced',
 	),
 );
 
@@ -90,13 +90,13 @@ $pootlepb_row_styling_fields = array(
 	'full_width'              => array(
 		'name' => 'Make row go full width',
 		'type' => 'checkbox',
-		'tab' => 'Layout',
+		'tab' => 'layout',
 		'priority' => 1,
 	),
 	'row_height'              => array(
 		'name'      => __( 'Empty Row Height', 'ppb-panels' ),
 		'type'      => 'px',
-		'tab' => 'Layout',
+		'tab' => 'layout',
 		'priority' => 2,
 		'default'   => '',
 		'help-text' => 'Row height can only be set when there is no content in a row.',
@@ -104,18 +104,18 @@ $pootlepb_row_styling_fields = array(
 	'hide_row'                => array(
 		'name' => 'Hide row',
 		'type' => 'checkbox',
-		'tab' => 'Layout',
+		'tab' => 'layout',
 		'priority' => 3,
 	),
 	'margin_bottom'           => array(
 		'name' => 'Row Bottom Margin',
 		'type' => 'px',
-		'tab' => 'Layout',
+		'tab' => 'layout',
 		'priority' => 4,
 	),
 	'col_gutter' => array(
 		'name' => __( 'Column Gutters', 'vantage' ),
-		'tab' => 'Layout',
+		'tab' => 'layout',
 		'type' => 'select',
 		'priority' => 5,
 		'options' => array(
@@ -131,7 +131,7 @@ $pootlepb_row_styling_fields = array(
 	//Background
 	'background_toggle' => array(
 		'name' => __( 'Set Background', 'vantage' ),
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'select',
 		'priority' => 1,
 		'options' => array(
@@ -145,46 +145,46 @@ $pootlepb_row_styling_fields = array(
 
 	'bg_color_wrap' => array(
 		'name' => '<div class="bg_section bg_color">',
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'html',
 		'priority' => 2,
 	),
 
 	'background' => array(
 		'name' => __( 'Background Color', 'vantage' ),
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'color',
 		'priority' => 3,
 	),
 
 	'bg_image_wrap' => array(
 		'name' => '</div><div class="bg_section bg_image">',
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'html',
 		'priority' => 4,
 	),
 
 	'background_image' => array(
 		'name' => __( 'Background Image', 'vantage' ),
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'upload',
 		'priority' => 5,
 	),
 	'background_image_repeat' => array(
 		'name' => __( 'Repeat Background Image', 'vantage' ),
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'checkbox',
 		'priority' => 6,
 	),
 	'background_parallax' => array(
 		'name' => __( 'Parallax Background Image', 'vantage' ),
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'checkbox',
 		'priority' => 7,
 	),
 	'background_image_size' => array(
 		'name' => __( 'Background Image Size', 'vantage' ),
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'select',
 		'priority' => 8,
 		'options' => array(
@@ -196,33 +196,33 @@ $pootlepb_row_styling_fields = array(
 	),
 	'bg_overlay_color' => array(
 		'name' => 'Overlay color on image',
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'color',
 		'priority' => 9,
 	),
 	'bg_overlay_opacity' => array(
 		'name' => 'Overlay color opacity',
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'slider',
 		'priority' => 10,
 	),
 
 	'bg_video_wrap' => array(
 		'name' => '</div><div class="bg_section bg_video">',
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'html',
 		'priority' => 11,
 	),
 
 	'bg_video' => array(
 		'name' => __( 'Background Video', 'vantage' ),
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'uploadVid',
 		'priority' => 12,
 	),
 	'bg_mobile_image' => array(
 		'name' => __( 'Responsive Image', 'vantage' ),
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'upload',
 		'priority' => 13,
 		'help-text' => "If you add an image here it will replace the video on mobile site. <br> If you don't it won't!",
@@ -230,26 +230,26 @@ $pootlepb_row_styling_fields = array(
 
 	'bg_wrap_close' => array(
 		'name' => '</div>',
-		'tab' => 'Background',
+		'tab' => 'background',
 		'type' => 'html',
 		'priority' => 14,
 	),
 
 	'style' => array(
 		'name' => __( 'Inline CSS Styles', 'ppb-panels' ),
-		'tab' => 'Advanced',
+		'tab' => 'advanced',
 		'type' => 'textarea',
 		'priority' => 1,
 	),
 	'class' => array(
 		'name' => __( 'Row CSS Class', 'ppb-panels' ),
-		'tab' => 'Advanced',
+		'tab' => 'advanced',
 		'type' => 'text',
 		'priority' => 2,
 	),
 	'col_class' => array(
 		'name'    => __( 'Column CSS Class', 'ppb-panels' ),
-		'tab' => 'Advanced',
+		'tab' => 'advanced',
 		'type'    => 'text',
 		'priority' => 3,
 	),
