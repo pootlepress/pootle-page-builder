@@ -93,7 +93,7 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 
 		echo '<div';
 		foreach ( $attr as $k => $v ) {
-			echo " $k='$v''";
+			echo " $k='$v'";
 		}
 		echo '>';
 	}
