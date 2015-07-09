@@ -3,7 +3,7 @@
 Contributors: pootlepress, nickburne
 Plugin Name: pootle page builder
 Plugin URI: http://www.pootlepress.com/page-builder
-Tags: page builder, pagebuilder, pootlepress, pootle page builder, pootlepagebuilder, pootle pagebuilder
+Tags: page builder, pagebuilder, pootlepress, pootle page builder, pootlepagebuilder, pootle pagebuilder, layout, layouts, layout builder, layout customizer, content builder, landing pages, landing page builder
 Author URI: http://www.pootlepress.com
 Author: PootlePress
 Donate link:
@@ -79,6 +79,9 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 = 0.1.2 =
 * 2015-07-09
  * Tweak - improved column gutter settings
+ * Tweak - add slider field type to content edit panel
+ * Tweak - tabbing fields now based on index of tab
+ * Tweak - global function pootlepb_stringify_attributes
  * Fix - WooCommerce Products item in main nav disappearing
 
 = 0.1.1 =
