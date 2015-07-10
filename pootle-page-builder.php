@@ -141,17 +141,28 @@ final class Pootle_Page_Builder extends Pootle_Page_Builder_Abstract {
 
 		foreach ( $query->posts as $post ) {
 
-			$panel_content = Pootle_Page_Builder_Render_Layout::instance()->panels_render( $post->ID );
-
-			global $pootlepb_inline_css;
-			$panel_style = '<style>' . $pootlepb_inline_css . '</style>';
-
-			$updated_post = array(
-				'ID'           => $post->ID,
-				'post_content' => $panel_style . $panel_content,
-			);
-			wp_update_post( $updated_post );
+			//Put pb content in post
+			$this->pb_post_content( $post );
 		}
+	}
+
+	/**
+	 * Puts pb content in post content
+	 * @param WP_Post $post
+	 * @since 0.1.0
+	 */
+	protected function pb_post_content( $post ) {
+
+		$panel_content = Pootle_Page_Builder_Render_Layout::instance()->panels_render( $post->ID );
+
+		global $pootlepb_inline_css;
+		$panel_style = '<style>' . $pootlepb_inline_css . '</style>';
+
+		$updated_post = array(
+			'ID'           => $post->ID,
+			'post_content' => $panel_style . $panel_content,
+		);
+		wp_update_post( $updated_post );
 	}
 
 	/**

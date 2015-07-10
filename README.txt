@@ -80,8 +80,18 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * 2015-07-09
  * Tweak - improved column gutter settings
  * Tweak - add slider field type to content edit panel
- * Tweak - tabbing fields now based on index of tab
  * Tweak - global function pootlepb_stringify_attributes
+ * Tweak - hard uninstall ( deleting pb data ) now a choice not compulsion
+ * Tweak - content edit panel and row settings panel tabbing fields now based on index of tab
+ * Tweak - content edit panel and row settings panel allow tabbing with priority settings
+ * Tweak - content block attributes now filtered by pootlepb_content_block_attributes
+ * Tweak - smart titles can now be changed by pootlepb_admin_content_block_title event on html
+ * Tweak - content edit panel tabs now filtered by pootlepb_content_block_tabs
+ * Tweak - content edit panel fields filtered by pootlepb_content_block_fields support new 'tab' key
+ * Tweak - dynamic action hooks for content edit panel tabs pootlepb_content_block_{$tab}_tab
+ * Tweak - row settings panel tabs now filtered by pootlepb_row_settings_tabs
+ * Tweak - row settings panel fields filtered by pootlepb_row_settings_fields support new 'tab' key
+ * Tweak - dynamic action hooks for row settings panel tabs pootlepb_row_settings_{$tab}_tab
  * Fix - WooCommerce Products item in main nav disappearing
 
 = 0.1.1 =
