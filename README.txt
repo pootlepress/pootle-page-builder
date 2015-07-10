@@ -98,8 +98,8 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Changelog ==
 
-= 0.1.2 =
-* 2015-07-09
+= 0.2.0 =
+* 2015-07-10
  * Tweak - improved column gutter settings
  * Tweak - add slider field type to content edit panel
  * Tweak - global function pootlepb_stringify_attributes
