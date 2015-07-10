@@ -15,7 +15,16 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
-pootle page builder helps you build compelling WordPress pages easily. No more boring, linear, article pages that are as limited as your posts. With pootle page builder you can:
+>Please note: pootle page builder is still in beta & therefore we do not recommend using it for production (live sites). 
+>Please read [this post](http://www.pootlepress.com/2015/07/try-out-the-all-new-pootle-page-builder-in-beta/) on how to report bugs.
+
+= What is pootle page builder? =
+
+pootle page builder helps you build compelling WordPress pages easily. No more boring, linear, article pages that are as limited as your posts. 
+
+= What can I do with pootle page builder? =
+
+With pootle page builder you can:
 
  * Add rows and columns to create the page you want
  * Customize the styles of cells (blocks)
@@ -24,11 +33,24 @@ pootle page builder helps you build compelling WordPress pages easily. No more b
  * Add autoplay background videos to rows
  * Do CSS customizations per cell/block, column or row (for advanced users)
 
-We have made sure the plugin:
+= Is there anything else you can tell me about pootle page builder? =
+
+We have made sure pootle page builder:
 
  * Feels as much like WordPress as possible making it easy to use for site owners.
  * Code is well written & fully optimized for performance.
+ 
+The core version of pootle page builder has amazing features such as parallax and video backgrounds for row, but we will also be releasing some add-ons soon such as:
 
+ * Portfolios - create amazing portfolio pages with stunning hover animations
+ * WooCommerce - integrates page builder deeply into WooCommerce product pages, WooCommerce tab manager and more.
+ * Photography - will give you power to add stunning fitlers and effects to your images.
+
+We would love to hear any more add-ons you think would be useful.
+
+= Can I see pootle page builder in action? =
+ 
+ Yes! Watch this video.
 [vimeo http://vimeo.com/131757773]
 
 == Usage ==
