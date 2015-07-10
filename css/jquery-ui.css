@@ -1,6 +1,6 @@
-#panels .ui-button,
-#add-to-panels .ui-button,
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close {
+.ui-button,
+.ui-button,
+.ui-dialog .ui-dialog-titlebar-close {
     position: relative;
     height: auto;
 
@@ -29,66 +29,66 @@
     zoom: 1;
 }
 
-#panels .ui-button.ui-button-icon-only .ui-button-text,
-#add-to-panels .ui-button.ui-button-icon-only .ui-button-text,
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close.ui-button-icon-only .ui-button-text {
+.ui-button.ui-button-icon-only .ui-button-text,
+.ui-button.ui-button-icon-only .ui-button-text,
+.ui-dialog .ui-dialog-titlebar-close.ui-button-icon-only .ui-button-text {
     display: none;
 }
 
-#panels .ui-button .ui-icon,
-#add-to-panels .ui-button .ui-icon,
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close .ui-icon {
+.ui-button .ui-icon,
+.ui-button .ui-icon,
+.ui-dialog .ui-dialog-titlebar-close .ui-icon {
     width: 8px;
     height: 8px;
 
     display: block;
 }
 
-#panels .ui-button .ui-icon.ui-icon-add,
-#add-to-panels .ui-button .ui-icon.ui-icon-add,
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-add {
+.ui-button .ui-icon.ui-icon-add,
+.ui-button .ui-icon.ui-icon-add,
+.ui-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-add {
     background: url(images/icons/add.png);
 }
 
-#panels .ui-button .ui-icon.ui-icon-prebuilt,
-#add-to-panels .ui-button .ui-icon.ui-icon-prebuilt,
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-prebuilt {
+.ui-button .ui-icon.ui-icon-prebuilt,
+.ui-button .ui-icon.ui-icon-prebuilt,
+.ui-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-prebuilt {
     background: url(images/icons/brush.png);
 }
 
-#panels .ui-button .ui-icon.ui-icon-columns,
-#add-to-panels .ui-button .ui-icon.ui-icon-columns,
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-columns {
+.ui-button .ui-icon.ui-icon-columns,
+.ui-button .ui-icon.ui-icon-columns,
+.ui-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-columns {
     background: url(images/icons/columns.png);
 }
 
-#panels .ui-button .ui-icon.ui-icon-settings,
-#add-to-panels .ui-button .ui-icon.ui-icon-settings,
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-settings {
+.ui-button .ui-icon.ui-icon-settings,
+.ui-button .ui-icon.ui-icon-settings,
+.ui-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-settings {
     background: url(images/icons/settings.png);
 }
 
-#panels .ui-button .ui-icon.ui-icon-move,
-#add-to-panels .ui-button .ui-icon.ui-icon-move,
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-move {
+.ui-button .ui-icon.ui-icon-move,
+.ui-button .ui-icon.ui-icon-move,
+.ui-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-move {
     background: url(images/icons/move.png);
 }
 
-#panels .ui-button .ui-icon.ui-icon-remove,
-#add-to-panels .ui-button .ui-icon.ui-icon-remove,
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-remove {
+.ui-button .ui-icon.ui-icon-remove,
+.ui-button .ui-icon.ui-icon-remove,
+.ui-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-remove {
     background: url(images/icons/remove.png);
 }
 
-#panels .ui-button .ui-icon.ui-icon-gear,
-#add-to-panels .ui-button .ui-icon.ui-icon-gear,
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-gear {
+.ui-button .ui-icon.ui-icon-gear,
+.ui-button .ui-icon.ui-icon-gear,
+.ui-dialog .ui-dialog-titlebar-close .ui-icon.ui-icon-gear {
     background: url(images/icons/gear.png);
 }
 
-#panels .ui-button:hover,
-#add-to-panels .ui-button:hover,
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close:hover {
+.ui-button:hover,
+.ui-button:hover,
+.ui-dialog .ui-dialog-titlebar-close:hover {
     background: #f0f0f0;
     background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #f0f0f0), color-stop(1, #ffffff));
     background: -ms-linear-gradient(bottom, #f0f0f0, #ffffff);
@@ -97,9 +97,9 @@
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f0f0f0', GradientType=0);
 }
 
-#panels .ui-button:active,
-#add-to-panels .ui-button:active,
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close:active {
+.ui-button:active,
+.ui-button:active,
+.ui-dialog .ui-dialog-titlebar-close:active {
     background: #ffffff;
     background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ffffff), color-stop(1, #ffffff));
     background: -ms-linear-gradient(bottom, #ffffff, #ffffff);
@@ -110,7 +110,7 @@
 
 /* jQuery UI Dialog */
 
-.ui-dialog.panels-admin-dialog {
+.ui-dialog {
     background: white;
     border: 1px solid #D0D0D0;
     -webkit-border-radius: 3px;
@@ -123,13 +123,13 @@
     z-index: 80002 !important;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-buttonpane {
+.ui-dialog .ui-dialog-buttonpane {
     background: #f1f1f1;
     border: none;
     border-top: 1px solid #dddddd;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar {
+.ui-dialog .ui-dialog-titlebar {
     position: relative;
 
     background: #e0e0e0;
@@ -165,7 +165,7 @@
     -moz-border-radius-topleft: 3px;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close {
+.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close {
     position: absolute;
     top: 50%;
     right: 8px;
@@ -174,11 +174,11 @@
     margin-top: -10px;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:before {
+.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close:before {
     display: none;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close .ui-icon {
+.ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-close .ui-icon {
     width: 8px;
     height: 8px;
 
@@ -186,31 +186,31 @@
     display: block;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-content {
+.ui-dialog .ui-dialog-content {
     background: #ffffff no-repeat center center;
     max-height: 600px;
     overflow: auto;
     padding: 12px;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-content *:first-child {
+.ui-dialog .ui-dialog-content *:first-child {
     margin-top: 0;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-content *:last-child {
+.ui-dialog .ui-dialog-content *:last-child {
     margin-bottom: 0;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-content label {
+.ui-dialog .ui-dialog-content label {
     color: #333;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-content p:hover label {
+.ui-dialog .ui-dialog-content p:hover label {
     color: #1c1c1c;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-content textarea,
-.ui-dialog.panels-admin-dialog .ui-dialog-content input.widefat {
+.ui-dialog .ui-dialog-content textarea,
+.ui-dialog .ui-dialog-content input.widefat {
     -ms-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -218,23 +218,23 @@
     margin-top: 6px;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-content p {
+.ui-dialog .ui-dialog-content p {
     margin: 15px 0 5px 0;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-content p.description {
+.ui-dialog .ui-dialog-content p.description {
     margin-top: 5px;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-content.ui-dialog-content-loading {
+.ui-dialog .ui-dialog-content.ui-dialog-content-loading {
     background-image: url('./images/ajax-loader-small.gif');
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-buttonpane {
+.ui-dialog .ui-dialog-buttonpane {
     padding: 5px;
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-buttonpane .ui-button {
+.ui-dialog .ui-dialog-buttonpane .ui-button {
     background: #21759b;
     background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #21759b), color-stop(1, #2e9fd2));
     background: -ms-linear-gradient(bottom, #21759b, #2e9fd2);
@@ -255,7 +255,7 @@
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 }
 
-.ui-dialog.panels-admin-dialog.panels-ajax-loading .ui-dialog-buttonpane {
+.ui-dialog.panels-ajax-loading .ui-dialog-buttonpane {
     background: #f1f1f1 url(./images/ajax-loader-small-grey.gif) no-repeat 15px 22px;
 }
 

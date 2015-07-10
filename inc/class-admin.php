@@ -193,7 +193,7 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'mobile-width' ) );
 		// The display fields
-		add_settings_field( 'hard-uninstall', __( 'Uninstall on Delete', 'ppb-panels' ), array(
+		add_settings_field( 'hard-uninstall', __( 'Delete ALL data on uninstall', 'ppb-panels' ), array(
 			$this,
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'hard-uninstall' ) );
@@ -239,10 +239,10 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 		$settings = pootlepb_settings();
 		switch ( $args['type'] ) {
 			case 'hard-uninstall' :
-				?><label><input type="checkbox"
-				                name="pootlepb-hard-uninstall" <?php checked( get_option( 'pootlepb-hard-uninstall' ) ) ?>
-				                value="1"/> <?php _e( 'Enabled', 'ppb-panels' ) ?></label><?php
-				break;
+				?><label><input type="checkbox" name="pootlepb-hard-uninstall" id="pootlepb-hard-uninstall"
+				                <?php checked( get_option( 'pootlepb-hard-uninstall' ) ) ?>
+				                value="1"/> <?php _e( 'Enabled', 'ppb-panels' ) ?></label>
+				<?php
 				break;
 			case 'responsive' :
 				?><label><input type="checkbox"

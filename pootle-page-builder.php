@@ -186,7 +186,8 @@ final class Pootle_Page_Builder extends Pootle_Page_Builder_Abstract {
 		wp_enqueue_style( 'pootlepage-main-admin', plugin_dir_url( __FILE__ ) . 'css/main-admin.css', array(), POOTLEPB_VERSION );
 
 		if ( $pagenow == 'admin.php' && false !== strpos( filter_input( INPUT_GET, 'page' ), 'page_builder' ) ) {
-			wp_enqueue_script( 'ppb-settings-script', plugin_dir_url( __FILE__ ) . 'js/settings.js', array() );
+			wp_enqueue_script( 'jquery-ui-dialog' );
+			wp_enqueue_script( 'ppb-settings-script', plugin_dir_url( __FILE__ ) . 'js/settings.js', array( 'jquery-ui-dialog' ) );
 			wp_enqueue_style( 'ppb-settings-styles', plugin_dir_url( __FILE__ ) . 'css/settings.css', array() );
 			wp_enqueue_style( 'ppb-option-admin', plugin_dir_url( __FILE__ ) . 'css/option-admin.css', array(), POOTLEPB_VERSION );
 			wp_enqueue_script( 'ppb-option-admin', plugin_dir_url( __FILE__ ) . 'js/option-admin.js', array( 'jquery' ), POOTLEPB_VERSION );
