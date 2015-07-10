@@ -13,7 +13,7 @@
                 autoOpen: false,
                 modal: false,
                 title: "Are you sure",
-                //width: 800,
+                width: 500,
                 buttons: [
                     {
                         text: 'Cancel',
