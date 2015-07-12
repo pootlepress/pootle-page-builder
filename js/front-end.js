@@ -50,7 +50,13 @@ jQuery(function ($) {
 
     $(document).imagesLoaded(function () {
 
-        ppbSkrollr = skrollr.init({smoothScrolling: false});
+        ppbSkrollr = skrollr.init({
+            smoothScrolling: false,
+            mobileCheck: function() {
+                //hack - forces mobile version to be off
+                return false;
+            }
+        });
 
         /**
          * Adds parallax functionality
