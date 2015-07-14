@@ -169,7 +169,7 @@ ul.wooTabs {
     margin-bottom: 0 !important;
 }
 
-video.ppb-bg-video {
+.panel-row-style.video-bg video.ppb-bg-video {
     position: absolute;
     top: -999px;
     bottom: -999px;

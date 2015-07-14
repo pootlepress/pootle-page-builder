@@ -50,13 +50,11 @@ jQuery(function ($) {
 
     $(document).imagesLoaded(function () {
 
-        ppbSkrollr = skrollr.init({
-            smoothScrolling: false,
-            mobileCheck: function() {
-                //hack - forces mobile version to be off
-                return false;
-            }
-        });
+        if ( ! /Android|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent||navigator.vendor||a.opera) ) {
+            ppbSkrollr = skrollr.init({
+                smoothScrolling: false
+            });
+        }
 
         /**
          * Adds parallax functionality
@@ -101,14 +99,16 @@ jQuery(function ($) {
                             image.dataWidth = $t.outerWidth();
 
                         }
+                        if ( ! /Android|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent||navigator.vendor||a.opera) ) {
 
-                        leftOffset$t = $t.offset().left - ( image.dataWidth - $t.outerWidth() ) / 2;
-                        topOffset$t = $t.offset().top - $(window).height();
+                            leftOffset$t = $t.offset().left - ( image.dataWidth - $t.outerWidth() ) / 2;
+                            topOffset$t = $t.offset().top - $(window).height();
 
-                        $t.attr( 'data-bottom-top', 'background-position: ' + leftOffset$t + 'px ' + $(window).height() + 'px;' );
-                        $t.attr( 'data-top-bottom', 'background-position: ' + leftOffset$t + 'px -' + ($t.height() + 500) + 'px;' );
+                            $t.attr('data-bottom-top', 'background-position: ' + leftOffset$t + 'px ' + $(window).height() + 'px;');
+                            $t.attr('data-top-bottom', 'background-position: ' + leftOffset$t + 'px -' + ($t.height() + 500) + 'px;');
 
-                        ppbSkrollr.refresh();
+                            ppbSkrollr.refresh();
+                        }
                     });
 
                     image.src = image_url;
