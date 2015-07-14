@@ -112,7 +112,10 @@ final class Pootle_Page_Builder_Front_Css_Js {
 		$this->css( $panel_grid_cell_css, '.panel-grid-cell' );
 
 		$this->css( 'font-size: 0;', '.panel-grid-cell-container' );
-
+		$this->css( 'font-size: initial;', '.panel-grid-cell-container > *' );
+		$this->css( 'position: relative;', '.panel-row-style, .panel-grid-cell-container' );
+		$this->css( 'z-index: 1;', '.panel-grid-cell-container' );
+		$this->css( 'position: absolute;width: 100%;height: 100%;content: "";top: 0;left: 0;z-index: 0;', '.panel-row-style:before' );
 	}
 
 	/**
