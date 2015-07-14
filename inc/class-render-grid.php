@@ -10,7 +10,7 @@
  * Renders all the rows on the page
  * Class Pootle_Page_Builder_Render_Grid
  */
-class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
+class Pootle_Page_Builder_Render_Grid {
 	/**
 	 * @var Pootle_Page_Builder_Render_Grid Instance
 	 * @access protected
@@ -255,4 +255,4 @@ class Pootle_Page_Builder_Render_Grid extends Pootle_Page_Builder_Abstract {
 }
 
 //Instantiating Pootle_Page_Builder_Render_Grid class
-Pootle_Page_Builder_Render_Grid::instance();
+$GLOBALS['Pootle_Page_Builder_Render_Grid'] = new Pootle_Page_Builder_Render_Grid();

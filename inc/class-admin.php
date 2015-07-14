@@ -7,7 +7,7 @@
  * Time: 6:39 PM
  * @since 0.1.0
  */
-final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
+final class Pootle_Page_Builder_Admin {
 	/**
 	 * @var Pootle_Page_Builder_Admin
 	 * @since 0.1.0
@@ -18,7 +18,7 @@ final class Pootle_Page_Builder_Admin extends Pootle_Page_Builder_Abstract {
 	 * Magic __construct
 	 * @since 0.1.0
 	 */
-	protected function __construct() {
+	public function __construct() {
 		$this->includes();
 		$this->actions();
 	}

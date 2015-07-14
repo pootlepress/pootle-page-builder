@@ -7,7 +7,7 @@
  * Time: 4:01 PM
  * @since 0.1.0
  */
-final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
+final class Pootle_Page_Builder_Admin_UI {
 	/**
 	 * @var Pootle_Page_Builder_Admin_UI
 	 * @access protected
@@ -20,7 +20,7 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 	 * Adds the actions and filter hooks for plugin functioning
 	 * @since 0.1.0
 	 */
-	protected function __construct() {
+	public function __construct() {
 
 		add_action( 'add_meta_boxes', array( $this, 'metabox' ) );
 		add_action( 'admin_print_styles-post-new.php', array( $this, 'enqueue_styles' ) );
@@ -291,4 +291,4 @@ final class Pootle_Page_Builder_Admin_UI extends Pootle_Page_Builder_Abstract {
 }
 
 //Instantiating Pootle_Page_Builder_Content_Block class
-Pootle_Page_Builder_Admin_UI::instance();
+$GLOBALS['Pootle_Page_Builder_Admin_UI'] = new Pootle_Page_Builder_Admin_UI();

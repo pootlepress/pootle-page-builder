@@ -11,7 +11,7 @@
  * Class Pootle_Page_Builder_Content_Block
  * @since 0.1.0
  */
-final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstract {
+final class Pootle_Page_Builder_Content_Block {
 	/**
 	 * @var Pootle_Page_Builder_Content_Block
 	 * @since 0.1.0
@@ -23,7 +23,7 @@ final class Pootle_Page_Builder_Content_Block extends Pootle_Page_Builder_Abstra
 	 * $since 1.0.0
 	 * @since 0.1.0
 	 */
-	protected function __construct() {
+	public function __construct() {
 		add_filter( 'pootlepb_content_block', array( $this, 'auto_embed' ), 8 );
 		add_action( 'pootlepb_render_content_block', array( $this, 'open_block' ), 5, 6 );
 		add_action( 'pootlepb_render_content_block', array( $this, 'render_content_block' ), 50 );
@@ -307,4 +307,4 @@ public function wc_tab() {
 }
 
 //Instantiating Pootle_Page_Builder_Content_Block class
-Pootle_Page_Builder_Content_Block::instance();
+$GLOBALS['Pootle_Page_Builder_Content_Block'] = new Pootle_Page_Builder_Content_Block();

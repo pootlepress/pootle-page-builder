@@ -18,7 +18,7 @@ require_once 'inc/class-abstract.php';
  * Use Pootle_Page_Builder::instance() to get an instance
  * @since 0.1.0
  */
-final class Pootle_Page_Builder extends Pootle_Page_Builder_Abstract {
+final class Pootle_Page_Builder {
 
 	/**
 	 * @var Pootle_Page_Builder instance of Pootle_Page_Builder
@@ -45,7 +45,7 @@ final class Pootle_Page_Builder extends Pootle_Page_Builder_Abstract {
 	 * Magic __construct
 	 * @since 0.1.0
 	 */
-	protected function __construct() {
+	public function __construct() {
 		$this->constants();
 		$this->includes();
 		$this->hooks();
@@ -58,7 +58,7 @@ final class Pootle_Page_Builder extends Pootle_Page_Builder_Abstract {
 	private function constants() {
 		define( 'POOTLEPB_VERSION', '0.2.0' );
 		define( 'POOTLEPB_BASE_FILE', __FILE__ );
-		define( 'POOTLEPB_DIR', __DIR__ . '/' );
+		define( 'POOTLEPB_DIR', plugin_dir_path( __FILE__ ) );
 		define( 'POOTLEPB_URL', plugin_dir_url( __FILE__ ) );
 		// Tracking presence of version older than 3.0.0
 		if ( - 1 == version_compare( get_option( 'pootlepb_initial_version' ), '2.5' ) ) {
@@ -81,11 +81,11 @@ final class Pootle_Page_Builder extends Pootle_Page_Builder_Abstract {
 		/** PPB Admin Class */
 		require_once POOTLEPB_DIR . 'inc/class-admin.php';
 		/** Instantiating PPB Admin Class */
-		$this->admin = Pootle_Page_Builder_Admin::instance();
+		$this->admin = $GLOBALS['Pootle_Page_Builder_Admin'] = new Pootle_Page_Builder_Admin();
 		/** PPB Public Class */
 		require_once POOTLEPB_DIR . 'inc/class-public.php';
 		/** Instantiating PPB Public Class */
-		$this->public = Pootle_Page_Builder_Public::instance();
+		$this->public = $GLOBALS['Pootle_Page_Builder_Public'] = new Pootle_Page_Builder_Public();
 	}
 
 	/**
@@ -231,4 +231,4 @@ final class Pootle_Page_Builder extends Pootle_Page_Builder_Abstract {
 } //class Pootle_Page_Builder
 
 //Instantiating Pootle_Page_Builder
-Pootle_Page_Builder::instance();
+new Pootle_Page_Builder();

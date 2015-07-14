@@ -7,7 +7,7 @@
  * Time: 11:32 PM
  * @since 0.1.0
  */
-final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstract {
+final class Pootle_Page_Builder_Front_Css_Js {
 	/**
 	 * @var Pootle_Page_Builder_Front_Css_Js
 	 * @access protected
@@ -22,7 +22,7 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 	 * Magic __construct
 	 * @since 0.1.0
 	 */
-	protected function __construct() {
+	public function __construct() {
 		$this->hooks();
 	}
 
@@ -275,4 +275,4 @@ final class Pootle_Page_Builder_Front_Css_Js extends Pootle_Page_Builder_Abstrac
 }
 
 //Instantiating Pootle_Page_Builder_Front_Css_Js class
-Pootle_Page_Builder_Front_Css_Js::instance();
+$GLOBALS['Pootle_Page_Builder_Front_Css_Js'] = new Pootle_Page_Builder_Front_Css_Js();

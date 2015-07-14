@@ -10,7 +10,7 @@
  * Class Pootle_Page_Builder_Custom_Styles
  * @since 0.1.0
  */
-final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstract {
+final class Pootle_Page_Builder_Custom_Styles {
 	/**
 	 * @var Pootle_Page_Builder_Custom_Styles
 	 * @since 0.1.0
@@ -25,7 +25,7 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 	 * $since 1.0.0
 	 * @since 0.1.0
 	 */
-	protected function __construct() {
+	public function __construct() {
 
 		/* Add style attributes */
 		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_style_vars' ), 5, 2 );
@@ -303,4 +303,4 @@ final class Pootle_Page_Builder_Custom_Styles extends Pootle_Page_Builder_Abstra
 }
 
 //Instantiating Pootle_Page_Builder_Custom_Styles class
-Pootle_Page_Builder_Custom_Styles::instance();
+$GLOBALS['Pootle_Page_Builder_Custom_Styles'] = new Pootle_Page_Builder_Custom_Styles();

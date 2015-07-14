@@ -29,7 +29,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 	 * Magic __construct
 	 * @since 0.1.0
 	 */
-	protected function __construct() {
+	public function __construct() {
 		/* Main content filter */
 		add_filter( 'the_content', array( $this, 'content_filter' ) );
 
@@ -195,4 +195,4 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 }
 
 //Instantiating Pootle_Page_Builder_Render_Layout class
-Pootle_Page_Builder_Render_Layout::instance();
+$GLOBALS['Pootle_Page_Builder_Render_Layout'] = new Pootle_Page_Builder_Render_Layout();

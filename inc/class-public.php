@@ -13,7 +13,7 @@
  * Use Pootle_Page_Builder_Public::instance() to get an instance
  * @since 0.1.0
  */
-final class Pootle_Page_Builder_Public extends Pootle_Page_Builder_Abstract {
+final class Pootle_Page_Builder_Public {
 	/**
 	 * @var Pootle_Page_Builder_Public
 	 * @since 0.1.0
@@ -25,7 +25,7 @@ final class Pootle_Page_Builder_Public extends Pootle_Page_Builder_Abstract {
 	 * $since 1.0.0
 	 * @since 0.1.0
 	 */
-	protected function __construct() {
+	public function __construct() {
 		$this->includes();
 		$this->actions();
 	}

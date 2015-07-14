@@ -16,13 +16,11 @@ abstract class Pootle_Page_Builder_Abstract {
 	 */
 	public static function instance() {
 
-		$class = get_called_class();
-
-		if ( empty( $class::$instance ) ) {
-			static::$instance = new $class();
+		if ( empty( Self::$instance ) ) {
+			Self::$instance = new $class();
 		}
 
-		return static::$instance;
+		return Self::$instance;
 	}
 
 	/**
@@ -30,7 +28,7 @@ abstract class Pootle_Page_Builder_Abstract {
 	 * @access private
 	 * @since 0.1.0
 	 */
-	protected function __construct() {
+	public function __construct() {
 	}
 
 }
