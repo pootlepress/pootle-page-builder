@@ -98,6 +98,13 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Changelog ==
 
+= 0.2.1 =
+* 2015-07-14
+ * Tweak - improve content display when plugin de-activated
+ * Tweak - more PHP 5.2.4 support
+ * Fix - disable parallax for mobile devices to fix freezing pages on iOS
+ * Fix - errors caused by servers running PHP 5.2.4
+
 = 0.2.0 =
 * 2015-07-10
  * Tweak - improved column gutter settings
