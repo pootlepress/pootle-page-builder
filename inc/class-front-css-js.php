@@ -274,5 +274,5 @@ final class Pootle_Page_Builder_Front_Css_Js {
 	}
 }
 
-//Instantiating Pootle_Page_Builder_Front_Css_Js class
+/** @var Pootle_Page_Builder_Front_Css_Js Instance */
 $GLOBALS['Pootle_Page_Builder_Front_Css_Js'] = new Pootle_Page_Builder_Front_Css_Js();

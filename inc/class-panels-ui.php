@@ -290,5 +290,5 @@ final class Pootle_Page_Builder_Admin_UI {
 	}
 }
 
-//Instantiating Pootle_Page_Builder_Content_Block class
+/** @var Pootle_Page_Builder_Content_Block Instance */
 $GLOBALS['Pootle_Page_Builder_Admin_UI'] = new Pootle_Page_Builder_Admin_UI();

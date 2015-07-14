@@ -306,5 +306,5 @@ public function wc_tab() {
 }
 }
 
-//Instantiating Pootle_Page_Builder_Content_Block class
+/** @var Pootle_Page_Builder_Content_Block Instance */
 $GLOBALS['Pootle_Page_Builder_Content_Block'] = new Pootle_Page_Builder_Content_Block();

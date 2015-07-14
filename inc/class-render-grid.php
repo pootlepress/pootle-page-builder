@@ -254,5 +254,6 @@ class Pootle_Page_Builder_Render_Grid {
 	}
 }
 
-//Instantiating Pootle_Page_Builder_Render_Grid class
+
+/** @var Pootle_Page_Builder_Render_Grid Instance */
 $GLOBALS['Pootle_Page_Builder_Render_Grid'] = new Pootle_Page_Builder_Render_Grid();

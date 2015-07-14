@@ -91,7 +91,7 @@ function pootlepb_revisions_field( $value, $field, $revision ) {
 		return '';
 	}
 
-	return Pootle_Page_Builder_Render_Layout::instance()->panels_render( $parent_id, false, $panels_data );
+	return $GLOBALS['Pootle_Page_Builder_Render_Layout']->panels_render( $parent_id, false, $panels_data );
 }
 
 add_filter( '_wp_post_revision_field_panels_data_field', 'pootlepb_revisions_field', 10, 3 );

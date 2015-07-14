@@ -302,5 +302,5 @@ final class Pootle_Page_Builder_Custom_Styles {
 	}
 }
 
-//Instantiating Pootle_Page_Builder_Custom_Styles class
+/** @var Pootle_Page_Builder_Custom_Styles Instance */
 $GLOBALS['Pootle_Page_Builder_Custom_Styles'] = new Pootle_Page_Builder_Custom_Styles();

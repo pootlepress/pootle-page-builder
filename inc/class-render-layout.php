@@ -138,7 +138,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 		ob_start();
 
 		global $pootlepb_inline_css;
-		$pootlepb_inline_css .= Pootle_Page_Builder_Front_Css_Js::instance()->panels_generate_css( $post_id, $panels_data );
+		$pootlepb_inline_css .= $GLOBALS['Pootle_Page_Builder_Front_Css_Js']->panels_generate_css( $post_id, $panels_data );
 
 		$this->output_rows( $grids, $panels_data, $post_id );
 
@@ -194,5 +194,5 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 	}
 }
 
-//Instantiating Pootle_Page_Builder_Render_Layout class
+/** @var Pootle_Page_Builder_Render_Layout Instance */
 $GLOBALS['Pootle_Page_Builder_Render_Layout'] = new Pootle_Page_Builder_Render_Layout();
