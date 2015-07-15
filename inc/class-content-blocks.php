@@ -32,6 +32,8 @@ final class Pootle_Page_Builder_Content_Block {
 		add_action( 'wp_footer', array( $this, 'print_inline_css' ) );
 		add_action( 'pootlepb_content_block_tabs', array( $this, 'add_wc_tab' ) );
 
+		add_action( 'edit_page_form', array( $this, 'ppb_tmce_dialog' ) );
+
 		add_action( 'pootlepb_content_block_editor_tab', array( $this, 'panels_editor' ) );
 		add_action( 'pootlepb_content_block_woocommerce_tab', array( $this, 'wc_tab' ) );
 		add_action( 'wp_ajax_pootlepb_editor_form', array( $this, 'ajax_content_panel' ) );
@@ -253,6 +255,7 @@ final class Pootle_Page_Builder_Content_Block {
 				'default_editor' => 'tmce',
 				'tinymce'        => array(
 					'force_p_newlines' => false,
+					'height' => 500,
 				)
 			)
 		);
@@ -294,6 +297,34 @@ final class Pootle_Page_Builder_Content_Block {
 		return $tabs;
 	}
 
+	public function ppb_tmce_dialog() {
+	?>
+		<div id="ppb-editor-container" style="display:none;position:fixed;top:50px;bottom:50px;right:50px;left:50px;"
+		     class="panels-admin-dialog ppb-add-content-panel ppb-cool-panel-container ui-helper-clearfix" tabindex="-1" role="dialog" aria-describedby="ui-id-7" aria-labelledby="ui-id-8">
+			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
+        <span id="ui-id-8" class="ui-dialog-title">
+            Editor
+        </span>
+				<button type="button" class="ui-button ui-corner-all ui-button-icon-only ui-dialog-titlebar-close" role="button" title="Close">
+					<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>
+					<span class="ui-button-text">Close</span>
+				</button>
+			</div>
+			<div class="panel-dialog dialog-form widget-dialog-pootle_pb_content_block ui-dialog-content ui-widget-content" id="ui-id-7">
+				<?php
+				$this->editor_panel();
+				?>
+			</div>
+			<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+				<div class="ui-dialog-buttonset">
+					<button type="button" class="button pootle stop ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button">
+						<span class="ui-button-text">Done</span>
+					</button>
+				</div>
+			</div>
+		</div>
+	<?php
+	}
 /**
  * Output woo commerce tab
  * @since 0.1.0

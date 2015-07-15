@@ -145,13 +145,6 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 	<?php do_action( 'pootlepb_metabox_end' ); ?>
 </div>
 
-<div class="ppb-hidden-editor-container" style="display:none;">
-	<?php
-	$request = null;
-	require POOTLEPB_DIR . 'tpl/content-block-panel.php';
-	?>
-</div>
-
 <?php
 if ( 'post-new.php' == $pagenow || ! empty( $panels_data['grids'] ) ) {
 ?>

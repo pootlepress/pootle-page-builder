@@ -24,6 +24,9 @@
             $$.data('dialog').find('*[name^=widgets]').not('[data-info-field]').each(function () {
                 var $$ = $(this);
                 var name = /widgets\[[0-9]+\]\[(.*)\]/.exec($$.attr('name'));
+                console.log('==CALLED panelsGetPanelData');
+                console.log($$.attr('name'));
+                console.log(name);
 
                 name = name[1];
 
@@ -185,6 +188,7 @@
         });
 
         $panel.find('> .panel-wrapper > .title > .actions > .edit').click(function () {
+            console.log('========EDIT CLICKED!!');
 
             var $currentPanel = $(this).closest('.panel');
 
@@ -193,92 +197,9 @@
             if (typeof activeDialog != 'undefined') return false;
 
             // The done button
-            var doneClicked = false;
+            doneClicked = false;
 
             window.$currentPanel = $(this).parents('.panel');
-
-            // Create a dialog for this form
-            activeDialog = $('<div class="panel-dialog dialog-form"></div>')
-                .data('widget-type', type)
-                .addClass('ui-dialog-content-loading')
-                .addClass('widget-dialog-' + type.toLowerCase())
-                .dialog({
-                    dialogClass: 'panels-admin-dialog ppb-add-content-panel ppb-cool-panel-container',
-                    autoOpen: false,
-                    modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
-                    draggable: false,
-                    resizable: false,
-                    title: "Editor",
-                    height: $(window).height() - 50,
-                    width: $(window).width() - 50,
-                    create: function (event, ui) {
-                        $(this).closest('.ui-dialog').find('.show-in-panels').show();
-                    },
-                    open: function () {
-                        // This fixes the A element focus issue
-                        $(this).closest('.ui-dialog').find('a').blur();
-
-                        var overlay = $('<div class="ppb-panels-ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-                        $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-
-                    },
-                    close: function () {
-
-                        if (!doneClicked) {
-                            $(this).trigger('panelsdone', $currentPanel, activeDialog);
-                        }
-
-                        //Set the widget styles
-                        panels.pootlePageSetWidgetStyles($('.pootle-style-fields'));
-
-                        // Destroy the dialog and remove it
-                        $(this).data('overlay').remove();
-                        $(this).dialog('destroy').remove();
-                        activeDialog = undefined;
-                    },
-                    buttons: [
-                        {
-                            text: panels.i10n.buttons['done'],
-                            class: 'button pootle stop',
-                            click: function () {
-                                doneClicked = true;
-                                var editor = $('#ppbeditor');
-                                if( ! editor.is(':visible') ) {
-                                    editor.val(tinyMCE.get('ppbeditor').getContent());
-                                }
-
-                                $(this).trigger('panelsdone', $currentPanel, activeDialog);
-
-                                var panelData = $currentPanel.panelsGetPanelData();
-
-                                $currentPanel.find('input[name$="[data]"]').val(JSON.stringify(panelData));
-                                $currentPanel.find('input[name$="[info][raw]"]').val(1);
-
-                                //Smart titles
-                                $('html').trigger( 'pootlepb_admin_content_block_title', [ $currentPanel, $currentPanel.panelsGetPanelData() ] );
-
-                                // Change the title of the panel
-                                activeDialog.dialog('close');
-                            }
-                        }
-                    ]
-                })
-                .keypress(function (e) {
-                    if (e.keyCode == $.ui.keyCode.ENTER) {
-                        if ($(this).closest('.ui-dialog').find('textarea:focus').length > 0) return;
-
-                        // This is the same as clicking the add button
-                        $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane .ui-button:eq(0)').click();
-                        e.preventDefault();
-                        return false;
-                    }
-                    else if (e.keyCode === $.ui.keyCode.ESCAPE) {
-                        $(this).closest('.ui-dialog').dialog('close');
-                    }
-                });
-
-            // This is so we can access the dialog (and its forms) later.
-            $currentPanel.data('dialog', activeDialog);
 
             // Load the widget form
             var widgetClass = type;
@@ -300,6 +221,26 @@
 
             if ("Pootle_Text_Widget" == widgetClass || "Pootle_PB_Content_Block" == widgetClass) {
 
+                // Create a dialog for this form
+                activeDialog = $('#ppb-editor-container')
+                    .data('widget-type', type)
+                    .keypress(function (e) {
+                        if (e.keyCode == $.ui.keyCode.ENTER) {
+                            if ($(this).closest('.ui-dialog').find('textarea:focus').length > 0) return;
+
+                            // This is the same as clicking the add button
+                            $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane .ui-button:eq(0)').click();
+                            e.preventDefault();
+                            return false;
+                        }
+                        else if (e.keyCode === $.ui.keyCode.ESCAPE) {
+                            $(this).closest('.ui-dialog').dialog('close');
+                        }
+                    });
+
+                // This is so we can access the dialog (and its forms) later.
+                $currentPanel.data('dialog', activeDialog);
+
                 var text = '',
                     filter = 1;
 
@@ -308,17 +249,19 @@
                     filter = instance.filter;
                 }
 
-                var newPanelId = $currentPanel.find('> input[name$="[info][id]"]').val();
+                var newPanelId = $currentPanel.find('> input[name$="[info][id]"]').val(),
+                    panelHeight;
 
-                var editor_cache = panels.editor_form_cache;
+                var overlay = $('<div class="ppb-panels-ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001)
 
-                activeDialog
-                    .html( editor_cache )
-                    .dialog("option", "position", {my: "center", at: "center", of: window})
-                    .dialog("open");
+                activeDialog.css('display', "block").data('overlay', overlay).before( overlay );
 
-                tinymce.execCommand( 'mceRemoveEditor', false, 'ppbeditor' );
-                tinymce.execCommand( 'mceAddEditor', false, 'ppbeditor' );
+                //Add events to the editor buttons
+                panels.ppbEditorButtonEvents();
+
+                panelHeight = activeDialog.height() - ( activeDialog.find('.ui-dialog-titlebar').outerHeight() + activeDialog.find('.ui-dialog-buttonpane').outerHeight() );
+
+                activeDialog.find('.panel-dialog').css('height', panelHeight);
 
                 content = tinyMCE.get('ppbeditor').setContent( text );
 
@@ -326,6 +269,8 @@
                     name = editor.attr('name');
 
                 editor.attr('name', name.replace(/\{\$id\}/g, newPanelId));
+
+                console.log('Panel ID: ' + newPanelId + ' current name "' + name + '" corrected as "' + editor.attr('name') + '"');
 
                 $('.ppb-add-content-panel')
                     .tabs({
@@ -369,6 +314,29 @@
                 // This gives panel types a chance to influence the form
                 activeDialog.removeClass('ui-dialog-content-loading').trigger('panelsopen', $currentPanel, activeDialog);
             } else {
+
+                // Create a dialog for this form
+                activeDialog = $('<div class="panel-dialog dialog-form"></div>')
+                    .data('widget-type', type)
+                    .addClass('ui-dialog-content-loading')
+                    .addClass('widget-dialog-' + type.toLowerCase())
+                    .dialog(panels.block_editor_dialog_properties)
+                    .keypress(function (e) {
+                        if (e.keyCode == $.ui.keyCode.ENTER) {
+                            if ($(this).closest('.ui-dialog').find('textarea:focus').length > 0) return;
+
+                            // This is the same as clicking the add button
+                            $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane .ui-button:eq(0)').click();
+                            e.preventDefault();
+                            return false;
+                        }
+                        else if (e.keyCode === $.ui.keyCode.ESCAPE) {
+                            $(this).closest('.ui-dialog').dialog('close');
+                        }
+                    });
+
+                // This is so we can access the dialog (and its forms) later.
+                $currentPanel.data('dialog', activeDialog);
 
                 $.post(
                     ajaxurl,
@@ -810,7 +778,93 @@
     };
 
     $(document).ready(function () {
-        panels.editor_form_cache = $('.ppb-hidden-editor-container').contents();
+        //panels.editor_form_cache = $('#ppb-editor-container').contents();
     });
+
+    panels.block_editor_dialog_properties = {
+        dialogClass: 'panels-admin-dialog ppb-add-content-panel ppb-cool-panel-container',
+        autoOpen: false,
+        modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
+        draggable: false,
+        resizable: false,
+        title: "Editor",
+        height: $(window).height() - 50,
+        width: $(window).width() - 50,
+        create: function (event, ui) {
+            $(this).closest('.ui-dialog').find('.show-in-panels').show();
+        },
+        open: function (e, ui, $t) {
+
+            var $t = $t || $(this);
+
+            // This fixes the A element focus issue
+            $t.closest('.ui-dialog').find('a').blur();
+
+            var overlay = $('<div class="ppb-panels-ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
+            $t.data('overlay', overlay).closest('.ui-dialog').before(overlay);
+
+        },
+        close: function (e, ui, $t) {
+
+            var $t = $t || $(this);
+
+            if (!doneClicked) {
+                $t.trigger('panelsdone', $currentPanel, activeDialog);
+            }
+
+            //Set the widget styles
+            panels.pootlePageSetWidgetStyles($('.pootle-style-fields'));
+
+            $t.hide();
+            $t.data('overlay').remove();
+            if( $t.hasClass('ui-dialog-content') ) {
+                //Remove the dialog
+                $t.dialog('destroy').remove();
+            } else {
+                $('#ppbeditor').attr('name', 'widgets[{$id}][text]');
+            }
+            activeDialog = undefined;
+        },
+        buttons: [
+            {
+                text: panels.i10n.buttons['done'],
+                class: 'button pootle stop',
+                click: function () {
+                    doneClicked = true;
+                    var editor = $('#ppbeditor');
+                    if( ! editor.is(':visible') ) {
+                        editor.val(tinyMCE.get('ppbeditor').getContent());
+                    }
+
+                    $(this).trigger('panelsdone', $currentPanel, activeDialog);
+
+                    var panelData = $currentPanel.panelsGetPanelData();
+
+                    $currentPanel.find('input[name$="[data]"]').val(JSON.stringify(panelData));
+                    $currentPanel.find('input[name$="[info][raw]"]').val(1);
+
+                    //Smart titles
+                    $('html').trigger( 'pootlepb_admin_content_block_title', [ $currentPanel, $currentPanel.panelsGetPanelData() ] );
+
+                    // Change the title of the panel
+                    if( activeDialog.hasClass('ui-dialog-content') ) {
+                        activeDialog.dialog('close');
+                    }
+                }
+            }
+        ]
+    };
+
+    panels.ppbEditorButtonEvents = function() {
+        $('#ppb-editor-container').find('.ui-dialog-titlebar-close').off('click').on('click', function () {
+            panels.block_editor_dialog_properties.close(undefined, undefined, $('#ppb-editor-container'));
+            $('#ppb-editor-container').hide();
+        });
+        $('#ppb-editor-container').find('.ui-dialog-buttonpane .pootle').off('click').click(function () {
+            panels.block_editor_dialog_properties.buttons[0].click(undefined, undefined, $('#ppb-editor-container'));
+            panels.block_editor_dialog_properties.close(undefined, undefined, $('#ppb-editor-container'));
+            $('#ppb-editor-container').hide();
+        });
+    }
 
 })(jQuery);

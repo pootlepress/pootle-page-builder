@@ -1057,7 +1057,7 @@ button.wp-switch-editor {
     background: url(images/icons/times.png);
 }
 
-.ui-dialog.panels-admin-dialog {
+.ui-dialog.panels-admin-dialog, .ppb-cool-panel-container {
     z-index: 99999 !important;
 }
 
@@ -1325,12 +1325,11 @@ when editing event widget from Event Calendar Pro */
     overflow: hidden;
 }
 
-.ui-dialog.ppb-cool-panel-container .ui-dialog-titlebar,
-.ui-dialog.ppb-cool-panel-container .ui-dialog-buttonpane {
+.ppb-cool-panel-container .ui-dialog-titlebar, .ppb-cool-panel-container .ui-dialog-buttonpane {
     margin-left: 200px;
 }
 
-.ui-dialog.ppb-cool-panel-container .ui-dialog-buttonpane {
+.ppb-cool-panel-container .ui-dialog-buttonpane {
     padding: 16px;    
 }
 
@@ -1344,6 +1343,7 @@ when editing event widget from Event Calendar Pro */
     padding: 0;
     height: 100%;
     overflow: visible;
+    background-color: #fff;
 }
 
 .ppb-cool-panel-wrap > ul {
