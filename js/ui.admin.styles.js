@@ -44,7 +44,7 @@ jQuery(function ($) {
                 var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
                 $t.data('overlay', overlay).closest('.ui-dialog').before(overlay);
 
-                window.setRowOptionUploadButton($('#grid-styles-dialog'));
+                panels.setCoolStyleButtons($('#grid-styles-dialog'));
 
                 var $bgToggle = $t.find('[data-style-field=background_toggle]'),
                     $bgVidFlds = $t.find('[data-style-field=bg_video]');

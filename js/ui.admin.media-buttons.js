@@ -1,6 +1,6 @@
 (function ($) {
 
-    window.setRowOptionUploadButton = function ( $this ) {
+    panels.setCoolStyleButtons = function ( $this ) {
 
         /* Removing existing event handlers */
         $this.find('.upload-button').off('click');

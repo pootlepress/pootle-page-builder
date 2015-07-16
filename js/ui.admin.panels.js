@@ -20,13 +20,10 @@
         var data = {};
         var parts;
 
-        if (typeof $$.data('dialog') != 'undefined' && !$$.data('dialog').hasClass('ui-dialog-content-loading')) {
+        if ($$.data('dialog') && $$.data('dialog').is(':visible') && !$$.data('dialog').hasClass('ui-dialog-content-loading')) {
             $$.data('dialog').find('*[name^=widgets]').not('[data-info-field]').each(function () {
                 var $$ = $(this);
                 var name = /widgets\[[0-9]+\]\[(.*)\]/.exec($$.attr('name'));
-                console.log('==CALLED panelsGetPanelData');
-                console.log($$.attr('name'));
-                console.log(name);
 
                 name = name[1];
 
@@ -188,7 +185,6 @@
         });
 
         $panel.find('> .panel-wrapper > .title > .actions > .edit').click(function () {
-            console.log('========EDIT CLICKED!!');
 
             var $currentPanel = $(this).closest('.panel');
 
@@ -256,6 +252,8 @@
 
                 activeDialog.css('display', "block").data('overlay', overlay).before( overlay );
 
+                $('#ppbeditor_ifr').css('min-height', 500);
+
                 //Add events to the editor buttons
                 panels.ppbEditorButtonEvents();
 
@@ -270,8 +268,6 @@
 
                 editor.attr('name', name.replace(/\{\$id\}/g, newPanelId));
 
-                console.log('Panel ID: ' + newPanelId + ' current name "' + name + '" corrected as "' + editor.attr('name') + '"');
-
                 $('.ppb-add-content-panel')
                     .tabs({
                         activate: function (e, ui) {
@@ -285,17 +281,15 @@
                         active: 0
                     })
                     .addClass("ui-tabs-vertical ui-helper-clearfix")
-                    .find('input[data-style-field-type="color"]').each(function () {
+                    .find('input[data-style-field-type="color"]').each(function() {
                         $t = $(this);
                         var wpPkrContnr = $t.closest('.wp-picker-container');
-                        if ( wpPkrContnr.length > 0 ) {
-                            wpPkrContnr.after($t);
-                            wpPkrContnr.remove();
+                        if ( wpPkrContnr.length == 0 ) {
+                            $t.wpColorPicker();
                         }
-                        $t.wpColorPicker();
                     });
 
-                window.setRowOptionUploadButton($('.ppb-add-content-panel'));
+                panels.setCoolStyleButtons($('.ppb-add-content-panel'));
 
                 var $t = $('.ppb-add-content-panel'),
                     title = $t.find('.ui-tabs-active a').html();
@@ -377,7 +371,7 @@
                                 }
                             });
 
-                        window.setRowOptionUploadButton($('.ppb-add-content-panel'));
+                        panels.setCoolStyleButtons($('.ppb-add-content-panel'));
 
                         var $t = $('.ppb-add-content-panel'),
                             title = $t.find('.ui-tabs-active a').html();
@@ -777,10 +771,6 @@
         $currentPanel.find('input[name$="[style]"]').val(JSON.stringify(styleData));
     };
 
-    $(document).ready(function () {
-        //panels.editor_form_cache = $('#ppb-editor-container').contents();
-    });
-
     panels.block_editor_dialog_properties = {
         dialogClass: 'panels-admin-dialog ppb-add-content-panel ppb-cool-panel-container',
         autoOpen: false,
@@ -842,6 +832,8 @@
 
                     $currentPanel.find('input[name$="[data]"]').val(JSON.stringify(panelData));
                     $currentPanel.find('input[name$="[info][raw]"]').val(1);
+
+                    $currentPanel.data('dialog', null);
 
                     //Smart titles
                     $('html').trigger( 'pootlepb_admin_content_block_title', [ $currentPanel, $currentPanel.panelsGetPanelData() ] );

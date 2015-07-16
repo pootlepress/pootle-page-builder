@@ -55,6 +55,7 @@
 .panel-grid-cell > .panel {
     border: none;
     box-shadow: none !important;
+    background-color: initial;
 }
 
 .panel-grid-cell .panel:before {

@@ -85,7 +85,7 @@ final class Pootle_Page_Builder_Content_Block {
 		$attr = array( 'id' => $id );
 
 		//Classes for this content block
-		$attr['class'] = array( 'panel' );
+		$attr['class'] = array( 'ppb-block', 'panel' );
 		if ( ! empty( $styleArray['class'] ) ) { $attr['class'][] = $styleArray['class']; }
 
 		$styleWithSelector = ''; // Passed with reference
@@ -253,6 +253,7 @@ final class Pootle_Page_Builder_Content_Block {
 			array(
 				'textarea_name'  => 'widgets[{$id}][text]',
 				'default_editor' => 'tmce',
+				'editor_height' => 500,
 				'tinymce'        => array(
 					'force_p_newlines' => false,
 					'height' => 500,
@@ -299,7 +300,7 @@ final class Pootle_Page_Builder_Content_Block {
 
 	public function ppb_tmce_dialog() {
 	?>
-		<div id="ppb-editor-container" style="display:none;position:fixed;top:50px;bottom:50px;right:50px;left:50px;"
+		<div id="ppb-editor-container" style="display:none;position:fixed;top:25px;bottom:25px;right:25px;left:25px;"
 		     class="panels-admin-dialog ppb-add-content-panel ppb-cool-panel-container ui-helper-clearfix" tabindex="-1" role="dialog" aria-describedby="ui-id-7" aria-labelledby="ui-id-8">
 			<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
         <span id="ui-id-8" class="ui-dialog-title">
