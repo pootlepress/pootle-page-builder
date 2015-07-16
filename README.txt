@@ -98,6 +98,14 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Changelog ==
 
+= 0.2.2 =
+* 2015-07-16
+ * Fix - scrolling not working on mobile browsers
+ * Fix - background video not working in some themes
+ * Fix - editor not working in firefox
+ * Fix - background video not autoplaying in safari
+ * Fix - add media function now working correctly
+
 = 0.2.1 =
 * 2015-07-14
  * Tweak - improve content display when plugin de-activated
