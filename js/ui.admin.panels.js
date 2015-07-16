@@ -252,7 +252,7 @@
 
                 activeDialog.css('display', "block").data('overlay', overlay).before( overlay );
 
-                $('#ppbeditor_ifr').css('min-height', 500);
+                $('#ppbeditor_ifr').css('min-height', 410);
 
                 //Add events to the editor buttons
                 panels.ppbEditorButtonEvents();

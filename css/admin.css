@@ -1402,3 +1402,7 @@ when editing event widget from Event Calendar Pro */
     background: #ef4832;
     color: #fff;
 }
+
+#ppbeditor {
+    min-height: 430px;
+}
