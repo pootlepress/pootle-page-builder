@@ -29,6 +29,7 @@ final class Pootle_Page_Builder_Admin_UI {
 		add_action( 'admin_print_styles-post.php', array( $this, 'enqueue_scripts' ) );
 		add_filter( 'pootlepb_prebuilt_layouts', array( $this, 'cloned_page_layouts' ) );
 		add_action( 'wp_ajax_so_panels_prebuilt', array( $this, 'ajax_action_prebuilt' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'dequeue_conflicting_scripts' ), 16 );
 
 	}
 
@@ -139,6 +140,17 @@ final class Pootle_Page_Builder_Admin_UI {
 		wp_enqueue_script( 'pootlepb-ui-undomanager', POOTLEPB_URL . 'js/ui.admin.undomanager.min.js', array( 'jquery', ), POOTLEPB_VERSION );
 		wp_enqueue_script( 'pootlepb-chosen', POOTLEPB_URL . 'js/chosen/chosen.jquery.min.min.js', array( 'jquery' ), POOTLEPB_VERSION );
 
+	}
+
+	/**
+	 * Dequeues the conflicting scripts and styles
+	 */
+	public function dequeue_conflicting_scripts() {
+		$screen = get_current_screen();
+
+		if ( in_array( $screen->id, pootlepb_settings( 'post-types' ) ) ) {
+			wp_dequeue_style( 'jquery-ui-datepicker' );
+		}
 	}
 
 	/**
