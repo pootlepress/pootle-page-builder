@@ -7,9 +7,9 @@
     $(document).ready(function () {
 
         var dialog = $('<div />')
-            .attr('id', 'ppb-hrad-unin-dialog')
+            .attr('id', 'ppb-hard-unin-dialog')
             .appendTo($('body'))
-            .dialog({
+            .ppbDialog({
                 autoOpen: false,
                 modal: false,
                 title: "Are you sure",
@@ -29,19 +29,15 @@
                         }
                     }
                 ]
-            })
+            });
         $('#pootlepb-hard-uninstall').change(function(){
             var $t = $(this);
 
             if ($t.prop('checked')) {
                 dialog
                     .html('Are you really sure you want to enable this? When enabled this will delete ALL settings and layouts for page builder pages when you delete page builder from your plugins list.')
-                    .dialog("option", "position", {my: "center", at: "center", of: window})
-                    .dialog("open");
-
-                if (!sure) {
-
-                }
+                    .ppbDialog("option", "position", {my: "center", at: "center", of: window})
+                    .ppbDialog("open");
             }
         });
 

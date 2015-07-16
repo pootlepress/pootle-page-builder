@@ -109,6 +109,7 @@ final class Pootle_Page_Builder_Admin_UI {
 		global $pootlepb_ui_js_deps;
 
 		//UI Scripts
+		wp_enqueue_script( 'pootlepb-ui-dialog', POOTLEPB_URL . 'js/ui.dialog.js', POOTLEPB_VERSION );
 		wp_enqueue_script( 'pootlepb-ui-admin', POOTLEPB_URL . 'js/ui.admin.js', $pootlepb_ui_js_deps, POOTLEPB_VERSION );
 		wp_enqueue_script( 'pootlepb-ui-admin-sticky', POOTLEPB_URL . 'js/ui.admin.sticky.js', array( 'jquery', ), POOTLEPB_VERSION );
 		wp_enqueue_script( 'pootlepb-ui-admin-panels', POOTLEPB_URL . 'js/ui.admin.panels.js', array( 'jquery', ), POOTLEPB_VERSION );

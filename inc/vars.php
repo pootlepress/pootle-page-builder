@@ -966,6 +966,7 @@ $pootlepb_ui_js_deps = array(
 	'jquery-ui-sortable',
 	'jquery-ui-slider',
 	'jquery-ui-dialog',
+	'pootlepb-ui-dialog',
 	'jquery-ui-button',
 	'jquery-ui-tabs',
 );
