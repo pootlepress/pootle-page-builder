@@ -352,15 +352,15 @@ h4 {}
     padding: 2px 7px 2px 7px;
     z-index: 10;
     color: #b4b9be;
+    opacity: 0;
 }
 
 #pootlepb-panels .panels-container .panel .title .actions a {
     display: inline-block;
     color: #b4b9be;
-    opacity: 0;
 }
 
-#pootlepb-panels .panels-container .panel:hover .title .actions a {
+#pootlepb-panels .panels-container .panel:hover .title .actions {
     opacity: 1;
 }
 
