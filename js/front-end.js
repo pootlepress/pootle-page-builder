@@ -50,6 +50,7 @@ jQuery(function ($) {
 
     $(document).imagesLoaded(function () {
 
+        ppbSkrollr = false;
         if ( ! /Android|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent||navigator.vendor||a.opera) ) {
             ppbSkrollr = skrollr.init({
                 smoothScrolling: false
@@ -62,7 +63,15 @@ jQuery(function ($) {
          */
         ppbParallax = function () {
             $('.ppb-parallax').each(function () {
+
+                //Return ppbSkrollr not set
+                if( ! ppbSkrollr ) return;
+
                 var $t = $(this);
+                $t.css({
+                    backgroundAttachment: 'fixed',
+                    backgroundSize: 'cover'
+                });
                 var image_url = $t.css('background-image'),
                     image;
 
@@ -99,8 +108,6 @@ jQuery(function ($) {
                             image.dataWidth = $t.outerWidth();
 
                         }
-                        if ( ! /Android|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent||navigator.vendor||a.opera) ) {
-
                             leftOffset$t = $t.offset().left - ( image.dataWidth - $t.outerWidth() ) / 2;
                             topOffset$t = $t.offset().top - $(window).height();
 
@@ -108,7 +115,6 @@ jQuery(function ($) {
                             $t.attr('data-top-bottom', 'background-position: ' + leftOffset$t + 'px -' + ($t.height() + 500) + 'px;');
 
                             ppbSkrollr.refresh();
-                        }
                     });
 
                     image.src = image_url;

@@ -195,7 +195,6 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 		if ( ! empty( $style['background_parallax'] ) ) {
 			$attr['class'][] = 'ppb-parallax';
-			$attr['style'] .= 'background-attachment: fixed;background-size: cover;';
 		}
 
 		return $attr;
