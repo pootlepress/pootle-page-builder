@@ -294,7 +294,7 @@
                         }
                     });
 
-                panels.setCoolStyleButtons($('.ppb-add-content-panel'));
+                panels.addInputFieldEventHandlers($('.ppb-add-content-panel'));
 
                 var $t = $('.ppb-add-content-panel'),
                     title = $t.find('.ui-tabs-active a').html();
@@ -379,7 +379,7 @@
                                 }
                             });
 
-                        panels.setCoolStyleButtons($('.ppb-add-content-panel'));
+                        panels.addInputFieldEventHandlers($('.ppb-add-content-panel'));
 
                         var $t = $('.ppb-add-content-panel'),
                             title = $t.find('.ui-tabs-active a').html();
