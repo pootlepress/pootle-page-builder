@@ -119,7 +119,7 @@ final class Pootle_Page_Builder_Admin {
 	}
 
 	public function is_pb_post_empty( $maybe_empty, $postarr ) {
-		if ( count( $postarr['grids'] ) ) {
+		if ( ! empty( $postarr['grids'] ) ) {
 			return false;
 		} else {
 			return $maybe_empty;

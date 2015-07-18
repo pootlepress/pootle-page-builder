@@ -197,6 +197,12 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" /> <?php
 			break;
 		default :
+
+			/**
+			 * Allows rendering custom fields
+			 * @param string $key The ID of field
+			 * @param array $field Field data
+			 */
 			do_action( "row_styling_custom_field_{$field['type']}", $key, $field );
 	}
 }
@@ -270,6 +276,11 @@ function pootlepb_render_content_field( $key, $field ) {
 			<?php
 			break;
 		default:
+			/**
+			 * Allows rendering custom fields
+			 * @param string $key The ID of field
+			 * @param array $field Field data
+			 */
 			do_action( "content_block_custom_field_{$field['type']}", $key, $field );
 	}
 }
