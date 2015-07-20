@@ -98,6 +98,16 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Changelog ==
 
+* 2015-07-20
+ * New - row panel and content panel support custom field type rendering via dynamic hook
+ * Tweak - parallax disabled for mobile
+ * Tweak - hide icons container until hover
+ * Tweak - woocommerce link only active when woocommerce is activated
+ * Tweak - force responsive image to display instead of background video for mobile
+ * Fix - formatting and sizing in the visual editor
+ * Fix - editor now full height of container
+ * Fix - page builder content now saves when page title is empty 
+
 = 0.2.2 =
 * 2015-07-16
  * Fix - scrolling not working on mobile browsers
