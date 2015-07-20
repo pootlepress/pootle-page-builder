@@ -103,26 +103,27 @@
             var $t = $(this);
             $t.css('background-image','url('+$t.val()+')')
         });
-
-        panels.bgVideoMobImgSet();
-        $('#pp-pb-bg_video').off('change').on('change', panels.bgVideoMobImgSet);
-        $('#pp-pb-bg_mobile_image').off('change').on('change', panels.bgVideoMobImgSet);
     };
 
     panels.bgVideoMobImgSet = function(){
-        $('#row-bg-video-notice').remove();
-        console.log('Mobile Image: ' + $('#pp-pb-bg_video').val())
-        $('#pp-pb-bg_mobile_image').attr('style', '');
-        if( $('#pp-pb-bg_video').val() ) {
-            console.log('Mobile Image: ' + $('#pp-pb-bg_mobile_image').val())
-            if( '' == $('#pp-pb-bg_mobile_image').val().replace( ' ', '' ) ) {
-                var notice = $('<div/>').attr('id', 'row-bg-video-notice').addClass('ppb-alert')
-                    .html('<span class="dashicons dashicons-no"></span>Kindly select a background image for mobile devices.')
-                $('.bg_section.bg_video').append(notice);
-                $('#pp-pb-bg_mobile_image').css({backgroundColor:'#fcc', borderColor:'#f88'});
 
+        $('#row-bg-video-notice').remove();
+        $('#pp-pb-bg_mobile_image').attr('style', '');
+
+        if( '.bg_video' == $('#pp-pb-background_toggle').val() && $('#pp-pb-bg_video').val() ) {
+
+            if( '' == $('#pp-pb-bg_mobile_image').val().replace( ' ', '' ) ) {
+
+                var notice = $('<div/>').attr('id', 'row-bg-video-notice').addClass('ppb-alert')
+                    .html('<span class="dashicons dashicons-no"></span>Please select an image to display instead of the background video for mobile devices.')
+                $('.bg_section.bg_video').append(notice);
+                $('#pp-pb-bg_mobile_image').css({backgroundColor: '#fcc', borderColor: '#f88'});
+
+                return false;
             }
         }
+
+        return true;
     }
 
 })(jQuery);

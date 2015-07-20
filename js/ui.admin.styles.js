@@ -10,6 +10,10 @@ jQuery(function ($) {
     // Create the dialog for setting up the style
     var buttons = {};
     buttons[panels.i10n.buttons.done] = function () {
+        if( ! panels.bgVideoMobImgSet() ) {
+            $('[href="#pootle-background-tab"]').click();
+            return;
+        }
         $('#grid-styles-dialog').dialog('close');
     };
 

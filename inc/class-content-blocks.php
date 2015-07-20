@@ -291,10 +291,13 @@ final class Pootle_Page_Builder_Content_Block {
 	 * @since 0.1.0
 	 */
 	public function add_wc_tab( $tabs ) {
-		$tabs['woocommerce'] = array(
-			'label' => 'Woocommerce',
-			'priority' => 2,
-		);
+
+		if( class_exists( 'WooCommerce' ) ) {
+			$tabs['woocommerce'] = array(
+				'label'    => 'Woocommerce',
+				'priority' => 2,
+			);
+		}
 		return $tabs;
 	}
 

@@ -122,7 +122,7 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 	switch ( $field['type'] ) {
 		case 'select':
 			?>
-			<select name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			<select name="panelsStyle[<?php echo esc_attr( $key ) ?>]" id="pp-pb-<?php esc_attr_e( $key ) ?>"
 			        data-style-field="<?php echo esc_attr( $key ) ?>"
 			        data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>">
 				<?php foreach ( $field['options'] as $ov => $on ) : ?>
@@ -191,6 +191,13 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 			         data-style-field="<?php echo esc_attr( $key ) ?>"
 			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />px <?php
 			break;
+
+		case 'color':
+			?><input type="text" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" /> <?php
+			break;
+
 		case 'text':
 			?><input type="text" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
 			         data-style-field="<?php echo esc_attr( $key ) ?>"
