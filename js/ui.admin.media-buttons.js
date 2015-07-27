@@ -1,6 +1,6 @@
 (function ($) {
 
-    panels.setCoolStyleButtons = function ( $this ) {
+    panels.addInputFieldEventHandlers = function ( $this ) {
 
         /* Removing existing event handlers */
         $this.find('.upload-button').off('click');
@@ -34,7 +34,8 @@
                 attachment = ppbFileFrame.state().get('selection').first().toJSON();
 
                 // Do something with attachment.id and/or attachment.url here
-                $textField.val(attachment.url);
+                $textField
+                    .val(attachment.url)
                 $textField.change();
 
             });
@@ -98,6 +99,31 @@
             });
         });
 
+        $this.find('[data-style-field-type="upload"]').change(function() {
+            var $t = $(this);
+            $t.css('background-image','url('+$t.val()+')')
+        });
     };
+
+    panels.bgVideoMobImgSet = function(){
+
+        $('#row-bg-video-notice').remove();
+        $('#pp-pb-bg_mobile_image').attr('style', '');
+
+        if( '.bg_video' == $('#pp-pb-background_toggle').val() && $('#pp-pb-bg_video').val() ) {
+
+            if( '' == $('#pp-pb-bg_mobile_image').val().replace( ' ', '' ) ) {
+
+                var notice = $('<div/>').attr('id', 'row-bg-video-notice').addClass('ppb-alert')
+                    .html('<span class="dashicons dashicons-no"></span>Please select an image to display instead of the background video for mobile devices.')
+                $('.bg_section.bg_video').append(notice);
+                $('#pp-pb-bg_mobile_image').css({backgroundColor: '#fcc', borderColor: '#f88'});
+
+                return false;
+            }
+        }
+
+        return true;
+    }
 
 })(jQuery);

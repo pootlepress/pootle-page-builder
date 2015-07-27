@@ -56,7 +56,7 @@ final class Pootle_Page_Builder_Admin {
 
 		//Allow the save post to save panels data
 		add_filter( 'pootlepb_save_post_pass', array( $this, 'save_post_or_not' ), 10, 2 );
-
+		add_filter( 'wp_insert_post_empty_content', array( $this, 'is_pb_post_empty' ), 25, 2 );
 		//Settings
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'options_init' ) );
@@ -116,6 +116,14 @@ final class Pootle_Page_Builder_Admin {
 			$panels_data = wp_slash( $panels_data );
 		}
 		update_post_meta( $post_id, 'panels_data', $panels_data );
+	}
+
+	public function is_pb_post_empty( $maybe_empty, $postarr ) {
+		if ( ! empty( $postarr['grids'] ) ) {
+			return false;
+		} else {
+			return $maybe_empty;
+		}
 	}
 
 	/**

@@ -58,7 +58,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 
 		$postID = apply_filters( 'pootlepb_the_content_id', get_the_ID() );
 
-		$pass = apply_filters( 'pootlepb_the_content_pass', is_page() );
+		$pass = apply_filters( 'pootlepb_the_content_pass', in_array( get_post_type(), pootlepb_settings( 'post-types' ) ) );
 
 		if ( ! $pass ) {
 			return $content;

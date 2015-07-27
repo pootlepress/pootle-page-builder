@@ -117,85 +117,100 @@ function pootlepb_row_dialog_fields_output( $tab = null ) {
 	}
 }
 
-function pootlepb_render_row_settings_field( $name, $attr ) {
+function pootlepb_render_row_settings_field( $key, $field ) {
 
-	switch ( $attr['type'] ) {
+	switch ( $field['type'] ) {
 		case 'select':
 			?>
-			<select name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-			        data-style-field="<?php echo esc_attr( $name ) ?>"
-			        data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>">
-				<?php foreach ( $attr['options'] as $ov => $on ) : ?>
+			<select name="panelsStyle[<?php echo esc_attr( $key ) ?>]" id="pp-pb-<?php esc_attr_e( $key ) ?>"
+			        data-style-field="<?php echo esc_attr( $key ) ?>"
+			        data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>">
+				<?php foreach ( $field['options'] as $ov => $on ) : ?>
 					<option
-						value="<?php echo esc_attr( $ov ) ?>" <?php if ( isset( $attr['default'] ) ) { selected( $ov, $attr['default'] ); } ?>  ><?php echo esc_html( $on ) ?></option>
+						value="<?php echo esc_attr( $ov ) ?>" <?php if ( isset( $field['default'] ) ) { selected( $ov, $field['default'] ); } ?>  ><?php echo esc_html( $on ) ?></option>
 				<?php endforeach ?>
 			</select>
 			<?php
 			break;
 
 		case 'checkbox' :
-			$checked = ( isset( $attr['default'] ) ? checked( $attr['default'], true, false ) : '' );
+			$checked = ( isset( $field['default'] ) ? checked( $field['default'], true, false ) : '' );
 			?>
 			<label class="ppb-panels-checkbox-label">
-				<input type="checkbox" <?php echo esc_html( $checked ) ?> name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-				       data-style-field="<?php echo esc_attr( $name ) ?>"
-				       data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>"/>
+				<input type="checkbox" <?php echo esc_html( $checked ) ?> name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+				       data-style-field="<?php echo esc_attr( $key ) ?>"
+				       data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>"/>
 			</label>
 			<?php
 			break;
 
 		case 'number' :
-			?><input type="number" min="<?php echo $attr['min'] ?>" value="<?php echo esc_attr( $attr['default'] ) ?>"
-			         name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-			         data-style-field="<?php echo esc_attr( $name ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" />
+			?><input type="number" min="<?php echo $field['min'] ?>" value="<?php echo esc_attr( $field['default'] ) ?>"
+			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
 			<?php
-			if ( isset( $attr['help-text'] ) ) {
+			if ( isset( $field['help-text'] ) ) {
 				// don't use div for this or else div will appear outside of <p>
-				echo "<span class='small-help-text'>" . esc_html( $attr['help-text'] ) . '</span>';
+				echo "<span class='small-help-text'>" . esc_html( $field['help-text'] ) . '</span>';
 			}
 			break;
 
 		case 'upload':
-			?><input type="text" id="pp-pb-<?php esc_attr_e( $name ) ?>"
-			         name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-			         data-style-field="<?php echo esc_attr( $name ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" />
+			?><input type="text" id="pp-pb-<?php esc_attr_e( $key ) ?>"
+			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
 			<button class="button upload-button">Select Image</button><?php
 			break;
 
 		case 'uploadVid':
-			?><input type="text" id="pp-pb-<?php esc_attr_e( $name ) ?>"
-			         name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-			         data-style-field="<?php echo esc_attr( $name ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" />
+			?><input type="text" id="pp-pb-<?php esc_attr_e( $key ) ?>"
+			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
 			<button class="button video-upload-button">Select Video</button><?php
 			break;
 
 		case 'textarea':
-			?><textarea type="text" name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-			            data-style-field="<?php echo esc_attr( $name ) ?>"
-			            data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" ></textarea> <?php
+			?><textarea type="text" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			            data-style-field="<?php echo esc_attr( $key ) ?>"
+			            data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" ></textarea> <?php
 			break;
 
 		case 'slider':
-			?><input type="hidden" name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-			         data-style-field="<?php echo esc_attr( $name ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" />
+			?><input type="hidden" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
 			<div class="ppb-slider"></div><span class="slider-val"></span>
 			<?php
 			break;
 
 		case 'px':
-			?><input type="number" name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-			         data-style-field="<?php echo esc_attr( $name ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" />px <?php
+			?><input type="number" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />px <?php
+			break;
+
+		case 'color':
+			?><input type="text" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" /> <?php
+			break;
+
+		case 'text':
+			?><input type="text" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" /> <?php
 			break;
 		default :
-			?><input type="text" name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-			         data-style-field="<?php echo esc_attr( $name ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" /> <?php
-			break;
+
+			/**
+			 * Allows rendering custom fields
+			 * @param string $key The ID of field
+			 * @param array $field Field data
+			 */
+			do_action( "row_styling_custom_field_{$field['type']}", $key, $field );
 	}
 }
 
@@ -262,11 +277,18 @@ function pootlepb_render_content_field( $key, $field ) {
 			<div class="ppb-slider"></div><span class="slider-val"></span>
 			<?php
 			break;
-		default:
+		case 'text':
 			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="text"
 			         data-style-field-type="text"/>
 			<?php
 			break;
+		default:
+			/**
+			 * Allows rendering custom fields
+			 * @param string $key The ID of field
+			 * @param array $field Field data
+			 */
+			do_action( "content_block_custom_field_{$field['type']}", $key, $field );
 	}
 }
 

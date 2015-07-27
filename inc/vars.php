@@ -218,6 +218,7 @@ $pootlepb_row_styling_fields = array(
 		'name' => __( 'Background Video', 'vantage' ),
 		'tab' => 'background',
 		'type' => 'uploadVid',
+		'help-text' => "Background videos autoplay & therefore only work on desktop browsers",
 		'priority' => 12,
 	),
 	'bg_mobile_image' => array(
@@ -225,7 +226,7 @@ $pootlepb_row_styling_fields = array(
 		'tab' => 'background',
 		'type' => 'upload',
 		'priority' => 13,
-		'help-text' => "If you add an image here it will replace the video on mobile site. <br> If you don't it won't!",
+		'help-text' => "Select an image to display instead of the background video for mobile devices",
 	),
 
 	'bg_wrap_close' => array(

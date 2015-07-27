@@ -352,15 +352,15 @@ h4 {}
     padding: 2px 7px 2px 7px;
     z-index: 10;
     color: #b4b9be;
+    opacity: 0;
 }
 
 #pootlepb-panels .panels-container .panel .title .actions a {
     display: inline-block;
     color: #b4b9be;
-    opacity: 0;
 }
 
-#pootlepb-panels .panels-container .panel:hover .title .actions a {
+#pootlepb-panels .panels-container .panel:hover .title .actions {
     opacity: 1;
 }
 
@@ -931,7 +931,11 @@ h4 {}
     vertical-align: middle;
 }
 
-#grid-styles-dialog .field > input[type="number"]{
+.ppb-cool-panel-wrap .field > input {
+    max-width: 160px;
+}
+
+.ppb-cool-panel-wrap .field > input[type="number"]{
     width: 70px;
 }
 
@@ -1401,4 +1405,23 @@ when editing event widget from Event Calendar Pro */
 .pp-red {
     background: #ef4832;
     color: #fff;
+}
+
+#ppbeditor {
+    min-height: 430px;
+}
+.ppb-alert {
+    background: #fcc;
+    color: #f00;
+    padding: 4px 12px;
+    border-radius: 7px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.ppb-alert .dashicons {
+    vertical-align: middle;
+    font-size: 20px;
+    height: auto;
+    width: auto;
+    margin: -2px 2px 0 -7px;
 }

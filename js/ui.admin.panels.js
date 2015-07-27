@@ -246,27 +246,32 @@
                 }
 
                 var newPanelId = $currentPanel.find('> input[name$="[info][id]"]').val(),
-                    panelHeight;
+                    panelHeight, $edi_ifr, ediGutterHeight, editor, name;
 
                 var overlay = $('<div class="ppb-panels-ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001)
 
-                activeDialog.css('display', "block").data('overlay', overlay).before( overlay );
-
-                $('#ppbeditor_ifr').css('min-height', 500);
-
-                //Add events to the editor buttons
-                panels.ppbEditorButtonEvents();
+                activeDialog.css({display: "block", 'opacity':0}).data('overlay', overlay).before( overlay );
 
                 panelHeight = activeDialog.height() - ( activeDialog.find('.ui-dialog-titlebar').outerHeight() + activeDialog.find('.ui-dialog-buttonpane').outerHeight() );
 
                 activeDialog.find('.panel-dialog').css('height', panelHeight);
 
+                editor = $('#ppbeditor');
+                $edi_ifr = $('#ppbeditor_ifr');
+
+                //Adjust name for content block data population
+                name = editor.attr('name');
+                editor.attr('name', name.replace(/\{\$id\}/g, newPanelId));
+
+                //Dynamic editor height
+                ediGutterHeight = $('#wp-ppbeditor-wrap').outerHeight() - $edi_ifr.outerHeight() ;
+                $edi_ifr.css('min-height', panelHeight - ediGutterHeight - 34);
+                $('#ppbeditor').css('min-height', panelHeight - 70 - 34);
+
                 content = tinyMCE.get('ppbeditor').setContent( text );
 
-                var editor = $('#ppbeditor'),
-                    name = editor.attr('name');
-
-                editor.attr('name', name.replace(/\{\$id\}/g, newPanelId));
+                //Add events to the editor buttons
+                panels.ppbEditorButtonEvents();
 
                 $('.ppb-add-content-panel')
                     .tabs({
@@ -289,13 +294,16 @@
                         }
                     });
 
-                panels.setCoolStyleButtons($('.ppb-add-content-panel'));
+                panels.addInputFieldEventHandlers($('.ppb-add-content-panel'));
 
                 var $t = $('.ppb-add-content-panel'),
                     title = $t.find('.ui-tabs-active a').html();
                 $('.ppb-add-content-panel .ui-dialog-titlebar .ui-dialog-title').html(title);
 
                 $(".ppb-cool-panel-wrap li").removeClass("ui-corner-top").addClass("ui-corner-left");
+
+                //Show the editor
+                activeDialog.css('opacity', '1');
 
                 //Get style data in fields
                 panels.pootlePageGetWidgetStyles($('.pootle-style-fields'));
@@ -371,7 +379,7 @@
                                 }
                             });
 
-                        panels.setCoolStyleButtons($('.ppb-add-content-panel'));
+                        panels.addInputFieldEventHandlers($('.ppb-add-content-panel'));
 
                         var $t = $('.ppb-add-content-panel'),
                             title = $t.find('.ui-tabs-active a').html();
@@ -814,6 +822,7 @@
                 $('#ppbeditor').attr('name', 'widgets[{$id}][text]');
             }
             activeDialog = undefined;
+            switchEditors.go( 'ppbeditor', 'tmce' );
         },
         buttons: [
             {

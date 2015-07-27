@@ -3,13 +3,13 @@
 Contributors: pootlepress, nickburne
 Plugin Name: pootle page builder
 Plugin URI: http://www.pootlepress.com/page-builder
-Tags: page builder, pagebuilder, pootlepress, pootle page builder, pootlepagebuilder, pootle pagebuilder, layout, layouts, layout builder, layout customizer, content builder, landing pages, landing page builder
+Tags: page builder, pagebuilder, pootlepress, pootle page builder, pootlepagebuilder, pootle pagebuilder, layout, layouts, layout builder, layout customizer, content builder, landing pages, landing page builder, site origin
 Author URI: http://www.pootlepress.com
 Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.2.2
-Stable tag: 0.2.0
+Stable tag: 0.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -97,6 +97,17 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Initial release. It's alive!
 
 == Changelog ==
+
+= 0.2.3 = 
+* 2015-07-20
+ * New - row panel and content panel support custom field type rendering via dynamic hook
+ * Tweak - parallax disabled for mobile
+ * Tweak - hide icons container until hover
+ * Tweak - woocommerce link only active when woocommerce is activated
+ * Tweak - force responsive image to display instead of background video for mobile
+ * Fix - formatting and sizing in the visual editor
+ * Fix - editor now full height of container
+ * Fix - page builder content now saves when page title is empty 
 
 = 0.2.2 =
 * 2015-07-16
