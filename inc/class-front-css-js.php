@@ -208,12 +208,6 @@ final class Pootle_Page_Builder_Front_Css_Js {
 		$this->css( $bottom_margin, '.panel-grid-cell .panel' );
 		$this->css( $bottom_margin_last, '.panel-grid-cell .panel:last-child' );
 
-		// This is for the side margins
-		$margin_half    = $settings['margin-sides'] / 2;
-		$side_padding = "padding: 0 {$margin_half}px 0";
-
-		$this->css( $side_padding, '.panel-grid-cell' );
-
 		if ( ! defined( 'POOTLEPB_OLD_V' ) ) {
 
 			$this->css( 'padding: 10px', '.panel' );

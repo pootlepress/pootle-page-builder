@@ -29,7 +29,7 @@ function pootlepb_panels_panels_row_attributes( $attr, $row ) {
 		}
 
 		$marginBottom = pootlepb_settings( 'margin-bottom' );
-		if ( ! empty( $row['style']['margin_bottom'] ) || '0' === ( $row['style']['margin_bottom'] ) ) {
+		if ( isset( $row['style']['margin_bottom'] ) ) {
 			$attr['style'] .= "margin-bottom: {$row['style']['margin_bottom']}px;";
 		} elseif ( $marginBottom ) {
 			$attr['style'] .= "margin-bottom: {$marginBottom}px;";
