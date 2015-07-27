@@ -111,7 +111,7 @@ jQuery(function ($) {
 
             frame.on('escape', function () {
                 // Reopen the dialog
-                dialog.find('.ui-dialog-content').dialog('open');
+                dialog.find('.ui-dialog-content').ppbDialog('open');
             });
 
             return false;

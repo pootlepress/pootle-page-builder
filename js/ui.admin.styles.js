@@ -14,7 +14,7 @@ jQuery(function ($) {
             $('[href="#pootle-background-tab"]').click();
             return;
         }
-        $('#grid-styles-dialog').dialog('close');
+        $('#grid-styles-dialog').ppbDialog('close');
     };
 
 
@@ -22,7 +22,7 @@ jQuery(function ($) {
     $gridStylesDialog.data('html', $('#grid-styles-dialog').html());
     $gridStylesDialog
         .show()
-        .dialog({
+        .ppbDialog({
             dialogClass: 'panels-admin-dialog ppb-cool-panel-container',
             autoOpen: false,
             modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
@@ -34,7 +34,7 @@ jQuery(function ($) {
             open: function () {
                 $t = $(this);
 
-                $t.find('.ppb-cool-panel-wrap').tabs({
+                $t.find('.ppb-cool-panel-wrap').ppbTabs({
                     active: 0
                 });
 
@@ -115,13 +115,13 @@ jQuery(function ($) {
             }
         });
 
-        $('#grid-styles-dialog').dialog('open');
+        $('#grid-styles-dialog').ppbDialog('open');
 
         // Now set up all the fields
         $('#grid-styles-dialog [data-style-field-type="color"]')
             .wpColorPicker()
             .closest('p').find('a').click(function () {
-                $('#grid-styles-dialog').dialog("option", "position", "center");
+                $('#grid-styles-dialog').ppbDialog("option", "position", "center");
             });
     }
 
@@ -153,13 +153,13 @@ jQuery(function ($) {
 
     panels.BGVidFormatWrong = function ($t) {
 
-        $("<div title='Please Use a .mp4 or .webm video'>This field supports .mp4 and .webm formats only.</div>").dialog({
+        $("<div title='Please Use a .mp4 or .webm video'>This field supports .mp4 and .webm formats only.</div>").ppbDialog({
             modal: true,
             resizable: false,
             width: 400,
             buttons: {
                 Ok: function () {
-                    $(this).dialog("close");
+                    $(this).ppbDialog("close");
                 }
             }
         });

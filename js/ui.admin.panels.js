@@ -230,7 +230,7 @@
                             return false;
                         }
                         else if (e.keyCode === $.ui.keyCode.ESCAPE) {
-                            $(this).closest('.ui-dialog').dialog('close');
+                            $(this).closest('.ui-dialog').ppbDialog('close');
                         }
                     });
 
@@ -248,11 +248,17 @@
                 var newPanelId = $currentPanel.find('> input[name$="[info][id]"]').val(),
                     panelHeight, $edi_ifr, ediGutterHeight, editor, name;
 
-                var overlay = $('<div class="ppb-panels-ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001)
+                var overlay = $('<div class="ppb-panels-ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
 
-                activeDialog.css({display: "block", 'opacity':0}).data('overlay', overlay).before( overlay );
+                activeDialog.css({
+                    display: "block",
+                    top: $(window).scrollTop(),
+                    height: window.innerHeight - 64,
+                    width: window.innerWidth - 64,
+                    'opacity':0
+                }).data('overlay', overlay).before( overlay );
 
-                panelHeight = activeDialog.height() - ( activeDialog.find('.ui-dialog-titlebar').outerHeight() + activeDialog.find('.ui-dialog-buttonpane').outerHeight() );
+                panelHeight = activeDialog.height() - ( activeDialog.find('.ppb-dialog-titlebar').outerHeight() + activeDialog.find('.ppb-dialog-buttonpane').outerHeight() );
 
                 activeDialog.find('.panel-dialog').css('height', panelHeight);
 
@@ -274,7 +280,7 @@
                 panels.ppbEditorButtonEvents();
 
                 $('.ppb-add-content-panel')
-                    .tabs({
+                    .ppbTabs({
                         activate: function (e, ui) {
                             var $t = $(this),
                                 title = $t.find('.ui-tabs-active a').html(),
@@ -322,7 +328,7 @@
                     .data('widget-type', type)
                     .addClass('ui-dialog-content-loading')
                     .addClass('widget-dialog-' + type.toLowerCase())
-                    .dialog(panels.block_editor_dialog_properties)
+                    .ppbDialog(panels.block_editor_dialog_properties)
                     .keypress(function (e) {
                         if (e.keyCode == $.ui.keyCode.ENTER) {
                             if ($(this).closest('.ui-dialog').find('textarea:focus').length > 0) return;
@@ -333,7 +339,7 @@
                             return false;
                         }
                         else if (e.keyCode === $.ui.keyCode.ESCAPE) {
-                            $(this).closest('.ui-dialog').dialog('close');
+                            $(this).closest('.ui-dialog').ppbDialog('close');
                         }
                     });
 
@@ -356,11 +362,11 @@
 
                         activeDialog
                             .html(result)
-                            .dialog("option", "position", {my: "center", at: "center", of: window})
-                            .dialog("open");
+                            .ppbDialog("option", "position", {my: "center", at: "center", of: window})
+                            .ppbDialog("open");
 
                         $('.ppb-add-content-panel')
-                            .tabs({
+                            .ppbTabs({
                                 activate: function (e, ui) {
                                     var $t = $(this),
                                         title = $t.find('.ui-tabs-active a').html(),
@@ -442,7 +448,7 @@
 
             window.$currentPanel = $currentPanel;
 
-            $('#widget-styles-dialog').dialog('open');
+            $('#widget-styles-dialog').ppbDialog('open');
 
             return false;
         });
@@ -450,7 +456,7 @@
         $panel.find('> .panel-wrapper > .title > .actions > .delete').click(function () {
             var $currentPanel = $(this).closest('.panel');
 
-            $('#remove-widget-dialog').dialog({
+            $('#remove-widget-dialog').ppbDialog({
                 dialogClass: 'panels-admin-dialog',
                 autoOpen: false,
                 modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
@@ -511,16 +517,16 @@
 
                         deleteFunction($currentPanel);
 
-                        $(this).dialog('close');
+                        $(this).ppbDialog('close');
                     },
                     Cancel: function () {
-                        $(this).dialog('close');
+                        $(this).ppbDialog('close');
                     }
                 }
 
             });
 
-            $('#remove-widget-dialog').dialog('open');
+            $('#remove-widget-dialog').ppbDialog('open');
 
             return false;
         });
@@ -817,7 +823,7 @@
             $t.data('overlay').remove();
             if( $t.hasClass('ui-dialog-content') ) {
                 //Remove the dialog
-                $t.dialog('destroy').remove();
+                $t.ppbDialog('destroy').remove();
             } else {
                 $('#ppbeditor').attr('name', 'widgets[{$id}][text]');
             }
@@ -842,14 +848,14 @@
                     $currentPanel.find('input[name$="[data]"]').val(JSON.stringify(panelData));
                     $currentPanel.find('input[name$="[info][raw]"]').val(1);
 
-                    $currentPanel.data('dialog', null);
-
                     //Smart titles
                     $('html').trigger( 'pootlepb_admin_content_block_title', [ $currentPanel, $currentPanel.panelsGetPanelData() ] );
 
+                    $currentPanel.data('dialog', null);
+
                     // Change the title of the panel
                     if( activeDialog.hasClass('ui-dialog-content') ) {
-                        activeDialog.dialog('close');
+                        activeDialog.ppbDialog('close');
                     }
                 }
             }
@@ -857,11 +863,11 @@
     };
 
     panels.ppbEditorButtonEvents = function() {
-        $('#ppb-editor-container').find('.ui-dialog-titlebar-close').off('click').on('click', function () {
+        $('#ppb-editor-container').find('.ppb-dialog-titlebar-close').off('click').on('click', function () {
             panels.block_editor_dialog_properties.close(undefined, undefined, $('#ppb-editor-container'));
             $('#ppb-editor-container').hide();
         });
-        $('#ppb-editor-container').find('.ui-dialog-buttonpane .pootle').off('click').click(function () {
+        $('#ppb-editor-container').find('.ppb-dialog-buttonpane .pootle').off('click').click(function () {
             panels.block_editor_dialog_properties.buttons[0].click(undefined, undefined, $('#ppb-editor-container'));
             panels.block_editor_dialog_properties.close(undefined, undefined, $('#ppb-editor-container'));
             $('#ppb-editor-container').hide();

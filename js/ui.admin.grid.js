@@ -310,7 +310,7 @@
 
             var $container = $(this).closest('.grid-container');
 
-            $('#remove-row-dialog').dialog({
+            $('#remove-row-dialog').ppbDialog({
                 dialogClass: 'panels-admin-dialog',
                 autoOpen: true,
                 modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
@@ -440,10 +440,10 @@
 
                         panels.checkAddRowButtonColor( true );
 
-                        $(this).dialog('close');
+                        $(this).ppbDialog('close');
                     },
                     Cancel: function () {
-                        $(this).dialog('close');
+                        $(this).ppbDialog('close');
                     }
                 }
 

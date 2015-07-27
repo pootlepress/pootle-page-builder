@@ -1,6 +1,3 @@
-/*! jQuery UI - v1.11.4 - 2015-06-20 * http://jqueryui.com * Includes: core.css, slider.css * Copyright 2015 jQuery Foundation and other contributors; Licensed MIT */
-.ppb-helper-hidden{display:none}.ppb-helper-hidden-accessible{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.ppb-helper-reset{margin:0;padding:0;border:0;outline:0;line-height:1.3;text-decoration:none;font-size:100%;list-style:none}.ppb-helper-clearfix:before,.ppb-helper-clearfix:after{content:"";display:table;border-collapse:collapse}.ppb-helper-clearfix:after{clear:both}.ppb-helper-clearfix{min-height:0}.ppb-helper-zfix{width:100%;height:100%;top:0;left:0;position:absolute;opacity:0;filter:Alpha(Opacity=0)}.ppb-front{z-index:100}.ppb-state-disabled{cursor:default!important}.ppb-icon{display:block;text-indent:-99999px;overflow:hidden;background-repeat:no-repeat}.ppb-widget-overlay{position:fixed;top:0;left:0;width:100%;height:100%}.ppb-slider{position:relative;text-align:left}.ppb-slider .ppb-slider-handle{position:absolute;z-index:2;width:1.2em;height:1.2em;cursor:default;-ms-touch-action:none;touch-action:none}.ppb-slider .ppb-slider-range{position:absolute;z-index:1;font-size:.7em;display:block;border:0;background-position:0 0}.ppb-slider.ppb-state-disabled .ppb-slider-handle,.ppb-slider.ppb-state-disabled .ppb-slider-range{filter:inherit}.ppb-slider-horizontal{height:.8em;background: #f2f2f2;}.ppb-slider-horizontal, .ppb-slider-horizontal .ppb-slider-handle{border-radius: 9px;border: 1px solid #aaa;}.ppb-slider-horizontal .ppb-slider-handle{top:-.3em;margin-left:-.6em;background: #fff;}.ppb-slider-horizontal .ppb-slider-range{top:0;height:100%}.ppb-slider-horizontal .ppb-slider-range-min{left:0}.ppb-slider-horizontal .ppb-slider-range-max{right:0}.ppb-slider-vertical{width:.8em;height:100px}.ppb-slider-vertical .ppb-slider-handle{left:-.3em;margin-left:0;margin-bottom:-.6em}.ppb-slider-vertical .ppb-slider-range{left:0;width:100%}.ppb-slider-vertical .ppb-slider-range-min{bottom:0}.ppb-slider-vertical .ppb-slider-range-max{top:0}:focus {outline: none;}
-
 #panels {
     position: relative;
 }
@@ -90,7 +87,7 @@ html {
     min-height: 59px;
 }
 
-#panels-container .grid .ppb-resizable-handle.ppb-resizable-w {
+#panels-container .grid .ui-resizable-handle.ui-resizable-w {
     left: -11px;
     width: 10px;
     background: rgba(0, 150, 211, 0);
@@ -101,11 +98,11 @@ html {
     transition: background 0.25s ease-in-out;
 }
 
-#panels-container .grid .ppb-resizable-handle.ppb-resizable-w:hover {
+#panels-container .grid .ui-resizable-handle.ui-resizable-w:hover {
     background: #eee;
 }
 
-#panels-container .grid-container:hover .ppb-resizable-handle {
+#panels-container .grid-container:hover .ui-resizable-handle {
     background: #f1f1f1;
 }
 
@@ -276,7 +273,7 @@ video.ppb-bg-video {
     margin-top: 5px;
 }
 
-#pootlepb-panels .ppb-resizable-helper {
+#pootlepb-panels .ui-resizable-helper {
     position: absolute;
     border: 1px solid #ecd800;
     -ms-box-sizing: border-box;
@@ -382,12 +379,12 @@ h4 {}
     display: none;
 }
 
-#pootlepb-panels .panels-container .panel.ppb-sortable-helper h4 {
+#pootlepb-panels .panels-container .panel.ui-sortable-helper h4 {
     cursor: move;
 }
 
-#pootlepb-panels .panels-container .ppb-state-highlight,
-.cell-selected .panels-container .ppb-state-highlight {
+#pootlepb-panels .panels-container .ui-state-highlight,
+.cell-selected .panels-container .ui-state-highlight {
     position: relative;
     height: 44px;
     border: 1px dashed #b4b9be;
@@ -947,7 +944,7 @@ input:disabled{
     background: #f5f5f5;
 }
 
-.ppb-slider.ppb-slider{
+.ppb-slider.ui-slider{
     margin: 3px 0 0;
     width: 200px;   
 }
@@ -985,8 +982,8 @@ input:disabled{
     font-size: 10px;
 }
 
-#panels .ppb-button,
-#add-to-panels .ppb-button {
+#panels .ui-button,
+#add-to-panels .ui-button {
     position: relative;
     height: auto;
     cursor: pointer;
@@ -1006,78 +1003,78 @@ button.wp-switch-editor {
     height: 25px;
 }
 
-#panels .ppb-button.ppb-button-icon-only .ppb-button-text,
-#add-to-panels .ppb-button.ppb-button-icon-only .ppb-button-text {
+#panels .ui-button.ui-button-icon-only .ui-button-text,
+#add-to-panels .ui-button.ui-button-icon-only .ui-button-text {
     display: none;
 }
 
-#panels .ppb-button .ppb-icon,
-#add-to-panels .ppb-button .ppb-icon {
+#panels .ui-button .ui-icon,
+#add-to-panels .ui-button .ui-icon {
     width: 8px;
     height: 8px;
     display: block;
 }
 
-#panels .ppb-button .ppb-icon.ppb-icon-add,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-add {
+#panels .ui-button .ui-icon.ui-icon-add,
+#add-to-panels .ui-button .ui-icon.ui-icon-add {
     background: url(images/icons/add.png);
 }
 
-#panels .ppb-button .ppb-icon.ppb-icon-prebuilt,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-prebuilt {
+#panels .ui-button .ui-icon.ui-icon-prebuilt,
+#add-to-panels .ui-button .ui-icon.ui-icon-prebuilt {
     background: url(images/icons/brush.png);
 }
 
-#panels .ppb-button .ppb-icon.ppb-icon-columns,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-columns {
+#panels .ui-button .ui-icon.ui-icon-columns,
+#add-to-panels .ui-button .ui-icon.ui-icon-columns {
     background: url(images/icons/columns.png);
 }
 
-#panels .ppb-button .ppb-icon.ppb-icon-settings,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-settings {
+#panels .ui-button .ui-icon.ui-icon-settings,
+#add-to-panels .ui-button .ui-icon.ui-icon-settings {
     background: url(images/icons/settings.png);
 }
 
-#panels .ppb-button .ppb-icon.ppb-icon-move,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-move {
+#panels .ui-button .ui-icon.ui-icon-move,
+#add-to-panels .ui-button .ui-icon.ui-icon-move {
     background: url(images/icons/move.png);
 }
 
-#panels .ppb-button .ppb-icon.ppb-icon-remove,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-remove {
+#panels .ui-button .ui-icon.ui-icon-remove,
+#add-to-panels .ui-button .ui-icon.ui-icon-remove {
     background: url(images/icons/remove.png);
 }
 
-#panels .ppb-button .ppb-icon.ppb-icon-gear,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-gear {
+#panels .ui-button .ui-icon.ui-icon-gear,
+#add-to-panels .ui-button .ui-icon.ui-icon-gear {
     width: 20px !important;
     height: 20px !important;
     box-sizing: content-box;
     padding: 4px !important;
 }
 
-#panels .ppb-button .ppb-icon.ppb-icon-times,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-times {
+#panels .ui-button .ui-icon.ui-icon-times,
+#add-to-panels .ui-button .ui-icon.ui-icon-times {
     background: url(images/icons/times.png);
 }
 
-.ppb-dialog.panels-admin-dialog, .ppb-cool-panel-container {
+.ui-dialog.panels-admin-dialog, .ppb-cool-panel-container {
     z-index: 99999 !important;
 }
 
-.ppb-dialog.panels-admin-dialog .ppb-dialog-content {
+.ui-dialog.panels-admin-dialog .ui-dialog-content {
     z-index: 80002 !important;
 }
 
-.ppb-dialog.panels-admin-dialog .ppb-dialog-content.ppb-dialog-content-loading {
+.ui-dialog.panels-admin-dialog .ui-dialog-content.ui-dialog-content-loading {
     background: url('./images/ajax-loader-small.gif') center center no-repeat;
 }
 
-.ppb-dialog.panels-admin-dialog .ppb-dialog-content > *:first-child {
+.ui-dialog.panels-admin-dialog .ui-dialog-content > *:first-child {
     margin-top: 0;
 }
 
-.ppb-dialog.panels-admin-dialog .ppb-dialog-content > *:last-child {
+.ui-dialog.panels-admin-dialog .ui-dialog-content > *:last-child {
     margin-bottom: 0;
 }
 
@@ -1239,12 +1236,12 @@ div#pootle-content-module-tabs li a {
     border: 1px solid #aaa;
 }
 
-div#pootle-content-module-tabs li.ppb-tabs-active a {
+div#pootle-content-module-tabs li.ui-tabs-active a {
     border-bottom: 1px solid #fff;
     background: #fff;
 }
 
-div#pootle-content-module-tabs li.ppb-tabs-active a:focus {
+div#pootle-content-module-tabs li.ui-tabs-active a:focus {
     -webkit-box-shadow: none;
     box-shadow: none;
     outline: 0;
@@ -1329,15 +1326,15 @@ when editing event widget from Event Calendar Pro */
     overflow: hidden;
 }
 
-.ppb-cool-panel-container .ppb-dialog-titlebar, .ppb-cool-panel-container .ppb-dialog-buttonpane {
+.ppb-cool-panel-container .ui-dialog-titlebar, .ppb-cool-panel-container .ui-dialog-buttonpane {
     margin-left: 200px;
 }
 
-.ppb-cool-panel-container .ppb-dialog-buttonpane {
+.ppb-cool-panel-container .ui-dialog-buttonpane {
     padding: 16px;    
 }
 
-.ppb-cool-panel-container .ppb-dialog-content {
+.ppb-cool-panel-container .ui-dialog-content {
     padding: 0;
     overflow: visible;
 }
@@ -1362,7 +1359,7 @@ when editing event widget from Event Calendar Pro */
     border-right: 1px solid #ccc;
 }
 
-.ppb-cool-panel-wrap > div.ppb-widget-content {
+.ppb-cool-panel-wrap > div.ui-widget-content {
     padding: 16px;
     margin: 0 0 0 200px;
 ';
@@ -1386,7 +1383,7 @@ when editing event widget from Event Calendar Pro */
     box-shadow: none;
 }
 
-.ppb-cool-panel-container .ppb-tabs-active a {
+.ppb-cool-panel-container .ui-tabs-active a {
     color: #23282d;
     font-weight: 700;
     cursor: default;

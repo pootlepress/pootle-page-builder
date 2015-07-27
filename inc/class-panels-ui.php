@@ -67,6 +67,8 @@ final class Pootle_Page_Builder_Admin_UI {
 	public function enqueue_styles() {
 		$screen = get_current_screen();
 		if ( in_array( $screen->id, pootlepb_settings( 'post-types' ) ) ) {
+			wp_enqueue_script( 'pootlepb-ui' );
+			wp_enqueue_style( 'pootlepb-ui-styles' );
 			wp_enqueue_style( 'pootlepb-admin', POOTLEPB_URL . 'css/admin.css', array(), POOTLEPB_VERSION );
 			wp_enqueue_style( 'ppb-chosen-style', POOTLEPB_URL . 'js/chosen/chosen.css' );
 			wp_enqueue_style( 'wp-jquery-ui-dialog' );
@@ -109,7 +111,7 @@ final class Pootle_Page_Builder_Admin_UI {
 		global $pootlepb_ui_js_deps;
 
 		//UI Scripts
-		wp_enqueue_script( 'pootlepb-ui-dialog', POOTLEPB_URL . 'js/ui.dialog.js', POOTLEPB_VERSION );
+		wp_enqueue_script( 'pootlepb-ui', POOTLEPB_URL . 'js/ui.dialog.js', POOTLEPB_VERSION );
 		wp_enqueue_script( 'pootlepb-ui-admin', POOTLEPB_URL . 'js/ui.admin.js', $pootlepb_ui_js_deps, POOTLEPB_VERSION );
 		wp_enqueue_script( 'pootlepb-ui-admin-sticky', POOTLEPB_URL . 'js/ui.admin.sticky.js', array( 'jquery', ), POOTLEPB_VERSION );
 		wp_enqueue_script( 'pootlepb-ui-admin-panels', POOTLEPB_URL . 'js/ui.admin.panels.js', array( 'jquery', ), POOTLEPB_VERSION );
@@ -150,7 +152,7 @@ final class Pootle_Page_Builder_Admin_UI {
 		$screen = get_current_screen();
 
 		if ( in_array( $screen->id, pootlepb_settings( 'post-types' ) ) ) {
-			wp_dequeue_style( 'jquery-ui-datepicker' );
+			//wp_dequeue_style( 'jquery-ui-datepicker' );
 		}
 	}
 

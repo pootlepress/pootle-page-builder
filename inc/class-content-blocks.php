@@ -308,32 +308,31 @@ final class Pootle_Page_Builder_Content_Block {
 		if ( in_array( $screen->id, pootlepb_settings( 'post-types' ) ) ) {
 			?>
 			<div id="ppb-editor-container"
-			     style="display:none;position:fixed;top:25px;bottom:25px;right:25px;left:25px;"
-			     class="panels-admin-dialog ppb-add-content-panel ppb-cool-panel-container ui-helper-clearfix"
-			     tabindex="-1" role="dialog" aria-describedby="ui-id-7" aria-labelledby="ui-id-8">
-				<div class="ui-dialog-titlebar ui-widget-header ui-corner-all ui-helper-clearfix">
-        <span id="ui-id-8" class="ui-dialog-title">
-            Editor
-        </span>
-					<button type="button" class="ui-button ui-corner-all ui-button-icon-only ui-dialog-titlebar-close"
-					        role="button" title="Close">
-						<span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span>
-						<span class="ui-button-text">Close</span>
-					</button>
+			     style="display:none;position:absolute;right:32px;left:auto;"
+			     class="panels-admin-dialog ppb-dialog ppb-add-content-panel ppb-cool-panel-container ppb-helper-clearfix"
+			     tabindex="-1" role="dialog" aria-describedby="ppb-id-7" aria-labelledby="ppb-id-8">
+				<div
+					class="ppb-dialog-titlebar ppb-widget-header ppb-corner-all ppb-helper-clearfix ui-draggable-handle">
+					<span id="ppb-id-8" class="ppb-dialog-title"> Editor </span>
+					<button
+						class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ppb-dialog-titlebar-close"
+						title="Close" type="button"><span class=
+						                                  "ui-button-icon-primary ui-icon ppb-icon-closethick"></span><span
+							class="ui-button-text">Close</span></button>
 				</div>
 				<div
-					class="panel-dialog dialog-form widget-dialog-pootle_pb_content_block ui-dialog-content ui-widget-content"
-					id="ui-id-7">
+					class="panel-dialog dialog-form widget-dialog-pootle_pb_content_block ppb-dialog-content ppb-widget-content"
+					id="ppb-id-7">
 					<?php
 					$this->editor_panel();
 					?>
 				</div>
-				<div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-					<div class="ui-dialog-buttonset">
+				<div class="ppb-dialog-buttonpane ppb-widget-content ppb-helper-clearfix">
+					<div class="ppb-dialog-buttonset">
 						<button type="button"
-						        class="button pootle stop ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+						        class="button pootle stop ppb-button ppb-widget ppb-state-default ppb-corner-all ppb-button-text-only"
 						        role="button">
-							<span class="ui-button-text">Done</span>
+							<span class="ppb-button-text">Done</span>
 						</button>
 					</div>
 				</div>

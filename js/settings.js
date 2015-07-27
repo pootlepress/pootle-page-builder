@@ -19,13 +19,13 @@
                         text: 'Cancel',
                         click: function () {
                             $('#pootlepb-hard-uninstall').prop('checked', false);
-                            dialog.dialog('close');
+                            dialog.ppbDialog('close');
                         }
                     },
                     {
                         text: 'Yes, I\'m sure',
                         click: function () {
-                            dialog.dialog('close');
+                            dialog.ppbDialog('close');
                         }
                     }
                 ]
