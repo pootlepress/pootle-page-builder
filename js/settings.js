@@ -11,7 +11,6 @@
             .appendTo($('body'))
             .ppbDialog({
                 autoOpen: false,
-                modal: false,
                 title: "Are you sure",
                 width: 500,
                 buttons: [

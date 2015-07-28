@@ -30,7 +30,7 @@ jQuery(function( $ ) {
             maxWidth: null,
             minHeight: 150,
             minWidth: 150,
-            modal: false,
+            modal: true,
             position: {
                 my: "center",
                 at: "center",
@@ -250,9 +250,7 @@ jQuery(function( $ ) {
             // Ensure the overlay is moved to the top with the dialog, but only when
             // opening. The overlay shouldn't move after the dialog is open so that
             // modeless dialogs opened after the modal dialog stack properly.
-            if ( this.overlay ) {
-                this.overlay.css( "z-index", this.uiDialog.css( "z-index" ) - 1 );
-            }
+            this.overlay.css( "z-index", this.uiDialog.css( "z-index" ) - 1 );
 
             this._show( this.uiDialog, this.options.show, function() {
                 that._focusTabbable();
@@ -833,10 +831,6 @@ jQuery(function( $ ) {
         },
 
         _destroyOverlay: function() {
-            if ( !this.options.modal ) {
-                return;
-            }
-
             if ( this.overlay ) {
                 var overlays = this.document.data( "ppb-dialog-overlays" ) - 1;
 

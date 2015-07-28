@@ -248,7 +248,7 @@
                 var newPanelId = $currentPanel.find('> input[name$="[info][id]"]').val(),
                     panelHeight, $edi_ifr, ediGutterHeight, editor, name;
 
-                var overlay = $('<div class="ppb-panels-ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
+                var overlay = $('<div class="ppb-widget-overlay ui-front"></div>').css('z-index', 80001);
 
                 activeDialog.css({
                     display: "block",
@@ -459,15 +459,7 @@
             $('#remove-widget-dialog').ppbDialog({
                 dialogClass: 'panels-admin-dialog',
                 autoOpen: false,
-                modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
                 title: $('#remove-widget-dialog').attr('data-title'),
-                open: function () {
-                    var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-                    $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-                },
-                close: function () {
-                    $(this).data('overlay').remove();
-                },
                 buttons: {
                     Yes: function () {
 
@@ -788,7 +780,6 @@
     panels.block_editor_dialog_properties = {
         dialogClass: 'panels-admin-dialog ppb-add-content-panel ppb-cool-panel-container',
         autoOpen: false,
-        modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
         draggable: false,
         resizable: false,
         title: "Editor",
@@ -798,14 +789,9 @@
             $(this).closest('.ui-dialog').find('.show-in-panels').show();
         },
         open: function (e, ui, $t) {
-
             var $t = $t || $(this);
-
             // This fixes the A element focus issue
             $t.closest('.ui-dialog').find('a').blur();
-
-            var overlay = $('<div class="ppb-panels-ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-            $t.data('overlay', overlay).closest('.ui-dialog').before(overlay);
 
         },
         close: function (e, ui, $t) {

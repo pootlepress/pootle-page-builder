@@ -386,11 +386,12 @@ h4 {}
     cursor: move;
 }
 
-#pootlepb-panels .panels-container .ppb-state-highlight,
-.cell-selected .panels-container .ppb-state-highlight {
+#pootlepb-panels .panels-container .ui-state-highlight,
+.cell-selected .panels-container .ui-state-highlight {
     position: relative;
     height: 44px;
     border: 1px dashed #b4b9be;
+    background: none;
     margin-bottom: 5px;
 }
 

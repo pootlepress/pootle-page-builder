@@ -129,73 +129,6 @@ jQuery(function ($) {
         });
     };
 
-    $('#page-setting-dialog').data('html', $('#page-setting-dialog').html());
-
-    $('#page-setting-dialog').ppbDialog({
-        dialogClass: 'panels-admin-dialog',
-        modal: false,
-        autoOpen: false,
-        width: 500,
-        maxHeight: Math.round($(window).height() * 0.8),
-        draggable: false,
-        resizable: false,
-        title: $('#page-setting-dialog').attr('data-title'),
-        open: function () {
-            var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-            $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-
-            window.pootlePagePageSettingUploadButton();
-
-            var fieldValues = JSON.parse($('#page-settings').val());
-            if (typeof fieldValues != 'undefined' || fieldValues != null) {
-
-                for (var fieldName in fieldValues) {
-
-                    // Save the dialog field
-                    var df = $('#page-setting-dialog [data-style-field="' + fieldName + '"]');
-                    switch (df.data('style-field-type')) {
-                        case 'checkbox':
-                            df.attr('checked', fieldValues[fieldName]);
-                            break;
-                        case 'color':
-                            df.wpColorPicker('color', fieldValues[fieldName]);
-                            break;
-                        default :
-                            df.val(fieldValues[fieldName]);
-                            break;
-                    }
-                }
-            }
-
-        },
-        close: function () {
-            $(this).data('overlay').remove();
-
-            // Copy the dialog values back to the hidden value
-            var fieldValues = {};
-            $('#page-setting-dialog [data-style-field]').each(function () {
-                var $$ = $(this);
-                var fieldName = $$.data('style-field');
-
-                switch ($$.data('style-field-type')) {
-                    case 'checkbox':
-                        fieldValues[fieldName] = $$.is(':checked');
-                        break;
-                    default :
-                        fieldValues[fieldName] = $$.val();
-                        break;
-                }
-            });
-
-            $('#page-settings').val(JSON.stringify(fieldValues));
-        },
-        buttons: {
-            'Done': function () {
-                $('#page-setting-dialog').ppbDialog('close');
-            }
-        }
-    });
-
     $('#page-setting-dialog [data-style-field-type="color"]')
         .wpColorPicker()
         .closest('p').find('a').click(function () {
@@ -217,7 +150,6 @@ jQuery(function ($) {
         .ppbDialog({
             dialogClass: 'panels-admin-dialog',
             autoOpen: false,
-            modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
             draggable: false,
             resizable: false,
             title: panels.i10n.messages.styleWidget,
@@ -226,9 +158,6 @@ jQuery(function ($) {
             open: function () {
                 // This fixes the A element focus issue
                 $(this).closest('.ui-dialog').find('a').blur();
-
-                var overlay = $('<div class="ppb-panels-ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-                $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
 
                 var $hidden = window.$currentPanel.find('input[name$="[style]"]');
                 var json = $hidden.val();
@@ -330,7 +259,6 @@ jQuery(function ($) {
     //
     $('#hide-element-dialog').ppbDialog({
         dialogClass: 'panels-admin-dialog',
-        modal: false,
         autoOpen: false,
         width: 500,
         maxHeight: Math.round($(window).height() * 0.8),
@@ -338,9 +266,6 @@ jQuery(function ($) {
         resizable: false,
         title: $('#hide-element-dialog').attr('data-title'),
         open: function () {
-            var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-            $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-
             var fieldValues = JSON.parse($('#hide-elements').val());
             if (typeof fieldValues != 'undefined' || fieldValues != null) {
 
@@ -361,8 +286,6 @@ jQuery(function ($) {
 
         },
         close: function () {
-            $(this).data('overlay').remove();
-
             // Copy the dialog values back to the hidden value
             var fieldValues = {};
             $('#hide-element-dialog [data-style-field]').each(function () {
@@ -394,15 +317,9 @@ jQuery(function ($) {
         .ppbDialog({
             dialogClass: 'panels-admin-dialog',
             autoOpen: false,
-            modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
             title: $('#grid-add-dialog').attr('data-title'),
             open: function () {
                 $(this).find('input').val(2).select();
-                var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-                $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-            },
-            close: function () {
-                $(this).data('overlay').remove();
             },
             width: 430,
             buttons: gridAddDialogButtons
@@ -429,15 +346,9 @@ jQuery(function ($) {
             dialogClass: 'panels-admin-dialog',
             autoOpen: false,
             width: 550,
-            modal: true, // Disable modal so we don't mess with media editor. We'll create our own overlay.
             title: $contentSwitchDialog.attr('data-title'),
             open: function () {
                 $(this).find('input').val(2).select();
-                var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-                $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-            },
-            close: function () {
-                $(this).data('overlay').remove();
             },
             buttons: [
                 {
@@ -466,15 +377,9 @@ jQuery(function ($) {
             dialogClass: 'panels-admin-dialog',
             autoOpen: false,
             width: 500,
-            modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
             title: $contentSwitchDialog.attr('data-title'),
             open: function () {
                 $(this).find('input').val(2).select();
-                var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-                $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-            },
-            close: function () {
-                $(this).data('overlay').remove();
             },
             buttons: [
                 {
@@ -776,9 +681,7 @@ jQuery(function ($) {
                     numPanels = $t.find('.panel').length;
                 $t.css("cursor", "default");
 
-                if (numPanels > 0) {
-                    panels.removePaddingAnimated( $t );
-                }
+                panels.removePaddingAnimated( $t );
             }
         );
     };

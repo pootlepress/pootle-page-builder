@@ -12,19 +12,9 @@ jQuery(function ($) {
         autoOpen: false,
         resizable: false,
         draggable: false,
-        modal: false,
         title: $('#grid-prebuilt-dialog').attr('data-title'),
         minWidth: 600,
         height: 350,
-        create: function (event, ui) {
-        },
-        open: function () {
-            var overlay = $('<div class="ppb-panels-ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-            $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-        },
-        close: function () {
-            $(this).data('overlay').remove();
-        },
         buttons: [
             {
                 text: panels.i10n.buttons.insert,
