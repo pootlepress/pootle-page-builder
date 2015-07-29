@@ -86,7 +86,7 @@ final class Pootle_Page_Builder_Content_Block {
 		$attr = array( 'id' => $id );
 
 		//Classes for this content block
-		$attr['class'] = array( 'ppb-block', 'paanel' );
+		$attr['class'] = array( 'ppb-block' );
 		if ( ! empty( $styleArray['class'] ) ) { $attr['class'][] = $styleArray['class']; }
 
 		$styleWithSelector = ''; // Passed with reference

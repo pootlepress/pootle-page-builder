@@ -98,11 +98,6 @@
                 }
             });
         });
-
-        $this.find('[data-style-field-type="upload"]').change(function() {
-            var $t = $(this);
-            $t.css('background-image','url('+$t.val()+')')
-        });
     };
 
     panels.bgVideoMobImgSet = function(){

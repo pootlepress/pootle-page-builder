@@ -93,7 +93,12 @@ function pootlepb_row_dialog_fields_output( $tab = null ) {
 	//Row settings panel fields
 	$fields = pootlepb_row_settings_fields();
 
-	foreach ( $fields as $key => $field ) {
+	//Prioritize array
+	pootlepb_prioritize_array( $fields );
+
+	foreach ( $fields as $field ) {
+
+		$key = $field['id'];
 
 		//Skip if current fields doesn't belong to the specified tab
 		if ( ! empty( $tab ) && $tab != $field['tab'] ) { continue; }
@@ -215,7 +220,12 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 }
 
 function pootlepb_block_dialog_fields_output( $tab = null ) {
+
+	//Content block panel fields
 	$fields = pootlepb_block_styling_fields();
+
+	//Prioritize array
+	pootlepb_prioritize_array( $fields );
 
 	foreach ( $fields as $key => $field ) {
 
