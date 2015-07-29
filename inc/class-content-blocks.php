@@ -92,12 +92,8 @@ final class Pootle_Page_Builder_Content_Block {
 		$styleWithSelector = ''; // Passed with reference
 		$this->set_inline_embed_styles( $attr, $styleWithSelector, $styleArray, $id ); // Get Styles
 
-		$attr['class'] = implode( ' ', $attr['class'] );
-
-		echo '<div';
-		foreach ( $attr as $k => $v ) {
-			echo " $k='$v'";
-		}
+		echo '<div ';
+		echo pootlepb_stringify_attributes( $attr );
 		echo '>';
 	}
 
