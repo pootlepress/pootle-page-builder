@@ -87,16 +87,28 @@
         $this.find('.ppb-slider').each(function() {
             var $t = $(this),
                 $f = $t.siblings('input'),
-                $spn = $(this).siblings('.slider-val');
-            $spn.text(($f.val() * 100) + '%');
+                $spn = $(this).siblings('.slider-val'),
+                max = $t.data('max'),
+                valu;
+
+            //Update span
+            if ( '' != $f.val() ) {
+                valu = $f.val();
+            } else {
+                valu = $t.data('default');
+            }
+            $spn.text((valu/max*100) + '%');
+
+            //Init slider
             $t.slider({
-                min: 0,
-                max: 1,
-                step: 0.05,
-                value: $f.val(),
+                min: $t.data('min'),
+                max: max,
+                step: $t.data('step'),
+                value: valu,
                 slide: function (e, ui) {
+                    //Update values on slide
                     $f.val(ui.value);
-                    $spn.text(Math.round(ui.value * 100) + '%');
+                    $spn.text(Math.round(ui.value/max*100) + '%');
                 }
             });
         });

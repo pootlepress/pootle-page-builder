@@ -248,7 +248,7 @@ class Pootle_Page_Builder_Render_Grid {
 		if ( isset( $style['background'] ) && ! empty( $style['bg_overlay_color'] ) ) {
 			$overlay_color = $style['bg_overlay_color'];
 			if ( ! empty( $style['bg_overlay_opacity'] ) ) {
-				$overlay_color = 'rgba( ' . pootlepb_hex2rgb( $overlay_color ) . ", {$style['bg_overlay_opacity']} )";
+				$overlay_color = 'rgba( ' . pootlepb_hex2rgb( $overlay_color ) . ', ' . ( 1 - $style['bg_overlay_opacity'] ) . ' )';
 			}
 			$css .= "$rowID .panel-row-style:before { background-color: $overlay_color; }";
 		}

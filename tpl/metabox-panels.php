@@ -1,5 +1,12 @@
 <?php
 $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
+
+$buttons = array( 'grid-add' => 'Add Row' );
+if ( ! empty( $layouts ) ) {
+	$buttons['prebuilt-set'] = 'Use Existing Page Layout';
+}
+
+$buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 ?>
 
 <div id="panels" data-animations="true">
@@ -11,11 +18,13 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 
 	<div id="add-to-panels">
 
-		<button class="grid-add add-button ed_button button button-small"><?php _e( 'Add Row', 'ppb-panels' ) ?></button>
-
-		<?php if ( ! empty( $layouts ) ) : ?>
-			<button class="prebuilt-set add-button ed_button button button-small"><?php _e( 'Use Existing Page Layout', 'ppb-panels' ) ?></button>
-		<?php endif; ?>
+	<?php
+		foreach ( $buttons as $id => $name ) { ?>
+			<button class="<?php echo $id ?> add-button ed_button button button-small">
+				<?php _e( $name, 'ppb-panels' ) ?>
+			</button>
+		<?php }
+	?>
 
 		<div class="clear"></div>
 	</div>
@@ -49,11 +58,9 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 		$visit_count = get_user_meta( $current_user->ID, 'pootlepb_visit_count', true );
 
 		//Set welcome message
-		if ( empty( $visit_count ) ) {
-
+		if ( empty( $visit_count ) || empty( $layouts ) ) {
 			$visit_count = 0;
 			$message = "Welcome to Page Builder{$username}! Click the 'Add Row' button above to start building your page.";
-
 		} elseif ( 1 == $visit_count ) {
 			$message = "Welcome back to Page Builder{$username}! You can now also use existing pages as a template to start your page and save you time!";
 		} else {
