@@ -2,6 +2,8 @@
 
     panels.addInputFieldEventHandlers = function ( $this ) {
 
+        $('html').trigger( 'pootlepb_admin_input_field_event_handlers', [ $this ] );
+
         /* Removing existing event handlers */
         $this.find('.upload-button').off('click');
         $this.find('.video-upload-button').off('click');

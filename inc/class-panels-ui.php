@@ -120,7 +120,7 @@ final class Pootle_Page_Builder_Admin_UI {
 		wp_enqueue_script( 'pootlepb-ui-admin-tooltip', POOTLEPB_URL . 'js/ui.admin.tooltip.min.js', array( 'jquery', ), POOTLEPB_VERSION );
 		wp_enqueue_script( 'pootlepb-ui-admin-media', POOTLEPB_URL . 'js/ui.admin.media.min.js', array( 'jquery', ), POOTLEPB_VERSION );
 		wp_enqueue_script( 'pootlepb-ui-admin-styles', POOTLEPB_URL . 'js/ui.admin.styles.js', array( 'jquery', ), POOTLEPB_VERSION );
-		wp_enqueue_script( 'pootlepb-ui-admin-media-buttons', POOTLEPB_URL . 'js/ui.admin.media-buttons.js', array( 'jquery', ) );
+		wp_enqueue_script( 'pootlepb-ui-admin-media-buttons', POOTLEPB_URL . 'js/ui.admin.fields-handler.js', array( 'jquery', ) );
 	}
 
 	/**
