@@ -305,3 +305,16 @@
 .ppb-dialog .ui-icon, .ppb-dialog .ppb-dialog-content .ui-icon{
     background: none;
 }
+
+.ppb-widget-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  min-height: 360px;
+  background: #000;
+  opacity: .7;
+  filter: alpha(opacity=70);
+  z-index: 100101;
+}

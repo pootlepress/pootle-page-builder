@@ -11,7 +11,6 @@
             .appendTo($('body'))
             .ppbDialog({
                 autoOpen: false,
-                modal: false,
                 title: "Are you sure",
                 width: 500,
                 buttons: [
@@ -19,13 +18,13 @@
                         text: 'Cancel',
                         click: function () {
                             $('#pootlepb-hard-uninstall').prop('checked', false);
-                            dialog.dialog('close');
+                            dialog.ppbDialog('close');
                         }
                     },
                     {
                         text: 'Yes, I\'m sure',
                         click: function () {
-                            dialog.dialog('close');
+                            dialog.ppbDialog('close');
                         }
                     }
                 ]

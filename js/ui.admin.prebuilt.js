@@ -7,24 +7,14 @@
  */
 
 jQuery(function ($) {
-    $('#grid-prebuilt-dialog').show().dialog({
+    $('#grid-prebuilt-dialog').show().ppbDialog({
         dialogClass: 'panels-admin-dialog',
         autoOpen: false,
         resizable: false,
         draggable: false,
-        modal: false,
         title: $('#grid-prebuilt-dialog').attr('data-title'),
         minWidth: 600,
         height: 350,
-        create: function (event, ui) {
-        },
-        open: function () {
-            var overlay = $('<div class="ppb-panels-ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-            $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-        },
-        close: function () {
-            $(this).data('overlay').remove();
-        },
         buttons: [
             {
                 text: panels.i10n.buttons.insert,
@@ -35,7 +25,7 @@ jQuery(function ($) {
 
                     var s = $('#grid-prebuilt-input').find(':selected');
                     if (s.attr('data-layout-id') == null) {
-                        $('#grid-prebuilt-dialog').dialog('close');
+                        $('#grid-prebuilt-dialog').ppbDialog('close');
                         return;
                     }
 
@@ -47,7 +37,7 @@ jQuery(function ($) {
                                 // Clear the grids and load the prebuilt layout
                                 panels.clearGrids();
                                 panels.loadPanels(data);
-                                $('#grid-prebuilt-dialog').dialog('close');
+                                $('#grid-prebuilt-dialog').ppbDialog('close');
                             }
                         }
                     });
@@ -65,7 +55,7 @@ jQuery(function ($) {
 
     // Button for adding prebuilt layouts
     $('#add-to-panels .prebuilt-set').click(function () {
-            $('#grid-prebuilt-dialog').dialog('open');
+            $('#grid-prebuilt-dialog').ppbDialog('open');
             return false;
         });
 });

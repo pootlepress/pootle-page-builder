@@ -263,6 +263,35 @@ function pootlepb_settings( $key = '' ) {
 	return $settings;
 }
 
+/**
+ * Compares priority
+ * @param array $a
+ * @param array $b
+ * @return bool
+ */
+function pootlepb_priority_cmp( $a, $b ) {
+
+	return $a['priority'] > $b['priority'];
+}
+
+/**
+ * Compares priority
+ *
+ * @param array $arr
+ * @return bool
+ */
+function pootlepb_prioritize_array( &$arr = array() ) {
+	foreach ( $arr as $k => $v ) {
+		$arr[ $k ]['id'] = $k;
+	}
+	uasort( $arr, 'pootlepb_priority_cmp' );
+}
+
+/**
+ * Returns defaults from content style fields
+ * @global $pootlepb_content_block_styling_fields
+ * @return array
+ */
 function pootlepb_default_content_block_style( ) {
 	global $pootlepb_content_block_styling_fields;
 

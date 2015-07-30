@@ -68,7 +68,7 @@ jQuery(function ($) {
         if (panels.animations) gridContainer.hide().slideDown();
         else gridContainer.show();
 
-        $('#grid-add-dialog').dialog('close');
+        $('#grid-add-dialog').ppbDialog('close');
     };
 
     window.pootlePagePageSettingUploadButton = function () {
@@ -129,77 +129,10 @@ jQuery(function ($) {
         });
     };
 
-    $('#page-setting-dialog').data('html', $('#page-setting-dialog').html());
-
-    $('#page-setting-dialog').dialog({
-        dialogClass: 'panels-admin-dialog',
-        modal: false,
-        autoOpen: false,
-        width: 500,
-        maxHeight: Math.round($(window).height() * 0.8),
-        draggable: false,
-        resizable: false,
-        title: $('#page-setting-dialog').attr('data-title'),
-        open: function () {
-            var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-            $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-
-            window.pootlePagePageSettingUploadButton();
-
-            var fieldValues = JSON.parse($('#page-settings').val());
-            if (typeof fieldValues != 'undefined' || fieldValues != null) {
-
-                for (var fieldName in fieldValues) {
-
-                    // Save the dialog field
-                    var df = $('#page-setting-dialog [data-style-field="' + fieldName + '"]');
-                    switch (df.data('style-field-type')) {
-                        case 'checkbox':
-                            df.attr('checked', fieldValues[fieldName]);
-                            break;
-                        case 'color':
-                            df.wpColorPicker('color', fieldValues[fieldName]);
-                            break;
-                        default :
-                            df.val(fieldValues[fieldName]);
-                            break;
-                    }
-                }
-            }
-
-        },
-        close: function () {
-            $(this).data('overlay').remove();
-
-            // Copy the dialog values back to the hidden value
-            var fieldValues = {};
-            $('#page-setting-dialog [data-style-field]').each(function () {
-                var $$ = $(this);
-                var fieldName = $$.data('style-field');
-
-                switch ($$.data('style-field-type')) {
-                    case 'checkbox':
-                        fieldValues[fieldName] = $$.is(':checked');
-                        break;
-                    default :
-                        fieldValues[fieldName] = $$.val();
-                        break;
-                }
-            });
-
-            $('#page-settings').val(JSON.stringify(fieldValues));
-        },
-        buttons: {
-            'Done': function () {
-                $('#page-setting-dialog').dialog('close');
-            }
-        }
-    });
-
     $('#page-setting-dialog [data-style-field-type="color"]')
         .wpColorPicker()
         .closest('p').find('a').click(function () {
-            $('#page-setting-dialog').dialog("option", "position", "center");
+            $('#page-setting-dialog').ppbDialog("option", "position", "center");
         });
 
     // The done button
@@ -209,15 +142,14 @@ jQuery(function ($) {
         doneClicked = true;
 
         // Change the title of the panel
-        $('#widget-styles-dialog').dialog('close');
+        $('#widget-styles-dialog').ppbDialog('close');
     };
 
     // Create a dialog for this form
     $('#widget-styles-dialog')
-        .dialog({
+        .ppbDialog({
             dialogClass: 'panels-admin-dialog',
             autoOpen: false,
-            modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
             draggable: false,
             resizable: false,
             title: panels.i10n.messages.styleWidget,
@@ -226,9 +158,6 @@ jQuery(function ($) {
             open: function () {
                 // This fixes the A element focus issue
                 $(this).closest('.ui-dialog').find('a').blur();
-
-                var overlay = $('<div class="ppb-panels-ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-                $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
 
                 var $hidden = window.$currentPanel.find('input[name$="[style]"]');
                 var json = $hidden.val();
@@ -315,22 +244,21 @@ jQuery(function ($) {
                 return false;
             }
             else if (e.keyCode === $.ui.keyCode.ESCAPE) {
-                $(this).closest('.ui-dialog').dialog('close');
+                $(this).closest('.ui-dialog').ppbDialog('close');
             }
         });
 
     $('#widget-styles-dialog [data-style-field-type="color"]')
         .wpColorPicker()
         .closest('p').find('a').click(function () {
-            $('#widget-styles-dialog').dialog("option", "position", "center");
+            $('#widget-styles-dialog').ppbDialog("option", "position", "center");
         });
 
     //
     // Hide Element Dialog
     //
-    $('#hide-element-dialog').dialog({
+    $('#hide-element-dialog').ppbDialog({
         dialogClass: 'panels-admin-dialog',
-        modal: false,
         autoOpen: false,
         width: 500,
         maxHeight: Math.round($(window).height() * 0.8),
@@ -338,9 +266,6 @@ jQuery(function ($) {
         resizable: false,
         title: $('#hide-element-dialog').attr('data-title'),
         open: function () {
-            var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-            $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-
             var fieldValues = JSON.parse($('#hide-elements').val());
             if (typeof fieldValues != 'undefined' || fieldValues != null) {
 
@@ -361,8 +286,6 @@ jQuery(function ($) {
 
         },
         close: function () {
-            $(this).data('overlay').remove();
-
             // Copy the dialog values back to the hidden value
             var fieldValues = {};
             $('#hide-element-dialog [data-style-field]').each(function () {
@@ -383,7 +306,7 @@ jQuery(function ($) {
         },
         buttons: {
             'Done': function () {
-                $('#hide-element-dialog').dialog('close');
+                $('#hide-element-dialog').ppbDialog('close');
             }
         }
     });
@@ -391,18 +314,12 @@ jQuery(function ($) {
     // Create the dialog that we use to add new grids
     $('#grid-add-dialog')
         .show()
-        .dialog({
+        .ppbDialog({
             dialogClass: 'panels-admin-dialog',
             autoOpen: false,
-            modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
             title: $('#grid-add-dialog').attr('data-title'),
             open: function () {
                 $(this).find('input').val(2).select();
-                var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-                $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-            },
-            close: function () {
-                $(this).data('overlay').remove();
             },
             width: 430,
             buttons: gridAddDialogButtons
@@ -412,11 +329,11 @@ jQuery(function ($) {
                 // This is the same as clicking the add button
                 gridAddDialogButtons[panels.i10n.buttons.add]();
                 setTimeout(function () {
-                    $('#grid-add-dialog').dialog('close');
+                    $('#grid-add-dialog').ppbDialog('close');
                 }, 1)
             }
             else if (e.keyCode === $.ui.keyCode.ESCAPE) {
-                $('#grid-add-dialog').dialog('close');
+                $('#grid-add-dialog').ppbDialog('close');
             }
         });
     ;
@@ -425,19 +342,13 @@ jQuery(function ($) {
     $contentSwitchDialog = $('#content-loss-dialog');
 
     $contentSwitchDialog
-        .dialog({
+        .ppbDialog({
             dialogClass: 'panels-admin-dialog',
             autoOpen: false,
-            width: 500,
-            modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
+            width: 550,
             title: $contentSwitchDialog.attr('data-title'),
             open: function () {
                 $(this).find('input').val(2).select();
-                var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-                $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-            },
-            close: function () {
-                $(this).data('overlay').remove();
             },
             buttons: [
                 {
@@ -445,14 +356,14 @@ jQuery(function ($) {
                     class: 'button i-know',
                     click: function () {
                         activate_panels();
-                        $(this).dialog("close");
+                        $(this).ppbDialog("close");
                     }
                 },
                 {
                     text: $contentSwitchDialog.attr('data-button-stop'),
                     class: 'button pootle stop',
                     click: function () {
-                        $(this).dialog("close");
+                        $(this).ppbDialog("close");
                     }
                 }
             ]
@@ -462,19 +373,13 @@ jQuery(function ($) {
     $contentSwitchDialog = $('#layout-loss-dialog');
 
     $contentSwitchDialog
-        .dialog({
+        .ppbDialog({
             dialogClass: 'panels-admin-dialog',
             autoOpen: false,
             width: 500,
-            modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
             title: $contentSwitchDialog.attr('data-title'),
             open: function () {
                 $(this).find('input').val(2).select();
-                var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-                $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-            },
-            close: function () {
-                $(this).data('overlay').remove();
             },
             buttons: [
                 {
@@ -485,7 +390,7 @@ jQuery(function ($) {
                         $('.switch-tmce').click();
                         $('#wp-content-wrap').addClass('tmce-active');
 
-                        $(this).dialog("close");
+                        $(this).ppbDialog("close");
 
                         $('#pootlepb-panels').append(
                             $('<input type="hidden" value="1" name="pootlepb_noPB">').attr( 'id', 'pootlepb_noPB')
@@ -497,7 +402,7 @@ jQuery(function ($) {
                     text: $contentSwitchDialog.attr('data-button-stop'),
                     class: 'button pootle stop',
                     click: function () {
-                        $(this).dialog("close");
+                        $(this).ppbDialog("close");
                     }
                 }
             ]
@@ -514,17 +419,17 @@ jQuery(function ($) {
     // The button for adding a grid
     $('#panels .grid-add')
         .click(function () {
-            $('#grid-add-dialog').dialog('open');
+            $('#grid-add-dialog').ppbDialog('open');
             return false;
         });
 
     $('#add-to-panels .page-settings').click(function () {
-        $('#page-setting-dialog').dialog('open');
+        $('#page-setting-dialog').ppbDialog('open');
         return false;
     });
 
     $('#add-to-panels .hide-elements').click(function () {
-        $('#hide-element-dialog').dialog('open');
+        $('#hide-element-dialog').ppbDialog('open');
         return false;
     });
 
@@ -548,7 +453,7 @@ jQuery(function ($) {
 
     $(window).resize(function () {
         // When the window is resized, we want to center any panels-admin-dialog dialogs
-        $('.panels-admin-dialog').filter(':data(dialog)').dialog('option', 'position', 'center');
+        $('.panels-admin-dialog').filter(':data(dialog)').ppbDialog('option', 'position', 'center');
     });
 
     // Handle switching between the page builder and other tabs
@@ -573,7 +478,7 @@ jQuery(function ($) {
                 if (( $('.wp-editor-area').val().replace(/(<([^>]+)>)/ig, "") || $('#tinymce').html() ) && ( typeof panelsData == 'undefined' || panelsData.grids.length == 0 )) {
 
                     //Warning for content loss
-                    $('#content-loss-dialog').dialog('open');
+                    $('#content-loss-dialog').ppbDialog('open');
 
                 } else {
                     activate_panels()
@@ -657,7 +562,7 @@ jQuery(function ($) {
             return;
 
         }
-        $('#layout-loss-dialog').dialog('open');
+        $('#layout-loss-dialog').ppbDialog('open');
     });
 
     // Click again after the panels have been set up
@@ -776,9 +681,7 @@ jQuery(function ($) {
                     numPanels = $t.find('.panel').length;
                 $t.css("cursor", "default");
 
-                if (numPanels > 0) {
-                    panels.removePaddingAnimated( $t );
-                }
+                panels.removePaddingAnimated( $t );
             }
         );
     };

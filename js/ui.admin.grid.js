@@ -310,18 +310,10 @@
 
             var $container = $(this).closest('.grid-container');
 
-            $('#remove-row-dialog').dialog({
+            $('#remove-row-dialog').ppbDialog({
                 dialogClass: 'panels-admin-dialog',
                 autoOpen: true,
-                modal: false, // Disable modal so we don't mess with media editor. We'll create our own overlay.
                 title: $('#remove-row-dialog').attr('data-title'),
-                open: function () {
-                    var overlay = $('<div class="ppb-panels ui-widget-overlay ui-widget-overlay ui-front"></div>').css('z-index', 80001);
-                    $(this).data('overlay', overlay).closest('.ui-dialog').before(overlay);
-                },
-                close: function () {
-                    $(this).data('overlay').remove();
-                },
                 buttons: {
                     Yes: function () {
 
@@ -440,10 +432,10 @@
 
                         panels.checkAddRowButtonColor( true );
 
-                        $(this).dialog('close');
+                        $(this).ppbDialog('close');
                     },
                     Cancel: function () {
-                        $(this).dialog('close');
+                        $(this).ppbDialog('close');
                     }
                 }
 
@@ -540,7 +532,7 @@
                 $(this).find('.cell-width-value span').html(Math.round(percent * 1000) / 10 + '%');
             })
             .find('.panels-container')
-            // This sortable handles the widgets inside the cell
+            // Handles the content blocks sorting
             .sortable({
                 placeholder: "ui-state-highlight",
                 connectWith: ".panels-container",
@@ -557,6 +549,13 @@
 
                     // Refresh all the cell sizes after we stop sorting
                     this.lastContainer = thisContainer;
+                },
+                sort: function( e, ui ){
+                    var $target = $(e.target);
+                    if (!/html|body/i.test($target.offsetParent()[0].tagName)) {
+                        var top = e.pageY - $target.offsetParent().offset().top - (ui.helper.outerHeight(true) / 2);
+                        ui.helper.css({'top' : top + 'px'});
+                    }
                 },
                 helper: function (e, el) {
                     return el.clone().css('opacity', panels.animations ? 0.9 : 1).addClass('panel-being-dragged');

@@ -93,7 +93,12 @@ function pootlepb_row_dialog_fields_output( $tab = null ) {
 	//Row settings panel fields
 	$fields = pootlepb_row_settings_fields();
 
-	foreach ( $fields as $key => $field ) {
+	//Prioritize array
+	pootlepb_prioritize_array( $fields );
+
+	foreach ( $fields as $field ) {
+
+		$key = $field['id'];
 
 		//Skip if current fields doesn't belong to the specified tab
 		if ( ! empty( $tab ) && $tab != $field['tab'] ) { continue; }
@@ -215,9 +220,16 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 }
 
 function pootlepb_block_dialog_fields_output( $tab = null ) {
+
+	//Content block panel fields
 	$fields = pootlepb_block_styling_fields();
 
-	foreach ( $fields as $key => $field ) {
+	//Prioritize array
+	pootlepb_prioritize_array( $fields );
+
+	foreach ( $fields as $field ) {
+
+		$key = $field['id'];
 
 		if ( ! empty( $tab ) ) {
 			if ( $tab != $field['tab'] ) {
@@ -225,7 +237,7 @@ function pootlepb_block_dialog_fields_output( $tab = null ) {
 			}
 		}
 
-		echo "<div class='field'>";
+		echo "<div class='field field-" . $key . " field_type-" . $field['type'] . "'>";
 		echo '<label>' . esc_html( $field['name'] ) . '</label>';
 		echo '<span>';
 
@@ -240,7 +252,18 @@ function pootlepb_render_content_field( $key, $field ) {
 	switch ( $field['type'] ) {
 		case 'color' :
 			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="text"
-			         data-style-field-type="color"/>
+			         data-style-field-type="<?php echo $field['type']; ?>"/>
+			<?php
+			break;
+		case 'select':
+			?>
+			<select dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>"
+			        data-style-field-type="<?php echo $field['type']; ?>">
+				<?php foreach ( $field['options'] as $ov => $on ) : ?>
+					<option
+						value="<?php echo esc_attr( $ov ) ?>" <?php if ( isset( $field['default'] ) ) { selected( $ov, $field['default'] ); } ?>  ><?php echo esc_html( $on ) ?></option>
+				<?php endforeach ?>
+			</select>
 			<?php
 			break;
 		case 'border' :
