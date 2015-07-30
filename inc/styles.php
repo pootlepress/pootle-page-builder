@@ -184,13 +184,22 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 			break;
 
 		case 'slider':
-			?><input type="hidden" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
-			         data-style-field="<?php echo esc_attr( $key ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
-			<div class="ppb-slider"></div><span class="slider-val"></span>
+			$field = wp_parse_args( $field, array(
+				'min' => '0',
+				'default' => '0',
+				'max' => '1',
+				'step' => '0.05',
+			) );
+			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="hidden"
+			         data-style-field-type="slider"/>
+			<div class="ppb-slider"
+			     data-min="<?php echo $field['min'] ?>"
+			     data-max="<?php echo $field['max'] ?>"
+			     data-default="<?php echo $field['default'] ?>"
+			     data-step="<?php echo $field['step'] ?>"
+				></div><span class="slider-val"></span>
 			<?php
 			break;
-
 		case 'px':
 			?><input type="number" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
 			         data-style-field="<?php echo esc_attr( $key ) ?>"
@@ -295,9 +304,20 @@ function pootlepb_render_content_field( $key, $field ) {
 			<button class="button upload-button">Select Image</button><?php
 			break;
 		case 'slider':
+			$field = wp_parse_args( $field, array(
+				'min' => '0',
+				'default' => '0',
+				'max' => '1',
+				'step' => '0.05',
+			) );
 			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="hidden"
 			         data-style-field-type="slider"/>
-			<div class="ppb-slider"></div><span class="slider-val"></span>
+			<div class="ppb-slider"
+			     data-min="<?php echo $field['min'] ?>"
+			     data-max="<?php echo $field['max'] ?>"
+			     data-default="<?php echo $field['default'] ?>"
+			     data-step="<?php echo $field['step'] ?>"
+				></div><span class="slider-val"></span>
 			<?php
 			break;
 		case 'text':
