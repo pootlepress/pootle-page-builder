@@ -1273,7 +1273,7 @@ div#pootle-content-module-tabs li.ppb-tabs-active a:focus {
 
 #pootlepb-panels .field > label,
 .pootle-style-fields .field > label {
-    width: 200px;
+    width: 230px;
     font-weight: bold;
 }
 
@@ -1380,7 +1380,8 @@ when editing event widget from Event Calendar Pro */
     margin: 0;
     line-height: 18px;
     font-size: 14px;
-    color: #0073aa;
+    color: #0073aa !important;
+    background: none !important;
     text-decoration: none;
     outline: none;
     -webkit-box-shadow: none;

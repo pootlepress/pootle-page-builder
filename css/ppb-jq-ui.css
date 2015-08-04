@@ -318,3 +318,7 @@
   filter: alpha(opacity=70);
   z-index: 100101;
 }
+.ppb-cool-panel-wrap .ppb-tabs-nav li {
+    border:  none;
+    background: none;
+}

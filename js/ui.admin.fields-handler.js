@@ -109,6 +109,11 @@
                     //Update values on slide
                     $f.val(ui.value);
                     $spn.text(Math.round(ui.value/max*100) + '%');
+                },
+                change: function (e, ui) {
+                    //Update values on slide
+                    $f.val(ui.value);
+                    $spn.text(Math.round(ui.value/max*100) + '%');
                 }
             });
         });

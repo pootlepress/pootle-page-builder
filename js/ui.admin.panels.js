@@ -722,13 +722,12 @@
         var $styleDataField = window.$currentPanel.find('input[name$="[style]"]');
         var json = $styleDataField.val();
         var styleData = JSON.parse(json);
-
         // by default, set checkbox to unchecked,
         // so when a widget has no saved checkbox setting, and widget styling dialog is display,
         // it will be set to unchecked,
         // this is to set hide widget title checkbox
         $styleForm.find('input[type=checkbox]').prop('checked', false);
-        $styleForm.find('input[type=text], select, input[type=number], textarea').val('').change();
+        $styleForm.find('input[type=text], input[type=hidden], select, input[type=number], textarea').val('').change();
 
         // from style data in hidden field, set the widget style dialog fields with data
         for (var key in styleData) {
@@ -738,6 +737,8 @@
 
                 if ($field.attr('data-style-field-type') == "color" ) {
                     $field.wpColorPicker('color', styleData[key]);
+                } else if ($field.attr('data-style-field-type') == "slider" ) {
+                    $field.siblings('.ppb-slider').slider('value',styleData[key]);
                 } else if ($field.attr('data-style-field-type') == "checkbox") {
                     if (styleData[key] == $field.val()) {
                         $field.prop('checked', true);

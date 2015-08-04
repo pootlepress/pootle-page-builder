@@ -122,6 +122,8 @@ final class Pootle_Page_Builder_Content_Block {
 			}
 		}
 
+		$this->bg_color_transparency( $inlineStyle, $styleArray );
+
 		$attr['style'] = $inlineStyle;
 
 		$attr = apply_filters( 'pootlepb_content_block_attributes', $attr, $styleArray, $id );
@@ -189,7 +191,11 @@ final class Pootle_Page_Builder_Content_Block {
 
 		return $unit;
 	}
-
+	private function bg_color_transparency( &$style, $set ) {
+		if ( ! empty( $set['background-transparency'] ) && ! empty( $set['background-color'] ) ) {
+			$style .= 'background-color: rgba( ' . pootlepb_hex2rgb( $set['background-color'] ) . ', ' . ( 1 - $set['background-transparency'] ) . ' )';
+		}
+	}
 	/**
 	 * Render the Content Panel.
 	 *
