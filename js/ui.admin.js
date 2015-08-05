@@ -408,6 +408,13 @@ jQuery(function ($) {
             ]
         });
 
+    $('#no-empty-col-dialog')
+        .ppbDialog({
+            dialogClass: 'panels-admin-dialog',
+            autoOpen: false,
+            width: 500,
+            title: $('#no-empty-col-dialog').attr('data-title')
+        });
 
     $('#pootlepb-panels .handlediv').click(function () {
         // Trigger the resize to reorganise the columns

@@ -116,10 +116,20 @@
                 .append(
                     $('<div class="row-button sort-button dashicons-before dashicons-sort grid-handle"></div>')
                 )
+                // Add the add column button
+                .append(
+                $('<div class="row-button add-col-button dashicons-before dashicons-plus"></div>')
+                    .attr('data-tooltip', 'Add Column')
+                )
+                // Add the remove column button
+                .append(
+                $('<div class="row-button remove-col-button dashicons-before dashicons-minus"></div>')
+                    .attr('data-tooltip', 'Remove Column')
+                )
                 // Add the duplicate button
                 .append(
-                    $('<div class="row-button duplicate-button dashicons-before dashicons-admin-page"></div>')
-                        .attr('data-tooltip', 'Duplicate')
+                $('<div class="row-button duplicate-button dashicons-before dashicons-admin-page"></div>')
+                    .attr('data-tooltip', 'Duplicate')
                 )
                 // Add the button for selecting the row style
                 .append(
@@ -199,6 +209,65 @@
     };
 
     panels.setupGridButtons = function ($gridContainer) {
+
+        $gridContainer.find('> .controls > .add-col-button').click(function () {
+
+            var $gridContainer = $(this).closest('.grid-container'),
+                cells = $gridContainer.find('.cell'),
+                numCells = Math.min( 10, cells.length + 1),
+                $newRow = window.panels.createGrid( numCells, null );
+
+            for( var y = 0; y < cells.length; y++ ) {
+                var $newCell = $newRow.find('.cell .cell-wrapper').eq(y),
+                    $oldCell = $gridContainer.find('.cell .cell-wrapper').eq(y);
+
+                $newCell.append($oldCell.contents());
+            }
+
+            $newRow.insertAfter($gridContainer);
+            $('.panels-tooltip').remove();
+            $gridContainer.remove();
+            $(window).resize();
+            panels.ppbGridEvents($newRow);
+
+        });
+
+        $gridContainer.find('> .controls > .remove-col-button').click(function () {
+            var $gridContainer = $(this).closest('.grid-container'),
+                cells = $gridContainer.find('.cell'),
+                indexOfCellToRemove = null;
+
+            cells.each( function( i ){
+                if ( $(this).find('.panel').length < 1 ) {
+                    indexOfCellToRemove = i;
+                }
+            });
+
+            if ( null == indexOfCellToRemove ) {
+                $('#no-empty-col-dialog').ppbDialog('open');
+                return;
+            } else if ( 1 == cells.length ) {
+                return;
+            } else {
+                cells.eq(indexOfCellToRemove).remove();
+            }
+            var numCells = Math.max( 1, cells.length - 1),
+                $newRow = window.panels.createGrid( numCells, null );
+
+            for( var y = 0; y < cells.length - 1; y++ ) {
+                var $newCell = $newRow.find('.cell .cell-wrapper').eq(y),
+                    $oldCell = $gridContainer.find('.cell .cell-wrapper').eq(y);
+
+                $newCell.append($oldCell.contents());
+            }
+
+            $newRow.insertAfter($gridContainer);
+            $('.panels-tooltip').remove();
+            $gridContainer.remove();
+            $(window).resize();
+            panels.ppbGridEvents($newRow);
+
+        });
 
         $gridContainer.find('> .controls > .duplicate-button').click(function () {
 

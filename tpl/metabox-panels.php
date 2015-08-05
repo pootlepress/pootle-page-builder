@@ -142,6 +142,13 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 			<?php _e( "Ummm... if you go back to the default editor you'll loose all your content. Are you sure you want to loose all that hard work you've done?", 'ppb-panels' ) ?>
 		</p>
 	</div>
+	<div id="no-empty-col-dialog"
+	     data-title="<?php esc_attr_e( 'No empty column found', 'ppb-panels' ) ?>"
+	     class="panels-admin-dialog">
+		<p>
+			<?php _e( "You can only remove an empty column, please move or delete content from the column you wish to remove.", 'ppb-panels' ) ?>
+		</p>
+	</div>
 
 	<?php
 	global $post;
