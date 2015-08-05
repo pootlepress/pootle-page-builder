@@ -231,6 +231,7 @@ div#ppb-hello-user.visit-count-1 {
     line-height: 1;
     margin: 0 8px;
     text-align: right;
+    position: relative;
 }
 
 #panels-container .grid-container .controls .row-button {
@@ -244,6 +245,8 @@ div#ppb-hello-user.visit-count-1 {
 
 #panels-container .grid-container:hover .controls .row-button {
     opacity: 1;
+    position: relative;
+    z-index: 1;
 }
 
 #panels-container .grid-container .controls .row-button:hover {
@@ -269,6 +272,12 @@ video.ppb-bg-video {
 
 #panels-container .grid-container .controls .row-button.grid-handle {
     cursor: move;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
 }
 
 #pootlepb-panels {

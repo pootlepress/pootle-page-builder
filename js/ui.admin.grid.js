@@ -108,13 +108,13 @@
         container
             .append(
             $('<div class="controls" />')
-                // Add the move/reorder button
+                // Add the move/reorder area
+                .append(
+                    $('<div class="row-button sort-button grid-handle"></div>')
+                )
                 .append(
                     $('<div class="row-button row-bg-preview sort-button dashicons-before dashicons-visibility"></div>')
                     .attr('data-tooltip', 'Row is hidden')
-                )
-                .append(
-                    $('<div class="row-button sort-button dashicons-before dashicons-sort grid-handle"></div>')
                 )
                 // Add the add column button
                 .append(
