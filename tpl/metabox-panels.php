@@ -68,7 +68,11 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 		}
 
 		//Print the message
-		echo "<div id='ppb-hello-user' class='visit-count-" . esc_attr( $visit_count ) . "'> " . esc_html( $message ) . " </div>";
+		echo apply_filters( 'pootlepb_welcome_message',
+			"<div id='ppb-hello-user' class='visit-count-" . esc_attr( $visit_count ) . "'> " .
+			esc_html( $message ) .
+			"</div>" ,
+			$current_user, $visit_count );
 
 		//Update user visit count
 		$visit_count++;

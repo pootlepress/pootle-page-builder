@@ -215,7 +215,19 @@
             var $gridContainer = $(this).closest('.grid-container'),
                 cells = $gridContainer.find('.cell'),
                 numCells = Math.min( 10, cells.length + 1),
-                $newRow = window.panels.createGrid( numCells, null );
+                //Getting old row data
+                $old_inputs = $gridContainer.find('input[type=hidden][name^="grids["]'),
+                //Getting old row bg color
+                bg_color = $old_inputs.filter( '[name$="[style][background]"]').val(),
+                //Creating new row with bg color
+                $newRow = window.panels.createGrid( numCells, null, {background: bg_color} );
+
+            //Updating old column count
+            $old_inputs.filter( '[name$="][cells]"]').val( numCells );
+            //Removing all new row data
+            $newRow.find('input[type=hidden][name^="grids["]').remove();
+            //Putting old row data (with updated column count) in the new row
+            $newRow.prepend($old_inputs);
 
             for( var y = 0; y < cells.length; y++ ) {
                 var $newCell = $newRow.find('.cell .cell-wrapper').eq(y),
@@ -251,8 +263,21 @@
             } else {
                 cells.eq(indexOfCellToRemove).remove();
             }
+
             var numCells = Math.max( 1, cells.length - 1),
-                $newRow = window.panels.createGrid( numCells, null );
+                //Getting old row data
+                $old_inputs = $gridContainer.find('input[type=hidden][name^="grids["]'),
+                //Getting old row bg color
+                bg_color = $old_inputs.filter( '[name$="[style][background]"]').val(),
+                //Creating new row with bg color
+                $newRow = window.panels.createGrid( numCells, null, {background: bg_color} );
+
+            //Updating old column count
+            $old_inputs.filter( '[name$="][cells]"]').val( numCells );
+            //Removing all new row data
+            $newRow.find('input[type=hidden][name^="grids["]').remove();
+            //Putting old row data (with updated column count) in the new row
+            $newRow.prepend($old_inputs);
 
             for( var y = 0; y < cells.length - 1; y++ ) {
                 var $newCell = $newRow.find('.cell .cell-wrapper').eq(y),
@@ -513,6 +538,21 @@
 
 
         })
+    };
+
+    panels.gridDataFromGrid = function ($t) {
+        $t.find('input[type=hidden][name^="grids["]').each(function () {
+            var first = 'grids[';
+            var idx = $(this).attr('name').indexOf(']');
+            if (idx >= 0) {
+                var last = $(this).attr('name').substr(idx);
+
+                var newName = first + rowCount + last;
+
+                $(this).attr('name', newName);
+
+            }
+        });
     };
 
     /**

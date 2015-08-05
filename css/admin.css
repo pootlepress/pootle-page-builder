@@ -202,7 +202,7 @@ div#ppb-hello-user.visit-count-1 {
     padding-left: 205px;
     padding-right: 160px;
     padding-right: 14vw;
-    text-align: center;
+    text-align: left;
     background: url(./images/ppb-arrow.png) 133px 0px/ 71px no-repeat;
 }
 
@@ -274,10 +274,14 @@ video.ppb-bg-video {
     cursor: move;
     display: inline-block;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: -9px;
+    bottom: 0;
+    left: 20px;
+    right: 95px;
+    height: auto;
+    width: auto;
     z-index: 0;
+    margin: 0;
 }
 
 #pootlepb-panels {
@@ -1380,6 +1384,7 @@ when editing event widget from Event Calendar Pro */
     overflow: auto;
     box-sizing: border-box;
     background: #fff;
+    height: 100%;
 }
 
 .ppb-cool-panel-wrap > ul > li > a {
