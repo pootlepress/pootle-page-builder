@@ -190,7 +190,8 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 				'max' => '1',
 				'step' => '0.05',
 			) );
-			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="hidden"
+			?><input type="hidden" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
 			         data-style-field-type="slider"/>
 			<div class="ppb-slider"
 			     data-min="<?php echo $field['min'] ?>"
@@ -224,7 +225,7 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 			 * @param string $key The ID of field
 			 * @param array $field Field data
 			 */
-			do_action( "row_styling_custom_field_{$field['type']}", $key, $field );
+			do_action( "pootlepb_row_settings_custom_field_{$field['type']}", $key, $field );
 	}
 }
 
@@ -253,6 +254,9 @@ function pootlepb_block_dialog_fields_output( $tab = null ) {
 		pootlepb_render_content_field( $key, $field );
 
 		echo '</span>';
+		if ( isset( $field['help-text'] ) ) {
+			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
+		}
 		echo '</div>';
 	}
 }
@@ -283,6 +287,12 @@ function pootlepb_render_content_field( $key, $field ) {
 			<?php
 			break;
 		case 'number' :
+			$field = wp_parse_args( $field, array(
+				'min'   => '-9999',
+				'max'   => '9999',
+				'step'  => '1',
+				'unit'  => '',
+			) );
 			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="number"
 			         min="<?php esc_attr_e( $field['min'] ) ?>" max="<?php esc_attr_e( $field['max'] ) ?>"
 			         step="<?php esc_attr_e( $field['step'] ) ?>" value="" /> <?php esc_html_e( $field['unit'] ) ?>
@@ -331,7 +341,7 @@ function pootlepb_render_content_field( $key, $field ) {
 			 * @param string $key The ID of field
 			 * @param array $field Field data
 			 */
-			do_action( "content_block_custom_field_{$field['type']}", $key, $field );
+			do_action( "pootlepb_content_block_custom_field_{$field['type']}", $key, $field );
 	}
 }
 

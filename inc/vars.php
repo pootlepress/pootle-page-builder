@@ -1002,18 +1002,18 @@ $pootlepb_content_block_tabs = array(
 		'label' => 'Editor',
 		'priority' => 1,
 	),
-	'editor-separator' => array(
-		'priority' => 3,
-	),
 	'style' => array(
 		'label' => 'Style',
 		'class' => 'pootle-style-fields',
-		'priority' => 4,
+		'priority' => 2,
 	),
 	'advanced' => array(
 		'label' => 'Advanced',
 		'class' => 'pootle-style-fields',
-		'priority' => 10,
+		'priority' => 3,
+	),
+	'editor-separator' => array(
+		'priority' => 4,
 	),
 );
 

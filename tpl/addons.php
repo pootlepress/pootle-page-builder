@@ -6,6 +6,12 @@
  * Time: 11:16 PM
  * @since 0.1.0
  */
+
+/**
+ * Activated ppb add ons
+ * @var array
+ */
+$pootlepb_installed_add_ons = apply_filters( 'pootlepb_installed_add_ons', array() );
 ?>
 <div class="wrap">
 	<h2>Pootle Page Builder Add-ons</h2>

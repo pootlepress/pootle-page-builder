@@ -103,6 +103,13 @@ jQuery(function ($) {
                 case 'checkbox':
                     df.attr('checked', $$.val() ? true : false);
                     break;
+                case 'slider':
+                    try {
+                        df.siblings('.ppb-slider').slider('value', $$.val());
+                    } catch(err) {
+                        df.val($$.val());
+                    }
+                    break;
                 default :
                     df.val($$.val());
                     break;
