@@ -182,7 +182,7 @@ final class Pootle_Page_Builder_Admin {
 	 */
 	public function options_init() {
 		register_setting( 'pootlepage-add-ons', 'pootlepb_add_ons' );
-		register_setting( 'pootlepage-display', 'siteorigin_panels_display', array(
+		register_setting( 'pootlepage-display', 'pootlepb_display', array(
 			$this,
 			'pootlepb_options_sanitize_display',
 		) );
@@ -243,7 +243,7 @@ final class Pootle_Page_Builder_Admin {
 	 *
 	 * @since 0.1.0
 	 */
-	public function options_field_generic( $args, $groupName = 'siteorigin_panels_display' ) {
+	public function options_field_generic( $args, $groupName = 'pootlepb_display' ) {
 		$settings = pootlepb_settings();
 		switch ( $args['type'] ) {
 			case 'hard-uninstall' :

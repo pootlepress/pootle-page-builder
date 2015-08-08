@@ -430,18 +430,15 @@ jQuery(function ($) {
             return false;
         });
 
-    $('#add-to-panels .page-settings').click(function () {
+    $('#add-to-pb-panel .page-settings').click(function () {
         $('#page-setting-dialog').ppbDialog('open');
         return false;
     });
 
-    $('#add-to-panels .hide-elements').click(function () {
+    $('#add-to-pb-panel .hide-elements').click(function () {
         $('#hide-element-dialog').ppbDialog('open');
         return false;
     });
-
-    // Set the default text of the SiteOrigin link
-    $('#siteorigin-widgets-link').data('text', $('#siteorigin-widgets-link').html());
 
     // Handle filtering in the panels dialog
     $('#panels-text-filter-input')
@@ -552,7 +549,7 @@ jQuery(function ($) {
         .addClass('wp-editor-container')
         .hide()
         .find('.hndle span').remove().end()
-        .find('.hndle').removeClass('hndle').addClass('pootlepb-toolbar').append($('#add-to-panels'));
+        .find('.hndle').removeClass('hndle').addClass('pootlepb-toolbar').append($('#add-to-pb-panel'));
     // When the content panels button is clicked, trigger a window resize to set up the columns
     $('#content-panels').click(function () {
         $(window).resize();

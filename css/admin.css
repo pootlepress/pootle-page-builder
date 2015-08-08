@@ -714,69 +714,6 @@ h4 {}
     overflow-y: auto;
 }
 
-/* The SiteOrigin link */
-#siteorigin-widgets-link-wrapper {
-    text-align: center;
-}
-
-#siteorigin-widgets-link {
-    position: relative;
-    background: #9ccc54;
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #9ccc54), color-stop(1, #cbe385));
-    background: -ms-linear-gradient(bottom, #9ccc54, #cbe385);
-    background: -moz-linear-gradient(center bottom, #9ccc54 0%, #cbe385 100%);
-    background: -o-linear-gradient(#cbe385, #9ccc54);
-    border: 1px solid #83a44d;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-    color: #4f6920;
-    display: inline-block;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cbe385', endColorstr='#9ccc54', GradientType=0);
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 16px;
-    padding: 10px 15px;
-    text-decoration: none;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-    -moz-transition: background 0.5s, color 0.5s, -moz-box-shadow 0.5;
-    -webkit-transition: background 0.5s, color 0.5s, -webkit-box-shadow 0.5;
-    -o-transition: background 0.5s, color 0.5s, -o-box-shadow 0.5;
-    transition: background 0.5s, color 0.5s, box-shadow 0.5;
-}
-
-#siteorigin-widgets-link:hover {
-    background: #a8d85f;
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #a8d85f), color-stop(1, #d4ec8d));
-    background: -ms-linear-gradient(bottom, #a8d85f, #d4ec8d);
-    background: -moz-linear-gradient(center bottom, #a8d85f 0%, #d4ec8d 100%);
-    background: -o-linear-gradient(#d4ec8d, #a8d85f);
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.25);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.25);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.25);
-    color: #4a641b;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#d4ec8d', endColorstr='#a8d85f', GradientType=0);
-}
-
-#siteorigin-widgets-link:active {
-    background: #bbd975;
-    background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #bbd975), color-stop(1, #b3d46c));
-    background: -ms-linear-gradient(bottom, #bbd975, #b3d46c);
-    background: -moz-linear-gradient(center bottom, #bbd975 0%, #b3d46c 100%);
-    background: -o-linear-gradient(#b3d46c, #bbd975);
-    -webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
-    -moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.25);
-    color: #476118;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b3d46c', endColorstr='#bbd975', GradientType=0);
-    margin-bottom: -1px;
-    margin-top: 1px;
-    outline: none;
-}
-
 .panel-dialog h2.nav-tab-wrapper {
     margin-top: 0;
 }
@@ -995,12 +932,12 @@ input:disabled{
     width: 500px !important;
 }
 
-#add-to-panels {
+#add-to-pb-panel {
     font-size: 10px;
 }
 
 #panels .ppb-button,
-#add-to-panels .ppb-button {
+#add-to-pb-panel .ppb-button {
     position: relative;
     height: auto;
     cursor: pointer;
@@ -1021,49 +958,49 @@ button.wp-switch-editor {
 }
 
 #panels .ppb-button.ppb-button-icon-only .ppb-button-text,
-#add-to-panels .ppb-button.ppb-button-icon-only .ppb-button-text {
+#add-to-pb-panel .ppb-button.ppb-button-icon-only .ppb-button-text {
     display: none;
 }
 
 #panels .ppb-button .ppb-icon,
-#add-to-panels .ppb-button .ppb-icon {
+#add-to-pb-panel .ppb-button .ppb-icon {
     width: 8px;
     height: 8px;
     display: block;
 }
 
 #panels .ppb-button .ppb-icon.ppb-icon-add,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-add {
+#add-to-pb-panel .ppb-button .ppb-icon.ppb-icon-add {
     background: url(images/icons/add.png);
 }
 
 #panels .ppb-button .ppb-icon.ppb-icon-prebuilt,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-prebuilt {
+#add-to-pb-panel .ppb-button .ppb-icon.ppb-icon-prebuilt {
     background: url(images/icons/brush.png);
 }
 
 #panels .ppb-button .ppb-icon.ppb-icon-columns,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-columns {
+#add-to-pb-panel .ppb-button .ppb-icon.ppb-icon-columns {
     background: url(images/icons/columns.png);
 }
 
 #panels .ppb-button .ppb-icon.ppb-icon-settings,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-settings {
+#add-to-pb-panel .ppb-button .ppb-icon.ppb-icon-settings {
     background: url(images/icons/settings.png);
 }
 
 #panels .ppb-button .ppb-icon.ppb-icon-move,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-move {
+#add-to-pb-panel .ppb-button .ppb-icon.ppb-icon-move {
     background: url(images/icons/move.png);
 }
 
 #panels .ppb-button .ppb-icon.ppb-icon-remove,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-remove {
+#add-to-pb-panel .ppb-button .ppb-icon.ppb-icon-remove {
     background: url(images/icons/remove.png);
 }
 
 #panels .ppb-button .ppb-icon.ppb-icon-gear,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-gear {
+#add-to-pb-panel .ppb-button .ppb-icon.ppb-icon-gear {
     width: 20px !important;
     height: 20px !important;
     box-sizing: content-box;
@@ -1071,7 +1008,7 @@ button.wp-switch-editor {
 }
 
 #panels .ppb-button .ppb-icon.ppb-icon-times,
-#add-to-panels .ppb-button .ppb-icon.ppb-icon-times {
+#add-to-pb-panel .ppb-button .ppb-icon.ppb-icon-times {
     background: url(images/icons/times.png);
 }
 
@@ -1095,7 +1032,7 @@ button.wp-switch-editor {
     margin-bottom: 0;
 }
 
-#add-to-panels .button.button-small.add-button {
+#add-to-pb-panel .button.button-small.add-button {
     float: left;
     padding-top: 0;
     padding-bottom: 0;

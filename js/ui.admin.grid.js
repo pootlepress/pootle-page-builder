@@ -745,11 +745,11 @@
 
         if( $( '#panels-container .grid-container').length < 1 + delay ) {
 
-            $('#add-to-panels  .grid-add').addClass('pootle');
+            $('#add-to-pb-panel  .grid-add').addClass('pootle');
             $('#ppb-hello-user').show();
         } else {
 
-            $('#add-to-panels  .grid-add').removeClass('pootle');
+            $('#add-to-pb-panel  .grid-add').removeClass('pootle');
             $('#ppb-hello-user').hide();
         }
 

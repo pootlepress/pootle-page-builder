@@ -72,7 +72,7 @@ final class Pootle_Page_Builder_Admin_UI {
 			wp_enqueue_style( 'pootlepb-admin', POOTLEPB_URL . 'css/admin.css', array(), POOTLEPB_VERSION );
 			wp_enqueue_style( 'ppb-chosen-style', POOTLEPB_URL . 'js/chosen/chosen.css' );
 			wp_enqueue_style( 'wp-jquery-ui-dialog' );
-			do_action( 'siteorigin_panel_enqueue_admin_styles' );
+			do_action( 'pootlepb_enqueue_admin_styles' );
 		}
 	}
 

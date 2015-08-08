@@ -58,9 +58,9 @@ ksort( $panel_tabs );
 			<div id="pootle-<?php echo $k; ?>-tab" class="ppb-style-section <?php echo $tab['class']; ?>">
 
 				<?php
-				do_action( 'pootlepb_row_settings_' . $k . '_tab' );
+				do_action( "pootlepb_row_settings_{$k}_tab" );
 				pootlepb_row_dialog_fields_output( $k );
-				do_action( 'pootlepb_row_settings_' . $k . '_tab_after_fields' );
+				do_action( "pootlepb_row_settings_{$k}_tab_after_fields" );
 				?>
 
 			</div>

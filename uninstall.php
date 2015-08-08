@@ -36,7 +36,7 @@ if ( get_option( 'pootlepb-hard-uninstall' ) ) {
 
 	//Remove the options we used
 	delete_option( 'pootlepb_add_ons' );
-	delete_option( 'siteorigin_panels_display' );
+	delete_option( 'pootlepb_display' );
 
 	//Removing usermeta for visit count to new page
 	global $wpdb;

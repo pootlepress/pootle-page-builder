@@ -63,9 +63,9 @@ ksort( $panel_tabs );
 				<div id="pootle-<?php echo $k; ?>-tab" class="tab-contents pootle-style-fields <?php echo $tab['class']; ?>">
 
 					<?php
-					do_action( 'pootlepb_content_block_' . $k . '_tab', $request );
+					do_action( "pootlepb_content_block_{$k}_tab", $request );
 					pootlepb_block_dialog_fields_output( $k );
-					do_action( 'pootlepb_content_block_' . $k . '_tab_after_fields', $request );
+					do_action( "pootlepb_content_block_{$k}_tab_after_fields", $request );
 					?>
 
 				</div>

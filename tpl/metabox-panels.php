@@ -16,7 +16,7 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 	<div id="panels-container">
 	</div>
 
-	<div id="add-to-panels">
+	<div id="add-to-pb-panel">
 
 	<?php
 		foreach ( $buttons as $id => $name ) { ?>

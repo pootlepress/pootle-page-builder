@@ -54,7 +54,7 @@ jQuery(function ($) {
     });
 
     // Button for adding prebuilt layouts
-    $('#add-to-panels .prebuilt-set').click(function () {
+    $('#add-to-pb-panel .prebuilt-set').click(function () {
             $('#grid-prebuilt-dialog').ppbDialog('open');
             return false;
         });

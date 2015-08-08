@@ -88,179 +88,6 @@ function pootlepb_hide_elements_dialog_echo( $fields ) {
 	}
 }
 
-function pootlepb_row_dialog_fields_output( $tab = null ) {
-
-	//Row settings panel fields
-	$fields = pootlepb_row_settings_fields();
-
-	//Prioritize array
-	pootlepb_prioritize_array( $fields );
-
-	foreach ( $fields as $field ) {
-
-		$key = $field['id'];
-
-		//Skip if current fields doesn't belong to the specified tab
-		if ( ! empty( $tab ) && $tab != $field['tab'] ) { continue; }
-
-		//Output html field
-		if ( 'html' == $field['type'] ) {
-			echo wp_kses( $field['name'], wp_kses_allowed_html( 'post' ) );
-			continue;
-		}
-
-		echo '<div class="field field_' . esc_attr( $key ) . '">';
-
-		echo '<label>' . esc_html( $field['name'] );
-		echo '</label>';
-		pootlepb_render_row_settings_field( $key, $field );
-		if ( isset( $field['help-text'] ) ) {
-			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
-		}
-		echo '</div>';
-
-	}
-}
-
-function pootlepb_render_row_settings_field( $key, $field ) {
-
-	switch ( $field['type'] ) {
-		case 'select':
-			?>
-			<select name="panelsStyle[<?php echo esc_attr( $key ) ?>]" id="pp-pb-<?php esc_attr_e( $key ) ?>"
-			        data-style-field="<?php echo esc_attr( $key ) ?>"
-			        data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>">
-				<?php foreach ( $field['options'] as $ov => $on ) : ?>
-					<option
-						value="<?php echo esc_attr( $ov ) ?>" <?php if ( isset( $field['default'] ) ) { selected( $ov, $field['default'] ); } ?>  ><?php echo esc_html( $on ) ?></option>
-				<?php endforeach ?>
-			</select>
-			<?php
-			break;
-
-		case 'checkbox' :
-			$checked = ( isset( $field['default'] ) ? checked( $field['default'], true, false ) : '' );
-			?>
-			<label class="ppb-panels-checkbox-label">
-				<input type="checkbox" <?php echo esc_html( $checked ) ?> name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
-				       data-style-field="<?php echo esc_attr( $key ) ?>"
-				       data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>"/>
-			</label>
-			<?php
-			break;
-
-		case 'number' :
-			?><input type="number" min="<?php echo $field['min'] ?>" value="<?php echo esc_attr( $field['default'] ) ?>"
-			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
-			         data-style-field="<?php echo esc_attr( $key ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
-			<?php
-			if ( isset( $field['help-text'] ) ) {
-				// don't use div for this or else div will appear outside of <p>
-				echo "<span class='small-help-text'>" . esc_html( $field['help-text'] ) . '</span>';
-			}
-			break;
-
-		case 'upload':
-			?><input type="text" id="pp-pb-<?php esc_attr_e( $key ) ?>"
-			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
-			         data-style-field="<?php echo esc_attr( $key ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
-			<button class="button upload-button">Select Image</button><?php
-			break;
-
-		case 'uploadVid':
-			?><input type="text" id="pp-pb-<?php esc_attr_e( $key ) ?>"
-			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
-			         data-style-field="<?php echo esc_attr( $key ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
-			<button class="button video-upload-button">Select Video</button><?php
-			break;
-
-		case 'textarea':
-			?><textarea type="text" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
-			            data-style-field="<?php echo esc_attr( $key ) ?>"
-			            data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" ></textarea> <?php
-			break;
-
-		case 'slider':
-			$field = wp_parse_args( $field, array(
-				'min' => '0',
-				'default' => '0',
-				'max' => '1',
-				'step' => '0.05',
-			) );
-			?><input type="hidden" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
-			         data-style-field="<?php echo esc_attr( $key ) ?>"
-			         data-style-field-type="slider"/>
-			<div class="ppb-slider"
-			     data-min="<?php echo $field['min'] ?>"
-			     data-max="<?php echo $field['max'] ?>"
-			     data-default="<?php echo $field['default'] ?>"
-			     data-step="<?php echo $field['step'] ?>"
-				></div><span class="slider-val"></span>
-			<?php
-			break;
-		case 'px':
-			?><input type="number" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
-			         data-style-field="<?php echo esc_attr( $key ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />px <?php
-			break;
-
-		case 'color':
-			?><input type="text" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
-			         data-style-field="<?php echo esc_attr( $key ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" /> <?php
-			break;
-
-		case 'text':
-			?><input type="text" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
-			         data-style-field="<?php echo esc_attr( $key ) ?>"
-			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" /> <?php
-			break;
-		default :
-
-			/**
-			 * Allows rendering custom fields
-			 * @param string $key The ID of field
-			 * @param array $field Field data
-			 */
-			do_action( "pootlepb_row_settings_custom_field_{$field['type']}", $key, $field );
-	}
-}
-
-function pootlepb_block_dialog_fields_output( $tab = null ) {
-
-	//Content block panel fields
-	$fields = pootlepb_block_styling_fields();
-
-	//Prioritize array
-	pootlepb_prioritize_array( $fields );
-
-	foreach ( $fields as $field ) {
-
-		$key = $field['id'];
-
-		if ( ! empty( $tab ) ) {
-			if ( $tab != $field['tab'] ) {
-				continue;
-			}
-		}
-
-		echo "<div class='field field-" . $key . " field_type-" . $field['type'] . "'>";
-		echo '<label>' . esc_html( $field['name'] ) . '</label>';
-		echo '<span>';
-
-		pootlepb_render_content_field( $key, $field );
-
-		echo '</span>';
-		if ( isset( $field['help-text'] ) ) {
-			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
-		}
-		echo '</div>';
-	}
-}
-
 function pootlepb_render_content_field( $key, $field ) {
 	switch ( $field['type'] ) {
 		case 'color' :
@@ -342,6 +169,180 @@ function pootlepb_render_content_field( $key, $field ) {
 			 * @param array $field Field data
 			 */
 			do_action( "pootlepb_content_block_custom_field_{$field['type']}", $key, $field );
+	}
+}
+
+function pootlepb_block_dialog_fields_output( $tab = null ) {
+
+	//Content block panel fields
+	$fields = pootlepb_block_styling_fields();
+
+	//Prioritize array
+	pootlepb_prioritize_array( $fields );
+
+	foreach ( $fields as $field ) {
+
+		$key = $field['id'];
+
+		if ( ! empty( $tab ) ) {
+			if ( $tab != $field['tab'] ) {
+				continue;
+			}
+		}
+
+		echo "<div class='field field-" . $key . " field_type-" . $field['type'] . "'>";
+		echo '<label>' . esc_html( $field['name'] ) . '</label>';
+		echo '<span>';
+
+		pootlepb_render_content_field( $key, $field );
+
+		echo '</span>';
+		if ( isset( $field['help-text'] ) ) {
+			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
+		}
+		echo '</div>';
+	}
+}
+
+function pootlepb_row_dialog_fields_output( $tab = null ) {
+
+	//Row settings panel fields
+	$fields = pootlepb_row_settings_fields();
+
+	//Prioritize array
+	pootlepb_prioritize_array( $fields );
+
+	foreach ( $fields as $field ) {
+
+		$key = $field['id'];
+
+		//Skip if current fields doesn't belong to the specified tab
+		if ( ! empty( $tab ) && $tab != $field['tab'] ) { continue; }
+
+		//Output html field
+		if ( 'html' == $field['type'] ) {
+			echo wp_kses( $field['name'], wp_kses_allowed_html( 'post' ) );
+			continue;
+		}
+
+		echo '<div class="field field_' . esc_attr( $key ) . '">';
+
+		echo '<label>' . esc_html( $field['name'] );
+		echo '</label>';
+		pootlepb_render_row_settings_field( $key, $field );
+		if ( isset( $field['help-text'] ) ) {
+			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
+		}
+		echo '</div>';
+
+	}
+}
+
+function pootlepb_render_row_settings_field( $key, $field ) {
+
+	switch ( $field['type'] ) {
+		case 'select':
+			?>
+			<select name="panelsStyle[<?php echo esc_attr( $key ) ?>]" id="pp-pb-<?php esc_attr_e( $key ) ?>"
+			        data-style-field="<?php echo esc_attr( $key ) ?>"
+			        data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>">
+				<?php foreach ( $field['options'] as $ov => $on ) : ?>
+					<option
+						value="<?php echo esc_attr( $ov ) ?>" <?php if ( isset( $field['default'] ) ) {
+						selected( $ov, $field['default'] );
+					} ?>  ><?php echo esc_html( $on ) ?></option>
+				<?php endforeach ?>
+			</select>
+			<?php
+			break;
+		case 'checkbox' :
+			$checked = ( isset( $field['default'] ) ? checked( $field['default'], true, false ) : '' );
+			?>
+			<label class="ppb-panels-checkbox-label">
+				<input type="checkbox" <?php echo esc_html( $checked ) ?>
+				       name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+				       data-style-field="<?php echo esc_attr( $key ) ?>"
+				       data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>"/>
+			</label>
+			<?php
+			break;
+		case 'number' :
+			$field = wp_parse_args( $field, array(
+				'min'  => '-9999',
+				'max'  => '9999',
+				'step' => '1',
+				'unit' => '',
+			) );
+			?><input type="number" min="<?php echo $field['min'] ?>"
+			         max="<?php echo $field['max'] ?>"
+			         step="<?php echo $field['step'] ?>"
+			         value="<?php echo esc_attr( $field['default'] ) ?>"
+			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" /><?php
+			if ( ! empty( $field['unit'] ) ) {
+				?><span class="unit"><?php esc_html_e( $field['unit'] ) ?></span><?php
+			}
+			break;
+		case 'upload':
+			?><input type="text" id="pp-pb-<?php esc_attr_e( $key ) ?>"
+			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
+			<button class="button upload-button">Select Image</button><?php
+			break;
+		case 'uploadVid':
+			?><input type="text" id="pp-pb-<?php esc_attr_e( $key ) ?>"
+			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
+			<button class="button video-upload-button">Select Video</button><?php
+			break;
+		case 'textarea':
+			?><textarea type="text" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			            data-style-field="<?php echo esc_attr( $key ) ?>"
+			            data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" ></textarea> <?php
+			break;
+		case 'slider':
+			$field = wp_parse_args( $field, array(
+				'min' => '0',
+				'default' => '0',
+				'max' => '1',
+				'step' => '0.05',
+			) );
+			?><input type="hidden" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="slider"/>
+			<div class="ppb-slider"
+			     data-min="<?php echo $field['min'] ?>"
+			     data-max="<?php echo $field['max'] ?>"
+			     data-default="<?php echo $field['default'] ?>"
+			     data-step="<?php echo $field['step'] ?>"
+				></div><span class="slider-val"></span>
+			<?php
+			break;
+		case 'px':
+			?><input type="number" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />px <?php
+			break;
+		case 'color':
+			?><input type="text" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" /> <?php
+			break;
+		case 'text':
+			?><input type="text" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         data-style-field="<?php echo esc_attr( $key ) ?>"
+			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" /> <?php
+			break;
+		default :
+			/**
+			 * Allows rendering custom fields
+			 * @param string $key The ID of field
+			 * @param array $field Field data
+			 */
+			do_action( "pootlepb_row_settings_custom_field_{$field['type']}", $key, $field );
 	}
 }
 

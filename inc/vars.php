@@ -104,7 +104,8 @@ $pootlepb_row_styling_fields = array(
 	),
 	'row_height'              => array(
 		'name'      => __( 'Empty Row Height', 'ppb-panels' ),
-		'type'      => 'px',
+		'unit' => 'px',
+		'type'      => 'number',
 		'tab' => 'layout',
 		'priority' => 2,
 		'default'   => '',
@@ -118,7 +119,8 @@ $pootlepb_row_styling_fields = array(
 	),
 	'margin_bottom'           => array(
 		'name' => 'Row Bottom Margin',
-		'type' => 'px',
+		'unit' => 'px',
+		'type'      => 'number',
 		'tab' => 'layout',
 		'priority' => 4,
 	),

@@ -230,7 +230,7 @@ function pootlepb_settings( $key = '' ) {
 	}
 
 	if ( empty( $settings ) ) {
-		$display_settings = get_option( 'siteorigin_panels_display', array() );
+		$display_settings = get_option( 'pootlepb_display', array() );
 
 		$settings = get_theme_support( 'ppb-panels' );
 		if ( ! empty( $settings ) ) {
