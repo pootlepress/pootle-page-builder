@@ -304,8 +304,7 @@ video.ppb-bg-video {
 
 #pootlepb-panels .panels-container .panel {
     background: #fafafa;
-    border: 1px solid;
-    border-color: #dadada;
+    border: 1px solid #dadada;
     -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
     box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
     cursor: move;
@@ -705,8 +704,8 @@ h4 {}
     z-index: 10;
 }
 
-#grid-prebuilt-dialog {
-    overflow: hidden;
+.ppb-dialog-content {
+    overflow: auto;
 }
 
 #grid-prebuilt-dialog .chzn-results {
@@ -1245,6 +1244,10 @@ div#pootle-content-module-tabs li.ppb-tabs-active a:focus {
     display: inline-block;
 }
 
+.pootle-style-fields select[multiple] {
+    min-width: 160px;
+}
+
 a.wp-switch-editor {
     text-decoration: none;
     float: none;
@@ -1377,4 +1380,10 @@ when editing event widget from Event Calendar Pro */
     height: auto;
     width: auto;
     margin: -2px 2px 0 -7px;
+}
+.ppb-cool-panel-container .chzn-drop {
+    width: 203px !important;
+}
+.ppb-cool-panel-container .chzn-container {
+    width: 205px !important;
 }

@@ -210,6 +210,8 @@
 
     panels.setupGridButtons = function ($gridContainer) {
 
+        $('html').trigger( 'pootlepb_admin_setup_row_buttons', [ $gridContainer ] );
+
         $gridContainer.find('> .controls > .add-col-button').click(function () {
 
             var $gridContainer = $(this).closest('.grid-container'),

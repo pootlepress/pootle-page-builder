@@ -179,6 +179,8 @@
 
     panels.setupPanelButtons = function ($panel) {
 
+        $('html').trigger( 'pootlepb_admin_setup_content_block_buttons', [ $panel ] );
+
         $panel.find('> .panel-wrapper > .title > h4').click(function () {
             $(this).closest('.panel').find('a.edit').click();
             return false;
@@ -435,20 +437,6 @@
             var duplicatePanel = panelsCreatePanel($currentPanel.attr('data-type'), data);
             window.panels.addPanel(duplicatePanel, $currentPanel.closest('.panels-container'), null, false);
             duplicatePanel.removeClass('new-panel');
-
-            return false;
-        });
-
-        $panel.find('> .panel-wrapper > .title > .actions > .style').click(function () {
-
-            var $currentPanel = $(this).closest('.panel');
-
-            // style dialog
-            if (typeof activeDialog != 'undefined') return false;
-
-            window.$currentPanel = $currentPanel;
-
-            $('#widget-styles-dialog').ppbDialog('open');
 
             return false;
         });
@@ -727,7 +715,7 @@
         // it will be set to unchecked,
         // this is to set hide widget title checkbox
         $styleForm.find('input[type=checkbox]').prop('checked', false);
-        $styleForm.find('input[type=text], input[type=hidden], select, input[type=number], textarea').val('').change();
+        $styleForm.find('input[type=text], input[type=hidden], select, input[type=number], textarea').val('').change().trigger('chosen:updated');
 
         // from style data in hidden field, set the widget style dialog fields with data
         for (var key in styleData) {
@@ -748,7 +736,7 @@
                 } else {
                     $field.val(styleData[key]);
                 }
-                $field.change();
+                $field.change().trigger('chosen:updated');
 
             }
         }
@@ -775,6 +763,8 @@
             }
 
         });
+
+        console.log(styleData);
 
         $currentPanel.find('input[name$="[style]"]').val(JSON.stringify(styleData));
     };

@@ -141,7 +141,7 @@ final class Pootle_Page_Builder_Admin_UI {
 		wp_enqueue_style( 'wp-color-picker' );
 
 		wp_enqueue_script( 'pootlepb-ui-undomanager', POOTLEPB_URL . 'js/ui.admin.undomanager.min.js', array( 'jquery', ), POOTLEPB_VERSION );
-		wp_enqueue_script( 'pootlepb-chosen', POOTLEPB_URL . 'js/chosen/chosen.jquery.min.min.js', array( 'jquery' ), POOTLEPB_VERSION );
+		wp_enqueue_script( 'pootlepb-chosen', POOTLEPB_URL . 'js/chosen/chosen.jquery.min.js', array( 'jquery' ), POOTLEPB_VERSION );
 
 	}
 

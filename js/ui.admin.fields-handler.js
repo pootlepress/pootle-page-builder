@@ -117,6 +117,16 @@
                 }
             });
         });
+
+        $this.find('.ppb-chzn-multi').each(function(){
+            var $t = $(this);
+            $t
+                .chosen({
+                    width: '205px',
+                    placeholder_text_multiple: $t.attr('placeholder')
+                })
+            console.log($t.val());
+        })
     };
 
     panels.bgVideoMobImgSet = function(){

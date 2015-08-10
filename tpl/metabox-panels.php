@@ -122,10 +122,6 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 			<?php require POOTLEPB_DIR . 'tpl/row-settings-panel.php'; ?>
 	</div>
 
-	<div id="widget-styles-dialog" data-title="Style Widget" class="panels-admin-dialog">
-		<?php pootlepb_block_dialog_fields_output() ?>
-	</div>
-
 	<div id="content-loss-dialog" data-title="<?php esc_attr_e( 'Changing to Page Builder', 'ppb-panels' ) ?>"
 	     data-button-i-know="<?php esc_attr_e( "I know what I'm doing", 'ppb-panels' ) ?>"
 	     data-button-stop="<?php esc_attr_e( "Yep, I'll stop and create a new page", 'ppb-panels' ) ?>"
