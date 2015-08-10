@@ -102,11 +102,28 @@ function pootlepb_render_content_field( $key, $field ) {
 		case 'select':
 			?>
 			<select <?php echo $placeholder ?> dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>"
-			        data-style-field-type="<?php echo $field['type']; ?>">
+			                                   data-style-field-type="<?php echo $field['type']; ?>">
 				<?php foreach ( $field['options'] as $ov => $on ) : ?>
 					<option
 						value="<?php echo esc_attr( $ov ) ?>" <?php if ( isset( $field['default'] ) ) { selected( $ov, $field['default'] ); } ?>  ><?php echo esc_html( $on ) ?></option>
 				<?php endforeach ?>
+			</select>
+			<?php
+			break;
+		case 'radio':
+			foreach ( $field['options'] as $ov => $on ) {
+				echo '<label>';
+				?>
+				<input name="ppb-content-panel-radio-<?php echo esc_attr( $key ) ?>" <?php echo $placeholder ?>
+				       type="<?php echo $field['type']; ?>" data-style-field-type="<?php echo $field['type']; ?>"
+				       dialog-field="<?php echo esc_attr( $key ) ?>"
+				       class="content-block-<?php echo esc_attr( $key ) ?>"
+				       value="<?php echo esc_attr( $ov ) ?>">
+				<?php
+				echo wp_kses( $on, wp_kses_allowed_html( 'post' ) );
+				echo '</label>';
+			}
+			?>
 			</select>
 			<?php
 			break;
@@ -269,8 +286,8 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 		case 'select':
 			?>
 			<select  <?php echo $placeholder ?> name="panelsStyle[<?php echo esc_attr( $key ) ?>]" id="pp-pb-<?php esc_attr_e( $key ) ?>"
-			        data-style-field="<?php echo esc_attr( $key ) ?>"
-			        data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>">
+			                                    data-style-field="<?php echo esc_attr( $key ) ?>"
+			                                    data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>">
 				<?php foreach ( $field['options'] as $ov => $on ) : ?>
 					<option
 						value="<?php echo esc_attr( $ov ) ?>" <?php if ( isset( $field['default'] ) ) {
@@ -279,6 +296,19 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 				<?php endforeach ?>
 			</select>
 			<?php
+			break;
+		case 'radio':
+			foreach ( $field['options'] as $ov => $on ) {
+				echo '<label>';
+				?>
+				<input type="radio" value="<?php echo $ov ?>"
+				       name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+				       data-style-field="<?php echo esc_attr( $key ) ?>"
+				       data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>"/>
+				<?php
+				echo wp_kses( $on, wp_kses_allowed_html( 'post' ) );
+				echo '</label>';
+			}
 			break;
 		case 'multi-select':
 			?>

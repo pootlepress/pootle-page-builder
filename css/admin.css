@@ -90,7 +90,7 @@ html {
     min-height: 59px;
 }
 
-#panels-container .grid .ppb-resizable-handle.ppb-resizable-w {
+#panels-container .grid .ui-resizable-handle.ui-resizable-w {
     left: -11px;
     width: 10px;
     background: rgba(0, 150, 211, 0);
@@ -101,11 +101,11 @@ html {
     transition: background 0.25s ease-in-out;
 }
 
-#panels-container .grid .ppb-resizable-handle.ppb-resizable-w:hover {
+#panels-container .grid .ui-resizable-handle.ui-resizable-w:hover {
     background: #eee;
 }
 
-#panels-container .grid-container:hover .ppb-resizable-handle {
+#panels-container .grid-container:hover .ui-resizable-handle {
     background: #f1f1f1;
 }
 
