@@ -310,7 +310,7 @@ final class Pootle_Page_Builder_Content_Block {
 		if ( in_array( $screen->id, pootlepb_settings( 'post-types' ) ) ) {
 			?>
 			<div id="ppb-editor-container"
-			     style="display:none;position:absolute;right:32px;left:auto;"
+			     style="display:none;position:absolute;right:25px;left:auto;"
 			     class="panels-admin-dialog ppb-dialog ppb-add-content-panel ppb-cool-panel-container ppb-helper-clearfix"
 			     tabindex="-1" role="dialog" aria-describedby="ppb-id-7" aria-labelledby="ppb-id-8">
 				<div

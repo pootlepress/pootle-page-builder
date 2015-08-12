@@ -285,11 +285,9 @@
                     .ppbTabs({
                         activate: function (e, ui) {
                             var $t = $(this),
-                                title = $t.find('.ui-tabs-active a').html(),
+                                title = $t.find('.ppb-tabs-active a').html(),
                                 $target = $(e.toElement);
-                            $('.ppb-add-content-panel .ui-dialog-titlebar .ui-dialog-title').html(title);
-
-                            //panels.ppbContentModule( e, ui, $t, $currentPanel );
+                            $('.ppb-add-content-panel .ppb-dialog-titlebar .ppb-dialog-title').html(title);
                         },
                         active: 0
                     })
@@ -715,7 +713,15 @@
         // it will be set to unchecked,
         // this is to set hide widget title checkbox
         $styleForm.find('input[type=checkbox]').prop('checked', false);
-        $styleForm.find('input[type=text], input[type=hidden], select, input[type=number], textarea').val('').change().trigger('chosen:updated');
+
+        $styleForm.find('input[type=text], input[type=hidden], select, input[type=number], textarea')
+            .val('')
+            .change()
+            .trigger('chosen:updated');
+
+        $styleForm.find(':radio[value=""]')
+            .prop('checked', true)
+            .change();
 
         // from style data in hidden field, set the widget style dialog fields with data
         for (var key in styleData) {
@@ -727,6 +733,9 @@
                     $field.wpColorPicker('color', styleData[key]);
                 } else if ($field.attr('data-style-field-type') == "slider" ) {
                     $field.siblings('.ppb-slider').slider('value',styleData[key]);
+                } else if ($field.attr('data-style-field-type') == "radio" ) {
+                    console.log(styleData[key]);
+                    $field.filter('[value="' + styleData[key] + '"]').prop('checked', true);
                 } else if ($field.attr('data-style-field-type') == "checkbox") {
                     if (styleData[key] == $field.val()) {
                         $field.prop('checked', true);
@@ -749,22 +758,19 @@
         // from values in dialog fields, set style data into hidden fields
         var styleData = {};
         $styleForm.find('[dialog-field]').each(function () {
-            var $t = $(this);
+            var $t = $(this),
+                key = $t.attr('dialog-field'),
+                type = $t.attr('type');
 
-            if ($t.attr('type') == 'checkbox') {
-                // if the field is checkbox, only store value if it is checked
+            if ( type == 'checkbox' || type == 'radio') {
                 if ($t.prop('checked')) {
-                    var key = $t.attr('dialog-field');
                     styleData[key] = $t.val();
                 }
             } else {
-                var key = $t.attr('dialog-field');
                 styleData[key] = $t.val();
             }
 
         });
-
-        console.log(styleData);
 
         $currentPanel.find('input[name$="[style]"]').val(JSON.stringify(styleData));
     };

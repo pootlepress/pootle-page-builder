@@ -124,8 +124,7 @@
                 .chosen({
                     width: '205px',
                     placeholder_text_multiple: $t.attr('placeholder')
-                })
-            console.log($t.val());
+                });
         })
     };
 
