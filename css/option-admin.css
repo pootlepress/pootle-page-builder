@@ -193,3 +193,9 @@ table.form-table th, table.form-table td {
     margin-left: 140px;
     padding: 7px;
 }
+
+.ppb-addon-footer {
+    padding: 16px 7px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+}
