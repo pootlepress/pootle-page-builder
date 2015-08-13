@@ -24,6 +24,7 @@ final class Pootle_Page_Builder_Content_Block {
 	 * @since 0.1.0
 	 */
 	public function __construct() {
+		add_filter( 'pootlepb_content_block', 'do_shortcode' );
 		add_filter( 'pootlepb_content_block', array( $this, 'auto_embed' ), 8 );
 		add_action( 'pootlepb_render_content_block', array( $this, 'open_block' ), 5, 6 );
 		add_action( 'pootlepb_render_content_block', array( $this, 'render_content_block' ), 50 );
