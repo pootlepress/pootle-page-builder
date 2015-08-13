@@ -213,7 +213,7 @@ $pootlepb_row_styling_fields = array(
 	),
 	'bg_overlay_opacity' => array(
 		'name' => 'Overlay color transparency',
-		'min' => '0.5',
+		'min' => '0',
 		'max' => '1',
 		'step' => '0.01',
 		'tab' => 'background',
