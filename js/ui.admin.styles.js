@@ -89,9 +89,10 @@ jQuery(function ($) {
     ;
 
     panels.loadStyleValues = function (container) {
-        $('#grid-styles-dialog')
+        var $gridStylesDialog = $('#grid-styles-dialog');
+        $gridStylesDialog
             .data('container', container)
-            .html($('#grid-styles-dialog').data('html'));
+            .html($gridStylesDialog.data('html'));
 
         // Copy the values of the hidden fields in the container over to the dialog.
         container.find("[data-style-field]").each(function () {
@@ -116,7 +117,9 @@ jQuery(function ($) {
             }
         });
 
-        $('#grid-styles-dialog').ppbDialog('open');
+        $gridStylesDialog.ppbDialog('open');
+
+        $('html').trigger( 'pootlepb_admin_row_styling_panel_done', [ $gridStylesDialog ] );
 
         // Now set up all the fields
         $('#grid-styles-dialog [data-style-field-type="color"]')
@@ -166,6 +169,4 @@ jQuery(function ($) {
         $t.val('');
         $t.css('background', '#ffbbb9')
     };
-
-    panels.rowVisualStylesInit
 });

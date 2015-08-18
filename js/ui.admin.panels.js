@@ -295,9 +295,6 @@
                     })
                     .addClass("ui-tabs-vertical ui-helper-clearfix");
 
-                $('html').trigger( 'pootlepb_admin_editor_panel_done', [ $add_content_panel ] );
-
-
                 panels.addInputFieldEventHandlers($add_content_panel);
 
                 var $t = $add_content_panel,
@@ -316,6 +313,8 @@
                 $(window).resize();
                 $(document).trigger('panelssetup', $currentPanel, activeDialog);
                 $('#panels-container .panels-container').trigger('refreshcells');
+
+                $('html').trigger( 'pootlepb_admin_editor_panel_done', [ $add_content_panel ] );
 
                 // This gives panel types a chance to influence the form
                 activeDialog.removeClass('ui-dialog-content-loading').trigger('panelsopen', $currentPanel, activeDialog);
