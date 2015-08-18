@@ -4,6 +4,18 @@
 
         $('html').trigger( 'pootlepb_admin_input_field_event_handlers', [ $this ] );
 
+        $this.find('input[data-style-field-type="color"]').each(function() {
+            $t = $(this);
+            var wpPkrContnr = $t.closest('.wp-picker-container');
+            if ( wpPkrContnr.length == 0 ) {
+                $t.wpColorPicker({
+                    change: function (e,ui) {
+                        $(this).change();
+                    }
+                });
+            }
+        });
+
         /* Removing existing event handlers */
         $this.find('.upload-button').off('click');
         $this.find('.video-upload-button').off('click');

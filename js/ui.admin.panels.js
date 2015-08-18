@@ -279,9 +279,11 @@
                 content = tinyMCE.get('ppbeditor').setContent( text );
 
                 //Add events to the editor buttons
-                panels.ppbEditorButtonEvents();
+                panels.ppbEditorPanelButtonEvents();
 
-                $('.ppb-add-content-panel')
+                var $add_content_panel =  $('.ppb-add-content-panel');
+
+                $add_content_panel
                     .ppbTabs({
                         activate: function (e, ui) {
                             var $t = $(this),
@@ -291,18 +293,14 @@
                         },
                         active: 0
                     })
-                    .addClass("ui-tabs-vertical ui-helper-clearfix")
-                    .find('input[data-style-field-type="color"]').each(function() {
-                        $t = $(this);
-                        var wpPkrContnr = $t.closest('.wp-picker-container');
-                        if ( wpPkrContnr.length == 0 ) {
-                            $t.wpColorPicker();
-                        }
-                    });
+                    .addClass("ui-tabs-vertical ui-helper-clearfix");
 
-                panels.addInputFieldEventHandlers($('.ppb-add-content-panel'));
+                $('html').trigger( 'pootlepb_admin_editor_panel_done', [ $add_content_panel ] );
 
-                var $t = $('.ppb-add-content-panel'),
+
+                panels.addInputFieldEventHandlers($add_content_panel);
+
+                var $t = $add_content_panel,
                     title = $t.find('.ui-tabs-active a').html();
                 $('.ppb-add-content-panel .ui-dialog-titlebar .ui-dialog-title').html(title);
 
@@ -846,7 +844,7 @@
         ]
     };
 
-    panels.ppbEditorButtonEvents = function() {
+    panels.ppbEditorPanelButtonEvents = function() {
         $('#ppb-editor-container').find('.ppb-dialog-titlebar-close').off('click').on('click', function () {
             panels.block_editor_dialog_properties.close(undefined, undefined, $('#ppb-editor-container'));
             $('#ppb-editor-container').hide();
