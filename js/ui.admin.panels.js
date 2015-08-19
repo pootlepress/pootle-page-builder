@@ -224,15 +224,15 @@
                     .data('widget-type', type)
                     .keypress(function (e) {
                         if (e.keyCode == $.ui.keyCode.ENTER) {
-                            if ($(this).closest('.ui-dialog').find('textarea:focus').length > 0) return;
+                            if ($(this).closest('.ppb-dialog').find('textarea:focus').length > 0) return;
 
                             // This is the same as clicking the add button
-                            $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane .ui-button:eq(0)').click();
+                            $(this).closest('.ppb-dialog').find('.ui-dialog-buttonpane .ui-button:eq(0)').click();
                             e.preventDefault();
                             return false;
                         }
                         else if (e.keyCode === $.ui.keyCode.ESCAPE) {
-                            $(this).closest('.ui-dialog').ppbDialog('close');
+                            $(this).closest('.ppb-dialog').ppbDialog('close');
                         }
                     });
 
@@ -328,15 +328,15 @@
                     .ppbDialog(panels.block_editor_dialog_properties)
                     .keypress(function (e) {
                         if (e.keyCode == $.ui.keyCode.ENTER) {
-                            if ($(this).closest('.ui-dialog').find('textarea:focus').length > 0) return;
+                            if ($(this).closest('.ppb-dialog').find('textarea:focus').length > 0) return;
 
                             // This is the same as clicking the add button
-                            $(this).closest('.ui-dialog').find('.ui-dialog-buttonpane .ui-button:eq(0)').click();
+                            $(this).closest('.ppb-dialog').find('.ui-dialog-buttonpane .ui-button:eq(0)').click();
                             e.preventDefault();
                             return false;
                         }
                         else if (e.keyCode === $.ui.keyCode.ESCAPE) {
-                            $(this).closest('.ui-dialog').ppbDialog('close');
+                            $(this).closest('.ppb-dialog').ppbDialog('close');
                         }
                     });
 
@@ -781,12 +781,12 @@
         height: $(window).height() - 50,
         width: $(window).width() - 50,
         create: function (event, ui) {
-            $(this).closest('.ui-dialog').find('.show-in-panels').show();
+            $(this).closest('.ppb-dialog').find('.show-in-panels').show();
         },
         open: function (e, ui, $t) {
             var $t = $t || $(this);
             // This fixes the A element focus issue
-            $t.closest('.ui-dialog').find('a').blur();
+            $t.closest('.ppb-dialog').find('a').blur();
 
         },
         close: function (e, ui, $t) {

@@ -298,7 +298,7 @@ final class Pootle_Page_Builder_Content_Block {
 
 		if( class_exists( 'WooCommerce' ) ) {
 			$tabs['woocommerce'] = array(
-				'label'    => 'Woocommerce',
+				'label'    => 'Products',
 				'priority' => 2,
 			);
 		}
