@@ -31,7 +31,7 @@ jQuery(function ($) {
             height: 500,
             width: 700,
             open: function () {
-                $t = $(this);
+                var $t = $(this);
 
                 $t.find('.ppb-cool-panel-wrap').ppbTabs({
                     active: 0

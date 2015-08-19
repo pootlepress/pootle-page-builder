@@ -100,10 +100,22 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 = 0.3.0 = 
 * 2015-08-19
- * New - 
- * Tweak - 
- * Fix - 
- 
+ * New - Add-on page
+ * New - Chosen multi select fields supported for row settings panel and content editor panel
+ * New - Radio fields supported for row settings panel and content editor panel
+ * New - pootlepb_enqueue_admin_styles action to enqueue styles
+ * New - pootlepb_prioritize_array to sort array items by priority key
+ * New - Custom event pootlepb_admin_setup_row_buttons for adding row buttons
+ * New - Add column and Remove Column buttons for row
+ * New - Action hook pootlepb_add_to_panel_buttons to add buttons to add-to-pb-panel(besides add-row and prebuilt-set buttons)
+ * New - Filter hook pootlepb_welcome_message to filter pootle pb welcome message
+ * Tweak - Larger row dragging (jquery sortable) handle
+ * Tweak - Updating chosen js library
+ * Fix - Row BG overlay transparency instead of opacity
+ * Fix - Updating slider with values in row settings panel and content editor panel
+ * Fix - Slider control supports min, max, step and default in row settings panel and content editor panel
+ * Fix - Placeholder for input fields in row settings panel and content editor panel
+
 = 0.2.3 = 
 * 2015-07-20
  * New - row panel and content panel support custom field type rendering via dynamic hook
