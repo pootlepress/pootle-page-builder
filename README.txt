@@ -98,6 +98,12 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Changelog ==
 
+= 0.3.0 = 
+* 2015-08-19
+ * New - 
+ * Tweak - 
+ * Fix - 
+ 
 = 0.2.3 = 
 * 2015-07-20
  * New - row panel and content panel support custom field type rendering via dynamic hook
