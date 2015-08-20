@@ -118,21 +118,21 @@ final class Pootle_Page_Builder {
 	 * @since 0.1.0
 	 */
 	public function activate() {
+
+		//Sorting compatibility issues
+		$this->ppb_compatibility();
+
+		//Updating version
 		add_option( 'pootlepb_initial_version', POOTLEPB_VERSION, '', 'no' );
 		update_option( 'pootlepb_current_version', POOTLEPB_VERSION, '', 'no' );
 
-		$this->ppb_compatibility();
-
 		$current_user = wp_get_current_user();
-
 		//Get first name if set
 		$username = '';
 		if ( ! empty( $current_user->user_firstname ) ) {
 			$username = " {$current_user->user_firstname}";
 		}
-
 		$welcome_message = "<b>Hey{$username}! Welcome to Page builder.</b> You're all set to start building stunning pages!<br><a class='button pootle' href='" . admin_url( '/admin.php?page=page_builder' ) . "'>Get started</a>";
-
 		pootlepb_add_admin_notice( 'welcome', $welcome_message, 'updated pootle' );
 	}
 
@@ -167,6 +167,17 @@ final class Pootle_Page_Builder {
 	 */
 	private function ppb_compatibility() {
 
+		$version = get_option( 'pootlepb_current_version' );
+		if ( empty( $version ) ) {
+			$this->v023_to_v030();
+		}
+	}
+
+	/**
+	 * Sorts v0.2.3 to 0.3.0 issues
+	 * @since 0.3.0
+	 */
+	private function v023_to_v030() {
 		$query = $this->ppb_posts();
 
 		foreach ( $query->posts as $post ) {
