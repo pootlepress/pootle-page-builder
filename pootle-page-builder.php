@@ -108,6 +108,7 @@ final class Pootle_Page_Builder {
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
 
 		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+		add_action( 'admin_init', array( $this, 'ppb_compatibility' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
@@ -119,12 +120,8 @@ final class Pootle_Page_Builder {
 	 */
 	public function activate() {
 
-		//Sorting compatibility issues
-		$this->ppb_compatibility();
-
 		//Updating version
 		add_option( 'pootlepb_initial_version', POOTLEPB_VERSION, '', 'no' );
-		update_option( 'pootlepb_current_version', POOTLEPB_VERSION, '', 'no' );
 
 		$current_user = wp_get_current_user();
 		//Get first name if set
@@ -165,12 +162,14 @@ final class Pootle_Page_Builder {
 	 * @return WP_Query
 	 * @since 0.3.0
 	 */
-	private function ppb_compatibility() {
+	public function ppb_compatibility() {
 
 		$version = get_option( 'pootlepb_current_version' );
-		if ( empty( $version ) ) {
+		if ( version_compare( $version, '0.3.0', '<' ) ) {
 			$this->v023_to_v030();
 		}
+		update_option( 'pootlepb_current_version', POOTLEPB_VERSION, '', 'no' );
+
 	}
 
 	/**
