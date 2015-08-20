@@ -111,6 +111,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * New - Filter hook pootlepb_welcome_message to filter pootle pb welcome message
  * Tweak - Larger row dragging (jquery sortable) handle
  * Tweak - Updating chosen js library
+ * Tweak - pootlepb_admin_content_block_title event provides access styles info even on update
  * Fix - Row BG overlay transparency instead of opacity
  * Fix - Updating slider with values in row settings panel and content editor panel
  * Fix - Slider control supports min, max, step and default in row settings panel and content editor panel
