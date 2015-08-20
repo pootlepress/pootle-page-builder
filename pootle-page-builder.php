@@ -175,6 +175,7 @@ final class Pootle_Page_Builder {
 
 	/**
 	 * Sorts v0.2.3 to 0.3.0 issues
+	 * @todo remove after 1.1
 	 * @since 0.3.0
 	 */
 	private function v023_to_v030() {
@@ -213,6 +214,9 @@ final class Pootle_Page_Builder {
 	 * @since 0.1.0
 	 */
 	protected function pb_post_content( $post ) {
+		if ( empty( $panels_data['grids'] ) ) {
+			return;
+		}
 
 		$panel_content = $GLOBALS['Pootle_Page_Builder_Render_Layout']->panels_render( $post->ID );
 

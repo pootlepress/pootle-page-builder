@@ -112,10 +112,15 @@ final class Pootle_Page_Builder_Admin {
 
 		$panels_data = pootlepb_get_panels_data_from_post();
 
+		if ( empty( $panels_data['grids'] ) ) {
+			return;
+		}
+
 		if ( function_exists( 'wp_slash' ) ) {
 			$panels_data = wp_slash( $panels_data );
 		}
 		update_post_meta( $post_id, 'panels_data', $panels_data );
+
 	}
 
 	public function is_pb_post_empty( $maybe_empty, $postarr ) {
