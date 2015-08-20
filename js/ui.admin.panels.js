@@ -770,6 +770,8 @@
         });
 
         $currentPanel.find('input[name$="[style]"]').val(JSON.stringify(styleData));
+
+        return styleData;
     };
 
     panels.block_editor_dialog_properties = {
@@ -796,9 +798,6 @@
             if (!doneClicked) {
                 $t.trigger('panelsdone', $currentPanel, activeDialog);
             }
-
-            //Set the widget styles
-            panels.pootlePageSetWidgetStyles($('.pootle-style-fields'));
 
             $t.hide();
             $t.data('overlay').remove();
@@ -829,8 +828,15 @@
                     $currentPanel.find('input[name$="[data]"]').val(JSON.stringify(panelData));
                     $currentPanel.find('input[name$="[info][raw]"]').val(1);
 
+                    //Set the widget styles
+                    var styles = panels.pootlePageSetWidgetStyles($('.pootle-style-fields'));
+
+                    panelData.info = {
+                        style: styles
+                    };
+
                     //Smart titles
-                    $('html').trigger( 'pootlepb_admin_content_block_title', [ $currentPanel, $currentPanel.panelsGetPanelData() ] );
+                    $('html').trigger( 'pootlepb_admin_content_block_title', [ $currentPanel, panelData ] );
 
                     $currentPanel.data('dialog', null);
 
