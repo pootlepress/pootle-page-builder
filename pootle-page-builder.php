@@ -38,6 +38,13 @@ final class Pootle_Page_Builder {
 	protected $public;
 
 	/**
+	 * @var WP_Query Contains ppb posts
+	 * @access protected
+	 * @since 0.3.0
+	 */
+	public $ppb_posts;
+
+	/**
 	 * Magic __construct
 	 * @since 0.1.0
 	 */
@@ -112,6 +119,9 @@ final class Pootle_Page_Builder {
 	 */
 	public function activate() {
 		add_option( 'pootlepb_initial_version', POOTLEPB_VERSION, '', 'no' );
+		update_option( 'pootlepb_current_version', POOTLEPB_VERSION, '', 'no' );
+
+		$this->ppb_compatibility();
 
 		$current_user = wp_get_current_user();
 
@@ -127,21 +137,57 @@ final class Pootle_Page_Builder {
 	}
 
 	/**
+	 * Return Query with all posts using ppb
+	 * @return WP_Query
+	 * @since 0.3.0
+	 */
+	public function ppb_posts() {
+
+		if ( empty( $this->ppb_posts ) ) {
+			//Get all posts using page builder
+			$args  = array(
+				'post_type'  => pootlepb_settings( 'post-types' ),
+				'meta_query' => array(
+					array(
+						'key'     => 'panels_data',
+						'compare' => 'EXISTS',
+					),
+				)
+			);
+			$this->ppb_posts = new WP_Query( $args );
+		}
+
+		return $this->ppb_posts;
+	}
+
+	/**
+	 * Return Query with all posts using ppb
+	 * @return WP_Query
+	 * @since 0.3.0
+	 */
+	private function ppb_compatibility() {
+
+		$query = $this->ppb_posts();
+
+		foreach ( $query->posts as $post ) {
+
+			$data = get_post_meta( $post->ID, 'panels_data', true );
+			foreach( $data['grids'] as $k => &$grid ) {
+				if ( ! empty( $grid['style']['bg_overlay_opacity'] ) ) {
+					$grid['style']['bg_overlay_opacity'] = 1 - $grid['style']['bg_overlay_opacity'];
+				}
+			}
+			update_post_meta( $post->ID, 'panels_data', $data );
+		}
+	}
+
+	/**
 	 * Hook for deactivation of Page Builder.
 	 * @since 0.1.0
 	 */
 	public function deactivate() {
-		//Get all posts using page builder
-		$args  = array(
-			'post_type'  => 'page',
-			'meta_query' => array(
-				array(
-					'key'     => 'panels_data',
-					'compare' => 'EXISTS',
-				),
-			)
-		);
-		$query = new WP_Query( $args );
+
+		$query = $this->ppb_posts();
 
 		foreach ( $query->posts as $post ) {
 

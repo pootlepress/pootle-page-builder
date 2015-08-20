@@ -343,16 +343,16 @@ final class Pootle_Page_Builder_Content_Block {
 		<?php
 		}
 	}
-/**
- * Output woo commerce tab
- * @since 0.1.0
- */
-public function wc_tab() {
-	//Using WooCommerce? You can now build a stunning shop with Page Builder. Just get our WooCommerce extension and start building!
-	?>
-	Using WooCommerce? Will we soon be launching a WooCommerce Add-on for page builder!
-<?php
-}
+
+	/**
+	 * Output woo commerce tab
+	 * @since 0.1.0
+	 */
+	public function wc_tab() {
+		?>
+		Using WooCommerce? <a href="<?php echo esc_url( admin_url( 'admin.php?page=page_builder_addons' ) ); ?>">Check out our WooCommerce add-on for page builder</a>
+	<?php
+	}
 }
 
 /** @var Pootle_Page_Builder_Content_Block Instance */
