@@ -144,6 +144,7 @@ final class Pootle_Page_Builder {
 			//Get all posts using page builder
 			$args  = array(
 				'post_type'  => pootlepb_settings( 'post-types' ),
+				'posts_per_page' => -1,
 				'meta_query' => array(
 					array(
 						'key'     => 'panels_data',
