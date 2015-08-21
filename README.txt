@@ -70,7 +70,7 @@ Installing "pootle page builder" can be done either by searching for "pootle pag
 
 = Where can I get help & support =
 
-For help & support please head over to http://docs.pootlepress.com where there are loads of helpful artciles and you can submit a support ticket.
+For help & support please head over to http://docs.pootlepress.com where there are loads of helpful articles and you can submit a support ticket.
 
 = How do I contribute? =
 

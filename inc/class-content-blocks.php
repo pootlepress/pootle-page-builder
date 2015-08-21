@@ -93,6 +93,10 @@ final class Pootle_Page_Builder_Content_Block {
 		$styleWithSelector = ''; // Passed with reference
 		$this->set_inline_embed_styles( $attr, $styleWithSelector, $styleArray, $id ); // Get Styles
 
+		if ( ! empty( $styleWithSelector ) ) {
+			echo '<style>' . $styleWithSelector . '</style>';
+		}
+
 		echo '<div ';
 		echo pootlepb_stringify_attributes( $attr );
 		echo '>';
@@ -176,7 +180,7 @@ final class Pootle_Page_Builder_Content_Block {
 				$inlineStyle .= $field['css'] . ': ' . $styleArray[ $key ] . $unit . ';';
 			} else {
 				//Has a selector
-				$styleWithSelector .= '#' . $id . ' > ' . $field['selector'] . ' { ' . $field['css'] . ': ' . $styleArray[ $key ] . $unit . '; }';
+				$styleWithSelector .= '#' . $id . ' ' . $field['selector'] . ' { ' . $field['css'] . ': ' . $styleArray[ $key ] . $unit . '; }';
 			}
 		}
 	}

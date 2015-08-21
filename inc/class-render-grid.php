@@ -30,7 +30,12 @@ class Pootle_Page_Builder_Render_Grid {
 		echo '<div id="pootle-page-builder" >';
 		foreach ( $grids as $gi => $cells ) {
 
-			echo apply_filters( 'pootlepb_before_row', '', $panels_data['grids'][ $gi ] );
+			/**
+			 * Triggered before rendering the row
+			 * Allows other themes and plugins to add html before the row
+			 * @param array $data Grid data
+			 */
+			echo do_action( 'pootlepb_before_row', $panels_data['grids'][ $gi ] );
 
 			$rowID = 'pg-' . $post_id . '-' . $gi;
 
@@ -47,8 +52,12 @@ class Pootle_Page_Builder_Render_Grid {
 			echo '</div><!--.panel-row-style-->';
 			echo '</div><!--.panel-grid-->';
 
-			// This allows other themes and plugins to add html after the row
-			echo apply_filters( 'pootlepb_after_row', '', $panels_data['grids'][ $gi ] );
+			/**
+			 * Triggered after rendering the row
+			 * Allows other themes and plugins to add html after the row
+			 * @param array $data Grid data
+			 */
+			echo do_action( 'pootlepb_after_row', $panels_data['grids'][ $gi ] );
 		}
 		echo '</div>';
 	}
@@ -62,7 +71,17 @@ class Pootle_Page_Builder_Render_Grid {
 	 */
 	private function get_row_attributes( $gi, $rowID, $panels_data ) {
 
+		/**
+		 * Filters row classes
+		 * @param array $classes
+		 * @param array $row_data
+		 */
 		$grid_classes    = apply_filters( 'pootlepb_row_classes', array( 'panel-grid' ), $panels_data['grids'][ $gi ] );
+		/**
+		 * Filters row attributes
+		 * @param array $attributes
+		 * @param array $row_data
+		 */
 		$grid_attributes = apply_filters( 'pootlepb_row_attributes', array(
 			'class' => implode( ' ', $grid_classes ),
 			'id'    => $rowID
