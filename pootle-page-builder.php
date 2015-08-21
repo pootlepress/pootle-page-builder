@@ -164,11 +164,11 @@ final class Pootle_Page_Builder {
 	 */
 	public function ppb_compatibility() {
 
-		$version = get_option( 'pootlepb_current_version' );
+		$version = get_option( 'pootlepb_version' );
 		if ( version_compare( $version, '0.3.0', '<' ) ) {
 			$this->v023_to_v030();
 		}
-		update_option( 'pootlepb_current_version', POOTLEPB_VERSION, '', 'no' );
+		update_option( 'pootlepb_version', POOTLEPB_VERSION, '', 'no' );
 
 	}
 
