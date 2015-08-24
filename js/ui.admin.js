@@ -376,7 +376,7 @@ jQuery(function ($) {
         .ppbDialog({
             dialogClass: 'panels-admin-dialog',
             autoOpen: false,
-            width: 500,
+            width: 700,
             title: $contentSwitchDialog.attr('data-title'),
             open: function () {
                 $(this).find('input').val(2).select();

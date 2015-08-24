@@ -134,7 +134,7 @@
             var $t = $(this);
             $t
                 .chosen({
-                    width: '205px',
+                    width: '250px',
                     placeholder_text_multiple: $t.attr('placeholder')
                 });
         })

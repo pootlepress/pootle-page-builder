@@ -105,7 +105,7 @@ class Pootle_Page_Builder_Render_Grid {
 		echo '<div ' . $this->get_row_style_attributes( $gi, $styleArray, $cells, $panels_data ) . '>';
 
 		/**
-		 * Fires in pootle page builder row
+		 * Fires in row before the cells are rendered
 		 * @hooked Pootle_Page_Builder_Render_Layout::row_bg_video
 		 * @hooked Pootle_Page_Builder_Render_Layout::row_embed_css
 		 */
@@ -132,6 +132,11 @@ class Pootle_Page_Builder_Render_Grid {
 			$panels_data['grids'][ $gi ]['style']['class'],
 		);
 
+		/**
+		 * Filters row style container attributes
+		 * @param array $attributes
+		 * @param array $row_data
+		 */
 		$style_attributes = apply_filters( 'pootlepb_row_style_attributes', $style_attributes, $styleArray, $cells );
 
 		return pootlepb_stringify_attributes( $style_attributes );

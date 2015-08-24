@@ -149,6 +149,9 @@
     right: -5px;
     top: -5px
 }
+.ppb-dialog .ui-button .ui-button-text {
+  padding:0;
+}
 .ppb-dialog .ui-button {
     display: inline-block;
     text-decoration: none;
@@ -156,7 +159,7 @@
     line-height: 26px;
     height: 28px;
     margin: 0;
-    padding: 0 10px 1px;
+    padding: 0 10px 1px !important;
     cursor: pointer;
     border-width: 1px;
     border-style: solid;

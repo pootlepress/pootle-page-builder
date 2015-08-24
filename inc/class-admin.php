@@ -154,6 +154,11 @@ final class Pootle_Page_Builder_Admin {
 			return false;
 		}
 
+		if ( ! empty( $_POST['pootlepb_noPB'] ) ) {
+			delete_post_meta( $post->ID, 'panels_data' );
+			return false;
+		}
+
 		return $pass;
 
 	}
