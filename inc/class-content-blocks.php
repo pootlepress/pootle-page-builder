@@ -120,7 +120,7 @@ final class Pootle_Page_Builder_Content_Block {
 		foreach ( $widgetStyleFields as $key => $field ) {
 			if ( $field['type'] == 'border' ) {
 				//Border field
-				$this->content_block_border( $inlineStyle, $styleArray, $key, $field );
+				$this->content_block_border( $inlineStyle, $styleWithSelector, $id, $styleArray, $key, $field );
 			} else {
 				//Default for fields
 				$this->default_block_field( $inlineStyle, $styleWithSelector, $styleArray, $id, $key, $field );
@@ -142,7 +142,7 @@ final class Pootle_Page_Builder_Content_Block {
 	 * @param string $key
 	 * @param array $field
 	 */
-	private function content_block_border( &$inlineStyle, $styleArray, $key, $field ) {
+	private function content_block_border( &$inlineStyle, &$styleWithSelector, $id, $styleArray, $key, $field ) {
 
 		//Set border color key if not set
 		if ( empty( $styleArray[ $key . '-color' ] ) ) {
@@ -150,8 +150,12 @@ final class Pootle_Page_Builder_Content_Block {
 		}
 
 		//Border
-		if ( ! empty( $styleArray[ $key . '-width' ] ) ) {
-			$inlineStyle .= $field['css'] . ': ' . $styleArray[ $key . '-width' ] . 'px solid ' . $styleArray[ $key . '-color' ] . ';';
+		if ( ! empty( $styleArray[ $key . '-width' ] ) && ! empty( $field['css'] ) ) {
+			if ( empty( $field['selector'] ) ) {
+				$inlineStyle .= $field['css'] . ': ' . $styleArray[ $key . '-width' ] . 'px solid ' . $styleArray[ $key . '-color' ] . ';';
+			} else {
+				$styleWithSelector .= '#' . $id . ' ' . $field['selector'] . ' { ' . $field['css'] . ': ' . $styleArray[ $key . '-width' ] . 'px solid ' . $styleArray[ $key . '-color' ] . ';}';
+			}
 		}
 	}
 
