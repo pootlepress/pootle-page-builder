@@ -179,14 +179,22 @@ function pootlepb_render_content_field( $key, $field ) {
 				'default' => '0',
 				'max' => '1',
 				'step' => '0.05',
+				'unit' => '%',
+				'show_actual' => false,
 			) );
 			?><input dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="hidden"
 			         data-style-field-type="slider"/>
 			<div class="ppb-slider"
+			     <?php
+			     if ( ! empty( $field['show_actual'] ) ) {
+				     echo 'data-show-actual-val="1"';
+			     }
+			     ?>
 			     data-min="<?php echo $field['min'] ?>"
 			     data-max="<?php echo $field['max'] ?>"
 			     data-default="<?php echo $field['default'] ?>"
 			     data-step="<?php echo $field['step'] ?>"
+			     data-unit="<?php echo $field['unit'] ?>"
 				></div><span class="slider-val"></span>
 			<?php
 			break;
@@ -375,15 +383,23 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 				'default' => '0',
 				'max' => '1',
 				'step' => '0.05',
+				'unit' => '%',
+				'show_actual' => false,
 			) );
 			?><input type="hidden" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
 			         data-style-field="<?php echo esc_attr( $key ) ?>"
 			         data-style-field-type="slider"/>
 			<div class="ppb-slider"
+			     <?php
+			     if ( ! empty( $field['show_actual'] ) ) {
+				     echo 'data-show-actual-val="1"';
+			     }
+			     ?>
 			     data-min="<?php echo $field['min'] ?>"
 			     data-max="<?php echo $field['max'] ?>"
 			     data-default="<?php echo $field['default'] ?>"
 			     data-step="<?php echo $field['step'] ?>"
+			     data-unit="<?php echo $field['unit'] ?>"
 				></div><span class="slider-val"></span>
 			<?php
 			break;

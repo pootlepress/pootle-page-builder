@@ -96,6 +96,20 @@
             ppbMP4VideoFrame.open();
         });
 
+        //Updates value for slider controls
+        slider_val_update = function ( valu, $t, $f, $spn ) {
+            var max = $t.data('max');
+            //Update values on slide
+            $f.val(valu);
+
+            if ( $t.data('show-actual-val') ) {
+                $spn.text(valu + $t.data('unit'));
+            } else {
+                $spn.text(Math.round(valu / max * 100) + '%');
+            }
+        };
+
+        //Slider controls init
         $this.find('.ppb-slider').each(function() {
             var $t = $(this),
                 $f = $t.siblings('input'),
@@ -109,7 +123,7 @@
             } else {
                 valu = $t.data('default');
             }
-            $spn.text((valu/max*100) + '%');
+            slider_val_update( valu, $t, $f, $spn );
 
             //Init slider
             $t.slider({
@@ -117,15 +131,11 @@
                 max: max,
                 step: $t.data('step'),
                 value: valu,
-                slide: function (e, ui) {
-                    //Update values on slide
-                    $f.val(ui.value);
-                    $spn.text(Math.round(ui.value/max*100) + '%');
+                slide: function ( e, ui ) {
+                    slider_val_update( ui.value, $t, $f, $spn );
                 },
-                change: function (e, ui) {
-                    //Update values on slide
-                    $f.val(ui.value);
-                    $spn.text(Math.round(ui.value/max*100) + '%');
+                change: function ( e, ui ) {
+                    slider_val_update( ui.value, $t, $f, $spn );
                 }
             });
         });
