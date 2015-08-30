@@ -897,7 +897,7 @@ input:disabled{
     background: #f5f5f5;
 }
 
-.ui-slider.ui-slider{
+.ppb-slider.ui-slider{
     margin: 3px 5px 0 0;
     width: 200px;
 }

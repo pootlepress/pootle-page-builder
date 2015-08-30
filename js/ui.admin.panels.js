@@ -731,7 +731,6 @@
                 } else if ($field.attr('data-style-field-type') == "slider" ) {
                     $field.siblings('.ppb-slider').slider('value',styleData[key]);
                 } else if ($field.attr('data-style-field-type') == "radio" ) {
-                    console.log(styleData[key]);
                     $field.filter('[value="' + styleData[key] + '"]').prop('checked', true);
                 } else if ($field.attr('data-style-field-type') == "checkbox") {
                     if (styleData[key] == $field.val()) {
