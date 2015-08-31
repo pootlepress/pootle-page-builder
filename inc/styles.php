@@ -233,7 +233,7 @@ function pootlepb_block_dialog_fields_output( $tab = null ) {
 
 		//Output html field
 		if ( 'html' == $field['type'] ) {
-			echo wp_kses( $field['name'], wp_kses_allowed_html( 'post' ) );
+			echo $field['name'];
 			continue;
 		}
 
@@ -268,7 +268,7 @@ function pootlepb_row_dialog_fields_output( $tab = null ) {
 
 		//Output html field
 		if ( 'html' == $field['type'] ) {
-			echo wp_kses( $field['name'], wp_kses_allowed_html( 'post' ) );
+			echo $field['name'];
 			continue;
 		}
 
