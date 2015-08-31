@@ -58,8 +58,8 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 		public function init_menu() {
 
 			add_action( 'pootle_pb_addon_key_tabs', array( $this, 'add_menu' ) );
-			add_action( 'pootle_pb_addon_key_' . $this->token . '_tab', array( $this, 'pp_api_menu_config_page' ) );
-			add_action( 'admin_init', array( $this, 'pp_api_menu_load_settings' ) );
+			add_action( 'pootle_pb_addon_key_' . $this->token . '_tab', array( $this, 'menu_config_page' ) );
+			add_action( 'admin_init', array( $this, 'menu_load_settings' ) );
 		}
 
 		// Add option page menu
@@ -71,9 +71,9 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 				__( $this->settings_menu_title, $this->text_domain ),
 				'manage_options',
 				$this->activation_tab_key,
-				array( $this, 'pp_api_menu_config_page' )
+				array( $this, 'menu_config_page' )
 			);
-			add_action( 'admin_print_styles-' . $page, array( $this, 'pp_api_menu_css_scripts' ) );
+			add_action( 'admin_print_styles-' . $page, array( $this, 'menu_css_scripts' ) );
 
 			$tabs[ $this->token ] = $this->name;
 
@@ -81,7 +81,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 		}
 
 		// Draw option page
-		public function pp_api_menu_config_page( $url_base ) {
+		public function menu_config_page( $url_base ) {
 
 			$settings_tabs = array(
 				$this->activation_tab_key   => __( $this->menu_tab_activation_title, $this->text_domain ),
@@ -119,41 +119,41 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 		}
 
 		// Register settings
-		public function pp_api_menu_load_settings() {
+		public function menu_load_settings() {
 
-			register_setting( $this->data_key, $this->data_key, array( $this, 'pp_api_menu_validate_options' ) );
+			register_setting( $this->data_key, $this->data_key, array( $this, 'menu_validate_options' ) );
 
 			// API Key
 			add_settings_section( 'api_key', __( 'API License Activation', $this->text_domain ), '__return_false', $this->activation_tab_key );
 			add_settings_field( 'status', __( 'API License Key Status', $this->text_domain ), array(
 				$this,
-				'pp_api_menu_wc_am_api_key_status'
+				'menu_wc_am_api_key_status'
 			), $this->activation_tab_key, 'api_key' );
 			add_settings_field( 'api_key', __( 'API License Key', $this->text_domain ), array(
 				$this,
-				'pp_api_menu_wc_am_api_key_field'
+				'menu_wc_am_api_key_field'
 			), $this->activation_tab_key, 'api_key' );
 			add_settings_field( 'activation_email', __( 'API License email', $this->text_domain ), array(
 				$this,
-				'pp_api_menu_wc_am_api_email_field'
+				'menu_wc_am_api_email_field'
 			), $this->activation_tab_key, 'api_key' );
 
 			// Activation settings
 			register_setting( $this->deactivate_checkbox, $this->deactivate_checkbox, array(
 				$this,
-				'pp_api_menu_wc_am_license_key_deactivation'
+				'menu_wc_am_license_key_deactivation'
 			) );
 			add_settings_section( 'deactivate_button', __( 'API License Deactivation', $this->text_domain ), '__return_false', $this->deactivation_tab_key );
 			add_settings_field( 'deactivate_button', __( 'Deactivate API License Key', $this->text_domain ), array(
 				$this,
-				'pp_api_menu_wc_am_deactivate_textarea'
+				'menu_wc_am_deactivate_textarea'
 			), $this->deactivation_tab_key, 'deactivate_button' );
 
 		}
 
 		// Returns the API License Key status from the WooCommerce API Manager on the server
-		public function pp_api_menu_wc_am_api_key_status() {
-			$license_status       = $this->pp_api_menu_license_key_status();
+		public function menu_wc_am_api_key_status() {
+			$license_status       = $this->menu_license_key_status();
 			$license_status_check = ( ! empty( $license_status['status_check'] ) && $license_status['status_check'] == 'active' ) ? 'Activated' : 'Deactivated';
 			if ( ! empty( $license_status_check ) ) {
 				echo $license_status_check;
@@ -161,23 +161,23 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 		}
 
 		// Returns API License text field
-		public function pp_api_menu_wc_am_api_key_field() {
+		public function menu_wc_am_api_key_field() {
 
-			$this->pp_api_menu_wc_am_api_field_render( 'api_key' );
+			$this->menu_wc_am_api_field_render( 'api_key' );
 
 		}
 
 		// Returns API License email text field
-		public function pp_api_menu_wc_am_api_email_field() {
+		public function menu_wc_am_api_email_field() {
 
-			$this->pp_api_menu_wc_am_api_field_render( 'activation_email' );
+			$this->menu_wc_am_api_field_render( 'activation_email' );
 
 		}
 
 		/**
 		 * @param string $key The key for the field
 		 */
-		private function pp_api_menu_wc_am_api_field_render( $key ) {
+		private function menu_wc_am_api_field_render( $key ) {
 
 			//Outputting the field
 			echo "<input id='$key' name='" . $this->data_key . "[$key]' size='25' type='text' value='" . $this->options[ $key ] . "' />";
@@ -195,7 +195,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 		}
 
 		// Sanitizes and validates all input and output for Dashboard
-		public function pp_api_menu_validate_options( $input ) {
+		public function menu_validate_options( $input ) {
 
 			// Load existing options, validate, and update with changes from input before returning
 			$options = $this->options;
@@ -211,7 +211,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 				//If this is a new key, and an existing key already exists in the database,
 				//deactivate the existing key before activating the new key.
 				if ( $current_api_key != $options[ 'api_key' ] ) {
-					$this->pp_api_menu_replace_license_key( $current_api_key );
+					$this->menu_replace_license_key( $current_api_key );
 				}
 
 				$args = array(
@@ -247,7 +247,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 			if ( ! empty( $activate_results['code'] ) ) {
 
 				//Get error info and set error
-				$error_info = pp_api_error_info( $activate_results['code'] );
+				$error_info = ppb_am_error_info( $activate_results['code'] );
 				add_settings_error( $error_info[0], $error_info[1], "{$activate_results['error']}. {$activate_results['additional info']}", 'error' );
 
 				//Get the options empty
@@ -260,7 +260,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 		}
 
 		// Returns the API License Key status from the WooCommerce API Manager on the server
-		public function pp_api_menu_license_key_status() {
+		public function menu_license_key_status() {
 			$activation_status = get_option( $this->activated_key );
 
 			$args = array(
@@ -272,7 +272,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 		}
 
 		// Deactivate the current license key before activating the new license key
-		public function pp_api_menu_replace_license_key( $current_api_key ) {
+		public function menu_replace_license_key( $current_api_key ) {
 
 			$args = array(
 				'email'       => $this->options[ 'activation_email' ],
@@ -289,7 +289,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 		}
 
 		// Deactivates the license key to allow key to be used on another blog
-		public function pp_api_menu_wc_am_license_key_deactivation( $input ) {
+		public function menu_wc_am_license_key_deactivation( $input ) {
 
 			$activation_status = get_option( $this->activated_key );
 
@@ -325,7 +325,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 			}
 		}
 
-		public function pp_api_menu_wc_am_deactivate_textarea() {
+		public function menu_wc_am_deactivate_textarea() {
 
 			echo '<input type="checkbox" id="' . $this->deactivate_checkbox . '" name="' . $this->deactivate_checkbox . '" value="on"';
 			echo checked( get_option( $this->deactivate_checkbox ), 'on' );
@@ -336,7 +336,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 		}
 
 		// Loads admin style sheets
-		public function pp_api_menu_css_scripts() {
+		public function menu_css_scripts() {
 
 			wp_enqueue_style( $this->data_key . '-css', $this->plugin_url() . 'pp-api/assets/css/admin-settings.css', array(), $this->version, 'all' );
 

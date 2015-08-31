@@ -63,10 +63,6 @@ final class Pootle_Page_Builder {
 		define( 'POOTLEPB_BASE_FILE', __FILE__ );
 		define( 'POOTLEPB_DIR', plugin_dir_path( __FILE__ ) );
 		define( 'POOTLEPB_URL', plugin_dir_url( __FILE__ ) );
-		// Tracking presence of version older than 3.0.0
-		if ( - 1 == version_compare( get_option( 'pootlepb_initial_version' ), '2.5' ) ) {
-			define( 'POOTLEPB_OLD_V', get_option( 'pootlepb_initial_version' ) );
-		}
 	}
 
 	/**

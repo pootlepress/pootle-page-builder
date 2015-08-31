@@ -10,7 +10,6 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager' ) ) {
 	 * class Pootle_Page_Builder_Addon_Manager_Menu
 	 */
 	require plugin_dir_path( __FILE__ ) . 'inc/class-menu.php';
-
 	require plugin_dir_path( __FILE__ ) . 'inc/funcs.php';
 
 	class Pootle_Page_Builder_Addon_Manager extends Pootle_Page_Builder_Addon_Manager_Menu {
@@ -45,7 +44,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager' ) ) {
 			}
 
 			// Run the activation function
-			register_activation_hook( $this->file, array( $this, 'activation' ) );
+			add_action( 'admin_init', array( $this, 'activation' ) );
 
 			if ( is_admin() ) {
 
@@ -177,6 +176,8 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager' ) ) {
 		 * Generate the default data arrays
 		 */
 		public function activation() {
+
+			if ( get_option( $this->token . '_product_id' ) ) { return; }
 
 			$global_options = array(
 				'api_key'          => '',
