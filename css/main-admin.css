@@ -27,3 +27,15 @@ div.pootle.updated {
     position: absolute;
     text-indent: 1000px;
 }
+ul.ppb-side-25 li {
+    display:block;
+}
+.ppb-side-25 {
+    float: left;
+    width: 25%;
+}
+
+.ppb-main-70 {
+    float: right;
+    width: 70%;
+}
