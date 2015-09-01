@@ -113,6 +113,7 @@ final class Pootle_Page_Builder_Admin {
 		$panels_data = pootlepb_get_panels_data_from_post();
 
 		if ( empty( $panels_data['grids'] ) ) {
+			delete_post_meta( $post_id, 'panels_data' );
 			return;
 		}
 

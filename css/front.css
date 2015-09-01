@@ -63,7 +63,7 @@
     display: block;
 }
 
-.panel-grid-cell .panel:after {
+.panel-grid-cell .ppb-block:after {
     clear: both;
     content: '';
     display: table;

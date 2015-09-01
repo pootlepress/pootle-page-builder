@@ -20,7 +20,6 @@
 
 .panel-type-list .panel-type {
     width: 25%;
-
     -ms-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -139,10 +138,10 @@ table.form-table th, table.form-table td {
     padding: 7px 5px;
 }
 .about-wrap .about-text {
-  margin-right: 0px;
+    margin-right: 0px;
 }
 .about-wrap h1 {
-  margin-right: 270px;
+    margin-right: 270px;
 }
 
 /* Addons page */
@@ -155,19 +154,31 @@ table.form-table th, table.form-table td {
 
 .ppb-addon-img {
     float: left;
-    padding: 7px;
+    padding: 20px 7px 7px 20px;
 }
 
 .ppb-addon-card-wrap {
-    width: 31%;
-    margin: 0.5%;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 98%;
+    margin: 1%;
     min-width: 340px;
     float: left;
-
     border: 1px solid #ddd;
     background-color: #fff;
 }
-
+@media only screen and (min-width:768px) {
+    .ppb-addon-card-wrap {
+        width: 48%;
+    }
+}
+@media only screen and (min-width:1600px) {
+    .ppb-addon-card-wrap {
+        width: 31%;
+    }
+}
 .ppb-addon-card-wrap:after {
     content: close-quote;
     display: block;
@@ -191,7 +202,7 @@ table.form-table th, table.form-table td {
 
 .ppb-addon-details {
     margin-left: 140px;
-    padding: 7px;
+    padding: 20px;
 }
 
 .ppb-addon-footer {

@@ -369,3 +369,19 @@ function pootlepb_get_panels_data_from_post( $form_post = null ) {
 
 	return apply_filters( 'pootlepb_panels_data_from_post', $panels_data );
 }
+
+/**
+ * Return value if key $key exists in array $arr else returns $default
+ * @param array $arr Array to find the key in
+ * @param string $key The key to find value of
+ * @param string $default The default if key ain't set
+ *
+ * @return string
+ */
+ function pootlepb_array_key_value( $arr, $key, $default = '' ) {
+	 if ( is_array( $arr ) && isset( $arr[ $key ] ) ) {
+		 return $arr[ $key ];
+	 } else {
+		 return $default;
+	 }
+ }
