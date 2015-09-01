@@ -309,7 +309,7 @@
                 //Get style data and put it in fields
                 var json = window.$currentPanel.find('input[name$="[style]"]').val(),
                     styleData = JSON.parse(json);
-                panels.setStylesToFields($('.pootle-style-fields:not(#pootle-editor-tab)', styleData));
+                panels.setStylesToFields($('.pootle-style-fields:not(#pootle-editor-tab)'), styleData);
 
                 // This is to refresh the dialog positions
                 $(window).resize();
