@@ -197,7 +197,7 @@
             // The done button
             doneClicked = false;
 
-            window.$currentPanel = $(this).parents('.panel');
+            window.$currentPanel = $currentPanel;
 
             // Load the widget form
             var widgetClass = type;
@@ -281,9 +281,9 @@
                 //Add events to the editor buttons
                 panels.ppbEditorPanelButtonEvents();
 
-                var $add_content_panel =  $('.ppb-add-content-panel');
+                var $addContent_panel =  $('.ppb-add-content-panel');
 
-                $add_content_panel
+                $addContent_panel
                     .ppbTabs({
                         activate: function (e, ui) {
                             var $t = $(this),
@@ -295,9 +295,9 @@
                     })
                     .addClass("ui-tabs-vertical ui-helper-clearfix");
 
-                panels.addInputFieldEventHandlers($add_content_panel);
+                panels.addInputFieldEventHandlers($addContent_panel);
 
-                var $t = $add_content_panel,
+                var $t = $addContent_panel,
                     title = $t.find('.ui-tabs-active a').html();
                 $('.ppb-add-content-panel .ui-dialog-titlebar .ui-dialog-title').html(title);
 
@@ -307,7 +307,7 @@
                 activeDialog.css('opacity', '1');
 
                 //Get style data and put it in fields
-                var json = window.$currentPanel.find('input[name$="[style]"]').val(),
+                var json = $currentPanel.find('input[name$="[style]"]').val(),
                     styleData = JSON.parse(json);
                 panels.setStylesToFields($('.pootle-style-fields:not(#pootle-editor-tab)'), styleData);
 
@@ -316,7 +316,7 @@
                 $(document).trigger('panelssetup', $currentPanel, activeDialog);
                 $('#panels-container .panels-container').trigger('refreshcells');
 
-                $('html').trigger( 'pootlepb_admin_editor_panel_done', [ $add_content_panel ] );
+                $('html').trigger( 'pootlepb_admin_editor_panel_done', [ $addContent_panel, styleData ] );
 
                 // This gives panel types a chance to influence the form
                 activeDialog.removeClass('ui-dialog-content-loading').trigger('panelsopen', $currentPanel, activeDialog);
