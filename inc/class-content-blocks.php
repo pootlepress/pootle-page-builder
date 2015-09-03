@@ -93,9 +93,7 @@ final class Pootle_Page_Builder_Content_Block {
 		$styleWithSelector = ''; // Passed with reference
 		$this->set_inline_embed_styles( $attr, $styleWithSelector, $styleArray, $id ); // Get Styles
 
-		if ( ! empty( $styleWithSelector ) ) {
-			echo '<style>' . $styleWithSelector . '</style>';
-		}
+		if ( ! empty( $styleWithSelector ) ) { echo '<style>' . $styleWithSelector . '</style>'; }
 
 		echo '<div ';
 		echo pootlepb_stringify_attributes( $attr );
@@ -113,11 +111,10 @@ final class Pootle_Page_Builder_Content_Block {
 	private function set_inline_embed_styles( &$attr, &$styleWithSelector, $styleArray, $id ) {
 
 		$inlineStyle = '';
-		//Inline styles
-		if ( ! empty( $styleArray['inline-css'] ) ) { $inlineStyle .= $styleArray['inline-css']; }
 
 		$widgetStyleFields = pootlepb_block_styling_fields();
 		foreach ( $widgetStyleFields as $key => $field ) {
+			if ( empty( $field['css'] ) ) { continue; }
 			if ( $field['type'] == 'border' ) {
 				//Border field
 				$this->content_block_border( $inlineStyle, $styleWithSelector, $id, $styleArray, $key, $field );
@@ -129,8 +126,14 @@ final class Pootle_Page_Builder_Content_Block {
 
 		$this->bg_color_transparency( $inlineStyle, $styleArray );
 
-		$attr['style'] = $inlineStyle;
+		$attr['style'] = $inlineStyle . $styleArray['inline-css'];
 
+		/**
+		 * Filters content block attributes
+		 * @var array $attr Content block attributes
+		 * @var array $style Content block style settings
+		 * @var string $id Unique ID of content block
+		 */
 		$attr = apply_filters( 'pootlepb_content_block_attributes', $attr, $styleArray, $id );
 	}
 
@@ -144,13 +147,8 @@ final class Pootle_Page_Builder_Content_Block {
 	 */
 	private function content_block_border( &$inlineStyle, &$styleWithSelector, $id, $styleArray, $key, $field ) {
 
-		//Set border color key if not set
-		if ( empty( $styleArray[ $key . '-color' ] ) ) {
-			$styleArray[ $key . '-color' ] = '';
-		}
-
 		//Border
-		if ( ! empty( $styleArray[ $key . '-width' ] ) && ! empty( $field['css'] ) ) {
+		if ( ! empty( $styleArray[ $key . '-width' ] ) ) {
 			if ( empty( $field['selector'] ) ) {
 				$inlineStyle .= $field['css'] . ': ' . $styleArray[ $key . '-width' ] . 'px solid ' . $styleArray[ $key . '-color' ] . ';';
 			} else {
@@ -173,11 +171,9 @@ final class Pootle_Page_Builder_Content_Block {
 
 		if ( ! empty( $styleArray[ $key ] ) ) {
 
-			if ( empty( $field['css'] ) ) {
-				return;
-			}
+			$unit = '';
 
-			$unit = $this->get_unit( $field );
+			if ( ! empty( $field['unit'] ) ) { $unit = $field['unit']; }
 
 			if ( ! isset( $field['selector'] ) ) {
 				//No selector
@@ -189,20 +185,9 @@ final class Pootle_Page_Builder_Content_Block {
 		}
 	}
 
-	private function get_unit( $field ){
-
-		$unit = '';
-
-		//Assign Unit if not empty
-		if ( ! empty( $field['unit'] ) ) {
-			$unit = $field['unit'];
-		}
-
-		return $unit;
-	}
 	private function bg_color_transparency( &$style, $set ) {
 		if ( ! empty( $set['background-transparency'] ) && ! empty( $set['background-color'] ) ) {
-			$style .= 'background-color: rgba( ' . pootlepb_hex2rgb( $set['background-color'] ) . ', ' . ( 1 - $set['background-transparency'] ) . ' )';
+			$style .= 'background-color: rgba( ' . pootlepb_hex2rgb( $set['background-color'] ) . ', ' . ( 1 - $set['background-transparency'] ) . ' ); ';
 		}
 	}
 	/**
@@ -249,18 +234,10 @@ final class Pootle_Page_Builder_Content_Block {
 	 *
 	 * @since 0.1.0
 	 */
-	public function panels_editor( $request ) {
+	public function panels_editor() {
 		//Init text to populate in editor
-		$text = '';
-		if ( ! empty( $request['instance'] ) ) {
-			$instance = json_decode( $request['instance'] );
-			if ( ! empty( $instance->text ) ) {
-				$text = $instance->text;
-			}
-		}
-
 		wp_editor(
-			$text,
+			'',
 			'ppbeditor',
 			array(
 				'textarea_name'  => 'widgets[{$id}][text]',
@@ -272,28 +249,6 @@ final class Pootle_Page_Builder_Content_Block {
 				)
 			)
 		);
-	}
-
-	/**
-	 * Display a widget form with the provided data
-	 *
-	 * @param array|null $request Request data ($_POST/$_GET)
-	 *
-	 * @since 0.1.0
-	 */
-	public function editor_panel( $request = null ) {
-		require POOTLEPB_DIR . 'tpl/content-block-panel.php';
-	}
-
-	/**
-	 * Handles ajax requests for the content panel
-	 * @uses Pootle_Page_Builder_Content_Block::editor_panel()
-	 * @since 0.1.0
-	 */
-	public function ajax_content_panel() {
-		$request = array_map( 'stripslashes_deep', $_REQUEST );
-		$this->editor_panel( $request );
-		exit();
 	}
 
 	/**
@@ -335,7 +290,7 @@ final class Pootle_Page_Builder_Content_Block {
 					class="panel-dialog dialog-form widget-dialog-pootle_pb_content_block ppb-dialog-content ppb-widget-content"
 					id="ppb-id-7">
 					<?php
-					$this->editor_panel();
+					require POOTLEPB_DIR . 'tpl/content-block-panel.php';
 					?>
 				</div>
 				<div class="ppb-dialog-buttonpane ppb-widget-content ppb-helper-clearfix">
