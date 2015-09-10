@@ -1,15 +1,18 @@
 <?php
+/**
+ * Contains Pootle_Page_Builder_Admin_UI class
+ * @author shramee
+ * @since 0.1.0
+ */
 
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 26/6/15
- * Time: 4:01 PM
+ * Class Pootle_Page_Builder_Admin_UI
+ * Renders pootle page builder user interface
  * @since 0.1.0
  */
 final class Pootle_Page_Builder_Admin_UI {
 	/**
-	 * @var Pootle_Page_Builder_Admin_UI
+	 * @var Pootle_Page_Builder_Admin_UI Instance
 	 * @access protected
 	 * @since 0.1.0
 	 */
@@ -47,9 +50,7 @@ final class Pootle_Page_Builder_Admin_UI {
 
 	/**
 	 * Render a panel metabox.
-	 *
 	 * @param $post
-	 *
 	 * @since 0.1.0
 	 */
 	public function metabox_render( $post ) {

@@ -1,28 +1,24 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 26/6/15
- * Time: 6:46 PM
+ * Contains Pootle_Page_Builder_Public class
+ * @author shramee
  * @since 0.1.0
  */
 
 /**
- * Pootle Page Builder admin class
  * Class Pootle_Page_Builder_Public
- * Use Pootle_Page_Builder_Public::instance() to get an instance
+ * Pootle Page Builder public class
  * @since 0.1.0
  */
 final class Pootle_Page_Builder_Public {
 	/**
-	 * @var Pootle_Page_Builder_Public
+	 * @var Pootle_Page_Builder_Public Instance
 	 * @since 0.1.0
 	 */
 	protected static $instance;
 
 	/**
 	 * Magic __construct
-	 * $since 1.0.0
 	 * @since 0.1.0
 	 */
 	public function __construct() {
@@ -30,6 +26,10 @@ final class Pootle_Page_Builder_Public {
 		$this->actions();
 	}
 
+	/**
+	 * Includes files required for public end rendering
+	 * @since 0.1.0
+	 */
 	protected function includes() {
 		require_once POOTLEPB_DIR . 'inc/class-render-layout.php';
 		require_once POOTLEPB_DIR . 'inc/class-front-css-js.php';
@@ -46,9 +46,7 @@ final class Pootle_Page_Builder_Public {
 
 	/**
 	 * Add all the necessary body classes.
-	 *
 	 * @param $classes
-	 *
 	 * @return array
 	 * @since 0.1.0
 	 */

@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 26/6/15
- * Time: 5:43 PM
+ * Filters and actions for enhancements and bug fixes
+ * @author shramee
  * @since 0.1.0
  */
 
@@ -51,6 +49,9 @@ add_action( 'admin_notices', 'pootlepb_no_admin_notices', 0 );
 
 /**
  * Add a filter to import panels_data meta key. This fixes serialized PHP.
+ * @param array $post_meta Post meta data
+ * @return array
+ * @filter wp_import_post_meta
  * @since 0.1.0
  */
 function pootlepb_wp_import_post_meta( $post_meta ) {

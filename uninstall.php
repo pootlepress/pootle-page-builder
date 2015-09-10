@@ -1,15 +1,16 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 30/6/15
- * Time: 4:17 PM
+ * Stuff to do on installation
+ * @author shramee
+ * @since 0.1.0
  */
 
 //Don't proceed any further if it ain't called by uninstall
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
+
+//If hard uninstall is set true by user
 if ( get_option( 'pootlepb-hard-uninstall' ) ) {
 
 	//Get all posts using page builder

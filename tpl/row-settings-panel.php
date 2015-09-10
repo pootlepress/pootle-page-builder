@@ -1,7 +1,9 @@
 <?php
 /**
- * Created by shramee
- * At: 7:59 PM 8/7/15
+ * Row settings panel template
+ * Used by row styling/settings panels in pootle page builder post
+ * @author shramee
+ * @since 0.1.0
  */
 
 global $pootlepb_row_settings_tabs;

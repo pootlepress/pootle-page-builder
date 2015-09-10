@@ -1,11 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 19/6/15
- * Time: 11:05 PM
+ * Welcome to pootle page builder settings page template
+ * @author shramee
  * @since 0.1.0
  */
+
+/** Template start */
 ?>
 <div class="wrap ppb-welcome about-wrap">
 

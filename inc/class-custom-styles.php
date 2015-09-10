@@ -1,18 +1,18 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 1/7/15
- * Time: 11:49 AM
+ * Contains Pootle_Page_Builder_Custom_Styles class
+ * @author shramee
+ * @since 0.1.0
  */
 
 /**
  * Class Pootle_Page_Builder_Custom_Styles
+ * Renders customized style for grid
  * @since 0.1.0
  */
 final class Pootle_Page_Builder_Custom_Styles {
 	/**
-	 * @var Pootle_Page_Builder_Custom_Styles
+	 * @var Pootle_Page_Builder_Custom_Styles Instance
 	 * @since 0.1.0
 	 */
 	protected static $instance;
@@ -22,7 +22,6 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 	/**
 	 * Magic __construct
-	 * $since 1.0.0
 	 * @since 0.1.0
 	 */
 	public function __construct() {
@@ -42,10 +41,8 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 	/**
 	 * Initiates vars and properties for row styling
-	 *
 	 * @param array $attr
 	 * @param array $style
-	 *
 	 * @return array
 	 */
 	public function row_style_vars( $attr, $style ) {
@@ -64,10 +61,8 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 	/**
 	 * Set's row background color
-	 *
 	 * @param array $attr
 	 * @param array $style
-	 *
 	 * @return array
 	 */
 	public function row_bg_color( $attr, $style ) {
@@ -81,10 +76,8 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 	/**
 	 * Set's row border
-	 *
 	 * @param array $attr
 	 * @param array $style
-	 *
 	 * @return array
 	 */
 	public function row_border( $attr, $style ) {
@@ -101,10 +94,8 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 	/**
 	 * Set's row background image
-	 *
 	 * @param array $attr
 	 * @param array $style
-	 *
 	 * @return array
 	 */
 	public function row_bg_image( $attr, $style ) {
@@ -124,10 +115,8 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 	/**
 	 * Set's row bg image repeat
-	 *
 	 * @param array $attr
 	 * @param array $style
-	 *
 	 * @return array
 	 */
 	public function row_bg_img_repeat( $attr, $style ) {
@@ -144,14 +133,12 @@ final class Pootle_Page_Builder_Custom_Styles {
 	}
 
 	/**
-	 *
+	 * Outputs row bg image size
 	 * @param array $attr
 	 * @param array $style
-	 *
 	 * @return array
 	 */
 	public function row_bg_img_size( $attr, $style ) {
-
 		if ( ! empty( $style['background_image_size'] ) ) {
 			$attr['style'] .= 'background-size: ' . $style['background_image_size'] . '; ';
 		}
@@ -161,10 +148,8 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 	/**
 	 * Row full width class
-	 *
 	 * @param array $attr
 	 * @param array $style
-	 *
 	 * @return array
 	 * @since 0.1.0
 	 */
@@ -180,10 +165,8 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 	/**
 	 * Row bg parallax class
-	 *
 	 * @param array $attr
 	 * @param array $style
-	 *
 	 * @return array
 	 * @since 0.1.0
 	 */
@@ -202,11 +185,9 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 	/**
 	 * Row bg video class and video mobile image
-	 *
 	 * @param array $attr
 	 * @param array $style
 	 * @param array $cells
-	 *
 	 * @return array
 	 * @since 0.1.0
 	 */
@@ -245,10 +226,8 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 	/**
 	 * Row bg video class and video mobile image
-	 *
 	 * @param array $attr
 	 * @param array $style
-	 *
 	 * @return array
 	 * @since 0.1.0
 	 */
@@ -263,10 +242,8 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 	/**
 	 * Row bg video class and video mobile image
-	 *
 	 * @param array $attr
 	 * @param array $style
-	 *
 	 * @return array
 	 */
 	public function row_bg_vid_css( $attr, $style ) {
@@ -285,10 +262,8 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 	/**
 	 * Row bg video class and video mobile image
-	 *
 	 * @param array $attr
 	 * @param array $style
-	 *
 	 * @return array
 	 */
 	public function row_inline_css( $attr, $style ) {

@@ -1,60 +1,109 @@
 <?php
-
 /**
- * Pooltepress Admin Menu Class
- *
- * @package Update API Manager/Admin
- *
+ * Contains Pootle_Page_Builder_Addon_Manager_Menu class
+ * @author shramee
+ * @since 0.3.2
  */
+
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
+	/**
+	 * Class Pootle_Page_Builder_Addon_Manager_Menu
+	 * Pooltepress add-on key management settings menu tabs
+	 * @usedby Pootle_Page_Builder_Addon_Manager
+	 * @package Update API Manager/Admin
+	 */
 	class Pootle_Page_Builder_Addon_Manager_Menu {
 
+		/** @var string Plugin token */
 		public $data_key;
+
+		/** @var string This wp installation instance key */
 		public $instance_key;
+
+		/** @var string Deactivate checkbox options key */
 		public $deactivate_checkbox_key;
+
+		/** @var string Settings activate checkbox key */
 		public $activated_key;
 
+		/** @var string Settings deactivate checkbox key */
 		public $deactivate_checkbox;
+
+		/** @var string Activation tab key */
 		public $activation_tab_key;
+
+		/** @var string Activation tab key */
 		public $deactivation_tab_key;
+
+		/** @var string Add-on key manager tab title */
 		public $settings_menu_title;
+
+		/** @var string Add-on key manager section title */
 		public $settings_title;
+
+		/** @var string Add-on key manager activation tab title */
 		public $menu_tab_activation_title;
+
+		/** @var string Add-on key manager tab deactivation title */
 		public $menu_tab_deactivation_title;
 
 		/** @var string Base URL to the remote upgrade API Manager server */
 		public $upgrade_url;
+
 		/** @var string Version */
 		public $version;
+
 		/** @var string Token for this plugin */
 		public $token;
+
 		/** @var string Plugin name */
 		public $name;
+
 		/** @var string Plugin name */
 		public $file;
+
 		/** @var string Plugin textdomain */
 		public $text_domain;
 
-		/** @var string */
+		/** @var string Current location url */
 		public $plugin_url;
+
 		/** @var Pootle_Page_Builder_Addon_Manager_Key Instance */
 		protected $key_class;
 
+		/** @var array Add-on key options */
 		public $options;
+
+		/** @var array Add-on name */
 		public $plugin_name;
+
+		/** @var string Product id ( name, should precisely match on server) */
 		public $product_id;
+
+		/** @var string Renew license url */
 		public $renew_license_url;
+
+		/** @var string WP installation id */
 		public $instance_id;
+
+		/** @var string Add-on Text domain */
 		public $domain;
+
+		/** @var string Add-on current version */
 		public $software_version;
+
+		/** @var string Set to plugin */
 		public $plugin_or_theme;
 
+		/** @var string Add-on version on server */
 		public $update_version;
 
-		// Load admin menu
+		/**
+		 * Load admin menu
+		 */
 		public function init_menu() {
 
 			add_action( 'pootle_pb_addon_key_tabs', array( $this, 'add_menu' ) );
@@ -62,7 +111,11 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 			add_action( 'admin_init', array( $this, 'menu_load_settings' ) );
 		}
 
-		// Add option page menu
+		/**
+		 * Add option page menu
+		 * @param array $tabs Tabs to render
+		 * @return mixed
+		 */
 		public function add_menu( $tabs ) {
 
 
@@ -80,7 +133,10 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 			return $tabs;
 		}
 
-		// Draw option page
+		/**
+		 * Render option page
+		 * @param string $url_base
+		 */
 		public function menu_config_page( $url_base ) {
 
 			$settings_tabs = array(
@@ -118,7 +174,9 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 		<?php
 		}
 
-		// Register settings
+		/**
+		 * Register settings
+		 */
 		public function menu_load_settings() {
 
 			register_setting( $this->data_key, $this->data_key, array( $this, 'menu_validate_options' ) );
@@ -151,7 +209,9 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 
 		}
 
-		// Returns the API License Key status from the WooCommerce API Manager on the server
+		/**
+		 * Returns the API License Key status from the WooCommerce API Manager on the server
+		 */
 		public function menu_wc_am_api_key_status() {
 			$license_status       = $this->menu_license_key_status();
 			$license_status_check = ( ! empty( $license_status['status_check'] ) && $license_status['status_check'] == 'active' ) ? 'Activated' : 'Deactivated';
@@ -160,14 +220,18 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 			}
 		}
 
-		// Returns API License text field
+		/**
+		 * Returns API License text field
+		 */
 		public function menu_wc_am_api_key_field() {
 
 			$this->menu_wc_am_api_field_render( 'api_key' );
 
 		}
 
-		// Returns API License email text field
+		/**
+		 * Returns API License email text field
+		 */
 		public function menu_wc_am_api_email_field() {
 
 			$this->menu_wc_am_api_field_render( 'activation_email' );
@@ -175,6 +239,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 		}
 
 		/**
+		 * Renders settings input fields
 		 * @param string $key The key for the field
 		 */
 		private function menu_wc_am_api_field_render( $key ) {
@@ -194,7 +259,11 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 			}
 		}
 
-		// Sanitizes and validates all input and output for Dashboard
+		/**
+		 * Sanitizes and validates all input and output for Dashboard
+		 * @param array $input Input from settings form
+		 * @return array
+		 */
 		public function menu_validate_options( $input ) {
 
 			// Load existing options, validate, and update with changes from input before returning
@@ -242,6 +311,10 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 			return $options;
 		}
 
+		/**
+		 * Checks for error in response from server
+		 * @param array $activate_results
+		 */
 		private function check_error( $activate_results ) {
 
 			if ( ! empty( $activate_results['code'] ) ) {
@@ -259,7 +332,9 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 			}
 		}
 
-		// Returns the API License Key status from the WooCommerce API Manager on the server
+		/**
+		 * Returns the API License Key status from the WooCommerce API Manager on the server
+		 */
 		public function menu_license_key_status() {
 			$activation_status = get_option( $this->activated_key );
 
@@ -271,7 +346,11 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 			return json_decode( $this->key_class->status( $args ), true );
 		}
 
-		// Deactivate the current license key before activating the new license key
+		/**
+		 * Deactivate the current license key before activating the new license key
+		 * @param string $current_api_key new api key to activate
+		 * @return bool|void
+		 */
 		public function menu_replace_license_key( $current_api_key ) {
 
 			$args = array(
@@ -288,7 +367,11 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 			return add_settings_error( 'not_deactivated_text', 'not_deactivated_error', __( 'The license could not be deactivated. Use the License Deactivation tab to manually deactivate the license before activating a new license.', $this->text_domain ), 'updated' );
 		}
 
-		// Deactivates the license key to allow key to be used on another blog
+		/**
+		 * Deactivates the license key to allow key to be used on another blog
+		 * @param string $input Deactivation checkbox input
+		 * @return string
+		 */
 		public function menu_wc_am_license_key_deactivation( $input ) {
 
 			$activation_status = get_option( $this->activated_key );
@@ -325,6 +408,9 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 			}
 		}
 
+		/**
+		 * Renders deactivates checkbox
+		 */
 		public function menu_wc_am_deactivate_textarea() {
 
 			echo '<input type="checkbox" id="' . $this->deactivate_checkbox . '" name="' . $this->deactivate_checkbox . '" value="on"';
@@ -335,7 +421,9 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Menu' ) ) {
 		<?php
 		}
 
-		// Loads admin style sheets
+		/**
+		 * Loads admin style sheets
+		 */
 		public function menu_css_scripts() {
 
 			wp_enqueue_style( $this->data_key . '-css', $this->plugin_url() . 'pp-api/assets/css/admin-settings.css', array(), $this->version, 'all' );

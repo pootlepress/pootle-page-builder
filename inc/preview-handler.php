@@ -1,11 +1,10 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 26/6/15
- * Time: 10:38 PM
+ * Handles live preview
+ * @author shramee
  * @since 0.1.0
  */
+
 /**
  * Handles creating the preview.
  * @since 0.1.0

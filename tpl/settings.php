@@ -1,7 +1,7 @@
 <?php
 /**
  * Settings page template
- * package pootle_page_builder
+ * @author shramee
  * @since 0.1.0
  */
 ?>
@@ -11,6 +11,7 @@
 	<?php settings_errors(); ?>
 
 	<?php
+	/** @var string $active_tab Current tab */
 	$active_tab = 'general';
 	if( isset( $_GET[ 'tab' ] ) ) {
 		$active_tab = $_GET[ 'tab' ];

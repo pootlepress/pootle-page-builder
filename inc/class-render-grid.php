@@ -1,14 +1,13 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 1/7/15
- * Time: 3:51 PM
+ * Contains Pootle_Page_Builder_Render_Grid class
+ * @author shramee
+ * @since 0.1.0
  */
 
 /**
- * Renders all the rows on the page
  * Class Pootle_Page_Builder_Render_Grid
+ * Renders all the rows on the page
  */
 class Pootle_Page_Builder_Render_Grid {
 	/**

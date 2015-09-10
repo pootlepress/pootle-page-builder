@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 25/6/15
- * Time: 11:29 PM
+ * Contains Pootle_Page_Builder_Content_Block class
+ * @author shramee
  * @since 0.1.0
  */
 
@@ -13,14 +11,13 @@
  */
 final class Pootle_Page_Builder_Content_Block {
 	/**
-	 * @var Pootle_Page_Builder_Content_Block
+	 * @var Pootle_Page_Builder_Content_Block Instance
 	 * @since 0.1.0
 	 */
 	protected static $instance;
 
 	/**
 	 * Magic __construct
-	 * $since 1.0.0
 	 * @since 0.1.0
 	 */
 	public function __construct() {
@@ -43,9 +40,7 @@ final class Pootle_Page_Builder_Content_Block {
 
 	/**
 	 * Enables oEmbed in content blocks
-	 *
 	 * @param string $text
-	 *
 	 * @return string
 	 * @filter pootlepb_content_block
 	 * @since 0.1.0
@@ -64,14 +59,12 @@ final class Pootle_Page_Builder_Content_Block {
 
 	/**
 	 * Opens the content block container with styles and classes
-	 *
 	 * @param $block_info
 	 * @param $gi
 	 * @param $ci
 	 * @param $pi
 	 * @param $blocks_num
 	 * @param $post_id
-	 *
 	 * @action pootlepb_render_content_block
 	 * @since 0.1.0
 	 */
@@ -102,7 +95,6 @@ final class Pootle_Page_Builder_Content_Block {
 
 	/**
 	 * Sets content block embed and inline css
-	 *
 	 * @param string $attr
 	 * @param array $styleWithSelector
 	 * @param array $styleArray
@@ -133,17 +125,20 @@ final class Pootle_Page_Builder_Content_Block {
 		 * @var array $attr Content block attributes
 		 * @var array $style Content block style settings
 		 * @var string $id Unique ID of content block
+		 * @since 0.1.0
 		 */
 		$attr = apply_filters( 'pootlepb_content_block_attributes', $attr, $styleArray, $id );
 	}
 
 	/**
 	 * Renders border for the content block
-	 *
-	 * @param string $inlineStyle
-	 * @param array $styleArray
-	 * @param string $key
-	 * @param array $field
+	 * @param string $inlineStyle inline style
+	 * @param string $styleWithSelector CSS with selector
+	 * @param string $id CSS id
+	 * @param array $styleArray style data
+	 * @param string $key field key
+	 * @param array $field field data
+	 * @since 0.1.0
 	 */
 	private function content_block_border( &$inlineStyle, &$styleWithSelector, $id, $styleArray, $key, $field ) {
 
@@ -159,13 +154,13 @@ final class Pootle_Page_Builder_Content_Block {
 
 	/**
 	 * Fallback content block style renderer
-	 *
 	 * @param string $inlineStyle
 	 * @param array $styleWithSelector
 	 * @param array $styleArray
 	 * @param string $id
 	 * @param string $key
 	 * @param array $field
+	 * @since 0.1.0
 	 */
 	private function default_block_field( &$inlineStyle, &$styleWithSelector, $styleArray, $id, $key, $field ) {
 
@@ -185,6 +180,12 @@ final class Pootle_Page_Builder_Content_Block {
 		}
 	}
 
+	/**
+	 * Sets transparency for content block bg color
+	 * @param string $style Content CSS
+	 * @param array $set Settings
+	 * @since 0.2.3
+	 */
 	private function bg_color_transparency( &$style, $set ) {
 		if ( ! empty( $set['background-transparency'] ) && ! empty( $set['background-color'] ) ) {
 			$style .= 'background-color: rgba( ' . pootlepb_hex2rgb( $set['background-color'] ) . ', ' . ( 1 - $set['background-transparency'] ) . ' ); ';
@@ -192,9 +193,7 @@ final class Pootle_Page_Builder_Content_Block {
 	}
 	/**
 	 * Render the Content Panel.
-	 *
 	 * @param string $widget_info The widget class name.
-	 *
 	 * @since 0.1.0
 	 */
 	public function render_content_block( $block_info ) {
@@ -229,9 +228,7 @@ final class Pootle_Page_Builder_Content_Block {
 
 	/**
 	 * Output TMCE Editor
-	 *
 	 * @param $request
-	 *
 	 * @since 0.1.0
 	 */
 	public function panels_editor() {
@@ -268,6 +265,10 @@ final class Pootle_Page_Builder_Content_Block {
 		return $tabs;
 	}
 
+	/**
+	 * Outputs content editor panel
+	 * @since 0.1.0
+	 */
 	public function ppb_tmce_dialog() {
 
 		$screen = get_current_screen();

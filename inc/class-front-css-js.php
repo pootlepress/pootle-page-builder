@@ -1,15 +1,18 @@
 <?php
+/**
+ * Contains Pootle_Page_Builder_Front_Css_Js class
+ * @author shramee
+ * @since 0.1.0
+ */
 
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 25/6/15
- * Time: 11:32 PM
+ * Class Pootle_Page_Builder_Front_Css_Js
+ * Renders front end css and js
  * @since 0.1.0
  */
 final class Pootle_Page_Builder_Front_Css_Js {
 	/**
-	 * @var Pootle_Page_Builder_Front_Css_Js
+	 * @var Pootle_Page_Builder_Front_Css_Js Instance
 	 * @access protected
 	 * @since 0.1.0
 	 */
@@ -150,12 +153,10 @@ final class Pootle_Page_Builder_Front_Css_Js {
 
 	/**
 	 * Outputs margin bottom style for rows
-	 *
 	 * @param array $settings PPB settings
 	 * @param int $gi Grid Index
 	 * @param int $post_id
 	 * @param array $panels_data
-	 *
 	 * @since 0.1.0
 	 */
 	private function row_bottom_margin( $settings, $gi, $post_id, $panels_data ) {
@@ -168,6 +169,13 @@ final class Pootle_Page_Builder_Front_Css_Js {
 		}
 	}
 
+	/**
+	 * Outputs styles for res < 768px
+	 * @param array $settings Settings
+	 * @param string $gi Grid Index
+	 * @param string $post_id Post ID
+	 * @since 0.1.0
+	 */
 	private function mobile_styles( $settings, $gi, $post_id ) {
 
 		$panels_margin_bottom = $settings['margin-bottom'];

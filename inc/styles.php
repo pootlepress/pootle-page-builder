@@ -1,94 +1,58 @@
 <?php
 /**
- * Code to handle the row styling
+ * Handles style and settings fields rendering
  * @since 0.1.0
  */
 
-function pootlepb_dialog_form_echo( $fields ) {
+/**
+ * Renders content block fields
+ * @param string $tab The tab to render the fields for
+ * @since 0.1.0
+ */
+function pootlepb_block_dialog_fields_output( $tab = null ) {
 
-	foreach ( $fields as $name => $attr ) {
+	//Content block panel fields
+	$fields = pootlepb_block_styling_fields();
 
-		echo '<p class="field_' . esc_attr( $name ) . '">';
-		echo '<label>' . esc_attr( $attr['name'] ) . '</label>';
+	//Prioritize array
+	pootlepb_prioritize_array( $fields );
 
-		switch ( $attr['type'] ) {
-			case 'select':
-				?>
-				<select name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-				        data-style-field="<?php echo esc_attr( $name ) ?>"
-				        data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>">
-					<?php foreach ( $attr['options'] as $ov => $on ) : ?>
-						<option value="<?php echo esc_attr( $ov ) ?>"><?php echo esc_html( $on ) ?></option>
-					<?php endforeach ?>
-				</select>
-				<?php
-				break;
+	foreach ( $fields as $field ) {
 
-			case 'checkbox' :
-				?>
-				<label class="ppb-panels-checkbox-label">
-					<input type="checkbox" name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-					       data-style-field="<?php echo esc_attr( $name ) ?>"
-					       data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>"/>
-					Enabled
-				</label>
-				<?php
-				break;
+		$key = $field['id'];
 
-			case 'number' :
-				?><input type="number" min="<?php echo esc_attr( $attr['min'] ) ?>" value="<?php echo $attr['default'] ?>"
-				         name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-				         data-style-field="<?php echo esc_attr( $name ) ?>"
-				         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" /> <?php
-				break;
-
-			case 'upload':
-				?><input type="text" id="pp-pb-<?php esc_attr_e( $name ) ?>"
-				         name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-				         data-style-field="<?php echo esc_attr( $name ) ?>"
-				         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" />
-				<button class="button upload-button">Select Image</button><?php
-				break;
-
-			default :
-				?><input type="file" name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-				         data-style-field="<?php echo esc_attr( $name ) ?>"
-				         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" />
-				<?php
-				break;
+		if ( ! empty( $tab ) ) {
+			if ( $tab != $field['tab'] ) {
+				continue;
+			}
 		}
 
-		echo '</p>';
+		//Output html field
+		if ( 'html' == $field['type'] ) {
+			echo $field['name'];
+			continue;
+		}
+
+		echo "<div class='field field-" . $key . " field_type-" . $field['type'] . "'>";
+		echo '<label>' . esc_html( $field['name'] ) . '</label>';
+		echo '<span>';
+
+		pootlepb_render_content_block_field( $key, $field );
+
+		echo '</span>';
+		if ( isset( $field['help-text'] ) ) {
+			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
+		}
+		echo '</div>';
 	}
 }
 
-function pootlepb_hide_elements_dialog_echo( $fields ) {
-
-	foreach ( $fields as $name => $attr ) {
-
-		echo '<p>';
-		echo '<label>' . esc_attr( $attr['name'] ) . '</label>';
-
-		switch ( $attr['type'] ) {
-			case 'checkbox' :
-				?>
-				<input type="checkbox" name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-				       data-style-field="<?php echo esc_attr( $name ) ?>"
-				       data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>"/>
-				<?php
-				break;
-			default :
-				?><input type="text" name="panelsStyle[<?php echo esc_attr( $name ) ?>]"
-				         data-style-field="<?php echo esc_attr( $name ) ?>"
-				         data-style-field-type="<?php echo esc_attr( $attr['type'] ) ?>" /> <?php
-				break;
-		}
-
-		echo '</p>';
-	}
-}
-
-function pootlepb_render_content_field( $key, $field ) {
+/**
+ * Renders field for content panel
+ * @param string $key Field id
+ * @param array $field Field data
+ */
+function pootlepb_render_content_block_field( $key, $field ) {
 	$placeholder = '';
 	if ( ! empty( $field['placeholder'] ) ) {
 		$placeholder = "placeholder='{$field['placeholder']}'";
@@ -213,44 +177,11 @@ function pootlepb_render_content_field( $key, $field ) {
 	}
 }
 
-function pootlepb_block_dialog_fields_output( $tab = null ) {
-
-	//Content block panel fields
-	$fields = pootlepb_block_styling_fields();
-
-	//Prioritize array
-	pootlepb_prioritize_array( $fields );
-
-	foreach ( $fields as $field ) {
-
-		$key = $field['id'];
-
-		if ( ! empty( $tab ) ) {
-			if ( $tab != $field['tab'] ) {
-				continue;
-			}
-		}
-
-		//Output html field
-		if ( 'html' == $field['type'] ) {
-			echo $field['name'];
-			continue;
-		}
-
-		echo "<div class='field field-" . $key . " field_type-" . $field['type'] . "'>";
-		echo '<label>' . esc_html( $field['name'] ) . '</label>';
-		echo '<span>';
-
-		pootlepb_render_content_field( $key, $field );
-
-		echo '</span>';
-		if ( isset( $field['help-text'] ) ) {
-			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
-		}
-		echo '</div>';
-	}
-}
-
+/**
+ * Renders row settings fields
+ * @param string $tab The tab to render the fields for
+ * @since 0.1.0
+ */
 function pootlepb_row_dialog_fields_output( $tab = null ) {
 
 	//Row settings panel fields
@@ -285,6 +216,11 @@ function pootlepb_row_dialog_fields_output( $tab = null ) {
 	}
 }
 
+/**
+ * Renders field for row settings panel
+ * @param string $key Field id
+ * @param array $field Field data
+ */
 function pootlepb_render_row_settings_field( $key, $field ) {
 	$placeholder = '';
 	if ( ! empty( $field['placeholder'] ) ) {
@@ -430,7 +366,6 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 
 /**
  * Check if we're using a color in any of the style fields.
- *
  * @return bool
  * @since 0.1.0
  */
@@ -448,9 +383,7 @@ function pootlepb_style_is_using_color() {
 
 /**
  * Convert the single string attribute of the grid style into an array.
- *
  * @param $panels_data
- *
  * @return mixed
  * @since 0.1.0
  */
@@ -476,9 +409,7 @@ add_filter( 'pootlepb_prebuilt_layout', 'pootlepb_style_update_data' );
 
 /**
  * Sanitize all the data that's come from post data
- *
  * @param $panels_data
- *
  * @since 0.1.0
  */
 function pootlepb_style_sanitize_data( $panels_data ) {

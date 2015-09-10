@@ -1,19 +1,29 @@
 <?php
 /**
- * WooCommerce API Manager API Key Class
- *
- * @package Update API Manager/Key Handler
- * @author Todd Lahman LLC
- * @copyright   Copyright (c) Todd Lahman LLC
- * @since 1.3
- *
+ * Contains Pootle_Page_Builder_Addon_Manager_Key class
+ * @author shramee
+ * @since 0.3.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Key' ) ) {
+	/**
+	 * Class Pootle_Page_Builder_Addon_Manager_Key
+	 * Makes requests to update server for activation, deactivation and update check
+	 * @usedby Pootle_Page_Builder_Addon_Manager
+	 * @package Update API Manager/Admin
+	 */
 	class Pootle_Page_Builder_Addon_Manager_Key {
 
+		/**
+		 * Sets required properties for making requests to the server
+		 * @param string $product_id Add-on product id
+		 * @param string $instance_id Add-on instance id
+		 * @param string $software_version Add-on software version
+		 * @param string $upgrade_url Add-on upgrade url
+		 * @param string $domain Add-on domain
+		 */
 		public function __construct( $product_id, $instance_id, $software_version, $upgrade_url, $domain ) {
 			$this->product_id       = $product_id;
 			$this->instance_id      = $instance_id;
@@ -22,7 +32,11 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Key' ) ) {
 			$this->domain           = $domain;
 		}
 
-		// API Key URL
+		/**
+		 * API Key URL
+		 * @param mixed $args Url query args
+		 * @return string API key url
+		 */
 		public function create_software_api_url( $args ) {
 
 			$api_url = add_query_arg( 'wc-api', 'am-software-api', $this->upgrade_url );
@@ -32,9 +46,8 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Key' ) ) {
 
 		/**
 		 * Checks if the software is activated or deactivated
-		 *
 		 * @param  array $args
-		 *
+		 * @uses Pootle_Page_Builder_Addon_Manager_Key::request
 		 * @return bool|array
 		 */
 		public function activate( $args ) {
@@ -44,9 +57,8 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Key' ) ) {
 
 		/**
 		 * Checks if the software is activated or deactivated
-		 *
 		 * @param  array $args
-		 *
+		 * @uses Pootle_Page_Builder_Addon_Manager_Key::request
 		 * @return bool|array
 		 */
 		public function deactivate( $args ) {
@@ -56,9 +68,8 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Key' ) ) {
 
 		/**
 		 * Checks if the software is activated or deactivated
-		 *
 		 * @param  array $args
-		 *
+		 * @uses Pootle_Page_Builder_Addon_Manager_Key::request
 		 * @return bool|array
 		 */
 		public function status( $args ) {
@@ -66,6 +77,12 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Key' ) ) {
 			return $this->request( 'status', $args );
 		}
 
+		/**
+		 * Makes the actual request to the server
+		 * @param string $request Request to make, status|activation|deactivation
+		 * @param array $args Request arguments
+		 * @return bool|string Response from server
+		 */
 		private function request( $request, $args ) {
 
 			$defaults = array(
@@ -93,6 +110,4 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager_Key' ) ) {
 		}
 
 	}
-}
-
-// Class is instantiated as an object by other classes on-demand
+}// Class is instantiated as an object by other classes on-demand

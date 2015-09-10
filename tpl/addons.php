@@ -1,9 +1,8 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 24/6/15
- * Time: 11:16 PM
+ * Add-ons page template
+ * Shows add-ons cards from http://pootlepress.com/ feed
+ * @author shramee
  * @since 0.1.0
  */
 

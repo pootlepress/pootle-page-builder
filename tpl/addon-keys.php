@@ -1,7 +1,9 @@
 <?php
 /**
- * Created by shramee
- * At: 10:32 PM 31/8/15
+ * Add-ons key management page template
+ * Add-on activation management page in pootle page builder settings
+ * @author shramee
+ * @since 0.3.0
  */
 $tabs = apply_filters( 'pootle_pb_addon_key_tabs', array() );
 $url_base = '?page=page_builder_settings&tab=addons&addon=';

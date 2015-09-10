@@ -1,9 +1,11 @@
 <?php
 /**
+ * Row settings
+ */
+
+/**
  * Add row styles.
- *
  * @param $styles
- *
  * @return mixed
  * @since 0.1.0
  */
@@ -15,6 +17,12 @@ function pootlepb_panels_row_styles( $styles ) {
 
 add_filter( 'pootlepb_row_styles', 'pootlepb_panels_row_styles' );
 
+/**
+ * Row styling from global settings
+ * @param array $attr Row attributes
+ * @param array $row Row settings
+ * @return array Row attributes
+ */
 function pootlepb_panels_panels_row_attributes( $attr, $row ) {
 	if ( ! empty( $row['style']['no_margin'] ) ) {
 		if ( empty( $attr['style'] ) ) {
@@ -44,5 +52,4 @@ function pootlepb_panels_panels_row_attributes( $attr, $row ) {
 
 	return $attr;
 }
-
 add_filter( 'pootlepb_row_attributes', 'pootlepb_panels_panels_row_attributes', 10, 2 );

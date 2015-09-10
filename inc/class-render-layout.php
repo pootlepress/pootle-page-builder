@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 25/6/15
- * Time: 11:22 PM
+ * Contains Pootle_Page_Builder_Render_Layout class
+ * @author shramee
  * @since 0.1.0
  */
 
@@ -13,13 +11,14 @@
 require_once POOTLEPB_DIR . 'inc/class-render-grid.php';
 
 /**
- * @extends Pootle_Page_Builder_Render_Grid
  * Class Pootle_Page_Builder_Render_Layout
+ * Renders the grid on front end
+ * @uses Pootle_Page_Builder_Render_Grid
  */
 final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render_Grid {
 
 	/**
-	 * @var Pootle_Page_Builder_Render_Layout
+	 * @var Pootle_Page_Builder_Render_Layout Instance
 	 * @access protected
 	 * @since 0.1.0
 	 */

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Functions used accross pootle page builder and it's add-ons
+ * @author shramee
+ * @since 0.1.0
+ */
 
 /**
  * Adds notice to output in next admin_notices actions call
@@ -313,9 +318,7 @@ function pootlepb_default_content_block_style( ) {
 
 /**
  * Convert form post data into more efficient panels data.
- *
  * @param $form_post
- *
  * @return array
  * @since 0.1.0
  */
@@ -325,7 +328,7 @@ function pootlepb_get_panels_data_from_post( $form_post = null ) {
 		$form_post = $_POST;
 	}
 
-	$panels_data            = array();
+	$panels_data = array();
 
 	if ( ! empty( $_POST['pootlepb_noPB'] ) ) {
 		return $panels_data;
@@ -364,7 +367,7 @@ function pootlepb_get_panels_data_from_post( $form_post = null ) {
 
 	}
 
-	$panels_data['grids']      = array_values( stripslashes_deep( isset( $form_post['grids'] ) ? $form_post['grids'] : array() ) );
+	$panels_data['grids'] = array_values( stripslashes_deep( isset( $form_post['grids'] ) ? $form_post['grids'] : array() ) );
 	$panels_data['grid_cells'] = array_values( stripslashes_deep( isset( $form_post['grid_cells'] ) ? $form_post['grid_cells'] : array() ) );
 
 	return apply_filters( 'pootlepb_panels_data_from_post', $panels_data );

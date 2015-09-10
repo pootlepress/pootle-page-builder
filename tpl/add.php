@@ -1,7 +1,8 @@
 <?php
 /**
- * Created by shramee
- * At: 6:35 PM 6/7/15
+ * New pootle page builder page template
+ * User is redirected to new post page
+ * @author shramee
  * @since 0.1.1
  */
 ?>

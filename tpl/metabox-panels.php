@@ -1,4 +1,10 @@
 <?php
+/**
+ * Main pootle page builder user interface template
+ * @author shramee
+ * @since 0.1.0
+ */
+
 $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 
 $buttons = array( 'grid-add' => 'Add Row' );

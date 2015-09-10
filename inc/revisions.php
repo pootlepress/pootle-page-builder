@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 29/6/15
- * Time: 10:48 PM
+ * Handles revisions
+ * @author shramee
  * @since 0.1.0
  */
 

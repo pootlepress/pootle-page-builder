@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 13/5/15
- * Time: 12:37 PM
+ * Pootle page builder global variables
+ * @author shramee
  * @since 0.1.0
  */
 
@@ -182,12 +180,14 @@ $pootlepb_row_styling_fields = array(
 		'type' => 'upload',
 		'priority' => 5,
 	),
+
 	'background_image_repeat' => array(
 		'name' => __( 'Repeat Background Image', 'vantage' ),
 		'tab' => 'background',
 		'type' => 'checkbox',
 		'priority' => 6,
 	),
+
 	'background_parallax' => array(
 		'name' => __( 'Parallax Background Image', 'vantage' ),
 		'tab' => 'background',

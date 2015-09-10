@@ -1,15 +1,17 @@
 <?php
+/**
+ * Contains Pootle_Page_Builder_Admin class
+ * @author shramee
+ * @since 0.1.0
+ */
 
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 26/6/15
- * Time: 6:39 PM
- * @since 0.1.0
+ * Class Pootle_Page_Builder_Admin
+ * Handles admin filter and action
  */
 final class Pootle_Page_Builder_Admin {
 	/**
-	 * @var Pootle_Page_Builder_Admin
+	 * @var Pootle_Page_Builder_Admin Instance
 	 * @since 0.1.0
 	 */
 	protected static $instance;
@@ -124,6 +126,12 @@ final class Pootle_Page_Builder_Admin {
 
 	}
 
+	/**
+	 * If pb rows are set, returns false false
+	 * @param bool $maybe_empty Is post empty
+	 * @param array $postarr Post data
+	 * @return bool Post is empty or not
+	 */
 	public function is_pb_post_empty( $maybe_empty, $postarr ) {
 		if ( ! empty( $postarr['grids'] ) ) {
 			return false;
@@ -133,9 +141,9 @@ final class Pootle_Page_Builder_Admin {
 	}
 
 	/**
+	 * Checks whether to save post or not
 	 * @param bool|null $pass
-	 * @param object $post
-	 *
+	 * @param WP_Post $post
 	 * @return bool
 	 */
 	public function save_post_or_not( $pass, $post ) {

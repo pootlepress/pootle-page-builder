@@ -49,7 +49,7 @@
 
                 // Do something with attachment.id and/or attachment.url here
                 $textField
-                    .val(attachment.url)
+                    .val(attachment.url);
                 $textField.change();
 
             });

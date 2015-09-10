@@ -1,38 +1,73 @@
 <?php
+/**
+ * Contains Pootle_Page_Builder_Addon_Update_Check class
+ * @author shramee
+ * @since 0.3.2
+ */
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-/**
- * Todd Lahman LLC Updater - Single Updater Class
- *
- * @package Update API Manager/Update Handler
- * @author Todd Lahman LLC
- * @copyright   Copyright (c) Todd Lahman LLC
- * @since 1.0.0
- *
- */
-
 if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
+	/**
+	 * Class Pootle_Page_Builder_Addon_Update_Check
+	 * Checks Pooltepress add-on updates
+	 * @usedby Pootle_Page_Builder_Addon_Manager
+	 * @package Update API Manager/Admin
+	 */
 	class Pootle_Page_Builder_Addon_Update_Check {
 
-		private $upgrade_url; // URL to access the Update API Manager.
+
+		/** @var string URL to access the Update API Manager. */
+		private $upgrade_url;
+
+		/** @var string Add-on name */
 		private $plugin_name;
-		private $product_id; // Software Title
-		private $api_key; // API License Key
-		private $activation_email; // License Email
-		private $renew_license_url; // URL to renew a license
-		private $instance; // Instance ID (unique to each blog activation)
-		private $domain; // blog domain name
+
+		/** @var string Software Title */
+		private $product_id;
+
+		/** @var string API License Key */
+		private $api_key;
+
+		/** @var string License Email */
+		private $activation_email;
+
+		/** @var string URL to renew a license */
+		private $renew_license_url;
+
+		/** @var string Instance ID (unique to each blog activation) */
+		private $instance;
+
+		/** @var string blog domain name */
+		private $domain;
+
+		/** @var string Add-on version */
 		private $software_version;
-		private $plugin_or_theme; // 'theme' or 'plugin'
-		private $text_domain; // localization for translation
-		private $extra; // Used to send any extra information.
+
+		/** @var string 'theme' or 'plugin' */
+		private $plugin_or_theme;
+
+		/** @var string localization for translation */
+		private $text_domain;
+
+		/** @var string Used to send any extra information. */
+		private $extra;
 
 		/**
 		 * Constructor.
-		 *
 		 * @access public
-		 * @since  1.0.0
+		 * @param string $upgrade_url Add-on upgrade url
+		 * @param string $plugin_name Add-on plugin name
+		 * @param string $product_id Add-on product id
+		 * @param string $api_key Add-on api key
+		 * @param string $activation_email Add-on user activation email
+		 * @param string $renew_license_url Add-on renew license url
+		 * @param string $instance WP installation instance id
+		 * @param string $domain wp blog url
+		 * @param string $software_version Add-on version
+		 * @param string $plugin_or_theme set to plugin
+		 * @param string $text_domain Add-on text_domain
+		 * @param string $extra any extra information
 		 */
 		public function __construct( $upgrade_url, $plugin_name, $product_id, $api_key, $activation_email, $renew_license_url, $instance, $domain, $software_version, $plugin_or_theme, $text_domain, $extra ) {
 			// API data
@@ -88,7 +123,11 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 			add_filter( 'plugins_api', array( $this, 'request' ), 10, 3 );
 		}
 
-		// Upgrade API URL
+		/**
+		 * Upgrade API URL
+		 * @param mixed $args Upgrade url args
+		 * @return string Upgrade url
+		 */
 		private function create_upgrade_api_url( $args ) {
 			$upgrade_url = add_query_arg( 'wc-api', 'upgrade-api', $this->upgrade_url );
 
@@ -97,12 +136,9 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Check for updates against the remote server.
-		 *
 		 * @access public
 		 * @since  1.0.0
-		 *
 		 * @param  object $transient
-		 *
 		 * @return object $transient
 		 */
 		public function update_check( $transient ) {
@@ -151,9 +187,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Sends and receives data to and from the server API
-		 *
-		 * @access public
-		 * @since  1.0.0
+		 * @param mixed $args Upgrade url args
 		 * @return object $response
 		 */
 		public function plugin_information( $args ) {
@@ -188,12 +222,10 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Generic request helper.
-		 *
 		 * @access public
-		 * @since  1.0.0
-		 *
+		 * @param bool $false
+		 * @param string $action
 		 * @param  array $args
-		 *
 		 * @return object $response or boolean false
 		 */
 		public function request( $false, $action, $args ) {
@@ -233,10 +265,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Display license expired error notice
-		 *
 		 * @param  string $message
-		 *
-		 * @return void
 		 */
 		public function expired_license_error_notice( $message ) {
 
@@ -246,9 +275,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Display subscription on-hold error notice
-		 *
 		 * @param  string $message
-		 *
 		 * @return void
 		 */
 		public function on_hold_subscription_error_notice( $message ) {
@@ -259,9 +286,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Display subscription cancelled error notice
-		 *
 		 * @param  string $message
-		 *
 		 * @return void
 		 */
 		public function cancelled_subscription_error_notice( $message ) {
@@ -272,9 +297,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Display subscription expired error notice
-		 *
 		 * @param  string $message
-		 *
 		 * @return void
 		 */
 		public function expired_subscription_error_notice( $message ) {
@@ -285,9 +308,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Display subscription expired error notice
-		 *
 		 * @param  string $message
-		 *
 		 * @return void
 		 */
 		public function suspended_subscription_error_notice( $message ) {
@@ -298,9 +319,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Display subscription expired error notice
-		 *
 		 * @param  string $message
-		 *
 		 * @return void
 		 */
 		public function pending_subscription_error_notice( $message ) {
@@ -311,9 +330,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Display subscription expired error notice
-		 *
 		 * @param  string $message
-		 *
 		 * @return void
 		 */
 		public function trash_subscription_error_notice( $message ) {
@@ -324,9 +341,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Display subscription expired error notice
-		 *
 		 * @param  string $message
-		 *
 		 * @return void
 		 */
 		public function no_subscription_error_notice( $message ) {
@@ -337,9 +352,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Display missing key error notice
-		 *
 		 * @param  string $message
-		 *
 		 * @return void
 		 */
 		public function no_key_error_notice( $message ) {
@@ -350,9 +363,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Display missing download permission revoked error notice
-		 *
 		 * @param  string $message
-		 *
 		 * @return void
 		 */
 		public function download_revoked_error_notice( $message ) {
@@ -363,9 +374,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Display no activation error notice
-		 *
 		 * @param  string $message
-		 *
 		 * @return void
 		 */
 		public function no_activation_error_notice( $message ) {
@@ -376,9 +385,7 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Update_Check' ) ) {
 
 		/**
 		 * Display switched activation error notice
-		 *
 		 * @param  string $message
-		 *
 		 * @return void
 		 */
 		public function switched_subscription_error_notice( $message ) {

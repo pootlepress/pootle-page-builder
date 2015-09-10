@@ -1,11 +1,11 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: shramee
- * Date: 26/6/15
- * Time: 11:56 PM
+ * Content block panel template
+ * Used by content editor panels in pootle page builder post
+ * @author shramee
  * @since 0.1.0
  */
+
 global $pootlepb_content_block_tabs;
 
 /**
