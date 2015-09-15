@@ -98,7 +98,21 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Changelog ==
 
-= 0.3.0 = 
+= 1.0.0 =
+* 2015-09-15
+ * New - Auto update for
+ * New - All methods, functions and constants documented
+ * New - File and class documentation blocks more descriptive
+ * New - Add-on keys management page in settings
+ * Tweak - Improved slider control to allow actual value as well as percentage of max
+ * Tweak - Custom unit for slider ( px, em, ms etc. instead of % only )
+ * Fix -
+
+= 0.3.1 =
+* 2015-08-19
+ * Fix - Page builder ui js issues
+
+= 0.3.0 =
 * 2015-08-19
  * New - Add-on page
  * New - Chosen multi select fields supported for row settings panel and content editor panel

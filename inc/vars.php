@@ -1,7 +1,7 @@
 <?php
 /**
  * Pootle page builder global variables
- * @author shramee
+ * @author pootlepress
  * @since 0.1.0
  */
 

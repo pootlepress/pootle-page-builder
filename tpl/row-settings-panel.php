@@ -2,7 +2,7 @@
 /**
  * Row settings panel template
  * Used by row styling/settings panels in pootle page builder post
- * @author shramee
+ * @author pootlepress
  * @since 0.1.0
  */
 

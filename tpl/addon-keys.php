@@ -2,7 +2,7 @@
 /**
  * Add-ons key management page template
  * Add-on activation management page in pootle page builder settings
- * @author shramee
+ * @author pootlepress
  * @since 0.3.0
  */
 $tabs = apply_filters( 'pootle_pb_addon_key_tabs', array() );

@@ -2,7 +2,7 @@
 /**
  * New pootle page builder page template
  * User is redirected to new post page
- * @author shramee
+ * @author pootlepress
  * @since 0.1.1
  */
 ?>

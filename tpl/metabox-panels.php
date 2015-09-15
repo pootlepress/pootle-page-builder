@@ -1,7 +1,7 @@
 <?php
 /**
  * Main pootle page builder user interface template
- * @author shramee
+ * @author pootlepress
  * @since 0.1.0
  */
 

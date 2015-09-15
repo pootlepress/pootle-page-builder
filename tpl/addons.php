@@ -2,7 +2,7 @@
 /**
  * Add-ons page template
  * Shows add-ons cards from http://pootlepress.com/ feed
- * @author shramee
+ * @author pootlepress
  * @since 0.1.0
  */
 

@@ -1,7 +1,7 @@
 <?php
 /**
  * Settings page template
- * @author shramee
+ * @author pootlepress
  * @since 0.1.0
  */
 ?>

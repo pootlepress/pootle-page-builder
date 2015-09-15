@@ -1,7 +1,7 @@
 <?php
 /**
  * Filters and actions for enhancements and bug fixes
- * @author shramee
+ * @author pootlepress
  * @since 0.1.0
  */
 

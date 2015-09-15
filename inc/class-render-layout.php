@@ -1,7 +1,7 @@
 <?php
 /**
  * Contains Pootle_Page_Builder_Render_Layout class
- * @author shramee
+ * @author pootlepress
  * @since 0.1.0
  */
 

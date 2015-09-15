@@ -1,7 +1,7 @@
 <?php
 /**
- * Stuff to do on installation
- * @author shramee
+ * Stuff to do on uninstall
+ * @author pootlepress
  * @since 0.1.0
  */
 

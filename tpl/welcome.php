@@ -1,7 +1,7 @@
 <?php
 /**
  * Welcome to pootle page builder settings page template
- * @author shramee
+ * @author pootlepress
  * @since 0.1.0
  */
 

@@ -2,7 +2,7 @@
 /**
  * Content block panel template
  * Used by content editor panels in pootle page builder post
- * @author shramee
+ * @author pootlepress
  * @since 0.1.0
  */
 

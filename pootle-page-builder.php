@@ -3,7 +3,7 @@
 Plugin Name: pootle page builder
 Plugin URI: http://pootlepress.com/
 Description: pootle page builder helps you create stunning pages with full width rows including parallax background images & videos.
-Version: 0.3.1
+Version: 1.0.0
 Author: PootlePress
 Author URI: http://pootlepress.com/
 License: GPL version 3
@@ -64,7 +64,7 @@ final class Pootle_Page_Builder {
 	 */
 	private function constants() {
 		/** Pootle page builder current version */
-		define( 'POOTLEPB_VERSION', '0.3.0' );
+		define( 'POOTLEPB_VERSION', '1.0.0' );
 		/** Pootle page builder __FILE__ */
 		define( 'POOTLEPB_BASE_FILE', __FILE__ );
 		/** Pootle page builder plugin directory path */

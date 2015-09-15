@@ -1,7 +1,7 @@
 <?php
 /**
  * Functions used accross pootle page builder and it's add-ons
- * @author shramee
+ * @author pootlepress
  * @since 0.1.0
  */
 
