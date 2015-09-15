@@ -15,14 +15,7 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
->Please note: pootle page builder is still in beta & therefore we do not recommend using it for production (live sites). 
->Please read [this post](http://www.pootlepress.com/2015/07/try-out-the-all-new-pootle-page-builder-in-beta/) on how to report bugs.
-
-= What is pootle page builder? =
-
 pootle page builder helps you build compelling WordPress pages easily. No more boring, linear, article pages that are as limited as your posts. 
-
-= What can I do with pootle page builder? =
 
 With pootle page builder you can:
 
