@@ -93,13 +93,15 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 = 1.0.0 =
 * 2015-09-15
- * New - Auto update for
+ * New - New pootle page builder action hook `pootlepb_before_pb` executed before pb row on public end
+ * New - New pootle page builder action hook `pootlepb_after_pb` executed after pb row on public end
+ * New - Auto update for non wp.org hosted add-ons
  * New - All methods, functions and constants documented
  * New - File and class documentation blocks more descriptive
  * New - Add-on keys management page in settings
  * Tweak - Improved slider control to allow actual value as well as percentage of max
  * Tweak - Custom unit for slider ( px, em, ms etc. instead of % only )
- * Fix -
+ * Tweak - #pootle-page-builder on public end positioned relative
 
 = 0.3.1 =
 * 2015-08-19
