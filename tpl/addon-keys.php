@@ -7,6 +7,15 @@
  */
 $tabs = apply_filters( 'pootle_pb_addon_key_tabs', array() );
 $url_base = '?page=page_builder_settings&tab=addons&addon=';
+
+if ( empty( $tabs ) ) {
+	?>
+	<h3 style="display:block;">Hi,</h3>
+	<h4>Seems like you don't have any add-ons yet.</h4>
+	<h3 style="display:block;">Head over to <a href="http://www.pootlepress.com/product-category/pootle-page-builder-add-ons/">pootle page builder add-ons</a> to grab some awesome add-ons.</h3>
+	<?php
+	return;
+}
 ?>
 	<ul class="subsubsub">
 		<?php
@@ -28,5 +37,5 @@ $url_base = '?page=page_builder_settings&tab=addons&addon=';
 	</ul>
 	<div class="clear"></div>
 	<?php
-		do_action( 'pootle_pb_addon_key_' . $tab_now . '_tab', $url_base . $k );
+		do_action( 'pootle_pb_addon_key_' . $tab_now . '_tab', $url_base . $tab_now );
 do_action( 'pootlepb_addon_page' );

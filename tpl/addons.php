@@ -17,7 +17,7 @@ foreach ( $pootlepb_installed_add_ons as $id => $file ) {
 	$installed_plugins[] = strip_tags( $addon['Title'] );
 }
 
-$url = 'http://pootlepress.com/shop/feed/?product_cat=pootle-page-builder-add-ons';
+$url = 'http://pootlepress.com/feed/?product_cat=pootle-page-builder-add-ons';
 $sxml = simplexml_load_file( $url, null, LIBXML_NOCDATA );
 ?>
 <div class="wrap">

@@ -166,7 +166,7 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 </div>
 
 <?php
-if ( 'post-new.php' == $pagenow || ! empty( $panels_data['grids'] ) ) {
+if ( 'pootle' == filter_input( INPUT_GET, 'page_builder' ) || ! empty( $panels_data['grids'] ) ) {
 ?>
 	<style>.wrap{opacity:0;}</style>
 	<script>

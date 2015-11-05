@@ -53,6 +53,7 @@ jQuery(function ($) {
         ppbSkrollr = false;
         if ( ! /Android|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent||navigator.vendor||a.opera) ) {
             ppbSkrollr = skrollr.init({
+                forceHeight: false,
                 smoothScrolling: false
             });
         }

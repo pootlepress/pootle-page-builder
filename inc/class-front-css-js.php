@@ -36,6 +36,7 @@ final class Pootle_Page_Builder_Front_Css_Js {
 	private function hooks() {
 		add_filter( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 0 );
 		add_filter( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 0 );
+		add_action( 'wp_footer', array( $this, 'rag_adjust_script_load' ) );
 	}
 
 	/**
@@ -275,7 +276,24 @@ final class Pootle_Page_Builder_Front_Css_Js {
 	 * @since 0.1.0
 	 */
 	public function enqueue_scripts() {
+		wp_enqueue_script( 'pootle-page-builder-rag-adjust-js', POOTLEPB_URL . '/js/ragadjust.min.js', array( 'jquery' ) );
 		wp_enqueue_script( 'pootle-page-builder-front-js', POOTLEPB_URL . '/js/front-end.js', array( 'jquery' ) );
+	}
+
+	function rag_adjust_script_load() {
+		$elements = apply_filters( 'pootlepb_rag_adjust_elements', array(
+				'p',
+			)
+		);
+
+		$method = apply_filters( 'pootlepb_rag_adjust_method', $method = 'all' );
+		?>
+		<script type="text/javascript">
+
+			ragadjust( '<?php echo implode( ', ', $elements ); ?>', '<?php echo $method; ?>' );
+
+		</script>
+		<?php
 	}
 }
 
