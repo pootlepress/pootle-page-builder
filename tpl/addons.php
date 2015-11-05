@@ -17,7 +17,7 @@ foreach ( $pootlepb_installed_add_ons as $id => $file ) {
 	$installed_plugins[] = strip_tags( $addon['Title'] );
 }
 
-$url = 'http://pootlepress.com/feed/?product_cat=pootle-page-builder-add-ons';
+$url = 'http://pootlepress.github.io/pootle-page-builder/add-ons.xml';
 $sxml = simplexml_load_file( $url, null, LIBXML_NOCDATA );
 ?>
 <div class="wrap">
@@ -48,7 +48,7 @@ $sxml = simplexml_load_file( $url, null, LIBXML_NOCDATA );
 						</div>
 						<div class="ppb-addon-footer">
 							<?php
-							if ( in_array( $plgn->title, $installed_plugins ) ){
+							if ( in_array( $plgn->title, $installed_plugins ) ) {
 								?>
 								<div class="ppb-addon-installed">
 									You have this installed
