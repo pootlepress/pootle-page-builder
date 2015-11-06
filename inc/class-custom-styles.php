@@ -25,7 +25,6 @@ final class Pootle_Page_Builder_Custom_Styles {
 	 * @since 0.1.0
 	 */
 	public function __construct() {
-
 		/* Add style attributes */
 		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_style_vars' ), 5, 2 );
 		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_border' ), 10, 2 );

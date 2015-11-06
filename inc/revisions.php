@@ -65,6 +65,7 @@ function pootlepb_revisions_fields( $fields ) {
 	}
 
 	$fields['grids'] = __( 'Page Builder', 'ppb-panels' );
+	$fields['widgets'] = __( 'Page Builder Panels', 'ppb-panels' );
 
 	return $fields;
 }
