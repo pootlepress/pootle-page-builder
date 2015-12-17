@@ -222,17 +222,29 @@ img.ppb-bg-parallax {
 }
 
 @media only screen and (min-width: 769px) {
-    .panel-row-style.video-bg {
-        background: initial !important;
-    }
-
     br.rwd{
         display: none;
     }
 }
 
+@media only screen and (max-width: 1024px) {
+
+    .ppb-bg-video.hide-on-mobile {
+        display: none;
+    }
+
+    .ppb-no-mobile-padding {
+        padding: 0 !important;
+    }
+}
+
 @media only screen and (max-width: 768px) {
+
     .hide-on-mobile {
         display: none;
+    }
+
+    .ppb-no-mobile-padding {
+        padding: 0 !important;
     }
 }

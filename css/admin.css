@@ -477,7 +477,7 @@ h4 {}
     z-index: 9;
 }
 
-#pootlepb-panels h3.pootlepb-toolbar {
+#pootlepb-panels .pootlepb-toolbar {
     background: #F5F5F5;
     border-bottom: 1px solid #dedede;
     padding: 4px 9px 4px 9px;

@@ -286,10 +286,10 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 				'step' => '1',
 				'unit' => '',
 			) );
-			?><input <?php echo $placeholder ?> type="number" data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>"
-			         max="<?php echo $field['max'] ?>" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
-			         value="<?php echo esc_attr( $field['default'] ) ?>" step="<?php echo $field['step'] ?>"
-			         data-style-field="<?php echo esc_attr( $key ) ?>" min="<?php echo $field['min'] ?>" /><?php
+			?><input <?php echo $placeholder ?> type="number" name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         max="<?php echo $field['max'] ?>" min="<?php echo $field['min'] ?>"
+			         step="<?php echo $field['step'] ?>" data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>"
+			         data-style-field="<?php echo esc_attr( $key ) ?>" /><?php
 			if ( ! empty( $field['unit'] ) ) {
 				?><span class="unit"><?php esc_html_e( $field['unit'] ) ?></span><?php
 			}

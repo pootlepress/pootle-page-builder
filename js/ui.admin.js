@@ -716,5 +716,29 @@ jQuery(function ($) {
             }
         );
 
-    }
+    };
+
+    /**
+     * Adds some text to the data...
+     *
+     * @param data The data to modify
+     */
+    panels.yoastSEOContent = function( data ) {
+        $.each( panelsData.widgets, function( k, v){
+            data += v.text;
+        } );
+        return data;
+    };
+
+    /*
+     * Yoast SEO js filter
+     */
+    PootlePbSEO = function() {
+        if ( ! YoastSEO.app ) return;
+        YoastSEO.app.registerPlugin( 'pootlepb', {status: 'ready'} );
+        YoastSEO.app.registerModification( 'content', panels.yoastSEOContent, 'pootlepb' );
+    };
+    PootlePbSEO();
+    $( document ).ready( PootlePbSEO );
+
 });

@@ -68,7 +68,7 @@ final class Pootle_Page_Builder {
 		/** Pootle page builder __FILE__ */
 		define( 'POOTLEPB_BASE_FILE', __FILE__ );
 		/** Pootle page builder plugin directory path */
-		define( 'POOTLEPB_DIR', plugin_dir_path( __FILE__ ) );
+		define( 'POOTLEPB_DIR', dirname( __FILE__ ) . '/' );
 		/** Pootle page builder plugin directory url */
 		define( 'POOTLEPB_URL', plugin_dir_url( __FILE__ ) );
 	}
@@ -111,7 +111,7 @@ final class Pootle_Page_Builder {
 		register_activation_hook( __FILE__, array( $this, 'activate' ) );
 		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
 
-		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
 		add_action( 'admin_init', array( $this, 'ppb_compatibility' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
@@ -239,8 +239,11 @@ final class Pootle_Page_Builder {
 	 * @action plugins_loaded
 	 * @since 0.1.0
 	 */
-	public function load_textdomain() {
+	public function plugins_loaded() {
 		load_plugin_textdomain( 'ppb-panels', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+		if ( defined( 'WPSEO_VERSION' ) && 0 > version_compare( WPSEO_VERSION, 3 ) ) {
+			add_filter( 'wpseo_pre_analysis_post_content', 'pootlepb_wp_seo_filter', 10, 2 );
+		}
 	}
 
 	/**

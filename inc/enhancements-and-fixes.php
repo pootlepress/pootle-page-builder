@@ -29,8 +29,6 @@ function pootlepb_wp_seo_filter( $content, $post ) {
 	return $content;
 }
 
-add_filter( 'wpseo_pre_analysis_post_content', 'pootlepb_wp_seo_filter', 10, 2 );
-
 /**
  * No admin notices on our settings page
  *

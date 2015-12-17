@@ -62,6 +62,12 @@ $pootlepb_content_block_styling_fields = array(
 		'css'  => 'padding',
 		'tab' => 'style',
 	),
+	'padding-mobile'          => array(
+		'name' => 'Keep custom padding on mobile',
+		'type' => 'checkbox',
+		'priority' => 5,
+		'tab' => 'style',
+	),
 	'rounded-corners'  => array(
 		'name' => 'Rounded corners',
 		'type' => 'number',
@@ -115,6 +121,13 @@ $pootlepb_row_styling_fields = array(
 		'type' => 'checkbox',
 		'tab' => 'layout',
 		'priority' => 3,
+	),
+	'margin_top'           => array(
+		'name' => 'Row Top Margin',
+		'unit' => 'px',
+		'type'      => 'number',
+		'tab' => 'layout',
+		'priority' => 4,
 	),
 	'margin_bottom'           => array(
 		'name' => 'Row Bottom Margin',

@@ -13,6 +13,11 @@
 // Full width and parallax
 jQuery(function ($) {
 
+    /*
+     * Setting font
+     */
+    $('.panel-grid-cell' ).css( 'font-size', $('#pootle-page-builder' ).css( 'font-size' ) );
+
     /**
      * Adds full width functionality
      * @since 0.1.0
