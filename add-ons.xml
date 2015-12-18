@@ -9,7 +9,7 @@
 	>
 	<channel>
 		<title>pootlepress » Products</title>
-		<atom:link href="http://www.pootlepress.com/feed/?post_type=product&product_cat=pootle-page-builder-add-ons" rel="self" type="application/rss+xml"/>
+		<atom:link href="http://www.pootlepress.com/feed/?post_type=product&amp;product_cat=pootle-page-builder-add-ons" rel="self" type="application/rss+xml"/>
 		<link>http://www.pootlepress.com</link>
 		<description/>
 		<lastBuildDate>Thu, 17 Dec 2015 17:50:17 +0000</lastBuildDate>
@@ -30,7 +30,7 @@
 				<![CDATA[ Nick Burne ]]>
 			</dc:creator>
 			<guid isPermaLink="false">
-				http://www.pootlepress.com/?post_type=product&p=22087
+				http://www.pootlepress.com/?post_type=product&amp;p=22087
 			</guid>
 			<description>
 				<![CDATA[
@@ -65,7 +65,7 @@
 				<![CDATA[ Jamie Marsland ]]>
 			</dc:creator>
 			<guid isPermaLink="false">
-				http://www.pootlepress.com/?post_type=product&p=22693
+				http://www.pootlepress.com/?post_type=product&amp;p=22693
 			</guid>
 			<description>
 				<![CDATA[
@@ -127,7 +127,7 @@
 				<![CDATA[ Jamie Marsland ]]>
 			</dc:creator>
 			<guid isPermaLink="false">
-				http://www.pootlepress.com/?post_type=product&p=22612
+				http://www.pootlepress.com/?post_type=product&amp;p=22612
 			</guid>
 			<description>
 				<![CDATA[
@@ -159,7 +159,7 @@
 				<![CDATA[ Nick Burne ]]>
 			</dc:creator>
 			<guid isPermaLink="false">
-				http://www.pootlepress.com/?post_type=product&p=21895
+				http://www.pootlepress.com/?post_type=product&amp;p=21895
 			</guid>
 			<description>
 				<![CDATA[
