@@ -1,17 +1,22 @@
 <?php
-/*
+/**
 Plugin Name: pootle page builder
 Plugin URI: http://pootlepress.com/
 Description: pootle page builder helps you create stunning pages with full width rows including parallax background images & videos.
-Version: 1.0.0
+Version: 1.0.1
 Author: PootlePress
 Author URI: http://pootlepress.com/
 License: GPL version 3
 */
-/**
- * Contains Pootle_Page_Builder class
- * Main pootle page builder file
- */
+
+/** Pootle page builder current version */
+define( 'POOTLEPB_VERSION', '1.0.1' );
+/** Pootle page builder __FILE__ */
+define( 'POOTLEPB_BASE_FILE', __FILE__ );
+/** Pootle page builder plugin directory path */
+define( 'POOTLEPB_DIR', dirname( __FILE__ ) . '/' );
+/** Pootle page builder plugin directory url */
+define( 'POOTLEPB_URL', plugin_dir_url( __FILE__ ) );
 
 /**
  * Class Pootle_Page_Builder
@@ -53,24 +58,8 @@ final class Pootle_Page_Builder {
 	 * @since 0.1.0
 	 */
 	public function __construct() {
-		$this->constants();
 		$this->includes();
 		$this->hooks();
-	}
-
-	/**
-	 * Set the constants
-	 * @since 0.1.0
-	 */
-	private function constants() {
-		/** Pootle page builder current version */
-		define( 'POOTLEPB_VERSION', '1.0.0' );
-		/** Pootle page builder __FILE__ */
-		define( 'POOTLEPB_BASE_FILE', __FILE__ );
-		/** Pootle page builder plugin directory path */
-		define( 'POOTLEPB_DIR', dirname( __FILE__ ) . '/' );
-		/** Pootle page builder plugin directory url */
-		define( 'POOTLEPB_URL', plugin_dir_url( __FILE__ ) );
 	}
 
 	/**
