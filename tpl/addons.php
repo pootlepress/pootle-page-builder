@@ -61,10 +61,8 @@ $sxml = simplexml_load_string( $xml );
 				$desc = new SimpleXMLElement( '<p>' . $plgn->description . '</p>' );
 
 				?>
-				<div class="ppb-addon-card-wrap <?php echo $id; ?>-wrap">
-					<div class="ppb-addon-card <?php echo $id; ?> <?php if ( ! empty( $s[ $id ] ) ) {
-						echo 'active';
-					} ?>">
+				<div class="ppb-addon-card-wrap">
+					<div class="ppb-addon-card">
 
 						<div class="ppb-addon-img">
 							<a href="<?php echo $plgn->link ?>" class="thickbox"
