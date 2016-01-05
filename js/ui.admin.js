@@ -734,7 +734,7 @@ jQuery(function ($) {
      * Yoast SEO js filter
      */
     PootlePbSEO = function() {
-        if ( ! YoastSEO || ! YoastSEO.app ) return;
+        if ( 'undefined' == typeof YoastSEO || ! YoastSEO.app ) return;
         YoastSEO.app.registerPlugin( 'pootlepb', {status: 'ready'} );
         YoastSEO.app.registerModification( 'content', panels.yoastSEOContent, 'pootlepb' );
     };

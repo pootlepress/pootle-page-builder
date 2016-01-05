@@ -30,34 +30,36 @@ class Pootle_Page_Builder_Render_Grid {
 		do_action( 'pootlepb_before_pb' );
 		foreach ( $grids as $gi => $cells ) {
 
-			/**
-			 * Triggered before rendering the row
-			 * Allows other themes and plugins to add html before the row
-			 * @param array $data Grid data
-			 */
-			do_action( 'pootlepb_before_row', $panels_data['grids'][ $gi ] );
-
 			$rowID = 'pg-' . $post_id . '-' . $gi;
 
 			echo '<div ' . $this->get_row_attributes( $gi, $rowID, $panels_data ) . '>';
 
-			//ROW STYLE WRAPPER
-			$this->row_style_wrapper( $rowID, $gi, $cells, $panels_data );
+			/**
+			 * Triggered before rendering the row
+			 * Allows other themes and plugins to add html before the row
+			 * @param array $data	Grid data
+			 * @param int	$gi		Grid Index
+			 */
+			do_action( 'pootlepb_before_row', $panels_data['grids'][ $gi ], $gi );
 
+			//Row style wrapper
+			$this->row_style_wrapper( $rowID, $gi, $cells, $panels_data );
 			echo "<div class='panel-grid-cell-container'>";
 
 			$this->output_cells( $cells, $gi, $post_id, $panels_data );
 
 			echo "</div><!--.panel-grid-cell-container-->";
 			echo '</div><!--.panel-row-style-->';
-			echo '</div><!--.panel-grid-->';
 
 			/**
 			 * Triggered after rendering the row
 			 * Allows other themes and plugins to add html after the row
-			 * @param array $data Grid data
+			 * @param array $data	Grid data
+			 * @param int	$gi		Grid Index
 			 */
-			do_action( 'pootlepb_after_row', $panels_data['grids'][ $gi ] );
+			do_action( 'pootlepb_after_row', $panels_data['grids'][ $gi ], $gi );
+
+			echo '</div><!--.panel-grid-->';
 		}
 		do_action( 'pootlepb_after_pb' );
 		echo '</div>';

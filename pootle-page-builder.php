@@ -1,13 +1,14 @@
 <?php
 /**
-Plugin Name: pootle page builder
-Plugin URI: http://pootlepress.com/
-Description: pootle page builder helps you create stunning pages with full width rows including parallax background images & videos.
-Version: 1.0.1
-Author: PootlePress
-Author URI: http://pootlepress.com/
-License: GPL version 3
-*/
+ * Plugin Name: pootle page builder
+ * Plugin URI: http://pootlepress.com/
+ * Description: pootle page builder helps you create stunning pages with full width rows including parallax background images & videos.
+ * Version: 1.0.1
+ * Author: PootlePress
+ * Author URI: http://pootlepress.com/
+ * License: GPL version 3
+ * @developer shramee <shramee.srivastav@gmail.com>
+ */
 
 /** Pootle page builder current version */
 define( 'POOTLEPB_VERSION', '1.0.1' );
@@ -162,7 +163,7 @@ final class Pootle_Page_Builder {
 		if ( version_compare( $version, '0.3.0', '<' ) ) {
 			$this->v023_to_v030();
 		}
-		update_option( 'pootlepb_version', POOTLEPB_VERSION, '', 'no' );
+		update_option( 'pootlepb_version', POOTLEPB_VERSION, 'no' );
 
 	}
 
