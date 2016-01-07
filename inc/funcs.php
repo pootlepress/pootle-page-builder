@@ -168,9 +168,10 @@ function pootlepb_stringify_attributes( $attributes ) {
  */
 function pootlepb_is_panel( $can_edit = false ) {
 	// Check if this is a panel
-	$is_panel = ( is_singular() && get_post_meta( get_the_ID(), 'panels_data', false ) != '' );
+	$ppb_data = get_post_meta( get_the_ID(), 'panels_data', true );
+	$is_panel = ( is_singular() && ! empty( $ppb_data['grids'] ) );
 
-	return $is_panel && ( ! $can_edit || ( is_singular() && current_user_can( 'edit_post', get_the_ID() ) ) );
+	return $is_panel && ( ! $can_edit || current_user_can( 'edit_post', get_the_ID() ) );
 }
 
 /**

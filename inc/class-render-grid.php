@@ -25,8 +25,6 @@ class Pootle_Page_Builder_Render_Grid {
 	 * @param int $post_id
 	 */
 	protected function output_rows( $grids, $panels_data, $post_id ) {
-
-		echo '<div id="pootle-page-builder" >';
 		do_action( 'pootlepb_before_pb' );
 		foreach ( $grids as $gi => $cells ) {
 
@@ -62,7 +60,6 @@ class Pootle_Page_Builder_Render_Grid {
 			echo '</div><!--.panel-grid-->';
 		}
 		do_action( 'pootlepb_after_pb' );
-		echo '</div>';
 	}
 
 	/**
