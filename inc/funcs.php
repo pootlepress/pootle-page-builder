@@ -389,3 +389,21 @@ function pootlepb_get_panels_data_from_post( $form_post = null ) {
 		 return $default;
 	 }
  }
+
+/**
+ * Compares priority
+ *
+ * @param array $a
+ * @param array $b
+ *
+ * @return bool
+ */
+function pootlepb_array_cmp( $a, $b ) {
+	global $pootlepb_array_cmp_ki;
+	if ( ! $pootlepb_array_cmp_ki ) {
+		reset( $array );
+		$pootlepb_array_cmp_ki = key( $array );
+	}
+
+	return $a[ $pootlepb_array_cmp_ki ] > $b[ $pootlepb_array_cmp_ki ];
+}
