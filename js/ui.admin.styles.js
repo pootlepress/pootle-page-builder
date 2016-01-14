@@ -130,7 +130,6 @@ jQuery(function ($) {
     }
 
     panels.rowBgToggle = function () {
-
         var $dialog = $('#grid-styles-dialog'),
             $t = $dialog.find('[data-style-field=background_toggle]');
 
