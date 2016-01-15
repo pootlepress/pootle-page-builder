@@ -70,6 +70,7 @@ final class Pootle_Page_Builder_Content_Block {
 	 */
 	public function open_block( $block_info, $gi, $ci, $pi, $blocks_num, $post_id ) {
 
+		$styleArray = array();
 		if ( isset( $block_info['info']['style'] ) ) {
 			$styleArray = json_decode( $block_info['info']['style'], true );
 		}
@@ -85,7 +86,9 @@ final class Pootle_Page_Builder_Content_Block {
 		if ( empty( $styleArray['padding-mobile'] ) ) { $attr['class'][] = 'ppb-no-mobile-padding'; }
 
 		$styleWithSelector = ''; // Passed with reference
-		$this->set_inline_embed_styles( $attr, $styleWithSelector, $styleArray, $id ); // Get Styles
+		if ( ! empty( $styleArray ) ) {
+			$this->set_inline_embed_styles( $attr, $styleWithSelector, $styleArray, $id ); // Get Styles
+		}
 
 		if ( ! empty( $styleWithSelector ) ) { echo '<style>' . $styleWithSelector . '</style>'; }
 

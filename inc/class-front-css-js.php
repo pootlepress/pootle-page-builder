@@ -139,21 +139,9 @@ final class Pootle_Page_Builder_Front_Css_Js {
 		if ( ! empty( $panels_data['grids'][ $gi ]['style']['col_gutter'] ) ) {
 			$col_gutts = $panels_data['grids'][ $gi ]['style']['col_gutter'];
 		}
-		global $pootlepb_array_cmp_ki;
-		$pootlepb_array_cmp_ki = 'grid';
-
-		uasort( $panels_data['grid_cells'], 'pootlepb_array_cmp' );
-
-		$cells = array();
-
-		foreach ( $panels_data['grid_cells'] as $ci => $cell ) {
-			if ( isset( $cell['grid'] ) && $gi == $cell['grid'] ) {
-				$cells[] = $cell;
-			}
-		}
 
 		for ( $i = 0; $i < $cell_count; $i ++ ) {
-			$cell = $cells[ $i ];
+			$cell = $panels_data['grid_cells'][ $ci ];
 
 			if ( $cell_count > 1 ) {
 				$css_new = 'width:' . round( $cell['weight'] * ( 100 - ( ( $cell_count - 1 ) * $col_gutts ) ), 3 ) . '%';

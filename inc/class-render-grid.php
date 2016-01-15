@@ -152,8 +152,9 @@ class Pootle_Page_Builder_Render_Grid {
 	private function output_cells( $cells, $gi, $post_id, $panels_data ) {
 		foreach ( $cells as $ci => $content_blocks ) {
 			echo '<div '. $this->get_cell_attributes( $ci, $gi, $post_id, $panels_data ) . '>';
+
 			/**
-			 * Render the content block via this hook
+			 * Executed before content blocks are rendered
 			 * @param array $cell_data
 			 * * @param int $ci - Cell Index
 			 * * @param int $gi - Grid Index
@@ -161,7 +162,7 @@ class Pootle_Page_Builder_Render_Grid {
 			 * * @param int $post_id - The current post ID
 			 * @since 0.1.0
 			 */
-			do_action( 'pootlepb_render_cell', array(
+			do_action( 'pootlepb_before_content_blocks', array(
 				'ci' =>$ci,
 				'gi' =>$gi,
 				'count' =>count( $content_blocks ),
@@ -181,6 +182,23 @@ class Pootle_Page_Builder_Render_Grid {
 				 */
 				do_action( 'pootlepb_render_content_block', $content_block, $gi, $ci, $pi, count( $content_blocks ), $post_id );
 			}
+
+			/**
+			 * Executed after content blocks are rendered
+			 * @param array $cell_data
+			 * * @param int $ci - Cell Index
+			 * * @param int $gi - Grid Index
+			 * * @param int $blocks_num - Total number of Blocks in cell
+			 * * @param int $post_id - The current post ID
+			 * @since 0.1.0
+			 */
+			do_action( 'pootlepb_after_content_blocks', array(
+				'ci' =>$ci,
+				'gi' =>$gi,
+				'count' =>count( $content_blocks ),
+				'post_id' =>$post_id,
+			) );
+
 			echo '</div>';
 		}
 	}
