@@ -11,6 +11,8 @@ ragadjust = function (s, method) {
 
 				dashes = /([-–—])\s/gi,
 
+				wspace = skipWhitespace ? /^\s$/ : /\s/gi,
+
 				emphasis = /(<(strong|em|b|i)>)(([^\s]+\s*){2,3})?(<\/(strong|em|b|i)>)/gi;
 
 		while (elescount-- > 0) {

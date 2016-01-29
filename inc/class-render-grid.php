@@ -76,7 +76,7 @@ class Pootle_Page_Builder_Render_Grid {
 		 * @param array $classes
 		 * @param array $row_data
 		 */
-		$grid_classes    = apply_filters( 'pootlepb_row_classes', array( 'panel-grid' ), $panels_data['grids'][ $gi ] );
+		$grid_classes    = apply_filters( 'pootlepb_row_classes', array( 'panel-grid', 'ppb-row' ), $panels_data['grids'][ $gi ] );
 		/**
 		 * Filters row attributes
 		 * @param array $attributes

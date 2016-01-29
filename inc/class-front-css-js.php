@@ -286,10 +286,10 @@ final class Pootle_Page_Builder_Front_Css_Js {
 	function rag_adjust_script_load() {
 		$elements = apply_filters( 'pootlepb_rag_adjust_elements', array( 'p', ) );
 		if ( $elements ) {
-			$method = apply_filters( 'pootlepb_rag_adjust_method', $method = 'all' );
+			$method = apply_filters( 'pootlepb_rag_adjust_method', 'all' );
 			?>
 			<script type="text/javascript">
-				ragadjust( '<?php echo implode( ', ', $elements ); ?>', '<?php echo $method; ?>' );
+				ragadjust( '<?php echo implode( ', ', $elements ); ?>', '<?php echo $method; ?>', true );
 			</script>
 			<?php
 		}

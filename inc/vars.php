@@ -40,7 +40,6 @@ $pootlepb_content_block_styling_fields = array(
 		'name' => 'Text color',
 		'type' => 'color',
 		'priority' => 3,
-		'selector' => '*',
 		'css'  => 'color',
 		'tab' => 'style',
 	),

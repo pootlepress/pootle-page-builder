@@ -69,6 +69,10 @@
     display: table;
 }
 
+.panel-grid-cell .ppb-block * {
+    color: inherit;
+}
+
 .panel-grid-cell .panel.panel-last-child {
     margin-bottom: 0;
 }
