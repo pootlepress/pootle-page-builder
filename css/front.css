@@ -69,7 +69,7 @@
     display: table;
 }
 
-.panel-grid-cell .ppb-block * {
+.panel-grid-cell .ppb-block *:not(a) {
     color: inherit;
 }
 
@@ -172,6 +172,15 @@
 
 ul.wooTabs {
     margin-bottom: 0 !important;
+}
+
+.ppb-bg-video-container.hide-on-mobile {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
 }
 
 .panel-row-style.video-bg video.ppb-bg-video {

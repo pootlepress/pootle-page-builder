@@ -254,20 +254,22 @@ class Pootle_Page_Builder_Render_Grid {
 
 		if ( ! empty( $style['bg_video'] ) && ! empty( $style['background_toggle'] ) && '.bg_video' == $style['background_toggle'] ) {
 
-			$videoClasses = 'ppb-bg-video';
+			$videoClasses = 'ppb-bg-video-container';
 
 			if ( ! empty( $style['bg_mobile_image'] ) ) {
 				$videoClasses .= ' hide-on-mobile';
 			}
 			?>
-			<video class="<?php echo $videoClasses; ?>" preload="auto" autoplay="true" loop="loop" muted="muted"
-			       volume="0">
-				<?php
-				echo "<source src='{$style['bg_video']}' type='video/mp4'>";
-				echo "<source src='{$style['bg_video']}' type='video/webm'>";
-				?>
-				Sorry, your browser does not support HTML5 video.
-			</video>
+			<div class="<?php echo $videoClasses; ?>">
+				<video class="<?php echo str_replace( '-container', '', $videoClasses ); ?>" preload="auto" autoplay="true" loop="loop" muted="muted"
+				       volume="0">
+					<?php
+					echo "<source src='{$style['bg_video']}' type='video/mp4'>";
+					echo "<source src='{$style['bg_video']}' type='video/webm'>";
+					?>
+					Sorry, your browser does not support HTML5 video.
+				</video>
+			</div>
 		<?php
 		}
 	}
