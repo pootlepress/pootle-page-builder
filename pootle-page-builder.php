@@ -7,7 +7,7 @@
  * Author: PootlePress
  * Author URI: http://pootlepress.com/
  * License: GPL version 3
- * @developer shramee <shramee.srivastav@gmail.com>
+ @developer wpdevelopment.me <shramee@wpdevelopment.me>
  */
 
 /** Pootle page builder current version */
@@ -158,33 +158,7 @@ final class Pootle_Page_Builder {
 	 * @since 0.3.0
 	 */
 	public function ppb_compatibility() {
-
-		$version = get_option( 'pootlepb_version' );
-		if ( version_compare( $version, '0.3.0', '<' ) ) {
-			$this->v023_to_v030();
-		}
 		update_option( 'pootlepb_version', POOTLEPB_VERSION, 'no' );
-
-	}
-
-	/**
-	 * Sorts v0.2.3 to 0.3.0 issues
-	 * @todo remove after 1.1
-	 * @since 0.3.0
-	 */
-	private function v023_to_v030() {
-		$query = $this->ppb_posts();
-
-		foreach ( $query->posts as $post ) {
-
-			$data = get_post_meta( $post->ID, 'panels_data', true );
-			foreach( $data['grids'] as $k => &$grid ) {
-				if ( ! empty( $grid['style']['bg_overlay_opacity'] ) ) {
-					$grid['style']['bg_overlay_opacity'] = 1 - $grid['style']['bg_overlay_opacity'];
-				}
-			}
-			update_post_meta( $post->ID, 'panels_data', $data );
-		}
 	}
 
 	/**
