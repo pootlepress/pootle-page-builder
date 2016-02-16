@@ -37,10 +37,13 @@ function pootlepb_panels_panels_row_attributes( $attr, $row ) {
 		}
 
 		$marginBottom = pootlepb_settings( 'margin-bottom' );
+
+		if ( ! empty( $row['style']['margin_top'] ) ) {
+			$attr['style'] .= "margin-top: {$row['style']['margin_top']}px;";
+		}
+
 		if ( ! empty( $row['style']['margin_bottom'] ) ) {
 			$attr['style'] .= "margin-bottom: {$row['style']['margin_bottom']}px;";
-		} elseif ( ! empty( $row['style']['margin_top'] ) ) {
-			$attr['style'] .= "margin-top: {$row['style']['margin_top']}px;";
 		} elseif ( $marginBottom ) {
 			$attr['style'] .= "margin-bottom: {$marginBottom}px;";
 		} else {
