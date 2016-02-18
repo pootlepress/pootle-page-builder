@@ -8,8 +8,8 @@ Author URI: http://www.pootlepress.com
 Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
-Tested up to: 4.3.1
-Stable tag: 1.0.0
+Tested up to: 4.4.2
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -89,11 +89,37 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
-= 0.1 =
-* 2015-07-06
-* Initial release. It's alive!
+= 1.1.0 =
+* 2016-02-18
+ * New - Added rag adjust fixing text to enhance readability in fluid layouts.
+ * New - New filter `pootlepb_rag_adjust_elements` to add or remove elements to adjust text in.
+ * New - Action hook `pootlepb_before_row` added Grid Index as sencond argument
+ * New - Action hook `pootlepb_after_row` added Grid Index as sencond argument
+ * New - New pootle page builder action hook `pootlepb_before_content_blocks` runs before content blocks are rendered in cell
+ * New - New pootle page builder action hook `pootlepb_after_content_blocks` runs after content blocks are rendered in cell
+ * New - New pootle page builder function `pootlepb_array_cmp` sorts array by priority
+ * New - Option to remove Content block padding on mobile
+ * New - Option to add row top margin
+ * Tweak - Added class `ppb-row` for rows in pootle page builder
+ * Tweak - Yoast SEO content loading by js
+ * Fix - Blank add-on page
 
 == Changelog ==
+
+= 1.1.0 =
+* 2016-02-18
+ * New - Added rag adjust fixing text to enhance readability in fluid layouts.
+ * New - New filter `pootlepb_rag_adjust_elements` to add or remove elements to adjust text in.
+ * New - Action hook `pootlepb_before_row` added Grid Index as sencond argument
+ * New - Action hook `pootlepb_after_row` added Grid Index as sencond argument
+ * New - New pootle page builder action hook `pootlepb_before_content_blocks` runs before content blocks are rendered in cell
+ * New - New pootle page builder action hook `pootlepb_after_content_blocks` runs after content blocks are rendered in cell
+ * New - New pootle page builder function `pootlepb_array_cmp` sorts array by priority
+ * New - Option to remove Content block padding on mobile
+ * New - Option to add row top margin
+ * Tweak - Added class `ppb-row` for rows in pootle page builder
+ * Tweak - Yoast SEO content loading by js
+ * Fix - Blank add-on page
 
 = 1.0.0 =
 * 2015-09-15
