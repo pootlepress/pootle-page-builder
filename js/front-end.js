@@ -1,5 +1,7 @@
 /**
- * Created by shramee on 15/5/15.
+ * Front end CSS
+ * @package pootle page builder
+ * @developer wpdevelopment.me <shramee@wpdevelopment.me>
  * @since 0.1.0
  */
 // External libraries
