@@ -69,7 +69,7 @@
 	display: table;
 }
 
-.panel-grid-cell .ppb-block *:not(a) {
+.panel-grid-cell .ppb-block p {
 	color: inherit;
 }
 
