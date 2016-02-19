@@ -7,7 +7,7 @@
  * Author: pootlepress
  * Author URI: http://pootlepress.com/
  * License: GPL version 3
- @developer wpdevelopment.me <shramee@wpdevelopment.me>
+ * @developer wpdevelopment.me <shramee@wpdevelopment.me>
  */
 
 /** Pootle page builder current version */

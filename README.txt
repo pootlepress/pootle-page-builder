@@ -89,6 +89,10 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
+= 1.1.1 =
+* 2016-02-19
+ * Fix - Heading color setting in theme not working in PPB
+
 = 1.1.0 =
 * 2016-02-18
  * New - Added rag adjust fixing text to enhance readability in fluid layouts.
@@ -105,6 +109,10 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * Fix - Blank add-on page
 
 == Changelog ==
+
+= 1.1.1 =
+* 2016-02-19
+ * Fix - Heading color setting in theme not working in PPB
 
 = 1.1.0 =
 * 2016-02-18
