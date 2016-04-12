@@ -317,8 +317,8 @@ if ( ! class_exists( 'Pootle_Page_Builder_Addon_Manager' ) ) {
 			<?php if ( ! in_array( filter_input( INPUT_GET, 'page' ), array( 'page_builder_settings', 'page_builder_addons', ) ) ) {
 				return;
 			} ?>
-			<div id="message" class="error">
-				<p><?php printf( __( 'Your ' . $this->name . ' License Key has not been activated, so you will miss out on important updates and support. %sClick here%s to activate the license key.', $this->text_domain ), '<a href="' . esc_url( admin_url( 'admin.php?page=page_builder_settings&tab=addons&addon=' . $this->token ) ) . '">', '</a>' ); ?></p>
+			<div id="message" class="notice notice-warning is-dismissible">
+				<p><?php printf( __( 'Your ' . $this->name . ' license is not active. %sClick here%s to activate the license key.<br>Don\'t worry if the licence doesn\'t activate, your software will still work, this is just to receive automatic updates.', $this->text_domain ), '<a href="' . esc_url( admin_url( 'admin.php?page=page_builder_settings&tab=addons&addon=' . $this->token ) ) . '">', '</a>' ); ?></p>
 			</div>
 		<?php
 		}
