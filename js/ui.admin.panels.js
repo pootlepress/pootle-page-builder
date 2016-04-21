@@ -745,7 +745,7 @@
             }
         }
 
-    }
+    };
 
     panels.getStylesFromFields = function ($styleForm) {
         // from values in dialog fields, set style data into hidden fields

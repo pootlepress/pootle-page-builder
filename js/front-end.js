@@ -1,7 +1,7 @@
 /**
  * Front end CSS
  * @package pootle page builder
- * @developer wpdevelopment.me <shramee@wpdevelopment.me>
+ * @developer http://wpdevelopment.me <shramee@wpdevelopment.me>
  * @since 0.1.0
  */
 // External libraries

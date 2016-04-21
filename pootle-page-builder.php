@@ -7,7 +7,7 @@
  * Author: pootlepress
  * Author URI: http://pootlepress.com/
  * License: GPL version 3
- * @developer wpdevelopment.me <shramee@wpdevelopment.me>
+ * @developer http://wpdevelopment.me <shramee@wpdevelopment.me>
  */
 
 /** Pootle page builder current version */
@@ -77,20 +77,18 @@ final class Pootle_Page_Builder {
 		require_once POOTLEPB_DIR . 'inc/enhancements-and-fixes.php';
 		/** PPB Admin Class */
 		require_once POOTLEPB_DIR . 'inc/class-admin.php';
-		/**
-		 * PPB Admin Class Instance
-		 * @var Pootle_Page_Builder_Admin Instance
-		 */
-		$GLOBALS['Pootle_Page_Builder_Admin'] = new Pootle_Page_Builder_Admin();
-		$this->admin = $GLOBALS['Pootle_Page_Builder_Admin'];
+		/** @var Pootle_Page_Builder_Admin PPB Admin Class Instance */
+		$this->admin = $GLOBALS['Pootle_Page_Builder_Admin'] = new Pootle_Page_Builder_Admin();
+
 		/** PPB Public Class */
 		require_once POOTLEPB_DIR . 'inc/class-public.php';
-		/**
-		 * PPB Public Class Instance
-		 * @var Pootle_Page_Builder_Public Instance
-		 */
-		$GLOBALS['Pootle_Page_Builder_Public'] = new Pootle_Page_Builder_Public();
-		$this->public = $GLOBALS['Pootle_Page_Builder_Public'];
+		/** @var Pootle_Page_Builder_Public PPB Public Class Instance */
+		$this->public = $GLOBALS['Pootle_Page_Builder_Public'] = new Pootle_Page_Builder_Public();
+
+		/** PPB Live Editor */
+		require_once POOTLEPB_DIR . 'inc/class-live-editor.php';
+		/** Intantiating main plugin class */
+		Pootle_Page_Builder_Live_Editor::instance( __FILE__ );
 	}
 
 	/**

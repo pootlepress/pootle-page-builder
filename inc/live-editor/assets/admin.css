@@ -1,0 +1,14 @@
+/**
+ * Plugin admin end styles
+ *
+ * @package Pootle_Page_Builder_Live_Editor
+ * @version 1.0.0
+ * @developer shramee <shramee.srivastav@gmail.com>
+ */
+#wp-content-editor-tools .button.live-editor {
+	display: none;
+}
+
+#wp-content-wrap.panels-active .button.live-editor {
+	display: block;
+}
