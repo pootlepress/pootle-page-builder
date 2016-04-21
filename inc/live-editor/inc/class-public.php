@@ -263,11 +263,16 @@ class Pootle_Page_Builder_Live_Editor_Public{
 				if ( ! empty( $_POST['title'] ) ) {
 					$live_page_post['post_title'] = $_POST['title'];
 				}
-				if ( array( 'ID' => $id ) != $live_page_post ) {
-					wp_update_post( $live_page_post, true );
-				}
 
+				// Update PPB data
 				update_post_meta( $id, 'panels_data', $_POST['data'] );
+
+				// Generate post content
+				$live_page_post['post_content'] = pootlepb_get_text_content( $id );
+
+				// Update post
+				wp_update_post( $live_page_post, true );
+
 				echo get_permalink( $id );
 			} else {
 				foreach ( $_POST['data']['widgets'] as $i => $wid ) {

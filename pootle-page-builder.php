@@ -172,6 +172,8 @@ final class Pootle_Page_Builder {
 			//Put pb content in post
 			$this->pb_post_content( $post );
 		}
+
+		//die( 'All done!' );
 	}
 
 	/**
@@ -180,11 +182,11 @@ final class Pootle_Page_Builder {
 	 * @since 0.1.0
 	 */
 	protected function pb_post_content( $post ) {
-		if ( empty( $panels_data['grids'] ) ) {
+		$panel_content = $GLOBALS['Pootle_Page_Builder_Render_Layout']->panels_render( $post->ID );
+
+		if ( empty( $panel_content ) ) {
 			return;
 		}
-
-		$panel_content = $GLOBALS['Pootle_Page_Builder_Render_Layout']->panels_render( $post->ID );
 
 		global $pootlepb_inline_css;
 		$panel_style = '<style>' . $pootlepb_inline_css . '</style>';
@@ -193,7 +195,14 @@ final class Pootle_Page_Builder {
 			'ID'           => $post->ID,
 			'post_content' => $panel_style . $panel_content,
 		);
+
 		wp_update_post( $updated_post );
+
+		$sample_content = substr( strip_tags( $panel_content ), 0, 25 );
+		echo <<<dump
+<h3>$updated_post[ID]</h3>
+<p>$sample_content</p>
+dump;
 	}
 
 	/**

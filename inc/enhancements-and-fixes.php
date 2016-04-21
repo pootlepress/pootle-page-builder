@@ -14,10 +14,27 @@
  * @return string Post content
  * @since 0.1.0
  */
-function pootlepb_wp_seo_filter( $content, $post ) {
+function pootlepb_text_content( $content, $post = null ) {
+	if ( empty( $post ) ) {
+		global $post;
+	}
+	return $content . pootlepb_get_text_content( $post->ID );
+}
 
-	$id          = $post->ID;
-	$panels_data = get_post_meta( $id, 'panels_data', true );
+add_filter( 'content_save_pre', 'pootlepb_text_content', 10, 1 );
+
+/**
+ * Makes page builder content visible to WP SEO
+ *
+ * @param integer $post Post ID
+ *
+ * @return string Post content
+ * @since 0.1.0
+ */
+function pootlepb_get_text_content( $post ) {
+
+	$content = '';
+	$panels_data = get_post_meta( $post, 'panels_data', true );
 	if ( ! empty( $panels_data['widgets'] ) ) {
 		foreach ( $panels_data['widgets'] as $widget ) {
 			if ( ! empty( $widget['text'] ) ) {
