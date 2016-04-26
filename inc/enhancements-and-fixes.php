@@ -86,3 +86,30 @@ function pootlepb_wp_import_post_meta( $post_meta ) {
 }
 
 add_filter( 'wp_import_post_meta', 'pootlepb_wp_import_post_meta' );
+
+// Create a helper function for easy SDK access.
+function ppb_fs() {
+	global $ppb_fs;
+
+	if ( ! isset( $ppb_fs ) ) {
+		// Include Freemius SDK.
+		require_once POOTLEPB_DIR . '/wp-sdk/start.php';
+
+		$ppb_fs = fs_dynamic_init( array(
+			'id'                => '269',
+			'slug'              => 'pootle-page-builder',
+			'public_key'        => 'pk_cb4e7b7932169240ac86c3fb01dd5',
+			'is_premium'        => false,
+			'has_addons'        => true,
+			'has_paid_plans'    => false,
+			'menu'              => array(
+				'slug'       => 'page_builder',
+				'first-path' => 'admin.php?page=page_builder',
+				'support' => false,
+
+			),
+		) );
+	}
+
+	return $ppb_fs;
+}

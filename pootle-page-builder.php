@@ -61,6 +61,9 @@ final class Pootle_Page_Builder {
 	public function __construct() {
 		$this->includes();
 		$this->hooks();
+
+		// Init Freemius.
+		ppb_fs();
 	}
 
 	/**
@@ -104,6 +107,14 @@ final class Pootle_Page_Builder {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
 		add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
+
+		add_action( 'activated_plugin', array( $this, 'activation_redirect' ) );
+	}
+
+	public function activation_redirect( $plugin ) {
+		if ( $plugin == plugin_basename( __FILE__ ) ) {
+			exit( wp_redirect( admin_url( 'admin.php?page=page_builder' ) ) );
+		}
 	}
 
 	/**
@@ -121,8 +132,9 @@ final class Pootle_Page_Builder {
 		if ( ! empty( $current_user->user_firstname ) ) {
 			$username = " {$current_user->user_firstname}";
 		}
-		$welcome_message = "<b>Hey{$username}! Welcome to Page builder.</b> You're all set to start building stunning pages!<br><a class='button pootle' href='" . admin_url( '/admin.php?page=page_builder' ) . "'>Get started</a>";
-		pootlepb_add_admin_notice( 'welcome', $welcome_message, 'updated pootle' );
+
+		//$welcome_message = "<b>Hey{$username}! Welcome to Page builder.</b> You're all set to start building stunning pages!<br><a class='button pootle' href='" . admin_url( '/admin.php?page=page_builder' ) . "'>Get started</a>";
+		//pootlepb_add_admin_notice( 'welcome', $welcome_message, 'updated pootle' );
 	}
 
 	/**
@@ -211,6 +223,12 @@ dump;
 	 * @since 0.1.0
 	 */
 	public function plugins_loaded() {
+
+		if ( ! function_exists( 'pbtn_script' ) ) {
+			/** Functions used throughout the plugin */
+			require_once POOTLEPB_DIR . 'inc/pootle-buttons/pootle-button.php';
+		}
+
 		load_plugin_textdomain( 'ppb-panels', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 		if ( defined( 'WPSEO_VERSION' ) && 0 > version_compare( WPSEO_VERSION, 3 ) ) {
 			add_filter( 'wpseo_pre_analysis_post_content', 'pootlepb_wp_seo_filter', 10, 2 );
@@ -267,9 +285,6 @@ dump;
 	 * @since 0.1.0
 	 */
 	public function plugin_action_links( $links ) {
-		//$links[] = '<a href="http://pootlepress.com/pootle-page-builder/">' . __( 'Support Forum', 'ppb-panels' ) . '</a>';
-		//$links[] = '<a href="http://pootlepress.com/page-builder/#newsletter">' . __( 'Newsletter', 'ppb-panels' ) . '</a>';
-
 		return $links;
 	}
 } //class Pootle_Page_Builder
