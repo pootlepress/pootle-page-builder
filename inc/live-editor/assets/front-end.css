@@ -36,6 +36,10 @@
 	padding: 7px;
 }
 
+body .ppb-dialog {
+	font: 14px sans-serif;
+}
+
 .pootle-live-editor.ppb-edit-row .dashicons-before:before {
 }
 
@@ -616,6 +620,7 @@
 	border: 1px solid #ddd;
 	border-top-color: #bbb;
 	border-left-color: #bbb;
+	width: 160px;
 }
 
 .ppb-tabs-panel img {

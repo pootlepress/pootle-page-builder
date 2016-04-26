@@ -15,13 +15,14 @@
  * @since 0.1.0
  */
 function pootlepb_text_content( $content, $post = null ) {
-	if ( empty( $post ) ) {
-		global $post;
-	}
+	if ( empty( $post ) ) global $post;
+
+	if ( empty( $post->ID ) ) return $content;
+
 	return $content . pootlepb_get_text_content( $post->ID );
 }
 
-add_filter( 'content_save_pre', 'pootlepb_text_content', 10, 1 );
+add_filter( 'content_save_pre', 'pootlepb_text_content', 10, 2 );
 
 /**
  * Makes page builder content visible to WP SEO
