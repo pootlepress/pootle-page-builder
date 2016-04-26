@@ -192,12 +192,8 @@ final class Pootle_Page_Builder_Custom_Styles {
 	 */
 	public function row_height( $attr, $style, $cells = array() ) {
 
-		$row_empty = ! $this->row_has_content( $cells );
-
-		if ( $row_empty ) {
-			if ( ! empty( $style['row_height'] ) ) {
-				$attr['style'] .= 'height:' . $style['row_height'] . 'px;';
-			}
+		if ( ! empty( $style['row_height'] ) ) {
+			$attr['style'] .= 'min-height:' . $style['row_height'] . 'px;';
 		}
 
 		return $attr;

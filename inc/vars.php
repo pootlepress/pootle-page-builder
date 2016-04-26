@@ -20,6 +20,13 @@ global $pootlepb_content_block_styling_fields,
  * @since 0.1.0
  */
 $pootlepb_content_block_styling_fields = array(
+	'background-image' => array(
+		'name' => 'Background Image',
+		'type' => 'upload',
+		'priority' => 1,
+		'css'  => 'background-image:url(%s)',
+		'tab' => 'style',
+	),
 	'background-color' => array(
 		'name' => 'Background color',
 		'type' => 'color',
@@ -107,13 +114,13 @@ $pootlepb_row_styling_fields = array(
 		'priority' => 1,
 	),
 	'row_height'              => array(
-		'name'      => __( 'Empty Row Height', 'ppb-panels' ),
+		'name'      => __( 'Minimum Row Height', 'ppb-panels' ),
 		'unit' => 'px',
 		'type'      => 'number',
 		'tab' => 'layout',
 		'priority' => 2,
 		'default'   => '',
-		'help-text' => 'Row height can only be set when there is no content in a row.',
+		'help-text' => 'Minimum height row should have even when content is less. With more content it will stretch to contain all content and this setting will have no effect.',
 	),
 	'hide_row'                => array(
 		'name' => 'Hide row',
@@ -124,7 +131,7 @@ $pootlepb_row_styling_fields = array(
 	'margin_top'           => array(
 		'name' => 'Row Top Margin',
 		'unit' => 'px',
-		'type'      => 'number',
+		'type' => 'number',
 		'tab' => 'layout',
 		'priority' => 4,
 	),

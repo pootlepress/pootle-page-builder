@@ -176,7 +176,11 @@ final class Pootle_Page_Builder_Content_Block {
 
 			if ( ! isset( $field['selector'] ) ) {
 				//No selector
-				$inlineStyle .= $field['css'] . ': ' . $styleArray[ $key ] . $unit . ';';
+				if ( strpos( $field['css'], '%s' ) ) {
+					$inlineStyle .= sprintf( $field['css'], $styleArray[ $key ] );
+				} else {
+					$inlineStyle .= $field['css'] . ': ' . $styleArray[ $key ] . $unit . ';';
+				}
 			} else {
 				//Has a selector
 				$styleWithSelector .= '#' . $id . ' ' . $field['selector'] . ' { ' . $field['css'] . ': ' . $styleArray[ $key ] . $unit . '; }';
