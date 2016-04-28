@@ -24,7 +24,7 @@ $pootlepb_content_block_styling_fields = array(
 		'name' => 'Background Image',
 		'type' => 'upload',
 		'priority' => 1,
-		'css'  => 'background-image:url(%s)',
+		'css'  => 'background-image:url(%s);',
 		'tab' => 'style',
 	),
 	'background-color' => array(

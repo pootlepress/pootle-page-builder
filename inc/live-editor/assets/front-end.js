@@ -419,7 +419,7 @@ jQuery( function ( $ ) {
 			prevu.sync( function( $r, qry ) {
 				var $ro = $r.find( '#pg-' + qry.post + '-' + window.ppbRowI ),
 					$cols = $ro.find( '.panel-grid-cell-container > .panel-grid-cell' );
-				$cols.css( 'width', 100 / num_cells - num_cells + 1 + '%' );
+				$cols.css( 'width', ( 100 - num_cells + 1 ) / num_cells + '%' );
 				$('.pootle-live-editor.add-row' ).before( $ro );
 				$ro.prevuRowInit();
 
