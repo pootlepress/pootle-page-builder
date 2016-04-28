@@ -35,11 +35,11 @@ function pootlepb_block_dialog_fields_output( $tab = null ) {
 
 		echo "<div class='field field-" . $key . " field_type-" . $field['type'] . "'>";
 		echo '<label>' . esc_html( $field['name'] ) . '</label>';
+
 		echo '<span>';
-
 		pootlepb_render_content_block_field( $key, $field );
-
 		echo '</span>';
+
 		if ( isset( $field['help-text'] ) ) {
 			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
 		}
@@ -207,7 +207,11 @@ function pootlepb_row_dialog_fields_output( $tab = null ) {
 
 		echo '<label>' . esc_html( $field['name'] );
 		echo '</label>';
+
+		echo '<span>';
 		pootlepb_render_row_settings_field( $key, $field );
+		echo '</span>';
+
 		if ( isset( $field['help-text'] ) ) {
 			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
 		}

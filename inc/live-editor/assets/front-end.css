@@ -13,6 +13,29 @@
  * Created by shramee on 29/12/15.
  */
 
+.panels-tooltip {
+	position: absolute;
+	background: #1c1c1c;
+	background: rgba(0, 0, 0, 0.8);
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	color: white;
+	font-size: 11px; /* Higher than the admin bar */
+	padding: 4px 8px;
+	z-index: 999999;
+}
+
+.panels-tooltip .pointer {
+	position: absolute;
+	bottom: -4px;
+	left: 50%;
+	width: 8px;
+	height: 4px;
+	background-image: url(images/tooltip-pointer.png);
+	margin-left: -4px;
+}
+
 .screen-reader-text {
 	height: 1px;
 	width: 1px;
@@ -602,8 +625,12 @@ body .ppb-dialog {
 	display: block;
 }
 
+.ppb-tabs-panel .field > span > * {
+	max-width: 100%;
+}
+
 .ppb-tabs-panel .field > * {
-	max-width: 52%;
+	max-width: 49.3%;
 }
 
 .ppb-tabs-panel .field label {
@@ -621,6 +648,7 @@ body .ppb-dialog {
 	border-top-color: #bbb;
 	border-left-color: #bbb;
 	width: 160px;
+	margin: 7px 0;
 }
 
 .ppb-tabs-panel img {

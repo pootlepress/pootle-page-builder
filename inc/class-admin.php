@@ -181,19 +181,15 @@ final class Pootle_Page_Builder_Admin {
 			$this,
 			'menu_page',
 		), 'dashicons-screenoptions', '20.275' );
-		add_submenu_page( 'page_builder', 'Add New', 'Add New', 'manage_options', 'page_builder_add', array(
-			$this,
-			'menu_page',
-		) );
 		add_submenu_page( 'page_builder', 'Settings', 'Settings', 'manage_options', 'page_builder_settings', array(
 			$this,
 			'menu_page',
 		) );
-		add_submenu_page( 'page_builder', 'Add-ons', 'Add-ons', 'manage_options', 'page_builder_addons', array(
+/*		add_submenu_page( 'page_builder', 'Add-ons', 'Add-ons', 'manage_options', 'page_builder_addons', array(
 			$this,
 			'menu_page',
 		) );
-	}
+*/	}
 
 	/**
 	 * Register all the settings fields.
