@@ -56,7 +56,7 @@ logPPBData = function ( a, b, c ) {
 
 	if ( b ) { console.log( b ); }
 };
-logPPBData();
+
 jQuery( function ( $ ) {
 	$.each( ppbData.grids, function ( i, v ) {
 		ppbData.grids[ i ].id = i;
@@ -615,6 +615,10 @@ jQuery( function ( $ ) {
 	$ppb.delegate( '.ppb-live-edit-object', 'click', function () {
 		$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
 		$( this ).closest( '.ppb-block, .ppb-row' ).addClass( 'active' );
+	} );
+
+	$ppb.delegate( '.pootle-live-editor .dashicons-before', 'mousedown', function () {
+		$( '.pootle-live-editor-realtime.has-focus' ).blur();
 	} );
 
 	$ppb.delegate( '.ppb-edit-row .dashicons-admin-appearance', 'click', function () {
