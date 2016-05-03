@@ -100,15 +100,15 @@ function ppb_fs() {
 			'id'                => '269',
 			'slug'              => 'pootle-page-builder',
 			'public_key'        => 'pk_cb4e7b7932169240ac86c3fb01dd5',
-			'is_premium'        => false,
-			'has_addons'        => true,
-			'has_paid_plans'    => false,
+			'is_premium'        => true,
+			'has_paid_plans'    => true,
 			'menu'              => array(
 				'slug'       => 'page_builder',
 				'first-path' => 'admin.php?page=page_builder',
-				'support' => false,
-
 			),
+			// Set the SDK to work in a sandbox mode (for development & testing).
+			// IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
+			'secret_key'  => 'sk_Ps6;5x%cnDM:eoqhd2~<*vvr[}OoZ',
 		) );
 	}
 

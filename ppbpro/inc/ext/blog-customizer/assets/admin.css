@@ -1,0 +1,43 @@
+.field-ppb-blog-customizer-layout img {
+    display:block;
+    width: 100%;
+    height: auto;
+    border: 3px solid #a2a2a2;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.pootle-style-fields .field-ppb-blog-customizer-layout > span label{
+    float: left;
+    width: 19%;
+    max-width: 124px;
+    margin: 2px 0 2px 1%;
+    position: relative;
+}
+
+.field-ppb-blog-customizer-layout span label > * {
+    display: block;
+    vertical-align: middle;
+}
+
+.field-ppb-blog-customizer-layout span label input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.field-ppb-blog-customizer-layout span label input:checked + img {
+    border-radius: 0;
+    border-color: #646261;
+}
+
+.field-ppb-blog-customizer-layout span {
+    width: 61%;
+    margin-left: -5px;
+}
+
+#pootle-ppb-blog-customizer-tab .field[data-hide]{
+    display: none;
+}

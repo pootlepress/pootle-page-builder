@@ -8,6 +8,7 @@
  * Author URI: http://pootlepress.com/
  * License: GPL version 3
  * @developer http://wpdevelopment.me <shramee@wpdevelopment.me>
+ * @fs_premium_only /ppbpro/
  */
 
 /** Pootle page builder current version */
@@ -87,6 +88,13 @@ final class Pootle_Page_Builder {
 		require_once POOTLEPB_DIR . 'inc/class-public.php';
 		/** @var Pootle_Page_Builder_Public PPB Public Class Instance */
 		$this->public = $GLOBALS['Pootle_Page_Builder_Public'] = new Pootle_Page_Builder_Public();
+
+		if ( ppb_fs()->is__premium_only() ) {
+			if ( ppb_fs()->is_plan( 'ppbpro' ) ) {
+				/** PPB Public Class */
+				require_once POOTLEPB_DIR . 'ppbpro/ppbpro.php';
+			}
+		}
 
 		/** PPB Live Editor */
 		require_once POOTLEPB_DIR . 'inc/class-live-editor.php';
@@ -211,10 +219,9 @@ final class Pootle_Page_Builder {
 		wp_update_post( $updated_post );
 
 		$sample_content = substr( strip_tags( $panel_content ), 0, 25 );
-		echo <<<dump
-<h3>$updated_post[ID]</h3>
-<p>$sample_content</p>
-dump;
+		if ( WP_DEBUG ) {
+			echo "<h3>$updated_post[ID]</h3><p>$sample_content</p>";
+		}
 	}
 
 	/**

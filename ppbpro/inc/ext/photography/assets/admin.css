@@ -1,0 +1,46 @@
+/**
+ * Created by shramee <shramee.srivastav@gmail.com> on 4/12/15.
+ */
+#pootle-ppb-photo-addon-tab .spaced-up {
+	margin: 1em 0;
+	display:block;
+}
+
+#pootle-ppb-photo-addon-tab .photo-images .img {
+    height: 100px;
+    width: 100px;
+    float: left;
+    background: center/cover;
+    margin: 1%;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 1px 1px 5px 1px #aaa;
+    position: relative;
+}
+
+#pootle-ppb-photo-addon-tab .photo-images .img span {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    background: #ccc url(close.png) center/14px no-repeat;
+    border: 2px solid #fff;
+    opacity: 0.7;
+    cursor: pointer;
+    box-shadow: none;
+    border-radius: 50%;
+}
+
+#pootle-ppb-photo-addon-tab .photo-images .img span:hover {
+	opacity: 1;
+}
+
+#pootle-ppb-photo-addon-tab .photo-images .img:hover span {
+    display: block;
+}
+
+#pootle-ppb-photo-addon-tab .photo_tax_terms {
+    display:none;
+}

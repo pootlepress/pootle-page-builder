@@ -1,0 +1,67 @@
+/**
+ * Plugin front end styles
+ *
+ * @package pootle_page_builder_one_pager
+ * @version 1.0.0
+ */
+#one-pager-nav-container {
+	position: fixed;
+	right: 5px;
+	top: 0;
+	bottom: 0;
+	width: 34px;
+	height: 500px;
+	margin: auto;
+	z-index: 99;
+}
+
+#one-pager-nav-container:before {
+	content: '';
+	height: 100%;
+}
+
+#one-pager-nav-container:before, #one-pager-nav {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.one-pager-menu-item, .ppb-one-pager-to-top {
+	display: block;
+	text-decoration: none;
+	background: rgba(255,255,255,0.5);
+	color: black;
+	height: 25px;
+	width: 25px;
+	float: right;
+	margin: 0 0 1px;
+	position: relative;
+}
+
+.one-pager-menu-item:before, .ppb-one-pager-to-top:before {
+	display: block;
+	content: '';
+	width: 0;
+	height: 0;
+	border: 5px solid transparent;
+	border-bottom: 7px solid #999;
+	padding: 0;
+	margin: auto;
+	position: absolute;
+	top: -3px;
+	bottom: 0;
+	right: 0;
+	left: 0;
+}
+.one-pager-menu-item:before {
+	top: 0;
+	border: none;
+	height: 7px;
+	width: 7px;
+	background: #999;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	border-radius: 50%;
+}
+a.one-pager-menu-item.active:before {
+	background: #000;
+}

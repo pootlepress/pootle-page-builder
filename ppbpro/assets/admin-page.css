@@ -1,0 +1,25 @@
+/**
+ * Plugin options page styles
+ *
+ * @package Pootle_Page_Builder_Pro
+ * @developer shramee <shramee.srivastav@gmail.com>
+ */
+
+.ppb-addon-card.active .activate {
+	display: none;
+}
+
+.ppb-addon-card .deactivate {
+	display: none;
+}
+
+.ppb-addon-card.active .deactivate {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 5px 7px 4px 0;
+}
+
+.ppb-addon-card.active .deactivate.button {
+	float: right;
+	margin-top: 0;
+}

@@ -1,0 +1,48 @@
+/**
+ * Created by Shramee on April 02, 2015.
+ */
+.ppc-field { 
+	margin: 7px;
+}
+.ppc-field > .label {
+	width: 200px;
+	display: inline-block;
+	vertical-align: middle; 
+}
+.ppc-field > .control{ 
+	display: inline-block;
+	vertical-align: middle; 
+}
+.ppc-field > .wp-picker-container > .wp-color-result { 
+	margin: 0; 
+}
+.ppc-field > .image-upload-path { 
+	width: 200px; 
+}
+.ppc-field.layout > * { 
+	vertical-align: middle; 
+	display: inline-block; 
+}
+.ppc-field > img { 
+	margin:5px
+}
+.ppc-section {
+  border: 1px solid #ccc;
+  padding: 0 7px;
+}
+.ppc-sections-nav, .ppc-sections-nav li{
+	margin:0;
+	display: inline-block;
+}
+.ppc-sections-nav a.nav-tab{
+	display:block;
+	background: transparent;
+}
+.ppc-sections-nav .ui-tabs-active a{
+	background: #fff;
+}
+.ppc-sections-nav a:focus {
+  color: #555;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}

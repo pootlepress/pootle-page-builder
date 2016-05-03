@@ -163,8 +163,10 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 			) );
 
 			if ( $id ) {
+				global $ppbpro_tpl;
 //				$ppble_quotes = $ppble_new_live_page = array();
 				require 'vars.php';
+				$tpl = ppbpro_get_template( filter_input( INPUT_GET, 'tpl' ) );
 
 				$user = '';
 				$current_user = wp_get_current_user();
@@ -172,9 +174,16 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 					$user = ' ' . ucwords( $current_user->user_login );
 				}
 
-				$ppble_new_live_page['widgets'][0]['text'] = str_replace( '<!--USER-->', $user, $ppble_new_live_page['widgets'][0]['text'] );
+				if ( $tpl ) {
+					$ppb_data = $tpl;
+				} else {
+					$ppble_new_live_page['widgets'][0]['text'] = str_replace( '<!--USER-->', $user, $ppble_new_live_page['widgets'][0]['text'] );
+					$ppb_data = $ppble_new_live_page;
+				}
 
-				update_post_meta( $id, 'panels_data', $ppble_new_live_page );
+				//die( print_awesome_r( $ppb_data ) );
+
+				update_post_meta( $id, 'panels_data', $ppb_data );
 				$nonce_url = wp_nonce_url( get_the_permalink( $id ), 'ppb-live-' . $id, 'ppbLiveEditor' );
 				$nonce_url = html_entity_decode( $nonce_url );
 				header("Location: $nonce_url&edit_title=true");
