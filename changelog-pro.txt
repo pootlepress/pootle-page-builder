@@ -1,4 +1,4 @@
-# Pootle Pagebuilder Pro
+# Pootle Pagebuilder Pro Changelog
 
 = 1.0.0 =
 2016-05-06
