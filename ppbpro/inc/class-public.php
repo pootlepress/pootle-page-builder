@@ -42,6 +42,18 @@ class Pootle_Page_Builder_Pro_Public{
 	} // End __construct()
 
 	/**
+	 * Adds chosen post types to pb supported post types
+	 * @param array $post_types
+	 * @action pootlepb_builder_post_types
+	 * @return array
+	 */
+	public function add_post_types( $post_types ) {
+		$post_types[] = 'post';
+
+		return $post_types;
+	}
+
+	/**
 	 * Adds front end stylesheet and js
 	 * @action wp_enqueue_scripts
 	 * @since 1.0.0

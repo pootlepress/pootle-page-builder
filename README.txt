@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.4.2
-Stable tag: 1.1.1
+Stable tag: 2.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -109,26 +109,29 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
-= 1.1.1 =
-* 2016-02-19
- * Fix - Heading color setting in theme not working in PPB
-
-= 1.1.0 =
-* 2016-02-18
- * New - Added rag adjust fixing text to enhance readability in fluid layouts.
- * New - New filter `pootlepb_rag_adjust_elements` to add or remove elements to adjust text in.
- * New - Action hook `pootlepb_before_row` added Grid Index as sencond argument
- * New - Action hook `pootlepb_after_row` added Grid Index as sencond argument
- * New - New Pootle Pagebuilder action hook `pootlepb_before_content_blocks` runs before content blocks are rendered in cell
- * New - New Pootle Pagebuilder action hook `pootlepb_after_content_blocks` runs after content blocks are rendered in cell
- * New - New Pootle Pagebuilder function `pootlepb_array_cmp` sorts array by priority
- * New - Option to remove Content block padding on mobile
- * New - Option to add row top margin
- * Tweak - Added class `ppb-row` for rows in Pootle Pagebuilder
- * Tweak - Yoast SEO content loading by js
- * Fix - Blank add-on page
+= 2.0.0 =
+ * This is a major release please backup your site before installing
 
 == Changelog ==
+
+= 2.0.0 =
+* 2016-05-06
+ * New - Add/Edit rows and row styling live from front end!
+ * New - Edit content blocks, resize them and adjust styling and properties live from front end!
+ * New - Create the entire page live from front end!
+ * New - New filter `pootlepb_live_page_template` filters new live page template
+ * New - New filter `pootlepb_le_content_block_tabs` filters live editing content block sections
+ * New - New filter `pootlepb_le_row_block_tabs` filters live editing row styling sections
+ * New - Some content even after plugin is removed
+ * New - Includes pootle button plugin to add lovely button with WYSIWYG in editor
+ * New - Add background images to content
+ * New - Now uses freemius for easy support
+ * Tweak - License activation message changed
+ * Tweak - License activation message can now be dismissed
+ * Tweak - `Empty row height` now uses min-height and can be used even on non empty rows
+ * Tweak - `Empty row height` option renamed to `Minimum Row Height`
+ * Tweak - Add New option removed from Page Builder in admin menu
+ * Fix - Content not searchable by many users
 
 = 1.1.1 =
 * 2016-02-19

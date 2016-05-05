@@ -5,6 +5,7 @@
  * @property string $url Plugin root dir url
  * @property string $path Plugin root dir path
  * @property string $version Plugin version
+ * @since 2.0.0
  */
 class Pootle_Page_Builder_Live_Editor_Admin{
 
@@ -18,7 +19,7 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 	 * Main Pootle Page Builder Live Editor Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
 	 * @return Pootle_Page_Builder_Live_Editor instance
-	 * @since 	1.0.0
+	 * @since 2.0.0
 	 */
 	public static function instance() {
 		if ( null == self::$_instance ) {
@@ -30,7 +31,7 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 	/**
 	 * Constructor function.
 	 * @access  private
-	 * @since 	1.0.0
+	 * @since 2.0.0
 	 */
 	private function __construct() {
 		$this->token   =   Pootle_Page_Builder_Live_Editor::$token;
@@ -42,7 +43,7 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 	/**
 	 * Constructor function.
 	 * @access  private
-	 * @since 	1.0.0
+	 * @since 2.0.0
 	 */
 	public function enqueue() {
 		global $post;
@@ -155,6 +156,9 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 	public function new_live_post( $post_type = 'page' ) {
 		$nonce = filter_input( INPUT_GET, 'ppbLiveEditor' );
 		if ( wp_verify_nonce( $nonce, 'ppb-new-live-post' ) ) {
+
+			$requested_post_type = filter_input( INPUT_GET, 'post' );
+			$post_type = $requested_post_type ? $requested_post_type : $post_type;
 
 			$id = wp_insert_post( array(
 				'post_title'    => 'Untitled',

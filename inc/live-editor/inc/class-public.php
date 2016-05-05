@@ -2,34 +2,35 @@
 
 /**
  * Pootle Page Builder Live Editor public class
+ * @since 2.0.0
  */
-class Pootle_Page_Builder_Live_Editor_Public{
+class Pootle_Page_Builder_Live_Editor_Public {
 
 	/**
-	 * @var 	Pootle_Page_Builder_Live_Editor_Public Instance
+	 * @var    Pootle_Page_Builder_Live_Editor_Public Instance
 	 * @access  private
-	 * @since 	1.0.0
+	 * @since 2.0.0
 	 */
 	private static $_instance = null;
 
 	/**
-	 * @var 	mixed Edit title
+	 * @var    mixed Edit title
 	 * @access  private
-	 * @since 	1.0.0
+	 * @since 2.0.0
 	 */
 	private $edit_title = false;
 
 	/**
-	 * @var 	mixed Edit title
-	 * @access  private
-	 * @since 	1.0.0
+	 * @var    mixed Edit title
+	 * @access private
+	 * @since 2.0.0
 	 */
 	private $post_id = false;
 
 	/**
-	 * @var 	array Addons to display
+	 * @var    array Addons to display
 	 * @access  private
-	 * @since 	1.0.0
+	 * @since 2.0.0
 	 */
 	private $addons = array();
 
@@ -43,6 +44,7 @@ class Pootle_Page_Builder_Live_Editor_Public{
 		if ( null == self::$_instance ) {
 			self::$_instance = new self();
 		}
+
 		return self::$_instance;
 	} // End instance()
 
@@ -52,10 +54,10 @@ class Pootle_Page_Builder_Live_Editor_Public{
 	 * @since   1.0.0
 	 */
 	private function __construct() {
-		$this->token   =   Pootle_Page_Builder_Live_Editor::$token;
-		$this->url     =   Pootle_Page_Builder_Live_Editor::$url;
-		$this->path    =   Pootle_Page_Builder_Live_Editor::$path;
-		$this->version =   Pootle_Page_Builder_Live_Editor::$version;
+		$this->token   = Pootle_Page_Builder_Live_Editor::$token;
+		$this->url     = Pootle_Page_Builder_Live_Editor::$url;
+		$this->path    = Pootle_Page_Builder_Live_Editor::$path;
+		$this->version = Pootle_Page_Builder_Live_Editor::$version;
 	} // End __construct()
 
 	public function post_status() {
@@ -74,7 +76,7 @@ class Pootle_Page_Builder_Live_Editor_Public{
 		$nonce = $nonce ? $nonce : filter_input( INPUT_POST, 'nonce' );
 
 		//Post ID
-		$id = $post ? $post->ID : filter_input( INPUT_POST, 'post' );
+		$id            = $post ? $post->ID : filter_input( INPUT_POST, 'post' );
 		$this->post_id = $id;
 
 		if ( wp_verify_nonce( $nonce, 'ppb-live-' . $id ) ) {
@@ -87,7 +89,10 @@ class Pootle_Page_Builder_Live_Editor_Public{
 
 			$this->addons = apply_filters( 'pootlepb_le_content_block_tabs', array() );
 
-			remove_filter( 'pootlepb_content_block', array( $GLOBALS['Pootle_Page_Builder_Content_Block'], 'auto_embed' ), 8 );
+			remove_filter( 'pootlepb_content_block', array(
+				$GLOBALS['Pootle_Page_Builder_Content_Block'],
+				'auto_embed'
+			), 8 );
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 99 );
 			add_action( 'pootlepb_before_pb', array( $this, 'before_pb' ), 7, 4 );
 			add_action( 'pootlepb_render_content_block', array( $this, 'edit_content_block' ), 7, 4 );
@@ -106,29 +111,36 @@ class Pootle_Page_Builder_Live_Editor_Public{
 			add_filter( 'pootlepb_rag_adjust_elements', '__return_empty_array', 999 );
 			add_filter( 'body_class', array( $this, 'body_class' ) );
 			add_filter( 'post_class', array( $this, 'post_type_class' ), 10, 3 );
+
 			return true;
-		}else {
+		} else {
 			return null;
 		}
 	}
 
 	/**
 	 * Add pootle-live-editor-active class to body
+	 *
 	 * @param array $classes
+	 *
 	 * @return array Content
 	 */
 	public function body_class( $classes ) {
 		$classes[] = 'pootle-live-editor-active';
+
 		return $classes;
 	}
 
 	/**
 	 * Add post type calss to post
+	 *
 	 * @param array $classes
+	 *
 	 * @return string Content
 	 */
 	public function post_type_class( $classes, $unused, $post ) {
 		$classes[] = get_post_type( $post );
+
 		return $classes;
 	}
 
@@ -142,7 +154,8 @@ class Pootle_Page_Builder_Live_Editor_Public{
 		if ( ! empty( $pootlepb_inline_css ) ) {
 			?>
 			<!----------Pootle Page Builder Inline Styles---------->
-			<style id="pootle-live-editor-styles" type="text/css" media="all"><?php echo $pootlepb_inline_css ?></style><?php
+			<style id="pootle-live-editor-styles" type="text/css"
+			       media="all"><?php echo $pootlepb_inline_css ?></style><?php
 		}
 
 		$pootlepb_inline_css = '';
@@ -165,26 +178,36 @@ class Pootle_Page_Builder_Live_Editor_Public{
 
 	/**
 	 * Wraps the content in .pootle-live-editor-realtime and convert short codes to strings
+	 *
 	 * @param string $content
+	 *
 	 * @return string Content
 	 */
 	public function content( $content ) {
 		$content = str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), $content );
+
 		return "<div class='pootle-live-editor-realtime'>$content</div>";
 	}
 
 	protected function enqueue_scripts() {
 		global $pootlepb_color_deps;
-		$url = $this->url . '/assets';
-		$jQui_deps = array( 'jquery', 'jquery-ui-slider', 'jquery-ui-dialog', 'jquery-ui-tabs', 'jquery-ui-sortable', 'jquery-ui-resizable' );
-		$ppb_js = POOTLEPB_URL . 'js';
-		$ver = POOTLEPB_VERSION;
+		$url       = $this->url . '/assets';
+		$jQui_deps = array(
+			'jquery',
+			'jquery-ui-slider',
+			'jquery-ui-dialog',
+			'jquery-ui-tabs',
+			'jquery-ui-sortable',
+			'jquery-ui-resizable'
+		);
+		$ppb_js    = POOTLEPB_URL . 'js';
+		$ver       = POOTLEPB_VERSION;
 
 		wp_enqueue_style( 'ppb-chosen-style', "$ppb_js/chosen/chosen.css" );
 		wp_enqueue_script( 'pootlepb-chosen', "$ppb_js/chosen/chosen.jquery.min.js", array( 'jquery' ), POOTLEPB_VERSION );
 
 		wp_enqueue_script( 'iris', admin_url( 'js/iris.min.js' ), $pootlepb_color_deps );
-		wp_enqueue_script( 'wp-color-picker',  admin_url( 'js/color-picker.min.js' ),  array( 'iris' ) );
+		wp_enqueue_script( 'wp-color-picker', admin_url( 'js/color-picker.min.js' ), array( 'iris' ) );
 
 		wp_enqueue_script( 'ppb-fields', "$url/ppb-deps.js", array( 'wp-color-picker', ), $ver );
 		wp_enqueue_script( 'ppb-ui', "$ppb_js/ppb-ui.js", $jQui_deps, $ver );
@@ -194,7 +217,11 @@ class Pootle_Page_Builder_Live_Editor_Public{
 
 		wp_enqueue_script( 'ppble-sd', "$url/showdown.min.js", array( 'ppb-ui', 'ppb-fields', ), $ver );
 
-		wp_enqueue_script( 'pootle-live-editor', "$url/front-end.js", array( 'ppb-ui', 'ppble-sd', 'ppb-fields', ), $ver );
+		wp_enqueue_script( 'pootle-live-editor', "$url/front-end.js", array(
+			'ppb-ui',
+			'ppble-sd',
+			'ppb-fields',
+		), $ver );
 
 		wp_enqueue_script( "pp-pb-iris", "$ppb_js/iris.js", array( 'iris' ) );
 
@@ -225,10 +252,10 @@ class Pootle_Page_Builder_Live_Editor_Public{
 
 		//Ajax
 		$ppbAjax = array(
-			'url'		=> admin_url( 'admin-ajax.php' ),
-			'action'	=> 'pootlepb_live_editor',
-			'post'		=> $post->ID,
-			'nonce'		=> $_GET['ppbLiveEditor'],
+			'url'    => admin_url( 'admin-ajax.php' ),
+			'action' => 'pootlepb_live_editor',
+			'post'   => $post->ID,
+			'nonce'  => $_GET['ppbLiveEditor'],
 		);
 		if ( $this->edit_title ) {
 			$ppbAjax['title'] = $this->edit_title;
@@ -237,10 +264,10 @@ class Pootle_Page_Builder_Live_Editor_Public{
 
 		//Colorpicker
 		$colorpicker_l10n = array(
-			'clear'			=> __( 'Clear' ),
-			'defaultString'	=> __( 'Default' ),
-			'pick'			=> __( 'Select Color' ),
-			'current'		=> __( 'Current Color' ),
+			'clear'         => __( 'Clear' ),
+			'defaultString' => __( 'Default' ),
+			'pick'          => __( 'Select Color' ),
+			'current'       => __( 'Current Color' ),
 		);
 		wp_localize_script( 'pp-pb-color-picker', 'wpColorPicker_i18n', $colorpicker_l10n );
 	}
@@ -278,7 +305,7 @@ class Pootle_Page_Builder_Live_Editor_Public{
 				foreach ( $_POST['data']['widgets'] as $i => $wid ) {
 					if ( ! empty( $wid['info']['style'] ) ) {
 						$_POST['data']['widgets'][ $i ]['info']['style'] = stripslashes( $wid['info']['style'] );
-						$_POST['data']['widgets'][ $i ]['text'] = stripslashes( $wid['text'] );
+						$_POST['data']['widgets'][ $i ]['text']          = stripslashes( $wid['text'] );
 					}
 				}
 				echo $GLOBALS['Pootle_Page_Builder_Render_Layout']->panels_render( $id, $_POST['data'] );
@@ -297,13 +324,16 @@ class Pootle_Page_Builder_Live_Editor_Public{
 
 	/**
 	 * Adds front end grid edit ui
+	 *
 	 * @param array $data
-	 * @param int   $gi
+	 * @param int $gi
+	 *
 	 * @since 1.1.0
 	 */
 	public function edit_row( $data, $gi = 0 ) {
 		?>
-		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-row" data-index="<?php echo $gi; ?>" data-i_bkp="<?php echo $gi; ?>">
+		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-row" data-index="<?php echo $gi; ?>"
+		     data-i_bkp="<?php echo $gi; ?>">
 			<span href="javascript:void(0)" title="Row Sorting" class="dashicons-before dashicons-editor-code">
 				<span class="screen-reader-text">Sort row</span>
 			</span>
@@ -327,8 +357,11 @@ class Pootle_Page_Builder_Live_Editor_Public{
 	 */
 	public function edit_content_block( $content_block ) {
 		?>
-		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-block" data-index="<?php echo $content_block['info']['id']; ?>" data-i_bkp="<?php echo $content_block['info']['id']; ?>">
-			<span href="javascript:void(0)" title="Drag and Drop content block" class="dashicons-before dashicons-screenoptions">
+		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-block"
+		     data-index="<?php echo $content_block['info']['id']; ?>"
+		     data-i_bkp="<?php echo $content_block['info']['id']; ?>">
+			<span href="javascript:void(0)" title="Drag and Drop content block"
+			      class="dashicons-before dashicons-screenoptions">
 				<span class="screen-reader-text">Sort row</span>
 			</span>
 			<span href="javascript:void(0)" title="Edit Content" class="dashicons-before dashicons-edit">
@@ -340,7 +373,8 @@ class Pootle_Page_Builder_Live_Editor_Public{
 			<?php
 			if ( ! empty( $this->addons ) ) {
 				?>
-				<span href="javascript:void(0)" title="Addons" class="dashicons-before dashicons-admin-plugins pootle-live-editor-addons">
+				<span href="javascript:void(0)" title="Addons"
+				      class="dashicons-before dashicons-admin-plugins pootle-live-editor-addons">
 					<span class="screen-reader-text">Add ons</span>
 					<span class="pootle-live-editor-addons-list">
 					<?php
@@ -368,7 +402,8 @@ class Pootle_Page_Builder_Live_Editor_Public{
 	 * Edit content block icons
 	 */
 	public function cell_attr( $attr, $ci, $gi ) {
-		$attr[ 'data-index' ] = $ci;
+		$attr['data-index'] = $ci;
+
 		return $attr;
 	}
 
@@ -395,7 +430,7 @@ class Pootle_Page_Builder_Live_Editor_Public{
 				<span class="screen-reader-text">Add Content</span>
 			</span>
 		</div>
-		*/?>
+		*/ ?>
 		<div class="pootle-live-editor resize-cells"></div>
 		<?php
 	}
@@ -424,8 +459,15 @@ class Pootle_Page_Builder_Live_Editor_Public{
 		wp_register_style( 'qtip', plugins_url( 'assets/css/qtip.css', SU_PLUGIN_FILE ), false, '2.1.1', 'all' );
 		wp_register_script( 'qtip', plugins_url( 'assets/js/qtip.js', SU_PLUGIN_FILE ), array( 'jquery' ), '2.1.1', true );
 		// Generator
-		wp_enqueue_style( 'su-generator', plugins_url( 'assets/css/generator.css', SU_PLUGIN_FILE ), array( 'wp-color-picker', 'magnific-popup' ), SU_PLUGIN_VERSION, 'all' );
-		wp_enqueue_script( 'su-generator', plugins_url( 'assets/js/generator.js', SU_PLUGIN_FILE ), array( 'wp-color-picker', 'magnific-popup', 'qtip' ), SU_PLUGIN_VERSION, true );
+		wp_enqueue_style( 'su-generator', plugins_url( 'assets/css/generator.css', SU_PLUGIN_FILE ), array(
+			'wp-color-picker',
+			'magnific-popup'
+		), SU_PLUGIN_VERSION, 'all' );
+		wp_enqueue_script( 'su-generator', plugins_url( 'assets/js/generator.js', SU_PLUGIN_FILE ), array(
+			'wp-color-picker',
+			'magnific-popup',
+			'qtip'
+		), SU_PLUGIN_VERSION, true );
 		wp_localize_script( 'su-generator', 'su_generator', array(
 			'upload_title'         => __( 'Choose file', 'shortcodes-ultimate' ),
 			'upload_insert'        => __( 'Insert', 'shortcodes-ultimate' ),
