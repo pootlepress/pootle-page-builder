@@ -116,7 +116,6 @@ class Pootle_Page_Builder_Pro{
 
 			//Mark this add on as active
 			add_filter( 'pootlepb_installed_add_ons', array( $this, 'add_on_active' ) );
-
 		} else {
 
 			//Mark this add on as active
@@ -152,11 +151,13 @@ class Pootle_Page_Builder_Pro{
 		$this->admin = Pootle_Page_Builder_Pro_Admin::instance();
 
 		//Adding front end JS and CSS in /assets folder
-		add_action( 'admin_enqueue_scripts',	array( $this->admin, 'enqueue' ) );
+		add_action( 'admin_enqueue_scripts', array( $this->admin, 'enqueue' ) );
 		//Adding front end JS and CSS in /assets folder
-		add_action( 'admin_init',				array( $this->admin, 'init_settings' ) );
+		add_action( 'admin_init', array( $this->admin, 'init_settings' ) );
 		//Admin settings tab
-		add_filter( 'admin_menu',				array( $this->admin, 'admin_menu' ), 25 );
+		add_filter( 'admin_menu', array( $this->admin, 'admin_menu' ), 25 );
+		//Make live templates work
+		add_filter( 'pootlepb_live_page_template', array( $this->admin, 'filter_template' ) );
 	}
 
 	/**

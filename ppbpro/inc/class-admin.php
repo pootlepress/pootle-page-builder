@@ -18,7 +18,7 @@ class Pootle_Page_Builder_Pro_Admin{
 	/**
 	 * Main Pootle Page Builder Pro Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
-	 * @return Pootle_Page_Builder_Pro instance
+	 * @return Pootle_Page_Builder_Pro_Admin instance
 	 * @since 	1.0.0
 	 */
 	public static function instance() {
@@ -56,6 +56,20 @@ class Pootle_Page_Builder_Pro_Admin{
 			$this,
 			'menu_page',
 		) );
+	}
+
+	/**
+	 * Modifies templateß
+	 * @param array $otpl Original template data
+	 * @return array Template data
+	 */
+	public function filter_template( $otpl ) {
+		$tpl = ppbpro_get_template( filter_input( INPUT_GET, 'tpl' ) );
+		if ( $tpl ) {
+			return $tpl;
+		} else {
+			return $otpl;
+		}
 	}
 
 	/**

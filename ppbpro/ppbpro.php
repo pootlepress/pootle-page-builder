@@ -41,3 +41,4 @@ function Pootle_Page_Builder_Pro_api_init() {
 		Pootle_Page_Builder_Pro::$token
 	);
 }
+

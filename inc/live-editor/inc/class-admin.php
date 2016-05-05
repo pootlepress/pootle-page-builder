@@ -162,11 +162,10 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 				'post_type'  => $post_type,
 			) );
 
-			if ( $id ) {
-				global $ppbpro_tpl;
-//				$ppble_quotes = $ppble_new_live_page = array();
+			if ( is_numeric( $id ) ) {
+				global $ppble_new_live_page;
+
 				require 'vars.php';
-				$tpl = ppbpro_get_template( filter_input( INPUT_GET, 'tpl' ) );
 
 				$user = '';
 				$current_user = wp_get_current_user();
@@ -174,14 +173,14 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 					$user = ' ' . ucwords( $current_user->user_login );
 				}
 
-				if ( $tpl ) {
-					$ppb_data = $tpl;
-				} else {
-					$ppble_new_live_page['widgets'][0]['text'] = str_replace( '<!--USER-->', $user, $ppble_new_live_page['widgets'][0]['text'] );
-					$ppb_data = $ppble_new_live_page;
-				}
+				$ppb_data = apply_filters( 'pootlepb_live_page_template', $ppble_new_live_page );
 
-				//die( print_awesome_r( $ppb_data ) );
+				foreach ( $ppb_data['widgets'] as $i => $wid ) {
+					if ( ! empty( $wid['info']['style'] ) ) {
+						$ppb_data['widgets'][ $i ]['info']['style'] = stripslashes( $wid['info']['style'] );
+					}
+					$ppb_data['widgets'][ $i ]['text'] = html_entity_decode( stripslashes( str_replace( '<!--USER-->', $user, str_replace( '&nbsp;', '&amp;nbsp;', $wid['text'] ) ) ) );
+				}
 
 				update_post_meta( $id, 'panels_data', $ppb_data );
 				$nonce_url = wp_nonce_url( get_the_permalink( $id ), 'ppb-live-' . $id, 'ppbLiveEditor' );
