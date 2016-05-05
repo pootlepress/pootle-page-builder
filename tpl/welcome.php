@@ -29,8 +29,26 @@
 	<p>Page Builder is easy to use but you can check out the video below to get started.</p>
 
 	<div class="ppb-video-container">
-		<iframe src="https://player.vimeo.com/video/131757773" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="https://vimeo.com/131757773">Pootle Page Builder Sneak Peek 2</a> from <a href="https://vimeo.com/user8529687">pootlepress</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+		<iframe src="https://player.vimeo.com/video/164802830" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><p><a href="https://vimeo.com/164802830">Pootle pagebuilder - the basics</a> from <a href="https://vimeo.com/user8529687">pootlepress</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 	</div>
+
+	<h4>pootle page builder pro</h4>
+	<p>Upgrade to Pootle pagebuilder pro and get all this extra functionality</p>
+	<p>Creating a beautiful blog or news page</p>
+	<div class="ppb-video-container">
+		<iframe src="https://player.vimeo.com/video/163400847" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><p><a href="https://vimeo.com/164802830">Pootle pagebuilder - the basics</a> from <a href="https://vimeo.com/user8529687">pootlepress</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+	</div>
+
+	<p>Create stunning WooCommerce pages</p>
+	<div class="ppb-video-container">
+		<iframe src="https://player.vimeo.com/video/163403782" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><p><a href="https://vimeo.com/164802830">Pootle pagebuilder - the basics</a> from <a href="https://vimeo.com/user8529687">pootlepress</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+	</div>
+
+	<p>Works with your favourite plugins</p>
+	<div class="ppb-video-container">
+		<iframe src="https://player.vimeo.com/video/163405802" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><p><a href="https://vimeo.com/164802830">Pootle pagebuilder - the basics</a> from <a href="https://vimeo.com/user8529687">pootlepress</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+	</div>
+
 
 	<div class="changelog">
 		<div class="feature-section col three-col">

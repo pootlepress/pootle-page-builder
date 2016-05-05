@@ -1,4 +1,4 @@
-=== pootle page builder ===
+=== Pootle Pagebuilder ===
 
 Contributors: pootlepress, nickburne, shramee
 Plugin Name: pootle page builder
@@ -15,48 +15,68 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
-= What is pootle page builder? =
+= Pootle Pagebuilder pro is a front-end, drag and drop page builder that makes it easy to create beautiful WordPress pages and posts. =
+If you’ve ever been frustrated with WordPress then you’re going to love how Pootle Pagebuilder gives you complete control over your page layouts.
 
-pootle page builder helps you build compelling WordPress pages easily. No more boring, linear, article pages that are as limited as your posts. 
+= What is Pootle Pagebuilder? =
 
-= What can I do with pootle page builder? =
+Pootle Pagebuilder is a front-end, drag and drop page builder that is the most creative, fun and intuitive way to build stunning looking pages and posts with WordPress.
 
-With pootle page builder you can:
+Anyone can now create a beautiful WordPress website in minutes and no technical knowledge is needed (we promise).
 
- * Add rows and columns to create the page you want
- * Customize the styles of cells (blocks)
- * Add full width rows, to create long sectional pages
- * Add background images to rows with effects such as parallax
- * Add autoplay background videos to rows
- * Do CSS customizations per cell/block, column or row (for advanced users)
+= Can I see Pootle Pagebuilder in action? =
 
-= Is there anything else you can tell me about pootle page builder? =
-
-We have made sure pootle page builder:
-
- * Feels as much like WordPress as possible making it easy to use for site owners.
- * Code is well written & fully optimized for performance.
- 
-The core version of pootle page builder has amazing features such as parallax and video backgrounds for row, but we will also be releasing some add-ons soon such as:
-
- * Portfolios - create amazing portfolio pages with stunning hover animations
- * WooCommerce - integrates page builder deeply into WooCommerce product pages, WooCommerce tab manager and more.
- * Photography - will give you power to add stunning fitlers and effects to your images.
-
-We would love to hear any more add-ons you think would be useful.
-
-= Can I see pootle page builder in action? =
- 
  Yes! Watch this video.
-[vimeo http://vimeo.com/131757773]
+[vimeo https://vimeo.com/163387430]
+
+= What can I do with Pootle Pagebuilder? =
+
+With Pootle Pagebuilder you can:
+
+* Build beautiful pages in minutes
+* Design your pages from the front-end with a powerful drag and drop live designer
+* Add full width rows, to create long sectional pages
+* Add flexible rows and columns to create the page you want
+* Customize the styles of content areas
+* Add background images, colours and videos to rows
+* Add parallax background images to rows
+* Add CSS customizations (for advanced users)
+
+= Is there anything else you can tell me about Pootle Pagebuilder? =
+
+We have made sure Pootle Pagebuilder:
+* Works on any theme.
+* Works with your favourite plugins e.g Ninja forms.
+* Is mobile friendly. The pages you create with Pootle Pagebuilder  will work seamlessly on desktop and mobile.
+* Feels as much like WordPress as possible making it easy to use for site owners and non technical content editors.
+* Works via the front-end and back-end.
+* Lean and fast - the code is well written and fully optimized and tested for performance and speed.
+* The free version of Pootle Pagebuilder has amazing features such as parallax and video backgrounds.
+
+= We’re super-excited to now also offer a Pro version that adds the following additional, powerful functionality; =
+
+= Pootle Pagebuilder Pro features =
+
+* Blog Customizer - design beautiful blog pages by bringing posts into your pages
+* WooCommerce Customizer - create highly customized WooCommerce pages
+* Page Customizer - customize individual pages - e.g hide header for squeeze and landing pages
+* One pager Customizer - create one pager websites in minutes
+* Photo Customizer - create stunning galleries and slideshows
+* Premium support
+
+If you would like to see the Pootle Pagebuilder Pro version in action click here to see some short video walkthroughs http://www.pootlepress.com/pootle-pagebuilder-pro/
 
 == Usage ==
 
 Install and activate the plugin. In your WordPress dashboard simply add a new page to start using page builder.
+ Yes! Watch this video.
+[vimeo https://vimeo.com/163387430]
+
+
 
 == Installation ==
 
-Installing "pootle page builder" can be done either by searching for "pootle page builder" via the "Plugins > Add New" screen in your WordPress dashboard, or by using the following steps:
+Installing "Pootle Pagebuilder" can be done either by searching for "Pootle Pagebuilder" via the "Plugins > Add New" screen in your WordPress dashboard, or by using the following steps:
 
 1. Download the plugin via WordPress.org.
 2. Upload the ZIP file through the "Plugins > Add New > Upload" screen in your WordPress dashboard.
@@ -99,12 +119,12 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * New - New filter `pootlepb_rag_adjust_elements` to add or remove elements to adjust text in.
  * New - Action hook `pootlepb_before_row` added Grid Index as sencond argument
  * New - Action hook `pootlepb_after_row` added Grid Index as sencond argument
- * New - New pootle page builder action hook `pootlepb_before_content_blocks` runs before content blocks are rendered in cell
- * New - New pootle page builder action hook `pootlepb_after_content_blocks` runs after content blocks are rendered in cell
- * New - New pootle page builder function `pootlepb_array_cmp` sorts array by priority
+ * New - New Pootle Pagebuilder action hook `pootlepb_before_content_blocks` runs before content blocks are rendered in cell
+ * New - New Pootle Pagebuilder action hook `pootlepb_after_content_blocks` runs after content blocks are rendered in cell
+ * New - New Pootle Pagebuilder function `pootlepb_array_cmp` sorts array by priority
  * New - Option to remove Content block padding on mobile
  * New - Option to add row top margin
- * Tweak - Added class `ppb-row` for rows in pootle page builder
+ * Tweak - Added class `ppb-row` for rows in Pootle Pagebuilder
  * Tweak - Yoast SEO content loading by js
  * Fix - Blank add-on page
 

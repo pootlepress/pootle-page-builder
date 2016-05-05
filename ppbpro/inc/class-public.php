@@ -47,7 +47,7 @@ class Pootle_Page_Builder_Pro_Public{
 	 * @since 1.0.0
 	 */
 	public function init() {
-		$active_addons = get_option( 'ppbpro_active_addons', array() );
+		$active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', 'page-customizer', 'photography', ) );
 		foreach ( $active_addons as $addon => $active ) {
 			$file = "$this->path/inc/ext/$addon/init.php";
 			if ( file_exists( $file ) && $active ) {

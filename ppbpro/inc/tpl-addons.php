@@ -8,7 +8,7 @@
 
 global $ppbpro_addons_data;
 
-$active_addons = get_option( 'ppbpro_active_addons', array() );
+$active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', 'page-customizer', 'photography', ) );
 ?>
 <div class="wrap">
 	<h2>Pootle Page Builder Pro</h2>

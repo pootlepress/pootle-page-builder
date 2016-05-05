@@ -97,18 +97,19 @@ function ppb_fs() {
 		require_once POOTLEPB_DIR . '/wp-sdk/start.php';
 
 		$ppb_fs = fs_dynamic_init( array(
-			'id'                => '269',
-			'slug'              => 'pootle-page-builder',
-			'public_key'        => 'pk_cb4e7b7932169240ac86c3fb01dd5',
-			'is_premium'        => true,
-			'has_paid_plans'    => true,
-			'menu'              => array(
+			'id'             => '269',
+			'slug'           => 'pootle-page-builder',
+			'public_key'     => 'pk_cb4e7b7932169240ac86c3fb01dd5',
+			'is_premium'     => true,
+			'has_paid_plans' => true,
+			'hide_trial'     => true,
+			'menu'           => array(
 				'slug'       => 'page_builder',
 				'first-path' => 'admin.php?page=page_builder',
 			),
 			// Set the SDK to work in a sandbox mode (for development & testing).
 			// IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
-			'secret_key'  => 'sk_Ps6;5x%cnDM:eoqhd2~<*vvr[}OoZ',
+			'secret_key'     => 'sk_Ps6;5x%cnDM:eoqhd2~<*vvr[}OoZ',
 		) );
 	}
 
