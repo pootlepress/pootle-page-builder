@@ -6,8 +6,8 @@
  */
 
 //Don't proceed any further if it ain't called by uninstall
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
-	exit;
+if ( ! defined( 'POOTLEPB_UNINSTALL' ) ) {
+	die;
 }
 
 //If hard uninstall is set true by user

@@ -299,6 +299,7 @@ final class Pootle_Page_Builder {
 	 * Executed by freemius on uninstall
 	 */
 	public function uninstall() {
+		define( 'POOTLEPB_UNINSTALL', true );
 		include 'run-on-uninstall.php';
 	}
 } //class Pootle_Page_Builder
