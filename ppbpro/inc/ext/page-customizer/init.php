@@ -323,9 +323,9 @@ final class Pootle_Page_Customizer {
 		}
 	}
 
-	public function custom_fields() {
+	public function custom_fields( $id ) {
 		global $post;
-
+		wp_localize_script( 'ppc-admin-script', 'ppc_metadata', get_post_meta( $id, $this->token, true ) );
 		$fields          = $this->fields;
 		$field_structure = array();
 		foreach ( $fields as $key => $field ) {

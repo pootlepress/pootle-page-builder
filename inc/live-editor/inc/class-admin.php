@@ -177,7 +177,11 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 					$user = ' ' . ucwords( $current_user->user_login );
 				}
 
-				$ppb_data = apply_filters( 'pootlepb_live_page_template', $ppble_new_live_page );
+				/**
+				 * Filters new live page template
+				 * @param int $id Post ID
+				 */
+				$ppb_data = apply_filters( 'pootlepb_live_page_template', $ppble_new_live_page, $id );
 
 				foreach ( $ppb_data['widgets'] as $i => $wid ) {
 					if ( ! empty( $wid['info']['style'] ) ) {

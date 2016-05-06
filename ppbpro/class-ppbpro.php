@@ -157,7 +157,7 @@ class Pootle_Page_Builder_Pro{
 		//Admin settings tab
 		add_filter( 'admin_menu', array( $this->admin, 'admin_menu' ), 25 );
 		//Make live templates work
-		add_filter( 'pootlepb_live_page_template', array( $this->admin, 'filter_template' ) );
+		add_filter( 'pootlepb_live_page_template', array( $this->admin, 'filter_template' ), 10, 2 );
 		//Adds Live post link
 		add_action( 'admin_bar_menu', array( $this->admin, 'add_item' ), 999 );
 	}

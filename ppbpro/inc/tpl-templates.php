@@ -17,6 +17,49 @@ $live_page_url = wp_nonce_url( $live_page_url, 'ppb-new-live-post', 'ppbLiveEdit
 		text-align: center;
 	}
 
+	.ppb-tpl-img {
+		position: relative;
+		width: 100%;
+		background: center top/cover;
+		padding-top: 100%;
+		margin: 0 0 25px
+	}
+
+	.ppb-tpl-img .dashicons, .ppb-tpl-img:before {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	.ppb-tpl-img:before {
+		background: rgba(0,0,0,0.7);
+		content: '';
+		display:none;
+	}
+
+	.ppb-tpl-img .dashicons {
+		margin: auto;
+		display: none;
+		height: 160px;
+		width: 80%;
+		padding: 0 10%;
+		color: #fff;
+	}
+
+	.ppb-tpl-img .dashicons > div {
+		font: 25px sans-serif;
+	}
+
+	.ppb-tpl-img .dashicons:before  {
+		font-size: 70px;
+	}
+
+	.ppb-template:hover .ppb-tpl-img:before, .ppb-template:hover div {
+		display: block;
+	}
+
 	.ppb-template {
 		display: inline-block;
 		width: 45%;
@@ -28,14 +71,10 @@ $live_page_url = wp_nonce_url( $live_page_url, 'ppb-new-live-post', 'ppbLiveEdit
 		text-decoration: none;
 		color: #555;
 		text-align: center;
-
 	}
-	.ppb-template img {
-		display: block;
-		width: 100%;
-		height: auto;
-		float: right;
-		margin: 0 0 25px;
+
+	.ppb-template:hover {
+		color:#333;
 	}
 </style>
 <div class="wrap">
@@ -44,7 +83,7 @@ $live_page_url = wp_nonce_url( $live_page_url, 'ppb-new-live-post', 'ppbLiveEdit
 		<?php
 		foreach ( ppbpro_get_template() as $Tpl ) {
 			$tpl = strtolower( $Tpl );
-			echo "<a class='ppb-template' href='$live_page_url&tpl=$Tpl'><img src='$plg_url/$tpl.png'>$Tpl</a>";
+			echo "<a class='ppb-template' href='$live_page_url&tpl=$Tpl'><div class='ppb-tpl-img' style='background-image:url($plg_url/$tpl.png)'><div class='dashicons dashicons-plus'><div>Add Page with this template</div></div></div>$Tpl</a>";
 		}
 		?>
 	</div>

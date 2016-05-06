@@ -34,6 +34,11 @@ $ppbpro_addons_data = array(
 	//),
 );
 
+/**
+ * Returns template data if $tpl is set else returns the template keys
+ * @param string $tpl Template key
+ * @return array|bool Template data
+ */
 function ppbpro_get_template( $tpl = 0 ) {
 	$assets_url = Pootle_Page_Builder_Pro::$url . '/assets/tpl';
 	$tpls = array(
@@ -49,4 +54,21 @@ function ppbpro_get_template( $tpl = 0 ) {
 	} else {
 		return false;
 	}
+}
+
+/**
+ * Returns template page customizer data
+ *
+ * @param string $tpl Template key
+ * @return array|bool
+ */
+function ppbpro_get_tpl_pc_data( $tpl ) {
+	$assets_url = Pootle_Page_Builder_Pro::$url . '/assets/tpl';
+	$data = array(
+		'Squeezy'	=> '{"hide-header":"1","hide-footer":"1"}',
+	);
+	if ( ! empty( $data[ $tpl ] ) ) {
+		return json_decode( $data[ $tpl ], 'associative_array' );
+	}
+	return false;
 }

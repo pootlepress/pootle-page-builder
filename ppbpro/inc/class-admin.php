@@ -63,9 +63,14 @@ class Pootle_Page_Builder_Pro_Admin{
 	 * @param array $otpl Original template data
 	 * @return array Template data
 	 */
-	public function filter_template( $otpl ) {
-		$tpl = ppbpro_get_template( filter_input( INPUT_GET, 'tpl' ) );
+	public function filter_template( $otpl, $id ) {
+		$tpl_key = filter_input( INPUT_GET, 'tpl' );
+		$tpl = ppbpro_get_template( $tpl_key );
 		if ( $tpl ) {
+			$pc = ppbpro_get_tpl_pc_data( $tpl_key );
+			if ( $pc ) {
+				update_post_meta( $id, 'pootle-page-customizer', $pc );
+			}
 			return $tpl;
 		} else {
 			return $otpl;
