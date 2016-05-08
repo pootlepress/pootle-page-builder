@@ -64,7 +64,8 @@ final class Pootle_Page_Builder {
 		$this->hooks();
 
 		// Init Freemius and add uninstall hook.
-		ppb_fs()->add_action('after_uninstall', array( $this, 'uninstall' ));
+		ppb_fs()->add_action( 'after_uninstall', array( $this, 'uninstall' ) );
+		ppb_fs()->add_filter( 'show_trial', '__return_false' );
 	}
 
 	/**
