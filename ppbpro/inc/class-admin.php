@@ -66,6 +66,7 @@ class Pootle_Page_Builder_Pro_Admin{
 	public function filter_template( $otpl, $id ) {
 		$tpl_key = filter_input( INPUT_GET, 'tpl' );
 		$tpl = ppbpro_get_template( $tpl_key );
+		
 		if ( $tpl ) {
 			$pc = ppbpro_get_tpl_pc_data( $tpl_key );
 			if ( $pc ) {

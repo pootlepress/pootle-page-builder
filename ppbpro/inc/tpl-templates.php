@@ -8,7 +8,8 @@
 
 global $ppbpro_tpl;
 
-$plg_url = Pootle_Page_Builder_Pro::$url . 'assets/tpl/thumbs';
+$thmb_url = Pootle_Page_Builder_Pro::$url . '/assets/tpl/thumbs';
+$thmb_pth = Pootle_Page_Builder_Pro::$path . '/assets/tpl/thumbs';
 $live_page_url = admin_url( 'admin-ajax.php?action=pootlepb_live_page' );
 $live_page_url = wp_nonce_url( $live_page_url, 'ppb-new-live-post', 'ppbLiveEditor' );
 ?>
@@ -83,7 +84,11 @@ $live_page_url = wp_nonce_url( $live_page_url, 'ppb-new-live-post', 'ppbLiveEdit
 		<?php
 		foreach ( ppbpro_get_template() as $Tpl ) {
 			$tpl = strtolower( $Tpl );
-			echo "<a class='ppb-template' href='$live_page_url&tpl=$Tpl'><div class='ppb-tpl-img' style='background-image:url($plg_url/$tpl.png)'><div class='dashicons dashicons-plus'><div>Add Page with this template</div></div></div>$Tpl</a>";
+			$img_url = "$thmb_url/$tpl.png";
+			if ( ! file_exists( "$thmb_pth/$tpl.png" ) ) {
+				$img_url = "http://pootlepress.github.io/pootle-page-builder/tpl-thumbs/$tpl.png";
+			}
+			echo "<a class='ppb-template' href='$live_page_url&tpl=$Tpl'><div class='ppb-tpl-img' style='background-image:url($img_url)'><div class='dashicons dashicons-plus'><div>Add Page with this template</div></div></div>$Tpl</a>";
 		}
 		?>
 	</div>
