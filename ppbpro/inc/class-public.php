@@ -16,6 +16,8 @@ class Pootle_Page_Builder_Pro_Public{
 	 */
 	private static $_instance = null;
 
+	private $css = '';
+
 	/**
 	 * Main Pootle Page Builder Pro Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
@@ -51,6 +53,17 @@ class Pootle_Page_Builder_Pro_Public{
 		$post_types[] = 'post';
 
 		return $post_types;
+	}
+
+	/**
+	 * Adds row CSS
+	 * @param array $info The widget info
+	 * @since 0.1.0
+	 */
+	public function row_css( $info ) {
+		if ( ! empty( $info['style']['ppbpro-row-css'] ) ) {
+			echo "<style>{$info['style']['ppbpro-row-css']}</style>";
+		}
 	}
 
 	/**

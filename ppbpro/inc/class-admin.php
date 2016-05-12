@@ -143,6 +143,24 @@ class Pootle_Page_Builder_Pro_Admin{
 	}
 
 	/**
+	 * Adds content block panel fields
+	 * @param array $fields Fields to output in content block panel
+	 * @return array Tabs
+	 * @filter pootlepb_content_block_fields
+	 * @since 	1.0.0
+	 */
+	function row_fields( $fields ) {
+		$fields[ 'ppbpro-row-css' ] = array(
+			'name' => 'CSS for Row Elements',
+			'placeholder' => 'Styles with selector here...',
+			'type' => 'textarea',
+			'priority' => 1,
+			'tab' => 'advanced',
+		);
+		return $fields;
+	}
+
+	/**
 	 * Enqueue admin scripts and styles
 	 * @global $pagenow
 	 * @action admin_notices

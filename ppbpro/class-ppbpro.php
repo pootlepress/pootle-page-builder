@@ -160,6 +160,8 @@ class Pootle_Page_Builder_Pro{
 		add_filter( 'pootlepb_live_page_template', array( $this->admin, 'filter_template' ), 10, 2 );
 		//Adds Live post link
 		add_action( 'admin_bar_menu', array( $this->admin, 'add_item' ), 999 );
+		//Adds style field in row
+		add_action( 'pootlepb_row_settings_fields', array( $this->admin, 'row_fields' ), 999 );
 	}
 
 	/**
@@ -174,6 +176,9 @@ class Pootle_Page_Builder_Pro{
 		$this->public->init();
 		//Add supported post types
 		add_filter( 'pootlepb_builder_post_types', array( $this->public, 'add_post_types' ), 16 );
+		//Add row CSS to row
+		add_action( 'pootlepb_before_row', array( $this->public, 'row_css' ), 25 );
+
 	} // End enqueue()
 
 	/**
