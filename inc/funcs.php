@@ -228,15 +228,8 @@ function pootlepb_wp_import_post_meta_map( $val ) {
  */
 function pootlepb_settings( $key = '' ) {
 
-	if ( has_action( 'after_setup_theme' ) ) {
-		// Only use static settings if we've initialized the theme
-		static $settings;
-	} else {
-		$settings = false;
-	}
-
 	if ( empty( $settings ) ) {
-		$display_settings = get_option( 'pootlepb_display', array() );
+		$set = get_option( 'pootlepb_display', array() );
 
 		$settings = get_theme_support( 'ppb-panels' );
 		if ( ! empty( $settings ) ) {
@@ -245,20 +238,15 @@ function pootlepb_settings( $key = '' ) {
 			$settings = array();
 		}
 
+		$post_types = apply_filters( 'pootlepb_builder_post_types', array( 'page' ) );
 
 		$settings = wp_parse_args( $settings, array(
-			'post-types'    => apply_filters( 'pootlepb_builder_post_types', array( 'page' ) ),
-			// Post types that can be edited using panels.
-			'responsive'    => ! isset( $display_settings['responsive'] ) ? true : $display_settings['responsive'] == '1',
-			// Should we use a responsive layout
-			'mobile-width'  => ! isset( $display_settings['mobile-width'] ) ? 780 : $display_settings['mobile-width'],
-			// What is considered a mobile width?
-			'margin-bottom' => ! isset( $display_settings['margin-bottom'] ) ? 0 : $display_settings['margin-bottom'],
-			// Bottom margin of a cell
-			'margin-sides'  => ! isset( $display_settings['margin-sides'] ) ? 10 : $display_settings['margin-sides'],
-			// Spacing between 2 cells
-			'inline-css'    => true,
-			// How to display CSS
+			'post-types'    => $post_types, // Supported post types
+			'responsive'    => ! isset( $set['responsive'] )    ? true : $set['responsive'] == '1', // RWD?
+			'mobile-width'  => ! isset( $set['mobile-width'] )  ? 780  : $set['mobile-width'],      // Width for RWD
+			'margin-bottom' => ! isset( $set['margin-bottom'] ) ? 0	   : $set['margin-bottom'],     // for cell
+			'margin-sides'  => ! isset( $set['margin-sides'] )  ? 10   : $set['margin-sides'],      // for cells
+			'inline-css'    => true,        // CSS in HTML? or seperate file
 		) );
 	}
 
@@ -408,3 +396,17 @@ function pootlepb_array_cmp( $a, $b ) {
 	return $a[ $pootlepb_array_cmp_ki ] > $b[ $pootlepb_array_cmp_ki ];
 }
 
+add_filter( 'the_content', function ( $content ) {
+	return str_replace( array( '&amp;#10004;', '&amp;#10006;' ), array( '&#10004;', '&#10006;' ), $content );
+}, 1, 99 );
+
+function pootlepb_rand( $length = 16 ) {
+	$characters       = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	$charactersLength = strlen( $characters );
+	$randomString     = '';
+	for ( $i = 0; $i < $length; $i ++ ) {
+		$randomString .= $characters[ rand( 0, $charactersLength - 1 ) ];
+	}
+
+	return $randomString;
+}

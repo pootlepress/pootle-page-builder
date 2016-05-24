@@ -67,8 +67,10 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 		content: "\f180";
 		top: 1px;
 	}
-	#wp-admin-bar-ppb-publish-parent > a:before,
-	#wp-admin-bar-ppb-publish a:before {
+	#wpadminbar li#wp-admin-bar-ppb-publish {
+		display: block;
+	}
+	#wp-admin-bar-ppb-publish > a:before {
 		content: "\f319";
 		top: 2px;
 	}
@@ -96,7 +98,7 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 		if ( wp_verify_nonce( $nonce, 'ppb-live-' . get_the_id() ) ) {
 			if ( 'draft' == Pootle_Page_Builder_Live_Editor_Public::instance()->post_status() ) {
 				$args = array(
-					'id'		=> 'ppb-publish-parent',
+					'id'		=> 'ppb-publish',
 					'title'		=> 'Save/Publish',
 					'href'		=> '#ppb-live-save-publish',
 					'meta'		=> array(
@@ -105,7 +107,7 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 				);
 				$admin_bar->add_menu( $args );
 
-				$args['parent'] = 'ppb-publish-parent';
+				$args['parent'] = 'ppb-publish';
 				$args['id'] = 'ppb-live-update-changes';
 				$args['href'] = '#ppb-live-update-changes';
 				$args['title'] = 'Save';

@@ -34,8 +34,9 @@ final class Pootle_Page_Builder_Front_Css_Js {
 	 * @since 0.1.0
 	 */
 	private function hooks() {
-		add_filter( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 0 );
-		add_filter( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 0 );
+		add_filter( 'pootlepb_rwd_mobile_width', array( $this, 'no_rwd_for_app' ), 0 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ), 0 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ), 0 );
 		add_action( 'wp_footer', array( $this, 'rag_adjust_script_load' ) );
 	}
 
@@ -108,7 +109,7 @@ final class Pootle_Page_Builder_Front_Css_Js {
 
 			$this->row_bottom_margin( $settings, $gi, $post_id, $panels_data );
 
-			$this->mobile_styles( $settings, $gi, $post_id, $cell_count );
+			$this->mobile_styles( $settings, $gi, $post_id );
 		}
 
 		$panel_grid_cell_css = 'display: inline-block !important; vertical-align: top !important;';
@@ -181,7 +182,7 @@ final class Pootle_Page_Builder_Front_Css_Js {
 	private function mobile_styles( $settings, $gi, $post_id ) {
 
 		$panels_margin_bottom = $settings['margin-bottom'];
-		$panels_mobile_width  = $settings['mobile-width'];
+		$panels_mobile_width  = apply_filters( 'pootlepb_rwd_mobile_width', $settings['mobile-width'] );
 
 		if ( $settings['responsive'] ) {
 			// Mobile Responsive
@@ -270,6 +271,18 @@ final class Pootle_Page_Builder_Front_Css_Js {
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( 'ppb-panels-front', POOTLEPB_URL . 'css/front.css', array(), POOTLEPB_VERSION );
+	}
+
+	/**
+	 * Reduces rwd resolution to 610 or less for app
+	 * @param int $res
+	 * @return int
+	 */
+	public function no_rwd_for_app( $res ) {
+		if ( isset( $_GET['ppb-ios'] ) || filter_input( INPUT_POST, 'action' ) == 'pootlepb_live_editor' ) {
+			return min( $res, 610 );
+		}
+		return $res;
 	}
 
 	/**

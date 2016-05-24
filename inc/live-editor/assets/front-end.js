@@ -78,6 +78,7 @@ jQuery( function ( $ ) {
 		$addRowDialog = $( '#pootlepb-add-row' ),
 		$setTitleDialog = $( '#pootlepb-set-title' ),
 		$ppb = $( '#pootle-page-builder' ),
+		$ios = $( '#ppb-ios-bar' ),
 		dialogAttr = {
 			dialogClass : 'ppb-cool-panel',
 			autoOpen : false,
@@ -96,6 +97,7 @@ jQuery( function ( $ ) {
 		unSavedChanges: false,
 		syncAjax : function () {
 			return jQuery.post( ppbAjax.url, ppbAjax, function ( response ) {
+				console.log( response );
 				var $response = $( $.parseHTML( response ) );
 				if ( 'function' == typeof prevu.ajaxCallback ) {
 					prevu.ajaxCallback( $response, ppbAjax );
@@ -808,6 +810,41 @@ jQuery( function ( $ ) {
 
 	$ppb.delegate( '.pootle-live-editor.add-row .dashicons-plus', 'click', function () {
 		$addRowDialog.ppbDialog( 'open' );
+		var $lastRow = $('.panel-grid:last-child');
+		if ($lastRow.length) {
+			$('html, body').animate({
+				scrollTop: $lastRow.height() + $lastRow.offset().top
+			}, 1000);
+			return false;
+		}
+	} );
+
+	$ios.delegate( '.add-row', 'click', function () {
+		$addRowDialog.ppbDialog( 'open' );
+	} );
+
+	$ios.delegate( '.row-appearance', 'click', function () {
+		var $focused = $('.ppb-active-editor');
+		if ( $focused.length != 1 ) {
+			alert( 'Please select a row by touching any of it\'s content blocks to start editing.' );
+			return;
+		}
+		var $editBar = $focused.closest('.panel-grid').children('.pootle-live-editor');
+		console.log( $editBar.data( 'index' ) );
+		window.ppbRowI = $editBar.data( 'index' );
+		$rowPanel.ppbDialog( 'open' );
+	} );
+
+	$ios.delegate( '.edit-content', 'click', function () {
+		var $focused = $('.ppb-active-editor');
+		if ( $focused.length != 1 ) {
+			alert( 'Please select a content block to start editing.' );
+			return;
+		}
+		var $editBar = $focused.closest('.ppb-block').children('.pootle-live-editor');
+		console.log( $editBar.data( 'index' ) );
+		window.ppbPanelI = $editBar.data( 'index' );
+		$contentPanel.ppbDialog( 'open' );
 	} );
 
 	$ppb.delegate( '.pootle-live-editor.add-content .dashicons-plus', 'click', function () {
@@ -862,6 +899,10 @@ jQuery( function ( $ ) {
 				blockI = $t.siblings( '.pootle-live-editor' ).data( 'index' );
 			ppbData.widgets[blockI].text = editor.getContent();
 			prevu.unSavedChanges = true;
+		});
+		editor.on('focus', function(e) {
+			$( '.ppb-active-editor' ).removeClass( 'ppb-active-editor' );
+			$( e.target.targetElm ).addClass( 'ppb-active-editor' );
 		});
 	};
 

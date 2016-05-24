@@ -33,6 +33,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 2.0.0
 	 */
 	private $addons = array();
+	private $user;
+	private $nonce;
 
 	/**
 	 * Main Pootle Page Builder Live Editor Instance
@@ -68,54 +70,66 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * Adds the actions anf filter hooks for plugin
 	 * @since 1.1.0
 	 */
-	public function actions() {
+	public function verify() {
 		global $post;
 
 		//Checking nonce
 		$nonce = filter_input( INPUT_GET, 'ppbLiveEditor' );
-		$nonce = $nonce ? $nonce : filter_input( INPUT_POST, 'nonce' );
+		$this->nonce = $nonce ? $nonce : filter_input( INPUT_POST, 'nonce' );
+		$user = filter_input( INPUT_POST, 'user' );
+		$this->user = $user = $user ? $user : filter_input( INPUT_GET, 'user' );
 
 		//Post ID
 		$id            = $post ? $post->ID : filter_input( INPUT_POST, 'post' );
 		$this->post_id = $id;
 
-		if ( wp_verify_nonce( $nonce, 'ppb-live-' . $id ) ) {
+		if ( $this->nonce === get_transient( 'ppb-ios-' . $user ) ) {
 
-			if ( ! function_exists( 'is_plugin_active' ) ) {
-				function is_plugin_active() {
-					return 0;
-				}
-			}
+			$this->actions();
+			add_filter('show_admin_bar', '__return_false');
+			add_action( 'wp_footer', array( $this, 'ios_bar' ) );
 
-			$this->addons = apply_filters( 'pootlepb_le_content_block_tabs', array() );
-
-			remove_filter( 'pootlepb_content_block', array(
-				$GLOBALS['Pootle_Page_Builder_Content_Block'],
-				'auto_embed'
-			), 8 );
-			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 99 );
-			add_action( 'pootlepb_before_pb', array( $this, 'before_pb' ), 7, 4 );
-			add_action( 'pootlepb_render_content_block', array( $this, 'edit_content_block' ), 7, 4 );
-
-			if ( ! empty( $_GET['edit_title'] ) ) {
-				$this->edit_title = get_the_title();
-			}
-
-			add_filter( 'pootlepb_row_cell_attributes', array( $this, 'cell_attr' ), 10, 3 );
-			add_filter( 'pootlepb_content_block', array( $this, 'content' ), 5 );
-			add_action( 'pootlepb_before_row', array( $this, 'edit_row' ), 7, 2 );
-			add_action( 'pootlepb_after_content_blocks', array( $this, 'column' ) );
-			add_action( 'pootlepb_after_pb', array( $this, 'add_row' ) );
-			add_action( 'pootlepb_after_pb', array( $this, 'preview_styles' ), 11 );
-			add_action( 'wp_footer', array( $this, 'dialogs' ), 7 );
-			add_filter( 'pootlepb_rag_adjust_elements', '__return_empty_array', 999 );
-			add_filter( 'body_class', array( $this, 'body_class' ) );
-			add_filter( 'post_class', array( $this, 'post_type_class' ), 10, 3 );
-
+			return true;
+		} else if ( wp_verify_nonce( $this->nonce, 'ppb-live-' . $id ) ) {
+			$this->actions();
 			return true;
 		} else {
 			return null;
 		}
+	}
+
+	private function actions() {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			function is_plugin_active() {
+				return 0;
+			}
+		}
+
+		$this->addons = apply_filters( 'pootlepb_le_content_block_tabs', array() );
+
+		remove_filter( 'pootlepb_content_block', array(
+			$GLOBALS['Pootle_Page_Builder_Content_Block'],
+			'auto_embed'
+		), 8 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 99 );
+		add_action( 'pootlepb_before_pb', array( $this, 'before_pb' ), 7, 4 );
+		add_action( 'pootlepb_render_content_block', array( $this, 'edit_content_block' ), 7, 4 );
+
+		if ( ! empty( $_GET['edit_title'] ) ) {
+			$this->edit_title = get_the_title();
+		}
+
+		add_filter( 'pootlepb_row_cell_attributes', array( $this, 'cell_attr' ), 10, 3 );
+		add_filter( 'pootlepb_content_block', array( $this, 'content' ), 5 );
+		add_action( 'pootlepb_before_row', array( $this, 'edit_row' ), 7, 2 );
+		add_action( 'pootlepb_after_content_blocks', array( $this, 'column' ) );
+		add_action( 'pootlepb_after_pb', array( $this, 'add_row' ) );
+		add_action( 'pootlepb_after_pb', array( $this, 'preview_styles' ), 11 );
+		add_action( 'wp_footer', array( $this, 'dialogs' ), 7 );
+		add_filter( 'pootlepb_rag_adjust_elements', '__return_empty_array', 999 );
+		add_filter( 'body_class', array( $this, 'body_class' ) );
+		add_filter( 'post_class', array( $this, 'post_type_class' ), 10, 3 );
+
 	}
 
 	/**
@@ -255,7 +269,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			'url'    => admin_url( 'admin-ajax.php' ),
 			'action' => 'pootlepb_live_editor',
 			'post'   => $post->ID,
-			'nonce'  => $_GET['ppbLiveEditor'],
+			'nonce'  => $this->nonce,
+			'user' => $this->user,
 		);
 		if ( $this->edit_title ) {
 			$ppbAjax['title'] = $this->edit_title;
@@ -277,7 +292,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 1.1.0
 	 */
 	public function sync() {
-		if ( $this->actions() ) {
+		var_dump( $this->verify() );
+		if ( $this->verify() ) {
 			$id = $_POST['post'];
 
 			if ( filter_input( INPUT_POST, 'publish' ) ) {
@@ -478,6 +494,36 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			'last_used'            => __( 'Last used settings', 'shortcodes-ultimate' ),
 			'hotkey'               => get_option( 'su_option_hotkey' )
 		) );
+	}
+
+	public function ios_bar() {
+		?>
+		<style>
+			html { margin-top: 43px; }
+			#ppb-ios-bar { height: 43px; background: #EF4832; color: #fff; padding: 4px 5px 5px; position: fixed; top: 0; left: 0; right: 0; z-index: 99999; -webkit-box-shadow: 0 0 2px 2px rgba(0,0,0,0.52); box-shadow: 0 0 2px 2px rgba(0,0,0,0.52); }
+			#ppb-ios-bar a { color: #fff; margin: 0 7px; display: inline-block; font-weight: 400; font-size: 16px; line-height: 34px;  }
+			#ppb-ios-bar span.dashicons-before:before { margin-right: 0.16em; font-size: 25px; width: 25px; height: 25px; width: 25px; vertical-align: middle;  }
+			.pootle-live-editor.ppb-live-add-object.add-row, .panel-grid:hover .ppb-edit-row:hover span.dashicons-before, .ppb-block:hover .pootle-live-editor:hover span.dashicons-before { display: none;  }
+			.panel-grid:hover .ppb-edit-row:hover span.dashicons-editor-code, .ppb-block:hover .pootle-live-editor:hover span.dashicons-screenoptions { display: inline-block;  }
+		</style>
+		<div id="ppb-ios-bar">
+
+			<a href="#" class="ios-icon add-row">
+				<span class="dashicons-before dashicons-plus">Add Row</span>
+			</a>
+			<a href="#" class="ios-icon row-appearance">
+				<span class="dashicons-before dashicons-admin-appearance">Row</span>
+			</a>
+			<a href="#" class="ios-icon edit-content">
+				<span class="dashicons-before dashicons-edit">Content</span>
+			</a>
+			<div style="float:right">
+				<a href="#ppb-live-update-changes" class="ios-icon update">
+					<span class="dashicons-before dashicons-screenoptions">Update</span>
+				</a>
+			</div>
+		</div>
+		<?php
 	}
 
 }

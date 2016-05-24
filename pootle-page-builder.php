@@ -115,6 +115,10 @@ final class Pootle_Page_Builder {
 		add_action( 'admin_init', array( $this, 'ppb_compatibility' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
+		add_action( 'wp_ajax_ppb_ios_posts', array( $this, 'ios_app_json' ) );
+		add_action( 'wp_ajax_nopriv_ppb_ios_posts', array( $this, 'ios_app_json' ) );
+		add_action( 'wp_ajax_ppb_ios_login', array( $this, 'ios_app_login' ) );
+		add_action( 'wp_ajax_nopriv_ppb_ios_login', array( $this, 'ios_app_login' ) );
 		add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
 
 		add_action( 'activated_plugin', array( $this, 'activation_redirect' ) );
@@ -169,6 +173,42 @@ final class Pootle_Page_Builder {
 		}
 
 		return $this->ppb_posts;
+	}
+
+	/**
+	 * Return Query with all posts using ppb
+	 * @return WP_Query
+	 * @since 0.3.0
+	 */
+	public function ios_app_json() {
+		$query = $this->ppb_posts();
+		$json = array();
+
+		foreach ( $query->posts as $post ) {
+			$json[] = array(
+				'title' => $post->post_title,
+				'link' => get_permalink( $post ),
+				'type' => $post->post_type,
+			);
+		}
+		echo json_encode( $json );
+		die();
+	}
+
+	public function ios_app_login() {
+		//print_awesome_r( getallheaders() );
+		// Nonce is checked, get the POST data and sign user on
+
+		$user_signon = wp_signon( null, false );
+		if ( is_wp_error( $user_signon ) ) {
+			echo json_encode( array( 'nonce' => 'Failed', 'message' => __( 'Wrong username or password.' ) ) );
+		} else {
+			$nonce = pootlepb_rand();
+			set_transient( 'ppb-ios-' . filter_input( INPUT_POST, 'log' ), $nonce, 25 * HOUR_IN_SECONDS );
+			echo json_encode( array( 'nonce' => $nonce, 'message' => __( 'Login successful, redirecting...' ) ) );
+		}
+
+		die();
 	}
 
 	/**
