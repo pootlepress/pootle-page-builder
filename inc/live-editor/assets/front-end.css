@@ -647,8 +647,9 @@ body .ppb-dialog {
 	border: 1px solid #ddd;
 	border-top-color: #bbb;
 	border-left-color: #bbb;
-	width: 160px;
+	width: 200px;
 	margin: 7px 0;
+	padding: 0;
 }
 
 .ppb-tabs-panel img {

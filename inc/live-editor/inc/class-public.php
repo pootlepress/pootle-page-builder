@@ -87,7 +87,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 			$this->actions();
 			add_filter('show_admin_bar', '__return_false');
-			add_action( 'wp_footer', array( $this, 'ios_bar' ) );
+			add_action( 'wp_head', array( $this, 'ios_bar' ) );
 
 			return true;
 		} else if ( wp_verify_nonce( $this->nonce, 'ppb-live-' . $id ) ) {
@@ -98,7 +98,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		}
 	}
 
-	private function actions() {
+	public function actions() {
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			function is_plugin_active() {
 				return 0;
@@ -141,7 +141,6 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 */
 	public function body_class( $classes ) {
 		$classes[] = 'pootle-live-editor-active';
-
 		return $classes;
 	}
 
@@ -217,6 +216,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		$ppb_js    = POOTLEPB_URL . 'js';
 		$ver       = POOTLEPB_VERSION;
 
+		wp_enqueue_media();
+
 		wp_enqueue_style( 'ppb-chosen-style', "$ppb_js/chosen/chosen.css" );
 		wp_enqueue_script( 'pootlepb-chosen', "$ppb_js/chosen/chosen.jquery.min.js", array( 'jquery' ), POOTLEPB_VERSION );
 
@@ -245,10 +246,6 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		wp_enqueue_script( 'image-edit' );
 
 		do_action( 'pootlepb_enqueue_admin_scripts' );
-
-		if ( defined( 'SU_PLUGIN_FILE' ) ) {
-			$this->su_deps();
-		}
 
 	}
 
@@ -459,71 +456,91 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		require 'dialogs.php';
 	}
 
-	private function su_deps() {
-		// Magnific Popup
-		wp_register_style( 'magnific-popup', plugins_url( 'assets/css/magnific-popup.css', SU_PLUGIN_FILE ), false, '0.9.9', 'all' );
-		wp_register_script( 'magnific-popup', plugins_url( 'assets/js/magnific-popup.js', SU_PLUGIN_FILE ), array( 'jquery' ), '0.9.9', true );
-		wp_localize_script( 'magnific-popup', 'su_magnific_popup', array(
-			'close'   => __( 'Close (Esc)', 'shortcodes-ultimate' ),
-			'loading' => __( 'Loading...', 'shortcodes-ultimate' ),
-			'prev'    => __( 'Previous (Left arrow key)', 'shortcodes-ultimate' ),
-			'next'    => __( 'Next (Right arrow key)', 'shortcodes-ultimate' ),
-			'counter' => sprintf( __( '%s of %s', 'shortcodes-ultimate' ), '%curr%', '%total%' ),
-			'error'   => sprintf( __( 'Failed to load this link. %sOpen link%s.', 'shortcodes-ultimate' ), '<a href="%url%" target="_blank"><u>', '</u></a>' )
-		) );
-		// qTip
-		wp_register_style( 'qtip', plugins_url( 'assets/css/qtip.css', SU_PLUGIN_FILE ), false, '2.1.1', 'all' );
-		wp_register_script( 'qtip', plugins_url( 'assets/js/qtip.js', SU_PLUGIN_FILE ), array( 'jquery' ), '2.1.1', true );
-		// Generator
-		wp_enqueue_style( 'su-generator', plugins_url( 'assets/css/generator.css', SU_PLUGIN_FILE ), array(
-			'wp-color-picker',
-			'magnific-popup'
-		), SU_PLUGIN_VERSION, 'all' );
-		wp_enqueue_script( 'su-generator', plugins_url( 'assets/js/generator.js', SU_PLUGIN_FILE ), array(
-			'wp-color-picker',
-			'magnific-popup',
-			'qtip'
-		), SU_PLUGIN_VERSION, true );
-		wp_localize_script( 'su-generator', 'su_generator', array(
-			'upload_title'         => __( 'Choose file', 'shortcodes-ultimate' ),
-			'upload_insert'        => __( 'Insert', 'shortcodes-ultimate' ),
-			'isp_media_title'      => __( 'Select images', 'shortcodes-ultimate' ),
-			'isp_media_insert'     => __( 'Add selected images', 'shortcodes-ultimate' ),
-			'presets_prompt_msg'   => __( 'Please enter a name for new preset', 'shortcodes-ultimate' ),
-			'presets_prompt_value' => __( 'New preset', 'shortcodes-ultimate' ),
-			'last_used'            => __( 'Last used settings', 'shortcodes-ultimate' ),
-			'hotkey'               => get_option( 'su_option_hotkey' )
-		) );
-	}
-
 	public function ios_bar() {
 		?>
 		<style>
-			html { margin-top: 43px; }
-			#ppb-ios-bar { height: 43px; background: #EF4832; color: #fff; padding: 4px 5px 5px; position: fixed; top: 0; left: 0; right: 0; z-index: 99999; -webkit-box-shadow: 0 0 2px 2px rgba(0,0,0,0.52); box-shadow: 0 0 2px 2px rgba(0,0,0,0.52); }
-			#ppb-ios-bar a { color: #fff; margin: 0 7px; display: inline-block; font-weight: 400; font-size: 16px; line-height: 34px;  }
-			#ppb-ios-bar span.dashicons-before:before { margin-right: 0.16em; font-size: 25px; width: 25px; height: 25px; width: 25px; vertical-align: middle;  }
+			.panel-grid:first-child{ margin-top:0 }
 			.pootle-live-editor.ppb-live-add-object.add-row, .panel-grid:hover .ppb-edit-row:hover span.dashicons-before, .ppb-block:hover .pootle-live-editor:hover span.dashicons-before { display: none;  }
 			.panel-grid:hover .ppb-edit-row:hover span.dashicons-editor-code, .ppb-block:hover .pootle-live-editor:hover span.dashicons-screenoptions { display: inline-block;  }
-		</style>
-		<div id="ppb-ios-bar">
+			.pootle-live-editor-active .ppb-tabs-nav {
+				font-size: 16px;
+			}
 
-			<a href="#" class="ios-icon add-row">
-				<span class="dashicons-before dashicons-plus">Add Row</span>
-			</a>
-			<a href="#" class="ios-icon row-appearance">
-				<span class="dashicons-before dashicons-admin-appearance">Row</span>
-			</a>
-			<a href="#" class="ios-icon edit-content">
-				<span class="dashicons-before dashicons-edit">Content</span>
-			</a>
-			<div style="float:right">
-				<a href="#ppb-live-update-changes" class="ios-icon update">
-					<span class="dashicons-before dashicons-screenoptions">Update</span>
-				</a>
-			</div>
-		</div>
+			.ppb-tabs-panel .field > * {
+				font-size: 16px;
+				font-weight: 300;
+			}
+			.ppb-tabs-panel .field {
+				margin-top: 25px
+			}
+			.ppb-tabs-nav li {
+				margin: 16px 0;
+			}
+
+			.pootle-live-editor-active .mce-toolbar .mce-btn-group .mce-btn, .pootle-live-editor-active .qt-dfw {
+				margin: 3px
+			}
+
+			.pootle-live-editor-active .ppb-dialog .button,
+			.pootle-live-editor-active .ppb-dialog button,
+			.pootle-live-editor-active .ppb-dialog .ui-button.pootle-live-editor-active,
+			.pootle-live-editor-active .wp-color-result,
+			.pootle-live-editor-active .wp-color-result:after  {
+				font-size: 14px;
+				line-height: 34px;
+				height: 34px;
+				font-weight: 300;
+			}
+			.pootle-live-editor-active .ppb-dialog .ppb-dialog-buttonpane button.ui-button,
+			.pootle-live-editor-active .ppb-dialog [type="text"],
+			.pootle-live-editor-active .ppb-dialog [type="number"],
+			.pootle-live-editor-active .ppb-dialog .button,
+			.pootle-live-editor-active .ppb-dialog button,
+			.pootle-live-editor-active .ppb-dialog .ui-button.pootle-live-editor-active,
+			.pootle-live-editor-active .wp-color-result:after  {
+				font-size: 16px;
+				padding: 9px 16px !important;
+				line-height: 16px;
+				height: auto;
+				font-weight: 300;
+			}
+
+			.pootle-live-editor-active .ppb-dialog [type="number"] {
+				width: 120px;
+				margin-right: 7px;
+			}
+			.mce-toolbar div.mce-btn button,
+			.mce-toolbar div.mce-btn button.mce-open {
+				padding: 7px 9px !important;
+			}
+			.ppb-dialog-titlebar {
+				font-weight: 300;
+			}
+			.pootle-live-editor-active .ppb-dialog [type="checkbox"] {
+				height: 20px;
+				width: 20px;
+				margin:5px 0;
+			}
+			.ppb-dialog .ui-button.ppb-dialog-titlebar-close {
+				padding: 2px !important;
+			}
+			.ui-resizable-handle.ui-resizable-w {
+				border: none;
+				padding: 7px;
+				margin-left: -7px;
+			}
+			.ui-resizable-handle.ui-resizable-w:before {
+				content: '';
+				display: block;
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				margin-left: -1px;
+				border-right: 2px dotted #ef4832;
+				padding: 0;
+				cursor: ew-resize;
+			}
+		</style>
 		<?php
 	}
-
 }

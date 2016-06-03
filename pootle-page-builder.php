@@ -3,7 +3,7 @@
  * Plugin Name: Pootle Pagebuilder
  * Plugin URI: http://pootlepress.com/
  * Description: pootle page builder helps you create stunning pages with full width rows including parallax background images & videos.
- * Version: 2.0.0
+ * Version: 2.1.beta1.1
  * Author: pootlepress
  * Author URI: http://pootlepress.com/
  * License: GPL version 3
@@ -12,7 +12,7 @@
  */
 
 /** Pootle page builder current version */
-define( 'POOTLEPB_VERSION', '2.0.0' );
+define( 'POOTLEPB_VERSION', '2.1.beta1.1' );
 /** Pootle page builder __FILE__ */
 define( 'POOTLEPB_BASE_FILE', __FILE__ );
 /** Pootle page builder plugin directory path */
@@ -196,19 +196,22 @@ final class Pootle_Page_Builder {
 	}
 
 	public function ios_app_login() {
-		//print_awesome_r( getallheaders() );
+		// print_awesome_r( getallheaders() );
 		// Nonce is checked, get the POST data and sign user on
-
 		$user_signon = wp_signon( null, false );
 		if ( is_wp_error( $user_signon ) ) {
 			echo json_encode( array( 'nonce' => 'Failed', 'message' => __( 'Wrong username or password.' ) ) );
 		} else {
+			if ( ! empty( $_POST['redirect_to'] ) ) {
+				header( "Location: $_POST[redirect_to]" );
+				exit;
+			}
 			$nonce = pootlepb_rand();
 			set_transient( 'ppb-ios-' . filter_input( INPUT_POST, 'log' ), $nonce, 25 * HOUR_IN_SECONDS );
 			echo json_encode( array( 'nonce' => $nonce, 'message' => __( 'Login successful, redirecting...' ) ) );
 		}
 
-		die();
+		exit();
 	}
 
 	/**
@@ -344,6 +347,7 @@ final class Pootle_Page_Builder {
 		include 'run-on-uninstall.php';
 	}
 } //class Pootle_Page_Builder
-
+global $Pootle_Page_Builder;
 //Instantiating Pootle_Page_Builder
-new Pootle_Page_Builder();
+/** @var Pootle_Page_Builder $Pootle_Page_Builder */
+$Pootle_Page_Builder = new Pootle_Page_Builder();

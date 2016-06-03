@@ -15,7 +15,7 @@ Array.prototype.ppbPrevuMove = function (oldI, newI) {
 	this.splice(newI, 0, this.splice(oldI, 1)[0]);
 	return this;
 };
-
+ppbIos = {};
 logPPBData = function ( a, b, c ) {
 
 	//Comment the code below to log console
@@ -95,6 +95,7 @@ jQuery( function ( $ ) {
 	prevu = {
 		debug: true,
 		unSavedChanges: false,
+
 		syncAjax : function () {
 			return jQuery.post( ppbAjax.url, ppbAjax, function ( response ) {
 				console.log( response );
@@ -111,6 +112,7 @@ jQuery( function ( $ ) {
 				ppbAjax.publish = 0;
 			} );
 		},
+
 		sync : function ( callback, publish ) {
 			prevu.ajaxCallback = callback;
 			prevu.unSavedChanges = true;
@@ -579,6 +581,48 @@ jQuery( function ( $ ) {
 			}
 		},
 
+		insertImage : function( $t ) {
+			// If the media frame already exists, reopen it.
+			if (prevu.insertImageFrame) {
+				prevu.insertImageFrame.open();
+				return;
+			}
+
+			// Create the media frame.
+			prevu.insertImageFrame = wp.media({
+				library: { type: 'image' },
+				displaySettings: true,
+				displayUserSettings: false,
+				title: 'Choose Image',
+				button: {text: 'Insert in Content Block'},
+				multiple: false
+			});
+			prevu.insertImageFrame.on( 'attach', function() {
+				$( '.setting[data-setting="url"]' ).before(
+					'<label class="setting" data-setting="url">' +
+					'<span class="name">Size</span>' +
+					'<input type="text" value="http://wp/ppb/wp-content/uploads/2016/02/p03hbzwm.jpg" readonly="">' +
+					'</label>'
+				);
+			} );
+			// When an image is selected, run a callback.
+			prevu.insertImageFrame.on('select', function () {
+				// We set multiple to false so only get one image from the uploader
+				attachment = prevu.insertImageFrame.state().get('selection').first().toJSON();
+
+				// Do something with attachment.id and/or attachment.url here
+				console.log( attachment );
+				var $img = $( '<img>' ).attr( 'src', attachment.url );
+
+				$t.append( $( '<p>' ).html( $img ) );
+				tinyMCE.triggerSave();
+
+			});
+
+			// Finally, open the modal
+			prevu.insertImageFrame.open();
+		},
+
 		tmce : $.extend( true, {}, tinyMCEPreInit.mceInit.ppbeditor )
 	};
 
@@ -612,11 +656,6 @@ jQuery( function ( $ ) {
 
 	$('.panel-grid-cell-container > .panel-grid-cell' ).each( function () {
 		prevu.resizableCells.correctCellData( $(this) );
-	} );
-
-	$ppb.delegate( '.ppb-live-edit-object', 'click', function () {
-		$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
-		$( this ).closest( '.ppb-block, .ppb-row' ).addClass( 'active' );
 	} );
 
 	$ppb.delegate( '.pootle-live-editor .dashicons-before', 'mousedown', function () {
@@ -764,48 +803,8 @@ jQuery( function ( $ ) {
 
 	$ppb.delegate( '.ppb-edit-block .dashicons-format-image', 'click', function ( e ) {
 		e.preventDefault();
-
 		prevu.activeEditor = $(this).closest('.ppb-block' ).children('.pootle-live-editor-realtime');
-
-		// If the media frame already exists, reopen it.
-		if (prevu.insertImageFrame) {
-			prevu.insertImageFrame.open();
-			return;
-		}
-
-		// Create the media frame.
-		prevu.insertImageFrame = wp.media({
-			library: { type: 'image' },
-			displaySettings: true,
-			displayUserSettings: false,
-			title: 'Choose Image',
-			button: {text: 'Insert in Content Block'},
-			multiple: false
-		});
-		prevu.insertImageFrame.on( 'attach', function() {
-			$( '.setting[data-setting="url"]' ).before(
-				'<label class="setting" data-setting="url">' +
-				'<span class="name">Size</span>' +
-				'<input type="text" value="http://wp/ppb/wp-content/uploads/2016/02/p03hbzwm.jpg" readonly="">' +
-				'</label>'
-			);
-		} );
-		// When an image is selected, run a callback.
-		prevu.insertImageFrame.on('select', function () {
-			// We set multiple to false so only get one image from the uploader
-			attachment = prevu.insertImageFrame.state().get('selection').first().toJSON();
-
-			// Do something with attachment.id and/or attachment.url here
-			console.log( attachment );
-			var $img = $( '<img>' ).attr( 'src', attachment.url );
-
-			prevu.activeEditor.append( $( '<p>' ).html( $img ) );
-			tinyMCE.triggerSave();
-
-		});
-
-		// Finally, open the modal
-		prevu.insertImageFrame.open();
+		prevu.insertImage( prevu.activeEditor )
 	} );
 
 	$ppb.delegate( '.pootle-live-editor.add-row .dashicons-plus', 'click', function () {
@@ -818,34 +817,47 @@ jQuery( function ( $ ) {
 			return false;
 		}
 	} );
-
-	$ios.delegate( '.add-row', 'click', function () {
+	ppbIos.AddRow = function () {
+		console.log( 'AddRow' );
 		$addRowDialog.ppbDialog( 'open' );
-	} );
 
-	$ios.delegate( '.row-appearance', 'click', function () {
-		var $focused = $('.ppb-active-editor');
-		if ( $focused.length != 1 ) {
+	};
+	ppbIos.StyleRow = function () {
+		console.log( 'StyleRow' );
+		var $row = $('.panel-grid.active');
+		if ( $row.length != 1 ) {
 			alert( 'Please select a row by touching any of it\'s content blocks to start editing.' );
 			return;
 		}
-		var $editBar = $focused.closest('.panel-grid').children('.pootle-live-editor');
+		var $editBar = $row.children('.pootle-live-editor');
 		console.log( $editBar.data( 'index' ) );
 		window.ppbRowI = $editBar.data( 'index' );
 		$rowPanel.ppbDialog( 'open' );
-	} );
-
-	$ios.delegate( '.edit-content', 'click', function () {
-		var $focused = $('.ppb-active-editor');
-		if ( $focused.length != 1 ) {
+	};
+	ppbIos.StyleContent = function () {
+		console.log( 'StyleContent' );
+		var $block = $('.ppb-block.active');
+		if ( $block.length != 1 ) {
 			alert( 'Please select a content block to start editing.' );
 			return;
 		}
-		var $editBar = $focused.closest('.ppb-block').children('.pootle-live-editor');
+		var $editBar = $block.children('.pootle-live-editor');
 		console.log( $editBar.data( 'index' ) );
 		window.ppbPanelI = $editBar.data( 'index' );
 		$contentPanel.ppbDialog( 'open' );
-	} );
+	};
+	ppbIos.insertImage = function () {
+		var $block = $('.ppb-block.active');
+		if ( $block.length != 1 ) {
+			alert( 'Please select a content block to start editing.' );
+			return;
+		}
+		prevu.activeEditor = $block.children('.pootle-live-editor-realtime');
+		prevu.insertImage( prevu.activeEditor )
+	};
+	ppbIos.Update = function () {
+		prevu.sync( null, 'Publish' );
+	};
 
 	$ppb.delegate( '.pootle-live-editor.add-content .dashicons-plus', 'click', function () {
 
@@ -901,8 +913,9 @@ jQuery( function ( $ ) {
 			prevu.unSavedChanges = true;
 		});
 		editor.on('focus', function(e) {
-			$( '.ppb-active-editor' ).removeClass( 'ppb-active-editor' );
-			$( e.target.targetElm ).addClass( 'ppb-active-editor' );
+			var $t = $( e.target.targetElm );
+			$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
+			$t.parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
 		});
 	};
 

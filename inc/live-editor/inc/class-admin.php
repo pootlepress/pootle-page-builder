@@ -205,4 +205,20 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 		}
 		die();
 	}
+	
+	public function browser_cache_page () {
+		if ( empty( $_GET['pootle_pb_ios_cache_helper'] ) ) {
+			return;
+		}
+
+		Pootle_Page_Builder_Live_Editor::instance( __FILE__ )->public->actions();
+		get_header();
+		global $ppble_new_live_page;
+		require 'vars.php';
+
+		echo $GLOBALS['Pootle_Page_Builder_Render_Layout']->panels_render( 1, $ppble_new_live_page );
+
+		get_footer();
+		exit();
+	}
 }

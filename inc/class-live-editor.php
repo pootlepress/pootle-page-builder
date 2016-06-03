@@ -80,7 +80,7 @@ class Pootle_Page_Builder_Live_Editor {
 	 * @since 2.0.0
 	 * @return Pootle_Page_Builder_Live_Editor instance
 	 */
-	public static function instance( $file ) {
+	public static function instance( $file = '' ) {
 		if ( null == self::$_instance ) {
 			self::$_instance = new self( $file );
 		}
@@ -136,6 +136,8 @@ class Pootle_Page_Builder_Live_Editor {
 		add_action( 'pootlepb_enqueue_admin_scripts', array( $this->admin, 'enqueue' ) );
 		//Adds Live editor link
 		add_action( 'admin_bar_menu', array( $this->admin, 'add_item' ), 999 );
+		//Ajax action to save live editor data and render new grid
+		add_action( 'wp', array( $this->admin, 'browser_cache_page' ) );
 	}
 
 	/**
