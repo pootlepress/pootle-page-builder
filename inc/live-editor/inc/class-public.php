@@ -289,7 +289,6 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 1.1.0
 	 */
 	public function sync() {
-		var_dump( $this->verify() );
 		if ( $this->verify() ) {
 			$id = $_POST['post'];
 
@@ -497,7 +496,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			.pootle-live-editor-active .ppb-dialog .button,
 			.pootle-live-editor-active .ppb-dialog button,
 			.pootle-live-editor-active .ppb-dialog .ui-button.pootle-live-editor-active,
-			.pootle-live-editor-active .wp-color-result:after  {
+			.pootle-live-editor-active .wp-color-result:after {
 				font-size: 16px;
 				padding: 9px 16px !important;
 				line-height: 16px;
@@ -540,7 +539,71 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				padding: 0;
 				cursor: ew-resize;
 			}
+			#pootlepb-set-title + .ppb-dialog-buttonpane .ui-button-text-icon-primary {
+				background: #0085ba !important;
+				border-color: #0073aa #006799 #006799 !important;
+				-webkit-box-shadow: 0 1px 0 #006799 !important;
+				box-shadow: 0 1px 0 #006799 !important;
+				color: #fff !important;
+				text-decoration: none;
+				text-shadow: 0 -1px 1px #006799,1px 0 1px #006799,0 1px 1px #006799,-1px 0 1px #006799 !important;
+				font-weight: 500;
+			}
+			#ppb-ios-updated-notice {
+				padding: 50px 50px;
+				position: fixed;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				width: 340px;
+				height: 340px;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+				margin: auto;
+				text-align: center;
+				background: #0c7;
+				z-index: 999;
+				border-radius: 50%;
+				-webkit-animation: fade-in-out 2.5s 1 both;
+				animation: fade-in-out 2.5s 1 both;
+				display: none;
+			}
+
+			#ppb-ios-updated-notice > * {
+				display: inline-block;
+				width: auto;
+				height: auto;
+				vertical-align: middle;
+				color: #fff;
+				font-size: 25px;
+				letter-spacing: 2px;
+			}
+
+			#ppb-ios-updated-notice .dashicons:before {
+				font-size: 160px;
+				color: inherit;
+				width: auto;
+				height: auto;
+				display: block;
+				line-height: 1;
+			}
+			@-webkit-keyframes fade-in-out {
+				0%   { opacity: 0; -webkit-transform: translate3d(0,-25%,0) }
+				34%  { opacity: 1; -webkit-transform: none                  }
+				61%  { opacity: 1; -webkit-transform: none                  }
+				100% { opacity: 0; -webkit-transform: translate3d(0,25%,0)  }
+			}
+			@keyframes fade-in-out {
+				0%   { opacity: 0; transform: translate3d(0,-25%,0) }
+				34%  { opacity: 1; transform: none                  }
+				61%  { opacity: 1; transform: none                  }
+				100% { opacity: 0; transform: translate3d(0,25%,0)  }
+			}
 		</style>
+		<div id="ppb-ios-updated-notice">
+			<span class="dashicons dashicons-yes"></span><h3>Changes Saved</h3>
+		</div>
 		<?php
 	}
 }

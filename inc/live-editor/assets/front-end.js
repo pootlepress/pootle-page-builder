@@ -93,6 +93,7 @@ jQuery( function ( $ ) {
 		};
 
 	prevu = {
+		noRedirect: false,
 		debug: true,
 		unSavedChanges: false,
 
@@ -107,6 +108,7 @@ jQuery( function ( $ ) {
 				$( 'style#pootle-live-editor-styles' ).html( $response.find( 'style#pootle-live-editor-styles' ).html() );
 				if ( ppbAjax.publish ) {
 					prevu.unSavedChanges = false;
+					if( ! prevu.noRedirect )
 					window.location = response;
 				}
 				ppbAjax.publish = 0;
@@ -817,13 +819,12 @@ jQuery( function ( $ ) {
 			return false;
 		}
 	} );
+	ppbIos.notice = $( '#ppb-ios-updated-notice' )
 	ppbIos.AddRow = function () {
-		console.log( 'AddRow' );
 		$addRowDialog.ppbDialog( 'open' );
 
 	};
 	ppbIos.StyleRow = function () {
-		console.log( 'StyleRow' );
 		var $row = $('.panel-grid.active');
 		if ( $row.length != 1 ) {
 			alert( 'Please select a row by touching any of it\'s content blocks to start editing.' );
@@ -835,7 +836,6 @@ jQuery( function ( $ ) {
 		$rowPanel.ppbDialog( 'open' );
 	};
 	ppbIos.StyleContent = function () {
-		console.log( 'StyleContent' );
 		var $block = $('.ppb-block.active');
 		if ( $block.length != 1 ) {
 			alert( 'Please select a content block to start editing.' );
@@ -847,7 +847,6 @@ jQuery( function ( $ ) {
 		$contentPanel.ppbDialog( 'open' );
 	};
 	ppbIos.insertImage = function () {
-		var $block = $('.ppb-block.active');
 		if ( $block.length != 1 ) {
 			alert( 'Please select a content block to start editing.' );
 			return;
@@ -856,7 +855,50 @@ jQuery( function ( $ ) {
 		prevu.insertImage( prevu.activeEditor )
 	};
 	ppbIos.Update = function () {
-		prevu.sync( null, 'Publish' );
+		prevu.noRedirect = true;
+		prevu.ajaxCallback = function () {
+			ppbAjax.title = null;
+			ppbIos.notice.show( 0 );
+			setTimeout( function () {
+				ppbIos.notice.hide();
+			}, 2500 );
+		};
+		prevu.unSavedChanges = true;
+		$( '.mce-edit-focus' ).blur();
+		ppbAjax.data = ppbData;
+		ppbAjax.publish = 'Publish';
+
+		if ( ppbAjax.title ) {
+			var butt = [
+				{
+					text: 'Publish',
+					icons: {
+						primary: 'ios-'
+					},
+					click: function () {
+						ppbAjax.publish = 'Publish';
+						ppbAjax.title = $( '#ppble-live-page-title' ).val();
+						prevu.syncAjax();
+						$setTitleDialog.ppbDialog( 'close' );
+					}
+				},
+				{
+					text: 'Save Draft',
+					click: function () {
+						ppbAjax.publish = 'Save Draft';
+						ppbAjax.title = $( '#ppble-live-page-title' ).val();
+						prevu.syncAjax();
+						$setTitleDialog.ppbDialog( 'close' );
+					}
+				}
+			];
+			$setTitleDialog.parent().data( 'action', 'Publish' );
+			$setTitleDialog.ppbDialog( 'open' );
+			$setTitleDialog.ppbDialog( 'option', 'buttons', butt );
+			return;
+		}
+
+		prevu.syncAjax();
 	};
 
 	$ppb.delegate( '.pootle-live-editor.add-content .dashicons-plus', 'click', function () {
