@@ -118,7 +118,7 @@ jQuery( function ( $ ) {
 		sync : function ( callback, publish ) {
 			prevu.ajaxCallback = callback;
 			prevu.unSavedChanges = true;
-			$( '.mce-edit-focus' ).blur();
+			prevu.saveTmceBlock( $( '.mce-edit-focus' ) );
 			ppbAjax.data = ppbData;
 
 			if ( publish ) {
@@ -624,7 +624,13 @@ jQuery( function ( $ ) {
 			// Finally, open the modal
 			prevu.insertImageFrame.open();
 		},
-
+		saveTmceBlock : function ( $ed ) {
+			if ( ! $ed || ! $ed.length ) return;
+			var blockI = $ed.siblings( '.pootle-live-editor' ).data( 'index' );
+			console.log( blockI );
+			ppbData.widgets[blockI].text = $ed.html();
+			prevu.unSavedChanges = true;
+		},
 		tmce : $.extend( true, {}, tinyMCEPreInit.mceInit.ppbeditor )
 	};
 
@@ -847,6 +853,7 @@ jQuery( function ( $ ) {
 		$contentPanel.ppbDialog( 'open' );
 	};
 	ppbIos.insertImage = function () {
+		var $block = $('.ppb-block.active');
 		if ( $block.length != 1 ) {
 			alert( 'Please select a content block to start editing.' );
 			return;
@@ -864,7 +871,7 @@ jQuery( function ( $ ) {
 			}, 2500 );
 		};
 		prevu.unSavedChanges = true;
-		$( '.mce-edit-focus' ).blur();
+		prevu.saveTmceBlock( $( '.mce-edit-focus' ) );
 		ppbAjax.data = ppbData;
 		ppbAjax.publish = 'Publish';
 
@@ -949,10 +956,7 @@ jQuery( function ( $ ) {
 	prevu.tmce.content_css	= "http://wp/ppb/wp-includes/css/dashicons.min.css?ver=4.4.2-alpha-36412";
 	prevu.tmce.setup	= function(editor) {
 		editor.on('change', function(e) {
-			var $t = $( e.target.targetElm ),
-				blockI = $t.siblings( '.pootle-live-editor' ).data( 'index' );
-			ppbData.widgets[blockI].text = editor.getContent();
-			prevu.unSavedChanges = true;
+			prevu.saveTmceBlock( $( e.target.targetElm ) );
 		});
 		editor.on('focus', function(e) {
 			var $t = $( e.target.targetElm );
@@ -981,5 +985,5 @@ jQuery( function ( $ ) {
 		if ( prevu.unSavedChanges ) {
 			return "You have unsaved changes! Click 'Update' in admin bar to save.\n\nYour changes will be lost if you dan't save.";
 		}
-	};
+	}
 } );
