@@ -157,7 +157,7 @@ class Pootle_Page_Builder_Live_Editor {
 		//Ajax action to save live editor data and render new grid
 		add_action( 'wp_ajax_pootlepb_live_page', array( $this->admin, 'new_live_page' ) );
 		//Ajax action to save live editor data and render new grid
-		add_action( 'wp_ajax_nopriv_pootlepb_live_page', array( $this->public, 'new_live_page' ) );
+		add_action( 'wp_ajax_nopriv_pootlepb_live_page', array( $this->admin, 'new_live_page' ) );
 
 	} // End enqueue()
 

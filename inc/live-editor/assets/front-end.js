@@ -15,7 +15,7 @@ Array.prototype.ppbPrevuMove = function (oldI, newI) {
 	this.splice(newI, 0, this.splice(oldI, 1)[0]);
 	return this;
 };
-ppbIos = {};
+ppbIpad = {};
 logPPBData = function ( a, b, c ) {
 
 	//Comment the code below to log console
@@ -77,8 +77,9 @@ jQuery( function ( $ ) {
 		$rowPanel = $( '#pootlepb-row-editor-panel' ),
 		$addRowDialog = $( '#pootlepb-add-row' ),
 		$setTitleDialog = $( '#pootlepb-set-title' ),
+		$ppbIpadColorDialog = $('#ppb-ipad-color-picker'),
+		$ppbIpadColorInput = $('#ppb-ipad-color-input'),
 		$ppb = $( '#pootle-page-builder' ),
-		$ios = $( '#ppb-ios-bar' ),
 		dialogAttr = {
 			dialogClass : 'ppb-cool-panel',
 			autoOpen : false,
@@ -825,12 +826,13 @@ jQuery( function ( $ ) {
 			return false;
 		}
 	} );
-	ppbIos.notice = $( '#ppb-ios-updated-notice' )
-	ppbIos.AddRow = function () {
+	ppbIpad.notice = $( '#ppb-ipad-updated-notice' );
+
+	ppbIpad.AddRow = function () {
 		$addRowDialog.ppbDialog( 'open' );
 
 	};
-	ppbIos.StyleRow = function () {
+	ppbIpad.StyleRow = function () {
 		var $row = $('.panel-grid.active');
 		if ( $row.length != 1 ) {
 			alert( 'Please select a row by touching any of it\'s content blocks to start editing.' );
@@ -841,7 +843,7 @@ jQuery( function ( $ ) {
 		window.ppbRowI = $editBar.data( 'index' );
 		$rowPanel.ppbDialog( 'open' );
 	};
-	ppbIos.StyleContent = function () {
+	ppbIpad.StyleContent = function () {
 		var $block = $('.ppb-block.active');
 		if ( $block.length != 1 ) {
 			alert( 'Please select a content block to start editing.' );
@@ -852,7 +854,7 @@ jQuery( function ( $ ) {
 		window.ppbPanelI = $editBar.data( 'index' );
 		$contentPanel.ppbDialog( 'open' );
 	};
-	ppbIos.insertImage = function () {
+	ppbIpad.insertImage = function () {
 		var $block = $('.ppb-block.active');
 		if ( $block.length != 1 ) {
 			alert( 'Please select a content block to start editing.' );
@@ -861,13 +863,13 @@ jQuery( function ( $ ) {
 		prevu.activeEditor = $block.children('.pootle-live-editor-realtime');
 		prevu.insertImage( prevu.activeEditor )
 	};
-	ppbIos.Update = function () {
+	ppbIpad.Update = function () {
 		prevu.noRedirect = true;
 		prevu.ajaxCallback = function () {
 			ppbAjax.title = null;
-			ppbIos.notice.show( 0 );
+			ppbIpad.notice.show( 0 );
 			setTimeout( function () {
-				ppbIos.notice.hide();
+				ppbIpad.notice.hide();
 			}, 2500 );
 		};
 		prevu.unSavedChanges = true;
@@ -880,7 +882,7 @@ jQuery( function ( $ ) {
 				{
 					text: 'Publish',
 					icons: {
-						primary: 'ios-'
+						primary: 'ipad-'
 					},
 					click: function () {
 						ppbAjax.publish = 'Publish';
@@ -906,6 +908,57 @@ jQuery( function ( $ ) {
 		}
 
 		prevu.syncAjax();
+	};
+
+	$ppbIpadColorInput.wpColorPicker({
+		width: 400,
+		hide: false
+	});
+
+	ppbIpad.format = {
+		H1     : function () {
+			tinymce.activeEditor.execCommand("mceToggleFormat", false, "h1")
+		},
+		H2     : function () {
+			tinymce.activeEditor.execCommand("mceToggleFormat", false, "h2")
+		},
+		H3     : function () {
+			tinymce.activeEditor.execCommand("mceToggleFormat", false, "h3")
+		},
+		Quote  : function () {
+			tinymce.activeEditor.execCommand('mceBlockQuote')
+		},
+		Color  : function () {
+			$ppbIpadColorDialog.show();
+			$ppbIpadColorInput.wpColorPicker( 'open' );
+				},
+		SetColor  : function () {
+			console.log( $ppbIpadColorInput.val() );
+			tinymce.activeEditor.execCommand(
+				'ForeColor',
+				false,
+				$ppbIpadColorInput.val()
+			);
+			$ppbIpadColorDialog.hide();
+		},
+		Link   : function () {
+			tinymce.activeEditor.execCommand('WP_Link')
+		},
+		Bold   : function () {
+			tinymce.activeEditor.execCommand('Bold')
+		},
+		Italic : function () {
+			tinymce.activeEditor.execCommand('Italic')
+		},
+		Left   : function () {
+			tinymce.activeEditor.execCommand('JustifyLeft')
+		},
+		Center : function () {
+			tinymce.activeEditor.execCommand('JustifyCenter')
+		},
+		Right  : function () {
+			tinymce.activeEditor.execCommand('JustifyRight')
+		}
 	};
 
 	$ppb.delegate( '.pootle-live-editor.add-content .dashicons-plus', 'click', function () {
@@ -952,7 +1005,21 @@ jQuery( function ( $ ) {
 	//prevu.tmce.selector		= '.site-info';
 	prevu.tmce.inline		= true;
 	prevu.tmce.theme		= 'ppbprevu';
-	prevu.tmce.toolbar		= [ 'bold', 'italic', 'strikethrough', 'forecolor', 'link', 'unlink', 'blockquote', 'h2', 'h3' ];
+
+	if ( ! ppbAjax.ipad ) {
+		prevu.tmce.toolbar = [
+			'bold',
+			'italic',
+			'strikethrough',
+			'forecolor',
+			'link',
+			'unlink',
+			'blockquote',
+			'h2',
+			'h3'
+		];
+	}
+
 	prevu.tmce.content_css	= "http://wp/ppb/wp-includes/css/dashicons.min.css?ver=4.4.2-alpha-36412";
 	prevu.tmce.setup	= function(editor) {
 		editor.on('change', function(e) {

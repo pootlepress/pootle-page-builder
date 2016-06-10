@@ -279,7 +279,7 @@ final class Pootle_Page_Builder_Front_Css_Js {
 	 * @return int
 	 */
 	public function no_rwd_for_app( $res ) {
-		if ( isset( $_GET['ppb-ios'] ) || filter_input( INPUT_POST, 'action' ) == 'pootlepb_live_editor' ) {
+		if ( isset( $_GET['ppb-ipad'] ) || filter_input( INPUT_POST, 'action' ) == 'pootlepb_live_editor' ) {
 			return min( $res, 610 );
 		}
 		return $res;

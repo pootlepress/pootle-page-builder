@@ -35,6 +35,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	private $addons = array();
 	private $user;
 	private $nonce;
+	private $ipad = false;
 
 	/**
 	 * Main Pootle Page Builder Live Editor Instance
@@ -83,11 +84,11 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		$id            = $post ? $post->ID : filter_input( INPUT_POST, 'post' );
 		$this->post_id = $id;
 
-		if ( $this->nonce === get_transient( 'ppb-ios-' . $user ) ) {
-
+		if ( $this->nonce === get_transient( 'ppb-ipad-' . $user ) ) {
+			$this->ipad = true;
 			$this->actions();
 			add_filter('show_admin_bar', '__return_false');
-			add_action( 'wp_head', array( $this, 'ios_bar' ) );
+			add_action( 'wp_head', array( $this, 'ipad_bar' ) );
 
 			return true;
 		} else if ( wp_verify_nonce( $this->nonce, 'ppb-live-' . $id ) ) {
@@ -269,6 +270,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			'nonce'  => $this->nonce,
 			'user' => $this->user,
 		);
+		if ( $this->ipad ) {
+			$ppbAjax['ipad'] = 1;
+		}
+
 		if ( $this->edit_title ) {
 			$ppbAjax['title'] = $this->edit_title;
 		}
@@ -455,155 +460,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		require 'dialogs.php';
 	}
 
-	public function ios_bar() {
-		?>
-		<style>
-			.panel-grid:first-child{ margin-top:0 }
-			.pootle-live-editor.ppb-live-add-object.add-row, .panel-grid:hover .ppb-edit-row:hover span.dashicons-before, .ppb-block:hover .pootle-live-editor:hover span.dashicons-before { display: none;  }
-			.panel-grid:hover .ppb-edit-row:hover span.dashicons-editor-code, .ppb-block:hover .pootle-live-editor:hover span.dashicons-screenoptions { display: inline-block;  }
-			.pootle-live-editor-active .ppb-tabs-nav {
-				font-size: 16px;
-			}
-
-			.ppb-tabs-panel .field > * {
-				font-size: 16px;
-				font-weight: 300;
-			}
-			.ppb-tabs-panel .field {
-				margin-top: 25px
-			}
-			.ppb-tabs-nav li {
-				margin: 16px 0;
-			}
-
-			.pootle-live-editor-active .mce-toolbar .mce-btn-group .mce-btn, .pootle-live-editor-active .qt-dfw {
-				margin: 3px
-			}
-
-			.pootle-live-editor-active .ppb-dialog .button,
-			.pootle-live-editor-active .ppb-dialog button,
-			.pootle-live-editor-active .ppb-dialog .ui-button.pootle-live-editor-active,
-			.pootle-live-editor-active .wp-color-result,
-			.pootle-live-editor-active .wp-color-result:after  {
-				font-size: 14px;
-				line-height: 34px;
-				height: 34px;
-				font-weight: 300;
-			}
-			.pootle-live-editor-active .ppb-dialog .ppb-dialog-buttonpane button.ui-button,
-			.pootle-live-editor-active .ppb-dialog [type="text"],
-			.pootle-live-editor-active .ppb-dialog [type="number"],
-			.pootle-live-editor-active .ppb-dialog .button,
-			.pootle-live-editor-active .ppb-dialog button,
-			.pootle-live-editor-active .ppb-dialog .ui-button.pootle-live-editor-active,
-			.pootle-live-editor-active .wp-color-result:after {
-				font-size: 16px;
-				padding: 9px 16px !important;
-				line-height: 16px;
-				height: auto;
-				font-weight: 300;
-			}
-
-			.pootle-live-editor-active .ppb-dialog [type="number"] {
-				width: 120px;
-				margin-right: 7px;
-			}
-			.mce-toolbar div.mce-btn button,
-			.mce-toolbar div.mce-btn button.mce-open {
-				padding: 7px 9px !important;
-			}
-			.ppb-dialog-titlebar {
-				font-weight: 300;
-			}
-			.pootle-live-editor-active .ppb-dialog [type="checkbox"] {
-				height: 20px;
-				width: 20px;
-				margin:5px 0;
-			}
-			.ppb-dialog .ui-button.ppb-dialog-titlebar-close {
-				padding: 2px !important;
-			}
-			.ui-resizable-handle.ui-resizable-w {
-				border: none;
-				padding: 7px;
-				margin-left: -7px;
-			}
-			.ui-resizable-handle.ui-resizable-w:before {
-				content: '';
-				display: block;
-				position: absolute;
-				top: 0;
-				bottom: 0;
-				margin-left: -1px;
-				border-right: 2px dotted #ef4832;
-				padding: 0;
-				cursor: ew-resize;
-			}
-			#pootlepb-set-title + .ppb-dialog-buttonpane .ui-button-text-icon-primary {
-				background: #0085ba !important;
-				border-color: #0073aa #006799 #006799 !important;
-				-webkit-box-shadow: 0 1px 0 #006799 !important;
-				box-shadow: 0 1px 0 #006799 !important;
-				color: #fff !important;
-				text-decoration: none;
-				text-shadow: 0 -1px 1px #006799,1px 0 1px #006799,0 1px 1px #006799,-1px 0 1px #006799 !important;
-				font-weight: 500;
-			}
-			#ppb-ios-updated-notice {
-				padding: 50px 50px;
-				position: fixed;
-				top: 0;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				width: 340px;
-				height: 340px;
-				-webkit-box-sizing: border-box;
-				box-sizing: border-box;
-				margin: auto;
-				text-align: center;
-				background: #0c7;
-				z-index: 999;
-				border-radius: 50%;
-				-webkit-animation: fade-in-out 2.5s 1 both;
-				animation: fade-in-out 2.5s 1 both;
-				display: none;
-			}
-
-			#ppb-ios-updated-notice > * {
-				display: inline-block;
-				width: auto;
-				height: auto;
-				vertical-align: middle;
-				color: #fff;
-				font-size: 25px;
-				letter-spacing: 2px;
-			}
-
-			#ppb-ios-updated-notice .dashicons:before {
-				font-size: 160px;
-				color: inherit;
-				width: auto;
-				height: auto;
-				display: block;
-				line-height: 1;
-			}
-			@-webkit-keyframes fade-in-out {
-				0%   { opacity: 0; -webkit-transform: translate3d(0,-25%,0) }
-				34%  { opacity: 1; -webkit-transform: none                  }
-				61%  { opacity: 1; -webkit-transform: none                  }
-				100% { opacity: 0; -webkit-transform: translate3d(0,25%,0)  }
-			}
-			@keyframes fade-in-out {
-				0%   { opacity: 0; transform: translate3d(0,-25%,0) }
-				34%  { opacity: 1; transform: none                  }
-				61%  { opacity: 1; transform: none                  }
-				100% { opacity: 0; transform: translate3d(0,25%,0)  }
-			}
-		</style>
-		<div id="ppb-ios-updated-notice">
-			<span class="dashicons dashicons-yes"></span><h3>Changes Saved</h3>
-		</div>
-		<?php
+	public function ipad_bar() {
+		include "tpl-ipad-requirements.php";
 	}
 }
+?>

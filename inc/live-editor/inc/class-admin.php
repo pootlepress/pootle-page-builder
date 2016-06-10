@@ -160,8 +160,8 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 	 */
 	public function new_live_post( $post_type = 'page' ) {
 		$nonce = filter_input( INPUT_GET, 'ppbLiveEditor' );
-		$ios_user = filter_input( INPUT_GET, 'user' );
-		if ( $nonce === get_transient( 'ppb-ios-' . $ios_user ) || wp_verify_nonce( $nonce, 'ppb-new-live-post' ) ) {
+		$ipad_user = filter_input( INPUT_GET, 'user' );
+		if ( $nonce === get_transient( 'ppb-ipad-' . $ipad_user ) || wp_verify_nonce( $nonce, 'ppb-new-live-post' ) ) {
 
 			$id = wp_insert_post( array(
 				'post_title'    => 'Untitled',
@@ -197,8 +197,8 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 				update_post_meta( $id, 'panels_data', $ppb_data );
 				$plink = get_the_permalink( $id );
 
-				if ( isset( $_GET['ppb-ios'] ) ) {
-					header("Location: $plink?ppb-ios&user=$ios_user&ppbLiveEditor=$nonce&edit_title=true");
+				if ( isset( $_GET['ppb-ipad'] ) ) {
+					header("Location: $plink?ppb-ipad&user=$ipad_user&ppbLiveEditor=$nonce&edit_title=true");
 					exit();
 				}
 				$nonce_url = wp_nonce_url( $plink, 'ppb-live-' . $id, 'ppbLiveEditor' );
@@ -215,7 +215,7 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 	}
 
 	public function browser_cache_page () {
-		if ( empty( $_GET['pootle_pb_ios_cache_helper'] ) ) {
+		if ( empty( $_GET['pootle_pb_ipad_cache_helper'] ) ) {
 			return;
 		}
 

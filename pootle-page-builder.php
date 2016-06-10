@@ -3,7 +3,7 @@
  * Plugin Name: Pootle Pagebuilder
  * Plugin URI: http://pootlepress.com/
  * Description: pootle page builder helps you create stunning pages with full width rows including parallax background images & videos.
- * Version: 2.1.beta1.2
+ * Version: 2.1.beta1.4
  * Author: pootlepress
  * Author URI: http://pootlepress.com/
  * License: GPL version 3
@@ -12,7 +12,7 @@
  */
 
 /** Pootle page builder current version */
-define( 'POOTLEPB_VERSION', '2.1.beta1.2' );
+define( 'POOTLEPB_VERSION', '2.1.beta1.4' );
 /** Pootle page builder __FILE__ */
 define( 'POOTLEPB_BASE_FILE', __FILE__ );
 /** Pootle page builder plugin directory path */
@@ -115,10 +115,10 @@ final class Pootle_Page_Builder {
 		add_action( 'admin_init', array( $this, 'ppb_compatibility' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 		add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-		add_action( 'wp_ajax_ppb_ios_posts', array( $this, 'ios_app_json' ) );
-		add_action( 'wp_ajax_nopriv_ppb_ios_posts', array( $this, 'ios_app_json' ) );
-		add_action( 'wp_ajax_ppb_ios_login', array( $this, 'ios_app_login' ) );
-		add_action( 'wp_ajax_nopriv_ppb_ios_login', array( $this, 'ios_app_login' ) );
+		add_action( 'wp_ajax_ppb_ipad_posts', array( $this, 'ipad_app_json' ) );
+		add_action( 'wp_ajax_nopriv_ppb_ipad_posts', array( $this, 'ipad_app_json' ) );
+		add_action( 'wp_ajax_ppb_ipad_login', array( $this, 'ipad_app_login' ) );
+		add_action( 'wp_ajax_nopriv_ppb_ipad_login', array( $this, 'ipad_app_login' ) );
 		add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
 
 		add_action( 'activated_plugin', array( $this, 'activation_redirect' ) );
@@ -180,7 +180,7 @@ final class Pootle_Page_Builder {
 	 * @return WP_Query
 	 * @since 0.3.0
 	 */
-	public function ios_app_json() {
+	public function ipad_app_json() {
 		$query = $this->ppb_posts();
 		$json = array();
 
@@ -195,7 +195,7 @@ final class Pootle_Page_Builder {
 		die();
 	}
 
-	public function ios_app_login() {
+	public function ipad_app_login() {
 		// print_awesome_r( getallheaders() );
 		// Nonce is checked, get the POST data and sign user on
 		$user_signon = wp_signon( null, false );
@@ -207,7 +207,7 @@ final class Pootle_Page_Builder {
 				exit;
 			}
 			$nonce = pootlepb_rand();
-			set_transient( 'ppb-ios-' . filter_input( INPUT_POST, 'log' ), $nonce, 25 * HOUR_IN_SECONDS );
+			set_transient( 'ppb-ipad-' . filter_input( INPUT_POST, 'log' ), $nonce, 25 * HOUR_IN_SECONDS );
 			echo json_encode( array( 'nonce' => $nonce, 'message' => __( 'Login successful, redirecting...' ) ) );
 		}
 
