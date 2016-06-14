@@ -60,7 +60,7 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 	/**
 	 * @param $admin_bar
 	 */
-	function add_item( $admin_bar ) {
+	function admin_bar_menu( $admin_bar ) {
 		?>
 <style>
 	#wpadminbar #wp-admin-bar-pootle-live-editor .ab-item:before {

@@ -3,7 +3,7 @@
  * Plugin Name: Pootle Pagebuilder
  * Plugin URI: http://pootlepress.com/
  * Description: pootle page builder helps you create stunning pages with full width rows including parallax background images & videos.
- * Version: 2.1.beta1.4
+ * Version: 2.1.beta1.5
  * Author: pootlepress
  * Author URI: http://pootlepress.com/
  * License: GPL version 3
@@ -12,7 +12,7 @@
  */
 
 /** Pootle page builder current version */
-define( 'POOTLEPB_VERSION', '2.1.beta1.4' );
+define( 'POOTLEPB_VERSION', '2.1.beta1.5' );
 /** Pootle page builder __FILE__ */
 define( 'POOTLEPB_BASE_FILE', __FILE__ );
 /** Pootle page builder plugin directory path */
@@ -200,7 +200,21 @@ final class Pootle_Page_Builder {
 		// Nonce is checked, get the POST data and sign user on
 		$user_signon = wp_signon( null, false );
 		if ( is_wp_error( $user_signon ) ) {
-			echo json_encode( array( 'nonce' => 'Failed', 'message' => __( 'Wrong username or password.' ) ) );
+			if ( username_exists( $_REQUEST['log'] ) ) {
+				echo json_encode(
+					array( 'nonce' => 'Failed',
+					       'message' => __( "Hi $_REQUEST[log], Your password doesn't match, please try again."
+					       )
+					)
+				);
+			} else {
+				echo json_encode(
+					array( 'nonce' => 'Failed',
+					       'message' => __( "We don't recognise you $_REQUEST[log], Kindly check your user name."
+					       )
+					)
+				);
+			}
 		} else {
 			if ( ! empty( $_POST['redirect_to'] ) ) {
 				header( "Location: $_POST[redirect_to]" );

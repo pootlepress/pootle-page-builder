@@ -133,33 +133,26 @@
 		line-height: 1;
 	}
 
-	#ppb-ipad-color-picker .wp-picker-container {
-		margin: 0 auto 25px;
-		width: 403px;
-		display: block;
-		float: none;
-	}
-
 	#ppb-ipad-color-picker {
-		width: 439px;
-		padding: 16px;
-		height: 550px;
+		width: 430px;
+		padding: 7px;
+		height: 340px;
+		-moz-box-sizing: content-box;
+		-webkit-box-sizing: content-box;
+		box-sizing: content-box;
+	}
+	.ppb-ipad-color-picker span {
+		display: block;
+		float:left;
+		width: 11%;
+		box-shadow: 1px 1px 3px rgba(0,0,0,0.25);
+		padding-top: 43px;
+		margin: 1.636%;
 	}
 
 	span.wp-picker-input-wrap .button,
 	a.wp-color-result.wp-picker-open {
 		display:none !important;
-	}
-
-	#ppb-ipad-color-input,
-	#ppb-ipad-color-done {
-		width: 403px;
-		font-size: 25px;
-		margin: auto;
-	}
-
-	#ppb-ipad-color-done {
-		background: #777;
 	}
 
 	@-webkit-keyframes fade-in-out {
@@ -180,6 +173,46 @@
 	<h3>Changes Saved</h3>
 </div>
 <div id="ppb-ipad-color-picker">
-	<input type="text" id="ppb-ipad-color-input">
-	<input onclick="ppbIpad.format.SetColor()" type="button" value="Choose Color" id="ppb-ipad-color-done">
+	<!--<h3>Choose Color</h3>-->
+	<div class="ppb-ipad-color-picker">
+		<span style="background: #000000" data-color="#000000"></span>
+		<span style="background: #993300" data-color="#993300"></span>
+		<span style="background: #333300" data-color="#333300"></span>
+		<span style="background: #003300" data-color="#003300"></span>
+		<span style="background: #003366" data-color="#003366"></span>
+		<span style="background: #000080" data-color="#000080"></span>
+		<span style="background: #333399" data-color="#333399"></span>
+		<span style="background: #333333" data-color="#333333"></span>
+		<span style="background: #800000" data-color="#800000"></span>
+		<span style="background: #FF6600" data-color="#FF6600"></span>
+		<span style="background: #808000" data-color="#808000"></span>
+		<span style="background: #008000" data-color="#008000"></span>
+		<span style="background: #008080" data-color="#008080"></span>
+		<span style="background: #0000FF" data-color="#0000FF"></span>
+		<span style="background: #666699" data-color="#666699"></span>
+		<span style="background: #808080" data-color="#808080"></span>
+		<span style="background: #FF0000" data-color="#FF0000"></span>
+		<span style="background: #FF9900" data-color="#FF9900"></span>
+		<span style="background: #99CC00" data-color="#99CC00"></span>
+		<span style="background: #339966" data-color="#339966"></span>
+		<span style="background: #33CCCC" data-color="#33CCCC"></span>
+		<span style="background: #3366FF" data-color="#3366FF"></span>
+		<span style="background: #800080" data-color="#800080"></span>
+		<span style="background: #999999" data-color="#999999"></span>
+		<span style="background: #FF00FF" data-color="#FF00FF"></span>
+		<span style="background: #FFCC00" data-color="#FFCC00"></span>
+		<span style="background: #FFFF00" data-color="#FFFF00"></span>
+		<span style="background: #00FF00" data-color="#00FF00"></span>
+		<span style="background: #00FFFF" data-color="#00FFFF"></span>
+		<span style="background: #00CCFF" data-color="#00CCFF"></span>
+		<span style="background: #993366" data-color="#993366"></span>
+		<span style="background: #FFFFFF" data-color="#FFFFFF"></span>
+		<span style="background: #FF99CC" data-color="#FF99CC"></span>
+		<span style="background: #FFCC99" data-color="#FFCC99"></span>
+		<span style="background: #FFFF99" data-color="#FFFF99"></span>
+		<span style="background: #CCFFCC" data-color="#CCFFCC"></span>
+		<span style="background: #CCFFFF" data-color="#CCFFFF"></span>
+		<span style="background: #99CCFF" data-color="#99CCFF"></span>
+		<span style="background: #CC99FF" data-color="#CC99FF"></span>
+	</div>
 </div>

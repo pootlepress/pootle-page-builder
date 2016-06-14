@@ -78,7 +78,6 @@ jQuery( function ( $ ) {
 		$addRowDialog = $( '#pootlepb-add-row' ),
 		$setTitleDialog = $( '#pootlepb-set-title' ),
 		$ppbIpadColorDialog = $('#ppb-ipad-color-picker'),
-		$ppbIpadColorInput = $('#ppb-ipad-color-input'),
 		$ppb = $( '#pootle-page-builder' ),
 		dialogAttr = {
 			dialogClass : 'ppb-cool-panel',
@@ -826,6 +825,21 @@ jQuery( function ( $ ) {
 			return false;
 		}
 	} );
+
+	$ppb.delegate( '.ppb-edit-row .dashicons-editor-code', 'dblclick', function () {
+		var $t = $( this );
+		window.ppbRowI = $t.closest( '.pootle-live-editor' ).data( 'index' );
+		$rowPanel.ppbDialog( 'open' );
+	} );
+
+
+	$ppb.delegate( '.ppb-edit-block .dashicons-screenoptions', 'dblclick', function () {
+		var $t = $( this );
+		window.ppbPanelI = $t.closest( '.pootle-live-editor' ).data( 'index' );
+		$contentPanel.ppbDialog( 'open' );
+	} );
+
+
 	ppbIpad.notice = $( '#ppb-ipad-updated-notice' );
 
 	ppbIpad.AddRow = function () {
@@ -910,10 +924,21 @@ jQuery( function ( $ ) {
 		prevu.syncAjax();
 	};
 
-	$ppbIpadColorInput.wpColorPicker({
-		width: 400,
-		hide: false
-	});
+	$ppbIpadColorDialog.delegate( '.ppb-ipad-color-picker span', 'mousedown', function ( e ) {
+		e.preventDefault();
+		return false;
+	} );
+
+	$ppbIpadColorDialog.delegate( '.ppb-ipad-color-picker span', 'click', function ( e ) {
+		e.preventDefault();
+		console.log( $( this ).data( 'color' ) );
+		tinymce.activeEditor.execCommand(
+			'ForeColor',
+			false,
+			$(this).data('color')
+		);
+		$ppbIpadColorDialog.hide();
+	} );
 
 	ppbIpad.format = {
 		H1     : function () {
@@ -930,16 +955,6 @@ jQuery( function ( $ ) {
 		},
 		Color  : function () {
 			$ppbIpadColorDialog.show();
-			$ppbIpadColorInput.wpColorPicker( 'open' );
-				},
-		SetColor  : function () {
-			console.log( $ppbIpadColorInput.val() );
-			tinymce.activeEditor.execCommand(
-				'ForeColor',
-				false,
-				$ppbIpadColorInput.val()
-			);
-			$ppbIpadColorDialog.hide();
 		},
 		Link   : function () {
 			tinymce.activeEditor.execCommand('WP_Link')
@@ -1006,17 +1021,21 @@ jQuery( function ( $ ) {
 	prevu.tmce.inline		= true;
 	prevu.tmce.theme		= 'ppbprevu';
 
+	console.log( prevu.tmce );
+
 	if ( ! ppbAjax.ipad ) {
 		prevu.tmce.toolbar = [
-			'bold',
-			'italic',
-			'strikethrough',
+			'h1',
+			'h2',
+			'h3',
+			'blockquote',
 			'forecolor',
 			'link',
-			'unlink',
-			'blockquote',
-			'h2',
-			'h3'
+			'bold',
+			'italic',
+			'alignleft',
+			'aligncenter',
+			'alignright',
 		];
 	}
 

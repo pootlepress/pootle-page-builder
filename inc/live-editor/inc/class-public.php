@@ -71,7 +71,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * Adds the actions anf filter hooks for plugin
 	 * @since 1.1.0
 	 */
-	public function verify() {
+	public function init_live_editing() {
 		global $post;
 
 		//Checking nonce
@@ -294,7 +294,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 1.1.0
 	 */
 	public function sync() {
-		if ( $this->verify() ) {
+		if ( $this->init_live_editing() ) {
 			$id = $_POST['post'];
 
 			if ( filter_input( INPUT_POST, 'publish' ) ) {

@@ -135,7 +135,7 @@ class Pootle_Page_Builder_Live_Editor {
 		// Enqueues the admin scripts
 		add_action( 'pootlepb_enqueue_admin_scripts', array( $this->admin, 'enqueue' ) );
 		//Adds Live editor link
-		add_action( 'admin_bar_menu', array( $this->admin, 'add_item' ), 999 );
+		add_action( 'admin_bar_menu', array( $this->admin, 'admin_bar_menu' ), 999 );
 		//Ajax action to save live editor data and render new grid
 		add_action( 'wp', array( $this->admin, 'browser_cache_page' ) );
 	}
@@ -149,7 +149,7 @@ class Pootle_Page_Builder_Live_Editor {
 		$this->public = Pootle_Page_Builder_Live_Editor_Public::instance();
 
 		//Adds frontend actions
-		add_action( 'wp', array( $this->public, 'verify' ) );
+		add_action( 'wp', array( $this->public, 'init_live_editing' ) );
 		//Ajax action to save live editor data and render new grid
 		add_action( 'wp_ajax_pootlepb_live_editor', array( $this->public, 'sync' ) );
 		//Ajax action to save live editor data and render new grid
