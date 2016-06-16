@@ -97,6 +97,8 @@ jQuery( function ( $ ) {
 		debug: true,
 		unSavedChanges: false,
 
+		justClickedEditRow: false,
+		justClickedEditBlock: false,
 		syncAjax : function () {
 			return jQuery.post( ppbAjax.url, ppbAjax, function ( response ) {
 				console.log( response );
@@ -826,17 +828,30 @@ jQuery( function ( $ ) {
 		}
 	} );
 
-	$ppb.delegate( '.ppb-edit-row .dashicons-editor-code', 'dblclick', function () {
-		var $t = $( this );
-		window.ppbRowI = $t.closest( '.pootle-live-editor' ).data( 'index' );
-		$rowPanel.ppbDialog( 'open' );
+	$ppb.delegate( '.ppb-edit-row .dashicons-editor-code', 'click', function () {
+		if ( prevu.justClickedEditRow ) {
+			var $t = $( this );
+			window.ppbRowI = $t.closest( '.pootle-live-editor' ).data( 'index' );
+			$rowPanel.ppbDialog( 'open' );
+		} else {
+			prevu.justClickedEditRow = true;
+			setTimeout( function(){
+				prevu.justClickedEditRow = false;
+			}, 520 );
+		}
 	} );
 
-
-	$ppb.delegate( '.ppb-edit-block .dashicons-screenoptions', 'dblclick', function () {
-		var $t = $( this );
-		window.ppbPanelI = $t.closest( '.pootle-live-editor' ).data( 'index' );
-		$contentPanel.ppbDialog( 'open' );
+	$ppb.delegate( '.ppb-edit-block .dashicons-screenoptions', 'click', function () {
+		if ( prevu.justClickedEditBlock ) {
+			var $t = $( this );
+			window.ppbPanelI = $t.closest( '.pootle-live-editor' ).data( 'index' );
+			$contentPanel.ppbDialog( 'open' );
+		} else {
+			prevu.justClickedEditBlock = true;
+			setTimeout( function () {
+				prevu.justClickedEditBlock = false;
+			}, 520 );
+		}
 	} );
 
 
@@ -894,21 +909,21 @@ jQuery( function ( $ ) {
 		if ( ppbAjax.title ) {
 			var butt = [
 				{
-					text: 'Publish',
-					icons: {
-						primary: 'ipad-'
-					},
+					text: 'Save Draft',
 					click: function () {
-						ppbAjax.publish = 'Publish';
+						ppbAjax.publish = 'Save Draft';
 						ppbAjax.title = $( '#ppble-live-page-title' ).val();
 						prevu.syncAjax();
 						$setTitleDialog.ppbDialog( 'close' );
 					}
 				},
 				{
-					text: 'Save Draft',
+					text: 'Publish',
+					icons: {
+						primary: 'ipad-publish'
+					},
 					click: function () {
-						ppbAjax.publish = 'Save Draft';
+						ppbAjax.publish = 'Publish';
 						ppbAjax.title = $( '#ppble-live-page-title' ).val();
 						prevu.syncAjax();
 						$setTitleDialog.ppbDialog( 'close' );
@@ -954,7 +969,11 @@ jQuery( function ( $ ) {
 			tinymce.activeEditor.execCommand('mceBlockQuote')
 		},
 		Color  : function () {
-			$ppbIpadColorDialog.show();
+			console.log( $( window ).scrollTop() );
+			console.log( $( '.ppb-block.active' ).offset().top );
+			var posTop = Math.max( $( window ).scrollTop(), $( '.ppb-block.active' ).offset().top );
+			console.log( posTop );
+			$ppbIpadColorDialog.show().css('top', posTop );
 		},
 		Link   : function () {
 			tinymce.activeEditor.execCommand('WP_Link')

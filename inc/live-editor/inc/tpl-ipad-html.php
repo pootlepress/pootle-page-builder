@@ -1,6 +1,13 @@
 <style>
 	.panel-grid:first-child{ margin-top:0 }
-	.pootle-live-editor.ppb-live-add-object.add-row, .panel-grid:hover .ppb-edit-row:hover span.dashicons-before, .ppb-block:hover .pootle-live-editor:hover span.dashicons-before { display: none;  }
+	.pootle-live-editor.ppb-live-add-object.add-row,
+	.panel-grid:hover .ppb-edit-row:hover span.dashicons-before,
+	.ppb-block:hover .pootle-live-editor:hover span.dashicons-before {
+		display: none;
+	}
+	.panel-grid:hover .ppb-edit-row:hover span.dashicons-before.dashicons-no {
+		display: inline-block;
+	}
 	.panel-grid:hover .ppb-edit-row:hover span.dashicons-editor-code, .ppb-block:hover .pootle-live-editor:hover span.dashicons-screenoptions { display: inline-block;  }
 	.pootle-live-editor-active .ppb-tabs-nav {
 		font-size: 16px;
@@ -134,6 +141,9 @@
 	}
 
 	#ppb-ipad-color-picker {
+		position: absolute;
+		top: 0;
+		bottom: auto;
 		width: 430px;
 		padding: 7px;
 		height: 340px;

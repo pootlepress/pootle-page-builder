@@ -12,7 +12,7 @@
  */
 
 /** Pootle page builder current version */
-define( 'POOTLEPB_VERSION', '2.1.beta1.5' );
+define( 'POOTLEPB_VERSION', '2.1.beta1.5.2' );
 /** Pootle page builder __FILE__ */
 define( 'POOTLEPB_BASE_FILE', __FILE__ );
 /** Pootle page builder plugin directory path */
