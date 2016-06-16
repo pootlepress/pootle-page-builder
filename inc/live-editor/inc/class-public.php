@@ -88,7 +88,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			$this->ipad = true;
 			$this->actions();
 			add_filter('show_admin_bar', '__return_false');
-			add_action( 'wp_head', array( $this, 'ipad_bar' ) );
+			add_action( 'wp_head', array( $this, 'ipad_html' ) );
 
 			return true;
 		} else if ( wp_verify_nonce( $this->nonce, 'ppb-live-' . $id ) ) {
@@ -460,8 +460,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		require 'dialogs.php';
 	}
 
-	public function ipad_bar() {
-		include "tpl-ipad-requirements.php";
+	public function ipad_html() {
+		include "tpl-ipad-html.php";
 	}
 }
 ?>
