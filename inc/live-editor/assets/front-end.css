@@ -590,8 +590,21 @@ body .ppb-dialog {
 
 #pootlepb-add-row, #pootlepb-set-title {
 	padding:25px;
+	text-align: center;
 }
-
+#pootlepb-set-title button {
+	margin-top: 16px;
+}
+#ppble-feat-img-prevu {
+	margin: auto;
+	margin-top: 16px;
+	padding-top: 70px;
+	padding-bottom: 70px;
+	line-height: 20px;
+	width: 160px;
+	background: #fff center no-repeat;
+	border: 1px solid #ddd;
+}
 .pootle-live-editor-active .ppb-dialog .button,
 .pootle-live-editor-active .ppb-dialog button,
 .pootle-live-editor-active .ppb-dialog .ui-button {

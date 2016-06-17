@@ -157,5 +157,15 @@ $row_panel_tabs = array(
 			<p>Please set the title for the page,</p>
 			<input id="ppble-live-page-title" type="text" placeholder="<?php echo $this->edit_title; ?>">
 		</label>
+		<?php
+		if ( get_post_type() == 'post' ) {
+			?>
+			<div id="ppble-feat-img-wrapper">
+				<div id="ppble-feat-img-prevu">Image preview</div>
+				<button id="ppble-live-post-thumb">Choose Featured image</button>
+			</div>
+			<?php
+		}
+		?>
 	</div>
 <?php

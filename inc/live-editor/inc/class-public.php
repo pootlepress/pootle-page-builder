@@ -307,6 +307,9 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				if ( ! empty( $_POST['title'] ) ) {
 					$live_page_post['post_title'] = $_POST['title'];
 				}
+				if ( ! empty( $_POST['thumbnail'] ) ) {
+					set_post_thumbnail( $id, $_POST['thumbnail'] );
+				}
 
 				// Update PPB data
 				update_post_meta( $id, 'panels_data', $_POST['data'] );
@@ -457,7 +460,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 1.1.0
 	 */
 	public function dialogs() {
-		require 'dialogs.php';
+		require 'tpl-dialogs.php';
 	}
 
 	public function ipad_html() {

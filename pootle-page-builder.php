@@ -182,10 +182,14 @@ final class Pootle_Page_Builder {
 	 */
 	public function ipad_app_json() {
 		$query = $this->ppb_posts();
-		$json = array();
+		$json = array(
+			'site_url' => site_url(),
+			'posts' => [],
+
+		);
 
 		foreach ( $query->posts as $post ) {
-			$json[] = array(
+			$json['posts'][] = array(
 				'title' => $post->post_title,
 				'link' => get_permalink( $post ),
 				'type' => $post->post_type,
@@ -203,15 +207,14 @@ final class Pootle_Page_Builder {
 			if ( username_exists( $_REQUEST['log'] ) ) {
 				echo json_encode(
 					array( 'nonce' => 'Failed',
-					       'message' => __( "Hi $_REQUEST[log], Your password doesn't match, please try again."
-					       )
+					       'message' => __( "Hi $_REQUEST[log], Your password doesn't match, please try again." ),
 					)
 				);
 			} else {
 				echo json_encode(
-					array( 'nonce' => 'Failed',
-					       'message' => __( "We don't recognise you $_REQUEST[log], Kindly check your user name."
-					       )
+					array(
+						'nonce' => 'Failed',
+						'message' => __( "We don't recognise you $_REQUEST[log], Kindly check your user name." ),
 					)
 				);
 			}
@@ -222,7 +225,10 @@ final class Pootle_Page_Builder {
 			}
 			$nonce = pootlepb_rand();
 			set_transient( 'ppb-ipad-' . filter_input( INPUT_POST, 'log' ), $nonce, 25 * HOUR_IN_SECONDS );
-			echo json_encode( array( 'nonce' => $nonce, 'message' => __( 'Login successful, redirecting...' ) ) );
+			echo json_encode( array(
+				'nonce' => $nonce,
+				'message' => __( 'Login successful, redirecting...' ),
+			) );
 		}
 
 		exit();

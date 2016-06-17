@@ -653,8 +653,8 @@ jQuery( function ( $ ) {
 	dialogAttr.title = 'Add row';
 	dialogAttr.dialogClass = dialogAttr.open = null;
 	dialogAttr.buttons.Done = prevu.addRow;
-	dialogAttr.height = 250;
-	dialogAttr.width = 320;
+	dialogAttr.height = 430;
+	dialogAttr.width = 340;
 	$addRowDialog.ppbDialog( dialogAttr );
 
 	dialogAttr.title = 'Set title of the page';
@@ -1084,6 +1084,39 @@ jQuery( function ( $ ) {
 
 	$( '[href="#ppb-live-publish-changes"]' ).click( function(){
 		prevu.sync( null, 'Publish' );
+	} );
+
+	$( '#ppble-live-post-thumb' ).click( function () {
+		event.preventDefault();
+
+		// If the media frame already exists, reopen it.
+		if ( typeof ppbFeaturedImageFrame !== 'undefined' ) {
+			ppbFeaturedImageFrame.open();
+			return;
+		}
+
+		// Create the media frame.
+		ppbFeaturedImageFrame = wp.media.frames.ppbFeaturedImageFrame = wp.media( {
+			title: 'Featured Image',
+			button: {
+				text: 'Set Featured Image'
+			},
+			multiple: false  // Set to true to allow multiple files to be selected
+		} );
+
+		// When an image is selected, run a callback.
+		ppbFeaturedImageFrame.on( 'select', function () {
+			// We set multiple to false so only get one image from the uploader
+			attachment = ppbFeaturedImageFrame.state().get( 'selection' ).first().toJSON();
+
+			// Do something with attachment.id and/or attachment.url here
+			ppbAjax.thumbnail = attachment.id;
+			console.log( attachment );
+			$('#ppble-feat-img-prevu').css( 'background-image', 'url(' + attachment.sizes.thumbnail.url + ')' ).css('color', 'rgba(0,0,0,0)');
+		} );
+
+		// Finally, open the modal
+		ppbFeaturedImageFrame.open();
 	} );
 
 	window.onbeforeunload = function(e) {
