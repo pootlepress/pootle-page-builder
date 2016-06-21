@@ -892,6 +892,10 @@ jQuery( function ( $ ) {
 		prevu.activeEditor = $block.children('.pootle-live-editor-realtime');
 		prevu.insertImage( prevu.activeEditor )
 	};
+	ppbIpad.preview = function () {
+		prevu.sync( null, 'Save Draft' );
+	};
+
 	ppbIpad.Update = function () {
 		prevu.noRedirect = true;
 		prevu.ajaxCallback = function () {
@@ -1056,6 +1060,10 @@ jQuery( function ( $ ) {
 			'aligncenter',
 			'alignright',
 		];
+	} else {
+		$( 'a' ).click( function( e ) {
+			e.preventDefault();
+		} )
 	}
 
 	prevu.tmce.content_css	= "http://wp/ppb/wp-includes/css/dashicons.min.css?ver=4.4.2-alpha-36412";

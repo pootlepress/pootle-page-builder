@@ -3,7 +3,7 @@
  * Plugin Name: Pootle Pagebuilder
  * Plugin URI: http://pootlepress.com/
  * Description: pootle page builder helps you create stunning pages with full width rows including parallax background images & videos.
- * Version: 2.1.beta1.5
+ * Version: 2.1.beta1.6
  * Author: pootlepress
  * Author URI: http://pootlepress.com/
  * License: GPL version 3
@@ -12,7 +12,7 @@
  */
 
 /** Pootle page builder current version */
-define( 'POOTLEPB_VERSION', '2.1.beta1.5.2' );
+define( 'POOTLEPB_VERSION', '2.1.beta1.6' );
 /** Pootle page builder __FILE__ */
 define( 'POOTLEPB_BASE_FILE', __FILE__ );
 /** Pootle page builder plugin directory path */
@@ -200,7 +200,14 @@ final class Pootle_Page_Builder {
 	}
 
 	public function ipad_app_login() {
-		// print_awesome_r( getallheaders() );
+		if ( 'server' == $_REQUEST['log'] && 'ping' == $_REQUEST['pwd'] ) {
+			echo json_encode(
+				array( 'nonce' => 'ServerPingSuccess',
+				       'message' => __( "Connected to server, type in your username and password to start building!" ),
+				)
+			);
+			exit;
+		}
 		// Nonce is checked, get the POST data and sign user on
 		$user_signon = wp_signon( null, false );
 		if ( is_wp_error( $user_signon ) ) {
