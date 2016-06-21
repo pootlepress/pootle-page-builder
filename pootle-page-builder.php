@@ -202,8 +202,10 @@ final class Pootle_Page_Builder {
 	public function ipad_app_login() {
 		if ( 'server' == $_REQUEST['log'] && 'ping' == $_REQUEST['pwd'] ) {
 			echo json_encode(
-				array( 'nonce' => 'ServerPingSuccess',
-				       'message' => __( "Connected to server, type in your username and password to start building!" ),
+				array(
+					'nonce'		=> 'PootlePBresponse',
+					'message'	=> __( "Connected to server, type in your username and password to start building!" ),
+					'site'		=> site_url(),
 				)
 			);
 			exit;

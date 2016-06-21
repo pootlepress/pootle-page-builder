@@ -161,8 +161,12 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 	public function new_live_post( $post_type = 'page' ) {
 		$nonce = filter_input( INPUT_GET, 'ppbLiveEditor' );
 		$ipad_user = filter_input( INPUT_GET, 'user' );
-		if ( $nonce === get_transient( 'ppb-ipad-' . $ipad_user ) || wp_verify_nonce( $nonce, 'ppb-new-live-post' ) ) {
 
+		if ( ! is_user_logged_in() ) {
+			?><h1>You need to be logged in to be able to do that!</h1><?php
+			exit;
+		}
+		if ( $nonce === get_transient( 'ppb-ipad-' . $ipad_user ) || wp_verify_nonce( $nonce, 'ppb-new-live-post' ) ) {
 			$id = wp_insert_post( array(
 				'post_title'    => 'Untitled',
 				'post_content'  => '',
