@@ -97,7 +97,7 @@
 		text-shadow: 0 -1px 1px #006799,1px 0 1px #006799,0 1px 1px #006799,-1px 0 1px #006799 !important;
 		font-weight: 500;
 	}
-	#ppb-ipad-updated-notice, #ppb-ipad-color-picker {
+	.circular-blue-notice, #ppb-ipad-color-picker {
 		padding: 50px 50px;
 		position: fixed;
 		top: 0;
@@ -112,16 +112,20 @@
 		background: #fff;
 		display: none;
 	}
-	#ppb-ipad-updated-notice {
+	.circular-blue-notice {
 		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
 		background: #0c7;
 		border-radius: 50%;
+	}
+
+	.fade-in-out {
 		-webkit-animation: fade-in-out 2.5s 1 both;
 		animation: fade-in-out 2.5s 1 both;
 	}
 
-	#ppb-ipad-updated-notice > * {
+	.circular-blue-notice > *,
+	.circular-blue-notice > .dashicons {
 		display: inline-block;
 		width: auto;
 		height: auto;
@@ -131,7 +135,11 @@
 		letter-spacing: 2px;
 	}
 
-	#ppb-ipad-updated-notice .dashicons:before {
+	span.ppb-rotate.dashicons.dashicons-admin-generic:before {
+		padding: 0 0 0.0216em 0.052em;
+	}
+
+	.circular-blue-notice .dashicons:before {
 		font-size: 160px;
 		color: inherit;
 		width: auto;
@@ -178,9 +186,13 @@
 		100% { opacity: 0; transform: translate3d(0,25%,0)  }
 	}
 </style>
-<div id="ppb-ipad-updated-notice">
+<div id="ppb-ipad-updated-notice" class="circular-blue-notice fade-in-out">
 	<span class="dashicons dashicons-yes"></span>
 	<h3>Changes Saved</h3>
+</div>
+<div id="ppb-ipad-notice" class="circular-blue-notice">
+	<span class="ppb-rotate dashicons dashicons-admin-generic"></span>
+	<h3>Saving changes...</h3>
 </div>
 <div id="ppb-ipad-color-picker">
 	<!--<h3>Choose Color</h3>-->

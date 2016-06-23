@@ -839,7 +839,7 @@
                     // Change the title of the panel
                     if( activeDialog.hasClass('ui-dialog-content') ) {
                         activeDialog.ppbDialog('close');
-                    }
+                      }
                 }
             }
         ]

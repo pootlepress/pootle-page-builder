@@ -588,16 +588,52 @@ body .ppb-dialog {
 	margin-left: 200px;
 }
 
-#pootlepb-add-row, #pootlepb-set-title {
+#pootlepb-add-row, #pootlepb-set-title, #pootlepb-post-settings {
 	padding:25px;
 	text-align: center;
 }
-#pootlepb-set-title button {
+
+.pootlepb-dialog button {
 	margin-top: 16px;
 }
-#ppble-feat-img-prevu {
-	margin: auto;
-	margin-top: 16px;
+
+.pootlepb-dialog label {
+	display: block;
+}
+
+#pootlepb-post-settings label {
+	text-align: left;
+	padding: 25px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+#pootlepb-post-settings label:last-of-type {
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+#pootlepb-post-settings label > * {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0;
+}
+
+#pootlepb-post-settings input,
+#pootlepb-post-settings select,
+#pootlepb-post-settings input {
+	width: 250px;
+}
+
+#pootlepb-post-settings h3 {
+	width: 169px;
+}
+
+#pootlepb-post-settings label > span {
+
+}
+
+.ppble-img-prevu {
+	text-align: center;
 	padding-top: 70px;
 	padding-bottom: 70px;
 	line-height: 20px;

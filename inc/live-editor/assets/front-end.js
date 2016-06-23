@@ -77,6 +77,7 @@ jQuery( function ( $ ) {
 		$rowPanel = $( '#pootlepb-row-editor-panel' ),
 		$addRowDialog = $( '#pootlepb-add-row' ),
 		$setTitleDialog = $( '#pootlepb-set-title' ),
+		$postSettingsDialog = $( '#pootlepb-post-settings' ),
 		$ppbIpadColorDialog = $('#ppb-ipad-color-picker'),
 		$ppb = $( '#pootle-page-builder' ),
 		dialogAttr = {
@@ -121,6 +122,8 @@ jQuery( function ( $ ) {
 			prevu.ajaxCallback = callback;
 			prevu.unSavedChanges = true;
 			prevu.saveTmceBlock( $( '.mce-edit-focus' ) );
+			delete ppbAjax.data;
+			console.log( ppbAjax );
 			ppbAjax.data = ppbData;
 
 			if ( publish ) {
@@ -381,6 +384,7 @@ jQuery( function ( $ ) {
 		},
 
 		addRow : function ( e, ui ) {
+			console.log( "adding row" );
 			window.ppbRowI = ppbData.grids.length;
 			var num_cells;
 
@@ -428,9 +432,11 @@ jQuery( function ( $ ) {
 				var $ro = $r.find( '#pg-' + qry.post + '-' + window.ppbRowI ),
 					$cols = $ro.find( '.panel-grid-cell-container > .panel-grid-cell' );
 				$cols.css( 'width', ( 100 - num_cells + 1 ) / num_cells + '%' );
+				$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
+				console.log( $ro.find( '.pootle-live-editor-realtime:eq(0)' ).length );
+				$ro.find('.pootle-live-editor-realtime:eq(0)').parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
 				$('.pootle-live-editor.add-row' ).before( $ro );
 				$ro.prevuRowInit();
-
 			} );
 		},
 
@@ -585,7 +591,7 @@ jQuery( function ( $ ) {
 			}
 		},
 
-		insertImage : function( $t ) {
+		insertImage : function() {
 			// If the media frame already exists, reopen it.
 			if (prevu.insertImageFrame) {
 				prevu.insertImageFrame.open();
@@ -615,10 +621,9 @@ jQuery( function ( $ ) {
 				attachment = prevu.insertImageFrame.state().get('selection').first().toJSON();
 
 				// Do something with attachment.id and/or attachment.url here
-				console.log( attachment );
 				var $img = $( '<img>' ).attr( 'src', attachment.url );
 
-				$t.append( $( '<p>' ).html( $img ) );
+				prevu.activeEditor.append( $( '<p>' ).html( $img ) );
 				tinyMCE.triggerSave();
 
 			});
@@ -632,6 +637,9 @@ jQuery( function ( $ ) {
 			console.log( blockI );
 			ppbData.widgets[blockI].text = $ed.html();
 			prevu.unSavedChanges = true;
+		},
+		postSettings : function () {
+			$postSettingsDialog.ppbDialog( 'open' );
 		},
 		tmce : $.extend( true, {}, tinyMCEPreInit.mceInit.ppbeditor )
 	};
@@ -653,7 +661,7 @@ jQuery( function ( $ ) {
 	dialogAttr.title = 'Add row';
 	dialogAttr.dialogClass = dialogAttr.open = null;
 	dialogAttr.buttons.Done = prevu.addRow;
-	dialogAttr.height = 430;
+	dialogAttr.height = 340;
 	dialogAttr.width = 340;
 	$addRowDialog.ppbDialog( dialogAttr );
 
@@ -663,6 +671,18 @@ jQuery( function ( $ ) {
 		prevu.syncAjax();
 	};
 	$setTitleDialog.ppbDialog( dialogAttr );
+
+	dialogAttr.height = 700;
+	dialogAttr.width = 610;
+	dialogAttr.title = 'Post settings';
+	dialogAttr.buttons.Done = function () {
+		ppbAjax.title = $postSettingsDialog.find( '.post-title' ).val();
+		ppbAjax.category = $postSettingsDialog.find( '.post-category' ).val();
+		ppbAjax.tags = $postSettingsDialog.find( '.post-tags' ).val();
+		prevu.sync();
+		$postSettingsDialog.ppbDialog( 'close' );
+	};
+	$postSettingsDialog.ppbDialog( dialogAttr );
 
 	$('.panel-grid-cell-container > .panel-grid-cell' ).each( function () {
 		prevu.resizableCells.correctCellData( $(this) );
@@ -814,7 +834,7 @@ jQuery( function ( $ ) {
 	$ppb.delegate( '.ppb-edit-block .dashicons-format-image', 'click', function ( e ) {
 		e.preventDefault();
 		prevu.activeEditor = $(this).closest('.ppb-block' ).children('.pootle-live-editor-realtime');
-		prevu.insertImage( prevu.activeEditor )
+		prevu.insertImage()
 	} );
 
 	$ppb.delegate( '.pootle-live-editor.add-row .dashicons-plus', 'click', function () {
@@ -854,13 +874,13 @@ jQuery( function ( $ ) {
 		}
 	} );
 
-
-	ppbIpad.notice = $( '#ppb-ipad-updated-notice' );
+	ppbIpad.updatedNotice = $( '#ppb-ipad-updated-notice' );
+	ppbIpad.notice = $( '#ppb-ipad-notice' );
 
 	ppbIpad.AddRow = function () {
 		$addRowDialog.ppbDialog( 'open' );
-
 	};
+
 	ppbIpad.StyleRow = function () {
 		var $row = $('.panel-grid.active');
 		if ( $row.length != 1 ) {
@@ -890,19 +910,28 @@ jQuery( function ( $ ) {
 			return;
 		}
 		prevu.activeEditor = $block.children('.pootle-live-editor-realtime');
-		prevu.insertImage( prevu.activeEditor )
+		prevu.insertImage()
 	};
 	ppbIpad.preview = function () {
 		prevu.sync( null, 'Save Draft' );
+		ppbIpad.notice.show( 0 );
+	};
+	ppbIpad.postSettings = function () {
+		prevu.postSettings();
+	};
+	ppbIpad.AddRow = function () {
+		$addRowDialog.ppbDialog( 'open' );
 	};
 
 	ppbIpad.Update = function () {
+		ppbIpad.notice.show( 0 );
 		prevu.noRedirect = true;
 		prevu.ajaxCallback = function () {
 			ppbAjax.title = null;
-			ppbIpad.notice.show( 0 );
+			ppbIpad.notice.hide( 0 );
+			ppbIpad.updatedNotice.show( 0 );
 			setTimeout( function () {
-				ppbIpad.notice.hide();
+				ppbIpad.updatedNotice.hide();
 			}, 2500 );
 		};
 		prevu.unSavedChanges = true;
@@ -1094,7 +1123,7 @@ jQuery( function ( $ ) {
 		prevu.sync( null, 'Publish' );
 	} );
 
-	$( '#ppble-live-post-thumb' ).click( function () {
+	$( '#ppble-feat-img-prevu' ).click( function () {
 		event.preventDefault();
 
 		// If the media frame already exists, reopen it.
@@ -1119,7 +1148,6 @@ jQuery( function ( $ ) {
 
 			// Do something with attachment.id and/or attachment.url here
 			ppbAjax.thumbnail = attachment.id;
-			console.log( attachment );
 			$('#ppble-feat-img-prevu').css( 'background-image', 'url(' + attachment.sizes.thumbnail.url + ')' ).css('color', 'rgba(0,0,0,0)');
 		} );
 

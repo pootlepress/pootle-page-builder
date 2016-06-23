@@ -290,6 +290,29 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	}
 
 	/**
+	 * Saves title, thumbnail, categories, tags etc. for post
+	 * @param array $live_page_post
+	 * @return array
+	 */
+	public function savePostMeta ( $live_page_post ) {
+		$id = $live_page_post['ID'];
+		if ( ! empty( $_POST['title'] ) ) {
+			$live_page_post['post_title'] = $_POST['title'];
+		}
+		if ( ! empty( $_POST['thumbnail'] ) ) {
+			set_post_thumbnail( $id, $_POST['thumbnail'] );
+		}
+
+		if ( ! empty( $_POST['category'] ) ) {
+			wp_set_post_terms( $id, $_POST['category'], "category", false );
+		}
+
+		if ( ! empty( $_POST['tags'] ) ) {
+			wp_set_post_terms( $id, $_POST['tags'], "post_tag", false );
+		}
+		return $live_page_post;
+	}
+	/**
 	 * Saves setting from front end via ajax
 	 * @since 1.1.0
 	 */
@@ -304,12 +327,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				if ( 'Publish' == filter_input( INPUT_POST, 'publish' ) ) {
 					$live_page_post['post_status'] = 'publish';
 				}
-				if ( ! empty( $_POST['title'] ) ) {
-					$live_page_post['post_title'] = $_POST['title'];
-				}
-				if ( ! empty( $_POST['thumbnail'] ) ) {
-					set_post_thumbnail( $id, $_POST['thumbnail'] );
-				}
+
+				$live_page_post = $this->savePostMeta( $live_page_post );
 
 				// Update PPB data
 				update_post_meta( $id, 'panels_data', $_POST['data'] );
@@ -322,6 +341,12 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 				echo get_permalink( $id );
 			} else {
+
+				$live_page_post = $this->savePostMeta( array( 'ID' => $id ) );
+
+				// Update post
+				wp_update_post( $live_page_post, true );
+
 				foreach ( $_POST['data']['widgets'] as $i => $wid ) {
 					if ( ! empty( $wid['info']['style'] ) ) {
 						$_POST['data']['widgets'][ $i ]['info']['style'] = stripslashes( $wid['info']['style'] );

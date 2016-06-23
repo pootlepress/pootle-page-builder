@@ -160,12 +160,66 @@ $row_panel_tabs = array(
 		<?php
 		if ( get_post_type() == 'post' ) {
 			?>
-			<div id="ppble-feat-img-wrapper">
-				<div id="ppble-feat-img-prevu">Image preview</div>
-				<button id="ppble-live-post-thumb">Choose Featured image</button>
-			</div>
+			<a href="javascript:">Edit Post</a>
 			<?php
 		}
 		?>
 	</div>
+
 <?php
+if ( get_post_type() == 'post' ) {
+	?>
+	<div class="pootlepb-dialog" id="pootlepb-post-settings">
+		<label>
+			<h3>Title</h3>
+			<span>
+				<input class="post-title" type="text" placeholder="<?php echo $this->edit_title; ?>">
+			</span>
+		</label>
+		<label>
+			<h3>Featured image</h3>
+			<span>
+			<div id="ppble-feat-img-wrapper">
+				<div class="ppble-img-prevu" id="ppble-feat-img-prevu">Choose Image</div>
+			</div>
+			</span>
+		</label>
+		<label>
+			<h3>Categories</h3>
+			<span>
+			<select multiple="multiple" class="post-category">
+				<?php
+				$terms = get_terms( array(
+					'taxonomy'   => 'category',
+					'hide_empty' => false,
+				) );
+
+				foreach ( $terms as $cat ) {
+					echo "<option value='$cat->term_id'>$cat->name</option>";
+				}
+				?>
+			</select>
+			</span>
+		</label>
+		<label>
+			<h3>Tags</h3>
+			<span>
+			<select multiple="multiple" class="post-tags">
+				<?php
+				$terms = get_terms( array(
+					'taxonomy'   => 'post_tag',
+					'hide_empty' => false,
+				) );
+
+				foreach ( $terms as $tag ) {
+					echo "<option value='$tag->name'>$tag->name</option>";
+				}
+				?>
+			</select>
+			</span>
+		</label>
+
+	</div>
+	<?php
+}
+?>
