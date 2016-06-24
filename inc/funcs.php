@@ -238,7 +238,7 @@ function pootlepb_settings( $key = '' ) {
 			$settings = array();
 		}
 
-		$post_types = apply_filters( 'pootlepb_builder_post_types', array( 'page' ) );
+		$post_types = apply_filters( 'pootlepb_builder_post_types', array( 'page', 'post', ) );
 
 		$settings = wp_parse_args( $settings, array(
 			'post-types'    => $post_types, // Supported post types

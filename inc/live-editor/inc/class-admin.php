@@ -87,12 +87,18 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 		$nonce = filter_input( INPUT_GET, 'ppbLiveEditor' );
 
 		$new_live_page_url = admin_url( 'admin-ajax.php' );
-		$new_live_page_url = wp_nonce_url( $new_live_page_url, 'ppb-new-live-post', 'ppbLiveEditor' );
+		$new_live_page_url = wp_nonce_url( $new_live_page_url, 'ppb-new-live-post', 'ppbLiveEditor' ) . '&action=pootlepb_live_page';
 		$admin_bar->add_menu( array(
 			'parent'    => 'new-content',
 			'id'        => 'ppb-new-live-page',
 			'title'     => 'Live Page',
-			'href'      => $new_live_page_url . '&action=pootlepb_live_page'
+			'href'      => $new_live_page_url
+		) );
+		$admin_bar->add_menu( array(
+			'parent' => 'new-content',
+			'id'     => 'ppb-new-live-post',
+			'title'  => 'Live Post',
+			'href'   => $new_live_page_url . '&post_type=post'
 		) );
 
 		if ( wp_verify_nonce( $nonce, 'ppb-live-' . get_the_id() ) ) {
@@ -147,7 +153,7 @@ class Pootle_Page_Builder_Live_Editor_Admin{
 	 * @since 1.1.0
 	 */
 	public function new_live_page() {
-		$requested_post_type = filter_input( INPUT_GET, 'post' );
+		$requested_post_type = filter_input( INPUT_GET, 'post_type' );
 		$post_type = $requested_post_type ? $requested_post_type : 'page';
 
 		$this->new_live_post( $post_type );

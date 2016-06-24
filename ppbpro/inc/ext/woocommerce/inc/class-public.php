@@ -98,6 +98,10 @@ class pootle_page_builder_for_WooCommerce_Public{
 
 			$short_code = '[' . $set['wc_prods-add'];
 
+			if ( 'products' == $set['wc_prods-add'] ) {
+				//$set['wc_prods-per_page'] = 999;
+			}
+
 			$this->set_parameters( $short_code, $set );
 
 			$short_code .= ']';

@@ -102,7 +102,6 @@ jQuery( function ( $ ) {
 		justClickedEditBlock: false,
 		syncAjax : function () {
 			return jQuery.post( ppbAjax.url, ppbAjax, function ( response ) {
-				console.log( response );
 				var $response = $( $.parseHTML( response ) );
 				if ( 'function' == typeof prevu.ajaxCallback ) {
 					prevu.ajaxCallback( $response, ppbAjax );
@@ -123,7 +122,6 @@ jQuery( function ( $ ) {
 			prevu.unSavedChanges = true;
 			prevu.saveTmceBlock( $( '.mce-edit-focus' ) );
 			delete ppbAjax.data;
-			console.log( ppbAjax );
 			ppbAjax.data = ppbData;
 
 			if ( publish ) {
@@ -289,6 +287,8 @@ jQuery( function ( $ ) {
 					$blk = $r.find( '#' + id ),
 					style = $blk.closest( '.panel-grid-cell' ).children( 'style' ).html(),
 					$cell = $t.closest( '.panel-grid-cell' );
+
+				//console.log( $t.length + ' ' + $blk.length );
 
 				$blk.addClass( 'pootle-live-editor-new-content-block' );
 
@@ -1121,6 +1121,11 @@ jQuery( function ( $ ) {
 
 	$( '[href="#ppb-live-publish-changes"]' ).click( function(){
 		prevu.sync( null, 'Publish' );
+	} );
+
+	$( '.ppb-edit-block' ).click( function () {
+		var editorid = $( this ).siblings( '.mce-content-body' ).attr( 'id' );
+		tinymce.get( editorid ).focus();
 	} );
 
 	$( '#ppble-feat-img-prevu' ).click( function () {

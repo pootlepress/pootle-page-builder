@@ -128,21 +128,6 @@ class Pootle_Page_Builder_Pro_Admin{
 	}
 
 	/**
-	 * @param $admin_bar
-	 */
-	function add_item( $admin_bar ) {
-
-		$new_live_page_url = admin_url( 'admin-ajax.php' );
-		$new_live_page_url = wp_nonce_url( $new_live_page_url, 'ppb-new-live-post', 'ppbLiveEditor' );
-		$admin_bar->add_menu( array(
-			'parent' => 'new-content',
-			'id'     => 'ppb-new-live-post',
-			'title'  => 'Live Post',
-			'href'   => $new_live_page_url . '&action=pootlepb_live_page&post=post'
-		) );
-	}
-
-	/**
 	 * Adds content block panel fields
 	 * @param array $fields Fields to output in content block panel
 	 * @return array Tabs

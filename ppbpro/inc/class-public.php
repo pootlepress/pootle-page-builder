@@ -44,18 +44,6 @@ class Pootle_Page_Builder_Pro_Public{
 	} // End __construct()
 
 	/**
-	 * Adds chosen post types to pb supported post types
-	 * @param array $post_types
-	 * @action pootlepb_builder_post_types
-	 * @return array
-	 */
-	public function add_post_types( $post_types ) {
-		$post_types[] = 'post';
-
-		return $post_types;
-	}
-
-	/**
 	 * Adds row CSS
 	 * @param array $info The widget info
 	 * @since 0.1.0
