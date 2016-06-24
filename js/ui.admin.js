@@ -724,10 +724,13 @@ jQuery(function ($) {
      * @param data The data to modify
      */
     panels.yoastSEOContent = function( data ) {
-        $.each( panelsData.widgets, function( k, v){
-            data += v.text;
-        } );
+        if ( typeof panelsData != 'undefined' ) {
+            $.each( panelsData.widgets, function ( k, v ) {
+                data += v.text;
+            } );
+        }
         return data;
+
     };
 
     /*
