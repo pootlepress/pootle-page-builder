@@ -83,6 +83,9 @@ class pootle_page_builder_blog_customizer_Public extends pootle_page_builder_blo
 	 * @since 1.0.0
 	 */
 	public function show_posts( $info ) {
+		if ( 'post' == get_post_type() ) {
+			return;
+		}
 		$set = json_decode( $info['info']['style'], true ); //Decode settings in JSON
 		$pc_sets = $this->get_custom_posts_settings( $set ); //Grab blog customizer settings
 		if ( ! empty( $pc_sets['down'] ) && ! empty( $pc_sets['across'] ) ) {
