@@ -914,7 +914,15 @@ jQuery( function ( $ ) {
 	};
 	ppbIpad.preview = function () {
 		prevu.sync( null, 'Save Draft' );
-		ppbIpad.notice.show( 0 );
+		ppbIpad.notice
+			.css( {
+				background		: '#009bf4',
+				height			: 'auto',
+				width			: 'auto',
+				borderRadius	: '0',
+				padding			: '43% 0 0',
+			})
+			.show( 0 );
 	};
 	ppbIpad.postSettings = function () {
 		prevu.postSettings();
@@ -933,6 +941,11 @@ jQuery( function ( $ ) {
 			setTimeout( function () {
 				ppbIpad.updatedNotice.hide();
 			}, 2500 );
+			try {
+				webkit.messageHandlers.heySwift.postMessage("updated");
+			} catch(err) {
+				console.log('The native context does not exist yet');
+			}
 		};
 		prevu.unSavedChanges = true;
 		prevu.saveTmceBlock( $( '.mce-edit-focus' ) );
@@ -979,7 +992,7 @@ jQuery( function ( $ ) {
 
 	$ppbIpadColorDialog.delegate( '.ppb-ipad-color-picker span', 'click', function ( e ) {
 		e.preventDefault();
-		//console.log( $( this ).data( 'color' ) );
+
 		tinymce.activeEditor.execCommand(
 			'ForeColor',
 			false,
