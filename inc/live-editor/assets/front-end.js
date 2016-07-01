@@ -129,7 +129,9 @@ jQuery( function ( $ ) {
 				if ( ppbAjax.title ) {
 					var butt = {};
 					butt[ publish ] = function () {
+						$setTitleDialog.ppbDialog( 'close' );
 						prevu.syncAjax();
+
 					};
 					$setTitleDialog.parent().attr( 'data-action', publish );
 					$setTitleDialog.ppbDialog( 'open' );
@@ -669,6 +671,7 @@ jQuery( function ( $ ) {
 	};
 	dialogAttr.buttons.Done = function () {
 		prevu.syncAjax();
+		$setTitleDialog.ppbDialog( 'close' );
 	};
 	$setTitleDialog.ppbDialog( dialogAttr );
 
@@ -680,8 +683,6 @@ jQuery( function ( $ ) {
 			ppbAjax.title = $postSettingsDialog.find( '.post-title' ).val();
 			ppbAjax.category = $postSettingsDialog.find( '.post-category' ).val();
 			ppbAjax.tags = $postSettingsDialog.find( '.post-tags' ).val();
-			prevu.sync();
-			$postSettingsDialog.ppbDialog( 'close' );
 		};
 		$postSettingsDialog.ppbDialog( dialogAttr );
 
