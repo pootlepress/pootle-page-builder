@@ -124,9 +124,11 @@
 		animation: fade-in-out 2.5s 1 both;
 	}
 
-	.circular-blue-notice > *,
 	.circular-blue-notice > .dashicons {
 		display: inline-block;
+	}
+	.circular-blue-notice > *,
+	.circular-blue-notice > .dashicons {
 		width: auto;
 		height: auto;
 		vertical-align: middle;
@@ -192,7 +194,7 @@
 </div>
 <div id="ppb-ipad-notice" class="circular-blue-notice">
 	<span class="ppb-rotate dashicons dashicons-admin-generic"></span>
-	<h3>Saving changes...</h3>
+	<h2>Saving changes and loading preview...</h2>
 </div>
 <div id="ppb-ipad-color-picker">
 	<!--<h3>Choose Color</h3>-->

@@ -129,7 +129,6 @@ jQuery( function ( $ ) {
 				if ( ppbAjax.title ) {
 					var butt = {};
 					butt[ publish ] = function () {
-						ppbAjax.title = $( '#ppble-live-page-title' ).val();
 						prevu.syncAjax();
 					};
 					$setTitleDialog.parent().attr( 'data-action', publish );
@@ -288,7 +287,7 @@ jQuery( function ( $ ) {
 					style = $blk.closest( '.panel-grid-cell' ).children( 'style' ).html(),
 					$cell = $t.closest( '.panel-grid-cell' );
 
-				//console.log( $t.length + ' ' + $blk.length );
+				console.log( $t.length + ' ' + $blk.length );
 
 				$blk.addClass( 'pootle-live-editor-new-content-block' );
 
@@ -296,8 +295,7 @@ jQuery( function ( $ ) {
 
 				$blk = $( '.pootle-live-editor-new-content-block' );
 				$( 'html' ).trigger( 'pootlepb_le_content_updated', [$blk] );
-				$blk.removeClass( 'pootle-live-editor-new-content-block' );
-
+				$blk.removeClass( 'pootle-live-editor-new-content-block' ).addClass( 'active' );
 
 				if ( $cell.children( 'style' ).length ) {
 					$cell.children( 'style' ).html( style );
@@ -661,28 +659,34 @@ jQuery( function ( $ ) {
 	dialogAttr.title = 'Add row';
 	dialogAttr.dialogClass = dialogAttr.open = null;
 	dialogAttr.buttons.Done = prevu.addRow;
-	dialogAttr.height = 340;
+	dialogAttr.height = 232;
 	dialogAttr.width = 340;
 	$addRowDialog.ppbDialog( dialogAttr );
 
-	dialogAttr.title = 'Set title of the page';
-	dialogAttr.buttons.Done = function () {
+	dialogAttr.title = $setTitleDialog.data( 'title' );
+	dialogAttr.close = function() {
 		ppbAjax.title = $( '#ppble-live-page-title' ).val();
+	};
+	dialogAttr.buttons.Done = function () {
 		prevu.syncAjax();
 	};
 	$setTitleDialog.ppbDialog( dialogAttr );
 
-	dialogAttr.height = 700;
-	dialogAttr.width = 610;
-	dialogAttr.title = 'Post settings';
-	dialogAttr.buttons.Done = function () {
-		ppbAjax.title = $postSettingsDialog.find( '.post-title' ).val();
-		ppbAjax.category = $postSettingsDialog.find( '.post-category' ).val();
-		ppbAjax.tags = $postSettingsDialog.find( '.post-tags' ).val();
-		prevu.sync();
-		$postSettingsDialog.ppbDialog( 'close' );
-	};
-	$postSettingsDialog.ppbDialog( dialogAttr );
+	if ( $postSettingsDialog.length ) {
+		dialogAttr.height = 700;
+		dialogAttr.width = 610;
+		dialogAttr.title = 'Post settings';
+		dialogAttr.close = function () {
+			ppbAjax.title = $postSettingsDialog.find( '.post-title' ).val();
+			ppbAjax.category = $postSettingsDialog.find( '.post-category' ).val();
+			ppbAjax.tags = $postSettingsDialog.find( '.post-tags' ).val();
+			prevu.sync();
+			$postSettingsDialog.ppbDialog( 'close' );
+		};
+		$postSettingsDialog.ppbDialog( dialogAttr );
+
+		$setTitleDialog = $postSettingsDialog;
+	}
 
 	$('.panel-grid-cell-container > .panel-grid-cell' ).each( function () {
 		prevu.resizableCells.correctCellData( $(this) );
@@ -958,9 +962,8 @@ jQuery( function ( $ ) {
 					text: 'Save Draft',
 					click: function () {
 						ppbAjax.publish = 'Save Draft';
-						ppbAjax.title = $( '#ppble-live-page-title' ).val();
-						prevu.syncAjax();
 						$setTitleDialog.ppbDialog( 'close' );
+						prevu.syncAjax();
 					}
 				},
 				{
@@ -970,9 +973,8 @@ jQuery( function ( $ ) {
 					},
 					click: function () {
 						ppbAjax.publish = 'Publish';
-						ppbAjax.title = $( '#ppble-live-page-title' ).val();
-						prevu.syncAjax();
 						$setTitleDialog.ppbDialog( 'close' );
+						prevu.syncAjax();
 					}
 				}
 			];

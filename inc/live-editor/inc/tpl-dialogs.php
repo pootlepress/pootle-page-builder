@@ -152,24 +152,17 @@ $row_panel_tabs = array(
 			<input max="10" min="1" id="ppb-row-add-cols" type="number" value="2">
 		</label>
 	</div>
-	<div class="pootlepb-dialog" id="pootlepb-set-title">
+	<div class="pootlepb-dialog" id="pootlepb-set-title" data-title="Set title of the page">
 		<label>
 			<p>Please set the title for the page,</p>
 			<input id="ppble-live-page-title" type="text" placeholder="<?php echo $this->edit_title; ?>">
 		</label>
-		<?php
-		if ( get_post_type() == 'post' ) {
-			?>
-			<a href="javascript:">Edit Post</a>
-			<?php
-		}
-		?>
 	</div>
 
 <?php
 if ( get_post_type() == 'post' ) {
 	?>
-	<div class="pootlepb-dialog" id="pootlepb-post-settings">
+	<div class="pootlepb-dialog" id="pootlepb-post-settings" data-title="Set title of the post">
 		<label>
 			<h3>Title</h3>
 			<span>
