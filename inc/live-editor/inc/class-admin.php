@@ -86,6 +86,9 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 			li[id^="wp-admin-bar-ppb-new-live-"] a:before {
 				content: '\f180';
 			}
+			li#wp-admin-bar-ppb-live-post-settings a:before {
+				content: "\f111";
+			}
 		</style>
 		<?php
 		global $post;
@@ -94,6 +97,9 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 
 		$new_live_page_url = admin_url( 'admin-ajax.php' );
 		$new_live_page_url = wp_nonce_url( $new_live_page_url, 'ppb-new-live-post', 'ppbLiveEditor' ) . '&action=pootlepb_live_page';
+		if ( ! get_option( 'pootlepb_tour_done' ) ) {
+			$new_live_page_url .= '&tour=1';
+		}
 		$admin_bar->add_menu( array(
 			'parent' => 'new-content',
 			'id'     => 'ppb-new-live-page',
@@ -140,6 +146,14 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 				);
 				$admin_bar->add_menu( $args );
 			}
+
+			if ( 'post' == get_post_type() ) {
+				$args['id']    = 'ppb-live-post-settings';
+				$args['href']  = '#ppb-live-post-settings';
+				$args['title'] = 'Post settings';
+				$admin_bar->add_menu( $args );
+			}
+
 		} else if ( pootlepb_is_panel( true ) ) {
 			$nonce_url = wp_nonce_url( get_the_permalink( $post->ID ), 'ppb-live-' . $post->ID, 'ppbLiveEditor' );
 			$args      = array(
@@ -216,8 +230,14 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 				update_post_meta( $id, 'panels_data', $ppb_data );
 				$plink = get_the_permalink( $id );
 
+				$plink .= strpos( $plink, '?' ) ? "&" : '?';
+
+				if ( isset( $_GET['tour'] ) ) {
+					$plink .= "tour=1&";
+				}
+
 				if ( isset( $_GET['ppb-ipad'] ) ) {
-					header( "Location: $plink?ppb-ipad&user=$ipad_user&ppbLiveEditor=$nonce&edit_title=true" );
+					header( "Location: {$plink}ppb-ipad&user={$ipad_user}&ppbLiveEditor={$nonce}&edit_title=true" );
 					exit();
 				}
 				$nonce_url = wp_nonce_url( $plink, 'ppb-live-' . $id, 'ppbLiveEditor' );

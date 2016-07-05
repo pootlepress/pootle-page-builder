@@ -133,10 +133,6 @@ body .ppb-dialog {
 	margin-left: 3px;
 }
 
-.ppb-edit-row:hover + .ppb-row, .ppb-block:hover {
-	outline: 2px solid #ef4832;
-}
-
 .ppb-block:hover .pootle-live-editor {
 	display: block;
 	visibility: visible;
@@ -152,8 +148,7 @@ body .ppb-dialog {
 	z-index: 97;
 }
 
-.panel-grid:hover .ppb-edit-row span:not(:first-child),
-.ppb-block:hover .pootle-live-editor span:not(:first-child) {
+.panel-grid .ppb-edit-row span:not(:first-child), .ppb-block .pootle-live-editor span:not(:first-child) {
 	visibility: hidden;
 }
 
@@ -500,7 +495,9 @@ body .ppb-dialog {
 	margin-left: 3px;
 }
 
-.ppb-edit-row:hover + .ppb-row, .ppb-block:hover {
+.ppb-edit-row:hover + .ppb-row,
+.ppb-block:hover,
+.panel-grid.tour-active .ppb-block {
 	outline: 2px solid #ef4832;
 }
 
@@ -513,7 +510,9 @@ body .ppb-dialog {
 	display:none;
 }
 
+.panel-grid.tour-active .ppb-edit-row,
 .panel-grid:hover .ppb-edit-row,
+.panel-grid.tour-active .pootle-live-editor,
 .ppb-block:hover .pootle-live-editor {
 	visibility: visible;
 	z-index: 9997;
@@ -633,12 +632,15 @@ body .ppb-dialog {
 }
 
 .ppble-img-prevu {
+	text-shadow: 0 0 1px rgba(255,255,255,0.7);
+	text-shadow: 1px 1px 1px rgba(255,255,255,0.7),  -1px 1px 1px rgba(255,255,255,0.7),  -1px -1px 1px rgba(255,255,255,0.7),  1px -1px 1px rgba(255,255,255,0.7);
+	color: rgba(0, 0, 0, 0.7);
 	text-align: center;
 	padding-top: 70px;
 	padding-bottom: 70px;
 	line-height: 20px;
 	width: 160px;
-	background: #fff center no-repeat;
+	background: #fff center/cover no-repeat;
 	border: 1px solid #ddd;
 }
 .pootle-live-editor-active .ppb-dialog .button,

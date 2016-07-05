@@ -239,6 +239,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			'ppb-fields',
 		), $ver );
 
+		wp_enqueue_script( 'pootle-live-editor-tour', "$url/tour.js", array( 'jquery', ), $ver );
+
 		wp_enqueue_script( "pp-pb-iris", "$ppb_js/iris.js", array( 'iris' ) );
 
 		wp_enqueue_script( 'pp-pb-color-picker', "$ppb_js/color-picker-custom.js", array( 'pp-pb-iris' ) );

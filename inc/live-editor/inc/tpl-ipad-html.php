@@ -12,7 +12,6 @@
 	.pootle-live-editor-active .ppb-tabs-nav {
 		font-size: 16px;
 	}
-
 	.ppb-tabs-panel .field > * {
 		font-size: 16px;
 		font-weight: 300;
@@ -23,11 +22,9 @@
 	.ppb-tabs-nav li {
 		margin: 16px 0;
 	}
-
 	.pootle-live-editor-active .mce-toolbar .mce-btn-group .mce-btn, .pootle-live-editor-active .qt-dfw {
 		margin: 3px
 	}
-
 	.pootle-live-editor-active .ppb-dialog .button,
 	.pootle-live-editor-active .ppb-dialog button,
 	.pootle-live-editor-active .ppb-dialog .ui-button.pootle-live-editor-active,
@@ -51,7 +48,6 @@
 		height: auto;
 		font-weight: 300;
 	}
-
 	.pootle-live-editor-active .ppb-dialog [type="number"] {
 		width: 120px;
 		margin-right: 7px;
@@ -118,12 +114,10 @@
 		background: #0c7;
 		border-radius: 50%;
 	}
-
 	.fade-in-out {
 		-webkit-animation: fade-in-out 2.5s 1 both;
 		animation: fade-in-out 2.5s 1 both;
 	}
-
 	.circular-blue-notice > .dashicons {
 		display: inline-block;
 	}
@@ -136,11 +130,9 @@
 		font-size: 25px;
 		letter-spacing: 2px;
 	}
-
 	span.ppb-rotate.dashicons.dashicons-admin-generic:before {
 		padding: 0 0 0.0216em 0.052em;
 	}
-
 	.circular-blue-notice .dashicons:before {
 		font-size: 160px;
 		color: inherit;
@@ -149,7 +141,6 @@
 		display: block;
 		line-height: 1;
 	}
-
 	#ppb-ipad-color-picker {
 		position: absolute;
 		top: 0;
@@ -169,12 +160,10 @@
 		padding-top: 43px;
 		margin: 1.636%;
 	}
-
 	span.wp-picker-input-wrap .button,
 	a.wp-color-result.wp-picker-open {
 		display:none !important;
 	}
-
 	@-webkit-keyframes fade-in-out {
 		0%   { opacity: 0; -webkit-transform: translate3d(0,-25%,0) }
 		34%  { opacity: 1; -webkit-transform: none                  }

@@ -670,8 +670,8 @@ jQuery( function ( $ ) {
 		ppbAjax.title = $( '#ppble-live-page-title' ).val();
 	};
 	dialogAttr.buttons.Done = function () {
-		prevu.syncAjax();
 		$setTitleDialog.ppbDialog( 'close' );
+		prevu.syncAjax();
 	};
 	$setTitleDialog.ppbDialog( dialogAttr );
 
@@ -683,6 +683,10 @@ jQuery( function ( $ ) {
 			ppbAjax.title = $postSettingsDialog.find( '.post-title' ).val();
 			ppbAjax.category = $postSettingsDialog.find( '.post-category' ).val();
 			ppbAjax.tags = $postSettingsDialog.find( '.post-tags' ).val();
+		};
+		dialogAttr.buttons.Done = function () {
+			$postSettingsDialog.ppbDialog( 'close' );
+			prevu.syncAjax();
 		};
 		$postSettingsDialog.ppbDialog( dialogAttr );
 
@@ -1135,6 +1139,17 @@ jQuery( function ( $ ) {
 		prevu.sync( null, 'Save Draft' );
 	} );
 
+	$( '[href="#ppb-live-post-settings"]' ).click( function(){
+		$postSettingsDialog
+			.ppbDialog( 'option', 'buttons', {
+				Done : function () {
+					$postSettingsDialog.ppbDialog( 'close' );
+					prevu.sync('Publish');
+				}
+			} )
+			.ppbDialog( 'open' );
+	} );
+
 	$( '[href="#ppb-live-publish-changes"]' ).click( function(){
 		prevu.sync( null, 'Publish' );
 	} );
@@ -1169,7 +1184,7 @@ jQuery( function ( $ ) {
 
 			// Do something with attachment.id and/or attachment.url here
 			ppbAjax.thumbnail = attachment.id;
-			$('#ppble-feat-img-prevu').css( 'background-image', 'url(' + attachment.sizes.thumbnail.url + ')' ).css('color', 'rgba(0,0,0,0)');
+			$('#ppble-feat-img-prevu').css( 'background-image', 'url(' + attachment.sizes.thumbnail.url + ')' );
 		} );
 
 		// Finally, open the modal

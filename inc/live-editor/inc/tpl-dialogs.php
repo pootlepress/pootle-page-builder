@@ -161,19 +161,34 @@ $row_panel_tabs = array(
 
 <?php
 if ( get_post_type() == 'post' ) {
+	$cats_data = get_the_category();
+	$cats = array();
+	if ( $cats_data ) {
+		foreach( $cats_data as $term ) {
+			$cats[] = $term->term_id;
+		}
+	}
+	$tags_data = get_the_tags();
+	$tags = array();
+	if ( $tags_data ) {
+		foreach ( $tags_data as $term ) {
+			$tags[] = $term->name;
+		}
+	}
+
 	?>
 	<div class="pootlepb-dialog" id="pootlepb-post-settings" data-title="Set title of the post">
 		<label>
 			<h3>Title</h3>
 			<span>
-				<input class="post-title" type="text" placeholder="<?php echo $this->edit_title; ?>">
+				<input class="post-title" type="text" placeholder="<?php echo $this->edit_title; ?>" value="<?php the_title() ?>">
 			</span>
 		</label>
 		<label>
 			<h3>Featured image</h3>
 			<span>
 			<div id="ppble-feat-img-wrapper">
-				<div class="ppble-img-prevu" id="ppble-feat-img-prevu">Choose Image</div>
+				<div style="background-image: url('<?php the_post_thumbnail_url() ?>');" class="ppble-img-prevu" id="ppble-feat-img-prevu">Choose Image</div>
 			</div>
 			</span>
 		</label>
@@ -188,7 +203,7 @@ if ( get_post_type() == 'post' ) {
 				) );
 
 				foreach ( $terms as $cat ) {
-					echo "<option value='$cat->term_id'>$cat->name</option>";
+					echo "<option value='$cat->term_id'" . ( in_array( $cat->term_id, $cats ) ? ' selected="selected"' : '' ) . ">$cat->name</option>";
 				}
 				?>
 			</select>
@@ -205,7 +220,7 @@ if ( get_post_type() == 'post' ) {
 				) );
 
 				foreach ( $terms as $tag ) {
-					echo "<option value='$tag->name'>$tag->name</option>";
+					echo "<option value='$tag->name'" . ( in_array( $tag->name, $tags ) ? ' selected="selected"' : '' ) . ">$tag->name</option>";
 				}
 				?>
 			</select>
@@ -214,5 +229,9 @@ if ( get_post_type() == 'post' ) {
 
 	</div>
 	<?php
+}
+if ( ! empty( $_REQUEST['tour'] ) ) {
+	update_option( 'pootlepb_tour_done', 'done' );
+	include "tpl-tour.php";
 }
 ?>
