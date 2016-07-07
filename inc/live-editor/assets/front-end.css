@@ -148,13 +148,18 @@ body .ppb-dialog {
 	z-index: 97;
 }
 
-.panel-grid .ppb-edit-row span:not(:first-child), .ppb-block .pootle-live-editor span:not(:first-child) {
+.panel-grid .ppb-edit-row span:not(:first-child),
+.ppb-block .pootle-live-editor span:not(:first-child) {
 	visibility: hidden;
+	display: none;
 }
 
 .panel-grid:hover .ppb-edit-row:hover span,
-.ppb-block:hover .pootle-live-editor:hover span {
+.panel-grid.tour-active .ppb-edit-row.tour-active span,
+.ppb-block:hover .pootle-live-editor:hover span,
+.panel-grid.tour-active .ppb-block .pootle-live-editor.tour-active span {
 	visibility: visible;
+	display: inline-block;
 }
 
 .ppb-tabs-nav {
@@ -320,6 +325,7 @@ body .ppb-dialog {
 	cursor:ew-resize;
 }
 
+.panel-grid.tour-active .resize-cells ~ .ui-resizable-handle,
 .panel-grid:hover .resize-cells ~ .ui-resizable-handle,
 .ppb-cols-resizing .ui-resizable-handle {
 	display: block;
@@ -518,13 +524,9 @@ body .ppb-dialog {
 	z-index: 9997;
 }
 
-.ppb-block:hover .pootle-live-editor span:not(:first-child) {
-	display: none;
-}
-
 .panel-grid:hover .ppb-edit-row:hover span,
 .ppb-block:hover .pootle-live-editor:hover span {
-	display: inline-block;
+	/* display: inline-block; */
 }
 
 .ppb-block:hover .pootle-live-editor:hover .pootle-live-editor-addons span {

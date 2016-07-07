@@ -93,7 +93,7 @@
 		text-shadow: 0 -1px 1px #006799,1px 0 1px #006799,0 1px 1px #006799,-1px 0 1px #006799 !important;
 		font-weight: 500;
 	}
-	.circular-blue-notice, #ppb-ipad-color-picker {
+	.ppb-full-blue-notice, #ppb-ipad-color-picker {
 		padding: 50px 50px;
 		position: fixed;
 		top: 0;
@@ -108,21 +108,23 @@
 		background: #fff;
 		display: none;
 	}
-	.circular-blue-notice {
+	.ppb-full-blue-notice {
 		-webkit-box-sizing: border-box;
 		box-sizing: border-box;
-		background: #0c7;
-		border-radius: 50%;
+		background		: #009bf4;
+		height			: auto;
+		width			: auto;
+		padding			: 43% 0 0;
 	}
 	.fade-in-out {
 		-webkit-animation: fade-in-out 2.5s 1 both;
 		animation: fade-in-out 2.5s 1 both;
 	}
-	.circular-blue-notice > .dashicons {
+	.ppb-full-blue-notice > .dashicons {
 		display: inline-block;
 	}
-	.circular-blue-notice > *,
-	.circular-blue-notice > .dashicons {
+	.ppb-full-blue-notice > *,
+	.ppb-full-blue-notice > .dashicons {
 		width: auto;
 		height: auto;
 		vertical-align: middle;
@@ -133,7 +135,7 @@
 	span.ppb-rotate.dashicons.dashicons-admin-generic:before {
 		padding: 0 0 0.0216em 0.052em;
 	}
-	.circular-blue-notice .dashicons:before {
+	.ppb-full-blue-notice .dashicons:before {
 		font-size: 160px;
 		color: inherit;
 		width: auto;
@@ -177,11 +179,11 @@
 		100% { opacity: 0; transform: translate3d(0,25%,0)  }
 	}
 </style>
-<div id="ppb-ipad-updated-notice" class="circular-blue-notice fade-in-out">
+<div id="ppb-ipad-updated-notice" class="ppb-full-blue-notice fade-in-out">
 	<span class="dashicons dashicons-yes"></span>
 	<h3>Changes Saved</h3>
 </div>
-<div id="ppb-ipad-notice" class="circular-blue-notice">
+<div id="ppb-ipad-notice" class="ppb-full-blue-notice">
 	<span class="ppb-rotate dashicons dashicons-admin-generic"></span>
 	<h2>Saving changes and loading preview...</h2>
 </div>

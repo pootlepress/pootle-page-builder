@@ -1,33 +1,18 @@
-<div id="ppb-tour-dialog" style="display: none;">
-	<div class="tour-header">
-		<h3><span class="dashicons dashicons-lightbulb"></span> <span class="tour-heading">Content Block</span></h3>
-	</div>
-	<div class="tour-content">
-		This is the content block, click here to edit this and hover over it to show more options.
-	</div>
-	<div class="tour-footer">
-		<a href="javascript:0" onclick="jQuery(this).parents('#ppb-tour-dialog').hide()">
-			<span class="dashicons dashicons-dismiss"></span> <?php _e( 'I know...' ) ?>
-		</a>
-		<a href="javascript:0" class="tour-next-slide">
-			<span class="dashicons dashicons-controls-play"></span> <?php _e( 'Tell me more!' ) ?>
-		</a>
-	</div>
-</div>
+<div id="ppb-tour-dialog" style="display: none;"></div>
 
 <style>
 	#ppb-tour-dialog {
 		margin: 16px 0 0 -23px;
 		position: absolute;
-		width: 340px;
+		width: 300px;
 		-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.25);
 		-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.25);
 		box-shadow: 0 1px 5px rgba(0,0,0,0.25);
-		top: 520px;
-		left: 160px;
-		z-index: 999;
+		top: 0;
+		left: 0;
 		background: #fff;
 		font-size: 16px;
+		z-index: 9999997;
 	}
 	#ppb-tour-dialog * {
 		vertical-align: middle;
@@ -35,6 +20,10 @@
 		padding: 0;
 		font-weight: normal;
 		color: inherit;
+	}
+	#ppb-tour-dialog ul,
+	#ppb-tour-dialog ol {
+		padding: 0 0 0 25px;
 	}
 	#ppb-tour-dialog .dashicons {
 		height: auto;
@@ -75,7 +64,6 @@
 	#ppb-tour-dialog .tour-footer .dashicons {
 		margin: -2px -2px 0 -1px;
 	}
-
 	#ppb-tour-dialog .tour-footer .dashicons-controls-play {
 		margin-right: -5px;
 	}

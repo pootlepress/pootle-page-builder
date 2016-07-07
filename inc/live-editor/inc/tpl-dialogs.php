@@ -155,7 +155,7 @@ $row_panel_tabs = array(
 	<div class="pootlepb-dialog" id="pootlepb-set-title" data-title="Set title of the page">
 		<label>
 			<p>Please set the title for the page,</p>
-			<input id="ppble-live-page-title" type="text" placeholder="<?php echo $this->edit_title; ?>">
+			<input id="ppble-live-page-title" type="text" value="<?php the_title() ?>">
 		</label>
 	</div>
 
@@ -178,12 +178,6 @@ if ( get_post_type() == 'post' ) {
 
 	?>
 	<div class="pootlepb-dialog" id="pootlepb-post-settings" data-title="Set title of the post">
-		<label>
-			<h3>Title</h3>
-			<span>
-				<input class="post-title" type="text" placeholder="<?php echo $this->edit_title; ?>" value="<?php the_title() ?>">
-			</span>
-		</label>
 		<label>
 			<h3>Featured image</h3>
 			<span>

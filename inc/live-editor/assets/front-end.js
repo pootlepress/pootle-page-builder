@@ -680,7 +680,6 @@ jQuery( function ( $ ) {
 		dialogAttr.width = 610;
 		dialogAttr.title = 'Post settings';
 		dialogAttr.close = function () {
-			ppbAjax.title = $postSettingsDialog.find( '.post-title' ).val();
 			ppbAjax.category = $postSettingsDialog.find( '.post-category' ).val();
 			ppbAjax.tags = $postSettingsDialog.find( '.post-tags' ).val();
 		};
@@ -690,7 +689,7 @@ jQuery( function ( $ ) {
 		};
 		$postSettingsDialog.ppbDialog( dialogAttr );
 
-		$setTitleDialog = $postSettingsDialog;
+		//$setTitleDialog = $postSettingsDialog;
 	}
 
 	$('.panel-grid-cell-container > .panel-grid-cell' ).each( function () {
@@ -923,15 +922,7 @@ jQuery( function ( $ ) {
 	};
 	ppbIpad.preview = function () {
 		prevu.sync( null, 'Save Draft' );
-		ppbIpad.notice
-			.css( {
-				background		: '#009bf4',
-				height			: 'auto',
-				width			: 'auto',
-				borderRadius	: '0',
-				padding			: '43% 0 0',
-			})
-			.show( 0 );
+
 	};
 	ppbIpad.postSettings = function () {
 		prevu.postSettings();
@@ -941,20 +932,8 @@ jQuery( function ( $ ) {
 	};
 
 	ppbIpad.Update = function () {
-		ppbIpad.notice.show( 0 );
-		prevu.noRedirect = true;
+//		prevu.noRedirect = false;
 		prevu.ajaxCallback = function () {
-			ppbAjax.title = null;
-			ppbIpad.notice.hide( 0 );
-			ppbIpad.updatedNotice.show( 0 );
-			setTimeout( function () {
-				ppbIpad.updatedNotice.hide();
-			}, 2500 );
-			try {
-				webkit.messageHandlers.heySwift.postMessage("updated");
-			} catch(err) {
-				console.log('The native context does not exist yet');
-			}
 		};
 		prevu.unSavedChanges = true;
 		prevu.saveTmceBlock( $( '.mce-edit-focus' ) );
@@ -966,8 +945,14 @@ jQuery( function ( $ ) {
 				{
 					text: 'Save Draft',
 					click: function () {
-						ppbAjax.publish = 'Save Draft';
 						$setTitleDialog.ppbDialog( 'close' );
+						try {
+							webkit.messageHandlers.heySwift.postMessage("updatedLoadingPreview");
+						} catch(err) {
+							console.log('The native context does not exist yet');
+						}
+						ppbIpad.notice.show( 0 );
+						ppbAjax.publish = 'Save Draft';
 						prevu.syncAjax();
 					}
 				},
@@ -977,16 +962,29 @@ jQuery( function ( $ ) {
 						primary: 'ipad-publish'
 					},
 					click: function () {
-						ppbAjax.publish = 'Publish';
 						$setTitleDialog.ppbDialog( 'close' );
+						try {
+							webkit.messageHandlers.heySwift.postMessage("updatedLoadingPreview");
+						} catch(err) {
+							console.log('The native context does not exist yet');
+						}
+						ppbIpad.notice.show( 0 );
+						ppbAjax.publish = 'Publish';
 						prevu.syncAjax();
 					}
 				}
 			];
 			$setTitleDialog.parent().data( 'action', 'Publish' );
-			$setTitleDialog.ppbDialog( 'open' );
 			$setTitleDialog.ppbDialog( 'option', 'buttons', butt );
+			$setTitleDialog.ppbDialog( 'open' );
 			return;
+		} else {
+			try {
+				webkit.messageHandlers.heySwift.postMessage("updatedLoadingPreview");
+			} catch(err) {
+				console.log('The native context does not exist yet');
+			}
+			ppbIpad.notice.show( 0 );
 		}
 
 		prevu.syncAjax();
