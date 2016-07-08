@@ -82,10 +82,10 @@ jQuery( function ( $ ) {
 					$row.children( '.ppb-edit-row' ).removeClass( 'tour-active' );
 					$block.children( '.ppb-edit-block' ).addClass( 'tour-active' );
 					break;
-				case 9:
+				case 7:
 					$block.children( '.ppb-edit-block' ).removeClass( 'tour-active' );
 					break;
-				case 10:
+				case 8:
 					$( '.ui-resizable-handle.ui-resizable-w' ).eq(1).parents( '.panel-grid' ).addClass( 'tour-active' );
 			}
 			var el  = slides[i].el,
@@ -103,6 +103,7 @@ jQuery( function ( $ ) {
 		} ).click();
 
 	};
+
 	var $row          = $( '.panel-grid' ).eq( 0 ),
 	    $block        = $row.find( '.ppb-block' ).eq( 0 ),
 	    $addRowDialog = $( '#pootlepb-add-row' );
@@ -117,17 +118,17 @@ jQuery( function ( $ ) {
 			{
 				el      : $( '#ppb-row-add-cols' ),
 				head    : 'Number of columns',
-				content : 'Choose 2 columns for this tour and click \'Done\'.<br>We will click it for you when you move to next slide since you can\'t reach it at the moment.'
+				content : 'Choose 2 columns for this tour and tap \'Done\'.<br>We will tap it for you when you move to next slide since you can\'t reach it at the moment.'
 			},
 			{
 				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-editor-code' ),
 				head    : 'Row Sorting',
-				content : '<ul><li>Drag and drop your row using this icon ­ cool huh?</li><li>Hover over this to make Row Styling and Delete Row icons appear</li><li>You can also doubleclick here to shortcut to  Row Styling panel.</li></ul>'
+				content : '<ul><li>Drag and drop your row using this icon ­ cool huh?</li><li>Tap this to make Delete Row icon appear</li><li>Double tap here to open Row Styling panel.</li></ul>'
 			},
 			{
-				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-admin-appearance' ),
-				head    : 'Row Styling',
-				content : 'Edit your row here.<ul><li>Set row background: colour, image or video</li><li>Set row layout: full­width, height, margin and gutter</li><li>Set advanced CSS styles.</li></ul>'
+				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-editor-code' ),
+				head    : 'Row Styling panel',
+				content : 'Row styling panel appears on double tapping.<ul><li>Set row background: colour, image or video</li><li>Set row layout: full­width, height, margin and gutter</li><li>Set advanced CSS styles.</li></ul>'
 			},
 			{
 				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-no' ),
@@ -137,27 +138,17 @@ jQuery( function ( $ ) {
 			{
 				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-screenoptions' ),
 				head    : 'Drag and Drop Content Block',
-				content : '<ul><li>Drag and drop your Content Block using this icon ­ cool huh?</li><li>Hover over this to make Edit Content, Add Image and Delete Content Block icons appear</li><li>You can also doubleclick here to shortcut to Edit Content panel.</li></ul>'
+				content : '<ul><li>Drag and drop your Content Block using this icon ­ cool huh?</li><li>Double tap here to open Edit Content panel.</li></ul>'
 			},
 			{
-				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-edit' ),
-				head    : 'Edit Content',
-				content : 'Add content here:<ul><li>Add and edit copy</li><li>Add and edit media</li><li>Style Content Block background: image, colour, transparency</li><li>Style text, border, padding and corners.</li></ul>'
-			},
-			{
-				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-format-image' ),
-				head    : 'Insert Image',
-				content : 'Adds image to Content Block.'
-			},
-			{
-				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-no' ),
-				head    : 'Delete Content Block',
-				content : 'Deletes your Content Block. This is undoable so be sure you want to delete your Content Block :)'
+				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-screenoptions' ),
+				head    : 'Edit Content panel',
+				content : 'Edit content panel opens on double tapping.<ul><li>Add and edit copy</li><li>Add and edit media</li><li>Style Content Block background: image, colour, transparency</li><li>Style text, border, padding and corners.</li></ul>'
 			},
 			{
 				el      : $block,
 				head    : 'In Content Block',
-				content : 'Doubleclick to directly edit your content block ­ snazzy!'
+				content : 'Double tap to directly edit your content block ­ snazzy!'
 			},
 			{
 				el      : '.ppb-col + .ppb-col .ui-resizable-handle.ui-resizable-w',
@@ -179,34 +170,34 @@ jQuery( function ( $ ) {
 	);
 } );
 /*
-jQuery(document).ready( function ( $ ) {
-	var $d = $( '#ppb-tour-dialog' ), // Dialog
-	    $row = $( '.panel-grid' ).eq(0),
-	    $block = $row.find( '.ppb-block' ).eq(0),
-	    tour = {
-		    slide     : 0,
-		    heading   : function ( head ) {
-			    $d.find( '.tour-heading' ).html( head );
-		    },
-		    content   : function ( content ) {
-			    $d.find( '.tour-content' ).html( content );
-		    },
-		    position  : function ( el ) {
-			    if ( ! el.length ) {
-				    return;
-			    }
-			    el = el.eq( 0 );
-			    var
-				    pos  = el.offset(),
-				    top  = pos.top + el.outerHeight(),
-				    left = pos.left + (
-					    el.outerWidth() / 2
-					    );
-			    $d.css( {
-				    top  : top,
-				    left : left
-			    } );
-		    },
-	    };
-} );
-	*/
+ jQuery(document).ready( function ( $ ) {
+ var $d = $( '#ppb-tour-dialog' ), // Dialog
+ $row = $( '.panel-grid' ).eq(0),
+ $block = $row.find( '.ppb-block' ).eq(0),
+ tour = {
+ slide     : 0,
+ heading   : function ( head ) {
+ $d.find( '.tour-heading' ).html( head );
+ },
+ content   : function ( content ) {
+ $d.find( '.tour-content' ).html( content );
+ },
+ position  : function ( el ) {
+ if ( ! el.length ) {
+ return;
+ }
+ el = el.eq( 0 );
+ var
+ pos  = el.offset(),
+ top  = pos.top + el.outerHeight(),
+ left = pos.left + (
+ el.outerWidth() / 2
+ );
+ $d.css( {
+ top  : top,
+ left : left
+ } );
+ },
+ };
+ } );
+ */

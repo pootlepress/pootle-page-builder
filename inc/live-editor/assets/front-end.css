@@ -183,8 +183,9 @@ body .ppb-dialog {
 	margin-left: 200px;
 }
 
-#pootlepb-add-row {
-	padding:25px;
+#pootlepb-confirm-delete, #pootlepb-add-row {
+	padding: 25px 18px;
+	font: 16px sans-serif;
 }
 
 .panel-grid:hover ~ .pootle-live-editor.add-row {

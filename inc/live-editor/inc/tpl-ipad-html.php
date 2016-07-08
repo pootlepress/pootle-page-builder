@@ -1,14 +1,25 @@
 <style>
 	.panel-grid:first-child{ margin-top:0 }
-	.pootle-live-editor.ppb-live-add-object.add-row,
-	.panel-grid:hover .ppb-edit-row:hover span.dashicons-before,
-	.ppb-block:hover .pootle-live-editor:hover span.dashicons-before {
+	.pootle-live-editor.ppb-live-add-object.add-row {
+		position: fixed;
+		top:0;
+		left: 50vw;
+		width:1px;
+		height:1px;
+		overflow: hidden;
+	}
+
+	.panel-grid.tour-active .ppb-edit-row.tour-active span.dashicons-before:not(.dashicons-no):not(.dashicons-editor-code),
+	.panel-grid:hover .ppb-edit-row:hover span.dashicons-before:not(.dashicons-no):not(.dashicons-editor-code),
+	.ppb-block:hover .pootle-live-editor:hover span.dashicons-before,
+	.panel-grid.tour-active .ppb-block .pootle-live-editor.tour-active span.dashicons-before:not(.dashicons-screenoptions) {
 		display: none;
 	}
-	.panel-grid:hover .ppb-edit-row:hover span.dashicons-before.dashicons-no {
+
+	.panel-grid:hover .ppb-edit-row:hover span.dashicons-editor-code,
+	.ppb-block:hover .pootle-live-editor:hover span.dashicons-screenoptions {
 		display: inline-block;
 	}
-	.panel-grid:hover .ppb-edit-row:hover span.dashicons-editor-code, .ppb-block:hover .pootle-live-editor:hover span.dashicons-screenoptions { display: inline-block;  }
 	.pootle-live-editor-active .ppb-tabs-nav {
 		font-size: 16px;
 	}

@@ -1,0 +1,63 @@
+.tour-dialog {
+	margin: 16px 0 0 -23px;
+	position: absolute;
+	width: 300px;
+	-webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.25);
+	-moz-box-shadow: 0 1px 5px rgba(0,0,0,0.25);
+	box-shadow: 0 1px 5px rgba(0,0,0,0.25);
+	top: 0;
+	left: 0;
+	background: #fff;
+	font-size: 16px;
+	z-index: 9999997;
+}
+.tour-dialog * {
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	color: inherit;
+}
+.tour-dialog ul,
+.tour-dialog ol {
+	padding: 0 0 0 25px;
+}
+.tour-dialog > [class^="tour-"] {
+	padding: 7px 16px;
+}
+.tour-dialog .tour-header {
+	background: #09c;
+	color: #fff;
+	border-color: #09c;
+}
+.tour-dialog .tour-header:before {
+	content: '';
+	display: block;
+	border: 16px solid transparent;
+	border-bottom-color: inherit;
+	position: absolute;
+	bottom: 100%;
+	left: 7px;
+}
+.tour-dialog .tour-header h3 {
+	font-size: 22px;
+}
+.tour-dialog .tour-footer {
+	color: #08b;
+}
+.tour-dialog .tour-footer a {
+	display:inline-block;
+}
+.tour-dialog .tour-footer a:last-of-type {
+	float: right;
+}
+
+/* Arrow on the right */
+.tour-dialog.tour-arrow-right {
+	margin-left: 23px;
+}
+
+.tour-dialog.tour-arrow-right .tour-header:before {
+	right: 7px;
+	left: auto;
+}

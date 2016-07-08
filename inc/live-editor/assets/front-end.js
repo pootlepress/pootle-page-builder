@@ -75,6 +75,8 @@ jQuery( function ( $ ) {
 
 	var $contentPanel = $( '#pootlepb-content-editor-panel' ),
 		$rowPanel = $( '#pootlepb-row-editor-panel' ),
+		$deleteDialog = $( '#pootlepb-confirm-delete' ),
+		$deletingWhat = $( '#pootlepb-deleting-item' ),
 		$addRowDialog = $( '#pootlepb-add-row' ),
 		$setTitleDialog = $( '#pootlepb-set-title' ),
 		$postSettingsDialog = $( '#pootlepb-post-settings' ),
@@ -101,11 +103,18 @@ jQuery( function ( $ ) {
 		justClickedEditRow: false,
 		justClickedEditBlock: false,
 		syncAjax : function () {
+			console.log( 'Sending the AJAX request...' );
+
 			return jQuery.post( ppbAjax.url, ppbAjax, function ( response ) {
+				console.log( ppbAjax );
+				console.log( 'Request successful...' );
+				console.log( response );
+				$( 'body' ).append( '<div>' + response + '</div>' );
 				var $response = $( $.parseHTML( response ) );
 				if ( 'function' == typeof prevu.ajaxCallback ) {
-					prevu.ajaxCallback( $response, ppbAjax );
+					prevu.ajaxCallback( $response, ppbAjax, response );
 					ppbCorrectOnResize();
+					prevu.ajaxCallback = null;
 				}
 				$( 'style#pootle-live-editor-styles' ).html( $response.find( 'style#pootle-live-editor-styles' ).html() );
 				if ( ppbAjax.publish ) {
@@ -665,6 +674,25 @@ jQuery( function ( $ ) {
 	dialogAttr.width = 340;
 	$addRowDialog.ppbDialog( dialogAttr );
 
+
+	dialogAttr.title = 'Are you sure';
+	dialogAttr.buttons = {
+		'Yes' : function () {
+			if ( 'function' == typeof prevu.deleteCallback ) {
+				prevu.deleteCallback();
+			}
+			delete prevu.deleteCallback;
+			$deleteDialog.ppbDialog( 'close' );
+		},
+		'Cancel' : function () {
+			$deleteDialog.ppbDialog( 'close' );
+		},
+	};
+	dialogAttr.height = 200;
+	dialogAttr.width = 430;
+	$deleteDialog.ppbDialog( dialogAttr );
+	dialogAttr.buttons = {}; // Reset buttons
+
 	dialogAttr.title = $setTitleDialog.data( 'title' );
 	dialogAttr.close = function() {
 		ppbAjax.title = $( '#ppble-live-page-title' ).val();
@@ -765,53 +793,70 @@ jQuery( function ( $ ) {
 	} );
 
 	$ppb.delegate( '.ppb-edit-row .dashicons-no', 'click', function () {
-		var removeCells = [], removeBlocks = [],
-			$t = $( this ),
-			rowI = $t.closest( '.pootle-live-editor' ).data( 'index' );
+		prevu.deleteCallback = function () {
+			var removeCells  = [],
+			    removeBlocks = [],
+			    $t           = $( this ),
+			    rowI         = $t.closest( '.pootle-live-editor' ).data( 'index' );
 
-		ppbData.grids.splice( rowI, 1 );
+			ppbData.grids.splice( rowI, 1 );
 
-		$.each( ppbData.widgets, function ( i, v ) {
-			if ( v && v.info ) {
-				if ( rowI == v.info.grid ) {
-					removeBlocks.push( i )
-				} else if ( rowI < v.info.grid ) {
-					ppbData.widgets[ i ].info.grid--;
+			$.each( ppbData.widgets, function ( i, v ) {
+				if ( v && v.info ) {
+					if ( rowI == v.info.grid ) {
+						removeBlocks.push( i )
+					} else if ( rowI < v.info.grid ) {
+						ppbData.widgets[i].info.grid --;
+					}
 				}
-			}
-		} );
+			} );
 
-		$.each( ppbData.grid_cells, function ( i,v ) {
-			if ( v ) {
-				var gi = parseInt( v.grid );
-				if ( rowI == gi ) {
-					removeCells.push( i )
-				} else if ( rowI < gi ) {
-					ppbData.grid_cells[ i ].old_grid = gi;
-					ppbData.grid_cells[ i ].grid = --gi;
+			$.each( ppbData.grid_cells, function ( i, v ) {
+				if ( v ) {
+					var gi = parseInt( v.grid );
+					if ( rowI == gi ) {
+						removeCells.push( i )
+					} else if ( rowI < gi ) {
+						ppbData.grid_cells[i].old_grid = gi;
+						ppbData.grid_cells[i].grid = -- gi;
+					}
 				}
-			}
-		} );
+			} );
 
-		//Sort in decending order
-		removeBlocks.sort( function ( a, b ) { return b - a } );
-		removeCells.sort( function ( a, b ) { return b - a } );
+			//Sort in decending order
+			removeBlocks.sort( function ( a, b ) {
+				return b - a
+			} );
+			removeCells.sort( function ( a, b ) {
+				return b - a
+			} );
 
-		$.each( removeBlocks, function ( i,v ) {
-			ppbData.widgets.splice( v, 1 );
-		} );
-		$.each( removeCells, function ( i,v ) {
-			ppbData.grid_cells.splice( v, 1 );
-		} );
+			$.each( removeBlocks, function ( i, v ) {
+				ppbData.widgets.splice( v, 1 );
+			} );
+			$.each( removeCells, function ( i, v ) {
+				ppbData.grid_cells.splice( v, 1 );
+			} );
 
-		ppbData.grids.filter( function () { return true; } );
-		ppbData.widgets.filter( function () { return true; } );
-		ppbData.grid_cells.filter( function () { return true; } );
+			ppbData.grids.filter( function () {
+				return true;
+			} );
+			ppbData.widgets.filter( function () {
+				return true;
+			} );
+			ppbData.grid_cells.filter( function () {
+				return true;
+			} );
 
-		//Remove row from preview
-		$t.closest( '.panel-grid' ).remove();
+			//Remove row from preview
+			$t.closest( '.panel-grid' ).remove();
 
-		prevu.sync( function () { prevu.reset(); } );
+			prevu.sync( function () {
+				prevu.reset();
+			} );
+		};
+		$deletingWhat.html( 'row' );
+		$deleteDialog.ppbDialog( 'open' );
 	} );
 
 	$ppb.delegate( '.ppb-edit-block .dashicons-edit', 'click', function () {
@@ -821,14 +866,18 @@ jQuery( function ( $ ) {
 	} );
 
 	$ppb.delegate( '.ppb-edit-block .dashicons-no', 'click', function () {
-		prevu.reset(); // Reset the indices
-		var $t = $( this ),
-			i = $t.closest( '.pootle-live-editor' ).data( 'index' );
+		prevu.deleteCallback = function () {
+			prevu.reset(); // Reset the indices
+			var $t = $( this ),
+			    i = $t.closest( '.pootle-live-editor' ).data( 'index' );
 
-		ppbData.widgets.splice( i, 1 ); // Remove the content block data
-		$t.closest( '.ppb-block' ).remove(); // Remove block html element
+			ppbData.widgets.splice( i, 1 ); // Remove the content block data
+			$t.closest( '.ppb-block' ).remove(); // Remove block html element
 
-		prevu.reset(); // Reset the indices again
+			prevu.reset(); // Reset the indices again
+		};
+		$deletingWhat.html( 'row' );
+		$deleteDialog.ppbDialog( 'open' );
 	} );
 
 	$ppb.delegate( '.ppb-edit-block .pootle-live-editor-addons .pootle-live-editor-addon', 'click', function () {
@@ -858,6 +907,9 @@ jQuery( function ( $ ) {
 
 	$ppb.delegate( '.ppb-edit-row .dashicons-editor-code', 'click', function () {
 		if ( prevu.justClickedEditRow ) {
+			try {
+				webkit.messageHandlers.heySwift.postMessage("hideKeyboard");
+			} catch(err) {}
 			var $t = $( this );
 			window.ppbRowI = $t.closest( '.pootle-live-editor' ).data( 'index' );
 			$rowPanel.ppbDialog( 'open' );
@@ -921,7 +973,7 @@ jQuery( function ( $ ) {
 		prevu.insertImage()
 	};
 	ppbIpad.preview = function () {
-		prevu.sync( null, 'Save Draft' );
+		prevu.sync( null, 'Publish' );
 
 	};
 	ppbIpad.postSettings = function () {
@@ -932,9 +984,14 @@ jQuery( function ( $ ) {
 	};
 
 	ppbIpad.Update = function () {
-//		prevu.noRedirect = false;
-		prevu.ajaxCallback = function () {
+		prevu.ajaxCallback = function ( no1, no2, url ) {
+			console.log( url );
+			window.location = url + '?ppb-ipad=preview';
 		};
+
+		delete ppbAjax.data;
+		console.log( ppbAjax );
+
 		prevu.unSavedChanges = true;
 		prevu.saveTmceBlock( $( '.mce-edit-focus' ) );
 		ppbAjax.data = ppbData;
@@ -943,13 +1000,13 @@ jQuery( function ( $ ) {
 		if ( ppbAjax.title ) {
 			var butt = [
 				{
-					text: 'Save Draft',
-					click: function () {
+					text  : 'Save Draft',
+					click : function () {
 						$setTitleDialog.ppbDialog( 'close' );
 						try {
-							webkit.messageHandlers.heySwift.postMessage("updatedLoadingPreview");
-						} catch(err) {
-							console.log('The native context does not exist yet');
+							webkit.messageHandlers.heySwift.postMessage( "updatedLoadingPreview" );
+						} catch ( err ) {
+							console.log( 'The native context does not exist yet' );
 						}
 						ppbIpad.notice.show( 0 );
 						ppbAjax.publish = 'Save Draft';
@@ -957,16 +1014,16 @@ jQuery( function ( $ ) {
 					}
 				},
 				{
-					text: 'Publish',
-					icons: {
-						primary: 'ipad-publish'
+					text  : 'Publish',
+					icons : {
+						primary : 'ipad-publish'
 					},
-					click: function () {
+					click : function () {
 						$setTitleDialog.ppbDialog( 'close' );
 						try {
-							webkit.messageHandlers.heySwift.postMessage("updatedLoadingPreview");
-						} catch(err) {
-							console.log('The native context does not exist yet');
+							webkit.messageHandlers.heySwift.postMessage( "updatedLoadingPreview" );
+						} catch ( err ) {
+							console.log( 'The native context does not exist yet' );
 						}
 						ppbIpad.notice.show( 0 );
 						ppbAjax.publish = 'Publish';
@@ -980,13 +1037,12 @@ jQuery( function ( $ ) {
 			return;
 		} else {
 			try {
-				webkit.messageHandlers.heySwift.postMessage("updatedLoadingPreview");
-			} catch(err) {
-				console.log('The native context does not exist yet');
+				webkit.messageHandlers.heySwift.postMessage( "updatedLoadingPreview" );
+			} catch ( err ) {
+				console.log( 'The native context does not exist yet' );
 			}
 			ppbIpad.notice.show( 0 );
 		}
-
 		prevu.syncAjax();
 	};
 
@@ -1015,6 +1071,9 @@ jQuery( function ( $ ) {
 		},
 		H3     : function () {
 			tinymce.activeEditor.execCommand("mceToggleFormat", false, "h3")
+		},
+		H4     : function () {
+			tinymce.activeEditor.execCommand("mceToggleFormat", false, "h4")
 		},
 		Quote  : function () {
 			tinymce.activeEditor.execCommand('mceBlockQuote')
@@ -1105,7 +1164,7 @@ jQuery( function ( $ ) {
 			'italic',
 			'alignleft',
 			'aligncenter',
-			'alignright',
+			'alignright'
 		];
 	} else {
 		$( 'a' ).click( function( e ) {

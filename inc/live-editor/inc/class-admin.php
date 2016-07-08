@@ -233,7 +233,8 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 				$plink .= strpos( $plink, '?' ) ? "&" : '?';
 
 				if ( isset( $_GET['tour'] ) ) {
-					$plink .= "tour=1&";
+					$_GET['tour'] = $_GET['tour'] ? $_GET['tour'] : 1;
+					$plink .= "tour=$_GET[tour]&";
 				}
 
 				if ( isset( $_GET['ppb-ipad'] ) ) {

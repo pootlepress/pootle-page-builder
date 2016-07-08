@@ -70,32 +70,14 @@ ksort( $panel_tabs );
 		?>
 
 	</div>
-<?php /*
 
-
-	<div class="pootlepb-dialog" id="pootlepb-content-editor-panel">
-		<ul>
-			<li><a href="#pootlepb-editor-content-tab">Editor</a></li>
-			<li><a href="#pootlepb-style-content-tab">Style</a></li>
-		</ul>
-		<div id="pootlepb-editor-content-tab" class="pootlepb-content-tab">
-			<?php
-			do_action( "pootlepb_content_block_editor_tab" );
-			pootlepb_block_dialog_fields_output( 'editor' );
-			do_action( "pootlepb_content_block_editor_tab_after_fields" );
-			?>
-		</div>
-		<div id="pootlepb-style-content-tab" class="pootlepb-content-tab pootlepb-style-fields">
-			<?php
-			do_action( "pootlepb_content_block_style_tab" );
-			pootlepb_block_dialog_fields_output( 'style' );
-			do_action( "pootlepb_content_block_style_tab_after_fields" );
-			?>
-		</div>
+	<div id="pootlepb-confirm-delete" class="pootlepb-dialog">
+		Are you sure you want to delete this <span id="pootlepb-deleting-item">row</span>?
+		<br>
+		This action cannot be undone.
 	</div>
 
-	*/
-
+<?php
 $row_panel_tabs = apply_filters( 'pootlepb_le_row_block_tabs', $panel_tabs );
 
 $row_panel_tabs = array(
@@ -162,14 +144,14 @@ $row_panel_tabs = array(
 <?php
 if ( get_post_type() == 'post' ) {
 	$cats_data = get_the_category();
-	$cats = array();
+	$cats      = array();
 	if ( $cats_data ) {
-		foreach( $cats_data as $term ) {
+		foreach ( $cats_data as $term ) {
 			$cats[] = $term->term_id;
 		}
 	}
 	$tags_data = get_the_tags();
-	$tags = array();
+	$tags      = array();
 	if ( $tags_data ) {
 		foreach ( $tags_data as $term ) {
 			$tags[] = $term->name;
@@ -182,7 +164,9 @@ if ( get_post_type() == 'post' ) {
 			<h3>Featured image</h3>
 			<span>
 			<div id="ppble-feat-img-wrapper">
-				<div style="background-image: url('<?php the_post_thumbnail_url() ?>');" class="ppble-img-prevu" id="ppble-feat-img-prevu">Choose Image</div>
+				<div style="background-image: url('<?php the_post_thumbnail_url() ?>');" class="ppble-img-prevu"
+				     id="ppble-feat-img-prevu">Choose Image
+				</div>
 			</div>
 			</span>
 		</label>
