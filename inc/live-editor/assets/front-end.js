@@ -793,12 +793,12 @@ jQuery( function ( $ ) {
 	} );
 
 	$ppb.delegate( '.ppb-edit-row .dashicons-no', 'click', function () {
+		var removeCells  = [],
+		    removeBlocks = [],
+		    $t           = $( this ),
+		    rowI         = $t.closest( '.pootle-live-editor' ).data( 'index' );
 		prevu.deleteCallback = function () {
-			var removeCells  = [],
-			    removeBlocks = [],
-			    $t           = $( this ),
-			    rowI         = $t.closest( '.pootle-live-editor' ).data( 'index' );
-
+			console.log( rowI );
 			ppbData.grids.splice( rowI, 1 );
 
 			$.each( ppbData.widgets, function ( i, v ) {
@@ -866,10 +866,11 @@ jQuery( function ( $ ) {
 	} );
 
 	$ppb.delegate( '.ppb-edit-block .dashicons-no', 'click', function () {
+		prevu.reset(); // Reset the indices
+		var $t = $( this ),
+		    i = $t.closest( '.pootle-live-editor' ).data( 'index' );
+
 		prevu.deleteCallback = function () {
-			prevu.reset(); // Reset the indices
-			var $t = $( this ),
-			    i = $t.closest( '.pootle-live-editor' ).data( 'index' );
 
 			ppbData.widgets.splice( i, 1 ); // Remove the content block data
 			$t.closest( '.ppb-block' ).remove(); // Remove block html element

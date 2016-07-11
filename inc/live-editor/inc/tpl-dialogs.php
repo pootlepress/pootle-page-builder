@@ -137,7 +137,7 @@ $row_panel_tabs = array(
 	<div class="pootlepb-dialog" id="pootlepb-set-title" data-title="Set title of the page">
 		<label>
 			<p>Please set the title for the page,</p>
-			<input id="ppble-live-page-title" type="text" value="<?php the_title() ?>">
+			<input id="ppble-live-page-title" type="text" placeholder="Untitled" value="<?php get_the_title() !== 'Untitled' ? the_title() : null ?>">
 		</label>
 	</div>
 
