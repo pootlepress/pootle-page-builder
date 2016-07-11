@@ -106,10 +106,6 @@ jQuery( function ( $ ) {
 			console.log( 'Sending the AJAX request...' );
 
 			return jQuery.post( ppbAjax.url, ppbAjax, function ( response ) {
-				console.log( ppbAjax );
-				console.log( 'Request successful...' );
-				console.log( response );
-				$( 'body' ).append( '<div>' + response + '</div>' );
 				var $response = $( $.parseHTML( response ) );
 				if ( 'function' == typeof prevu.ajaxCallback ) {
 					prevu.ajaxCallback( $response, ppbAjax, response );
@@ -386,7 +382,6 @@ jQuery( function ( $ ) {
 				$( 'html' ).trigger( 'pootlepb_le_content_updated', [$ro] );
 				$ro.removeClass( 'pootle-live-editor-new-cell' );
 
-
 				$( id ).prevuRowInit();
 			} );
 			$rowPanel.ppbDialog( 'close' );
@@ -445,7 +440,7 @@ jQuery( function ( $ ) {
 				//console.log( $ro.find( '.pootle-live-editor-realtime:eq(0)' ).length );
 				$ro.find('.pootle-live-editor-realtime:eq(0)').parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
 				$('.pootle-live-editor.add-row' ).before( $ro );
-				$ro.prevuRowInit();
+				$('#pg-' + qry.post + '-' + window.ppbRowI).prevuRowInit();
 			} );
 		},
 
