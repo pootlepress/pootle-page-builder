@@ -743,6 +743,11 @@ body .ppb-dialog {
 	padding-bottom: 2px;
 }
 
+.chosen-container.chosen-container-multi,
+.chosen-container.chosen-container-single {
+	width: 340px !important; /* or any value that fits your needs */
+}
+
 .mce-tinymce-inline .mce-stack-layout .mce-stack-layout-item { display:inline-block; }
 .mce-tinymce.mce-tinymce-inline { width:auto; }
 .mce-toolbar div.mce-btn button, .mce-toolbar div.mce-btn button.mce-open { line-height:25px; }

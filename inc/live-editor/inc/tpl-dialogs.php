@@ -208,8 +208,7 @@ if ( get_post_type() == 'post' ) {
 	</div>
 	<?php
 }
-if ( ! empty( $_REQUEST['tour'] ) ) {
-	update_option( 'pootlepb_tour_done', 'done' );
+if ( isset( $_REQUEST['tour'] ) ) {
 	include "tpl-tour.php";
 }
 ?>

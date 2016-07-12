@@ -4,6 +4,8 @@
 jQuery( function ( $ ) {
 	$.prototype.tour = function ( slides, options ) {
 		var
+
+			$w = $(window),
 			docW = $(document).width(),
 			docH = $(document).height(),
 			$d = this.$d = this.addClass( 'tour-dialog' ),
@@ -44,15 +46,15 @@ jQuery( function ( $ ) {
 
 		options.beforeHeading = options.beforeHeading ? options.beforeHeading : "<h3>";
 		options.afterHeading = options.afterHeading ? options.afterHeading : "</h3>";
-		options.skipText = options.skipText ? options.skipText : "Skip Tour";
-		options.moreText = options.moreText ? options.moreText : "More";
-		options.finishText = options.moreText ? options.moreText : "Thanks!";
+		options.endTourText = options.endTourText ? options.endTourText : "End Tour";
+		options.moreText = options.moreText ? options.moreText : "Next";
+		options.completeText = options.completeText ? options.completeText : "Thanks!";
 
 		this.html(
-			'<div class="tour-header">' + options.beforeHeading + '<span class="tour-heading">Content Block</span>' + options.afterHeading + '</div>' +
+			'<div class="tour-header"><span class="tour-arrow"></span>' + options.beforeHeading + '<span class="tour-heading">Content Block</span>' + options.afterHeading + '</div>' +
 			'<div class="tour-content"></div>' +
 			'<div class="tour-footer">' +
-			'<a href="javascript:0" class="tour-skip" onclick="jQuery(this).parents(\'#ppb-tour-dialog\').hide()">' + options.skipText + '</a>' +
+			'<a href="javascript:0" class="tour-skip" onclick="jQuery(this).parents(\'#ppb-tour-dialog\').hide()">' + options.endTourText + '</a>' +
 			'<a href="javascript:0" class="tour-next-slide">' + options.moreText + '</a>' +
 			'</div>' );
 
@@ -62,30 +64,28 @@ jQuery( function ( $ ) {
 				return;
 			}
 			var i = $$.slide;
-			console.log(i)
 			switch ( i ) {
-				case 1: // Adding Row
+				case 2: // Adding Row
 					if ( ! $addRowDialog.ppbDialog( 'isOpen' ) ) {
 						$addRowDialog.ppbDialog( 'open' );
 					}
 					break;
-				case 2:
+				case 3:
 					if ( $addRowDialog.ppbDialog( 'isOpen' ) ) {
 						$( '#pootlepb-add-row' ).siblings( '.ppb-dialog-buttonpane' ).find( 'button' ).click();
 					}
 					$row.addClass( 'tour-active' );
 					break;
-				case 3:
+				case 5:
 					$row.children( '.ppb-edit-row' ).addClass( 'tour-active' );
 					break;
-				case 5:
+				case 7:
 					$row.children( '.ppb-edit-row' ).removeClass( 'tour-active' );
 					$block.children( '.ppb-edit-block' ).addClass( 'tour-active' );
 					break;
-				case 9:
-					$block.children( '.ppb-edit-block' ).removeClass( 'tour-active' );
-					break;
 				case 10:
+					$block.children( '.ppb-edit-block' ).removeClass( 'tour-active' );
+					$row.removeClass( 'tour-active' );
 					$( '.ui-resizable-handle.ui-resizable-w' ).eq(1).parents( '.panel-grid' ).addClass( 'tour-active' );
 			}
 			var el  = slides[i].el,
@@ -93,9 +93,19 @@ jQuery( function ( $ ) {
 			$$.position( $el );
 			$$.heading( slides[i].head );
 			$$.content( slides[i].content );
+
+			if ( 0 == i ) {
+				$d.addClass( 'tour-no-arrow' ).css( {
+					top : $w.scrollTop() + ( window.innerHeight - $d.innerHeight() ) / 2,
+					left: ( window.innerWidth - $d.innerWidth() ) / 2
+				} );
+			} else if ( 1 == i ) {
+				$d.removeClass( 'tour-no-arrow' )
+			}
+
 			$$.slide ++;
 			if ( $$.slide == slides.length ) {
-				$( this ).html( options.finishText );
+				$( this ).html( options.completeText );
 				$d.find( '.tour-skip' ).hide();
 				$( '.tour-active' ).removeClass( 'tour-active' );
 			}
@@ -111,70 +121,71 @@ jQuery( function ( $ ) {
 		[
 			{
 				el      : '.ppb-live-add-object.add-row',
+				head    : 'Pootle Pagebuilder Tour',
+				content : 'Welcome to our 1 minute tour. Click ‘Next’ to be guided around your page and learn what you can do with Pootle Pagebuilder.'
+			},
+			{
+				el      : '.ppb-live-add-object.add-row',
 				head    : 'Add row',
-				content : 'Click the icon to add a new row and set number of columns.'
+				content : 'Click the ‘+’ icon to add a new row and set number of columns.'
 			},
 			{
 				el      : $( '#ppb-row-add-cols' ),
 				head    : 'Number of columns',
-				content : 'Choose 2 columns for this tour and click \'Done\'.<br>We will click it for you when you move to next slide since you can\'t reach it at the moment.'
-			},
-			{
-				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-editor-code' ),
-				head    : 'Row Sorting',
-				content : '<ul><li>Drag and drop your row using this icon ­ cool huh?</li><li>Hover over this to make Row Styling and Delete Row icons appear</li><li>You can also doubleclick here to shortcut to  Row Styling panel.</li></ul>'
-			},
-			{
-				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-admin-appearance' ),
-				head    : 'Row Styling',
-				content : 'Edit your row here.<ul><li>Set row background: colour, image or video</li><li>Set row layout: full­width, height, margin and gutter</li><li>Set advanced CSS styles.</li></ul>'
-			},
-			{
-				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-no' ),
-				head    : 'Delete Row',
-				content : 'Deletes your row . This is undoable so be sure you want to delete your row :)'
-			},
-			{
-				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-screenoptions' ),
-				head    : 'Drag and Drop Content Block',
-				content : '<ul><li>Drag and drop your Content Block using this icon ­ cool huh?</li><li>Hover over this to make Edit Content, Add Image and Delete Content Block icons appear</li><li>You can also doubleclick here to shortcut to Edit Content panel.</li></ul>'
-			},
-			{
-				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-edit' ),
-				head    : 'Edit Content',
-				content : 'Add content here:<ul><li>Add and edit copy</li><li>Add and edit media</li><li>Style Content Block background: image, colour, transparency</li><li>Style text, border, padding and corners.</li></ul>'
-			},
-			{
-				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-format-image' ),
-				head    : 'Insert Image',
-				content : 'Adds image to Content Block.'
-			},
-			{
-				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-no' ),
-				head    : 'Delete Content Block',
-				content : 'Deletes your Content Block. This is undoable so be sure you want to delete your Content Block :)'
+				content : 'Select number of required columns.'
 			},
 			{
 				el      : $block,
 				head    : 'In Content Block',
-				content : 'Doubleclick to directly edit your content block ­ snazzy!'
+				content : 'Click here to directly add copy to your content block &ndash; snazzy!'
+			},
+			{
+				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-editor-code' ),
+				head    : 'Row Sorting',
+				content : '<ul><li>Drag and drop your <b>row</b> using this icon &ndash; cool huh?</li><li>Hover over this to make <i>Row Styling</i> and <i>Delete Row</i> icons appear</li><li>You can also doubleclick here to shortcut to <i>Row Styling</i> panel.</li></ul>'
+			},
+			{
+				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-admin-appearance' ),
+				head    : 'Row Styling',
+				content : 'Edit your <b>row</b> here.<ul><li>Set <b>row</b> background: colour, image or video</li><li>Set <b>row</b> layout: full&ndash;width, height, margin and gutter</li><li>Set advanced CSS styles.</li></ul>'
+			},
+			{
+				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-no' ),
+				head    : 'Delete Row',
+				content : 'Deletes your <b>row</b>. This is undoable so be sure you want to delete your <b>row</b> :)'
+			},
+			{
+				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-screenoptions' ),
+				head    : 'Drag and Drop Content Block',
+				content : '<ul><li>Drag and drop your <b>content block</b> using this icon &ndash; cool huh?</li><li>Hover over this to make <i>Edit Content</i>, <i>Add Image</i> and <i>Delete Content Block</i> icons appear</li><li>You can also doubleclick here to shortcut to <i>Edit Content</i> panel.</li></ul>'
+			},
+			{
+				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-edit' ),
+				head    : 'Edit Content',
+				content : 'Add content here:<ul><li>Add and edit copy</li><li>Add and edit media</li><li>Style <b>content block</b> background: image, colour, transparency</li><li>Style text, border, padding and corners.</li></ul>'
+			},
+			{
+				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-no' ),
+				head    : 'Delete Content',
+				content : 'Deletes your <b>content block</b>. This is undoable so be sure you want to delete your <b>content block</b> :)'
 			},
 			{
 				el      : '.ppb-col + .ppb-col .ui-resizable-handle.ui-resizable-w',
 				head    : 'Column drag',
-				content : 'Change the width of your columns simply by dragging ­ so easy!'
+				content : 'Change the width of your columns simply by dragging &ndash; so easy!'
 			},
 			{
 				el      : '.ppb-live-add-object.add-row',
 				head    : 'Finished',
-				content : 'Let\'s get cracking :) Click here to start building!'
+				content : 'Let\'s get cracking :)'
 			}
 		],
 		{
 			beforeHeading : '<h3><span class="dashicons dashicons-lightbulb"></span>',
 			afterHeading  : "</h3>",
-			skipText      : '<span class="dashicons dashicons-dismiss"></span> I know...',
-			moreText      : '<span class="dashicons dashicons-controls-play"></span> Tell me more!',
+			endTourText      : '<span class="dashicons dashicons-dismiss"></span> End Tour',
+			moreText      : '<span class="dashicons dashicons-controls-play"></span> Next',
+			completeText      : '<span class="dashicons dashicons-controls-play"></span> Finish Tour',
 		}
 	);
 } );

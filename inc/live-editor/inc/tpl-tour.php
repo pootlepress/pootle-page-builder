@@ -1,7 +1,7 @@
 <div id="ppb-tour-dialog" style="display: none;"></div>
 
 <style>
-	#ppb-tour-dialog * {
+	#ppb-tour-dialog .dashicons {
 		vertical-align: middle;
 	}
 	#ppb-tour-dialog .tour-header {
@@ -27,5 +27,12 @@
 	}
 	#ppb-tour-dialog .tour-footer .dashicons-controls-play {
 		margin-right: -5px;
+	}
+	.tour-dialog .tour-header h3 {
+		font-size: 22px;
+		font-weight: normal;
+	}
+	.tour-dialog .tour-footer a {
+		font-weight: normal;
 	}
 </style>

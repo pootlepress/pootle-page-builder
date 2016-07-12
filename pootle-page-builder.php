@@ -12,7 +12,7 @@
  */
 
 /** Pootle page builder current version */
-define( 'POOTLEPB_VERSION', '2.1.beta9.7.' . time() );
+define( 'POOTLEPB_VERSION', '2.1.beta9.7.1' . time() );
 /** Pootle page builder __FILE__ */
 define( 'POOTLEPB_BASE_FILE', __FILE__ );
 /** Pootle page builder plugin directory path */
@@ -193,6 +193,7 @@ final class Pootle_Page_Builder {
 				'title' => $post->post_title,
 				'link' => get_permalink( $post ),
 				'type' => $post->post_type,
+				'status' => $post->post_status,
 			);
 		}
 		echo json_encode( $json );

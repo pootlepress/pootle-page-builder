@@ -5,6 +5,8 @@
  * @since 0.1.0
  */
 
+$ajax_with_nonce = wp_nonce_url( admin_url( 'admin-ajax.php' ), 'ppb-new-live-post', 'ppbLiveEditor' )
+
 /** Template start */
 ?>
 <div class="wrap ppb-welcome about-wrap">
@@ -18,7 +20,11 @@
 	<div class="ppb-badge"></div>
 
 	<p class="ppb-actions">
-		<a href="<?php echo esc_url( admin_url( 'admin.php?page=page_builder_settings' ) ); ?>" class="button pootle">Settings</a>
+		<a href="<?php
+		echo "$ajax_with_nonce&action=pootlepb_live_page&tour=1";
+		?>" class="button pootle">Tour</a>
+		<a href="<?php
+		echo esc_url( admin_url( 'admin.php?page=page_builder_settings' ) ); ?>" class="button pootle">Settings</a>
 		<a href="http://docs.pootlepress.com/" class="button pootle">Docs</a>
 		<b>Version <?php echo esc_attr( POOTLEPB_VERSION ); ?></b>
 	</p>

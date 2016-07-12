@@ -12,10 +12,8 @@
 	z-index: 9999997;
 }
 .tour-dialog * {
-	vertical-align: middle;
 	margin: 0;
 	padding: 0;
-	font-weight: normal;
 	color: inherit;
 }
 .tour-dialog ul,
@@ -39,9 +37,6 @@
 	bottom: 100%;
 	left: 7px;
 }
-.tour-dialog .tour-header h3 {
-	font-size: 22px;
-}
 .tour-dialog .tour-footer {
 	color: #08b;
 }
@@ -60,4 +55,8 @@
 .tour-dialog.tour-arrow-right .tour-header:before {
 	right: 7px;
 	left: auto;
+}
+
+.tour-dialog.tour-no-arrow .tour-header:before {
+	display: none;
 }
