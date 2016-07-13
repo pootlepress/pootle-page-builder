@@ -885,6 +885,12 @@ jQuery( function ( $ ) {
 		$contentPanel.find( 'a[href="#pootle-' + $t.data( 'id' ) + '-tab"]' ).click();
 	} );
 
+	$ppb.delegate( '.ppb-edit-block .dashicons-format-image', 'click', function ( e ) {
+		e.preventDefault();
+		prevu.activeEditor = $(this).closest('.ppb-block' ).children('.pootle-live-editor-realtime');
+		prevu.insertImage()
+	} );
+
 	$ppb.delegate( '.pootle-live-editor.add-row .dashicons-plus', 'click', function () {
 		$addRowDialog.ppbDialog( 'open' );
 		var $lastRow = $('.panel-grid:last-child');
@@ -894,6 +900,12 @@ jQuery( function ( $ ) {
 			}, 1000);
 			return false;
 		}
+	} );
+
+	$ppb.delegate( '.ppb-edit-row .dashicons-before, .ppb-edit-block .dashicons-before', 'click', function () {
+		try {
+			webkit.messageHandlers.heySwift.postMessage( "hideTextFormatting" );
+		} catch ( err ) {}
 	} );
 
 	$ppb.delegate( '.ppb-edit-row .dashicons-editor-code', 'click', function () {
@@ -1173,11 +1185,16 @@ jQuery( function ( $ ) {
 			var $t = $( e.target.targetElm );
 			$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
 			$t.parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
+			try {
+				webkit.messageHandlers.heySwift.postMessage( "showTextFormatting" );
+			} catch ( err ) {}
 		});
 		editor.addButton('ppbInsertImage', {
 			text: '',
 			icon: 'dashicons dashicons-format-image',
-			onclick: ppbIpad.insertImage
+			onclick: function () {
+				ppbIpad.insertImage();
+			}
 		});
 
 	};
