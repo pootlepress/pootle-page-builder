@@ -79,7 +79,7 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 				top: 2px;
 			}
 
-			li[id^="wp-admin-bar-ppb-new-live-"] a {
+			li[id^="wp-admin-bar-ppb-"] a {
 				clear: both;
 			}
 
@@ -124,6 +124,14 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 				$admin_bar->add_menu( $args );
 
 				$args['parent'] = 'ppb-publish';
+
+				if ( 'post' == get_post_type() ) {
+					$args['id']    = 'ppb-live-post-settings';
+					$args['href']  = '#ppb-live-post-settings';
+					$args['title'] = 'Post settings';
+					$admin_bar->add_menu( $args );
+				}
+
 				$args['id']     = 'ppb-live-update-changes';
 				$args['href']   = '#ppb-live-update-changes';
 				$args['title']  = 'Save';
@@ -143,13 +151,13 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 					),
 				);
 				$admin_bar->add_menu( $args );
-			}
 
-			if ( 'post' == get_post_type() ) {
-				$args['id']    = 'ppb-live-post-settings';
-				$args['href']  = '#ppb-live-post-settings';
-				$args['title'] = 'Post settings';
-				$admin_bar->add_menu( $args );
+				if ( 'post' == get_post_type() ) {
+					$args['id']    = 'ppb-live-post-settings';
+					$args['href']  = '#ppb-live-post-settings';
+					$args['title'] = 'Post settings';
+					$admin_bar->add_menu( $args );
+				}
 			}
 
 		} else if ( pootlepb_is_panel( true ) ) {

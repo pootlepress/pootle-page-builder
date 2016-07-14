@@ -142,7 +142,10 @@
             });
         },
         open: function () {
-            this.element.show().iris('toggle').focus();
+            this.element.show().iris('toggle');
+            if ( ! ppbAjax || !ppbAjax.ipad ) {
+                this.element.focus();
+            }
             this.button.removeClass('hidden');
             this.toggler.addClass('wp-picker-open');
             $('body').trigger('click.pnmcolorpicker').on('click.pnmcolorpicker', this.close);

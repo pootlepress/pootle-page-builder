@@ -1,4 +1,8 @@
 <style>
+	.wp-picker-container .wp-picker-open + .wp-picker-input-wrap {
+		display: none;
+	}
+
 	.panel-grid:first-child{ margin-top:0 }
 	.pootle-live-editor.ppb-live-add-object.add-row {
 		position: fixed;

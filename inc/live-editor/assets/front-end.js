@@ -3,7 +3,7 @@
  *
  * @package Pootle_Page_Builder_Live_Editor
  * @version 1.0.0
- * @developer shramee <shramee.srivastav@gmail.com>
+ * @developer shramee <shramee@wpdevelopment.me>
  */
 /**
  * Moves the elements in array
@@ -279,7 +279,7 @@ jQuery( function ( $ ) {
 			$( 'html' ).trigger( 'pootlepb_admin_editor_panel_done', [$contentPanel, st] );
 		},
 
-		savePanel : function () {
+		 savePanel : function () {
 			var st = JSON.parse( ppbData.widgets[window.ppbPanelI].info.style );
 
 			st = panels.getStylesFromFields( $contentPanel, st );
@@ -701,6 +701,8 @@ jQuery( function ( $ ) {
 
 	if ( $postSettingsDialog.length ) {
 		dialogAttr.height = 700;
+		dialogAttr.height = ppbAjax.ipad ? 529 : 502;
+
 		dialogAttr.width = 610;
 		dialogAttr.title = 'Post settings';
 		dialogAttr.close = function () {
@@ -855,9 +857,13 @@ jQuery( function ( $ ) {
 		$deleteDialog.ppbDialog( 'open' );
 	} );
 
-	$ppb.delegate( '.ppb-edit-block .dashicons-edit', 'click', function () {
+	$ppb.delegate( '.ppb-edit-block .dashicons-before', 'click', function () {
 		var $t = $( this );
+		$t.closest( '.ppb-block' ).addClass( 'active' );
 		window.ppbPanelI = $t.closest( '.pootle-live-editor' ).data( 'index' );
+	} );
+
+	$ppb.delegate( '.ppb-edit-block .dashicons-edit', 'click', function () {
 		$contentPanel.ppbDialog( 'open' );
 	} );
 
@@ -879,7 +885,6 @@ jQuery( function ( $ ) {
 
 	$ppb.delegate( '.ppb-edit-block .pootle-live-editor-addons .pootle-live-editor-addon', 'click', function () {
 		var $t = $( this );
-		window.ppbPanelI = $t.closest( '.pootle-live-editor' ).data( 'index' );
 		//console.log( window.ppbPanelI );
 		$contentPanel.ppbDialog( 'open' );
 		$contentPanel.find( 'a[href="#pootle-' + $t.data( 'id' ) + '-tab"]' ).click();
@@ -1148,8 +1153,10 @@ jQuery( function ( $ ) {
 
 	prevu.tmce.selector		= '.pootle-live-editor-realtime:not(.mce-content-body)';
 	//prevu.tmce.selector		= '.site-info';
-	prevu.tmce.inline		= true;
-	prevu.tmce.theme		= 'ppbprevu';
+
+	prevu.tmce.inline	= true;
+	prevu.tmce.theme	= 'ppbprevu';
+	prevu.tmce.plugins	= prevu.tmce.plugins.replace('wpeditimage,', '').replace('wplink,', '');
 
 	//console.log( prevu.tmce );
 
@@ -1161,7 +1168,7 @@ jQuery( function ( $ ) {
 			'h4',
 			'blockquote',
 			'forecolor',
-			'link',
+			'ppblink',
 			'bold',
 			'italic',
 			'alignleft',

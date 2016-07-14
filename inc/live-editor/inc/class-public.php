@@ -63,6 +63,11 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		$this->version = Pootle_Page_Builder_Live_Editor::$version;
 	} // End __construct()
 
+	function tinymce_plugin( $plugin_array ) {
+		$plugin_array['ppblink'] = $this->url . '/assets/ppblink.js';
+		return $plugin_array;
+	}
+
 	public function post_status() {
 		return get_post_status( $this->post_id );
 	}
@@ -84,12 +89,17 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		$id            = $post ? $post->ID : filter_input( INPUT_POST, 'post' );
 		$this->post_id = $id;
 
+		if ( isset( $_COOKIE['ppb-ipad'] ) ) {
+			add_filter( 'show_admin_bar', '__return_false' );
+		}
 		if ( isset( $_REQUEST['ppb-ipad'] ) ) {
+			setcookie( 'ppb-ipad', 'true' );
 			add_filter( 'show_admin_bar', '__return_false' );
 			if ( $this->nonce === get_transient( 'ppb-ipad-' . $user ) ) {
 				$this->ipad = true;
 				$this->actions();
 				add_action( 'wp_head', array( $this, 'ipad_html' ) );
+
 				return true;
 			}
 		} else if ( wp_verify_nonce( $this->nonce, 'ppb-live-' . $id ) ) {
@@ -116,6 +126,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 99 );
 		add_action( 'pootlepb_before_pb', array( $this, 'before_pb' ), 7, 4 );
 		add_action( 'pootlepb_render_content_block', array( $this, 'edit_content_block' ), 7, 4 );
+		add_filter( 'mce_external_plugins', array( $this, 'tinymce_plugin' ) ); // PPBlink tmce plugin
 
 		if ( ! empty( $_GET['edit_title'] ) ) {
 			$this->edit_title = true;
