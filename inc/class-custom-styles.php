@@ -159,6 +159,10 @@ final class Pootle_Page_Builder_Custom_Styles {
 			$attr['class'][] = 'ppb-full-width-no-bg';
 		}
 
+		if ( ! empty( $style['match_col_hi'] ) ) {
+			$attr['class'][] = 'ppb-match-col-hi';
+		}
+
 		return $attr;
 	}
 
