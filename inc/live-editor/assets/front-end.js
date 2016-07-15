@@ -1166,7 +1166,6 @@ jQuery( function ( $ ) {
 
 	prevu.tmce.inline	= true;
 	prevu.tmce.theme	= 'ppbprevu';
-	prevu.tmce.plugins	= prevu.tmce.plugins.replace('wpeditimage,', '').replace('wplink,', 'ppblink,');
 
 	//console.log( prevu.tmce );
 
@@ -1188,6 +1187,7 @@ jQuery( function ( $ ) {
 		];
 		$postSettingsDialog.find('select').chosen();
 	} else {
+		prevu.tmce.plugins	= prevu.tmce.plugins.replace('wpeditimage,', '').replace('wplink,', 'ppblink,');
 		$( 'a' ).click( function( e ) {
 			e.preventDefault();
 		} )
