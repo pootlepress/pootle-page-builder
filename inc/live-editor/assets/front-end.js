@@ -446,7 +446,6 @@ jQuery( function ( $ ) {
 					$cols = $ro.find( '.panel-grid-cell-container > .panel-grid-cell' );
 				$cols.css( 'width', ( 100 - num_cells + 1 ) / num_cells + '%' );
 				$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
-				//console.log( $ro.find( '.pootle-live-editor-realtime:eq(0)' ).length );
 				$ro.find('.pootle-live-editor-realtime:eq(0)').parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
 				$('.pootle-live-editor.add-row' ).before( $ro );
 				$('#pg-' + qry.post + '-' + window.ppbRowI).prevuRowInit();
@@ -869,7 +868,8 @@ jQuery( function ( $ ) {
 
 	$ppb.delegate( '.ppb-edit-block .dashicons-before', 'click', function () {
 		var $t = $( this );
-		$t.closest( '.ppb-block' ).addClass( 'active' );
+		$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
+		$t.parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
 		window.ppbPanelI = $t.closest( '.pootle-live-editor' ).data( 'index' );
 	} );
 
