@@ -1,11 +1,88 @@
-/**
- * Custom link plugin for tinyMCE
- *
- * @package Pootle_Page_Builder
- * @version 1.0.0
- * @developer shramee <shramee@wpdevelopment.me>
- */
 ( function( tinymce ) {
+	tinymce.ui.WPLinkPreview = tinymce.ui.Control.extend( {
+		url: '#',
+		renderHtml: function() {
+			return (
+				'<div id="' + this._id + '" class="wp-link-preview">' +
+					'<a href="' + this.url + '" target="_blank" tabindex="-1">' + this.url + '</a>' +
+				'</div>'
+			);
+		},
+		setURL: function( url ) {
+			var index, lastIndex;
+
+			if ( this.url !== url ) {
+				this.url = url;
+
+				url = window.decodeURIComponent( url );
+
+				url = url.replace( /^(?:https?:)?\/\/(?:www\.)?/, '' );
+
+				if ( ( index = url.indexOf( '?' ) ) !== -1 ) {
+					url = url.slice( 0, index );
+				}
+
+				if ( ( index = url.indexOf( '#' ) ) !== -1 ) {
+					url = url.slice( 0, index );
+				}
+
+				url = url.replace( /(?:index)?\.html$/, '' );
+
+				if ( url.charAt( url.length - 1 ) === '/' ) {
+					url = url.slice( 0, -1 );
+				}
+
+				// If nothing's left (maybe the URL was just a fragment), use the whole URL.
+				if ( url === '' ) {
+					url = this.url;
+				}
+
+				// If the URL is longer that 40 chars, concatenate the beginning (after the domain) and ending with ...
+				if ( url.length > 40 && ( index = url.indexOf( '/' ) ) !== -1 && ( lastIndex = url.lastIndexOf( '/' ) ) !== -1 && lastIndex !== index ) {
+					// If the beginning + ending are shorter that 40 chars, show more of the ending
+					if ( index + url.length - lastIndex < 40 ) {
+						lastIndex = -( 40 - ( index + 1 ) );
+					}
+
+					url = url.slice( 0, index + 1 ) + '\u2026' + url.slice( lastIndex );
+				}
+
+				tinymce.$( this.getEl().firstChild ).attr( 'href', this.url ).text( url );
+			}
+		}
+	} );
+
+	tinymce.ui.WPLinkInput = tinymce.ui.Control.extend( {
+		renderHtml: function() {
+			return (
+				'<div id="' + this._id + '" class="wp-link-input">' +
+					'<input type="text" value="" placeholder="' + tinymce.translate( 'Paste URL or type to search' ) + '" />' +
+					'<input type="text" style="display:none" value="" />' +
+				'</div>'
+			);
+		},
+		setURL: function( url ) {
+			this.getEl().firstChild.value = url;
+		},
+		getURL: function() {
+			return tinymce.trim( this.getEl().firstChild.value );
+		},
+		getLinkText: function() {
+			var text = this.getEl().firstChild.nextSibling.value;
+
+			if ( ! tinymce.trim( text ) ) {
+				return '';
+			}
+			return text.replace( /[\r\n\t ]+/g, ' ' );
+		},
+		reset: function() {
+			var urlInput = this.getEl().firstChild;
+
+			urlInput.value = '';
+			urlInput.nextSibling.value = '';
+		}
+	} );
+
 	tinymce.PluginManager.add( 'ppblink', function( editor ) {
 		var toolbar;
 		var editToolbar;
@@ -89,11 +166,6 @@
 								if ( ! element.value && selection && typeof window.wpLink !== 'undefined' ) {
 									element.value = window.wpLink.getUrlFromSelection( selection );
 								}
-
-								if ( ! doingUndoRedo ) {
-									element.focus();
-									element.select();
-								}
 							}
 						} );
 					}
@@ -107,7 +179,7 @@
 			}
 		} );
 
-		editor.addCommand( 'WP_Link', function() {
+		editor.addCommand( 'PPB_Link', function() {
 			if ( tinymce.Env.ie && tinymce.Env.ie < 10 && typeof window.wpLink !== 'undefined' ) {
 				window.wpLink.open( editor.id );
 				return;
@@ -181,17 +253,17 @@
 		editor.addButton( 'ppblink', {
 			icon: 'link',
 			tooltip: 'Insert/edit link',
-			cmd: 'WP_Link',
+			cmd: 'PPB_Link',
 			stateSelector: 'a[href]'
 		});
 
-		editor.addButton( 'ppbunlink', {
+		editor.addButton( 'unlink', {
 			icon: 'unlink',
 			tooltip: 'Remove link',
 			cmd: 'unlink'
 		});
 
-		editor.addMenuItem( 'ppblink', {
+		editor.addMenuItem( 'link', {
 			icon: 'link',
 			text: 'Insert/edit link',
 			cmd: 'WP_Link',

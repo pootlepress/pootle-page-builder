@@ -98,16 +98,6 @@
 		padding: 0;
 		cursor: ew-resize;
 	}
-	#pootlepb-set-title + .ppb-dialog-buttonpane .ui-button-text-icon-primary {
-		background: #0085ba !important;
-		border-color: #0073aa #006799 #006799 !important;
-		-webkit-box-shadow: 0 1px 0 #006799 !important;
-		box-shadow: 0 1px 0 #006799 !important;
-		color: #fff !important;
-		text-decoration: none;
-		text-shadow: 0 -1px 1px #006799,1px 0 1px #006799,0 1px 1px #006799,-1px 0 1px #006799 !important;
-		font-weight: 500;
-	}
 	.ppb-full-blue-notice, #ppb-ipad-color-picker {
 		padding: 50px 50px;
 		position: fixed;

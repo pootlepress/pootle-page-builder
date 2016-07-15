@@ -153,6 +153,7 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 				$admin_bar->add_menu( $args );
 
 				if ( 'post' == get_post_type() ) {
+					$args['parent'] = 'ppb-publish';
 					$args['id']    = 'ppb-live-post-settings';
 					$args['href']  = '#ppb-live-post-settings';
 					$args['title'] = 'Post settings';
@@ -243,7 +244,7 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 					$plink .= "tour=$_GET[tour]&";
 				}
 				if ( isset( $_GET['ppb-ipad'] ) ) {
-					if ( ! get_option( 'pootlepb_ipad_tour_done1' ) ) {
+					if ( ! get_option( 'pootlepb_ipad_tour_done' ) ) {
 						update_option( 'pootlepb_ipad_tour_done', 'done' );
 						$plink .= 'tour=ipad&';
 					}

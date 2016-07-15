@@ -132,10 +132,19 @@ jQuery( function ( $ ) {
 			if ( publish ) {
 				ppbAjax.publish = publish;
 				if ( ppbAjax.title ) {
-					var butt = {};
+					var butt = [				{
+						text  : publish,
+						icons : {
+							primary : publish == 'Publish' ? 'ipad-publish' : ''
+						},
+						click : function () {
+							$setTitleDialog.ppbDialog( 'close' );
+							prevu.syncAjax();
+						}
+					}
+					];
+
 					butt[ publish ] = function () {
-						$setTitleDialog.ppbDialog( 'close' );
-						prevu.syncAjax();
 
 					};
 					$setTitleDialog.parent().attr( 'data-action', publish );
@@ -560,7 +569,7 @@ jQuery( function ( $ ) {
 					widthTaken += $t.outerWidth();
 				} );
 
-				widthTaken += parseInt( $prev.css('padding-left') ) + parseInt( $prev.css('padding-right') );
+				widthTaken += $prev.css('padding-left') + parseInt( $prev.css('padding-right') );
 
 				$prev.css( 'width', 100 - ( 100 * widthTaken / $p.width() ) + '%' );
 
@@ -1093,7 +1102,7 @@ jQuery( function ( $ ) {
 			$ppbIpadColorDialog.show().css('top', posTop );
 		},
 		Link   : function () {
-			tinymce.activeEditor.execCommand('WP_Link')
+			tinymce.activeEditor.execCommand('PPB_Link')
 		},
 		Bold   : function () {
 			tinymce.activeEditor.execCommand('Bold')
@@ -1157,7 +1166,7 @@ jQuery( function ( $ ) {
 
 	prevu.tmce.inline	= true;
 	prevu.tmce.theme	= 'ppbprevu';
-	prevu.tmce.plugins	= prevu.tmce.plugins.replace('wpeditimage,', '').replace('wplink,', '');
+	prevu.tmce.plugins	= prevu.tmce.plugins.replace('wpeditimage,', '').replace('wplink,', 'ppblink,');
 
 	//console.log( prevu.tmce );
 
@@ -1273,7 +1282,7 @@ jQuery( function ( $ ) {
 
 	window.onbeforeunload = function(e) {
 		if ( prevu.unSavedChanges ) {
-			return "You have unsaved changes! Click 'Update' in admin bar to save.\n\nYour changes will be lost if you dan't save.";
+			//return "You have unsaved changes! Click 'Update' in admin bar to save.\n\nYour changes will be lost if you dan't save.";
 		}
 	}
 
