@@ -184,7 +184,7 @@ final class Pootle_Page_Builder {
 		$query = $this->ppb_posts();
 		$json = array(
 			'site_url' => site_url(),
-			'posts' => [],
+			'posts' => array(),
 
 		);
 

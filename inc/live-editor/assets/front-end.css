@@ -308,6 +308,10 @@ body .ppb-dialog {
 	min-height: 50px;
 }
 
+.ppb-row .panel-grid-cell:last-child {
+	margin-right: -2px;
+}
+
 .ppb-row .panel-grid-cell:first-child .ui-resizable-handle {
 	display: none !important;
 }

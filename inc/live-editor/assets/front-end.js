@@ -545,25 +545,26 @@ jQuery( function ( $ ) {
 			},
 			resize: function (event, ui) {
 				var $t = $( this ),
+				    $p = $t.parent(),
 					$prev = $t.prev(),
 					widthTaken = 0,
 					widthNow = ui.size.width,
 					originalWidth = ui.originalSize.width;
 
-				$t.parent().addClass( 'ppb-cols-resizing' );
+				$p.addClass( 'ppb-cols-resizing' );
+
+				$t.css( 'width', ( 100 * $t.innerWidth() / $p.innerWidth() ) + '%' );
 
 				$prev.siblings('.panel-grid-cell' ).each( function() {
 					var $t = $( this );
-					widthTaken += 1 + $t.outerWidth() + parseInt( $t.css('margin-left') ) + parseInt( $t.css('margin-right') );
+					widthTaken += $t.outerWidth();
 				} );
 
-				widthTaken += parseInt( $prev.css('padding-left') ) + parseInt( $prev.css('margin-left') ) +
-				              parseInt( $prev.css('padding-right') ) + parseInt( $prev.css('margin-right') );
+				widthTaken += parseInt( $prev.css('padding-left') ) + parseInt( $prev.css('padding-right') );
 
-				$prev.css(
-					'width',
-					( $t.parent().width() - widthTaken - 1 )
-				);
+				$prev.css( 'width', 100 - ( 100 * widthTaken / $p.width() ) + '%' );
+
+				console.log( 'Parent Width: ' + $p.width() + ';\n Width Taken: ' + ( $prev.outerWidth() + widthTaken ) );
 
 				prevu.resizableCells.correctCellData( $t  );
 				prevu.resizableCells.correctCellData( $prev  );
@@ -572,12 +573,12 @@ jQuery( function ( $ ) {
 
 				if ( originalWidth < widthNow ) {
 					//Increasing width
-					if ( $t.parent().width() * 0.93 < widthTaken ) {
+					if ( $p.width() * 0.93 < widthTaken ) {
 						$t.resizable( 'widget' ).trigger( 'mouseup' );
 					}
 				} else {
 					//Decreasing width
-					if ( $t.parent().width() * 0.07 > $t.width() ) {
+					if ( $p.width() * 0.07 > $t.width() ) {
 						$t.resizable( 'widget' ).trigger( 'mouseup' );
 					}
 				}
