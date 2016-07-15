@@ -763,6 +763,19 @@ body .ppb-dialog {
 	width: 340px !important; /* or any value that fits your needs */
 }
 
+.ppb-row.ppb-match-col-hi .panel-grid-cell-container {
+	display: block;
+}
+
+.ppb-row.ppb-match-col-hi .ppb-col {
+	display: inline-block !important;
+	height: auto;
+}
+
+.ppb-row.ppb-match-col-hi .ppb-block:first-child:last-child {
+	height: 100%;
+}
+
 .mce-tinymce-inline .mce-stack-layout .mce-stack-layout-item { display:inline-block; }
 .mce-tinymce.mce-tinymce-inline { width:auto; }
 .mce-toolbar div.mce-btn button, .mce-toolbar div.mce-btn button.mce-open { line-height:25px; }

@@ -568,7 +568,7 @@ jQuery( function ( $ ) {
 					widthTaken += $t.outerWidth();
 				} );
 
-				widthTaken += $prev.css('padding-left') + parseInt( $prev.css('padding-right') );
+				widthTaken += parseInt( $prev.css('padding-left') ) + parseInt( $prev.css('padding-right') );
 
 				$prev.css( 'width', 100 - ( 100 * widthTaken / $p.width() ) + '%' );
 

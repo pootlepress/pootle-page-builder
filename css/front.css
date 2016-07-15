@@ -255,6 +255,20 @@ img.ppb-bg-parallax {
 	br.rwd{
 		display: none;
 	}
+
+	.ppb-match-col-hi .panel-grid-cell-container {
+		display: table;
+	}
+
+	.ppb-match-col-hi .ppb-col {
+		display: table-cell !important;
+		height: 1px;
+	}
+
+	.ppb-match-col-hi .ppb-block:first-child:last-child {
+		height: 100%;
+	}
+
 }
 
 @media only screen and (max-width: 1024px) {
