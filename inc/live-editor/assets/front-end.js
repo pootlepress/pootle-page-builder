@@ -1284,11 +1284,11 @@ jQuery( function ( $ ) {
 		ppbFeaturedImageFrame.open();
 	} );
 
-	window.onbeforeunload = function(e) {
+	window.onbeforeunload = function ( e ) {
 		if ( prevu.unSavedChanges ) {
-			//return "You have unsaved changes! Click 'Update' in admin bar to save.\n\nYour changes will be lost if you dan't save.";
+			return "You have unsaved changes! Click 'Update' in admin bar to save.\n\nYour changes will be lost if you dan't save.";
 		}
-	}
+	};
 
 	var dateB4 = new Date();
 	var timeB4 = dateB4.getSeconds()*1000 + dateB4.getMilliseconds();
