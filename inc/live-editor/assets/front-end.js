@@ -407,7 +407,7 @@ jQuery( function ( $ ) {
 			var row = {
 				id: window.ppbRowI,
 				cells: num_cells,
-				style: { background: "", background_image: "", background_image_repeat: "", background_image_size: "cover", background_parallax: "", background_toggle: "", bg_color_wrap: "", bg_image_wrap: "", bg_mobile_image: "", bg_overlay_color: "", bg_overlay_opacity: "0.5", bg_video: "", bg_video_wrap: "", bg_wrap_close: "", class: "", col_class: "", col_gutter: "1", full_width: "", hide_row: "", margin_bottom: "0", margin_top: "0", row_height: "0", style: ""}
+				style: { background: "", background_image: "", background_image_repeat: "", background_image_size: "cover", background_parallax: "", background_toggle: "", bg_color_wrap: "", bg_image_wrap: "", match_col_hi: "1", bg_mobile_image: "", bg_overlay_color: "", bg_overlay_opacity: "0.5", bg_video: "", bg_video_wrap: "", bg_wrap_close: "", class: "", col_class: "", col_gutter: "1", full_width: "", hide_row: "", margin_bottom: "0", margin_top: "0", row_height: "0", style: ""}
 			}, cells, block;
 
 			ppbData.grids.push( row );
@@ -423,6 +423,7 @@ jQuery( function ( $ ) {
 					class: 'Pootle_PB_Content_Block',
 					grid: window.ppbRowI,
 					style: '{"background-color":"","background-transparency":"","text-color":"","border-width":"","border-color":"","padding":"","rounded-corners":"","inline-css":"","class":"","wc_prods-add":"","wc_prods-attribute":"","wc_prods-filter":null,"wc_prods-ids":null,"wc_prods-category":null,"wc_prods-per_page":"","wc_prods-columns":"","wc_prods-orderby":"","wc_prods-order":""}'
+
 				}
 			};
 

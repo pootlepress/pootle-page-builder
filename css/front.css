@@ -267,6 +267,9 @@ img.ppb-bg-parallax {
 
 	.ppb-match-col-hi .ppb-block:first-child:last-child {
 		height: 100%;
+		-webkit-box-sizing: content-box;
+		-moz-box-sizing: content-box;
+		box-sizing: content-box;
 	}
 
 }

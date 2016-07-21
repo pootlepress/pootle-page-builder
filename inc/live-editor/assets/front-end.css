@@ -773,11 +773,7 @@ body .ppb-dialog {
 }
 
 .ppb-row.ppb-match-col-hi .ppb-block:first-child:last-child {
-	height: 100%;
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
-
+	height: auto;
 }
 
 .mce-tinymce-inline .mce-stack-layout .mce-stack-layout-item { display:inline-block; }
