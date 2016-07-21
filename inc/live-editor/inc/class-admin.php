@@ -198,7 +198,11 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 		$ipad_user = filter_input( INPUT_GET, 'user' );
 
 		if ( ! is_user_logged_in() ) {
-			?><h1>You need to be logged in to be able to do that!</h1><?php
+			if ( $ipad_user ) {
+				echo "<h2>Hi $ipad_user</h2><h3>Please login again to continue building...</h3>";
+			} else {
+				?><h1>You need to be logged in to be able to do that!</h1><?php
+			}
 			exit;
 		}
 		if ( $nonce === get_transient( 'ppb-ipad-' . $ipad_user ) || wp_verify_nonce( $nonce, 'ppb-new-live-post' ) ) {
