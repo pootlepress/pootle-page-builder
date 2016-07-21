@@ -786,9 +786,7 @@
 
         },
         close: function (e, ui, $t) {
-
             var $t = $t || $(this);
-
             if (!doneClicked) {
                 $t.trigger('panelsdone', $currentPanel, activeDialog);
             }

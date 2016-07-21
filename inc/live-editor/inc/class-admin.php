@@ -79,6 +79,16 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 				top: 2px;
 			}
 
+			#wp-admin-bar-ppb-live-undo > a:before {
+				content: "\f171";
+				top: 2px;
+			}
+
+			#wp-admin-bar-ppb-live-redo > a:before {
+				content: "\f172";
+				top: 2px;
+			}
+
 			li[id^="wp-admin-bar-ppb-"] a {
 				clear: both;
 			}
@@ -112,7 +122,21 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 		) );
 
 		if ( wp_verify_nonce( $nonce, 'ppb-live-' . get_the_id() ) ) {
+
+			$args = array();
+
+			$args['id']    = 'ppb-live-undo';
+			$args['href']  = '#ppb-live-undo';
+			$args['title'] = 'Undo';
+			$admin_bar->add_menu( $args );
+
+			$args['id']    = 'ppb-live-redo';
+			$args['href']  = '#ppb-live-redo';
+			$args['title'] = 'Redo';
+			$admin_bar->add_menu( $args );
+
 			if ( 'draft' == Pootle_Page_Builder_Live_Editor_Public::instance()->post_status() ) {
+
 				$args = array(
 					'id'    => 'ppb-publish',
 					'title' => 'Save/Publish',
@@ -160,7 +184,6 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 					$admin_bar->add_menu( $args );
 				}
 			}
-
 		} else if ( pootlepb_is_panel( true ) ) {
 			$nonce_url = wp_nonce_url( get_the_permalink( $post->ID ), 'ppb-live-' . $post->ID, 'ppbLiveEditor' );
 			$args      = array(

@@ -252,7 +252,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			'ppb-ui',
 			'ppble-sd',
 			'ppb-fields',
+			'pootle-live-undo',
 		), $ver );
+
+		wp_enqueue_script( 'pootle-live-undo', "$url/front-end-undo.js", array( 'jquery' ), $ver );
 
 		if ( isset( $_REQUEST['tour'] ) ) {
 			wp_enqueue_style( 'pootle-live-editor-tour-css', "$url/tour.css", array(), $ver );

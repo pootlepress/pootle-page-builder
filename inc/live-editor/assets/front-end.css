@@ -776,6 +776,59 @@ body .ppb-dialog {
 	height: 100%;
 }
 
+.ppb-blue-notice,
+.ppb-full-blue-notice,
+#ppb-ipad-color-picker {
+	padding: 50px 50px;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 340px;
+	height: 340px;
+	z-index: 9999;
+	text-align: center;
+	margin: auto;
+	background: #009bf4;
+	display: none;
+}
+.ppb-blue-notice {
+	border-radius: 50%;
+}
+
+.ppb-full-blue-notice {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	height : auto;
+	width : auto;
+	padding : 30vh 0 0;
+}
+.ppb-blue-notice > .dashicons,
+.ppb-full-blue-notice > .dashicons {
+	display: inline-block;
+}
+.ppb-blue-notice > *,
+.ppb-full-blue-notice > *,
+.ppb-blue-notice > .dashicons,
+.ppb-full-blue-notice > .dashicons {
+	width: auto;
+	height: auto;
+	vertical-align: middle;
+	color: #fff;
+	font-size: 25px;
+	letter-spacing: 2px;
+}
+.ppb-blue-notice .dashicons:before,
+.ppb-full-blue-notice .dashicons:before {
+	font-size: 160px;
+	color: inherit;
+	width: auto;
+	height: auto;
+	display: block;
+	line-height: 1;
+}
+
 .mce-tinymce-inline .mce-stack-layout .mce-stack-layout-item { display:inline-block; }
 .mce-tinymce.mce-tinymce-inline { width:auto; }
 .mce-toolbar div.mce-btn button, .mce-toolbar div.mce-btn button.mce-open { line-height:25px; }

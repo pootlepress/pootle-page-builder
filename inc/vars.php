@@ -6,98 +6,98 @@
  */
 
 global $pootlepb_content_block_styling_fields,
-		$pootlepb_row_styling_fields,
-		$pootlepb_font,
-		$pootlepb_ui_i18n,
-		$pootlepb_ui_js_deps,
-		$pootlepb_color_i18n,
-		$pootlepb_color_deps,
-		$pootlepb_content_block_tabs,
-		$pootlepb_row_settings_tabs;
+       $pootlepb_row_styling_fields,
+       $pootlepb_font,
+       $pootlepb_ui_i18n,
+       $pootlepb_ui_js_deps,
+       $pootlepb_color_i18n,
+       $pootlepb_color_deps,
+       $pootlepb_content_block_tabs,
+       $pootlepb_row_settings_tabs;
 
 /**
  * Content block styling fields
  * @since 0.1.0
  */
 $pootlepb_content_block_styling_fields = array(
-	'background-image' => array(
-		'name' => 'Background Image',
-		'type' => 'upload',
+	'background-image'        => array(
+		'name'     => 'Background Image',
+		'type'     => 'upload',
 		'priority' => 1,
-		'css'  => 'background-image:url(%s);',
-		'tab' => 'style',
+		'css'      => 'background-image:url(%s);',
+		'tab'      => 'style',
 	),
-	'background-color' => array(
-		'name' => 'Background color',
-		'type' => 'color',
+	'background-color'        => array(
+		'name'     => 'Background color',
+		'type'     => 'color',
 		'priority' => 1,
-		'css'  => 'background-color',
-		'tab' => 'style',
+		'css'      => 'background-color',
+		'tab'      => 'style',
 	),
 	'background-transparency' => array(
-		'name' => 'Background color transparency',
-		'type' => 'slider',
-		'min'  => '0',
-		'max'  => '1',
-		'step' => '0.05',
+		'name'     => 'Background color transparency',
+		'type'     => 'slider',
+		'min'      => '0',
+		'max'      => '1',
+		'step'     => '0.05',
 		'priority' => 2,
-		'tab' => 'style',
+		'tab'      => 'style',
 	),
-	'text-color'       => array(
-		'name' => 'Text color',
-		'type' => 'color',
+	'text-color'              => array(
+		'name'     => 'Text color',
+		'type'     => 'color',
 		'priority' => 3,
-		'css'  => 'color',
-		'tab' => 'style',
+		'css'      => 'color',
+		'tab'      => 'style',
 	),
-	'border'           => array(
-		'name' => 'Border',
-		'type' => 'border',
+	'border'                  => array(
+		'name'     => 'Border',
+		'type'     => 'border',
 		'priority' => 4,
-		'css'  => 'border',
-		'tab' => 'style',
+		'css'      => 'border',
+		'tab'      => 'style',
 	),
-	'padding'          => array(
-		'name' => 'Padding',
-		'type' => 'number',
+	'padding'                 => array(
+		'name'     => 'Padding',
+		'type'     => 'number',
 		'priority' => 5,
-		'min'  => '0',
-		'max'  => '999',
-		'step' => '1',
-		'unit' => 'px',
-		'css'  => 'padding',
-		'tab' => 'style',
+		'min'      => '0',
+		'max'      => '999',
+		'step'     => '1',
+		'unit'     => 'px',
+		'css'      => 'padding',
+		'tab'      => 'style',
 	),
 	'padding-mobile'          => array(
-		'name' => 'Keep custom padding on mobile',
-		'type' => 'checkbox',
+		'name'     => 'Keep custom padding on mobile',
+		'type'     => 'checkbox',
 		'priority' => 5,
-		'tab' => 'style',
+		'tab'      => 'style',
 	),
-	'rounded-corners'  => array(
-		'name' => 'Rounded corners',
-		'type' => 'number',
+	'rounded-corners'         => array(
+		'name'     => 'Rounded corners',
+		'type'     => 'number',
 		'priority' => 6,
-		'min'  => '0',
-		'max'  => '100',
-		'step' => '1',
-		'unit' => 'px',
-		'css'  => 'border-radius',
-		'tab' => 'style',
+		'min'      => '0',
+		'max'      => '100',
+		'step'     => '1',
+		'unit'     => 'px',
+		'css'      => 'border-radius',
+		'tab'      => 'style',
 	),
-	'inline-css'       => array(
+	'inline-css'              => array(
 		'name'     => 'Inline CSS styles',
 		'type'     => 'textarea',
 		'priority' => 7,
 		'css'      => '',
-		'tab' => 'advanced',
+		'tab'      => 'advanced',
 	),
-	'class'            => array(
+	'class'                   => array(
 		'name'     => 'CSS Class',
 		'type'     => 'text',
 		'priority' => 8,
 		'css'      => '',
-		'tab' => 'advanced',
+		'tab'      => 'advanced',
 	),
 );
 
@@ -107,193 +107,193 @@ $pootlepb_content_block_styling_fields = array(
  */
 $pootlepb_row_styling_fields = array(
 	//Layout
-	'full_width'              => array(
-		'name' => 'Make row go full width',
-		'type' => 'checkbox',
-		'tab' => 'layout',
+	'full_width'        => array(
+		'name'     => 'Make row go full width',
+		'type'     => 'checkbox',
+		'tab'      => 'layout',
 		'priority' => 1,
 	),
-	'match_col_hi'              => array(
-		'name' => 'Force same height for columns',
-		'type' => 'checkbox',
-		'tab' => 'layout',
+	'match_col_hi'      => array(
+		'name'      => 'Force same height for columns',
+		'type'      => 'checkbox',
+		'tab'       => 'layout',
 		'help-text' => 'Requires only one content block to be set in each column. Does not work in live editor.',
-		'priority' => 2,
+		'priority'  => 2,
 	),
-	'row_height'              => array(
+	'row_height'        => array(
 		'name'      => __( 'Minimum Row Height', 'ppb-panels' ),
-		'unit' => 'px',
+		'unit'      => 'px',
 		'type'      => 'number',
-		'tab' => 'layout',
-		'priority' => 3,
+		'tab'       => 'layout',
+		'priority'  => 3,
 		'default'   => '',
 		'help-text' => 'Minimum height row should have even when content is less. With more content it will stretch to contain all content and this setting will have no effect.',
 	),
-	'hide_row'                => array(
-		'name' => 'Hide row',
-		'type' => 'checkbox',
-		'tab' => 'layout',
+	'hide_row'          => array(
+		'name'     => 'Hide row',
+		'type'     => 'checkbox',
+		'tab'      => 'layout',
 		'priority' => 4,
 	),
-	'margin_top'           => array(
-		'name' => 'Row Top Margin',
-		'unit' => 'px',
-		'type' => 'number',
-		'tab' => 'layout',
+	'margin_top'        => array(
+		'name'     => 'Row Top Margin',
+		'unit'     => 'px',
+		'type'     => 'number',
+		'tab'      => 'layout',
 		'priority' => 5,
 	),
-	'margin_bottom'           => array(
-		'name' => 'Row Bottom Margin',
-		'unit' => 'px',
-		'type'      => 'number',
-		'tab' => 'layout',
+	'margin_bottom'     => array(
+		'name'     => 'Row Bottom Margin',
+		'unit'     => 'px',
+		'type'     => 'number',
+		'tab'      => 'layout',
 		'priority' => 6,
 	),
-	'col_gutter' => array(
-		'name' => __( 'Gutters', 'vantage' ),
-		'tab' => 'layout',
-		'type' => 'select',
+	'col_gutter'        => array(
+		'name'     => __( 'Gutters', 'vantage' ),
+		'tab'      => 'layout',
+		'type'     => 'select',
 		'priority' => 7,
-		'options' => array(
-			'0' => 'None',
+		'options'  => array(
+			'0'   => 'None',
 			'0.5' => 'Small',
-			'1' => 'Medium',
-			'2' => 'Large',
-			'4' => 'Extra large',
+			'1'   => 'Medium',
+			'2'   => 'Large',
+			'4'   => 'Extra large',
 		),
-		'default' => '1',
+		'default'  => '1',
 	),
 
 	//Background
 	'background_toggle' => array(
-		'name' => __( 'Set Background', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'select',
+		'name'     => __( 'Set Background', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'select',
 		'priority' => 1,
-		'options' => array(
-			'' => 'Please choose...',
+		'options'  => array(
+			''          => 'Please choose...',
 			'.bg_color' => 'Background color',
 			'.bg_image' => 'Background image',
 			'.bg_video' => 'Background video',
 		),
-		'default' => '',
+		'default'  => '',
 	),
 
 	'bg_color_wrap' => array(
-		'name' => '<div class="bg_section bg_color">',
-		'tab' => 'background',
-		'type' => 'html',
+		'name'     => '<div class="bg_section bg_color">',
+		'tab'      => 'background',
+		'type'     => 'html',
 		'priority' => 2,
 	),
 
 	'background' => array(
-		'name' => __( 'Background Color', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'color',
+		'name'     => __( 'Background Color', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'color',
 		'priority' => 3,
 	),
 
 	'bg_image_wrap' => array(
-		'name' => '</div><div class="bg_section bg_image">',
-		'tab' => 'background',
-		'type' => 'html',
+		'name'     => '</div><div class="bg_section bg_image">',
+		'tab'      => 'background',
+		'type'     => 'html',
 		'priority' => 4,
 	),
 
 	'background_image' => array(
-		'name' => __( 'Background Image', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'upload',
+		'name'     => __( 'Background Image', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'upload',
 		'priority' => 5,
 	),
 
 	'background_image_repeat' => array(
-		'name' => __( 'Repeat Background Image', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'checkbox',
+		'name'     => __( 'Repeat Background Image', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'checkbox',
 		'priority' => 6,
 	),
 
-	'background_parallax' => array(
-		'name' => __( 'Parallax Background Image', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'checkbox',
+	'background_parallax'   => array(
+		'name'     => __( 'Parallax Background Image', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'checkbox',
 		'priority' => 7,
 	),
 	'background_image_size' => array(
-		'name' => __( 'Background Image Size', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'select',
+		'name'     => __( 'Background Image Size', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'select',
 		'priority' => 8,
-		'options' => array(
+		'options'  => array(
 			''          => 'No setting',
 			'100% auto' => '100% width',
 			'cover'     => 'Cover',
 		),
-		'default' => 'cover',
+		'default'  => 'cover',
 	),
-	'bg_overlay_color' => array(
-		'name' => 'Overlay color on image',
-		'tab' => 'background',
-		'type' => 'color',
+	'bg_overlay_color'      => array(
+		'name'     => 'Overlay color on image',
+		'tab'      => 'background',
+		'type'     => 'color',
 		'priority' => 9,
 	),
-	'bg_overlay_opacity' => array(
-		'name' => 'Overlay color transparency',
-		'min' => '0',
-		'max' => '1',
-		'step' => '0.02',
-		'default' => '0.5',
-		'tab' => 'background',
-		'type' => 'slider',
+	'bg_overlay_opacity'    => array(
+		'name'     => 'Overlay color transparency',
+		'min'      => '0',
+		'max'      => '1',
+		'step'     => '0.02',
+		'default'  => '0.5',
+		'tab'      => 'background',
+		'type'     => 'slider',
 		'priority' => 10,
 	),
 
 	'bg_video_wrap' => array(
-		'name' => '</div><div class="bg_section bg_video">',
-		'tab' => 'background',
-		'type' => 'html',
+		'name'     => '</div><div class="bg_section bg_video">',
+		'tab'      => 'background',
+		'type'     => 'html',
 		'priority' => 11,
 	),
 
-	'bg_video' => array(
-		'name' => __( 'Background Video', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'uploadVid',
+	'bg_video'        => array(
+		'name'      => __( 'Background Video', 'vantage' ),
+		'tab'       => 'background',
+		'type'      => 'uploadVid',
 		'help-text' => "Background videos autoplay & therefore only work on desktop browsers",
-		'priority' => 12,
+		'priority'  => 12,
 	),
 	'bg_mobile_image' => array(
-		'name' => __( 'Responsive Image', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'upload',
-		'priority' => 13,
+		'name'      => __( 'Responsive Image', 'vantage' ),
+		'tab'       => 'background',
+		'type'      => 'upload',
+		'priority'  => 13,
 		'help-text' => "Select an image to display instead of the background video for mobile devices",
 	),
 
 	'bg_wrap_close' => array(
-		'name' => '</div>',
-		'tab' => 'background',
-		'type' => 'html',
+		'name'     => '</div>',
+		'tab'      => 'background',
+		'type'     => 'html',
 		'priority' => 14,
 	),
 
-	'style' => array(
-		'name' => __( 'Inline CSS Styles', 'ppb-panels' ),
-		'tab' => 'advanced',
-		'type' => 'textarea',
+	'style'     => array(
+		'name'     => __( 'Inline CSS Styles', 'ppb-panels' ),
+		'tab'      => 'advanced',
+		'type'     => 'textarea',
 		'priority' => 1,
 	),
-	'class' => array(
-		'name' => __( 'Row CSS Class', 'ppb-panels' ),
-		'tab' => 'advanced',
-		'type' => 'text',
+	'class'     => array(
+		'name'     => __( 'Row CSS Class', 'ppb-panels' ),
+		'tab'      => 'advanced',
+		'type'     => 'text',
 		'priority' => 2,
 	),
 	'col_class' => array(
-		'name'    => __( 'Column CSS Class', 'ppb-panels' ),
-		'tab' => 'advanced',
-		'type'    => 'text',
+		'name'     => __( 'Column CSS Class', 'ppb-panels' ),
+		'tab'      => 'advanced',
+		'type'     => 'text',
 		'priority' => 3,
 	),
 );
@@ -1028,18 +1028,18 @@ $pootlepb_color_deps = array(
 );
 
 $pootlepb_content_block_tabs = array(
-	'editor' => array(
-		'label' => 'Editor',
+	'editor'           => array(
+		'label'    => 'Editor',
 		'priority' => 1,
 	),
-	'style' => array(
-		'label' => 'Style',
-		'class' => 'pootle-style-fields',
+	'style'            => array(
+		'label'    => 'Style',
+		'class'    => 'pootle-style-fields',
 		'priority' => 2,
 	),
-	'advanced' => array(
-		'label' => 'Advanced',
-		'class' => 'pootle-style-fields',
+	'advanced'         => array(
+		'label'    => 'Advanced',
+		'class'    => 'pootle-style-fields',
 		'priority' => 3,
 	),
 	'editor-separator' => array(
@@ -1049,15 +1049,15 @@ $pootlepb_content_block_tabs = array(
 
 $pootlepb_row_settings_tabs = array(
 	'background' => array(
-		'label' => 'Background',
+		'label'    => 'Background',
 		'priority' => 1,
 	),
-	'layout' => array(
-		'label' => 'Layout',
+	'layout'     => array(
+		'label'    => 'Layout',
 		'priority' => 2,
 	),
-	'advanced' => array(
-		'label' => 'Advanced',
+	'advanced'   => array(
+		'label'    => 'Advanced',
 		'priority' => 10,
 	),
 );

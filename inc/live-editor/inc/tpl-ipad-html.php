@@ -98,55 +98,12 @@
 		padding: 0;
 		cursor: ew-resize;
 	}
-	.ppb-full-blue-notice, #ppb-ipad-color-picker {
-		padding: 50px 50px;
-		position: fixed;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		width: 340px;
-		height: 340px;
-		z-index: 9999;
-		text-align: center;
-		margin: auto;
-		background: #fff;
-		display: none;
-	}
-	.ppb-full-blue-notice {
-		-webkit-box-sizing: border-box;
-		box-sizing: border-box;
-		background		: #009bf4;
-		height			: auto;
-		width			: auto;
-		padding			: 43% 0 0;
-	}
 	.fade-in-out {
 		-webkit-animation: fade-in-out 2.5s 1 both;
 		animation: fade-in-out 2.5s 1 both;
 	}
-	.ppb-full-blue-notice > .dashicons {
-		display: inline-block;
-	}
-	.ppb-full-blue-notice > *,
-	.ppb-full-blue-notice > .dashicons {
-		width: auto;
-		height: auto;
-		vertical-align: middle;
-		color: #fff;
-		font-size: 25px;
-		letter-spacing: 2px;
-	}
 	span.ppb-rotate.dashicons.dashicons-admin-generic:before {
 		padding: 0 0 0.0216em 0.052em;
-	}
-	.ppb-full-blue-notice .dashicons:before {
-		font-size: 160px;
-		color: inherit;
-		width: auto;
-		height: auto;
-		display: block;
-		line-height: 1;
 	}
 	#ppb-ipad-color-picker {
 		position: absolute;

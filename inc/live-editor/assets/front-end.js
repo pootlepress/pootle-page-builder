@@ -12,10 +12,11 @@
  * @returns Array
  */
 Array.prototype.ppbPrevuMove = function (oldI, newI) {
+	console.log( oldI + ' => ' + newI );
 	this.splice(newI, 0, this.splice(oldI, 1)[0]);
 	return this;
 };
-ppbIpad = {};
+prevu = ppbIpad = {};
 logPPBData = function ( a, b, c ) {
 
 	//Comment the code below to log console
@@ -91,11 +92,12 @@ jQuery( function ( $ ) {
 			height : $( window ).height() - 50,
 			width : $( window ).width() - 50,
 			buttons : {
-				Done : function () {}
+				Done : function() {}
 			}
 		};
 
 	prevu = {
+		undo: new PPBfrontendUndo(),
 		noRedirect: false,
 		debug: true,
 		unSavedChanges: false,
@@ -288,9 +290,9 @@ jQuery( function ( $ ) {
 			$( 'html' ).trigger( 'pootlepb_admin_editor_panel_done', [$contentPanel, st] );
 		},
 
-		 savePanel : function () {
+		savePanel : function () {
 			var st = JSON.parse( ppbData.widgets[window.ppbPanelI].info.style );
-
+			prevu.undo.func.saveState(); // Save state for undo
 			st = panels.getStylesFromFields( $contentPanel, st );
 
 			ppbData.widgets[window.ppbPanelI].text = tinyMCE.get( 'ppbeditor' ).getContent();
@@ -363,6 +365,8 @@ jQuery( function ( $ ) {
 			var dt = ppbData.grids[window.ppbRowI],
 				st = ppbData.grids[window.ppbRowI].style;
 
+			prevu.undo.func.saveState(); // Save state for undo
+
 			$rowPanel.find( '[data-style-field]' ).each( function () {
 				var $t = $( this ),
 					key = $t.attr( 'data-style-field' );
@@ -400,6 +404,8 @@ jQuery( function ( $ ) {
 			//console.log( "adding row" );
 			window.ppbRowI = ppbData.grids.length;
 			var num_cells;
+
+			prevu.undo.func.saveState(); // Save state for undo
 
 			logPPBData( 'Adding row' );
 
@@ -456,13 +462,15 @@ jQuery( function ( $ ) {
 			items: "> .panel-grid",
 			handle: ".ppb-edit-row .dashicons-before:first",
 			start: function ( e, ui ) {
-				$(this).data('draggingRowI', ui.item.index());
+				$ppb.data('draggingRowI', ui.item.index());
 			},
 			update: function ( e, ui ) {
 				var $t = $( this ),
-					olI = $t.data('draggingRowI'),
+					olI = $ppb.data('draggingRowI'),
 					newI = ui.item.index(),
 					diff = -1;
+
+				prevu.undo.func.saveState(); // Save state for undo
 
 				if ( newI == olI ) { return; }
 
@@ -529,6 +537,8 @@ jQuery( function ( $ ) {
 					nuI = $ppb.find( '.ppb-block' ).index( $t ),
 					gi = $t.closest( '.ppb-row' ).siblings('.ppb-edit-row').data( 'index' ),
 					ci = $t.closest( '.panel-grid-cell' ).index();
+
+				prevu.undo.func.saveState(); // Save state for undo
 
 				$t.siblings( '.add-content' ).appendTo( $t.parent() );
 				$t.parents().css( 'z-index', '' );
@@ -750,6 +760,8 @@ jQuery( function ( $ ) {
 			cells = [],
 			blocks = [];
 
+		prevu.undo.func.saveState(); // Save state for undo
+
 		window.ppbRowI = $t.closest( '.pootle-live-editor' ).data( 'index' );
 
 		ppbData.grids.splice( rowI, 0, row );
@@ -804,6 +816,9 @@ jQuery( function ( $ ) {
 		    removeBlocks = [],
 		    $t           = $( this ),
 		    rowI         = $t.closest( '.pootle-live-editor' ).data( 'index' );
+
+		prevu.undo.func.saveState(); // Save state for undo
+
 		prevu.deleteCallback = function () {
 			console.log( rowI );
 			ppbData.grids.splice( rowI, 1 );
@@ -1126,6 +1141,8 @@ jQuery( function ( $ ) {
 		var $t = $( this ),
 			id = $t.closest( '.panel-grid-cell' ).attr( 'id' ),
 			data = id.split( '-' );
+
+		prevu.undo.func.saveState(); // Save state for undo
 
 		$t.closest( '.panel-grid-cell' ).addClass( 'this-cell-is-waiting' );
 
