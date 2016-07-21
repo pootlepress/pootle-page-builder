@@ -117,7 +117,7 @@ $pootlepb_row_styling_fields = array(
 		'name' => 'Force same height for columns',
 		'type' => 'checkbox',
 		'tab' => 'layout',
-		'help-text' => 'Requires only one content block to be set in each column. Does not work in live editor.',
+		'help-text' => 'Requires only one content block to be set in each column. Will not preview in live editor but it will work once published.',
 		'priority' => 2,
 	),
 	'row_height'              => array(
