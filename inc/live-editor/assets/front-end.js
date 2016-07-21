@@ -193,10 +193,13 @@ jQuery( function ( $ ) {
 			$.each( ppbData.grids, function ( i, v ) {
 				var $t = $( '.ppb-edit-row[data-i_bkp="' + v.id + '"]' ),
 					$p = $t.closest( '.ppb-row' ),
-					id = 'pg-' + ppbAjax.post + '-';
+					$rStyle = $p.children( '.panel-row-style' ).children( 'style' ),
+					oldIdRegex = new RegExp( $p.attr('id') , "g"),
+					id = 'pg-' + ppbAjax.post + '-' + i;
 				$t.data( 'index', i ).attr( 'data-index', i );
-				$p.attr( 'id', 'pg-' + ppbAjax.post + '-' + i );
-				allIDs[id + i] = 1;
+				$rStyle.html( $rStyle.html().replace( oldIdRegex, id ) );
+				$p.attr( 'id', id );
+				allIDs[id] = 1;
 				ppbData.grids[ i ].id = i;
 			} );
 
