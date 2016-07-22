@@ -776,6 +776,10 @@ body .ppb-dialog {
 	height: auto;
 }
 
+iframe[src*='/pootle-buttons/'] {
+	max-height: 88vh;
+}
+
 .mce-tinymce-inline .mce-stack-layout .mce-stack-layout-item { display:inline-block; }
 .mce-tinymce.mce-tinymce-inline { width:auto; }
 .mce-toolbar div.mce-btn button, .mce-toolbar div.mce-btn button.mce-open { line-height:25px; }
