@@ -1289,14 +1289,6 @@ jQuery( function ( $ ) {
 			return "You have unsaved changes! Click 'Update' in admin bar to save.\n\nYour changes will be lost if you dan't save.";
 		}
 	};
-
-	var dateB4 = new Date();
-	var timeB4 = dateB4.getSeconds()*1000 + dateB4.getMilliseconds();
 	prevu.resort();
 	prevu.reset( 'noSort' );
-	var dateFr = new Date();
-	var timeFr = dateFr.getSeconds()*1000 + dateFr.getMilliseconds();
-	//console.log( timeFr + ' - ' + timeB4 + ' = ' + (timeFr - timeB4) );
-
-
 } );

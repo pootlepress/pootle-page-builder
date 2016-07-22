@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.4.2
-Stable tag: 2.0.0
+Stable tag: 2.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -113,6 +113,20 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * This is a major release please backup your site before installing
 
 == Changelog ==
+
+= 2.5.0 =
+* 2016-07-22
+ * New - Match column height for row.
+ * New - iPad app compatibility
+ * New - Live editor delete confirmation
+ * New - Post settings - Categories
+ * New - Post settings - Tags
+ * New - Post settings - Featured image
+ * New - New tinyMCE buttons - h1, h4, align left, align center and align right.
+ * New - Pootle Pagebuilder tour
+ * New - Templates come from external JSON file
+ * Fix - Row overlay color moving to different row on drag
+ * Fix - Yoast SEO no scores on WordPress editor pages
 
 = 2.0.0 =
 * 2016-05-06
