@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.4.2
-Stable tag: 2.5.0
+Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -113,6 +113,10 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * This is a major release please backup your site before installing
 
 == Changelog ==
+
+= 2.5.1 =
+* 2016-07-22
+ * Fix - Firefox, rows collapsed by default
 
 = 2.5.0 =
 * 2016-07-22
