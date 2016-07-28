@@ -212,3 +212,36 @@ if ( isset( $_REQUEST['tour'] ) ) {
 	include "tpl-tour.php";
 }
 ?>
+<div id="pootlepb-modules">
+	<div class="dashicons dashicons-screenoptions" onclick="jQuery(this).parent().toggleClass('toggle')"></div>
+	<?php
+	$ppb_modules = array(
+		'wc-popular-products' => array(
+			'label' => 'WooCommerce - Popular Products',
+			'icon_class' => 'dashicons dashicons-cart',
+			'icon_html' => '',
+		),
+		'photo-slider' => array(
+			'label' => 'Photography - Slider',
+			'icon_class' => 'dashicons dashicons-images-alt2',
+			'icon_html' => '',
+		),
+		'photo-gallery' => array(
+			'label' => 'Photography - Gallery',
+			'icon_class' => 'dashicons dashicons-grid-view',
+			'icon_html' => '',
+		),
+	);
+
+	$ppb_modules = apply_filters( 'pootlepb_modules', $ppb_modules );
+
+	foreach ( $ppb_modules as $id => $module ) {
+		$module = wp_parse_args( $module, array(
+			'label' => 'Unlabeled Module',
+			'icon_class' => 'dashicons dashicons-star-filled',
+			'icon_html' => '',
+		) );
+		echo "<div id='ppb-mod-$id' class='module mod-$id'><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>";
+	}
+	?>
+</div>

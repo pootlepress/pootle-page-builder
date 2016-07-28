@@ -82,6 +82,7 @@ jQuery( function ( $ ) {
 		$postSettingsDialog = $( '#pootlepb-post-settings' ),
 		$ppbIpadColorDialog = $('#ppb-ipad-color-picker'),
 		$ppb = $( '#pootle-page-builder' ),
+		$mods = $('#pootlepb-modules'),
 		dialogAttr = {
 			dialogClass : 'ppb-cool-panel',
 			autoOpen : false,
@@ -1291,4 +1292,17 @@ jQuery( function ( $ ) {
 	};
 	prevu.resort();
 	prevu.reset( 'noSort' );
+
+	// Modules
+	console.log( $mods.length + ' ' + $mods.find( '.module' ).length );
+	$mods.find( '.module' ).draggable( {
+		helper : "clone"
+	} );
+	$ppb.find( '.ppb-block' ).droppable( {
+		activeClass: "drop-module",
+		hoverClass: "hover-module",
+		drop: function( event, ui ) {
+			alert( 'Dropped ' + ui.draggable.text() + ' Module' );
+		}
+	} );
 } );

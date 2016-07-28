@@ -785,3 +785,98 @@ iframe[src*='/pootle-buttons/'] {
 .mce-toolbar div.mce-btn button, .mce-toolbar div.mce-btn button.mce-open { line-height:25px; }
 .mce-toolbar .mce-btn.mce-disabled { display:none; }
 .wp-core-ui input { padding:4px; background:#fff; border:1px solid #ccc; }
+
+/* Modules Slide in */
+#pootlepb-modules {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: -340px;
+	width: 340px;
+	background: #eee;
+	z-index: 9999;
+	transition: left 0.25s;
+}
+
+.admin-bar #pootlepb-modules {
+	top: 32px;
+}
+
+#pootlepb-modules.toggle {
+	left: 0;
+}
+
+#pootlepb-modules > .dashicons {
+	position: absolute;
+	top: 0;
+	left: 100%;
+	background: inherit;
+	height: auto;
+	width: auto;
+	padding: 7px 5px 5px;
+	cursor: pointer;
+}
+
+#pootlepb-modules > .dashicons:before {
+	font-size: 30px;
+	height: auto;
+	width: auto;
+}
+
+.module {
+	margin: 16px 16px 0;
+	border: 1px solid #ddd;
+	border-bottom-color: #bbb;
+	border-right-color: #bbb;
+	font-size: 0;
+	background: #fff;
+	opacity: 0.7;
+	cursor: -webkit-grab;
+	cursor:-moz-grab;
+}
+.module:active {
+	cursor: -webkit-grabbing;
+	cursor:-moz-grabbing;
+}
+
+.module:hover {
+	opacity: 1;
+}
+
+.module .icon,
+.module .label {
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.module .label {
+	padding: 7px 7px 7px 0;
+	width: 80%;
+	font: 16px/1.6 sans-serif;
+}
+
+.module .icon {
+	height: 50px;
+	line-height: 50px;
+	width: 20%;
+}
+
+.module .icon:before {
+	font-size: 30px
+}
+
+.ppb-block.drop-module:after {
+	display: block;
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 9;
+	background: rgba(239, 72, 50, 0.25);
+}
+
+.ppb-block.hover-module.drop-module:after {
+	background: rgba(239, 72, 50, 0.52);
+}
