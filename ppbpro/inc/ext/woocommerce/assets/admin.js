@@ -56,6 +56,7 @@ jQuery( function ( $ ) {
 			var $t = $( this );
 			wcFields.not( '.field-wc_prods-add' )
 			        .show();
+			var cats = [];
 
 			switch ( $t.val() ) {
 				case 'product_categories':
@@ -94,7 +95,7 @@ jQuery( function ( $ ) {
 			if ( 'product_categories' == $t.val() ) {
 				ppbWooHideField( 'per_page' );
 			} else {
-
+				ppbWooHideField( 'catids' );
 			}
 		} );
 
@@ -115,6 +116,9 @@ jQuery( function ( $ ) {
 	} );
 
 	ppbWooHideField = function ( key ) {
-		$( '.field-wc_prods-' + key ).hide().find( ':input' ).val( '' );
+		var $p = $( '.field-wc_prods-' + key ).hide();
+
+		$p.find( 'input, select' ).not('[type="checkbox"]').val( '' );
+		$p.find( 'input[type="checkbox"]' ).prop( 'checked', false );
 	}
 } );

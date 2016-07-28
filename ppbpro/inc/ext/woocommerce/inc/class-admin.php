@@ -118,8 +118,11 @@ class pootle_page_builder_for_WooCommerce_Admin{
 		}
 
 		$p_cats = array();
+		$c_cats = array();
+
 		foreach( get_categories( array( 'type' => 'product', 'taxonomy' => 'product_cat' ) ) as $cat ) {
 			$p_cats[ $cat->slug ] = $cat->name;
+			$c_cats[ $cat->term_id ] = $cat->name;
 		}
 
 		$products = array();
@@ -144,7 +147,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'priority' => 1,
 			'options' => array(
 				''                      => 'Please choose...',
-				'product_categories'    => 'Products categories',
+				'product_categories'    => 'Product categories',
 				'products'              => 'Individual products',
 				'product_category'      => 'Products by category',
 				'sale_products'         => 'Products on sale',
@@ -160,6 +163,14 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'tab' => 'wc_prods',
 			'type' => 'multi-select',
 			'options' => $p_cats,
+			'priority' => 2,
+			'default' => '',
+		);
+		$f['wc_prods-catids'] = array(
+			'name' => __( 'Category', 'vantage' ),
+			'tab' => 'wc_prods',
+			'type' => 'multi-select',
+			'options' => $c_cats,
 			'priority' => 2,
 			'default' => '',
 		);

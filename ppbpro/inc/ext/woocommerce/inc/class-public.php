@@ -18,6 +18,7 @@ class pootle_page_builder_for_WooCommerce_Public{
 		'columns',
 		'orderby',
 		'order',
+		'catids',
 	);
 	/**
 	 * @var 	pootle_page_builder_for_WooCommerce_Public Instance
@@ -96,7 +97,7 @@ class pootle_page_builder_for_WooCommerce_Public{
 
 		if ( ! empty( $set['wc_prods-add'] ) ) {
 
-			$short_code = '[' . $set['wc_prods-add'];
+			$short_code = "[{$set['wc_prods-add']}";
 
 			if ( 'products' == $set['wc_prods-add'] ) {
 				//$set['wc_prods-per_page'] = 999;
@@ -128,7 +129,10 @@ class pootle_page_builder_for_WooCommerce_Public{
 	 * @param array $set Content block settings
 	 */
 	private function add_to_shortcode( &$short_code, $param, $value ) {
-
+		if ( $param == 'catids' ) {
+			$short_code .= ' ids="' . implode( ',', $value ) . '"';
+			return;
+		}
 		if ( is_array( $value ) ) {
 			$short_code .= ' ' . $param . '="' . implode( ',', $value ) . '"';
 		} else {

@@ -15,6 +15,7 @@
 } )();
 // Full width and parallax
 jQuery(function ($) {
+    var $w = $( window );
 
     /*
      * Setting font
@@ -32,9 +33,8 @@ jQuery(function ($) {
 
             $t.css({ 'margin-left': 0, 'margin-right': 0, 'padding-left': 0, 'padding-right': 0 });
 
-            var fullContainer = $( window ),
-                leftSpace = $t.offset().left,
-                rightSpace = fullContainer.outerWidth() - leftSpace - $t.parent().outerWidth();
+            var leftSpace = $t.offset().left,
+                rightSpace = $w.outerWidth() - leftSpace - $t.parent().outerWidth();
 
             $t.css({
                 'margin-left': -leftSpace,
@@ -111,9 +111,9 @@ jQuery(function ($) {
 
                         }
                             leftOffset$t = $t.offset().left - ( image.dataWidth - $t.outerWidth() ) / 2;
-                            topOffset$t = $t.offset().top - $(window).height();
+                            topOffset$t = $t.offset().top - $w.height();
 
-                            $t.attr('data-bottom-top', 'background-position: ' + leftOffset$t + 'px ' + $(window).height() + 'px;');
+                            $t.attr('data-bottom-top', 'background-position: ' + leftOffset$t + 'px ' + $w.height() + 'px;');
                             $t.attr('data-top-bottom', 'background-position: ' + leftOffset$t + 'px -' + ($t.height() + 500) + 'px;');
 
                             ppbSkrollr.refresh();
@@ -125,6 +125,18 @@ jQuery(function ($) {
             });
 
         };
+
+        ppbMatchColHi = function() {
+            $( '.ppb-match-col-hi' ).each( function () {
+                var $t = $( this ),
+                    cols = $t.find( '.ppb-col' );
+                cols.css( 'height', 'auto' );
+                if ( $w.width() > 763 ) {
+                    cols.css( 'height', cols.eq( 0 ).innerHeight() );
+                }
+            } );
+        };
+
         /**
          * Calls all functions on resize event
          * @since 0.1.0
@@ -132,9 +144,10 @@ jQuery(function ($) {
         ppbCorrectOnResize = function () {
             ppbFullWidth();
             ppbParallax();
+            ppbMatchColHi();
         };
 
-        $(window).resize(ppbCorrectOnResize);
+        $w.resize(ppbCorrectOnResize);
         ppbCorrectOnResize();
 
     })

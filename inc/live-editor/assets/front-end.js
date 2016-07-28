@@ -671,7 +671,7 @@ jQuery( function ( $ ) {
 	dialogAttr.open = prevu.editRow;
 	dialogAttr.buttons.Done = prevu.saveRow;
 	dialogAttr.height = 520;
-	dialogAttr.width = 700;
+	dialogAttr.width = 720;
 	$rowPanel.ppbTabs().ppbDialog( dialogAttr );
 	panels.addInputFieldEventHandlers( $rowPanel );
 
