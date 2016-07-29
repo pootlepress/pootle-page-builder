@@ -216,20 +216,43 @@ if ( isset( $_REQUEST['tour'] ) ) {
 	<div class="dashicons dashicons-screenoptions" onclick="jQuery(this).parent().toggleClass('toggle')"></div>
 	<?php
 	$ppb_modules = array(
-		'wc-popular-products' => array(
-			'label' => 'WooCommerce - Popular Products',
+		'wc-product_categories' => array(
+			'label' => 'WooCommerce - Product categories',
 			'icon_class' => 'dashicons dashicons-cart',
 			'icon_html' => '',
+			'style_data' => '{"wc_prods-add":"product_categories"}',
+			'tab' => '#pootle-wc_prods-tab',
+			'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
+		),
+		'wc-best-selling-products' => array(
+			'label' => 'WooCommerce - Best selling products',
+			'icon_class' => 'dashicons dashicons-cart',
+			'icon_html' => '',
+			'style_data' => '{"wc_prods-add":"best_selling_products"}',
+			'tab' => '#pootle-wc_prods-tab',
+			'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
+		),
+		'wc-top-rated-products' => array(
+			'label' => 'WooCommerce - Top rated Products',
+			'icon_class' => 'dashicons dashicons-cart',
+			'icon_html' => '',
+			'style_data' => '{"wc_prods-add":"top_rated_products"}',
+			'tab' => '#pootle-wc_prods-tab',
+			'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
 		),
 		'photo-slider' => array(
 			'label' => 'Photography - Slider',
 			'icon_class' => 'dashicons dashicons-images-alt2',
 			'icon_html' => '',
+			'style_data' => '{}',
+			'ActiveClass' => 'page_builder_photo_addon',
 		),
 		'photo-gallery' => array(
 			'label' => 'Photography - Gallery',
 			'icon_class' => 'dashicons dashicons-grid-view',
 			'icon_html' => '',
+			'style_data' => '{}',
+			'ActiveClass' => 'page_builder_photo_addon',
 		),
 	);
 
@@ -241,7 +264,28 @@ if ( isset( $_REQUEST['tour'] ) ) {
 			'icon_class' => 'dashicons dashicons-star-filled',
 			'icon_html' => '',
 		) );
-		echo "<div id='ppb-mod-$id' class='module mod-$id'><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>";
+
+		$classes = "module mod-$id";
+
+		$attr = "";
+
+		if ( ! empty( $module['tab'] ) ) {
+			$attr .= " data-tab='$module[tab]'";
+		}
+
+		if ( ! empty( $module['style_data'] ) ) {
+			$attr .= " data-style_data='$module[style_data]'";
+		}
+
+		if ( ! empty( $module['ActiveClass'] ) && class_exists( $module['ActiveClass'] ) ) {
+			$classes .= ' active';
+			echo "<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>";
+		} else {
+			echo
+				'<a href="' . admin_url( 'admin.php?page=page_builder_modules' ) . '">' .
+				"<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>" .
+				'</a>';
+		}
 	}
 	?>
 </div>

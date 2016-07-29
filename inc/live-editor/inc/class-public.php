@@ -228,7 +228,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			'jquery-ui-tabs',
 			'jquery-ui-sortable',
 			'jquery-ui-resizable',
-			'jquery-ui-droppable',
+			'jquery-ui-droppable'
 		);
 		$ppb_js    = POOTLEPB_URL . 'js';
 		$ver       = POOTLEPB_VERSION;

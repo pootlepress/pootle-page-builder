@@ -328,7 +328,7 @@ final class Pootle_Page_Builder {
 			wp_enqueue_style( 'pootlepb-ui-styles' );
 			wp_enqueue_script( 'ppb-settings-script', POOTLEPB_URL . 'js/settings.js', array( 'pootlepb-ui' ) );
 			wp_enqueue_style( 'ppb-option-admin', POOTLEPB_URL . 'css/option-admin.css', array(), POOTLEPB_VERSION );
-			wp_enqueue_script( 'ppb-option-admin-js', POOTLEPB_URL . 'js/option-admin.js', array( 'jquery' ), POOTLEPB_VERSION );
+			add_thickbox();
 		}
 	}
 

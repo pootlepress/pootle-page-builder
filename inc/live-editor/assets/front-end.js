@@ -69,6 +69,7 @@ jQuery( function ( $ ) {
 		var $t = $( this );
 		$t.find('.panel-grid-cell-container > .panel-grid-cell').sortable( prevu.contentSortable );
 		$t.find('.panel-grid-cell-container > .panel-grid-cell').resizable( prevu.resizableCells );
+		$t.find( '.ppb-block' ).droppable( prevu.moduleDroppable );
 		tinymce.init( prevu.tmce );
 		$ppb.sortable( "refresh" );
 	};
@@ -104,10 +105,9 @@ jQuery( function ( $ ) {
 		justClickedEditRow: false,
 		justClickedEditBlock: false,
 		syncAjax : function () {
-			console.log( 'Sending the AJAX request...' );
 
 			return jQuery.post( ppbAjax.url, ppbAjax, function ( response ) {
-				var $response = $( $.parseHTML( response ) );
+				var $response = $( $.parseHTML( response, document, true ) );
 				if ( 'function' == typeof prevu.ajaxCallback ) {
 					prevu.ajaxCallback( $response, ppbAjax, response );
 					ppbCorrectOnResize();
@@ -292,7 +292,7 @@ jQuery( function ( $ ) {
 			$( 'html' ).trigger( 'pootlepb_admin_editor_panel_done', [$contentPanel, st] );
 		},
 
-		 savePanel : function () {
+		savePanel : function () {
 			var st = JSON.parse( ppbData.widgets[window.ppbPanelI].info.style );
 
 			st = panels.getStylesFromFields( $contentPanel, st );
@@ -307,15 +307,16 @@ jQuery( function ( $ ) {
 					style = $blk.closest( '.panel-grid-cell' ).children( 'style' ).html(),
 					$cell = $t.closest( '.panel-grid-cell' );
 
-				console.log( $t.length + ' ' + $blk.length );
-
 				$blk.addClass( 'pootle-live-editor-new-content-block' );
 
 				$t.replaceWith( $blk );
 
 				$blk = $( '.pootle-live-editor-new-content-block' );
 				$( 'html' ).trigger( 'pootlepb_le_content_updated', [$blk] );
-				$blk.removeClass( 'pootle-live-editor-new-content-block' ).addClass( 'active' );
+				$blk
+					.removeClass( 'pootle-live-editor-new-content-block' )
+					.addClass( 'active' )
+					.droppable( prevu.moduleDroppable );
 
 				if ( $cell.children( 'style' ).length ) {
 					$cell.children( 'style' ).html( style );
@@ -606,6 +607,24 @@ jQuery( function ( $ ) {
 
 				ppbData.grid_cells[i].weight = weight;
 				return weight;
+			}
+		},
+
+		moduleDraggable : {
+			helper : "clone"
+		},
+
+		moduleDroppable : {
+			activeClass: "drop-module",
+			hoverClass: "hover-module",
+			drop: function( event, ui ) {
+				var $d = ui.draggable,
+				    $t = $( this );
+
+				if ( $d.data( 'tab' ) ) {
+					$t.find('.dashicons-edit').click();
+					$( 'a.ppb-tabs-anchors[href="' + $d.data( 'tab' ) + '"]' ).click();
+				}
 			}
 		},
 
@@ -900,7 +919,6 @@ jQuery( function ( $ ) {
 
 	$ppb.delegate( '.ppb-edit-block .pootle-live-editor-addons .pootle-live-editor-addon', 'click', function () {
 		var $t = $( this );
-		//console.log( window.ppbPanelI );
 		$contentPanel.ppbDialog( 'open' );
 		$contentPanel.find( 'a[href="#pootle-' + $t.data( 'id' ) + '-tab"]' ).click();
 	} );
@@ -1295,14 +1313,6 @@ jQuery( function ( $ ) {
 
 	// Modules
 	console.log( $mods.length + ' ' + $mods.find( '.module' ).length );
-	$mods.find( '.module' ).draggable( {
-		helper : "clone"
-	} );
-	$ppb.find( '.ppb-block' ).droppable( {
-		activeClass: "drop-module",
-		hoverClass: "hover-module",
-		drop: function( event, ui ) {
-			alert( 'Dropped ' + ui.draggable.text() + ' Module' );
-		}
-	} );
+	$mods.find( '.module' ).draggable( prevu.moduleDraggable );
+	$ppb.find( '.ppb-block' ).droppable( prevu.moduleDroppable );
 } );

@@ -22,6 +22,7 @@ final class Pootle_Page_Builder_Admin {
 	 */
 	public function __construct() {
 		$this->includes();
+		$this->include_modules();
 		$this->actions();
 	}
 
@@ -43,12 +44,18 @@ final class Pootle_Page_Builder_Admin {
 		require_once POOTLEPB_DIR . 'inc/vantage-extra.php';
 	}
 
+
+	protected function include_modules() {
+		require_once POOTLEPB_DIR . 'inc/modules/metaslider.php';
+		require_once POOTLEPB_DIR . 'inc/modules/ninja-forms.php';
+	}
+
 	/**
 	 * Adds the actions anf filter hooks for plugin functioning
 	 * @access protected
 	 * @since 0.1.0
 	 */
-	private function actions() {
+	protected function actions() {
 		//Adding page builder help tab
 		add_action( 'load-page.php', array( $this, 'add_help_tab' ), 12 );
 		add_action( 'load-post-new.php', array( $this, 'add_help_tab' ), 12 );
@@ -182,6 +189,10 @@ final class Pootle_Page_Builder_Admin {
 			'menu_page',
 		), 'dashicons-screenoptions', '20.275' );
 		add_submenu_page( 'page_builder', 'Settings', 'Settings', 'manage_options', 'page_builder_settings', array(
+			$this,
+			'menu_page',
+		) );
+		add_submenu_page( 'page_builder', 'Modules', 'Modules', 'manage_options', 'page_builder_modules', array(
 			$this,
 			'menu_page',
 		) );

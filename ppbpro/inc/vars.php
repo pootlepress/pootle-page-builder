@@ -7,32 +7,6 @@
  */
 
 global $ppbpro_addons_data, $ppbpro_tpl;
-$ppbpro_addons_data = array(
-	array(
-		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/08/icon-post-customizer-add-on-400x400.jpg',
-		'path' => 'blog-customizer',
-	),
-	array(
-		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/10/page-customizer-icon-400x400.png',
-		'path' => 'page-customizer',
-	),
-	array(
-		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/12/photography-add-on-icon-400x400.jpg',
-		'path' => 'photography',
-	),
-	array(
-		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/10/one-pager-400x400.png',
-		'path' => 'one-pager',
-	),
-	array(
-		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/08/ppb-woocommmerce-add-on-400x400.jpg',
-		'path' => 'woocommerce',
-	),
-	//array(
-	//    'img'   => 'http://www.pootlepress.com/wp-content/uploads/2016/01/post-builder-icon-400x400.png',
-	//    'path'  => 'post-builder',
-	//),
-);
 
 /**
  * Returns template data if $tpl is set else returns the template keys

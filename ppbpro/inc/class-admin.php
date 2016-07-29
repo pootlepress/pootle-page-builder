@@ -52,10 +52,12 @@ class Pootle_Page_Builder_Pro_Admin{
 			$this,
 			'templates',
 		) );
+		/*
 		add_submenu_page( 'page_builder', 'Pootle Page Builder Pro', 'Page Builder Pro', 'manage_options', 'page_builder_pro', array(
 			$this,
 			'menu_page',
 		) );
+		*/
 	}
 
 	/**
@@ -153,7 +155,7 @@ class Pootle_Page_Builder_Pro_Admin{
 	 */
 	public function enqueue(){
 		global $pagenow;
-		if ( $pagenow == 'admin.php' && 'page_builder_pro' == filter_input( INPUT_GET, 'page' ) ) {
+		if ( $pagenow == 'admin.php' && 'page_builder_modules' == filter_input( INPUT_GET, 'page' ) ) {
 			$token = $this->token;
 			$url = $this->url;
 			wp_enqueue_style( $token . '-css', $url . '/assets/admin-page.css' );
