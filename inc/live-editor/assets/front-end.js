@@ -84,6 +84,7 @@ jQuery( function ( $ ) {
 		$ppbIpadColorDialog = $('#ppb-ipad-color-picker'),
 		$ppb = $( '#pootle-page-builder' ),
 		$mods = $('#pootlepb-modules'),
+		$body = $('body'),
 		dialogAttr = {
 			dialogClass : 'ppb-cool-panel',
 			autoOpen : false,
@@ -611,7 +612,13 @@ jQuery( function ( $ ) {
 		},
 
 		moduleDraggable : {
-			helper : "clone"
+			helper : "clone",
+			start : function(){
+				$body.addClass('ppb-dragging-module')
+			},
+			stop : function(){
+				$body.removeClass('ppb-dragging-module')
+			}
 		},
 
 		moduleDroppable : {
@@ -621,13 +628,17 @@ jQuery( function ( $ ) {
 				var $d = ui.draggable,
 				    $t = $( this );
 
+				if ( $d.data( 'callback' ) ) {
+					$t.find('.dashicons-screenoptions').click();
+					window[ $d.data( 'callback' ) ]( $t, $ );
+				}
+
 				if ( $d.data( 'tab' ) ) {
 					$t.find('.dashicons-edit').click();
 					$( 'a.ppb-tabs-anchors[href="' + $d.data( 'tab' ) + '"]' ).click();
 				}
 			}
 		},
-
 		insertImage : function() {
 			// If the media frame already exists, reopen it.
 			if (prevu.insertImageFrame) {
@@ -895,6 +906,7 @@ jQuery( function ( $ ) {
 		$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
 		$t.parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
 		window.ppbPanelI = $t.closest( '.pootle-live-editor' ).data( 'index' );
+		prevu.activeEditor = $(this).closest('.ppb-block' ).children('.pootle-live-editor-realtime');
 	} );
 
 	$ppb.delegate( '.ppb-edit-block .dashicons-edit', 'click', function () {
@@ -925,7 +937,6 @@ jQuery( function ( $ ) {
 
 	$ppb.delegate( '.ppb-edit-block .dashicons-format-image', 'click', function ( e ) {
 		e.preventDefault();
-		prevu.activeEditor = $(this).closest('.ppb-block' ).children('.pootle-live-editor-realtime');
 		prevu.insertImage()
 	} );
 
@@ -977,11 +988,9 @@ jQuery( function ( $ ) {
 
 	ppbIpad.updatedNotice = $( '#ppb-ipad-updated-notice' );
 	ppbIpad.notice = $( '#ppb-ipad-notice' );
-
 	ppbIpad.AddRow = function () {
 		$addRowDialog.ppbDialog( 'open' );
 	};
-
 	ppbIpad.StyleRow = function () {
 		var $row = $('.panel-grid.active');
 		if ( $row.length != 1 ) {
@@ -1011,6 +1020,7 @@ jQuery( function ( $ ) {
 			return;
 		}
 		prevu.activeEditor = $block.children('.pootle-live-editor-realtime');
+		tinymce.execCommand( 'mceFocus', false, prevu.activeEditor.attr( 'id' ) );
 		prevu.insertImage()
 	};
 	ppbIpad.preview = function () {
@@ -1315,4 +1325,13 @@ jQuery( function ( $ ) {
 	console.log( $mods.length + ' ' + $mods.find( '.module' ).length );
 	$mods.find( '.module' ).draggable( prevu.moduleDraggable );
 	$ppb.find( '.ppb-block' ).droppable( prevu.moduleDroppable );
+
+	window.ppbUnsplashContent = function( $t ) {
+		var $ed = $t.find('.mce-content-body');
+		tinymce.get( $ed.attr( 'id' ) ).execCommand('mceInsertContent', false, 'your content');
+	}
+	window.ppbPbtnContent = function( $t ) {
+		var $ed = $t.find('.mce-content-body');
+		tinymce.get( $ed.attr( 'id' ) ).execCommand('pbtn_add_btn_cmd');
+	}
 } );

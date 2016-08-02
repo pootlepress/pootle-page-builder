@@ -2,6 +2,9 @@
 class pootle_page_builder_Ninja_Forms {
 
 	public $token = 'ninja_forms';
+	public $slug = 'ninja-forms';
+	public $class = 'Ninja_Forms';
+	public $name = 'Ninja Forms';
 
 	/** @var pootle_page_builder_Ninja_Forms Instance */
 	private static $_instance = null;
@@ -26,7 +29,7 @@ class pootle_page_builder_Ninja_Forms {
 	}
 
 	function init() {
-		if ( class_exists( 'MetaSliderPlugin' ) ) {
+		if ( class_exists( $this->class ) ) {
 			// Content block panel tabs
 			add_filter( 'pootlepb_content_block_tabs', array( $this, 'tab' ) );
 			add_filter( 'pootlepb_le_content_block_tabs', array( $this, 'tab' ) );
@@ -43,7 +46,7 @@ class pootle_page_builder_Ninja_Forms {
 
 	public function tab( $tabs ) {
 		$tabs[ $this->token ] = array(
-			'label' => 'Ninja Forms',
+			'label' => $this->name,
 			'priority' => 5,
 		);
 		return $tabs;
@@ -62,30 +65,30 @@ class pootle_page_builder_Ninja_Forms {
 	public function shortcode( $info ) {
 		$set = json_decode( $info['info']['style'], true );
 		if ( ! empty( $set[ $this->token ] ) ) {
-			echo do_shortcode( "[ninja_forms id={$set[ $this->token ]}]" );
+			echo do_shortcode( "[$this->token id={$set[ $this->token ]}]" );
 		}
 	}
 
 	public function module( $mods ) {
-		$mods['ninja_forms-form'] = array(
-			'label' => 'Ninja Forms - Form',
+		$mods["$this->token-form"] = array(
+			'label' => $this->name,
 			'icon_class' => 'dashicons dashicons-feedback',
 			'icon_html' => '',
-			'tab' => '#pootle-ninja_forms-tab',
+			'tab' => "#pootle-$this->token-tab",
 			'ActiveClass' => 'MetaSliderPlugin',
 		);
 		return $mods;
 	}
 
 	public function module_plugin( $mods ) {
-		$mods['ninja-forms'] = array(
-			'Name' => 'Ninja Forms',
-			'Description' => 'Adds awesome meta slider module',
-			'InstallURI' => admin_url( 'plugin-install.php?tab=plugin-information&plugin=ninja-forms&TB_iframe=true&width=772&height=460"' ),
+		$mods[ $this->slug ] = array(
+			'Name' => $this->name,
+			'Description' => 'Adds awesome ninja form module',
+			'InstallURI' => admin_url( "plugin-install.php?tab=plugin-information&plugin=$this->slug&TB_iframe=true&width=772&height=460" ),
 			'AuthorURI' => 'https://www.metaslider.com',
 			'Author' => 'Matcha Labs',
-			'Image' => '//ps.w.org/ninja-forms/assets/icon-256x256.png?rev=1262610',
-			'ActiveClass' => 'Ninja_Forms',
+			'Image' => "//ps.w.org/$this->slug/assets/icon-256x256.png?rev=1262610",
+			'ActiveClass' => $this->class,
 		);
 		return $mods;
 

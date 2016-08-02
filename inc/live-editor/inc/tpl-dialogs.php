@@ -215,7 +215,7 @@ if ( isset( $_REQUEST['tour'] ) ) {
 <div id="pootlepb-modules">
 	<div class="dashicons dashicons-screenoptions" onclick="jQuery(this).parent().toggleClass('toggle')"></div>
 	<?php
-	$ppb_modules = array(
+	$ppb_modules = ! class_exists( 'Pootle_Page_Builder_Pro' ) ? array() : array(
 		'wc-product_categories' => array(
 			'label' => 'WooCommerce - Product categories',
 			'icon_class' => 'dashicons dashicons-cart',
@@ -268,6 +268,10 @@ if ( isset( $_REQUEST['tour'] ) ) {
 		$classes = "module mod-$id";
 
 		$attr = "";
+
+		if ( ! empty( $module['callback'] ) ) {
+			$attr .= " data-callback='$module[callback]'";
+		}
 
 		if ( ! empty( $module['tab'] ) ) {
 			$attr .= " data-tab='$module[tab]'";

@@ -521,4 +521,3 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		include "tpl-ipad-html.php";
 	}
 }
-?>

@@ -806,6 +806,10 @@ iframe[src*='/pootle-buttons/'] {
 	left: 0;
 }
 
+.ppb-dragging-module #pootlepb-modules.toggle {
+	left: -340px;
+}
+
 #pootlepb-modules > .dashicons {
 	position: absolute;
 	top: 0;
@@ -888,7 +892,7 @@ iframe[src*='/pootle-buttons/'] {
 	font-size: 30px
 }
 
-.ppb-block.drop-module:after {
+.ppb-block.hover-module.drop-module:after {
 	display: block;
 	content: "";
 	width: 100%;
@@ -898,8 +902,4 @@ iframe[src*='/pootle-buttons/'] {
 	left: 0;
 	z-index: 9;
 	background: rgba(239, 72, 50, 0.25);
-}
-
-.ppb-block.hover-module.drop-module:after {
-	background: rgba(239, 72, 50, 0.52);
 }
