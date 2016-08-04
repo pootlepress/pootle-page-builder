@@ -212,84 +212,60 @@ if ( isset( $_REQUEST['tour'] ) ) {
 	include "tpl-tour.php";
 }
 ?>
-<div id="pootlepb-modules">
+<div id="pootlepb-modules-wrap">
 	<div class="dashicons dashicons-screenoptions" onclick="jQuery(this).parent().toggleClass('toggle')"></div>
-	<?php
-	$ppb_modules = ! class_exists( 'Pootle_Page_Builder_Pro' ) ? array() : array(
-		'wc-product_categories' => array(
-			'label' => 'WooCommerce - Product categories',
-			'icon_class' => 'dashicons dashicons-cart',
-			'icon_html' => '',
-			'style_data' => '{"wc_prods-add":"product_categories"}',
-			'tab' => '#pootle-wc_prods-tab',
-			'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
-		),
-		'wc-best-selling-products' => array(
-			'label' => 'WooCommerce - Best selling products',
-			'icon_class' => 'dashicons dashicons-cart',
-			'icon_html' => '',
-			'style_data' => '{"wc_prods-add":"best_selling_products"}',
-			'tab' => '#pootle-wc_prods-tab',
-			'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
-		),
-		'wc-top-rated-products' => array(
-			'label' => 'WooCommerce - Top rated Products',
-			'icon_class' => 'dashicons dashicons-cart',
-			'icon_html' => '',
-			'style_data' => '{"wc_prods-add":"top_rated_products"}',
-			'tab' => '#pootle-wc_prods-tab',
-			'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
-		),
-		'photo-slider' => array(
-			'label' => 'Photography - Slider',
-			'icon_class' => 'dashicons dashicons-images-alt2',
-			'icon_html' => '',
-			'style_data' => '{}',
-			'ActiveClass' => 'page_builder_photo_addon',
-		),
-		'photo-gallery' => array(
-			'label' => 'Photography - Gallery',
-			'icon_class' => 'dashicons dashicons-grid-view',
-			'icon_html' => '',
-			'style_data' => '{}',
-			'ActiveClass' => 'page_builder_photo_addon',
-		),
-	);
+	<div id="pootlepb-modules">
+		<?php
+		$ppb_modules = ! class_exists( 'Pootle_Page_Builder_Pro' ) ? array() : array(
+			'wc-products'    => array(
+				'label'       => 'WooCommerce - Top rated Products',
+				'icon_class'  => 'dashicons dashicons-cart',
+				'tab'         => '#pootle-wc_prods-tab',
+				'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
+			),
+			'photo-slider'             => array(
+				'label'       => 'Photography - Slider',
+				'icon_class'  => 'dashicons dashicons-images-alt2',
+				'ActiveClass' => 'page_builder_photo_addon',
+			),
+		);
 
-	$ppb_modules = apply_filters( 'pootlepb_modules', $ppb_modules );
+		$ppb_modules = apply_filters( 'pootlepb_modules', $ppb_modules );
 
-	foreach ( $ppb_modules as $id => $module ) {
-		$module = wp_parse_args( $module, array(
-			'label' => 'Unlabeled Module',
-			'icon_class' => 'dashicons dashicons-star-filled',
-			'icon_html' => '',
-		) );
+		foreach ( $ppb_modules as $id => $module ) {
+			$module = wp_parse_args( $module, array(
+				'label'      => 'Unlabeled Module',
+				'icon_class' => 'dashicons dashicons-star-filled',
+				'icon_html'  => '',
+			) );
 
-		$classes = "module mod-$id";
+			$classes = "mod-$id";
 
-		$attr = "";
+			$attr = "";
 
-		if ( ! empty( $module['callback'] ) ) {
-			$attr .= " data-callback='$module[callback]'";
+			if ( ! empty( $module['callback'] ) ) {
+				$attr .= " data-callback='$module[callback]'";
+			}
+
+			if ( ! empty( $module['tab'] ) ) {
+				$attr .= " data-tab='$module[tab]'";
+			}
+
+			if ( ! empty( $module['style_data'] ) ) {
+				$attr .= " data-style_data='$module[style_data]'";
+			}
+
+			if ( ! empty( $module['ActiveClass'] ) && class_exists( $module['ActiveClass'] ) ) {
+				$classes .= ' module';
+				echo "<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>";
+			} else {
+				$classes .= ' module-disabled';
+				echo
+					'<a target="_blank" href="' . admin_url( 'admin.php?page=page_builder_modules' ) . '">' .
+					"<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>" .
+					'</a>';
+			}
 		}
-
-		if ( ! empty( $module['tab'] ) ) {
-			$attr .= " data-tab='$module[tab]'";
-		}
-
-		if ( ! empty( $module['style_data'] ) ) {
-			$attr .= " data-style_data='$module[style_data]'";
-		}
-
-		if ( ! empty( $module['ActiveClass'] ) && class_exists( $module['ActiveClass'] ) ) {
-			$classes .= ' active';
-			echo "<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>";
-		} else {
-			echo
-				'<a href="' . admin_url( 'admin.php?page=page_builder_modules' ) . '">' .
-				"<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>" .
-				'</a>';
-		}
-	}
-	?>
+		?>
+	</div>
 </div>

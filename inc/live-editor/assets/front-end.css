@@ -787,7 +787,7 @@ iframe[src*='/pootle-buttons/'] {
 .wp-core-ui input { padding:4px; background:#fff; border:1px solid #ccc; }
 
 /* Modules Slide in */
-#pootlepb-modules {
+#pootlepb-modules-wrap {
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -798,19 +798,22 @@ iframe[src*='/pootle-buttons/'] {
 	transition: left 0.25s;
 }
 
-.admin-bar #pootlepb-modules {
+#pootlepb-modules-wrap,
+#pootlepb-modules-wrap > .dashicons-screenoptions {
+	-webkit-box-shadow: 2px 1px 1px rgba(0,0,0,0.25);
+	box-shadow: 2px 1px 1px rgba(0,0,0,0.25);
+}
+
+.admin-bar #pootlepb-modules-wrap {
 	top: 32px;
 }
 
-#pootlepb-modules.toggle {
+#pootlepb-modules-wrap.toggle {
 	left: 0;
 }
 
-.ppb-dragging-module #pootlepb-modules.toggle {
-	left: -340px;
-}
-
-#pootlepb-modules > .dashicons {
+#pootlepb-modules-wrap > .dashicons-screenoptions,
+#pootlepb-modules-wrap > #pootlepb-modules {
 	position: absolute;
 	top: 0;
 	left: 100%;
@@ -821,7 +824,17 @@ iframe[src*='/pootle-buttons/'] {
 	cursor: pointer;
 }
 
-#pootlepb-modules > .dashicons:before {
+#pootlepb-modules-wrap > #pootlepb-modules {
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+#pootlepb-modules-wrap.toggle > #pootlepb-modules {
+	overflow: auto;
+}
+
+#pootlepb-modules-wrap > .dashicons-screenoptions:before {
 	font-size: 30px;
 	height: auto;
 	width: auto;
@@ -831,20 +844,22 @@ iframe[src*='/pootle-buttons/'] {
 	height: auto !important;
 }
 
+.module-disabled,
 .module {
 	margin: 16px 16px 0;
 	border: 1px solid #ddd;
 	border-bottom-color: #bbb;
 	border-right-color: #bbb;
-	font-size: 0;
 	background: #fff;
+	color: #333;
+	font-size: 0;
 	opacity: 0.79;
 	cursor: -webkit-grab;
 	cursor:-moz-grab;
 	position: relative;
 }
 
-.module:after {
+.module-disabled:after {
 	display: block;
 	content: '';
 	position: absolute;
@@ -852,13 +867,13 @@ iframe[src*='/pootle-buttons/'] {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background: #eee;
-	opacity: 0.25;
+	background: #ccc;
+	opacity: 0.34;
 	cursor: default;
 }
 
-.module.active:after {
-	display: none;
+a .module-disabled:after {
+	cursor: pointer;
 }
 
 .module:active {
@@ -870,24 +885,29 @@ iframe[src*='/pootle-buttons/'] {
 	opacity: 1;
 }
 
+.module-disabled .icon,
+.module-disabled .label,
 .module .icon,
 .module .label {
 	vertical-align: middle;
 	display: inline-block;
 }
 
+.module-disabled .label,
 .module .label {
 	padding: 7px 7px 7px 0;
 	width: 80%;
 	font: 16px/1.6 sans-serif;
 }
 
+.module-disabled .icon,
 .module .icon {
 	height: 50px;
 	line-height: 50px;
 	width: 20%;
 }
 
+.module-disabled .icon:before,
 .module .icon:before {
 	font-size: 30px
 }

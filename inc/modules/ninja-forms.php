@@ -8,6 +8,7 @@ class pootle_page_builder_Ninja_Forms {
 
 	/** @var pootle_page_builder_Ninja_Forms Instance */
 	private static $_instance = null;
+	protected $choices = array( '' => 'Please choose...' );
 
 	/**
 	 * Gets pootle_page_builder_Ninja_Forms instance
@@ -29,18 +30,23 @@ class pootle_page_builder_Ninja_Forms {
 	}
 
 	function init() {
+		// Adding modules to live editor sidebar
+		add_action( 'pootlepb_modules', array( $this, 'module' ) );
+		// Adding modules plugin to Modules page
+		add_action( 'pootlepb_modules_page', array( $this, 'module_plugin' ), 25 );
 		if ( class_exists( $this->class ) ) {
 			// Content block panel tabs
 			add_filter( 'pootlepb_content_block_tabs', array( $this, 'tab' ) );
 			add_filter( 'pootlepb_le_content_block_tabs', array( $this, 'tab' ) );
 			// Adding shortcode to content block
-			add_action( 'pootlepb_render_content_block', array( $this, 'shortcode' ), 25 );
-			// Adding modules to live editor sidebar
-			add_action( 'pootlepb_modules', array( $this, 'module' ), 25 );
-			// Adding modules plugin to Modules page
-			add_action( 'pootlepb_modules_page', array( $this, 'module_plugin' ), 25 );
+			add_action( 'pootlepb_render_content_block', array( $this, 'shortcode' ), 52 );
 			// Content block panel fields
 			add_filter( 'pootlepb_content_block_fields', array( $this, 'fields' ) );
+
+			$forms = ninja_forms_get_all_forms();
+			foreach ( $forms as $form ) {
+				$this->choices[ $form['id'] ] = "$form[id] - $form[name]";
+			}
 		}
 	}
 
@@ -55,7 +61,8 @@ class pootle_page_builder_Ninja_Forms {
 	public function fields( $fields ) {
 		$fields[ $this->token ] = array(
 			'name' => 'Form ID',
-			'type' => 'number',
+			'type' => 'select',
+			'options' => $this->choices,
 			'priority' => 1,
 			'tab' => $this->token,
 		);
@@ -75,7 +82,7 @@ class pootle_page_builder_Ninja_Forms {
 			'icon_class' => 'dashicons dashicons-feedback',
 			'icon_html' => '',
 			'tab' => "#pootle-$this->token-tab",
-			'ActiveClass' => 'MetaSliderPlugin',
+			'ActiveClass' => $this->class,
 		);
 		return $mods;
 	}

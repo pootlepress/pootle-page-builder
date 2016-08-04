@@ -243,6 +243,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		wp_enqueue_script( 'ppb-fields', "$url/ppb-deps.js", array( 'wp-color-picker', ), $ver );
 		wp_enqueue_script( 'ppb-ui', "$ppb_js/ppb-ui.js", $jQui_deps, $ver );
+		wp_enqueue_script( 'ppb-unsplash', "$ppb_js/unsplash.js", $jQui_deps, $ver );
 		wp_enqueue_script( 'ppb-ui-tooltip', "$ppb_js/ui.admin.tooltip.js" );
 		wp_enqueue_script( 'ppble-tmce-view', "$url/tmce.view.js" );
 		wp_enqueue_script( 'ppble-tmce-theme', "$url/tmce.theme.js", array( 'ppble-tmce-view' ) );
@@ -270,6 +271,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		wp_enqueue_script( 'mce-view' );
 		wp_enqueue_script( 'image-edit' );
+
+		if ( defined( 'NINJA_FORMS_URL' ) ) {
+			wp_enqueue_style( 'ninja-forms-display', NINJA_FORMS_URL .'css/ninja-forms-display.css?nf_ver=' . NF_PLUGIN_VERSION );
+		}
 
 		do_action( 'pootlepb_enqueue_admin_scripts' );
 

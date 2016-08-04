@@ -21,10 +21,10 @@
 			ed.addCommand( 'pbtn_add_btn_cmd', function() {
 				var selected_text = ed.selection.getContent();
 				ed.windowManager.open( {
-					title: 'Insert Button',
+					title: '',
 					url : pbtn.dialogUrl + '&assets_url=' + ass_url + '&text=' + selected_text,
-					width : 500,
-					height : 500
+					width : 700,
+					height : 610
 				}, { plugin_url : pbtn.ass_url, editor : ed } );
 			});
 			ed.on( "dblClick", function ( e ) {
@@ -34,7 +34,7 @@
 						icon = btn.find('i').length ? encodeURIComponent( btn.find('i').prop( 'outerHTML' ) ) : '';
 					ed.selection.select( btn[0] );
 					ed.windowManager.open( {
-						title: 'Edit Button',
+						title: '',
 						url : pbtn.dialogUrl + '&edit_button=1&assets_url=' + ass_url + '&text=' + btn.text() +
 						      '&icon=' + icon + '&url=' + href,
 						width : 500,

@@ -21,25 +21,49 @@ $editing = ! empty( $_GET['edit_button'] );
 			font-size: 0.88em;
 			margin: 0.5em;
 		}
-		h3 {
-			font-weight: normal;
-			color: #333;
+		section h3 {
+			font-weight: 100;
+			font-size: 20px;
+			letter-spacing: 1px;
+		}
+		section h3:first-of-type {
+			margin-top: 0;
+		}
+		section h3:not(:first-of-type) {
+			margin-top: 25px;
+			padding-top: 16px;
+			border-top: 1px solid #ccc;
 		}
 		.field {
-			margin: 1em 0;
-		}
-
-		.field > label {
-			display: inline-block;
-			width: 205px;
+			margin: 1em 0 1.6em;
+			font-size: 14px;
 		}
 
 		.field > * {
 			vertical-align: middle;
 		}
 
+		.field p {
+			margin: 0;
+			opacity: 0.9;
+			font-size: 13px;
+		}
+
+		.field > label {
+			display: inline-block;
+			width: 250px;
+		}
+
+		.field .wp-color-result:after {
+			padding: 3px 9px;
+		}
+
+		.field .wp-color-result {
+			padding-left: 32px;
+		}
+
 		.field > .input-wrap, .field > input, .field select {
-			width: 178px;
+			width: 340px;
 		}
 
 		.field > .input-wrap {
@@ -60,7 +84,15 @@ $editing = ! empty( $_GET['edit_button'] );
 			width: 40px;
 			margin-left: 5px;
 		}
-
+		.field .wp-color-result.wp-picker-open {
+			width: 0;
+			overflow: hidden;
+			-webkit-box-sizing:content-box;
+			box-sizing:content-box;
+		}
+		.field .wp-color-result.wp-picker-open:after {
+			content: '.';
+		}
 		header, footer {
 			background: #fcfcfc;
 			padding: 5px;
@@ -84,6 +116,7 @@ $editing = ! empty( $_GET['edit_button'] );
 			position: absolute;
 			top: 0;
 			margin: 0;
+			font-size: 12px;
 		}
 
 		input[type=range] {
@@ -183,7 +216,7 @@ $editing = ! empty( $_GET['edit_button'] );
 </head>
 <body class="wp-core-ui">
 	<header class="preview">
-		<p>Preview</p>
+		<p>Live Preview</p>
 		<a href="#" id="preview"></a>
 	</header>
 	<section>

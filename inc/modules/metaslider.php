@@ -2,6 +2,7 @@
 class pootle_page_builder_Meta_Slider {
 
 	public $token = 'metaslider';
+	protected $choices = array( '' => 'Please choose...' );
 
 	/** @var pootle_page_builder_Meta_Slider Instance */
 	private static $_instance = null;
@@ -26,18 +27,23 @@ class pootle_page_builder_Meta_Slider {
 	}
 
 	function init() {
+		// Adding modules to live editor sidebar
+		add_action( 'pootlepb_modules', array( $this, 'module' ), 25 );
+		// Adding modules plugin to Modules page
+		add_action( 'pootlepb_modules_page', array( $this, 'module_plugin' ), 25 );
 		if ( class_exists( 'MetaSliderPlugin' ) ) {
 			// Content block panel tabs
 			add_filter( 'pootlepb_content_block_tabs', array( $this, 'tab' ) );
 			add_filter( 'pootlepb_le_content_block_tabs', array( $this, 'tab' ) );
 			// Adding shortcode to content block
-			add_action( 'pootlepb_render_content_block', array( $this, 'shortcode' ), 25 );
-			// Adding modules to live editor sidebar
-			add_action( 'pootlepb_modules', array( $this, 'module' ), 25 );
-			// Adding modules plugin to Modules page
-			add_action( 'pootlepb_modules_page', array( $this, 'module_plugin' ), 25 );
+			add_action( 'pootlepb_render_content_block', array( $this, 'shortcode' ), 52 );
 			// Content block panel fields
 			add_filter( 'pootlepb_content_block_fields', array( $this, 'fields' ) );
+
+			$sliders = get_posts( array( 'post_type' => 'ml-slider' ) );
+			foreach( $sliders as $slider ) {
+				$this->choices[ "[metaslider id={$slider->ID}]" ] = "{$slider->ID} - {$slider->post_title}";
+			}
 		}
 	}
 
@@ -50,18 +56,11 @@ class pootle_page_builder_Meta_Slider {
 	}
 
 	public function fields( $fields ) {
-		$sliders = get_posts( array( 'post_type' => 'ml-slider' ) );
-		$shortcodes = array(
-			'' => 'Please choose...'
-		);
-		foreach( $sliders as $slider ) {
-			$shortcodes[ "[metaslider id={$slider->ID}]" ] = "{$slider->ID} - {$slider->post_title}";
-		}
 
 		$fields[ $this->token ] = array(
 			'name' => 'Choose slider',
 			'type' => 'select',
-			'options' => $shortcodes,
+			'options' => $this->choices,
 			'priority' => 1,
 			'tab' => $this->token,
 		);

@@ -83,7 +83,7 @@ jQuery( function ( $ ) {
 		$postSettingsDialog = $( '#pootlepb-post-settings' ),
 		$ppbIpadColorDialog = $('#ppb-ipad-color-picker'),
 		$ppb = $( '#pootle-page-builder' ),
-		$mods = $('#pootlepb-modules'),
+		$mods = $('#pootlepb-modules-wrap'),
 		$body = $('body'),
 		dialogAttr = {
 			dialogClass : 'ppb-cool-panel',
@@ -402,7 +402,7 @@ jQuery( function ( $ ) {
 			$rowPanel.ppbDialog( 'close' );
 		},
 
-		addRow : function ( e, ui ) {
+		addRow : function ( callback, blockText ) {
 			//console.log( "adding row" );
 			window.ppbRowI = ppbData.grids.length;
 			var num_cells;
@@ -424,7 +424,7 @@ jQuery( function ( $ ) {
 			};
 
 			block = {
-				text : '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>',
+				text : typeof blockText == "string" ? blockText : '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>',
 				info : {
 					class: 'Pootle_PB_Content_Block',
 					grid: window.ppbRowI,
@@ -449,13 +449,19 @@ jQuery( function ( $ ) {
 			$addRowDialog.ppbDialog( 'close' );
 
 			prevu.sync( function( $r, qry ) {
-				var $ro = $r.find( '#pg-' + qry.post + '-' + window.ppbRowI ),
-					$cols = $ro.find( '.panel-grid-cell-container > .panel-grid-cell' );
-				$cols.css( 'width', ( 100 - num_cells + 1 ) / num_cells + '%' );
+				var $ro   = $r.find( '#pg-' + qry.post + '-' + window.ppbRowI ),
+				    $cols = $ro.find( '.panel-grid-cell-container > .panel-grid-cell' );
+				$cols.css( 'width', (
+				                    100 - num_cells + 1
+				                    ) / num_cells + '%' );
 				$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
-				$ro.find('.pootle-live-editor-realtime:eq(0)').parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
-				$('.pootle-live-editor.add-row' ).before( $ro );
-				$('#pg-' + qry.post + '-' + window.ppbRowI).prevuRowInit();
+				$ro.find( '.pootle-live-editor-realtime:eq(0)' ).parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
+				$( '.pootle-live-editor.add-row' ).before( $ro );
+				$( '#pg-' + qry.post + '-' + window.ppbRowI ).prevuRowInit();
+
+				if ( 'function' == typeof callback ) {
+					callback();
+				}
 			} );
 		},
 
@@ -614,28 +620,37 @@ jQuery( function ( $ ) {
 		moduleDraggable : {
 			helper : "clone",
 			start : function(){
-				$body.addClass('ppb-dragging-module')
-			},
-			stop : function(){
-				$body.removeClass('ppb-dragging-module')
+				$mods.removeClass('toggle')
+			}
+		},
+
+		insertModule : function( $contentblock, $module ) {
+			if ( $module.data( 'callback' ) ) {
+				$contentblock.find('.dashicons-screenoptions').click();
+				window[ $module.data( 'callback' ) ]( $contentblock, $ );
+			}
+
+			if ( $module.data( 'tab' ) ) {
+				$contentblock.find('.dashicons-edit').click();
+				$( 'a.ppb-tabs-anchors[href="' + $module.data( 'tab' ) + '"]' ).click();
 			}
 		},
 
 		moduleDroppable : {
 			activeClass: "drop-module",
 			hoverClass: "hover-module",
-			drop: function( event, ui ) {
-				var $d = ui.draggable,
+			drop: function( e, ui ) {
+				var $m = ui.draggable,
 				    $t = $( this );
 
-				if ( $d.data( 'callback' ) ) {
-					$t.find('.dashicons-screenoptions').click();
-					window[ $d.data( 'callback' ) ]( $t, $ );
-				}
-
-				if ( $d.data( 'tab' ) ) {
-					$t.find('.dashicons-edit').click();
-					$( 'a.ppb-tabs-anchors[href="' + $d.data( 'tab' ) + '"]' ).click();
+				if ( $t.hasClass('add-row') ) {
+					$( '#ppb-row-add-cols' ).val( '1' );
+					prevu.addRow( function () {
+						prevu.insertModule( $ppb.find( '.ppb-block' ).last(), $m )
+					}, '' );
+				} else {
+					console.log( e.target );
+					prevu.insertModule( $t, $m )
 				}
 			}
 		},
@@ -701,8 +716,6 @@ jQuery( function ( $ ) {
 	dialogAttr.title = 'Edit row';
 	dialogAttr.open = prevu.editRow;
 	dialogAttr.buttons.Done = prevu.saveRow;
-	dialogAttr.height = 520;
-	dialogAttr.width = 720;
 	$rowPanel.ppbTabs().ppbDialog( dialogAttr );
 	panels.addInputFieldEventHandlers( $rowPanel );
 
@@ -1322,16 +1335,20 @@ jQuery( function ( $ ) {
 	prevu.reset( 'noSort' );
 
 	// Modules
-	console.log( $mods.length + ' ' + $mods.find( '.module' ).length );
 	$mods.find( '.module' ).draggable( prevu.moduleDraggable );
-	$ppb.find( '.ppb-block' ).droppable( prevu.moduleDroppable );
+	$ppb.find( '.ppb-block, .ppb-live-add-object.add-row' ).droppable( prevu.moduleDroppable );
 
-	window.ppbUnsplashContent = function( $t ) {
-		var $ed = $t.find('.mce-content-body');
-		tinymce.get( $ed.attr( 'id' ) ).execCommand('mceInsertContent', false, 'your content');
-	}
-	window.ppbPbtnContent = function( $t ) {
-		var $ed = $t.find('.mce-content-body');
-		tinymce.get( $ed.attr( 'id' ) ).execCommand('pbtn_add_btn_cmd');
-	}
+	window.ppbUnsplashContent = function ( $t ) {
+		var $ed = $t.find( '.mce-content-body' ),
+		    ed  = tinymce.get( $ed.attr( 'id' ) );
+		ShrameeUnsplashImage( function ( url ) {
+			var $img = '<p><img src="' + url + '"></p>';
+			ed.selection.setCursorLocation( ed.getBody().lastChild, 1 );
+			ed.execCommand( 'mceInsertContent', false, $img );
+		} );
+	};
+	window.ppbPbtnContent = function ( $t ) {
+		var $ed = $t.find( '.mce-content-body' );
+		tinymce.get( $ed.attr( 'id' ) ).execCommand( 'pbtn_add_btn_cmd' );
+	};
 } );

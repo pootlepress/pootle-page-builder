@@ -303,7 +303,8 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
 			         data-style-field="<?php echo esc_attr( $key ) ?>"
 			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
-			<button class="button upload-button">Select Image</button><?php
+			<button class="button upload-button">Select Image</button>
+			<button style="display: none;" class="button unsplash-button">Unsplash Image</button><?php
 			break;
 		case 'uploadVid':
 			?><input <?php echo $placeholder ?> type="text" id="pp-pb-<?php esc_attr_e( $key ) ?>"

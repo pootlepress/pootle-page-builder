@@ -21,8 +21,7 @@
 		} );
 
 		/* Removing existing event handlers */
-		$this.find( '.upload-button' ).off( 'click' );
-		$this.find( '.video-upload-button' ).off( 'click' );
+		$this.find( '.upload-button, .unsplash-button, .video-upload-button' ).off( 'click' );
 
 		// Uploading Fields aka media selection
 		var ppbFileFrame,
@@ -48,18 +47,20 @@
 
 			// When an image is selected, run a callback.
 			ppbFileFrame.on( 'select', function () {
-				// We set multiple to false so only get one image from the uploader
 				attachment = ppbFileFrame.state().get( 'selection' ).first().toJSON();
-
-				// Do something with attachment.id and/or attachment.url here
-				$textField
-					.val( attachment.url );
-				$textField.change();
-
+				$textField.val( attachment.url ).change();
 			} );
 
 			// Finally, open the modal
 			ppbFileFrame.open();
+		} );
+
+		$this.find( '.unsplash-button' ).attr( 'style', '' ).on( 'click', function ( e ) {
+			e.preventDefault();
+			var $textField = $( this ).siblings( 'input' );
+			ShrameeUnsplashImage( function ( url ) {
+				$textField.val( url ).change();
+			}, $textField.val() );
 		} );
 
 		$this.find( '.video-upload-button' ).on( 'click', function ( event ) {
