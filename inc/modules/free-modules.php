@@ -41,8 +41,15 @@ class pootle_page_builder_Unsplash {
 		);
 		$mods["pbtn"] = array(
 			'label' => 'Pootle button',
-			'icon_html' => '',
+			'icon_class' => 'dashicons dashicons-upload',
 			'callback' => 'ppbPbtnContent',
+			'ActiveClass' => $this->class,
+		);
+		$mods["hero-section"] = array(
+			'label' => 'Hero Section',
+			'icon_class' => 'dashicons dashicons-archive',
+			'tab' => "#pootlepb-background-row-tab",
+			'callback' => 'ppbHeroSection',
 			'ActiveClass' => $this->class,
 		);
 		return $mods;

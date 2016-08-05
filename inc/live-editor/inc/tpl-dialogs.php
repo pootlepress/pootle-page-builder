@@ -218,14 +218,21 @@ if ( isset( $_REQUEST['tour'] ) ) {
 		<?php
 		$ppb_modules = ! class_exists( 'Pootle_Page_Builder_Pro' ) ? array() : array(
 			'wc-products'    => array(
-				'label'       => 'WooCommerce - Top rated Products',
+				'label'       => 'WooCommerce',
 				'icon_class'  => 'dashicons dashicons-cart',
 				'tab'         => '#pootle-wc_prods-tab',
 				'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
 			),
 			'photo-slider'             => array(
-				'label'       => 'Photography - Slider',
+				'label'       => 'Slider',
 				'icon_class'  => 'dashicons dashicons-images-alt2',
+				'tab'         => '#pootle-ppb-photo-addon-tab',
+				'ActiveClass' => 'page_builder_photo_addon',
+			),
+			'blog-posts'             => array(
+				'label'       => 'Blog posts',
+				'icon_class'  => 'dashicons dashicons-admin-post',
+				'tab'         => '#pootle-ppb-blog-customizer-tab',
 				'ActiveClass' => 'page_builder_photo_addon',
 			),
 		);

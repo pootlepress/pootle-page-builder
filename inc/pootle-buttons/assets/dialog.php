@@ -117,6 +117,11 @@ $editing = ! empty( $_GET['edit_button'] );
 			top: 0;
 			margin: 0;
 			font-size: 12px;
+			color: #333;
+			letter-spacing: 1px;
+			background: #fff;
+			padding: 2px 5px 2px 2px;
+			opacity: 0.7;
 		}
 
 		input[type=range] {
@@ -428,7 +433,7 @@ $editing = ! empty( $_GET['edit_button'] );
 					return_text = '<p class="pbtn" style="clear:both;">' + return_text + '</p>';
 				}
 				ed.execCommand( 'mceInsertContent', 0, return_text );
-				ed.windowManager.close();
+				ed.windowManager.close(window);
 			} );
 
 			$style_inputs.change( preview );

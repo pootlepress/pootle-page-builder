@@ -17,10 +17,10 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 	<div class="ppb-modules modules-free">
 		<h2>Free Modules</h2>
 		<?php
-		foreach ( $pootlepb_modules as $id => $plugin ) {
+		foreach ( $pootlepb_modules as $slug => $plugin ) {
 			$card_classes = class_exists( $plugin['ActiveClass'] ) ? 'ppb-addon-card active' : 'ppb-addon-card';
 			?>
-			<div id="<?php echo $id ?>" class="ppb-addon-card-wrap">
+			<div id="<?php echo $slug ?>" class="ppb-addon-card-wrap">
 				<div class="<?php echo $card_classes; ?>">
 					<div class="ppb-addon-img">
 						<a class="thickbox"
@@ -42,6 +42,9 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 							if ( strpos( $card_classes, 'active' ) ) {
 								echo '<span class="dashicons dashicons-yes"></span>';
 								_e( 'This module is active!', 'ppbpro' );
+							} else if ( is_dir( WP_PLUGIN_DIR . '/' . $slug ) ) {
+								$activate_url = admin_url( "plugins.php" );
+								echo "<a href='$activate_url' target='_blank' class='button pootle right'>" . __( 'Activate' ) . "</a>";
 							} else {
 								echo "<a href='$plugin[InstallURI]' class='button pootle thickbox right'>" . __( 'Install' ) . "</a>";
 							}
@@ -65,9 +68,9 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 			settings_errors();
 
 			foreach ( $ppbpro_addons_data as $addon ) {
-				$id     = $addon['path'];
+				$slug     = $addon['path'];
 				$plugin = $addon['plugin'];
-				$active = isset( $active_addons[ $id ] ) ? $active_addons[ $id ] : '';
+				$active = isset( $active_addons[ $slug ] ) ? $active_addons[ $slug ] : '';
 				?>
 				<div class="ppb-addon-card-wrap">
 					<div class="ppb-addon-card <?php if ( $active ) {
@@ -89,7 +92,7 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 						</div>
 						<div class="ppb-addon-footer">
 							<div class="ppb-addon-controls ppb-addon-installed">
-								<input type="hidden" name="ppbpro_active_addons[<?php echo $id; ?>]"
+								<input type="hidden" name="ppbpro_active_addons[<?php echo $slug; ?>]"
 								       value="<?php echo $active; ?>">
 								<a class="button pootle activate"><?php _e( 'Activate' ) ?></a>
 

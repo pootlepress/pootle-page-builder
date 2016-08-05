@@ -25,7 +25,7 @@ function ShrameeUnsplashImageDialog( $ ) {
 				$( '<div/>' ).attr( 'id', 'shramee-unsplash-images' )
 			);
 		$( 'body' )
-			.append( '<style>#shramee-unsplash-overlay,#shramee-unsplash-wrap{position:fixed;top:0;right:0;bottom:0;left:0;z-index:999997;background: rgba( 0,0,0,0.25 )}#shramee-unsplash-wrap{text-align:center;margin:auto; top: 25px;left: 25px;right: 25px;bottom: 25px;background:#fff;padding:25px;overflow:auto}#shramee-unsplash-wrap:before{content:"Search for images on unsplash";display:block;margin:-25px -25px 25px;padding:7px;background:#ddd;text-align:left}#shramee-unsplash-wrap *{vertical-align:middle}#shramee-unsplash-search-field{width:50%;min-width:340px}#shramee-unsplash-search{font-size:0;position:relative;left:-43px;color:#333;display:inline-block;padding:7px 9px}#shramee-unsplash-wrap .image{height:250px;width:250px;display:inline-block;cursor:pointer}#shramee-unsplash-images{margin:25px auto}#shramee-unsplash-images .image{margin:2px}</style>' )
+			.append( '<style>#shramee-unsplash-overlay,#shramee-unsplash-wrap{position:fixed;top:0;right:0;bottom:0;left:0;z-index:999997;background: rgba( 0,0,0,0.25 )}#shramee-unsplash-wrap{text-align:center;margin:auto; top: 25px;left: 25px;right: 25px;bottom: 25px;background:#fff;padding:25px;overflow:auto}#shramee-unsplash-wrap:before{content:"Search for images on unsplash";display:block;margin:-25px -25px 25px;padding:7px;background:#ddd;text-align:left}#shramee-unsplash-wrap *{vertical-align:middle}#shramee-unsplash-search-field{width:50%;min-width:340px;padding: 7px 43px 7px 11px;-webkit-border-radius:3px;border-radius:3px;border:1px solid #aaa;box-shadow:0 0 2px 0px rgba(0,0,0,0.25);-webkit-box-shadow:0 0 2px 0px rgba(0,0,0,0.25);}#shramee-unsplash-search{font-size:0;position:relative;left:-43px;color:#333;display:inline-block;padding:11px}#shramee-unsplash-wrap .image{height:250px;width:250px;display:inline-block;cursor:pointer;background: center/cover;}#shramee-unsplash-images{margin:25px auto}#shramee-unsplash-images .image{margin:2px}</style>' )
 			.append( $( '<div/>' ).attr( 'id', 'shramee-unsplash-overlay' ) )
 			.append( $dlog );
 		$dlg = $( '#shramee-unsplash-wrap,#shramee-unsplash-overlay' );
@@ -39,11 +39,11 @@ function ShrameeUnsplashImageDialog( $ ) {
 				$f    = $( '#shramee-unsplash-search-field' ),
 				$imgs = $( '#shramee-unsplash-images' );
 		$f.off( 'focus' );
-		$f.focus( function ( e ) {
-			var evt = e ? e:window.event;
-			if (evt.stopPropagation)    evt.stopPropagation();
-			if (evt.cancelBubble!=null) evt.cancelBubble = true;
-		} );
+		$f.keypress(function(e) {
+			if(e.which == 13) {
+				$btn.click();
+			}
+		});
 		$btn.click( function ( e ) {
 			e.preventDefault();
 			var

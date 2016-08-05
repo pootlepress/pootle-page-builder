@@ -57,16 +57,19 @@
 
 		$this.find( '.unsplash-button' ).attr( 'style', '' ).on( 'click', function ( e ) {
 			e.preventDefault();
-			var $textField = $( this ).siblings( 'input' );
+			var
+				$textFields = $( this ).siblings( 'input' ),
+				$textField = $textFields.filter( '[type="text"]' ),
+				$searchField = $textFields.filter( '[type="search"]' );
 			ShrameeUnsplashImage( function ( url ) {
 				$textField.val( url ).change();
-			}, $textField.val() );
+			}, $searchField.val() );
 		} );
 
 		$this.find( '.video-upload-button' ).on( 'click', function ( event ) {
 			event.preventDefault();
 
-			$textField = $( this ).siblings( 'input' );
+			var $textField = $( this ).siblings( 'input' );
 
 			// If the media frame already exists, reopen it.
 			if ( ppbMP4VideoFrame ) {

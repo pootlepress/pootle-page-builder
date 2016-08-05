@@ -711,7 +711,7 @@ body .ppb-dialog {
 	width: auto;
 }
 
-.ppb-tabs-panel input[type='text'], .ppb-tabs-panel input[type='number'] {
+.ppb-tabs-panel input[type='text'], .ppb-tabs-panel input[type='search'], .ppb-tabs-panel input[type='number'] {
 	background: #fff;
 	border: 1px solid #ddd;
 	border-top-color: #bbb;
@@ -857,6 +857,7 @@ iframe[src*='/pootle-buttons/'] {
 	cursor: -webkit-grab;
 	cursor:-moz-grab;
 	position: relative;
+	width: 300px;
 }
 
 .module-disabled:after {
@@ -922,4 +923,21 @@ a .module-disabled:after {
 	left: 0;
 	z-index: 9;
 	background: rgba(239, 72, 50, 0.25);
+}
+
+.ppb-live-add-object.add-row {
+	transition: padding 0.5s
+}
+.ppb-live-add-object.add-row.drop-module {
+	background: #ef4832;
+	padding: 11px;
+}
+
+.ppb-live-add-object.add-row.drop-module .dashicons-before:before {
+	background: none;
+	color: #fff;
+}
+
+.ppb-live-add-object.add-row.hover-module {
+	padding: 25px;
 }
