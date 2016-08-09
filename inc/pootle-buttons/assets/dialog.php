@@ -37,6 +37,7 @@ $editing = ! empty( $_GET['edit_button'] );
 		.field {
 			margin: 1em 0 1.6em;
 			font-size: 14px;
+			position: relative;
 		}
 
 		.field > * {
@@ -201,6 +202,30 @@ $editing = ! empty( $_GET['edit_button'] );
 			background: #ffffff;
 		}
 
+		/* Tooltip */
+		.field .dashicons-editor-help {
+			font-size: 25px;
+			vertical-align: middle;
+			width: auto;
+			height: auto;
+		}
+
+		p.tooltip {
+			position: absolute;
+			background: #222;
+			padding: 3px 7px;
+			color: #eee;
+			z-index: 9;
+			display: none;
+			top: 99%;
+			left: 0;
+			right: 0;
+		}
+
+		.dashicons-editor-help:hover ~ .tooltip {
+			display: block;
+		}
+
 	</style>
 	<?php
 	wp_enqueue_script( 'wp-color-picker' );
@@ -266,7 +291,7 @@ $editing = ! empty( $_GET['edit_button'] );
 		<div class="field">
 			<label>Second Background color</label>
 			<input class="input-attr input-bg-color2" name="data-bg-color2" type="colorpicker"  data-alpha="true" value="" placeholder="Bottom Color for Gradient">
-			<p>Use different second background color for a beautiful gradient!</p>
+			<i class="dashicons dashicons-editor-help"></i> <p class="tooltip">Use different second background color for a beautiful gradient!</p>
 		</div>
 		<div class="field">
 			<label>Text color</label>

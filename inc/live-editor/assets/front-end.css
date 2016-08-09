@@ -610,8 +610,30 @@ body .ppb-dialog {
 	font-weight: 500;
 }
 
-.pootlepb-dialog button {
-	margin-top: 16px;
+.pootlepb-dialog input[type="search"],
+.pootlepb-dialog input[type="text"],
+.pootlepb-dialog input[type="number"],
+.ppb-dialog .field .button,
+.ppb-dialog .field button {
+	margin: 2px 5px 2px 0;
+	padding: 0 7px;
+	color: #555;
+	background: #fff;
+	border: 1px solid #ccc !important;
+	box-shadow: none;
+}
+
+
+.ppb-tabs-panel input[type='text'],
+.ppb-tabs-panel input[type='search'],
+.ppb-tabs-panel input[type='number'] {
+	width: 200px;
+}
+
+.pootle-live-editor-active .ppb-dialog .button,
+.pootle-live-editor-active .ppb-dialog button,
+.pootle-live-editor-active .ppb-dialog .ui-button {
+	background: #eee;
 }
 
 .pootlepb-dialog label {
@@ -661,15 +683,6 @@ body .ppb-dialog {
 	background: #fff center/cover no-repeat;
 	border: 1px solid #ddd;
 }
-.pootle-live-editor-active .ppb-dialog .button,
-.pootle-live-editor-active .ppb-dialog button,
-.pootle-live-editor-active .ppb-dialog .ui-button {
-	color: #555 !important;
-	border-color: #ccc !important;
-	background: #f7f7f7 !important;
-	-webkit-box-shadow: 0 1px 0 #ccc !important;
-	box-shadow: 0 1px 0 #ccc !important;
-}
 
 .panel-grid:hover ~ .pootle-live-editor.add-row {
 	visibility: hidden;
@@ -696,6 +709,8 @@ body .ppb-dialog {
 
 .ppb-tabs-panel .field > span > * {
 	max-width: 100%;
+	line-height: 34px;
+	font-size: 14px !important;
 }
 
 .ppb-tabs-panel .field > * {
@@ -709,16 +724,6 @@ body .ppb-dialog {
 
 .ppb-tabs-panel .field label.ppb-panels-checkbox-label {
 	width: auto;
-}
-
-.ppb-tabs-panel input[type='text'], .ppb-tabs-panel input[type='search'], .ppb-tabs-panel input[type='number'] {
-	background: #fff;
-	border: 1px solid #ddd;
-	border-top-color: #bbb;
-	border-left-color: #bbb;
-	width: 200px;
-	margin: 7px 0;
-	padding: 0;
 }
 
 .ppb-tabs-panel img {
@@ -813,7 +818,7 @@ iframe[src*='/pootle-buttons/'] {
 }
 
 #pootlepb-modules-wrap > .dashicons-screenoptions,
-#pootlepb-modules-wrap > #pootlepb-modules {
+#pootlepb-modules-wrap #pootlepb-modules {
 	position: absolute;
 	top: 0;
 	left: 100%;
@@ -824,13 +829,13 @@ iframe[src*='/pootle-buttons/'] {
 	cursor: pointer;
 }
 
-#pootlepb-modules-wrap > #pootlepb-modules {
+#pootlepb-modules-wrap #pootlepb-modules {
 	left: 0;
 	bottom: 0;
 	right: 0;
 }
 
-#pootlepb-modules-wrap.toggle > #pootlepb-modules {
+#pootlepb-modules-wrap.toggle #pootlepb-modules {
 	overflow: auto;
 }
 
@@ -844,8 +849,8 @@ iframe[src*='/pootle-buttons/'] {
 	height: auto !important;
 }
 
-.module-disabled,
-.module {
+.ppb-module-disabled,
+.ppb-module {
 	margin: 16px 16px 0;
 	border: 1px solid #ddd;
 	border-bottom-color: #bbb;
@@ -860,7 +865,7 @@ iframe[src*='/pootle-buttons/'] {
 	width: 300px;
 }
 
-.module-disabled:after {
+.ppb-module-disabled:after {
 	display: block;
 	content: '';
 	position: absolute;
@@ -873,47 +878,48 @@ iframe[src*='/pootle-buttons/'] {
 	cursor: default;
 }
 
-a .module-disabled:after {
+a .ppb-module-disabled:after {
 	cursor: pointer;
 }
 
-.module:active {
+.ppb-module:active {
 	cursor: -webkit-grabbing;
 	cursor:-moz-grabbing;
 }
 
-.module:hover {
+.ppb-module:hover {
 	opacity: 1;
 }
 
-.module-disabled .icon,
-.module-disabled .label,
-.module .icon,
-.module .label {
+.ppb-module-disabled .icon,
+.ppb-module-disabled .label,
+.ppb-module .icon,
+.ppb-module .label {
 	vertical-align: middle;
 	display: inline-block;
+	box-sizing: border-box;
 }
 
-.module-disabled .label,
-.module .label {
+.ppb-module-disabled .label,
+.ppb-module .label {
 	padding: 7px 7px 7px 0;
 	width: 80%;
 	font: 16px/1.6 sans-serif;
 }
 
-.module-disabled .icon,
-.module .icon {
+.ppb-module-disabled .icon,
+.ppb-module .icon {
 	height: 50px;
 	line-height: 50px;
 	width: 20%;
 }
 
-.module-disabled .icon:before,
-.module .icon:before {
+.ppb-module-disabled .icon:before,
+.ppb-module .icon:before {
 	font-size: 30px
 }
 
-.ppb-block.hover-module.drop-module:after {
+.ppb-block.ppb-hover-module.ppb-drop-module:after {
 	display: block;
 	content: "";
 	width: 100%;
@@ -928,16 +934,18 @@ a .module-disabled:after {
 .ppb-live-add-object.add-row {
 	transition: padding 0.5s
 }
-.ppb-live-add-object.add-row.drop-module {
-	background: #ef4832;
+.ppb-live-add-object.add-row.ppb-drop-module {
+	border: 2px dashed #ef4832;
 	padding: 11px;
+	margin-top: 5px;
 }
 
-.ppb-live-add-object.add-row.drop-module .dashicons-before:before {
+.ppb-live-add-object.add-row.ppb-hover-module .dashicons-before:before {
 	background: none;
 	color: #fff;
 }
 
-.ppb-live-add-object.add-row.hover-module {
+.ppb-live-add-object.add-row.ppb-hover-module {
+	background: #ef4832;
 	padding: 25px;
 }

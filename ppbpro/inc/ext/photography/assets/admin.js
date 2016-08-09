@@ -54,6 +54,7 @@ jQuery( function ( $ ) {
 
 			//Get all selected images url in an object
 			$.each( attachment, function ( k, v ) {
+				console.log( v );
 				v = v.url;
 				ppbPhoto.addImgPrevu( v );
 			} );

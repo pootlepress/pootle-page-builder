@@ -61,9 +61,19 @@
 				$textFields = $( this ).siblings( 'input' ),
 				$textField = $textFields.filter( '[type="text"]' ),
 				$searchField = $textFields.filter( '[type="search"]' );
-			ShrameeUnsplashImage( function ( url ) {
-				$textField.val( url ).change();
-			}, $searchField.val() );
+			if ( ! $searchField.is(':visible') ) {
+				$searchField.show();
+				$searchField.siblings('br').show();
+				return;
+			}
+			ShrameeUnsplashImage(
+				function ( url ) {
+					$textField.val( url ).change();
+					$searchField.val('').hide();
+					$searchField.siblings('br').hide();
+				},
+				$searchField.val()
+			);
 		} );
 
 		$this.find( '.video-upload-button' ).on( 'click', function ( event ) {

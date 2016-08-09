@@ -214,6 +214,8 @@ final class Pootle_Page_Builder_Admin {
 			'pootlepb_options_sanitize_display',
 		) );
 		register_setting( 'pootlepage-display', 'pootlepb-hard-uninstall' );
+		register_setting( 'ppbpro_modules', 'ppb_enabled_addons' );
+		register_setting( 'ppbpro_modules', 'ppb_disabled_addons' );
 
 		add_settings_section( 'display', __( 'Display', 'ppb-panels' ), '__return_false', 'pootlepage-display' );
 

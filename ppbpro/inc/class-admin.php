@@ -148,6 +148,38 @@ class Pootle_Page_Builder_Pro_Admin{
 	}
 
 	/**
+	 * Adds content block panel fields
+	 * @param array $fields Fields to output in content block panel
+	 * @return array Tabs
+	 * @filter pootlepb_content_block_fields
+	 * @since 	1.0.0
+	 */
+	function modules( $modules ) {
+		$modules['photo-slider'] = array(
+			'label'       => 'Slider',
+			'icon_class'  => 'dashicons dashicons-images-alt2',
+			'tab'         => '#pootle-ppb-photo-addon-tab',
+			'ActiveClass' => 'page_builder_photo_addon',
+			'priority'    => 10,
+		);
+		$modules['blog-posts'] = array(
+			'label'       => 'Blog posts',
+			'icon_class'  => 'dashicons dashicons-admin-post',
+			'tab'         => '#pootle-ppb-blog-customizer-tab',
+			'ActiveClass' => 'page_builder_photo_addon',
+			'priority'    => 25,
+		);
+		$modules['wc-products'] = array(
+			'label'       => 'WooCommerce',
+			'icon_class'  => 'dashicons dashicons-cart',
+			'tab'         => '#pootle-wc_prods-tab',
+			'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
+			'priority'    => 30,
+		);
+		return $modules;
+	}
+
+	/**
 	 * Enqueue admin scripts and styles
 	 * @global $pagenow
 	 * @action admin_notices

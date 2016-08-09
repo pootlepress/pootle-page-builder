@@ -83,6 +83,7 @@ class pootle_page_builder_Ninja_Forms {
 			'icon_html' => '',
 			'tab' => "#pootle-$this->token-tab",
 			'ActiveClass' => $this->class,
+			'priority'    => 35,
 		);
 		return $mods;
 	}

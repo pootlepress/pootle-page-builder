@@ -33,24 +33,27 @@ class pootle_page_builder_Unsplash {
 	}
 
 	public function module( $mods ) {
-		$mods["unsplash"] = array(
-			'label' => 'Unsplash',
-			'icon_class' => 'dashicons dashicons-camera',
-			'callback' => 'ppbUnsplashContent',
-			'ActiveClass' => $this->class,
-		);
-		$mods["pbtn"] = array(
-			'label' => 'Pootle button',
-			'icon_class' => 'dashicons dashicons-upload',
-			'callback' => 'ppbPbtnContent',
-			'ActiveClass' => $this->class,
-		);
 		$mods["hero-section"] = array(
 			'label' => 'Hero Section',
 			'icon_class' => 'dashicons dashicons-archive',
 			'tab' => "#pootlepb-background-row-tab",
 			'callback' => 'ppbHeroSection',
 			'ActiveClass' => $this->class,
+			'priority' => 5
+		);
+		$mods["unsplash"] = array(
+			'label' => 'Unsplash',
+			'icon_class' => 'dashicons dashicons-camera',
+			'callback' => 'ppbUnsplashContent',
+			'ActiveClass' => $this->class,
+			'priority' => 15
+		);
+		$mods["pbtn"] = array(
+			'label' => 'Pootle button',
+			'icon_class' => 'dashicons dashicons-upload',
+			'callback' => 'ppbPbtnContent',
+			'ActiveClass' => $this->class,
+			'priority' => 20
 		);
 		return $mods;
 	}

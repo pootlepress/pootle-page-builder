@@ -16,11 +16,7 @@
 		$di.append( $('<br>') );
 		$.each( $.fn.dashicons, function( k, icon ) {
 			var ico = 'dashicons dashicons-' + icon;
-			$i = $( '<i/>' ).addClass( ico ).css( {
-				fontSize: '1em',
-				width: '1em',
-				height: '1em'
-			} );
+			$i = $( '<i/>' ).addClass( ico );
 			$i.click( function() {
 				var $t = $( this );
 				$input.val( $t.prop('outerHTML') ).change();

@@ -161,10 +161,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	}
 
 	/**
-	 * Add post type calss to post
-	 *
+	 * Add post type class to post
 	 * @param array $classes
-	 *
 	 * @return string Content
 	 */
 	public function post_type_class( $classes, $unused, $post ) {

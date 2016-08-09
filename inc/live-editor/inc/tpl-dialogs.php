@@ -131,7 +131,7 @@ $row_panel_tabs = array(
 	<div class="pootlepb-dialog" id="pootlepb-add-row">
 		<label>
 			<p>How many columns do you want your row to have?</p>
-			<input max="10" min="1" id="ppb-row-add-cols" type="number" value="2">
+			<input max="10" min="1" id="ppb-row-add-cols" type="number" value="1">
 		</label>
 	</div>
 	<div class="pootlepb-dialog" id="pootlepb-set-title" data-title="Set title of the page">
@@ -211,68 +211,118 @@ if ( get_post_type() == 'post' ) {
 if ( isset( $_REQUEST['tour'] ) ) {
 	include "tpl-tour.php";
 }
-?>
-<div id="pootlepb-modules-wrap">
-	<div class="dashicons dashicons-screenoptions" onclick="jQuery(this).parent().toggleClass('toggle')"></div>
-	<div id="pootlepb-modules">
-		<?php
-		$ppb_modules = ! class_exists( 'Pootle_Page_Builder_Pro' ) ? array() : array(
-			'wc-products'    => array(
-				'label'       => 'WooCommerce',
-				'icon_class'  => 'dashicons dashicons-cart',
-				'tab'         => '#pootle-wc_prods-tab',
-				'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
-			),
-			'photo-slider'             => array(
-				'label'       => 'Slider',
-				'icon_class'  => 'dashicons dashicons-images-alt2',
-				'tab'         => '#pootle-ppb-photo-addon-tab',
-				'ActiveClass' => 'page_builder_photo_addon',
-			),
-			'blog-posts'             => array(
-				'label'       => 'Blog posts',
-				'icon_class'  => 'dashicons dashicons-admin-post',
-				'tab'         => '#pootle-ppb-blog-customizer-tab',
-				'ActiveClass' => 'page_builder_photo_addon',
-			),
-		);
 
-		$ppb_modules = apply_filters( 'pootlepb_modules', $ppb_modules );
+$ppb_modules = apply_filters( 'pootlepb_modules', array() );
 
-		foreach ( $ppb_modules as $id => $module ) {
-			$module = wp_parse_args( $module, array(
-				'label'      => 'Unlabeled Module',
-				'icon_class' => 'dashicons dashicons-star-filled',
-				'icon_html'  => '',
-			) );
+if ( 'post' == get_post_type() ) {
+	unset( $ppb_modules['blog-posts'] );
+}
 
-			$classes = "mod-$id";
+$default_module_args = array(
+	'label'      => 'Unlabeled Module',
+	'icon_class' => 'dashicons dashicons-star-filled',
+	'icon_html'  => '',
+);
 
-			$attr = "";
+$enabled_modules = get_option( 'ppb_enabled_addons', array(
+	'hero-section',
+	'photo-slider',
+	'unsplash',
+	'pbtn',
+	'blog-posts',
+	'wc-products',
+	'ninja_forms-form',
+	'metaslider-slider',
+) );
+$disabled_modules = get_option( 'ppb_disabled_addons', array() );
 
-			if ( ! empty( $module['callback'] ) ) {
-				$attr .= " data-callback='$module[callback]'";
+// Removing disabled modules
+foreach ( $disabled_modules as $id ) {
+	unset( $ppb_modules[ $id ] );
+}
+
+// Prioritizing active modules
+foreach ( $enabled_modules as $i => $id ) {
+	if ( ! empty( $ppb_modules[ $id ] ) ) {
+		$ppb_modules[ $id ]['priority'] = $i * 2 + 1;
+	}
+}
+
+if ( $enabled_modules ) {
+	?>
+	<div id="pootlepb-modules-wrap">
+		<div class="dashicons dashicons-screenoptions" onclick="jQuery(this).parent().toggleClass('toggle')"></div>
+		<div id="pootlepb-modules">
+			<?php
+
+			pootlepb_prioritize_array( $ppb_modules );
+
+			foreach ( $ppb_modules as $module ) {
+				$id     = $module['id'];
+				$module = wp_parse_args( $module, array(
+					'label'      => 'Unlabeled Module',
+					'icon_class' => 'dashicons dashicons-star-filled',
+					'icon_html'  => '',
+				) );
+
+				$classes = "mod-$id";
+
+				$attr = "";
+
+				if ( ! empty( $module['callback'] ) ) {
+					$attr .= " data-callback='$module[callback]'";
+				}
+
+				if ( ! empty( $module['tab'] ) ) {
+					$attr .= " data-tab='$module[tab]'";
+				}
+
+				if ( ! empty( $module['style_data'] ) ) {
+					$attr .= " data-style_data='$module[style_data]'";
+				}
+
+				if ( ! empty( $module['ActiveClass'] ) && class_exists( $module['ActiveClass'] ) ) {
+					$classes .= ' ppb-module';
+					echo "<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>";
+				} else {
+					$classes .= ' ppb-module-disabled';
+					echo
+						'<a target="_blank" href="' . admin_url( 'admin.php?page=page_builder_modules' ) . '">' .
+						"<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>" .
+						'</a>';
+				}
 			}
-
-			if ( ! empty( $module['tab'] ) ) {
-				$attr .= " data-tab='$module[tab]'";
-			}
-
-			if ( ! empty( $module['style_data'] ) ) {
-				$attr .= " data-style_data='$module[style_data]'";
-			}
-
-			if ( ! empty( $module['ActiveClass'] ) && class_exists( $module['ActiveClass'] ) ) {
-				$classes .= ' module';
-				echo "<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>";
-			} else {
-				$classes .= ' module-disabled';
-				echo
-					'<a target="_blank" href="' . admin_url( 'admin.php?page=page_builder_modules' ) . '">' .
-					"<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>" .
-					'</a>';
-			}
-		}
-		?>
+			?>
+		</div>
 	</div>
+	<?php
+}
+?>
+
+<div id="ppb-loading-overlay">
+	<div id="ppb-loader"></div>
+	<style>
+		#ppb-loading-overlay,
+		#ppb-loader {
+			position:fixed;
+			top:-9999px;
+			right:-9999px;
+			bottom:-9999px;
+			left:-9999px;
+		}
+		#ppb-loading-overlay {
+			background: rgba(0, 0, 0, 0.5);
+			display: none;
+		}
+		#ppb-loader {
+			margin: auto;
+			width: 160px;
+			height: 160px;
+			border: 16px solid #fdb;
+			border-radius: 50%;
+			border-top-color: #ef4832;
+			-webkit-animation: ppb-spin 1.6s linear infinite;
+			animation: ppb-spin 1.6s linear infinite;
+		}
+	</style>
 </div>

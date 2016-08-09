@@ -331,11 +331,17 @@ if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 			wp_register_style( 'pootlepb-ui-styles', POOTLEPB_URL . 'css/ppb-jq-ui.css', array() );
 			wp_enqueue_style( 'pootlepage-main-admin', plugin_dir_url( __FILE__ ) . 'css/main-admin.css', array(), POOTLEPB_VERSION );
 
-			if ( $pagenow == 'admin.php' && false !== strpos( filter_input( INPUT_GET, 'page' ), 'page_builder' ) ) {
+			$page = filter_input( INPUT_GET, 'page' );
+			if ( $pagenow == 'admin.php' && false !== strpos( $page, 'page_builder' ) ) {
 				wp_enqueue_script( 'pootlepb-ui' );
 				wp_enqueue_style( 'pootlepb-ui-styles' );
 				wp_enqueue_script( 'ppb-settings-script', POOTLEPB_URL . 'js/settings.js', array( 'pootlepb-ui' ) );
 				wp_enqueue_style( 'ppb-option-admin', POOTLEPB_URL . 'css/option-admin.css', array(), POOTLEPB_VERSION );
+
+				if ( 'page_builder_modules' == $page ) {
+					wp_enqueue_style( 'ppb-option-modules', POOTLEPB_URL . 'css/option-modules.css', array(), POOTLEPB_VERSION );
+					wp_enqueue_script( 'ppb-option-modules', POOTLEPB_URL . 'js/option-modules.js', array( 'jquery-ui-sortable', ), POOTLEPB_VERSION );
+				}
 				add_thickbox();
 			}
 		}

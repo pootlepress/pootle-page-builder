@@ -33,12 +33,13 @@
 					var href = btn.attr( 'href' ) ? btn.attr( 'href' ) : '',
 						icon = btn.find('i').length ? encodeURIComponent( btn.find('i').prop( 'outerHTML' ) ) : '';
 					ed.selection.select( btn[0] );
+					console.log( 'Double clicked!' );
 					ed.windowManager.open( {
 						title: '',
 						url : pbtn.dialogUrl + '&edit_button=1&assets_url=' + ass_url + '&text=' + btn.text() +
 						      '&icon=' + icon + '&url=' + href,
-						width : 500,
-						height : 500
+						width : 700,
+						height : 610
 					}, { plugin_url : pbtn.ass_url, editor : ed, button : btn } );
 				}
 			} );

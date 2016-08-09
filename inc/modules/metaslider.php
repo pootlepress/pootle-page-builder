@@ -81,6 +81,7 @@ class pootle_page_builder_Meta_Slider {
 			'icon_html' => '',
 			'tab' => '#pootle-metaslider-tab',
 			'ActiveClass' => 'MetaSliderPlugin',
+			'priority'    => 40,
 		);
 		return $mods;
 	}

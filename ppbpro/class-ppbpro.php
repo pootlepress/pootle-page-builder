@@ -160,6 +160,8 @@ class Pootle_Page_Builder_Pro{
 		add_filter( 'pootlepb_live_page_template', array( $this->admin, 'filter_template' ), 10, 2 );
 		//Adds style field in row
 		add_action( 'pootlepb_row_settings_fields', array( $this->admin, 'row_fields' ), 999 );
+		//Pro modules
+		add_action( 'pootlepb_modules', array( $this->admin, 'modules' ), 25 );
 	}
 
 	/**

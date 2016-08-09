@@ -85,6 +85,7 @@ jQuery( function ( $ ) {
 		$ppb = $( '#pootle-page-builder' ),
 		$mods = $('#pootlepb-modules-wrap'),
 		$body = $('body'),
+		$loader = $('#ppb-loading-overlay'),
 		dialogAttr = {
 			dialogClass : 'ppb-cool-panel',
 			autoOpen : false,
@@ -625,17 +626,18 @@ jQuery( function ( $ ) {
 
 		insertModule : function( $contentblock, $module ) {
 			var tab = $module.data( 'tab' );
-
 			$contentblock.find('.dashicons-screenoptions').click();
 
+			var $ed = $contentblock.find( '.mce-content-body' ),
+			    ed  = tinymce.get( $ed.attr( 'id' ) );
+			ed.selection.select(tinyMCE.activeEditor.getBody(), true);
+			ed.selection.collapse(false);
+
 			if ( $module.data( 'callback' ) ) {
-				window[ $module.data( 'callback' ) ]( $contentblock, $ );
+				window[ $module.data( 'callback' ) ]( $contentblock, ed, $ );
 			}
 
 			if ( tab ) {
-				console.log( tab );
-				console.log( $( '.panel-grid.active' ).find( '.ppb-edit-row .dashicons-admin-appearance' ) );
-
 				if ( 0 < tab.indexOf('-row-tab') ) {
 					$('.panel-grid.active').find('.ppb-edit-row .dashicons-admin-appearance').click();
 				} else {
@@ -644,15 +646,16 @@ jQuery( function ( $ ) {
 
 				$( 'a.ppb-tabs-anchors[href="' + tab + '"]' ).click();
 			}
+			$loader.fadeOut(500);
 		},
 
 		moduleDroppable : {
-			activeClass: "drop-module",
-			hoverClass: "hover-module",
+			activeClass: "ppb-drop-module",
+			hoverClass: "ppb-hover-module",
 			drop: function( e, ui ) {
 				var $m = ui.draggable,
 				    $t = $( this );
-
+				$loader.fadeIn(500);
 				if ( $t.hasClass('add-row') ) {
 					$( '#ppb-row-add-cols' ).val( '1' );
 					prevu.addRow( function ( $t ) {
@@ -1346,21 +1349,19 @@ jQuery( function ( $ ) {
 	prevu.reset( 'noSort' );
 
 	// Modules
-	$mods.find( '.module' ).draggable( prevu.moduleDraggable );
+	$mods.find( '.ppb-module' ).draggable( prevu.moduleDraggable );
 	$ppb.find( '.ppb-block, .ppb-live-add-object.add-row' ).droppable( prevu.moduleDroppable );
 
-	window.ppbUnsplashContent = function ( $t ) {
-		var $ed = $t.find( '.mce-content-body' ),
-		    ed  = tinymce.get( $ed.attr( 'id' ) );
+	window.ppbUnsplashContent = function ( $t, ed ) {
 		ShrameeUnsplashImage( function ( url ) {
-			var $img = '<p><img src="' + url + '"></p>';
-			ed.selection.setCursorLocation( ed.getBody().lastChild, 1 );
+			var $img = '<img src="' + url + '">';
+			ed.selection.select(tinyMCE.activeEditor.getBody(), true);
+			ed.selection.collapse(false);
 			ed.execCommand( 'mceInsertContent', false, $img );
 		} );
 	};
-	window.ppbPbtnContent = function ( $t ) {
-		var $ed = $t.find( '.mce-content-body' );
-		tinymce.get( $ed.attr( 'id' ) ).execCommand( 'pbtn_add_btn_cmd' );
+	window.ppbPbtnContent = function ( $t, ed ) {
+		ed.execCommand( 'pbtn_add_btn_cmd' );
 	};
 
 	window.ppbHeroSection = function ( $t ) {
