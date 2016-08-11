@@ -229,6 +229,11 @@ final class Pootle_Page_Builder_Admin {
 			$this,
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'mobile-width' ) );
+		// Module panel position
+		add_settings_field( 'modules-position', __( 'Modules insert panel position', 'ppb-panels' ), array(
+			$this,
+			'options_field_generic',
+		), 'pootlepage-display', 'display', array( 'type' => 'modules-position' ) );
 		// The display fields
 		add_settings_field( 'hard-uninstall', __( 'Delete ALL data on uninstall', 'ppb-panels' ), array(
 			$this,
@@ -274,6 +279,8 @@ final class Pootle_Page_Builder_Admin {
 	 */
 	public function options_field_generic( $args, $groupName = 'pootlepb_display' ) {
 		$settings = pootlepb_settings();
+		$name = 'name="' . esc_attr( $groupName ) . '[' . esc_attr( $args['type'] ) . ']"';
+		$value = isset( $settings[ $args['type'] ] ) ? $settings[ $args['type'] ] : '';
 		switch ( $args['type'] ) {
 			case 'hard-uninstall' :
 				?><label><input type="checkbox" name="pootlepb-hard-uninstall" id="pootlepb-hard-uninstall"
@@ -283,12 +290,24 @@ final class Pootle_Page_Builder_Admin {
 				break;
 			case 'responsive' :
 				?><label><input type="checkbox"
-				                name="<?php echo esc_attr( $groupName ) ?>[<?php echo esc_attr( $args['type'] ) ?>]" <?php checked( $settings[ $args['type'] ] ) ?>
+				                <?php echo $name ?> <?php checked( $value ) ?>
 				                value="1"/> <?php _e( 'Enabled', 'ppb-panels' ) ?></label><?php
 				break;
+			case 'modules-position' :
+				?>
+				<label>
+					<input type="radio" <?php echo $name ?> <?php checked( 'left', $value ) ?> value="left"/>
+					<?php _e( 'Left', 'ppb-panels' ) ?>
+				</label>
+				<label>
+					<input type="radio" <?php echo $name ?> <?php checked( 'right', $value ) ?> value="right"/>
+					<?php _e( 'Right', 'ppb-panels' ) ?>
+				</label>
+				<?php
+				break;
 			case 'mobile-width' :
-				?><input type="text" name="<?php echo esc_attr( $groupName ) ?>[<?php echo esc_attr( $args['type'] ) ?>]"
-				         value="<?php echo esc_attr( $settings[ $args['type'] ] ) ?>"
+				?><input type="text" <?php echo $name ?>
+				         value="<?php echo esc_attr( $value ) ?>"
 				         class="small-text" /> <?php _e( 'px', 'ppb-panels' ) ?><?php
 				break;
 		}

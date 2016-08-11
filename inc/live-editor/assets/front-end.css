@@ -617,6 +617,7 @@ body .ppb-dialog {
 .ppb-dialog .field button {
 	margin: 2px 5px 2px 0;
 	padding: 0 7px;
+	line-height: 34px;
 	color: #555;
 	background: #fff;
 	border: 1px solid #ccc !important;
@@ -709,7 +710,6 @@ body .ppb-dialog {
 
 .ppb-tabs-panel .field > span > * {
 	max-width: 100%;
-	line-height: 34px;
 	font-size: 14px !important;
 }
 
@@ -800,7 +800,12 @@ iframe[src*='/pootle-buttons/'] {
 	width: 340px;
 	background: #eee;
 	z-index: 9999;
-	transition: left 0.25s;
+	transition: left 0.25s, right 0.25s;
+}
+
+#pootlepb-modules-wrap.position-right {
+	left: auto;
+	right: -340px;
 }
 
 #pootlepb-modules-wrap,
@@ -817,6 +822,11 @@ iframe[src*='/pootle-buttons/'] {
 	left: 0;
 }
 
+#pootlepb-modules-wrap.position-right.toggle {
+	left: auto;
+	right: 0;
+}
+
 #pootlepb-modules-wrap > .dashicons-screenoptions,
 #pootlepb-modules-wrap #pootlepb-modules {
 	position: absolute;
@@ -827,6 +837,11 @@ iframe[src*='/pootle-buttons/'] {
 	width: auto;
 	padding: 7px 5px 5px;
 	cursor: pointer;
+}
+
+#pootlepb-modules-wrap.position-right > .dashicons-screenoptions {
+	right: 100%;
+	left: auto;
 }
 
 #pootlepb-modules-wrap #pootlepb-modules {
@@ -948,4 +963,12 @@ a .ppb-module-disabled:after {
 .ppb-live-add-object.add-row.ppb-hover-module {
 	background: #ef4832;
 	padding: 25px;
+}
+
+.ppb-tabs-panel .field > span input[data-style-field-type="upload"] {
+	height: 115px;
+	background-position: center;
+	background-size: cover;
+	color: rgba(0,0,0,0);
+	display: block;
 }

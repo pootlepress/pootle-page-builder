@@ -4,6 +4,11 @@ $editing = ! empty( $_GET['edit_button'] );
 <!DOCTYPE html>
 <html>
 <head>
+	<script>
+		top.jQuery( '.pootle-live-editor-active .mce-panel.mce-floatpanel.mce-inline-toolbar-grp' ).hide();
+
+		jQuery = $ = top.jQuery;
+	</script>
 	<style>
 		html {
 			margin: 2px !important;
@@ -327,7 +332,7 @@ $editing = ! empty( $_GET['edit_button'] );
 	<script src="<?php echo $_GET['assets_url'] . 'dashicons-select.js?v=1.0.1' ?>"></script>
 
 	<script>
-		jQuery( function ( $ ) {
+		( function ( $ ) {
 			var get_input_attr, get_input_styles, get_background, preview,
 				params = top.tinymce.activeEditor.windowManager.getParams(),
 				$icon = $( '.button-icon' ),
@@ -336,7 +341,8 @@ $editing = ! empty( $_GET['edit_button'] );
 				$align = $( '.input-style.align' ),
 				$style_inputs = $( '.input-style' ),
 				$attr_inputs = $( '.input-attr' ),
-				$submit = $( '#submit' );
+				$submit = $( '#submit' ),
+				ed = params.editor;
 
 			<?php
 			if ( $editing ) {
@@ -442,8 +448,7 @@ $editing = ! empty( $_GET['edit_button'] );
 			$submit.click( function () {
 				var return_text = '<a ',
 					attr = '',
-					style = '',
-					ed = params.editor;
+					style = '';
 
 				return_text += get_input_attr() + '">' + $icon.val() + ' ' + $text.val() + "</a>&nbsp;\n";
 
@@ -457,6 +462,7 @@ $editing = ! empty( $_GET['edit_button'] );
 				} else {
 					return_text = '<p class="pbtn" style="clear:both;">' + return_text + '</p>';
 				}
+				$( '.pootle-live-editor-active .mce-panel.mce-floatpanel.mce-inline-toolbar-grp' ).show();
 				ed.execCommand( 'mceInsertContent', 0, return_text );
 				ed.windowManager.close(window);
 			} );
@@ -485,7 +491,7 @@ $editing = ! empty( $_GET['edit_button'] );
 					} );
 				}
 			);
-		} );
+		} )( jQuery );
 	</script>
 </body>
 </html>

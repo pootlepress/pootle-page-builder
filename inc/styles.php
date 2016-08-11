@@ -203,7 +203,7 @@ function pootlepb_row_dialog_fields_output( $tab = null ) {
 			continue;
 		}
 
-		echo '<div class="field field_' . esc_attr( $key ) . '">';
+		echo '<div class="field field_' . esc_attr( $key ) . ' field_type_' . esc_attr( $field['type'] ) . '">';
 
 		echo '<label>' . esc_html( $field['name'] );
 		echo '</label>';
@@ -300,10 +300,10 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 			break;
 		case 'upload':
 			?><input <?php echo $placeholder ?> type="text" id="pp-pb-<?php esc_attr_e( $key ) ?>"
-			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
+			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]" value=""
 			         data-style-field="<?php echo esc_attr( $key ) ?>"
 			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
-			<button class="button upload-button">Select Image</button> <small>OR</small> <br style="display: none;">
+			<button class="button upload-button">Select Image</button> <small>OR</small>
 			<input placeholder="Search Unsplash..." type="search" style="display: none;">
 			<button style="display: none;" class="button unsplash-button">Search Unsplash</button><?php
 			break;

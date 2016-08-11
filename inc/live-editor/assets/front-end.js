@@ -634,7 +634,8 @@ jQuery( function ( $ ) {
 			ed.selection.collapse(false);
 
 			if ( $module.data( 'callback' ) ) {
-				window[ $module.data( 'callback' ) ]( $contentblock, ed, $ );
+				if ( typeof window.ppbModules[ $module.data( 'callback' ) ] == 'function' )
+					window.ppbModules[ $module.data( 'callback' ) ]( $contentblock, ed, $ );
 			}
 
 			if ( tab ) {
@@ -763,6 +764,8 @@ jQuery( function ( $ ) {
 		}
 	};
 
+	dialogAttr.height = ppbAjax.ipad ? 232 : 227;
+	dialogAttr.width =  430;
 	dialogAttr.title = $setTitleDialog.data( 'title' );
 	dialogAttr.close = function() {
 		ppbAjax.title = $( '#ppble-live-page-title' ).val();
@@ -1352,19 +1355,21 @@ jQuery( function ( $ ) {
 	$mods.find( '.ppb-module' ).draggable( prevu.moduleDraggable );
 	$ppb.find( '.ppb-block, .ppb-live-add-object.add-row' ).droppable( prevu.moduleDroppable );
 
-	window.ppbUnsplashContent = function ( $t, ed ) {
+	window.ppbModules.image = function ( $t, ed ) {
+		$t.find( '.ppb-edit-block' ).find( '.dashicons-before.dashicons-format-image' ).click();
+	};
+	window.ppbModules.unsplash = function ( $t, ed ) {
 		ShrameeUnsplashImage( function ( url ) {
-			var $img = '<img src="' + url + '">';
-			ed.selection.select(tinyMCE.activeEditor.getBody(), true);
-			ed.selection.collapse(false);
-			ed.execCommand( 'mceInsertContent', false, $img );
+			var $img = $('<img>').attr( 'src', url );
+			prevu.activeEditor.append( $img );
+			tinyMCE.triggerSave();
 		} );
 	};
-	window.ppbPbtnContent = function ( $t, ed ) {
+	window.ppbModules.button = function ( $t, ed ) {
 		ed.execCommand( 'pbtn_add_btn_cmd' );
 	};
 
-	window.ppbHeroSection = function ( $t ) {
+	window.ppbModules.heroSection = function ( $t ) {
 		var $tlbr = $t.closest('.panel-grid').find('.ppb-edit-row');
 		$tlbr.find('.ui-sortable-handle').click();
 		ppbData.grids[ ppbRowI ].style.full_width = true;

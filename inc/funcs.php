@@ -247,6 +247,7 @@ function pootlepb_settings( $key = '' ) {
 			'margin-bottom' => ! isset( $set['margin-bottom'] ) ? 0	   : $set['margin-bottom'],     // for cell
 			'margin-sides'  => ! isset( $set['margin-sides'] )  ? 10   : $set['margin-sides'],      // for cells
 			'inline-css'    => true,        // CSS in HTML? or seperate file
+			'modules-position' => ! isset( $set['modules-position'] )  ? 'left' : $set['modules-position'],
 		) );
 	}
 

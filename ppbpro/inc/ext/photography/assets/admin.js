@@ -33,37 +33,52 @@ jQuery( function ( $ ) {
 	});
 
 	$html.on( 'pootlepb_admin_input_field_event_handlers', function ( e, $t ) {
-		var $slImg = $t.find( '.photo-select-images' );
+		var $slImg = $t.find( '.photo-select-images' ),
+			$sUImg = $t.find( '.photo-select-unsplash' );
 		$slImg.off( 'click' );
 		$slImg.click( ppbPhoto.selectImg );
+		$sUImg.off( 'click' );
+		$sUImg.click( ppbPhoto.searchUnplash );
 		ppbPhoto.tab.find( '.content-block-ppb-photo-addon_gallery_link' ).val( 'lightbox' );
+	} );
+
+	// Create the media frame.
+	ppbPhoto.frame = wp.media.frames.ppbPhotoFrame = wp.media( {
+		title : 'Choose Photos',
+		button : { text : 'Done' },
+		multiple : true
+	} );
+	// When an image is selected, run a callback.
+	ppbPhoto.frame.on( 'select', function () {
+		var attachment = ppbPhoto.frame.state().get( 'selection' ).toJSON();
+
+		//Get all selected images url in an object
+		$.each( attachment, function ( k, v ) {
+			console.log( v );
+			v = v.url;
+			ppbPhoto.addImgPrevu( v );
+		} );
+
+		//Save selected images
+		ppbPhoto.imgsFromWrap();
 	} );
 
 	ppbPhoto.selectImg = function ( e ) {
 		e.preventDefault();
-
-		// Create the media frame.
-		ppbPhoto.frame = wp.media.frames.ppbPhotoFrame = wp.media( {
-			title : 'Choose Photos',
-			button : { text : 'Done' },
-			multiple : true
-		} );
-		// When an image is selected, run a callback.
-		ppbPhoto.frame.on( 'select', function () {
-			var attachment = ppbPhoto.frame.state().get( 'selection' ).toJSON();
-
-			//Get all selected images url in an object
-			$.each( attachment, function ( k, v ) {
-				console.log( v );
-				v = v.url;
-				ppbPhoto.addImgPrevu( v );
-			} );
-
-			//Save selected images
-			ppbPhoto.imgsFromWrap();
-		} );
-		// Finally, open the modal
 		ppbPhoto.frame.open();
+	};
+
+	ppbPhoto.searchUnplash = function ( e ) {
+		e.preventDefault();
+		ShrameeUnsplashImages(
+			function ( urls ) {
+				$.each( urls, function ( k, url ) {
+					ppbPhoto.addImgPrevu( url );
+				} );
+				ppbPhoto.imgsFromWrap();
+			},
+			$(this).siblings( 'input[type="search"]' ).val()
+		);
 	};
 
 	ppbPhoto.addImgPrevu = function ( url ) {
@@ -133,7 +148,7 @@ jQuery( function ( $ ) {
 	ppbPhoto.source.change( function () {
 		var $t = ppbPhoto.source;
 		$( '.photo-source' ).slideUp();
-		$( '.photo-' + $t.val() ) .slideDown();
+		$( '.photo-' + $t.val().replace(/\W+/g, "-") ) .slideDown();
 	} );
 
 	ppbPhoto.tax.change( function () {

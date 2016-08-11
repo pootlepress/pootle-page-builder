@@ -30,7 +30,7 @@
 		$this.find( '.upload-button' ).on( 'click', function ( event ) {
 			event.preventDefault();
 
-			$textField = $( this ).siblings( 'input' );
+			var $textField = $( this ).siblings( 'input[data-style-field-type="upload"]' );
 
 			// If the media frame already exists, reopen it.
 			if ( ppbFileFrame ) {
@@ -55,6 +55,16 @@
 			ppbFileFrame.open();
 		} );
 
+		$this.find( 'input[data-style-field-type="upload"] ~ input[type="search"]' ).attr( 'style', '' );
+		$this.find( 'input[data-style-field-type="upload"]' ).off( 'change' ).change( function() {
+			var $t = $( this );
+			if ( $t.val() ) {
+				$t.show();
+				$t.css( 'background-image', 'url("' + $t.val() + '")' );
+			} else {
+				$t.hide();
+			}
+		} );
 		$this.find( '.unsplash-button' ).attr( 'style', '' ).on( 'click', function ( e ) {
 			e.preventDefault();
 			var
@@ -63,14 +73,12 @@
 				$searchField = $textFields.filter( '[type="search"]' );
 			if ( ! $searchField.is(':visible') ) {
 				$searchField.show();
-				$searchField.siblings('br').show();
 				return;
 			}
 			ShrameeUnsplashImage(
 				function ( url ) {
 					$textField.val( url ).change();
-					$searchField.val('').hide();
-					$searchField.siblings('br').hide();
+					$searchField.val('');
 				},
 				$searchField.val()
 			);

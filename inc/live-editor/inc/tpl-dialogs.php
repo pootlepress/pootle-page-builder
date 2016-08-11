@@ -249,8 +249,9 @@ foreach ( $enabled_modules as $i => $id ) {
 }
 
 if ( $enabled_modules ) {
+	$side = pootlepb_settings( 'modules-position' );
 	?>
-	<div id="pootlepb-modules-wrap">
+	<div id="pootlepb-modules-wrap" class="position-<?php echo $side ?>">
 		<div class="dashicons dashicons-screenoptions" onclick="jQuery(this).parent().toggleClass('toggle')"></div>
 		<div id="pootlepb-modules">
 			<?php
@@ -309,6 +310,7 @@ if ( $enabled_modules ) {
 			right:-9999px;
 			bottom:-9999px;
 			left:-9999px;
+			z-index: 9999;
 		}
 		#ppb-loading-overlay {
 			background: rgba(0, 0, 0, 0.5);

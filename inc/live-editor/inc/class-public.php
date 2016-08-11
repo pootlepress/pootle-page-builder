@@ -310,6 +310,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			$ppbAjax['title'] = get_the_title();
 		}
 		wp_localize_script( 'pootle-live-editor', 'ppbAjax', $ppbAjax );
+		wp_localize_script( 'pootle-live-editor', 'ppbModules', array() );
 
 		//Colorpicker
 		$colorpicker_l10n = array(
