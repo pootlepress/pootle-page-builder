@@ -57,7 +57,7 @@ class page_builder_photo_addon_Public{
 
 		wp_enqueue_script( $token . 'masonry', $url . '/assets/masonry.pkgd.min.js', array( 'jquery' ) );
 		wp_enqueue_script( $token . 'imgloaded', $url . '/assets/imagesloaded.pkgd.min.js', array( 'jquery' ) );
-		wp_enqueue_script( $token . 'flex-slider', $url . '/assets/jquery.flexslider.min.js', array( 'jquery' ) );
+		wp_enqueue_script( 'ppb-flex-slider', $url . '/assets/jquery.flexslider.min.js', array( 'jquery' ) );
 
 		wp_enqueue_style( $token . '-css', $url . '/assets/front-end.css' );
 		wp_enqueue_script( $token . '-js', $url . '/assets/front-end.js',

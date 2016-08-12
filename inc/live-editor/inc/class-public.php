@@ -12,6 +12,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 2.0.0
 	 */
 	private static $_instance = null;
+	private $_do_nothing = null;
 
 	/**
 	 * @var    mixed Edit title
@@ -50,6 +51,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		return self::$_instance;
 	} // End instance()
+
+	public static function enable_do_nothing() {
+		Pootle_Page_Builder_Live_Editor_Public::instance()->_do_nothing = true;
+	}
 
 	/**
 	 * Constructor function.
@@ -409,6 +414,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 1.1.0
 	 */
 	public function edit_row( $data, $gi = 0 ) {
+		if ( $this->_do_nothing ) return;
 		?>
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-row" data-index="<?php echo $gi; ?>"
 		     data-i_bkp="<?php echo $gi; ?>">
@@ -434,6 +440,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * Edit content block icons
 	 */
 	public function edit_content_block( $content_block ) {
+		if ( $this->_do_nothing ) return;
 		?>
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-block"
 		     data-index="<?php echo $content_block['info']['id']; ?>"
@@ -489,6 +496,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * Edit content block icons
 	 */
 	public function add_row() {
+		if ( $this->_do_nothing ) {
+			$this->_do_nothing = null;
+			return;
+		}
 		?>
 		<div class="pootle-live-editor  ppb-live-add-object add-row">
 			<span href="javascript:void(0)" title="Add row" class="dashicons-before dashicons-plus">
@@ -502,13 +513,14 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * Edit content block icons
 	 */
 	public function column() {
+		if ( $this->_do_nothing ) return;
 		/*
-		<div class="pootle-live-editor ppb-live-add-object add-content">
-			<span href="javascript:void(0)" title="Add Content" class="dashicons-before dashicons-plus">
-				<span class="screen-reader-text">Add Content</span>
-			</span>
-		</div>
-		*/ ?>
+				<div class="pootle-live-editor ppb-live-add-object add-content">
+					<span href="javascript:void(0)" title="Add Content" class="dashicons-before dashicons-plus">
+						<span class="screen-reader-text">Add Content</span>
+					</span>
+				</div>
+				*/ ?>
 		<div class="pootle-live-editor resize-cells"></div>
 		<?php
 	}

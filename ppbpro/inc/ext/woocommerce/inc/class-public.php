@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Pootle Page Builder Addon Boilerplate public class
+ * Pootle Slider public class
  * @property string $token Plugin token
  * @property string $url Plugin root dir url
  * @property string $path Plugin root dir path
@@ -28,7 +28,7 @@ class pootle_page_builder_for_WooCommerce_Public{
 	private static $_instance = null;
 
 	/**
-	 * Main Pootle Page Builder Addon Boilerplate Instance
+	 * Main Pootle Slider Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
 	 * @since 1.0.0
 	 * @return pootle_page_builder_for_WooCommerce instance

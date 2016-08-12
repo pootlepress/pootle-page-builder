@@ -607,7 +607,7 @@ jQuery( function ( $ ) {
 			correctCellData: function ( $t ) {
 				var width = $t.outerWidth(),
 					pWidth = $t.parent().width() + 1,
-					i = $('.panel-grid-cell-container > .panel-grid-cell' ).index( $t ),
+					i = $('.panel-grid-cell-container > .panel-grid-cell' ).not('.ppb-block *').index( $t ),
 					weight = Math.floor( 10000 * width / pWidth ) / 10000;
 
 				$t.find('.pootle-live-editor.resize-cells' ).html('<div class="weight">' + (Math.round( 1000 * weight ) / 10) + '%</div>');
@@ -698,9 +698,12 @@ jQuery( function ( $ ) {
 				attachment = prevu.insertImageFrame.state().get('selection').first().toJSON();
 
 				// Do something with attachment.id and/or attachment.url here
-				var $img = $( '<img>' ).attr( 'src', attachment.url );
+				var $img = '<img src="' + attachment.url + '">';
 
-				prevu.activeEditor.append( $( '<p>' ).html( $img ) );
+				var ed = tinymce.get( prevu.activeEditor.attr( 'id' ) );
+				ed.selection.select(tinyMCE.activeEditor.getBody(), true);
+				ed.selection.collapse(false);
+				ed.execCommand( 'mceInsertContent', false, $img );
 				tinyMCE.triggerSave();
 
 			});
@@ -791,7 +794,7 @@ jQuery( function ( $ ) {
 		//$setTitleDialog = $postSettingsDialog;
 	}
 
-	$('.panel-grid-cell-container > .panel-grid-cell' ).each( function () {
+	$('.panel-grid-cell-container > .panel-grid-cell' ).not('.ppb-block *').each( function () {
 		prevu.resizableCells.correctCellData( $(this) );
 	} );
 
@@ -1360,9 +1363,10 @@ jQuery( function ( $ ) {
 	};
 	window.ppbModules.unsplash = function ( $t, ed ) {
 		ShrameeUnsplashImage( function ( url ) {
-			var $img = $('<img>').attr( 'src', url );
-			prevu.activeEditor.append( $img );
-			tinyMCE.triggerSave();
+			var $img = '<img src="' + url + '">';
+			ed.selection.select(tinyMCE.activeEditor.getBody(), true);
+			ed.selection.collapse(false);
+			ed.execCommand( 'mceInsertContent', false, $img );
 		} );
 	};
 	window.ppbModules.button = function ( $t, ed ) {
