@@ -155,7 +155,7 @@ final class Pootle_Page_Builder_Custom_Styles {
 	public function row_full_width( $attr, $style ) {
 
 		if ( ! empty( $style['full_width'] ) ) {
-			$attr['class'][] = 'ppb-full-width-row';
+			$attr['class'][] = 'ppb-stretch-full-width';
 			$attr['class'][] = 'ppb-full-width-no-bg';
 		}
 

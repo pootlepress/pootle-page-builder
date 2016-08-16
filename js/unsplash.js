@@ -38,9 +38,7 @@ function ShrameeUnsplashImageDialog( $ ) {
 			.append(
 				$( '<div/>' ).attr( 'id', 'shramee-unsplash-footer' )
 					.append(
-						$( '<div/>' ).attr( {
-							class : 'dashicons dashicons-yes', id : 'shramee-unsplash-done'
-						} )
+						$( '<div/>' ).attr( 'id', 'shramee-unsplash-done' )
 					)
 			);
 		$( 'body' )

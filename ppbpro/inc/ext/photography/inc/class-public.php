@@ -25,7 +25,7 @@ class page_builder_photo_addon_Public{
 	 * Main Pootle page builder Photography add on Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
 	 * @since 1.0.0
-	 * @return page_builder_photo_addon instance
+	 * @return page_builder_photo_addon_Public instance
 	 */
 	public static function instance() {
 		if ( null == self::$_instance ) {
@@ -54,14 +54,13 @@ class page_builder_photo_addon_Public{
 	public function enqueue() {
 		$token = $this->token;
 		$url = $this->url;
-
-		wp_enqueue_script( $token . 'masonry', $url . '/assets/masonry.pkgd.min.js', array( 'jquery' ) );
-		wp_enqueue_script( $token . 'imgloaded', $url . '/assets/imagesloaded.pkgd.min.js', array( 'jquery' ) );
+		wp_enqueue_script( 'ppb-masonry', $url . '/assets/masonry.pkgd.min.js', array( 'jquery' ) );
+		wp_enqueue_script( 'ppb-imgloaded', $url . '/assets/imagesloaded.pkgd.min.js', array( 'jquery' ) );
 		wp_enqueue_script( 'ppb-flex-slider', $url . '/assets/jquery.flexslider.min.js', array( 'jquery' ) );
 
 		wp_enqueue_style( $token . '-css', $url . '/assets/front-end.css' );
 		wp_enqueue_script( $token . '-js', $url . '/assets/front-end.js',
-			array( $token . 'masonry', $token . 'flex-slider', $token . 'imgloaded', 'jquery' ) );
+			array( 'ppb-masonry', 'ppb-flex-slider', 'ppb-imgloaded', 'jquery' ) );
 	}
 
 	/**
@@ -262,7 +261,7 @@ class page_builder_photo_addon_Public{
 			foreach ( $images as $img ) {
 				$caption = '';
 				$url = wp_get_attachment_image_src( $img['id'], $this->set['size'] );
-				$url = $url[0];
+				$url = $url ? $url[0] : $img['img'];
 				if ( ! empty( $img['title'] ) ) {
 					$caption = '<p class="ppb-photo-caption">' . $img['title'] . '</p>';
 				}
@@ -270,7 +269,7 @@ class page_builder_photo_addon_Public{
 				if ( empty( $this->attr['type'] ) ) {
 					$img_tag = "<div class='img' style='background-image: url($url);'></div>";
 				} else if ( 'photo-listing' == $this->attr['type'] ) {
-					$img_tag = "<img src='{$img['img']}'>";
+					$img_tag = "<img src='$url'>";
 				} else {
 					$img_tag = "<img src='$url'>";
 				}

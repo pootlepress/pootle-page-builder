@@ -82,6 +82,7 @@ jQuery( function ( $ ) {
 			} );
 		},
 		initPhotoAddon = function ( $t ) {
+			console.log( $t.find( '.ppb-photo-slider' ) );
 			$t.find( '.ppb-photo-slider' ).each( initSlider );
 
 			$t.find( '.ppb-photo-gallery' ).each( initGallery );
