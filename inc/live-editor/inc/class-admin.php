@@ -176,6 +176,13 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 	}
 
 	/**
+	 * Filters the row actions
+	 */
+	public function post_row_actions() {
+
+	}
+
+	/**
 	 * Saves setting from front end via ajax
 	 * @since 1.1.0
 	 */
@@ -229,7 +236,7 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 				 *
 				 * @param int $id Post ID
 				 */
-				$ppb_data = apply_filters( 'pootlepb_live_page_template', $ppble_new_live_page, $id );
+				$ppb_data = apply_filters( 'pootlepb_live_page_template', $ppble_new_live_page, $id, $post_type );
 
 				foreach ( $ppb_data['widgets'] as $i => $wid ) {
 					if ( ! empty( $wid['info']['style'] ) ) {
