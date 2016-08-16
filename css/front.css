@@ -11,6 +11,7 @@
 .panel-grid .panel-row-style {
 	position: relative;
 	overflow: hidden;
+	background-position: center;
 }
 
 .panel-grid:before {
