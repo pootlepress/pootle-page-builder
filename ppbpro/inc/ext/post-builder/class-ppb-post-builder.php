@@ -94,8 +94,8 @@ class PPB_Post_Builder_Addon{
 			//Initiate admin
 			$this->_admin();
 
-			//Mark this add on as active
-			add_filter( 'pootlepb_installed_add_ons', array( $this, 'add_on_active' ) );
+			//Mark this add on as active - Not required with Freemius handling updates
+			//add_filter( 'pootlepb_installed_add_ons', array( $this, 'add_on_active' ) );
 
 		}
 	} // End init()

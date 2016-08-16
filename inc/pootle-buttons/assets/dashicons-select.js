@@ -17,10 +17,11 @@
 		$.each( $.fn.dashicons, function( k, icon ) {
 			var ico = 'dashicons dashicons-' + icon;
 			$i = $( '<i/>' ).addClass( ico ).css( {
-				fontSize: '1em',
-				width: '1em',
-				height: '1em'
-			} );
+					'font-size' : '1em',
+					'height' : '1em',
+					'width' : '1em',
+				}
+			);
 			$i.click( function() {
 				var $t = $( this );
 				$input.val( $t.prop('outerHTML') ).change();

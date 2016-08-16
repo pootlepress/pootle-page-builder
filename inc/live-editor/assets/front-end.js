@@ -69,6 +69,7 @@ jQuery( function ( $ ) {
 		var $t = $( this );
 		$t.find('.panel-grid-cell-container > .panel-grid-cell').sortable( prevu.contentSortable );
 		$t.find('.panel-grid-cell-container > .panel-grid-cell').resizable( prevu.resizableCells );
+		$t.find( '.ppb-block' ).droppable( prevu.moduleDroppable );
 		tinymce.init( prevu.tmce );
 		$ppb.sortable( "refresh" );
 	};
@@ -82,6 +83,9 @@ jQuery( function ( $ ) {
 		$postSettingsDialog = $( '#pootlepb-post-settings' ),
 		$ppbIpadColorDialog = $('#ppb-ipad-color-picker'),
 		$ppb = $( '#pootle-page-builder' ),
+		$mods = $('#pootlepb-modules-wrap'),
+		$body = $('body'),
+		$loader = $('#ppb-loading-overlay'),
 		dialogAttr = {
 			dialogClass : 'ppb-cool-panel',
 			autoOpen : false,
@@ -103,10 +107,9 @@ jQuery( function ( $ ) {
 		justClickedEditRow: false,
 		justClickedEditBlock: false,
 		syncAjax : function () {
-			console.log( 'Sending the AJAX request...' );
 
 			return jQuery.post( ppbAjax.url, ppbAjax, function ( response ) {
-				var $response = $( $.parseHTML( response ) );
+				var $response = $( $.parseHTML( response, document, true ) );
 				if ( 'function' == typeof prevu.ajaxCallback ) {
 					prevu.ajaxCallback( $response, ppbAjax, response );
 					ppbCorrectOnResize();
@@ -291,7 +294,7 @@ jQuery( function ( $ ) {
 			$( 'html' ).trigger( 'pootlepb_admin_editor_panel_done', [$contentPanel, st] );
 		},
 
-		 savePanel : function () {
+		savePanel : function () {
 			var st = JSON.parse( ppbData.widgets[window.ppbPanelI].info.style );
 
 			st = panels.getStylesFromFields( $contentPanel, st );
@@ -306,15 +309,16 @@ jQuery( function ( $ ) {
 					style = $blk.closest( '.panel-grid-cell' ).children( 'style' ).html(),
 					$cell = $t.closest( '.panel-grid-cell' );
 
-				console.log( $t.length + ' ' + $blk.length );
-
 				$blk.addClass( 'pootle-live-editor-new-content-block' );
 
 				$t.replaceWith( $blk );
 
 				$blk = $( '.pootle-live-editor-new-content-block' );
 				$( 'html' ).trigger( 'pootlepb_le_content_updated', [$blk] );
-				$blk.removeClass( 'pootle-live-editor-new-content-block' ).addClass( 'active' );
+				$blk
+					.removeClass( 'pootle-live-editor-new-content-block' )
+					.addClass( 'active' )
+					.droppable( prevu.moduleDroppable );
 
 				if ( $cell.children( 'style' ).length ) {
 					$cell.children( 'style' ).html( style );
@@ -399,7 +403,7 @@ jQuery( function ( $ ) {
 			$rowPanel.ppbDialog( 'close' );
 		},
 
-		addRow : function ( e, ui ) {
+		addRow : function ( callback, blockText ) {
 			//console.log( "adding row" );
 			window.ppbRowI = ppbData.grids.length;
 			var num_cells;
@@ -421,7 +425,7 @@ jQuery( function ( $ ) {
 			};
 
 			block = {
-				text : '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>',
+				text : typeof blockText == "string" ? blockText : '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>',
 				info : {
 					class: 'Pootle_PB_Content_Block',
 					grid: window.ppbRowI,
@@ -446,13 +450,18 @@ jQuery( function ( $ ) {
 			$addRowDialog.ppbDialog( 'close' );
 
 			prevu.sync( function( $r, qry ) {
-				var $ro = $r.find( '#pg-' + qry.post + '-' + window.ppbRowI ),
-					$cols = $ro.find( '.panel-grid-cell-container > .panel-grid-cell' );
+				var $ro   = $r.find( '#pg-' + qry.post + '-' + window.ppbRowI ),
+				    $cols = $ro.find( '.panel-grid-cell-container > .panel-grid-cell' );
 				$cols.css( 'width', ( 100 - num_cells + 1 ) / num_cells + '%' );
 				$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
-				$ro.find('.pootle-live-editor-realtime:eq(0)').parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
-				$('.pootle-live-editor.add-row' ).before( $ro );
-				$('#pg-' + qry.post + '-' + window.ppbRowI).prevuRowInit();
+				$ro.find( '.pootle-live-editor-realtime:eq(0)' ).parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
+				$( '.pootle-live-editor.add-row' ).before( $ro );
+				$ro = $( '#pg-' + qry.post + '-' + window.ppbRowI );
+				$ro.prevuRowInit();
+
+				if ( 'function' == typeof callback ) {
+					callback( $ro );
+				}
 			} );
 		},
 
@@ -598,7 +607,7 @@ jQuery( function ( $ ) {
 			correctCellData: function ( $t ) {
 				var width = $t.outerWidth(),
 					pWidth = $t.parent().width() + 1,
-					i = $('.panel-grid-cell-container > .panel-grid-cell' ).index( $t ),
+					i = $('.panel-grid-cell-container > .panel-grid-cell' ).not('.ppb-block *').index( $t ),
 					weight = Math.floor( 10000 * width / pWidth ) / 10000;
 
 				$t.find('.pootle-live-editor.resize-cells' ).html('<div class="weight">' + (Math.round( 1000 * weight ) / 10) + '%</div>');
@@ -608,6 +617,57 @@ jQuery( function ( $ ) {
 			}
 		},
 
+		moduleDraggable : {
+			helper : "clone",
+			start : function(){
+				$mods.removeClass('toggle')
+			}
+		},
+
+		insertModule : function( $contentblock, $module ) {
+			var tab = $module.data( 'tab' );
+			$contentblock.find('.dashicons-screenoptions').click();
+
+			var $ed = $contentblock.find( '.mce-content-body' ),
+			    ed  = tinymce.get( $ed.attr( 'id' ) );
+			ed.selection.select(tinyMCE.activeEditor.getBody(), true);
+			ed.selection.collapse(false);
+
+			if ( $module.data( 'callback' ) ) {
+				if ( typeof window.ppbModules[ $module.data( 'callback' ) ] == 'function' )
+					window.ppbModules[ $module.data( 'callback' ) ]( $contentblock, ed, $ );
+			}
+
+			if ( tab ) {
+				if ( 0 < tab.indexOf('-row-tab') ) {
+					$('.panel-grid.active').find('.ppb-edit-row .dashicons-admin-appearance').click();
+				} else {
+					$contentblock.find('.ppb-edit-block .dashicons-edit' ).click();
+				}
+
+				$( 'a.ppb-tabs-anchors[href="' + tab + '"]' ).click();
+			}
+			$loader.fadeOut(500);
+		},
+
+		moduleDroppable : {
+			activeClass: "ppb-drop-module",
+			hoverClass: "ppb-hover-module",
+			drop: function( e, ui ) {
+				var $m = ui.draggable,
+				    $t = $( this );
+				$loader.fadeIn(500);
+				if ( $t.hasClass('add-row') ) {
+					$( '#ppb-row-add-cols' ).val( '1' );
+					prevu.addRow( function ( $t ) {
+						prevu.insertModule( $t.find( '.ppb-block' ).last(), $m )
+					}, '&nbsp;' );
+				} else {
+					console.log( e.target );
+					prevu.insertModule( $t, $m )
+				}
+			}
+		},
 		insertImage : function() {
 			// If the media frame already exists, reopen it.
 			if (prevu.insertImageFrame) {
@@ -638,9 +698,12 @@ jQuery( function ( $ ) {
 				attachment = prevu.insertImageFrame.state().get('selection').first().toJSON();
 
 				// Do something with attachment.id and/or attachment.url here
-				var $img = $( '<img>' ).attr( 'src', attachment.url );
+				var $img = '<img src="' + attachment.url + '">';
 
-				prevu.activeEditor.append( $( '<p>' ).html( $img ) );
+				var ed = tinymce.get( prevu.activeEditor.attr( 'id' ) );
+				ed.selection.select(tinyMCE.activeEditor.getBody(), true);
+				ed.selection.collapse(false);
+				ed.execCommand( 'mceInsertContent', false, $img );
 				tinyMCE.triggerSave();
 
 			});
@@ -670,8 +733,6 @@ jQuery( function ( $ ) {
 	dialogAttr.title = 'Edit row';
 	dialogAttr.open = prevu.editRow;
 	dialogAttr.buttons.Done = prevu.saveRow;
-	dialogAttr.height = 520;
-	dialogAttr.width = 720;
 	$rowPanel.ppbTabs().ppbDialog( dialogAttr );
 	panels.addInputFieldEventHandlers( $rowPanel );
 
@@ -706,6 +767,8 @@ jQuery( function ( $ ) {
 		}
 	};
 
+	dialogAttr.height = ppbAjax.ipad ? 232 : 227;
+	dialogAttr.width =  430;
 	dialogAttr.title = $setTitleDialog.data( 'title' );
 	dialogAttr.close = function() {
 		ppbAjax.title = $( '#ppble-live-page-title' ).val();
@@ -731,7 +794,7 @@ jQuery( function ( $ ) {
 		//$setTitleDialog = $postSettingsDialog;
 	}
 
-	$('.panel-grid-cell-container > .panel-grid-cell' ).each( function () {
+	$('.panel-grid-cell-container > .panel-grid-cell' ).not('.ppb-block *').each( function () {
 		prevu.resizableCells.correctCellData( $(this) );
 	} );
 
@@ -739,9 +802,11 @@ jQuery( function ( $ ) {
 		$( '.pootle-live-editor-realtime.has-focus' ).blur();
 	} );
 
+	$ppb.delegate( '.pootle-live-editor.ppb-edit-row', 'click', function () {
+		window.ppbRowI = $( this ).data( 'index' );
+	} );
 	$ppb.delegate( '.ppb-edit-row .dashicons-admin-appearance', 'click', function () {
 		var $t = $( this );
-		window.ppbRowI = $t.closest( '.pootle-live-editor' ).data( 'index' );
 		$rowPanel.ppbDialog( 'open' );
 	} );
 
@@ -875,6 +940,7 @@ jQuery( function ( $ ) {
 		$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
 		$t.parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
 		window.ppbPanelI = $t.closest( '.pootle-live-editor' ).data( 'index' );
+		prevu.activeEditor = $(this).closest('.ppb-block' ).children('.pootle-live-editor-realtime');
 	} );
 
 	$ppb.delegate( '.ppb-edit-block .dashicons-edit', 'click', function () {
@@ -899,14 +965,12 @@ jQuery( function ( $ ) {
 
 	$ppb.delegate( '.ppb-edit-block .pootle-live-editor-addons .pootle-live-editor-addon', 'click', function () {
 		var $t = $( this );
-		//console.log( window.ppbPanelI );
 		$contentPanel.ppbDialog( 'open' );
 		$contentPanel.find( 'a[href="#pootle-' + $t.data( 'id' ) + '-tab"]' ).click();
 	} );
 
 	$ppb.delegate( '.ppb-edit-block .dashicons-format-image', 'click', function ( e ) {
 		e.preventDefault();
-		prevu.activeEditor = $(this).closest('.ppb-block' ).children('.pootle-live-editor-realtime');
 		prevu.insertImage()
 	} );
 
@@ -958,11 +1022,9 @@ jQuery( function ( $ ) {
 
 	ppbIpad.updatedNotice = $( '#ppb-ipad-updated-notice' );
 	ppbIpad.notice = $( '#ppb-ipad-notice' );
-
 	ppbIpad.AddRow = function () {
 		$addRowDialog.ppbDialog( 'open' );
 	};
-
 	ppbIpad.StyleRow = function () {
 		var $row = $('.panel-grid.active');
 		if ( $row.length != 1 ) {
@@ -970,7 +1032,6 @@ jQuery( function ( $ ) {
 			return;
 		}
 		var $editBar = $row.children('.pootle-live-editor');
-		//console.log( $editBar.data( 'index' ) );
 		window.ppbRowI = $editBar.data( 'index' );
 		$rowPanel.ppbDialog( 'open' );
 	};
@@ -992,6 +1053,7 @@ jQuery( function ( $ ) {
 			return;
 		}
 		prevu.activeEditor = $block.children('.pootle-live-editor-realtime');
+		tinymce.execCommand( 'mceFocus', false, prevu.activeEditor.attr( 'id' ) );
 		prevu.insertImage()
 	};
 	ppbIpad.preview = function () {
@@ -1291,4 +1353,31 @@ jQuery( function ( $ ) {
 	};
 	prevu.resort();
 	prevu.reset( 'noSort' );
+
+	// Modules
+	$mods.find( '.ppb-module' ).draggable( prevu.moduleDraggable );
+	$ppb.find( '.ppb-block, .ppb-live-add-object.add-row' ).droppable( prevu.moduleDroppable );
+
+	window.ppbModules.image = function ( $t, ed ) {
+		$t.find( '.ppb-edit-block' ).find( '.dashicons-before.dashicons-format-image' ).click();
+	};
+	window.ppbModules.unsplash = function ( $t, ed ) {
+		ShrameeUnsplashImage( function ( url ) {
+			var $img = '<img src="' + url + '">';
+			ed.selection.select(tinyMCE.activeEditor.getBody(), true);
+			ed.selection.collapse(false);
+			ed.execCommand( 'mceInsertContent', false, $img );
+		} );
+	};
+	window.ppbModules.button = function ( $t, ed ) {
+		ed.execCommand( 'pbtn_add_btn_cmd' );
+	};
+
+	window.ppbModules.heroSection = function ( $t ) {
+		var $tlbr = $t.closest('.panel-grid').find('.ppb-edit-row');
+		$tlbr.find('.ui-sortable-handle').click();
+		ppbData.grids[ ppbRowI ].style.full_width = true;
+		ppbData.grids[ ppbRowI ].style.background_toggle = '.bg_image';
+		ppbData.grids[ ppbRowI ].style.row_height = '500';
+	}
 } );

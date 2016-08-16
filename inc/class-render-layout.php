@@ -24,6 +24,10 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 	 */
 	protected static $instance;
 
+	static function render( $post_id = false, $panels_data = array() ) {
+		return $GLOBALS['Pootle_Page_Builder_Render_Layout']->panels_render( $post_id, $panels_data );
+	}
+
 	/**
 	 * Magic __construct
 	 * @since 0.1.0

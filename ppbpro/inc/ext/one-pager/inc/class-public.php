@@ -27,7 +27,7 @@ class pootle_page_builder_one_pager_Public{
 	 * Main pootle page builder one pager Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
 	 * @since 1.0.0
-	 * @return pootle_page_builder_one_pager instance
+	 * @return pootle_page_builder_one_pager_Public instance
 	 */
 	public static function instance() {
 		if ( null == self::$_instance ) {

@@ -58,6 +58,7 @@ function pbtn_script() {
 		} );
 	</script>
 	<?php
+	wp_enqueue_style( 'dashicons' );
 }
 
 add_filter( 'mce_buttons', 'pbtn_register_tinymce_button' );

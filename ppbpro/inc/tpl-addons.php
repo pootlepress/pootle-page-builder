@@ -8,7 +8,15 @@
 
 global $ppbpro_addons_data;
 
-$active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', 'page-customizer', 'photography', ) );
+$active_addons = array();
+if ( class_exists( 'Pootle_Page_Builder_Pro' ) ) {
+	$active_addons = get_option( 'ppbpro_active_addons', array(
+		'blog-customizer',
+		'page-customizer',
+		'photography',
+	) );
+}
+
 ?>
 <div class="wrap">
 	<h2>Pootle Page Builder Pro</h2>
@@ -38,7 +46,7 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 						</div>
 						<div class="desc ppb-addon-description">
 							<p class="ppb-addon-description"><?php echo strip_tags( $plugin['Description'], '<a>' ); ?></p>
-							<cite>By <a href="<?php echo $plugin['AuthorURI'] ?>"><?php echo $plugin['Author'] ?></a> | Version <?php echo $plugin['Version']; ?></cite>
+							<cite>By <a href="//pootlepress.com">pootlepress</a></cite>
 						</div>
 					</div>
 					<div class="ppb-addon-footer">

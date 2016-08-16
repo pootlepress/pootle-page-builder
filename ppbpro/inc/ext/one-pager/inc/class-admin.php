@@ -8,17 +8,13 @@
  */
 class pootle_page_builder_one_pager_Admin{
 
-	/**
-	 * @var 	pootle_page_builder_one_pager_Admin Instance
-	 * @access  private
-	 * @since 	1.0.0
-	 */
+	/** @var pootle_page_builder_one_pager_Admin Instance */
 	private static $_instance = null;
 
 	/**
 	 * Main pootle page builder one pager Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
-	 * @return pootle_page_builder_one_pager instance
+	 * @return pootle_page_builder_one_pager_Admin instance
 	 * @since 	1.0.0
 	 */
 	public static function instance() {

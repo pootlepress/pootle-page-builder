@@ -131,7 +131,7 @@ $row_panel_tabs = array(
 	<div class="pootlepb-dialog" id="pootlepb-add-row">
 		<label>
 			<p>How many columns do you want your row to have?</p>
-			<input max="10" min="1" id="ppb-row-add-cols" type="number" value="2">
+			<input max="10" min="1" id="ppb-row-add-cols" type="number" value="1">
 		</label>
 	</div>
 	<div class="pootlepb-dialog" id="pootlepb-set-title" data-title="Set title of the page">
@@ -211,4 +211,120 @@ if ( get_post_type() == 'post' ) {
 if ( isset( $_REQUEST['tour'] ) ) {
 	include "tpl-tour.php";
 }
+
+$ppb_modules = apply_filters( 'pootlepb_modules', array() );
+
+if ( 'post' == get_post_type() ) {
+	unset( $ppb_modules['blog-posts'] );
+}
+
+$default_module_args = array(
+	'label'      => 'Unlabeled Module',
+	'icon_class' => 'dashicons dashicons-star-filled',
+	'icon_html'  => '',
+);
+
+$enabled_modules = get_option( 'ppb_enabled_addons', array(
+	'hero-section',
+	'photo-slider',
+	'unsplash',
+	'pbtn',
+	'blog-posts',
+	'wc-products',
+	'ninja_forms-form',
+	'metaslider-slider',
+) );
+$disabled_modules = get_option( 'ppb_disabled_addons', array() );
+
+// Removing disabled modules
+foreach ( $disabled_modules as $id ) {
+	unset( $ppb_modules[ $id ] );
+}
+
+// Prioritizing active modules
+foreach ( $enabled_modules as $i => $id ) {
+	if ( ! empty( $ppb_modules[ $id ] ) ) {
+		$ppb_modules[ $id ]['priority'] = $i * 2 + 1;
+	}
+}
+
+if ( $enabled_modules ) {
+	$side = pootlepb_settings( 'modules-position' );
+	?>
+	<div id="pootlepb-modules-wrap" class="position-<?php echo $side ?>">
+		<div class="dashicons dashicons-screenoptions" onclick="jQuery(this).parent().toggleClass('toggle')"></div>
+		<div id="pootlepb-modules">
+			<?php
+
+			pootlepb_prioritize_array( $ppb_modules );
+
+			foreach ( $ppb_modules as $module ) {
+				$id     = $module['id'];
+				$module = wp_parse_args( $module, array(
+					'label'      => 'Unlabeled Module',
+					'icon_class' => 'dashicons dashicons-star-filled',
+					'icon_html'  => '',
+				) );
+
+				$classes = "mod-$id";
+
+				$attr = "";
+
+				if ( ! empty( $module['callback'] ) ) {
+					$attr .= " data-callback='$module[callback]'";
+				}
+
+				if ( ! empty( $module['tab'] ) ) {
+					$attr .= " data-tab='$module[tab]'";
+				}
+
+				if ( ! empty( $module['style_data'] ) ) {
+					$attr .= " data-style_data='$module[style_data]'";
+				}
+
+				if ( ! empty( $module['ActiveClass'] ) && class_exists( $module['ActiveClass'] ) ) {
+					$classes .= ' ppb-module';
+					echo "<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>";
+				} else {
+					$classes .= ' ppb-module-disabled';
+					echo
+						'<a target="_blank" href="' . admin_url( 'admin.php?page=page_builder_modules' ) . '">' .
+						"<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>" .
+						'</a>';
+				}
+			}
+			?>
+		</div>
+	</div>
+	<?php
+}
 ?>
+
+<div id="ppb-loading-overlay">
+	<div id="ppb-loader"></div>
+	<style>
+		#ppb-loading-overlay,
+		#ppb-loader {
+			position:fixed;
+			top:-9999px;
+			right:-9999px;
+			bottom:-9999px;
+			left:-9999px;
+			z-index: 9999;
+		}
+		#ppb-loading-overlay {
+			background: rgba(0, 0, 0, 0.5);
+			display: none;
+		}
+		#ppb-loader {
+			margin: auto;
+			width: 160px;
+			height: 160px;
+			border: 16px solid #fdb;
+			border-radius: 50%;
+			border-top-color: #ef4832;
+			-webkit-animation: ppb-spin 1.6s linear infinite;
+			animation: ppb-spin 1.6s linear infinite;
+		}
+	</style>
+</div>

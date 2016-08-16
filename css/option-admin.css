@@ -163,20 +163,16 @@ table.form-table th, table.form-table td {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     width: 98%;
-    margin: 1%;
+    margin: 1% 1%;
     min-width: 340px;
     float: left;
     border: 1px solid #ddd;
     background-color: #fff;
 }
-@media only screen and (min-width:768px) {
-    .ppb-addon-card-wrap {
-        width: 48%;
-    }
-}
+
 @media only screen and (min-width:1600px) {
     .ppb-addon-card-wrap {
-        width: 31%;
+        width: 48%;
     }
 }
 .ppb-addon-card-wrap:after {
@@ -203,10 +199,11 @@ table.form-table th, table.form-table td {
 .ppb-addon-details {
     margin-left: 140px;
     padding: 20px;
+    min-height: 124px;
 }
 
 .ppb-addon-footer {
-    padding: 16px 7px;
+    padding: 16px;
     background-color: #f5f5f5;
     border-top: 1px solid #ddd;
 }
@@ -218,4 +215,91 @@ table.form-table th, table.form-table td {
     line-height: 20px;
     font-size: 35px;
     padding: 0 16px 0 0;
+}
+
+.ppb-addon-card.active .activate {
+    display: none;
+}
+
+.ppb-addon-card .deactivate {
+    display: none;
+}
+
+.ppb-addon-card.active .deactivate {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px 7px 4px 0;
+}
+
+.ppb-addon-card.active .deactivate.button {
+    float: right;
+    margin-top: 0;
+}
+
+.left-wide img, .right-wide img {
+    border-radius: 999px;
+}
+
+.panel-grid:first-child .ppb-row.panel-row-style {
+    padding: 25% 0;
+}
+
+.panel-grid .ppb-row {
+    padding: 70px 0;
+    padding-bottom: 115px;
+    overflow:visible;
+}
+
+.panel-grid:not(:first-child) .ppb-row:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: auto;
+    height: 97px;
+    top: -36px;
+    left: -250px;
+    right: -250px;
+    background-color: inherit;
+    transform: rotate(3.5deg);
+    transform-origin: 50% 0;
+}
+
+.panel-grid .left-wide.ppb-row:before {
+    transform: rotate(-3.5deg);
+}
+
+@media only screen and ( max-width:520px ) {
+
+    .panel-grid .ppb-row:before {
+        transform: rotate(5deg);
+    }
+
+    .panel-grid .left-wide.ppb-row:before {
+        transform: rotate(-5deg);
+    }
+}
+@media only screen and ( min-width:1024px ) {
+    .panel-row-style {
+        padding: 97px 0;
+    }
+    .panel-grid:not(:last-child) .panel-row-style {
+        padding-bottom: 169px;
+    }
+    .panel-grid:not(:first-child) .ppb-row:before {
+        height: 160px;
+        top: -50px;
+    }
+}
+
+@media only screen and ( min-width:1600px ) {
+    .panel-row-style {
+        padding: 120px 0;
+    }
+    .panel-grid:not(:last-child) .panel-row-style {
+        padding-bottom: 304px;
+    }
+    .panel-grid:not(:first-child) .ppb-row:before {
+        height: 250px;
+        top: -100px;
+    }
 }

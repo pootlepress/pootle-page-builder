@@ -81,6 +81,7 @@ class page_builder_photo_addon_Admin{
 			'type' => 'slider_source',
 			'options' => array(
 				''				=> 'Media library',
+				'unsplash'				=> 'Unsplash',
 				'rcnt_posts'	=> 'Recent Posts',
 				'cat'   		=> 'Categories',
 				'tax'   		=> 'Taxonomy',
@@ -260,16 +261,19 @@ class page_builder_photo_addon_Admin{
 		$field['type'] = 'select';
 		$key = esc_attr( $key );
 		pootlepb_render_content_block_field( $key . '_type', $field );
+
+		$input_attrs = "dialog-field='{$key}_data' class='content-block-{$key}_data' ";
+		echo
+			"<input type='hidden' $input_attrs data-style-field-type='text' />";
 		?>
 		<div class="photo-source spaced-up photo-" style="display: block;">
-			<?php
-			echo
-				"<input type='hidden' dialog-field='{$key}_data' class='content-block-{$key}_data' " .
-				"data-style-field-type='text' />";
-			?>
 			<button class='button photo-select-images'>Select Images</button>
-			<div class="photo-images spaced-up"></div>
 		</div>
+		<div class="photo-source spaced-up photo-unsplash" style="display: block;">
+			<input type="search">
+			<button class='button photo-select-unsplash'>Search Unsplash</button>
+		</div>
+		<div class="photo-images photo-source spaced-up photo- photo-unsplash"></div>
 		<div class="photo-source spaced-up photo-cat" style="display: none;">
 			<?php $this->output_terms_select( 'category',  $key . '_cats', $field, 'Categories' ) ?>
 		</div>

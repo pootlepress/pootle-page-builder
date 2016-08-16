@@ -4,6 +4,11 @@ $editing = ! empty( $_GET['edit_button'] );
 <!DOCTYPE html>
 <html>
 <head>
+	<script>
+		top.jQuery( '.pootle-live-editor-active .mce-panel.mce-floatpanel.mce-inline-toolbar-grp' ).hide();
+
+		jQuery = $ = top.jQuery;
+	</script>
 	<style>
 		html {
 			margin: 2px !important;
@@ -21,25 +26,50 @@ $editing = ! empty( $_GET['edit_button'] );
 			font-size: 0.88em;
 			margin: 0.5em;
 		}
-		h3 {
-			font-weight: normal;
-			color: #333;
+		section h3 {
+			font-weight: 100;
+			font-size: 20px;
+			letter-spacing: 1px;
+		}
+		section h3:first-of-type {
+			margin-top: 0;
+		}
+		section h3:not(:first-of-type) {
+			margin-top: 25px;
+			padding-top: 16px;
+			border-top: 1px solid #ccc;
 		}
 		.field {
-			margin: 1em 0;
-		}
-
-		.field > label {
-			display: inline-block;
-			width: 205px;
+			margin: 1em 0 1.6em;
+			font-size: 14px;
+			position: relative;
 		}
 
 		.field > * {
 			vertical-align: middle;
 		}
 
+		.field p {
+			margin: 0;
+			opacity: 0.9;
+			font-size: 13px;
+		}
+
+		.field > label {
+			display: inline-block;
+			width: 250px;
+		}
+
+		.field .wp-color-result:after {
+			padding: 3px 9px;
+		}
+
+		.field .wp-color-result {
+			padding-left: 32px;
+		}
+
 		.field > .input-wrap, .field > input, .field select {
-			width: 178px;
+			width: 340px;
 		}
 
 		.field > .input-wrap {
@@ -60,7 +90,15 @@ $editing = ! empty( $_GET['edit_button'] );
 			width: 40px;
 			margin-left: 5px;
 		}
-
+		.field .wp-color-result.wp-picker-open {
+			width: 0;
+			overflow: hidden;
+			-webkit-box-sizing:content-box;
+			box-sizing:content-box;
+		}
+		.field .wp-color-result.wp-picker-open:after {
+			content: '.';
+		}
 		header, footer {
 			background: #fcfcfc;
 			padding: 5px;
@@ -84,6 +122,12 @@ $editing = ! empty( $_GET['edit_button'] );
 			position: absolute;
 			top: 0;
 			margin: 0;
+			font-size: 12px;
+			color: #333;
+			letter-spacing: 1px;
+			background: #fff;
+			padding: 2px 5px 2px 2px;
+			opacity: 0.7;
 		}
 
 		input[type=range] {
@@ -163,6 +207,30 @@ $editing = ! empty( $_GET['edit_button'] );
 			background: #ffffff;
 		}
 
+		/* Tooltip */
+		.field .dashicons-editor-help {
+			font-size: 25px;
+			vertical-align: middle;
+			width: auto;
+			height: auto;
+		}
+
+		p.tooltip {
+			position: absolute;
+			background: #222;
+			padding: 3px 7px;
+			color: #eee;
+			z-index: 9;
+			display: none;
+			top: 99%;
+			left: 0;
+			right: 0;
+		}
+
+		.dashicons-editor-help:hover ~ .tooltip {
+			display: block;
+		}
+
 	</style>
 	<?php
 	wp_enqueue_script( 'wp-color-picker' );
@@ -183,7 +251,7 @@ $editing = ! empty( $_GET['edit_button'] );
 </head>
 <body class="wp-core-ui">
 	<header class="preview">
-		<p>Preview</p>
+		<p>Live Preview</p>
 		<a href="#" id="preview"></a>
 	</header>
 	<section>
@@ -228,7 +296,7 @@ $editing = ! empty( $_GET['edit_button'] );
 		<div class="field">
 			<label>Second Background color</label>
 			<input class="input-attr input-bg-color2" name="data-bg-color2" type="colorpicker"  data-alpha="true" value="" placeholder="Bottom Color for Gradient">
-			<p>Use different second background color for a beautiful gradient!</p>
+			<i class="dashicons dashicons-editor-help"></i> <p class="tooltip">Use different second background color for a beautiful gradient!</p>
 		</div>
 		<div class="field">
 			<label>Text color</label>
@@ -264,7 +332,7 @@ $editing = ! empty( $_GET['edit_button'] );
 	<script src="<?php echo $_GET['assets_url'] . 'dashicons-select.js?v=1.0.1' ?>"></script>
 
 	<script>
-		jQuery( function ( $ ) {
+		( function ( $ ) {
 			var get_input_attr, get_input_styles, get_background, preview,
 				params = top.tinymce.activeEditor.windowManager.getParams(),
 				$icon = $( '.button-icon' ),
@@ -273,7 +341,8 @@ $editing = ! empty( $_GET['edit_button'] );
 				$align = $( '.input-style.align' ),
 				$style_inputs = $( '.input-style' ),
 				$attr_inputs = $( '.input-attr' ),
-				$submit = $( '#submit' );
+				$submit = $( '#submit' ),
+				ed = params.editor;
 
 			<?php
 			if ( $editing ) {
@@ -379,8 +448,7 @@ $editing = ! empty( $_GET['edit_button'] );
 			$submit.click( function () {
 				var return_text = '<a ',
 					attr = '',
-					style = '',
-					ed = params.editor;
+					style = '';
 
 				return_text += get_input_attr() + '">' + $icon.val() + ' ' + $text.val() + "</a>&nbsp;\n";
 
@@ -394,8 +462,9 @@ $editing = ! empty( $_GET['edit_button'] );
 				} else {
 					return_text = '<p class="pbtn" style="clear:both;">' + return_text + '</p>';
 				}
+				$( '.pootle-live-editor-active .mce-panel.mce-floatpanel.mce-inline-toolbar-grp' ).show();
 				ed.execCommand( 'mceInsertContent', 0, return_text );
-				ed.windowManager.close();
+				ed.windowManager.close(window);
 			} );
 
 			$style_inputs.change( preview );
@@ -422,7 +491,7 @@ $editing = ! empty( $_GET['edit_button'] );
 					} );
 				}
 			);
-		} );
+		} )( jQuery );
 	</script>
 </body>
 </html>

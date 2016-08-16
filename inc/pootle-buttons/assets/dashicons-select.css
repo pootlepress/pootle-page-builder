@@ -1,0 +1,10 @@
+.dashicons-all-icons {
+	font-size: 20px;
+}
+.dashicons-all-icons .dashicons {
+	display: inline-block;
+	padding: 0.125em;
+	margin: 0.125em;
+	width: auto;
+	height: auto;
+}

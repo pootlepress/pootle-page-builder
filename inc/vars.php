@@ -5,15 +5,18 @@
  * @since 0.1.0
  */
 
-global $pootlepb_content_block_styling_fields,
-		$pootlepb_row_styling_fields,
-		$pootlepb_font,
-		$pootlepb_ui_i18n,
-		$pootlepb_ui_js_deps,
-		$pootlepb_color_i18n,
-		$pootlepb_color_deps,
-		$pootlepb_content_block_tabs,
-		$pootlepb_row_settings_tabs;
+global
+	$pootlepb_content_block_styling_fields,
+	$pootlepb_row_styling_fields,
+	$pootlepb_font,
+	$pootlepb_ui_i18n,
+	$pootlepb_ui_js_deps,
+	$pootlepb_color_i18n,
+	$pootlepb_color_deps,
+	$pootlepb_content_block_tabs,
+	$pootlepb_row_settings_tabs,
+	$ppbpro_addons_data,
+	$pootlepb_modules;
 
 /**
  * Content block styling fields
@@ -62,10 +65,21 @@ $pootlepb_content_block_styling_fields = array(
 		'type' => 'number',
 		'priority' => 5,
 		'min'  => '0',
-		'max'  => '999',
+		'max'  => '250',
 		'step' => '1',
 		'unit' => 'px',
 		'css'  => 'padding',
+		'tab' => 'style',
+	),
+	'margin'          => array(
+		'name' => 'Margin',
+		'type' => 'number',
+		'priority' => 5,
+		'min'  => '0',
+		'max'  => '250',
+		'step' => '1',
+		'unit' => 'px',
+		'css'  => 'margin',
 		'tab' => 'style',
 	),
 	'padding-mobile'          => array(
@@ -114,7 +128,7 @@ $pootlepb_row_styling_fields = array(
 		'priority' => 1,
 	),
 	'match_col_hi'              => array(
-		'name' => 'Force same height for columns',
+		'name' => 'Make columns the same height',
 		'type' => 'checkbox',
 		'tab' => 'layout',
 		'help-text' => 'Requires only one content block to be set in each column. Will not preview in live editor but it will work once published.',
@@ -1059,5 +1073,53 @@ $pootlepb_row_settings_tabs = array(
 	'advanced' => array(
 		'label' => 'Advanced',
 		'priority' => 10,
+	),
+);
+
+$pootlepb_modules = array(
+	'ninja-forms' => array(
+	),
+);
+
+$ppbpro_addons_data = array(
+	array(
+		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/08/icon-post-customizer-add-on-400x400.jpg',
+		'path' => 'blog-customizer',
+		'plugin' => array(
+			'Name' => 'pootle page builder blog customizer',
+			'Description' => 'Blog customizer for pootle page builder helps you create a beautiful blog page',
+		),
+	),
+	array(
+		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/10/page-customizer-icon-400x400.png',
+		'path' => 'page-customizer',
+		'plugin' => array(
+			'Name' => 'Page customizer',
+			'Description' => 'Page customizer adds options for individual pages. Add a fullscreen background video, change page background image and color, change header background image and color. Hide header, titles, breadcrumbs, sidebar and footer. Mobile options to change background image and color for phones and tablets.',
+		),
+	),
+	array(
+		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/12/photography-add-on-icon-400x400.jpg',
+		'path' => 'photography',
+		'plugin' => array(
+			'Name' => 'Pootle page builder Photography add on',
+			'Description' => 'Create stunning slideshows and galleries in minutes.',
+		),
+	),
+	array(
+		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/10/one-pager-400x400.png',
+		'path' => 'one-pager',
+		'plugin' => array(
+			'Name' => 'pootle page builder one pager',
+			'Description' => 'pootle page builder one pager helps you to create beautiful one page websites with any theme.',
+		),
+	),
+	array(
+		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/08/ppb-woocommmerce-add-on-400x400.jpg',
+		'path' => 'woocommerce',
+		'plugin' => array(
+			'Name' => 'pootle page builder for WooCommerce',
+			'Description' => 'pootle page builder for WooCommerce brings powerful WooCommerce features into page builder. Create stunning pages featuring your products by id, category, attribute, best-selling, top rated and on-sale, plus use pootle page builder on product pages and with WooCommerce Tab Manager.',
+		),
 	),
 );

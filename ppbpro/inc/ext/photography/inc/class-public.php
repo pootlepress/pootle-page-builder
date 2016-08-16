@@ -57,7 +57,7 @@ class page_builder_photo_addon_Public{
 
 		wp_enqueue_script( $token . 'masonry', $url . '/assets/masonry.pkgd.min.js', array( 'jquery' ) );
 		wp_enqueue_script( $token . 'imgloaded', $url . '/assets/imagesloaded.pkgd.min.js', array( 'jquery' ) );
-		wp_enqueue_script( $token . 'flex-slider', $url . '/assets/jquery.flexslider.min.js', array( 'jquery' ) );
+		wp_enqueue_script( 'ppb-flex-slider', $url . '/assets/jquery.flexslider.min.js', array( 'jquery' ) );
 
 		wp_enqueue_style( $token . '-css', $url . '/assets/front-end.css' );
 		wp_enqueue_script( $token . '-js', $url . '/assets/front-end.js',
@@ -97,7 +97,7 @@ class page_builder_photo_addon_Public{
 				$set = $this->set = wp_parse_args( $this->get_photo_settings( $set, $set[ $this->token . '_show' ] ), $defaults );
 				echo '<div ' . $this->attr() . ' class="ppb-photo ppb-photo-' . $set['show'] . '">';
 
-				if ( empty( $set['source_type'] ) ) {
+				if ( empty( str_replace( 'unsplash', '', $set['source_type'] ) ) ) {
 					$this->img_from_links( json_decode( $set['source_data'], true ) );
 				} elseif ( method_exists( $this, $get_img_func = 'img_from_' . $set['source_type'] ) ) {
 					$this->$get_img_func( $set );

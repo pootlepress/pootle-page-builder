@@ -17,25 +17,3 @@ require 'inc/class-public.php';
 require_once 'class-ppb-for-woocommerce.php';
 /** Intantiating main plugin class */
 pootle_page_builder_for_WooCommerce::instance( __FILE__ );
-
-/** Addon update API */
-add_action( 'plugins_loaded', 'pootle_page_builder_for_WooCommerce_api_init' );
-
-/**
- * Instantiates Pootle_Page_Builder_Addon_Manager with current add-on data
- * @action plugins_loaded
- */
-function pootle_page_builder_for_WooCommerce_api_init() {
-	//Return if POOTLEPB_DIR not defined
-	if ( ! defined( 'POOTLEPB_DIR' ) ) { return; }
-	/** Including PootlePress_API_Manager class */
-	require_once POOTLEPB_DIR . 'inc/addon-manager/class-manager.php';
-	/** Instantiating PootlePress_API_Manager */
-	new Pootle_Page_Builder_Addon_Manager(
-		pootle_page_builder_for_WooCommerce::$token,
-		'pootle page builder for WooCommerce',
-		pootle_page_builder_for_WooCommerce::$version,
-		pootle_page_builder_for_WooCommerce::$file,
-		pootle_page_builder_for_WooCommerce::$token
-	);
-}

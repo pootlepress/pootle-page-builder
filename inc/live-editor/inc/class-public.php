@@ -12,6 +12,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 2.0.0
 	 */
 	private static $_instance = null;
+	private $_do_nothing = null;
 
 	/**
 	 * @var    mixed Edit title
@@ -50,6 +51,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		return self::$_instance;
 	} // End instance()
+
+	public static function enable_do_nothing() {
+		Pootle_Page_Builder_Live_Editor_Public::instance()->_do_nothing = true;
+	}
 
 	/**
 	 * Constructor function.
@@ -161,10 +166,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	}
 
 	/**
-	 * Add post type calss to post
-	 *
+	 * Add post type class to post
 	 * @param array $classes
-	 *
 	 * @return string Content
 	 */
 	public function post_type_class( $classes, $unused, $post ) {
@@ -227,7 +230,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			'jquery-ui-dialog',
 			'jquery-ui-tabs',
 			'jquery-ui-sortable',
-			'jquery-ui-resizable'
+			'jquery-ui-resizable',
+			'jquery-ui-droppable'
 		);
 		$ppb_js    = POOTLEPB_URL . 'js';
 		$ver       = POOTLEPB_VERSION;
@@ -242,6 +246,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		wp_enqueue_script( 'ppb-fields', "$url/ppb-deps.js", array( 'wp-color-picker', ), $ver );
 		wp_enqueue_script( 'ppb-ui', "$ppb_js/ppb-ui.js", $jQui_deps, $ver );
+		wp_enqueue_script( 'ppb-unsplash', "$ppb_js/unsplash.js", $jQui_deps, $ver );
 		wp_enqueue_script( 'ppb-ui-tooltip', "$ppb_js/ui.admin.tooltip.js" );
 		wp_enqueue_script( 'ppble-tmce-view', "$url/tmce.view.js" );
 		wp_enqueue_script( 'ppble-tmce-theme', "$url/tmce.theme.js", array( 'ppble-tmce-view' ) );
@@ -269,6 +274,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		wp_enqueue_script( 'mce-view' );
 		wp_enqueue_script( 'image-edit' );
+
+		if ( defined( 'NINJA_FORMS_URL' ) ) {
+			wp_enqueue_style( 'ninja-forms-display', NINJA_FORMS_URL .'css/ninja-forms-display.css?nf_ver=' . NF_PLUGIN_VERSION );
+		}
 
 		do_action( 'pootlepb_enqueue_admin_scripts' );
 
@@ -306,6 +315,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			$ppbAjax['title'] = get_the_title();
 		}
 		wp_localize_script( 'pootle-live-editor', 'ppbAjax', $ppbAjax );
+		wp_localize_script( 'pootle-live-editor', 'ppbModules', array() );
 
 		//Colorpicker
 		$colorpicker_l10n = array(
@@ -404,6 +414,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 1.1.0
 	 */
 	public function edit_row( $data, $gi = 0 ) {
+		if ( $this->_do_nothing ) return;
 		?>
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-row" data-index="<?php echo $gi; ?>"
 		     data-i_bkp="<?php echo $gi; ?>">
@@ -429,6 +440,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * Edit content block icons
 	 */
 	public function edit_content_block( $content_block ) {
+		if ( $this->_do_nothing ) return;
 		?>
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-block"
 		     data-index="<?php echo $content_block['info']['id']; ?>"
@@ -484,6 +496,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * Edit content block icons
 	 */
 	public function add_row() {
+		if ( $this->_do_nothing ) {
+			$this->_do_nothing = null;
+			return;
+		}
 		?>
 		<div class="pootle-live-editor  ppb-live-add-object add-row">
 			<span href="javascript:void(0)" title="Add row" class="dashicons-before dashicons-plus">
@@ -497,13 +513,14 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * Edit content block icons
 	 */
 	public function column() {
+		if ( $this->_do_nothing ) return;
 		/*
-		<div class="pootle-live-editor ppb-live-add-object add-content">
-			<span href="javascript:void(0)" title="Add Content" class="dashicons-before dashicons-plus">
-				<span class="screen-reader-text">Add Content</span>
-			</span>
-		</div>
-		*/ ?>
+				<div class="pootle-live-editor ppb-live-add-object add-content">
+					<span href="javascript:void(0)" title="Add Content" class="dashicons-before dashicons-plus">
+						<span class="screen-reader-text">Add Content</span>
+					</span>
+				</div>
+				*/ ?>
 		<div class="pootle-live-editor resize-cells"></div>
 		<?php
 	}
@@ -520,4 +537,3 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		include "tpl-ipad-html.php";
 	}
 }
-?>

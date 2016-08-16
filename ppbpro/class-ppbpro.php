@@ -114,8 +114,8 @@ class Pootle_Page_Builder_Pro{
 			//Initiate public
 			$this->_public();
 
-			//Mark this add on as active
-			add_filter( 'pootlepb_installed_add_ons', array( $this, 'add_on_active' ) );
+			//Mark this add on as active - Not required with Freemius handling updates
+			//add_filter( 'pootlepb_installed_add_ons', array( $this, 'add_on_active' ) );
 		} else {
 
 			//Mark this add on as active
@@ -160,6 +160,8 @@ class Pootle_Page_Builder_Pro{
 		add_filter( 'pootlepb_live_page_template', array( $this->admin, 'filter_template' ), 10, 2 );
 		//Adds style field in row
 		add_action( 'pootlepb_row_settings_fields', array( $this->admin, 'row_fields' ), 999 );
+		//Pro modules
+		add_action( 'pootlepb_modules', array( $this->admin, 'modules' ), 25 );
 	}
 
 	/**

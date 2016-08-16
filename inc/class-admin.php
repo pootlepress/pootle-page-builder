@@ -22,6 +22,7 @@ final class Pootle_Page_Builder_Admin {
 	 */
 	public function __construct() {
 		$this->includes();
+		$this->include_modules();
 		$this->actions();
 	}
 
@@ -43,12 +44,19 @@ final class Pootle_Page_Builder_Admin {
 		require_once POOTLEPB_DIR . 'inc/vantage-extra.php';
 	}
 
+
+	protected function include_modules() {
+		require_once POOTLEPB_DIR . 'inc/modules/metaslider.php';
+		require_once POOTLEPB_DIR . 'inc/modules/ninja-forms.php';
+		require_once POOTLEPB_DIR . 'inc/modules/free-modules.php';
+	}
+
 	/**
 	 * Adds the actions anf filter hooks for plugin functioning
 	 * @access protected
 	 * @since 0.1.0
 	 */
-	private function actions() {
+	protected function actions() {
 		//Adding page builder help tab
 		add_action( 'load-page.php', array( $this, 'add_help_tab' ), 12 );
 		add_action( 'load-post-new.php', array( $this, 'add_help_tab' ), 12 );
@@ -185,6 +193,10 @@ final class Pootle_Page_Builder_Admin {
 			$this,
 			'menu_page',
 		) );
+		add_submenu_page( 'page_builder', 'Modules', 'Modules', 'manage_options', 'page_builder_modules', array(
+			$this,
+			'menu_page',
+		) );
 /*		add_submenu_page( 'page_builder', 'Add-ons', 'Add-ons', 'manage_options', 'page_builder_addons', array(
 			$this,
 			'menu_page',
@@ -202,6 +214,8 @@ final class Pootle_Page_Builder_Admin {
 			'pootlepb_options_sanitize_display',
 		) );
 		register_setting( 'pootlepage-display', 'pootlepb-hard-uninstall' );
+		register_setting( 'ppbpro_modules', 'ppb_enabled_addons' );
+		register_setting( 'ppbpro_modules', 'ppb_disabled_addons' );
 
 		add_settings_section( 'display', __( 'Display', 'ppb-panels' ), '__return_false', 'pootlepage-display' );
 
@@ -215,6 +229,11 @@ final class Pootle_Page_Builder_Admin {
 			$this,
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'mobile-width' ) );
+		// Module panel position
+		add_settings_field( 'modules-position', __( 'Modules insert panel position', 'ppb-panels' ), array(
+			$this,
+			'options_field_generic',
+		), 'pootlepage-display', 'display', array( 'type' => 'modules-position' ) );
 		// The display fields
 		add_settings_field( 'hard-uninstall', __( 'Delete ALL data on uninstall', 'ppb-panels' ), array(
 			$this,
@@ -260,6 +279,8 @@ final class Pootle_Page_Builder_Admin {
 	 */
 	public function options_field_generic( $args, $groupName = 'pootlepb_display' ) {
 		$settings = pootlepb_settings();
+		$name = 'name="' . esc_attr( $groupName ) . '[' . esc_attr( $args['type'] ) . ']"';
+		$value = isset( $settings[ $args['type'] ] ) ? $settings[ $args['type'] ] : '';
 		switch ( $args['type'] ) {
 			case 'hard-uninstall' :
 				?><label><input type="checkbox" name="pootlepb-hard-uninstall" id="pootlepb-hard-uninstall"
@@ -269,12 +290,24 @@ final class Pootle_Page_Builder_Admin {
 				break;
 			case 'responsive' :
 				?><label><input type="checkbox"
-				                name="<?php echo esc_attr( $groupName ) ?>[<?php echo esc_attr( $args['type'] ) ?>]" <?php checked( $settings[ $args['type'] ] ) ?>
+				                <?php echo $name ?> <?php checked( $value ) ?>
 				                value="1"/> <?php _e( 'Enabled', 'ppb-panels' ) ?></label><?php
 				break;
+			case 'modules-position' :
+				?>
+				<label>
+					<input type="radio" <?php echo $name ?> <?php checked( 'left', $value ) ?> value="left"/>
+					<?php _e( 'Left', 'ppb-panels' ) ?>
+				</label>
+				<label>
+					<input type="radio" <?php echo $name ?> <?php checked( 'right', $value ) ?> value="right"/>
+					<?php _e( 'Right', 'ppb-panels' ) ?>
+				</label>
+				<?php
+				break;
 			case 'mobile-width' :
-				?><input type="text" name="<?php echo esc_attr( $groupName ) ?>[<?php echo esc_attr( $args['type'] ) ?>]"
-				         value="<?php echo esc_attr( $settings[ $args['type'] ] ) ?>"
+				?><input type="text" <?php echo $name ?>
+				         value="<?php echo esc_attr( $value ) ?>"
 				         class="small-text" /> <?php _e( 'px', 'ppb-panels' ) ?><?php
 				break;
 		}

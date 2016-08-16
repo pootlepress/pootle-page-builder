@@ -247,6 +247,7 @@ function pootlepb_settings( $key = '' ) {
 			'margin-bottom' => ! isset( $set['margin-bottom'] ) ? 0	   : $set['margin-bottom'],     // for cell
 			'margin-sides'  => ! isset( $set['margin-sides'] )  ? 10   : $set['margin-sides'],      // for cells
 			'inline-css'    => true,        // CSS in HTML? or seperate file
+			'modules-position' => ! isset( $set['modules-position'] )  ? 'left' : $set['modules-position'],
 		) );
 	}
 
@@ -271,12 +272,14 @@ function pootlepb_priority_cmp( $a, $b ) {
 /**
  * Compares priority
  *
- * @param array $arr
+ * @param array $arr Array to prioritize
+ * @param int $default_priority Defaults priority if priority not set
  * @return bool
  */
-function pootlepb_prioritize_array( &$arr = array() ) {
+function pootlepb_prioritize_array( &$arr = array(), $default_priority = 25 ) {
 	foreach ( $arr as $k => $v ) {
 		$arr[ $k ]['id'] = $k;
+		$arr[ $k ]['priority'] = empty( $arr[ $k ]['priority'] ) ? $default_priority : $arr[ $k ]['priority'];
 	}
 	uasort( $arr, 'pootlepb_priority_cmp' );
 }
@@ -409,4 +412,8 @@ function pootlepb_rand( $length = 16 ) {
 	}
 
 	return $randomString;
+}
+
+function pootlepb_le_filter_modules( &$modules ) {
+	
 }

@@ -21,8 +21,7 @@
 		} );
 
 		/* Removing existing event handlers */
-		$this.find( '.upload-button' ).off( 'click' );
-		$this.find( '.video-upload-button' ).off( 'click' );
+		$this.find( '.upload-button, .unsplash-button, .video-upload-button' ).off( 'click' );
 
 		// Uploading Fields aka media selection
 		var ppbFileFrame,
@@ -31,7 +30,7 @@
 		$this.find( '.upload-button' ).on( 'click', function ( event ) {
 			event.preventDefault();
 
-			$textField = $( this ).siblings( 'input' );
+			var $textField = $( this ).siblings( 'input[data-style-field-type="upload"]' );
 
 			// If the media frame already exists, reopen it.
 			if ( ppbFileFrame ) {
@@ -48,24 +47,47 @@
 
 			// When an image is selected, run a callback.
 			ppbFileFrame.on( 'select', function () {
-				// We set multiple to false so only get one image from the uploader
 				attachment = ppbFileFrame.state().get( 'selection' ).first().toJSON();
-
-				// Do something with attachment.id and/or attachment.url here
-				$textField
-					.val( attachment.url );
-				$textField.change();
-
+				$textField.val( attachment.url ).change();
 			} );
 
 			// Finally, open the modal
 			ppbFileFrame.open();
 		} );
 
+		$this.find( 'input[data-style-field-type="upload"] ~ input[type="search"]' ).attr( 'style', '' );
+		$this.find( 'input[data-style-field-type="upload"]' ).off( 'change' ).change( function() {
+			var $t = $( this );
+			if ( $t.val() ) {
+				$t.show();
+				$t.css( 'background-image', 'url("' + $t.val() + '")' );
+			} else {
+				$t.hide();
+			}
+		} );
+		$this.find( '.unsplash-button' ).attr( 'style', '' ).on( 'click', function ( e ) {
+			e.preventDefault();
+			var
+				$textFields = $( this ).siblings( 'input' ),
+				$textField = $textFields.filter( '[type="text"]' ),
+				$searchField = $textFields.filter( '[type="search"]' );
+			if ( ! $searchField.is(':visible') ) {
+				$searchField.show();
+				return;
+			}
+			ShrameeUnsplashImage(
+				function ( url ) {
+					$textField.val( url ).change();
+					$searchField.val('');
+				},
+				$searchField.val()
+			);
+		} );
+
 		$this.find( '.video-upload-button' ).on( 'click', function ( event ) {
 			event.preventDefault();
 
-			$textField = $( this ).siblings( 'input' );
+			var $textField = $( this ).siblings( 'input' );
 
 			// If the media frame already exists, reopen it.
 			if ( ppbMP4VideoFrame ) {

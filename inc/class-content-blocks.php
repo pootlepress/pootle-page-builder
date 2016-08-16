@@ -229,7 +229,8 @@ final class Pootle_Page_Builder_Content_Block {
 		if ( ! empty( $pootlepb_inline_css ) ) {
 			?>
 			<!----------Pootle Page Builder Inline Styles---------->
-			<style type="text/css" media="all"><?php echo $pootlepb_inline_css ?></style><?php
+			<style type="text/css" media="all"><?php echo $pootlepb_inline_css ?></style>
+			<?php
 		}
 
 		$pootlepb_inline_css = '';

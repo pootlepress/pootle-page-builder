@@ -333,6 +333,7 @@ jQuery( function ( $ ) {
 			} );
 
 			panel.reposition = function ( name ) {
+				console.log( 'Positioning toolbar ' + name );
 				var toolbarEl = this.getEl(),
 					selection = editor.selection.getRng(),
 					boundary = selection.getBoundingClientRect(),
@@ -463,6 +464,8 @@ jQuery( function ( $ ) {
 			each( toolbars, function ( toolbar ) {
 				toolbar.hide();
 			} );
+
+			editor.toolbars = toolbars;
 
 			return {};
 		};
