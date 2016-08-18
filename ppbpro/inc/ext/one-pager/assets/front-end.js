@@ -21,7 +21,8 @@ jQuery(function ($) {
 
     //Smooth scroll
     $(function() {
-        $('a[href*="#"]').click(function() {
+        $('#one-pager-nav a, .menu-item a[href*="#"]').click(function( e ) {
+            e.pre
             if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
                 var $target = $(this.hash + '.one-pager-section-marker');
                 if ( '' == this.hash ) {
@@ -36,7 +37,6 @@ jQuery(function ($) {
                     $('html,body').animate({
                         scrollTop: $target.offset().top - offset
                     }, 1000);
-                    return false;
                 }
             }
         });

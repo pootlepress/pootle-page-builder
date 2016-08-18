@@ -236,6 +236,10 @@ $enabled_modules = get_option( 'ppb_enabled_addons', array(
 ) );
 $disabled_modules = get_option( 'ppb_disabled_addons', array() );
 
+$enabled_modules = apply_filters( 'pootlepb_enabled_addons', $enabled_modules );
+
+$disabled_modules = apply_filters( 'pootlepb_disabled_addons', $disabled_modules );
+
 // Removing disabled modules
 foreach ( $disabled_modules as $id ) {
 	unset( $ppb_modules[ $id ] );

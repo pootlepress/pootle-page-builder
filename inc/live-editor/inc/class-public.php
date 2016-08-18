@@ -216,6 +216,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @return string Content
 	 */
 	public function content( $content ) {
+		if ( $this->_do_nothing ) return $content;
+
 		$content = str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), $content );
 
 		return "<div class='pootle-live-editor-realtime'>$content</div>";

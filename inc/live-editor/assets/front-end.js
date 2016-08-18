@@ -1378,6 +1378,6 @@ jQuery( function ( $ ) {
 		$tlbr.find('.ui-sortable-handle').click();
 		ppbData.grids[ ppbRowI ].style.full_width = true;
 		ppbData.grids[ ppbRowI ].style.background_toggle = '.bg_image';
-		ppbData.grids[ ppbRowI ].style.row_height = '520';
+		ppbData.grids[ ppbRowI ].style.row_height = '500';
 	}
 } );
