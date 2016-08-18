@@ -156,7 +156,7 @@ class Pootle_Page_Builder_Pro_Admin{
 	 */
 	function modules( $modules ) {
 		$modules['photo-slider'] = array(
-			'label'       => 'Photo Gallery / Slider',
+			'label'       => 'Photo Gallery',
 			'icon_class'  => 'dashicons dashicons-images-alt2',
 			'tab'         => '#pootle-ppb-photo-addon-tab',
 			'ActiveClass' => 'page_builder_photo_addon',

@@ -111,7 +111,6 @@ if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 		 */
 		private function hooks() {
 			register_activation_hook( __FILE__, array( $this, 'activate' ) );
-			register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
 
 			add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ) );
 			add_action( 'admin_init', array( $this, 'ppb_compatibility' ) );
@@ -254,48 +253,6 @@ if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 		 */
 		public function ppb_compatibility() {
 			update_option( 'pootlepb_version', POOTLEPB_VERSION, 'no' );
-		}
-
-		/**
-		 * Hook for deactivation of Page Builder.
-		 * @since 0.1.0
-		 */
-		public function deactivate() {
-
-			$query = $this->ppb_posts();
-
-			foreach ( $query->posts as $post ) {
-
-				//Put pb content in post
-				$this->pb_post_content( $post );
-			}
-
-			//die( 'All done!' );
-		}
-
-		/**
-		 * Puts pb content in post content
-		 *
-		 * @param WP_Post $post
-		 *
-		 * @since 0.1.0
-		 */
-		protected function pb_post_content( $post ) {
-			$panel_content = $GLOBALS['Pootle_Page_Builder_Render_Layout']->panels_render( $post->ID );
-
-			if ( empty( $panel_content ) ) {
-				return;
-			}
-
-			global $pootlepb_inline_css;
-			$panel_style = '<style>' . $pootlepb_inline_css . '</style>';
-
-			$updated_post = array(
-				'ID'           => $post->ID,
-				'post_content' => $panel_style . $panel_content,
-			);
-
-			wp_update_post( $updated_post );
 		}
 
 		/**

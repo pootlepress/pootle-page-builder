@@ -54,7 +54,6 @@ jQuery( function ( $ ) {
 
 		//Get all selected images url in an object
 		$.each( attachment, function ( k, v ) {
-			console.log( v );
 			v = v.url;
 			ppbPhoto.addImgPrevu( v );
 		} );
@@ -129,9 +128,11 @@ jQuery( function ( $ ) {
 		if ( ! $pre ) {
 			ppbPhoto.tab.find('.field:not(.field-ppb-photo-addon_show)' ).slideUp();
 		} else if ( 'slider' == $pre ) {
+			ppbPhoto.source.find('option[value="unsplash"]').prop('disabled', false);
 			ppbPhoto.tab.find('[class*="field-ppb-photo-addon_gallery_"]' ).slideUp();
 			ppbPhoto.tab.find('.field:not([class*="field-ppb-photo-addon_gallery_"])' ).slideDown();
 		} else {
+			ppbPhoto.source.val('').find('option[value="unsplash"]').prop('disabled', true);
 			ppbPhoto.tab.find('[class*="field-ppb-photo-addon_slider_"]' ).slideUp();
 			ppbPhoto.tab.find('.field:not([class*="field-ppb-photo-addon_slider_"])' ).slideDown();
 		}

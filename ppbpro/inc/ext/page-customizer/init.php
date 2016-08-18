@@ -446,7 +446,7 @@ final class Pootle_Page_Customizer {
 		$hideFooter = $this->get_value( 'Footer', 'hide-footer', false );
 		$footerBgColor = $this->get_value( 'Footer', 'footer-background-color', null );
 		//Init $css
-		$css = '/*PootlePressPageCustomizer*/';
+		$css = '/*Pootle Pagebuilder Page Customizer*/';
 		//Header styles
 		$css .= '#main-header, #masthead, #header, #site-header, .site-header, .tc-header{';
 		if ( $hideHeader ) {

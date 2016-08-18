@@ -4,7 +4,7 @@ class pootle_page_builder_Ninja_Forms {
 	public $token = 'ninja_forms';
 	public $slug = 'ninja-forms';
 	public $class = 'Ninja_Forms';
-	public $name = 'Ninja Forms';
+	public $name = 'Ninja Form';
 
 	/** @var pootle_page_builder_Ninja_Forms Instance */
 	private static $_instance = null;

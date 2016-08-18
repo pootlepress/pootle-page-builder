@@ -42,7 +42,7 @@ class pootle_page_builder_Unsplash {
 			'priority' => 5
 		);
 		$mods["unsplash"] = array(
-			'label' => 'Unsplash',
+			'label' => 'Unsplash image',
 			'icon_class' => 'dashicons dashicons-camera',
 			'callback' => 'unsplash',
 			'ActiveClass' => $this->class,

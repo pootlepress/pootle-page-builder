@@ -134,9 +134,9 @@ $row_panel_tabs = array(
 			<input max="10" min="1" id="ppb-row-add-cols" type="number" value="1">
 		</label>
 	</div>
-	<div class="pootlepb-dialog" id="pootlepb-set-title" data-title="Set title of the page">
+	<div class="pootlepb-dialog" id="pootlepb-set-title" data-title="Set title of the <?php echo get_post_type() ?>">
 		<label>
-			<p>Please set the title for the page,</p>
+			<p>Please set the title for the <?php echo get_post_type() ?></p>
 			<input id="ppble-live-page-title" type="text" placeholder="Untitled" value="<?php get_the_title() !== 'Untitled' ? the_title() : null ?>">
 		</label>
 	</div>
@@ -159,7 +159,7 @@ if ( get_post_type() == 'post' ) {
 	}
 
 	?>
-	<div class="pootlepb-dialog" id="pootlepb-post-settings" data-title="Set title of the post">
+	<div class="pootlepb-dialog" id="pootlepb-post-settings" data-title="Set title of the <?php get_post_type() ?>">
 		<label>
 			<h3>Featured image</h3>
 			<span>

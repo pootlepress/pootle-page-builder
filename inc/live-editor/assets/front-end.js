@@ -1232,6 +1232,7 @@ jQuery( function ( $ ) {
 
 	prevu.tmce.inline	= true;
 	prevu.tmce.theme	= 'ppbprevu';
+	prevu.tmce.fontsize_formats	= '30px 35px 40px 50px 70px 100px';
 
 	//console.log( prevu.tmce );
 
@@ -1241,6 +1242,7 @@ jQuery( function ( $ ) {
 			'h2',
 			'h3',
 			'h4',
+			'fontsizeselect',
 			'blockquote',
 			'forecolor',
 			'ppblink',
