@@ -25,7 +25,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 	protected static $instance;
 
 	static function render( $post_id = false, $panels_data = array() ) {
-		return $GLOBALS['Pootle_Page_Builder_Render_Layout']->panels_render( $post_id, $panels_data );
+		return Pootle_Page_Builder_Render_Layout::$instance->panels_render( $post_id, $panels_data );
 	}
 
 	/**
@@ -33,6 +33,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 	 * @since 0.1.0
 	 */
 	public function __construct() {
+		Pootle_Page_Builder_Render_Layout::$instance = $this;
 		/* Main content filter */
 		add_filter( 'the_content', array( $this, 'content_filter' ) );
 
@@ -153,7 +154,6 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 
 		// Reset the current post
 		$pootlepb_current_post = $old_current_post;
-
 		return apply_filters( 'pootlepb_render', $html, $post_id, null );
 	}
 

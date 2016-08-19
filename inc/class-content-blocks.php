@@ -95,7 +95,6 @@ final class Pootle_Page_Builder_Content_Block {
 		echo '<div ';
 		echo pootlepb_stringify_attributes( $attr );
 		echo '>';
-		//print_awesome_r( $styleArray, 'Styles Array' );
 	}
 
 	/**

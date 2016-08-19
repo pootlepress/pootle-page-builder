@@ -13,6 +13,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 */
 	private static $_instance = null;
 	private $_do_nothing = null;
+	private $_active = false;
 
 	/**
 	 * @var    mixed Edit title
@@ -52,8 +53,20 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		return self::$_instance;
 	} // End instance()
 
-	public static function enable_do_nothing() {
-		Pootle_Page_Builder_Live_Editor_Public::instance()->_do_nothing = true;
+	/**
+	 * Deactivate live editor hooks for one ppb render
+	 * @uses Pootle_Page_Builder_Live_Editor_Public::instance(), Pootle_Page_Builder_Live_Editor_Public::_active
+	 */
+	public static function deactivate_le() {
+		Pootle_Page_Builder_Live_Editor_Public::instance()->_active = false;
+	}
+
+	/**
+	 * Check if live editor is active
+	 * @return bool Live editor active?
+	 */
+	public static function is_active() {
+		return Pootle_Page_Builder_Live_Editor_Public::instance()->_active;
 	}
 
 	/**
@@ -125,6 +138,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			}
 		}
 
+		$this->_active = true;
+
 		$this->addons = apply_filters( 'pootlepb_le_content_block_tabs', array() );
 
 		remove_filter( 'pootlepb_content_block', array(
@@ -134,6 +149,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 99 );
 		add_action( 'pootlepb_before_pb', array( $this, 'before_pb' ), 7, 4 );
 		add_action( 'pootlepb_render_content_block', array( $this, 'edit_content_block' ), 7, 4 );
+		add_action( 'pootlepb_render', array( $this, 'mark_active' ), 999 );
 		add_filter( 'mce_external_plugins', array( $this, 'tinymce_plugin' ) ); // PPBlink tmce plugin
 
 		if ( ! empty( $_GET['edit_title'] ) ) {
@@ -183,12 +199,13 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	public function preview_styles() {
 		global $pootlepb_inline_css;
 
-		if ( ! empty( $pootlepb_inline_css ) ) {
-			?>
-			<!----------Pootle Page Builder Inline Styles---------->
-			<style id="pootle-live-editor-styles" type="text/css"
-			       media="all"><?php echo $pootlepb_inline_css ?></style><?php
+		if ( empty( $pootlepb_inline_css ) ) {
+			$pootlepb_inline_css = '';
 		}
+		?>
+		<!----------Pootle Page Builder Inline Styles---------->
+		<style id="pootle-live-editor-styles" type="text/css"
+		       media="all"><?php echo $pootlepb_inline_css ?></style><?php
 
 		$pootlepb_inline_css = '';
 	}
@@ -216,7 +233,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @return string Content
 	 */
 	public function content( $content ) {
-		if ( $this->_do_nothing ) return $content;
+		if ( ! $this->_active ) return $content;
 
 		$content = str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), $content );
 
@@ -393,7 +410,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 						$_POST['data']['widgets'][ $i ]['text']          = stripslashes( $wid['text'] );
 					}
 				}
-				echo $GLOBALS['Pootle_Page_Builder_Render_Layout']->panels_render( $id, $_POST['data'] );
+				echo Pootle_Page_Builder_Render_Layout::render( $id, $_POST['data'] );
 			}
 		}
 		die();
@@ -416,7 +433,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 1.1.0
 	 */
 	public function edit_row( $data, $gi = 0 ) {
-		if ( $this->_do_nothing ) return;
+		if ( ! $this->_active ) return;
 		?>
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-row" data-index="<?php echo $gi; ?>"
 		     data-i_bkp="<?php echo $gi; ?>">
@@ -442,7 +459,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * Edit content block icons
 	 */
 	public function edit_content_block( $content_block ) {
-		if ( $this->_do_nothing ) return;
+		if ( ! $this->_active ) return;
 		?>
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-block"
 		     data-index="<?php echo $content_block['info']['id']; ?>"
@@ -494,12 +511,17 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		return $attr;
 	}
 
+	public function mark_active( $pb_html ) {
+		if ( ! $this->_active ) {
+			$this->_active = true;
+		}
+		return $pb_html;
+	}
 	/**
 	 * Edit content block icons
 	 */
 	public function add_row() {
-		if ( $this->_do_nothing ) {
-			$this->_do_nothing = null;
+		if ( ! $this->_active ) {
 			return;
 		}
 		?>
@@ -515,7 +537,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * Edit content block icons
 	 */
 	public function column() {
-		if ( $this->_do_nothing ) return;
+		if ( ! $this->_active ) return;
 		/*
 				<div class="pootle-live-editor ppb-live-add-object add-content">
 					<span href="javascript:void(0)" title="Add Content" class="dashicons-before dashicons-plus">

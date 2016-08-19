@@ -15,15 +15,15 @@ Array.prototype.ppbPrevuMove = function (oldI, newI) {
 	this.splice(newI, 0, this.splice(oldI, 1)[0]);
 	return this;
 };
+ppbPrevuDebug = 1;
 ppbIpad = {};
 logPPBData = function ( a, b, c ) {
 
 	//Comment the code below to log console
 	if ( 'undefined' == typeof ppbPrevuDebug || ! ppbPrevuDebug ) return;
 
-	if ( a ) { console.log( a ); }
-
 	var log = {
+			message : a,
 			content : [],
 			cells : [],
 			rows : []
@@ -115,6 +115,7 @@ jQuery( function ( $ ) {
 					ppbCorrectOnResize();
 					prevu.ajaxCallback = null;
 				}
+				console.log( $response.find( 'style#pootle-live-editor-styles' ) );
 				$( 'style#pootle-live-editor-styles' ).html( $response.find( 'style#pootle-live-editor-styles' ).html() );
 				if ( ppbAjax.publish ) {
 					prevu.unSavedChanges = false;
@@ -126,6 +127,7 @@ jQuery( function ( $ ) {
 		},
 
 		sync : function ( callback, publish ) {
+			logPPBData( 'Before sync' );
 			prevu.ajaxCallback = callback;
 			prevu.unSavedChanges = true;
 			prevu.saveTmceBlock( $( '.mce-edit-focus' ) );
@@ -158,6 +160,7 @@ jQuery( function ( $ ) {
 			} else {
 				delete ppbAjax.publish;
 			}
+			logPPBData( 'After sync' );
 			prevu.syncAjax();
 		},
 
@@ -475,7 +478,12 @@ jQuery( function ( $ ) {
 				var $t = $( this ),
 					olI = $t.data('draggingRowI'),
 					newI = ui.item.index(),
-					diff = -1;
+					diff = -1,
+					$focussedContent = $( '.mce-edit-focus' );
+
+				// Save content block
+				prevu.saveTmceBlock( $focussedContent );
+				$focussedContent.removeClass('mce-edit-focus')
 
 				if ( newI == olI ) { return; }
 
@@ -515,7 +523,7 @@ jQuery( function ( $ ) {
 				} );
 
 				prevu.resort();
-				prevu.sync( function() { prevu.reset( 'noSort' ) } );
+				prevu.sync( function() { prevu.reset( 'noSort' ); } );
 
 				logPPBData( 'Moved row ' + olI + ' => ' + newI );
 			}
@@ -661,7 +669,7 @@ jQuery( function ( $ ) {
 					$( '#ppb-row-add-cols' ).val( '1' );
 					prevu.addRow( function ( $t ) {
 						prevu.insertModule( $t.find( '.ppb-block' ).last(), $m )
-					}, '&nbsp;' );
+					}, '<p>&nbsp;</p>' );
 				} else {
 					console.log( e.target );
 					prevu.insertModule( $t, $m )
@@ -714,7 +722,7 @@ jQuery( function ( $ ) {
 		saveTmceBlock : function ( $ed ) {
 			if ( ! $ed || ! $ed.length ) return;
 			var blockI = $ed.siblings( '.pootle-live-editor' ).data( 'index' );
-			//console.log( 'Saving block ' + blockI );
+			if ( ! ppbData.widgets[blockI] ) return;
 			ppbData.widgets[blockI].text = $ed.html();
 			prevu.unSavedChanges = true;
 		},

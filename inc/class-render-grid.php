@@ -59,6 +59,7 @@ class Pootle_Page_Builder_Render_Grid {
 
 			echo '</div><!--.panel-grid-->';
 		}
+
 		do_action( 'pootlepb_after_pb' );
 	}
 
