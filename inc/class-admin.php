@@ -46,9 +46,7 @@ final class Pootle_Page_Builder_Admin {
 
 
 	protected function include_modules() {
-		require_once POOTLEPB_DIR . 'inc/modules/metaslider.php';
-		require_once POOTLEPB_DIR . 'inc/modules/ninja-forms.php';
-		require_once POOTLEPB_DIR . 'inc/modules/free-modules.php';
+		require_once POOTLEPB_DIR . 'inc/modules/init.php';
 	}
 
 	/**

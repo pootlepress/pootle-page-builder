@@ -787,7 +787,8 @@ iframe[src*='/pootle-buttons/'] {
 
 .mce-tinymce-inline .mce-stack-layout .mce-stack-layout-item { display:inline-block; }
 .mce-tinymce.mce-tinymce-inline { width:auto; }
-.mce-toolbar div.mce-btn button, .mce-toolbar div.mce-btn button.mce-open { line-height:25px; }
+.mce-toolbar div.mce-btn button, .mce-toolbar div.mce-btn button.mce-open { line-height:25px; background: #eee; border: 1px solid #ccc }
+.mce-toolbar .mce-btn-group .mce-btn.mce-listbox button { border-color: transparent; }
 .mce-toolbar .mce-btn.mce-disabled { display:none; }
 .wp-core-ui input { padding:4px; background:#fff; border:1px solid #ccc; }
 
