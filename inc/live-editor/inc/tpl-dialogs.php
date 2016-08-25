@@ -226,7 +226,9 @@ $default_module_args = array(
 
 $enabled_modules = get_option( 'ppb_enabled_addons', array(
 	'hero-section',
-	'photo-slider',
+	'image',
+	'pootle-slider',
+	'photo-gallery',
 	'unsplash',
 	'pbtn',
 	'blog-posts',

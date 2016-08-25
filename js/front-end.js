@@ -92,7 +92,7 @@ jQuery( function ( $ ) {
 					// just in case it is not already loaded
 					$( image ).load( function () {
 						var ratio = image.width / image.height,
-							minHi = $t.height() + 500,
+							minHi = $t.outerHeight() + 500,
 							leftOffset$t,
 							topOffset$t;
 
@@ -126,7 +126,7 @@ jQuery( function ( $ ) {
 
 						$t.attr( 'data-bottom-top', 'background-position: ' + leftOffset$t + 'px ' + $w.height() + 'px;' );
 						$t.attr( 'data-top-bottom', 'background-position: ' + leftOffset$t + 'px -' + (
-						                            $t.height() + 500
+						                            $t.outerHeight() + 500
 							) + 'px;' );
 
 						ppbSkrollr.refresh();

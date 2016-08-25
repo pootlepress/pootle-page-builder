@@ -45,7 +45,7 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 							$activate_url = admin_url( "plugins.php" );
 							echo "<a href='$activate_url' target='_blank' class='button pootle right'>" . __( 'Activate' ) . "</a>";
 						} else {
-							echo "<a href='$plugin[InstallURI]' class='button pootle thickbox right'>" . __( 'Install' ) . "</a>";
+							echo "<a href='$plugin[InstallURI]' class='button pootle right'>" . __( 'Install' ) . "</a>";
 						}
 						?>
 						<div class="clear"></div>

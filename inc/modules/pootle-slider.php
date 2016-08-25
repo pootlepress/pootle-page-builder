@@ -30,12 +30,14 @@ class pootle_page_builder_Pootle_Slider {
 
 	function init() {
 		// Adding modules to live editor sidebar
-		add_action( 'pootlepb_modules', array( $this, 'module' ) );
+		add_filter( 'pootlepb_modules', array( $this, 'module' ), 52 );
 		// Adding modules plugin to Modules page
 		add_action( 'pootlepb_modules_page', array( $this, 'module_plugin' ), 25 );
 	}
 
 	public function module( $mods ) {
+
+		print_awesome_r( $mods, get_post_type() );
 		if ( 'pootle-slider' == get_post_type() ) {
 			$modules = $mods;
 			$mods = array();
@@ -75,7 +77,7 @@ class pootle_page_builder_Pootle_Slider {
 		$mods[ $this->slug ] = array(
 			'Name' => $this->name,
 			'Description' => 'Adds awesome sliders to the pootle page builder',
-			'InstallURI' => admin_url( "plugin-install.php?tab=plugin-information&plugin=$this->slug&TB_iframe=true&width=772&height=460" ),
+			'InstallURI' => admin_url( "/plugin-install.php?s=$this->name&tab=search&type=term" ),
 			'AuthorURI' => 'https://www.pootlepress.com',
 			'Author' => 'pootlepress',
 			'Image' => "//ps.w.org/$this->slug/assets/icon-256x256.png?rev=1262610",

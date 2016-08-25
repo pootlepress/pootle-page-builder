@@ -92,7 +92,7 @@ class pootle_page_builder_Ninja_Forms {
 		$mods[ $this->slug ] = array(
 			'Name' => $this->name,
 			'Description' => 'Adds awesome ninja form module',
-			'InstallURI' => admin_url( "plugin-install.php?tab=plugin-information&plugin=$this->slug&TB_iframe=true&width=772&height=460" ),
+			'InstallURI' => admin_url( "/plugin-install.php?s=$this->name&tab=search&type=term" ),
 			'AuthorURI' => 'https://www.metaslider.com',
 			'Author' => 'Matcha Labs',
 			'Image' => "//ps.w.org/$this->slug/assets/icon-256x256.png?rev=1262610",

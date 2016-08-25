@@ -144,6 +144,9 @@ final class Pootle_Page_Builder_Front_Css_Js {
 
 		for ( $i = 0; $i < $cell_count; $i ++ ) {
 			$cell = $panels_data['grid_cells'][ $ci ];
+			if ( empty( $cell['weight'] ) ) {
+				$cell['weight'] = 100 / $cell_count;
+			}
 
 			if ( $cell_count > 1 ) {
 				$css_new = 'width:' . round( $cell['weight'] * ( 100 - ( ( $cell_count - 1 ) * $col_gutts ) ), 3 ) . '%';

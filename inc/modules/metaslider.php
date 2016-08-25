@@ -90,7 +90,7 @@ class pootle_page_builder_Meta_Slider {
 		$mods['ml-slider'] = array(
 			'Name' => 'Meta slider',
 			'Description' => 'Adds awesome meta slider module',
-			'InstallURI' => admin_url( 'plugin-install.php?tab=plugin-information&plugin=ml-slider&TB_iframe=true&width=772&height=460"' ),
+			'InstallURI' => admin_url( "/plugin-install.php?s=Meta Slider&tab=search&type=term" ),
 			'AuthorURI' => 'https://www.metaslider.com',
 			'Author' => 'Matcha Labs',
 			'Image' => '//ps.w.org/ml-slider/assets/icon.svg?rev=1000654',
