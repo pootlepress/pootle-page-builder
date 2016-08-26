@@ -37,7 +37,6 @@ class pootle_page_builder_Pootle_Slider {
 
 	public function module( $mods ) {
 
-		print_awesome_r( $mods, get_post_type() );
 		if ( 'pootle-slider' == get_post_type() ) {
 			$modules = $mods;
 			$mods = array();
