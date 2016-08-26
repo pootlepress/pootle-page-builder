@@ -118,10 +118,20 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 = 3.0.0 =
 * 2016-08-26
- * New - 
- * New -
- * Fix -
- * Fix -
+ * New - Modules slide in allows dragging and dropping modules
+ * New - Module Hero Section
+ * New - Module Image
+ * New - Module Slider
+ * New - Module Unsplash image
+ * New - Module Button
+ * New - Module Ninja Form
+ * New - Module Metaslider - Slider
+ * New - Pro Module Photo gallery
+ * New - Pro Module Blog Posts
+ * New - Pro Module WooCommerce Products
+ * New - Row background now allows searching on unsplash
+ * New - Setting to choose where to put modules slide in left or right
+ * Fix - Match column heights now works in Firefox
 
 = 2.5.1 =
 * 2016-07-22
