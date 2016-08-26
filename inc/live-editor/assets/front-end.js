@@ -993,10 +993,18 @@ jQuery( function ( $ ) {
 		}
 	} );
 
-	$ppb.delegate( '.ppb-edit-row .dashicons-before, .ppb-edit-block .dashicons-before', 'click', function () {
-		try {
-			webkit.messageHandlers.heySwift.postMessage( "hideTextFormatting" );
-		} catch ( err ) {}
+	$body.on("click touchstart", function ( e ) {
+		var $t = $( e.target );
+		if ( ! $t.closest('.ppb-block').length || $t.closest('.ppb-edit-row .dashicons-before, .ppb-edit-block .dashicons-before').length ) {
+			try {
+				webkit.messageHandlers.heySwift.postMessage( "hideTextFormatting" );
+				webkit.messageHandlers.heySwift.postMessage("hideKeyboard");
+			} catch ( err ) {}
+		} else {
+			try {
+				webkit.messageHandlers.heySwift.postMessage( "showTextFormatting" );
+			} catch ( err ) {}
+		}
 	} );
 
 	$ppb.delegate( '.ppb-edit-row .dashicons-editor-code', 'click', function () {
@@ -1278,9 +1286,6 @@ jQuery( function ( $ ) {
 			var $t = $( e.target.targetElm );
 			$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
 			$t.parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
-			try {
-				webkit.messageHandlers.heySwift.postMessage( "showTextFormatting" );
-			} catch ( err ) {}
 		});
 		editor.addButton('ppbInsertImage', {
 			text: '',

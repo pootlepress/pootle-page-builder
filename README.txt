@@ -8,7 +8,7 @@ Author URI: http://www.pootlepress.com
 Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
-Tested up to: 4.4.2
+Tested up to: 4.7-alpha-38356
 Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -27,7 +27,7 @@ Anyone can now create a beautiful WordPress website in minutes and no technical 
 = Can I see Pootle Pagebuilder in action? =
 
  Yes! Watch this video.
-[vimeo https://vimeo.com/163387430]
+[vimeo https://vimeo.com/180160132]
 
 = What can I do with Pootle Pagebuilder? =
 
@@ -69,8 +69,10 @@ If you would like to see the Pootle Pagebuilder Pro version in action click here
 == Usage ==
 
 Install and activate the plugin. In your WordPress dashboard simply add a new page to start using page builder.
- Yes! Watch this video.
-[vimeo https://vimeo.com/163387430]
+
+Watch this video.
+
+[vimeo https://vimeo.com/180160132]
 
 
 
@@ -109,10 +111,17 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
-= 2.0.0 =
+= 3.0.0 =
  * This is a major release please backup your site before installing
 
 == Changelog ==
+
+= 3.0.0 =
+* 2016-08-26
+ * New - 
+ * New -
+ * Fix -
+ * Fix -
 
 = 2.5.1 =
 * 2016-07-22
