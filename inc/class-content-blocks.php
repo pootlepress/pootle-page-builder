@@ -83,7 +83,7 @@ final class Pootle_Page_Builder_Content_Block {
 		//Classes for this content block
 		$attr['class'] = array( 'ppb-block' );
 		if ( ! empty( $styleArray['class'] ) ) { $attr['class'][] = $styleArray['class']; }
-		if ( empty( $styleArray['padding-mobile'] ) ) { $attr['class'][] = 'ppb-no-mobile-padding'; }
+		if ( empty( $styleArray['padding-mobile'] ) ) { $attr['class'][] = 'ppb-no-mobile-spacing'; }
 
 		$styleWithSelector = ''; // Passed with reference
 		if ( ! empty( $styleArray ) ) {

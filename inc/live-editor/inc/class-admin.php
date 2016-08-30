@@ -325,7 +325,7 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 					</style>
 					<div class="panel-grid-cell-container">
 						<div class="ppb-col panel-grid-cell " id="pgc-522-0-0" data-index="0">
-							<div id="panel-522-0-0-0" class="ppb-block ppb-no-mobile-padding" style="">
+							<div id="panel-522-0-0-0" class="ppb-block ppb-no-mobile-spacing" style="">
 								<div class="pootle-live-editor ppb-live-edit-object ppb-edit-block" data-index="0"
 								     data-i_bkp="0">
 			<span title="Drag and Drop content block"

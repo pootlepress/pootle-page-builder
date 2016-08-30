@@ -281,19 +281,15 @@ img.ppb-bg-parallax {
 		display: none;
 	}
 
-	.ppb-no-mobile-padding {
+	.ppb-no-mobile-spacing {
 		padding: 0 !important;
+		margin: 0 !important;
 	}
 }
 
 @media only screen and (max-width: 768px) {
-
 	.hide-on-mobile {
 		display: none;
-	}
-
-	.ppb-no-mobile-padding {
-		padding: 0 !important;
 	}
 }
 

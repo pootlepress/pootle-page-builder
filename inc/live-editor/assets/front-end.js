@@ -67,7 +67,7 @@ jQuery( function ( $ ) {
 
 	$.fn.prevuRowInit = function () {
 		var $t = $( this );
-		$t.find('.panel-grid-cell-container > .panel-grid-cell').sortable( prevu.contentSortable );
+		$t.find('.ppb-block').draggable( prevu.contentDraggable );
 		$t.find('.panel-grid-cell-container > .panel-grid-cell').resizable( prevu.resizableCells );
 		$t.find( '.ppb-block' ).droppable( prevu.moduleDroppable );
 		tinymce.init( prevu.tmce );
@@ -120,7 +120,7 @@ jQuery( function ( $ ) {
 				if ( ppbAjax.publish ) {
 					prevu.unSavedChanges = false;
 					if( ! prevu.noRedirect )
-					window.location = response;
+						window.location = response;
 				}
 				ppbAjax.publish = 0;
 			} );
@@ -298,12 +298,14 @@ jQuery( function ( $ ) {
 		},
 
 		savePanel : function () {
+			ppbData.widgets[window.ppbPanelI].text = tinyMCE.get( 'ppbeditor' ).getContent();
+
 			var st = JSON.parse( ppbData.widgets[window.ppbPanelI].info.style );
 
 			st = panels.getStylesFromFields( $contentPanel, st );
 
-			ppbData.widgets[window.ppbPanelI].text = tinyMCE.get( 'ppbeditor' ).getContent();
 			ppbData.widgets[window.ppbPanelI].info.style = JSON.stringify( st );
+
 			prevu.sync( function ( $r, qry ) {
 				var info = ppbData.widgets[window.ppbPanelI].info,
 					$t = $( '.ppb-block.active' ),
@@ -321,7 +323,8 @@ jQuery( function ( $ ) {
 				$blk
 					.removeClass( 'pootle-live-editor-new-content-block' )
 					.addClass( 'active' )
-					.droppable( prevu.moduleDroppable );
+					.droppable( prevu.moduleDroppable )
+					.draggable( prevu.contentDraggable );;
 
 				if ( $cell.children( 'style' ).length ) {
 					$cell.children( 'style' ).html( style );
@@ -454,7 +457,7 @@ jQuery( function ( $ ) {
 
 			prevu.sync( function( $r, qry ) {
 				var $ro   = $r.find( '#pg-' + qry.post + '-' + window.ppbRowI ),
-				    $cols = $ro.find( '.panel-grid-cell-container > .panel-grid-cell' );
+					$cols = $ro.find( '.panel-grid-cell-container > .panel-grid-cell' );
 				$cols.css( 'width', ( 100 - num_cells + 1 ) / num_cells + '%' );
 				$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
 				$ro.find( '.pootle-live-editor-realtime:eq(0)' ).parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
@@ -529,41 +532,41 @@ jQuery( function ( $ ) {
 			}
 		},
 
-		contentSortable : {
-			tolerance: 'pointer',
-			connectWith: '.panel-grid-cell',
-			handle: '.ppb-edit-block .dashicons-before:first',
-			items: '> .ppb-block',
-			helper: function (e, el) {
-				el.parents().css( 'z-index', 999 );
-				return el.clone().css('opacity', 0.7 ).addClass('panel-being-dragged');
+		contentDraggable : {
+			handle: '.ppb-edit-block .dashicons-screenoptions',
+			xhelper: function () {
+				return $('<div/>').addClass('content-drag-helper');
 			},
-			start: function ( e, ui ) {
-				var $t = ui.item,
-					index = $ppb.find( '.ppb-block' ).index( $t );
-				$t.data( 'index', index );
+			drag: function( e, ui ) {
+				var $t = $( this );
+				if( ( ui.position.top + parseInt( $t.css( 'margin-top' ) ) ) < -25 || ( ui.position.left + parseInt( $t.css( 'margin-left' ) ) ) < -25 ) {
+					$t.draggable( 'widget' ).trigger( 'mouseup' );
+				}
 			},
-			update: function (e, ui) {
-				if( ui.item.parent().attr('id') != $( this ).attr('id') ) return;
-				var $t = ui.item,
-					olI = $t.data('index'),
-					nuI = $ppb.find( '.ppb-block' ).index( $t ),
-					gi = $t.closest( '.ppb-row' ).siblings('.ppb-edit-row').data( 'index' ),
-					ci = $t.closest( '.panel-grid-cell' ).index();
+			start: function (e, ui) {
+				var $t = $( this );
+				$t.find( '.ppb-edit-block .dashicons-before:first' ).click();
+				ui.position.left = parseInt( $t.css( 'margin-left' ) );
+				ui.position.top = parseInt( $t.css( 'margin-top' ) );
+			},
+			stop: function (e, ui) {
+				var st = JSON.parse( ppbData.widgets[window.ppbPanelI].info.style ),
+					margin = {},
+					$t = $( this );
 
-				$t.siblings( '.add-content' ).appendTo( $t.parent() );
-				$t.parents().css( 'z-index', '' );
+				st['margin-top'] = Math.max( 1, ui.position.top + parseInt( $t.css( 'margin-top' ) ) );
+				st['margin-left'] = Math.max( 1, ui.position.left + parseInt( $t.css( 'margin-left' ) ) );
 
-				logPPBData( 0, 0, 'content' );
+				$t.css( {
+					marginTop	: st['margin-top'],
+					top			: '',
+					marginLeft	: st['margin-left'],
+					left		: '',
+					width		: '',
+					height		: ''
+				} );
 
-				ppbData.widgets[ olI ].info.grid = gi;
-				ppbData.widgets[ olI ].info.cell = ci;
-//				ppbData.widgets[ olI ].info.id = nuI;
-				ppbData.widgets.ppbPrevuMove( olI, nuI );
-				logPPBData( 0, 0, 'content' );
-				prevu.reset( 'noResort' );
-				prevu.resort();
-				logPPBData( 0, 0, 'content' );
+				ppbData.widgets[window.ppbPanelI].info.style = JSON.stringify( st );
 			}
 		},
 
@@ -574,7 +577,7 @@ jQuery( function ( $ ) {
 			},
 			resize: function (event, ui) {
 				var $t = $( this ),
-				    $p = $t.parent(),
+					$p = $t.parent(),
 					$prev = $t.prev(),
 					widthTaken = 0,
 					widthNow = ui.size.width,
@@ -637,7 +640,7 @@ jQuery( function ( $ ) {
 			$contentblock.find('.dashicons-screenoptions').click();
 
 			var $ed = $contentblock.find( '.mce-content-body' ),
-			    ed  = tinymce.get( $ed.attr( 'id' ) );
+				ed  = tinymce.get( $ed.attr( 'id' ) );
 			ed.selection.select(tinyMCE.activeEditor.getBody(), true);
 			ed.selection.collapse(false);
 
@@ -663,7 +666,7 @@ jQuery( function ( $ ) {
 			hoverClass: "ppb-hover-module",
 			drop: function( e, ui ) {
 				var $m = ui.draggable,
-				    $t = $( this );
+					$t = $( this );
 				$loader.fadeIn(500);
 				if ( $t.hasClass('add-row') ) {
 					$( '#ppb-row-add-cols' ).val( '1' );
@@ -878,9 +881,9 @@ jQuery( function ( $ ) {
 
 	$ppb.delegate( '.ppb-edit-row .dashicons-no', 'click', function () {
 		var removeCells  = [],
-		    removeBlocks = [],
-		    $t           = $( this ),
-		    rowI         = $t.closest( '.pootle-live-editor' ).data( 'index' );
+			removeBlocks = [],
+			$t           = $( this ),
+			rowI         = $t.closest( '.pootle-live-editor' ).data( 'index' );
 		prevu.deleteCallback = function () {
 			console.log( rowI );
 			ppbData.grids.splice( rowI, 1 );
@@ -943,7 +946,7 @@ jQuery( function ( $ ) {
 		$deleteDialog.ppbDialog( 'open' );
 	} );
 
-	$ppb.delegate( '.ppb-edit-block .dashicons-before', 'click', function () {
+	$ppb.delegate( '.ppb-edit-block .dashicons-before', 'click touchstart', function () {
 		var $t = $( this );
 		$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
 		$t.parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
@@ -958,7 +961,7 @@ jQuery( function ( $ ) {
 	$ppb.delegate( '.ppb-edit-block .dashicons-no', 'click', function () {
 		prevu.reset(); // Reset the indices
 		var $t = $( this ),
-		    i = $t.closest( '.pootle-live-editor' ).data( 'index' );
+			i = $t.closest( '.pootle-live-editor' ).data( 'index' );
 
 		prevu.deleteCallback = function () {
 
