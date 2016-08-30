@@ -99,7 +99,9 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 
 		$panels_data = apply_filters( 'pootlepb_data', $panels_data, $post_id );
 
-		if ( empty( get_post_meta( $post_id, 'pootlepb-new', true ) ) && ( empty( $panels_data ) || empty( $panels_data['grids'] ) ) ) {
+		$ppbnew = get_post_meta( $post_id, 'pootlepb-new', true );
+
+		if ( empty( $ppbnew ) && ( empty( $panels_data ) || empty( $panels_data['grids'] ) ) ) {
 			return true;
 		}
 	}

@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.7-alpha-38356
-Stable tag: 2.5.1
+Stable tag: 3.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -109,12 +109,28 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 6. Row display settings / Layout
 
+7. Modules
+
+8. WooCommerce module (pro version only)
+
+9. Ninja Forms module
+
+10. Pootle Slider module
+
+11. Hero module
+
+12. Also great for WordPress Posts
+
 == Upgrade Notice ==
 
 = 3.0.0 =
  * This is a major release please backup your site before installing
 
 == Changelog ==
+
+= 3.0.1 =
+* 2016-08-26
+ * Tweak - Compatibility with php 5.4
 
 = 3.0.0 =
 * 2016-08-26
