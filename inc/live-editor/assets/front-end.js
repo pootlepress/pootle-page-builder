@@ -145,6 +145,7 @@ jQuery( function ( $ ) {
 
 			if ( publish ) {
 				ppbAjax.publish = publish;
+				$body.trigger( 'savingPPB' );
 				if ( ppbAjax.title ) {
 					var butt = [				{
 						text  : publish,
@@ -724,6 +725,7 @@ jQuery( function ( $ ) {
 				}
 			}
 		},
+
 		insertImage : function() {
 			// If the media frame already exists, reopen it.
 			if (prevu.insertImageFrame) {
@@ -767,6 +769,7 @@ jQuery( function ( $ ) {
 			// Finally, open the modal
 			prevu.insertImageFrame.open();
 		},
+
 		saveTmceBlock : function ( $ed ) {
 			if ( ! $ed || ! $ed.length ) return;
 			var blockI = $ed.siblings( '.pootle-live-editor' ).data( 'index' );
@@ -774,9 +777,11 @@ jQuery( function ( $ ) {
 			ppbData.widgets[blockI].text = $ed.html();
 			prevu.unSavedChanges = true;
 		},
+
 		postSettings : function () {
 			$postSettingsDialog.ppbDialog( 'open' );
 		},
+
 		tmce : $.extend( true, {}, tinyMCEPreInit.mceInit.ppbeditor )
 	};
 
@@ -1306,6 +1311,7 @@ jQuery( function ( $ ) {
 			'h2',
 			'h3',
 			'h4',
+			'shrameeFonts',
 			'fontsizeselect',
 			'blockquote',
 			'forecolor',
@@ -1327,6 +1333,7 @@ jQuery( function ( $ ) {
 
 	prevu.tmce.content_css	= "http://wp/ppb/wp-includes/css/dashicons.min.css?ver=4.4.2-alpha-36412";
 	prevu.tmce.setup	= function(editor) {
+
 		editor.on('change', function(e) {
 			prevu.saveTmceBlock( $( e.target.targetElm ) );
 		});
@@ -1342,7 +1349,76 @@ jQuery( function ( $ ) {
 				ppbIpad.insertImage();
 			}
 		});
+		editor.addButton( 'shrameeFonts', {
+			type: 'listbox',
+			text: 'Font',
+			icon: false,
+			minWidth: 70,
+			onclick: function() {
+				this.value( '' );
+			},
+			onselect: function ( e ) {
+				var ed = tinymce.activeEditor,
+					val = this.value();
 
+				if ( ! val ) ed.formatter.remove( 'shrameeFontFormat' );
+
+				ed.formatter.register( 'shrameeFontFormat', {
+					inline: 'span',
+					classes: 'ppb-google-font',
+					attributes: { 'data-font':'%gfont' },
+					styles: {fontFamily: '%font'}
+				} );
+
+				if ( -1 == val.indexOf(',') ) {
+					ed.formatter.apply( 'shrameeFontFormat', {font: val, gfont: val.replace( ' ', '+' ) } );
+					$body.append( '<link href="https://fonts.googleapis.com/css?family=' + val.replace( ' ', '+' ) + '"  rel="stylesheet">' );
+				} else {
+					ed.formatter.apply( 'shrameeFontFormat', {font: val} );
+				}
+			},
+			values: [
+				{text: 'Default', value: ''},
+
+				// System Fonts
+				{text: 'Georgia', value: 'Georgia, serif'},
+				{text: 'Arial Black', value: '"Arial Black", Gadget, sans-serif'},
+				{text: 'Comic Sans MS', value: '"Comic Sans MS", cursive, sans-serif'},
+				{text: 'Impact', value: 'Impact, Charcoal, sans-serif'},
+				{text: 'Courier New', value: '"Courier New", Courier, monospace'},
+
+				// Google Fonts
+				{text: 'Abril Fatface', value: 'Abril Fatface'},
+				{text: 'Amatic SC', value: 'Amatic SC'},
+				{text: 'Dancing Script', value: 'Dancing Script'},
+				{text: 'Droid Serif', value: 'Droid Serif'},
+				{text: 'Great Vibes', value: 'Great Vibes'},
+				{text: 'Inconsolata', value: 'Inconsolata'},
+				{text: 'Indie Flower', value: 'Indie Flower'},
+				{text: 'Lato', value: 'Lato'},
+				{text: 'Lobster', value: 'Lobster'},
+				{text: 'Lora', value: 'Lora'},
+				{text: 'Oswald', value: 'Oswald'},
+				{text: 'Pacifico', value: 'Pacifico'},
+				{text: 'Passion One', value: 'Passion One'},
+				{text: 'Patua One', value: 'Patua One'},
+				{text: 'Playfair Display', value: 'Playfair Display'},
+				{text: 'Poiret One', value: 'Poiret One'},
+				{text: 'Raleway', value: 'Raleway'},
+				{text: 'Roboto', value: 'Roboto'},
+				{text: 'Roboto Condensed', value: 'Roboto Condensed'},
+				{text: 'Roboto Mono', value: 'Roboto Mono'},
+				{text: 'Roboto Slab', value: 'Roboto Slab'},
+				{text: 'Shadows Into Light', value: 'Shadows Into Light'},
+				{text: 'Sigmar One', value: 'Sigmar One'},
+				{text: 'Source Sans Pro', value: 'Source Sans Pro'},
+				{text: 'Ubuntu Mono', value: 'Ubuntu Mono'},
+			],
+			onPostRender: function () {
+				// Select the second item by default
+				this.value( '&nbsp;<em>Some italic text!</em>' );
+			}
+		} );
 	};
 
 	tinymce.init( prevu.tmce );
@@ -1443,4 +1519,11 @@ jQuery( function ( $ ) {
 		ppbData.grids[ ppbRowI ].style.background_toggle = '.bg_image';
 		ppbData.grids[ ppbRowI ].style.row_height = '500';
 	}
+
+	$body.on( 'savingPPB', function(){
+		ppbAjax.data.google_fonts = [];
+		$body.find( '[data-font]' ).not( '[data-font="%gfont"]' ).each( function(){
+			ppbAjax.data.google_fonts.push( $( this ).attr( 'data-font' ) );
+		} );
+	} );
 } );

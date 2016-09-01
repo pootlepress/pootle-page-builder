@@ -139,6 +139,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 		// Create the skeleton of the grids
 		$grids = array();
 
+		$this->google_fonts( $panels_data );
 		$this->grids_array( $grids, $panels_data );
 
 		ob_start();
@@ -157,6 +158,12 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 		// Reset the current post
 		$pootlepb_current_post = $old_current_post;
 		return apply_filters( 'pootlepb_render', $html, $post_id, null );
+	}
+
+	protected function google_fonts( $panels_data ) {
+		if ( ! empty( $panels_data['google_fonts'] ) ) {
+			echo '<link href="https://fonts.googleapis.com/css?family=' . implode( $panels_data['google_fonts'], '|' ) . '" rel="stylesheet">';
+		}
 	}
 
 	/**
