@@ -473,6 +473,22 @@ body .ppb-dialog {
 	display: none !important;
 }
 
+.ppb-row .panel-grid-cell .ppb-block:hover .ui-resizable-handle {
+	display: block !important;
+	visibility: visible;
+	width: 7px;
+	margin: 0 -3px;
+	top: 0;
+	bottom: 0;
+}
+
+.ppb-row .panel-grid-cell .ppb-block .ui-resizable-handle.ui-resizable-e {
+	left: auto;
+	right: 0;
+	border: none;
+	border-right: 1px dashed #ef4832;
+}
+
 .ui-resizable-handle {
 	display: none;
 	visibility: hidden;
@@ -481,9 +497,9 @@ body .ppb-dialog {
 	bottom: 16px;
 	left: 0;
 	right: auto;
-	border-right: 2px dotted #ef4832;
+	border-left: 1px dashed #ef4832;
 	padding: 0;
-	margin-left: -1px;
+	margin-left: 0;
 	cursor: ew-resize;
 }
 
@@ -823,7 +839,7 @@ body .ppb-dialog {
 }
 
 .ppb-edit-row:hover + .ppb-row, .ppb-block:hover, .panel-grid.tour-active .ppb-block {
-	outline: 2px solid #ef4832;
+	outline: 1px solid #ef4832;
 }
 
 .ppb-block:hover .pootle-live-editor {

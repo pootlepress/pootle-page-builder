@@ -65,11 +65,20 @@ jQuery( function ( $ ) {
 		ppbData.grid_cells[ i ].id = i;
 	} );
 
+	$.fn.prevuBlockInit = function () {
+		$( this ).each( function () {
+			var $t = $( this );
+			$t.draggable( prevu.contentDraggable );
+			$t.resizable( prevu.contentResizable );
+			$t.droppable( prevu.moduleDroppable );
+
+		} );
+	};
+
 	$.fn.prevuRowInit = function () {
 		var $t = $( this );
-		$t.find('.ppb-block').draggable( prevu.contentDraggable );
+		$t.find('.ppb-block').prevuBlockInit();
 		$t.find('.panel-grid-cell-container > .panel-grid-cell').resizable( prevu.resizableCells );
-		$t.find( '.ppb-block' ).droppable( prevu.moduleDroppable );
 		tinymce.init( prevu.tmce );
 		$ppb.sortable( "refresh" );
 	};
@@ -323,8 +332,7 @@ jQuery( function ( $ ) {
 				$blk
 					.removeClass( 'pootle-live-editor-new-content-block' )
 					.addClass( 'active' )
-					.droppable( prevu.moduleDroppable )
-					.draggable( prevu.contentDraggable );;
+					.prevuBlockInit();
 
 				if ( $cell.children( 'style' ).length ) {
 					$cell.children( 'style' ).html( style );
@@ -532,44 +540,6 @@ jQuery( function ( $ ) {
 			}
 		},
 
-		contentDraggable : {
-			handle: '.ppb-edit-block .dashicons-screenoptions',
-			xhelper: function () {
-				return $('<div/>').addClass('content-drag-helper');
-			},
-			drag: function( e, ui ) {
-				var $t = $( this );
-				if( ( ui.position.top + parseInt( $t.css( 'margin-top' ) ) ) < -25 || ( ui.position.left + parseInt( $t.css( 'margin-left' ) ) ) < -25 ) {
-					$t.draggable( 'widget' ).trigger( 'mouseup' );
-				}
-			},
-			start: function (e, ui) {
-				var $t = $( this );
-				$t.find( '.ppb-edit-block .dashicons-before:first' ).click();
-				ui.position.left = parseInt( $t.css( 'margin-left' ) );
-				ui.position.top = parseInt( $t.css( 'margin-top' ) );
-			},
-			stop: function (e, ui) {
-				var st = JSON.parse( ppbData.widgets[window.ppbPanelI].info.style ),
-					margin = {},
-					$t = $( this );
-
-				st['margin-top'] = Math.max( 1, ui.position.top + parseInt( $t.css( 'margin-top' ) ) );
-				st['margin-left'] = Math.max( 1, ui.position.left + parseInt( $t.css( 'margin-left' ) ) );
-
-				$t.css( {
-					marginTop	: st['margin-top'],
-					top			: '',
-					marginLeft	: st['margin-left'],
-					left		: '',
-					width		: '',
-					height		: ''
-				} );
-
-				ppbData.widgets[window.ppbPanelI].info.style = JSON.stringify( st );
-			}
-		},
-
 		resizableCells : {
 			handles: 'w',
 			stop: function (event, ui) {
@@ -626,6 +596,81 @@ jQuery( function ( $ ) {
 				ppbData.grid_cells[i].weight = weight;
 				return weight;
 			}
+		},
+
+		contentDraggable : {
+			handle: '.ppb-edit-block .dashicons-screenoptions',
+			xhelper: function () {
+				return $('<div/>').addClass('content-drag-helper');
+			},
+			drag: function( e, ui ) {
+				var $t = $( this );
+				if( ( ui.position.top + parseInt( $t.css( 'margin-top' ) ) ) < -25 || ( ui.position.left + parseInt( $t.css( 'margin-left' ) ) ) < -25 ) {
+					$t.draggable( 'widget' ).trigger( 'mouseup' );
+				}
+			},
+			start: function (e, ui) {
+				var $t = $( this );
+				$t.find( '.ppb-edit-block .dashicons-before:first' ).click();
+				ui.position.left = parseInt( $t.css( 'margin-left' ) );
+				ui.position.top = parseInt( $t.css( 'margin-top' ) );
+			},
+			stop: function (e, ui) {
+				var st = JSON.parse( ppbData.widgets[window.ppbPanelI].info.style ),
+					margin = {},
+					$t = $( this );
+
+				st['margin-top'] = Math.max( 1, ui.position.top + parseInt( $t.css( 'margin-top' ) ) );
+				st['margin-left'] = Math.max( 1, ui.position.left + parseInt( $t.css( 'margin-left' ) ) );
+
+				$t.css( {
+					marginTop	: st['margin-top'],
+					top			: '',
+					marginLeft	: st['margin-left'],
+					left		: '',
+					width		: '',
+					height		: ''
+				} );
+
+				ppbData.widgets[window.ppbPanelI].info.style = JSON.stringify( st );
+			}
+		},
+
+		contentResizable : {
+			handles: 'e, w',
+			start: function (e, ui) {
+				var $t = $( this );
+				$t.find( '.ppb-edit-block .dashicons-before:first' ).click();
+				$t.css( {
+					maxWidth: 9999,
+				} );
+			},
+			stop: function (event, ui) {
+				var st = JSON.parse( ppbData.widgets[window.ppbPanelI].info.style ),
+					$t = $( this ),
+					$p = $t.parent();
+
+				st['width'] = Math.round( parseInt( $t.width() ) );
+				st['margin-left'] = Math.max( 1, ui.position.left + parseInt( $t.css( 'margin-left' ) ) );
+
+				$t.css( {
+					maxWidth	: st['width'],
+					marginLeft	: st['margin-left'],
+					left		: '',
+					width		: ''
+				} );
+
+				ppbData.widgets[window.ppbPanelI].info.style = JSON.stringify( st );
+			},
+			resize: function (event, ui) {
+				var st = JSON.parse( ppbData.widgets[window.ppbPanelI].info.style ),
+					$t = $( this ),
+					$p = $t.parent();
+				if ( ( $t.outerWidth() - 7 ) > $p.width() ) {
+					$t.css( 'width', '' );
+					$t.resizable( 'widget' ).trigger( 'mouseup' );
+				}
+			},
 		},
 
 		moduleDraggable : {

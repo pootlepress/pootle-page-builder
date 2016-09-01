@@ -104,15 +104,15 @@ $pootlepb_content_block_styling_fields = array(
 		'css'  => 'margin-left',
 		'tab' => 'style',
 	),
-	'margin-right'          => array(
-		'name' => 'Right Margin',
+	'width'          => array(
+		'name' => 'Width',
 		'type' => 'number',
 		'priority' => 5,
 		'min'  => '0',
-		'max'  => '700',
+		'max'  => '100',
 		'step' => '1',
 		'unit' => 'px',
-		'css'  => 'margin-right',
+		'css'  => 'max-width',
 		'tab' => 'style',
 	),
 	'padding-mobile'          => array(

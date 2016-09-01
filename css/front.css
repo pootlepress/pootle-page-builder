@@ -43,6 +43,7 @@
 }
 
 .ppb-block {
+	box-sizing: content-box;
 	background: center/cover;
 }
 
