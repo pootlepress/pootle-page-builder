@@ -1597,12 +1597,18 @@ jQuery( function ( $ ) {
 	};
 
 	window.ppbModules.heroSection = function ( $t ) {
-		var $tlbr = $t.closest('.panel-grid').find('.ppb-edit-row');
-		$tlbr.find('.ui-sortable-handle').click();
-		ppbData.grids[ ppbRowI ].style.full_width = true;
-		ppbData.grids[ ppbRowI ].style.background_toggle = '.bg_image';
-		ppbData.grids[ ppbRowI ].style.row_height = '500';
-	}
+		var $tlbr = $t.closest( '.panel-grid' ).find( '.ppb-edit-row' );
+		$tlbr.find( '.ui-sortable-handle' ).click();
+		ppbData.grids[ppbRowI].style.full_width = true;
+		ppbData.grids[ppbRowI].style.background_toggle = '.bg_image';
+		ppbData.grids[ppbRowI].style.row_height = '500';
+	};
+
+	window.ppbModules.onePager = function ( $t ) {
+		$t.find( '.ppb-edit-block .dashicons-edit' ).click();
+		$( 'a.ppb-tabs-anchors[href="#pootle-ppb-1-pager-tab"]' ).click();
+		ppbModules.heroSection( $t );
+	};
 
 	$body.on( 'savingPPB', function(){
 		ppbAjax.data.google_fonts = [];

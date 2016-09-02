@@ -123,12 +123,7 @@ class pootle_page_builder_one_pager_Admin{
 	 * @since    1.0.0
 	 * @return array Panels data
 	 */
-	public function save_post( $data ) {
-
-		//Return panels data if post_ID not set
-		if ( empty( $_POST['post_ID'] ) ) {
-			return $data;
-		}
+	public function save_post( $data, $id ) {
 
 		$sections = array();
 
@@ -136,9 +131,7 @@ class pootle_page_builder_one_pager_Admin{
 			$this->sections_in_page( $sections, $widget );
 		}
 
-		$this->save_sections_data( $sections );
-
-		return $data;
+		$this->save_sections_data( $sections, $id );
 	}
 
 	/**
@@ -183,13 +176,13 @@ class pootle_page_builder_one_pager_Admin{
 	 * @filter pootlepb_panels_data_from_post
 	 * @since    1.0.0
 	 */
-	private function save_sections_data( $sections ) {
+	private function save_sections_data( $sections, $id ) {
 		if ( ! empty( $sections ) ) {
 
 			//Get current sections
 			$allSections = get_option( 'pootlepb_1pager_sections', array() );
 			//Add/Modify current post ID sections
-			$allSections[ $_POST['post_ID'] ] = $sections;
+			$allSections[ $id ] = $sections;
 			//Updating the option
 			update_option( 'pootlepb_1pager_sections', $allSections );
 		}

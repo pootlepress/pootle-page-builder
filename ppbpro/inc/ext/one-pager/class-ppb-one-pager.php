@@ -124,15 +124,15 @@ class pootle_page_builder_one_pager{
 	private function _admin() {
 		//Instantiating admin class
 		$this->admin = pootle_page_builder_one_pager_Admin::instance();
-
 		//Adds menu items meta box
 		add_filter( 'admin_init', array( $this->admin, 'admin_init' ) );
 		//Enqueue admin scripts
 		add_action( 'admin_enqueue_scripts', array( $this->admin, 'enqueue' ) );
 		//Saves one pager sections data
-		add_filter( 'pootlepb_panels_data_from_post', array( $this->admin, 'save_post' ) );
+		add_filter( 'pootlepb_save_post', array( $this->admin, 'save_post' ), 10, 2 );
 		//Content block panel tabs
 		add_filter( 'pootlepb_content_block_tabs', array( $this->admin, 'content_block_tabs' ) );
+		add_filter( 'pootlepb_le_content_block_tabs', array( $this->admin, 'content_block_tabs' ) );
 		//Content block panel fields
 		add_filter( 'pootlepb_content_block_fields', array( $this->admin, 'content_block_fields' ) );
 

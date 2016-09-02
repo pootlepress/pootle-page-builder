@@ -128,8 +128,16 @@ final class Pootle_Page_Builder_Admin {
 		if ( function_exists( 'wp_slash' ) ) {
 			$panels_data = wp_slash( $panels_data );
 		}
-		update_post_meta( $post_id, 'panels_data', $panels_data );
 
+		/**
+		 * Fired before saving pootle page builder post meta
+		 * @param array $ppb_data Page builder data
+		 * @param Int $post_id Post ID
+		 * @param WP_Post $post Post object
+		 */
+		do_action( 'pootlepb_save_post', $panels_data, $post_id, $post );
+
+		update_post_meta( $post_id, 'panels_data', $panels_data );
 	}
 
 	/**

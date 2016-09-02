@@ -377,6 +377,16 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		if ( $this->init_live_editing() ) {
 			$id = $_POST['post'];
 
+			if ( ! empty( $_POST['data'] ) ) {
+
+				foreach ( $_POST['data']['widgets'] as $i => $wid ) {
+					if ( ! empty( $wid['info']['style'] ) ) {
+						$_POST['data']['widgets'][ $i ]['info']['style'] = stripslashes( $wid['info']['style'] );
+						$_POST['data']['widgets'][ $i ]['text']          = stripslashes( $wid['text'] );
+					}
+				}
+
+			}
 			if ( filter_input( INPUT_POST, 'publish' ) ) {
 				// Update post
 				$live_page_post = array( 'ID' => $id );
@@ -386,6 +396,14 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				}
 
 				$live_page_post = $this->savePostMeta( $live_page_post );
+
+				/**
+				 * Fired before saving pootle page builder post meta
+				 * @param array $ppb_data Page builder data
+				 * @param Int $post_id Post ID
+				 * @param WP_Post $post Post object
+				 */
+				do_action( 'pootlepb_save_post', $_POST['data'], $id, get_post( $id ) );
 
 				// Update PPB data
 				update_post_meta( $id, 'panels_data', $_POST['data'] );
@@ -403,13 +421,6 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 				// Update post
 				wp_update_post( $live_page_post, true );
-
-				foreach ( $_POST['data']['widgets'] as $i => $wid ) {
-					if ( ! empty( $wid['info']['style'] ) ) {
-						$_POST['data']['widgets'][ $i ]['info']['style'] = stripslashes( $wid['info']['style'] );
-						$_POST['data']['widgets'][ $i ]['text']          = stripslashes( $wid['text'] );
-					}
-				}
 				echo Pootle_Page_Builder_Render_Layout::render( $id, $_POST['data'] );
 			}
 		}
