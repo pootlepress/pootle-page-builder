@@ -1154,6 +1154,8 @@ iframe[src*='/pootle-buttons/'] {
 	padding: 7px 9px;
 }
 
+.mce-tinymce.mce-tinymce-inline .mce-btn-group .mce-colorbutton button {padding-right: 0;}
+
 .mce-tinymce.mce-tinymce-inline .mce-btn-group .mce-last button {
 	border-right: 1px solid rgba(0,0,0,0.2);
 }
@@ -1176,6 +1178,7 @@ iframe[src*='/pootle-buttons/'] {
 .mce-toolbar .mce-btn-group .mce-btn.mce-listbox button {
 	border-color: transparent;
 	border-left: 1px solid rgba(0,0,0,0.2);
+	padding-right: 25px;
 }
 
 .mce-toolbar .mce-btn.mce-disabled {
@@ -1360,4 +1363,25 @@ a .ppb-module-disabled:after {
 	background-size: cover;
 	color: rgba(0,0,0,0);
 	display: block;
+}
+
+.pootle-guides:before,
+.pootle-guides:after {
+	content: '';
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background: #f40;
+}
+.pootle-guides-y:before, .pootle-guides-y .pootle-guides:before {
+	display: block;
+	width: 1px;
+}
+.pootle-guides-x:after, .pootle-guides-x .pootle-guides:after {
+	display: block;
+	height: 1px;
 }

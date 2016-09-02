@@ -546,6 +546,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				</div>
 				*/ ?>
 		<div class="pootle-live-editor resize-cells"></div>
+		<div class="pootle-guides"></div>
 		<?php
 	}
 
