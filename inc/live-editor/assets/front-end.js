@@ -1424,7 +1424,7 @@ jQuery( function ( $ ) {
 		} );
 		editor.addButton( 'shrameeFonts', function() {
 			var items = [
-				{text: 'Default', value: ''},
+				{text: 'Default', value: 'inherit'},
 				// System Fonts
 				{text: 'Georgia', value: 'Georgia, serif'}, {text: 'Arial Black', value: '"Arial Black", Gadget, sans-serif'}, {text: 'Comic Sans MS', value: '"Comic Sans MS", cursive, sans-serif'}, {text: 'Impact', value: 'Impact, Charcoal, sans-serif'}, {text: 'Courier New', value: '"Courier New", Courier, monospace'},
 				// Google Fonts
@@ -1464,9 +1464,7 @@ jQuery( function ( $ ) {
 						self = this;
 
 					ed.on( 'nodeChange', function ( e ) {
-						var formatter = ed.formatter;
-						var value = '',
-							matches = {};
+						var value = null;
 
 						$( e.parents ).each( function () {
 							var font = $( this ).css( 'font-family' );
@@ -1474,7 +1472,6 @@ jQuery( function ( $ ) {
 								if ( -1 < font.indexOf( item.text ) ) {
 									value = item.value;
 									$( '.mce-shramee-fonts-control' ).find( '.mce-txt' ).html( item.text );
-									console.log( value );
 									return false;
 								}
 							} );
@@ -1482,22 +1479,14 @@ jQuery( function ( $ ) {
 								return false;
 							}
 						} );
-/*
-						$.each( e.parents, function ( ni, node ) {
-							$.each( items, function ( ii, item ) {
-								var val = item.value;
-								matches[val] = ( formatter.matchNode( node, 'shrameeFontFormat', {font: val} ) );
-								if (
-									formatter.matchNode( node, 'shrameeFontFormat', {font: val} ) ||
-									formatter.matchNode( node, 'shrameeFontFormat', {font: val, gfont: val.replace( ' ', '+' ) } )
-								) {
-									value = item.value;
-									return false;
-								}
-							} );
-						} );
-*/
-						console.log( self.state.set( 'value', value ) );
+
+						if ( ! value ) {
+							$( '.mce-shramee-fonts-control' ).find( '.mce-txt' ).html( 'Default' );
+							value = 'inherit';
+						}
+
+						console.log( value );
+						self.state.set( 'value', value );
 					} );
 				}
 			};
