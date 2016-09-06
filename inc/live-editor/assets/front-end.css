@@ -871,7 +871,7 @@ body .ppb-dialog {
 .ppb-block:hover .pootle-live-editor:hover .pootle-live-editor-addons span .addon-text {
 	position: absolute;
 	margin: 0;
-	width: auto;
+	width: 115px;
 	height: auto;
 	padding: 7px;
 	top: 0;

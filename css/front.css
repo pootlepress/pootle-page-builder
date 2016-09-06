@@ -1,3 +1,6 @@
+/* @TODO Move this to gh-pages */
+@import "text-styles.css";
+
 /**
  * Front end CSS
  * @package pootle page builder
@@ -312,3 +315,4 @@ img.ppb-bg-parallax {
 	0% { -webkit-transform: rotate(0deg); transform:rotate(0deg); }
 	100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); }
 }
+

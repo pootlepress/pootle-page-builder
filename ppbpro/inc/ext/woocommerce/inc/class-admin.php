@@ -158,6 +158,17 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			),
 			'default' => '',
 		);
+		$f['wc_prods-display'] = array(
+			'name' => __( 'Display as', 'ppb-woocommerce' ),
+			'tab' => 'wc_prods',
+			'type' => 'select',
+			'priority' => 1,
+			'options' => array(
+				''         => 'Grid',
+				'carousel' => 'Carousel',
+			),
+			'default' => '',
+		);
 		$f['wc_prods-category'] = array(
 			'name' => __( 'Category', 'vantage' ),
 			'tab' => 'wc_prods',

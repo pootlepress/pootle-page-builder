@@ -4,3 +4,56 @@
  * @package pootle_page_builder_for_WooCommerce
  * @version 0.1.0
  */
+.owl-buttons [class*='owl-'] {
+	position: absolute;
+	top: 50%;
+	margin-top: -23px;
+	height: 32px;
+	width: 32px;
+	padding: 7px;
+	background: rgba(0,0,0,0.5);
+	box-shadow: 0 0 0 2px #fff, 1px 1px 5px 2px rgba(0,0,0,0.5);
+	border-radius: 50%;
+	box-sizing: content-box;
+	font-size: 0;
+	opacity: 0;
+	transition: all 0.25s;
+}
+
+.owl-carousel:hover .owl-buttons [class*='owl-'] {
+	opacity: 0.5;
+}
+
+.owl-carousel:hover .owl-buttons [class*='owl-']:hover {
+	opacity: 0.7;
+}
+
+.owl-controls .owl-buttons [class*='owl-']:before {
+	content: '';
+	display: block;
+	margin: auto;
+	width: 0;
+	height: 0;
+	border-style: solid;
+}
+
+.owl-controls .owl-buttons .owl-prev {
+	left: 7px;
+	text-align: center;
+}
+
+.owl-controls .owl-buttons .owl-prev:before {
+	border-width: 16px 16px 16px 0;
+	border-color: transparent #ffffff transparent transparent;
+	margin-left: 5px;
+}
+
+.owl-controls .owl-buttons .owl-next {
+	right: 7px;
+}
+
+.owl-controls .owl-buttons .owl-next:before {
+	border-width: 16px 0 16px 16px;
+	border-color: transparent transparent transparent #ffffff;
+	margin-right: 5px;
+}

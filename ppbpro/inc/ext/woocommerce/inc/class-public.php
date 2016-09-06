@@ -9,6 +9,8 @@
  */
 class pootle_page_builder_for_WooCommerce_Public{
 
+	private $i = 1;
+	private $id = '';
 	private $parameters = array(
 		'category',
 		'ids',
@@ -62,6 +64,8 @@ class pootle_page_builder_for_WooCommerce_Public{
 
 		wp_enqueue_style( $token . '-css', $url . '/assets/front-end.css' );
 		wp_enqueue_script( $token . '-js', $url . '/assets/front-end.js', array( 'jquery' ) );
+		wp_enqueue_style( 'owl-carousel-css', 'https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css' );
+		wp_enqueue_script( 'owl-carousel-js', 'https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js', array( 'jquery' ) );
 	} // End enqueue()
 
 	/**
@@ -106,7 +110,10 @@ class pootle_page_builder_for_WooCommerce_Public{
 			$this->set_parameters( $short_code, $set );
 
 			$short_code .= ']';
-			echo '<!--' . $short_code . '-->' . do_shortcode( $short_code );
+
+			$this->id = 'ppb-wc-addon-' . $this->i++;
+			echo '<!--' . $short_code . '-->' . "<div id='$this->id'>" . do_shortcode( $short_code );
+			$this->display_scripts( $set );
 		}
 	}
 
@@ -138,5 +145,50 @@ class pootle_page_builder_for_WooCommerce_Public{
 		} else {
 			$short_code .= ' ' . $param . '="' . $value . '"';
 		}
+	}
+
+	/**
+	 * Renders js for display type
+	 * @param array $set Content block settings
+	 */
+	private function display_scripts( $set ) {
+		if ( ! empty( $set['wc_prods-display'] ) ) {
+			$method = 'display_' . $set['wc_prods-display'] . '_scripts';
+			if ( method_exists( $this, $method ) )
+				$this->$method( $set );
+		}
+	}
+
+	/**
+	 * Renders js for carousel
+	 * @param array $set Content block settings
+	 */
+	private function display_carousel_scripts( $set ) {
+		$items = empty( $set['wc_prods-columns'] ) ? 4 : $set['wc_prods-columns'];
+		?>
+		<style>
+			#<?php echo $this->id ?> ul.products li.product.type-product {
+				width: auto;
+				margin: 0 auto !important;
+				float: none;
+				padding: 0 2px !important;
+			}
+		</style>
+		<script>
+			( function( $ ) {
+				var $car = $( '#<?php echo $this->id ?> ul.products' ),
+					acros = <?php echo $items ?>,
+					acrosBy2 = <?php echo ( $items - ( $items % 2 ) ) / 2 ?>;
+				$car.addClass( 'owl-carousel' ).owlCarousel( {
+					navigation: true,
+					items : acros,
+					itemsDesktop : false,
+					itemsDesktopSmall : [ 1060, Math.max( 1, acros - 1, acrosBy2 ) ],
+					itemsTablet: [ 790, Math.max( 1, acrosBy2 ) ],
+					itemsMobile : [ 430, 1 ] // itemsMobile disabled - inherit from itemsTablet option
+				} );
+			} )( jQuery );
+		</script>
+		<?php
 	}
 }

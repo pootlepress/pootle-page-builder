@@ -1342,6 +1342,7 @@ jQuery( function ( $ ) {
 			'h4',
 			'shrameeFonts',
 			'fontsizeselect',
+			'ppbFontStyles',
 			'blockquote',
 			'forecolor',
 			'ppblink',
@@ -1424,7 +1425,7 @@ jQuery( function ( $ ) {
 		} );
 		editor.addButton( 'shrameeFonts', function() {
 			var items = [
-				{text: 'Default', value: ''},
+				{text: 'Default', value: 'inherit'},
 				// System Fonts
 				{text: 'Georgia', value: 'Georgia, serif'}, {text: 'Arial Black', value: '"Arial Black", Gadget, sans-serif'}, {text: 'Comic Sans MS', value: '"Comic Sans MS", cursive, sans-serif'}, {text: 'Impact', value: 'Impact, Charcoal, sans-serif'}, {text: 'Courier New', value: '"Courier New", Courier, monospace'},
 				// Google Fonts
@@ -1444,13 +1445,6 @@ jQuery( function ( $ ) {
 
 					if ( ! val ) ed.formatter.remove( 'shrameeFontFormat' );
 
-					ed.formatter.register( 'shrameeFontFormat', {
-						inline: 'span',
-						classes: 'ppb-google-font',
-						attributes: { 'data-font':'%gfont' },
-						styles: {fontFamily: '%font'}
-					} );
-
 					if ( -1 == val.indexOf(',') ) {
 						ed.formatter.apply( 'shrameeFontFormat', {font: val, gfont: val.replace( ' ', '+' ) } );
 						$body.append( '<link href="https://fonts.googleapis.com/css?family=' + val.replace( ' ', '+' ) + '"  rel="stylesheet">' );
@@ -1464,9 +1458,7 @@ jQuery( function ( $ ) {
 						self = this;
 
 					ed.on( 'nodeChange', function ( e ) {
-						var formatter = ed.formatter;
-						var value = '',
-							matches = {};
+						var value = null;
 
 						$( e.parents ).each( function () {
 							var font = $( this ).css( 'font-family' );
@@ -1474,7 +1466,6 @@ jQuery( function ( $ ) {
 								if ( -1 < font.indexOf( item.text ) ) {
 									value = item.value;
 									$( '.mce-shramee-fonts-control' ).find( '.mce-txt' ).html( item.text );
-									console.log( value );
 									return false;
 								}
 							} );
@@ -1482,27 +1473,87 @@ jQuery( function ( $ ) {
 								return false;
 							}
 						} );
-/*
-						$.each( e.parents, function ( ni, node ) {
+
+						if ( ! value ) {
+							$( '.mce-shramee-fonts-control' ).find( '.mce-txt' ).html( 'Font' );
+							value = 'inherit';
+						}
+
+						console.log( value );
+						self.state.set( 'value', value );
+					} );
+				}
+			};
+		} );
+		editor.addButton( 'ppbFontStyles', function() {
+			var items = [
+				{text: 'Elegant shadow', value: 'ppbfost-elegant-shadow'},
+				{text: 'Deep shadow', value: 'ppbfost-deep-shadow'},
+				{text: 'Inset shadow', value: 'ppbfost-inset-shadow'},
+				{text: 'Retro shadow', value: 'ppbfost-retro-shadow'},
+			],
+				lastVal = '';
+			return {
+				type: 'listbox',
+				text: 'Font Style',
+				icon: false,
+				minWidth: 70,
+				classes: 'ppbFoStField',
+				onselect: function ( e ) {
+					var ed = tinymce.activeEditor,
+						val = this.value();
+					$.each( items, function ( ii, item ) {
+						ed.formatter.remove( 'ppbFoStFormat', {value: item.value} );
+					} );
+					ed.formatter.apply( 'ppbFoStFormat', {value: val} );
+				},
+				values: items,
+				onPostRender: function () {
+					var ed = tinymce.activeEditor,
+						self = this;
+
+					ed.on( 'nodeChange', function ( e ) {
+						var value = null;
+
+						$( e.parents ).each( function () {
+							var $t = $( this );
 							$.each( items, function ( ii, item ) {
-								var val = item.value;
-								matches[val] = ( formatter.matchNode( node, 'shrameeFontFormat', {font: val} ) );
-								if (
-									formatter.matchNode( node, 'shrameeFontFormat', {font: val} ) ||
-									formatter.matchNode( node, 'shrameeFontFormat', {font: val, gfont: val.replace( ' ', '+' ) } )
-								) {
+								if ( $t.hasClass( item.value ) ) {
 									value = item.value;
+									$( '.mce-ppbFoStField' ).find( '.mce-txt' ).html( item.text );
 									return false;
 								}
 							} );
+							if ( value ) {
+								return false;
+							}
 						} );
-*/
-						console.log( self.state.set( 'value', value ) );
+
+						if ( ! value ) {
+							$( '.mce-ppbFoStField' ).find( '.mce-txt' ).html( 'Font Style' );
+							value = 'inherit';
+						}
+
+						lastVal = value;
+						self.state.set( 'value', value );
 					} );
 				}
 			};
 		} );
 
+	};
+
+	prevu.tmce.formats = {
+		shrameeFontFormat: {
+			inline: 'span',
+			classes: 'ppb-google-font',
+			attributes: {'data-font': '%gfont'},
+			styles: {fontFamily: '%font'}
+		},
+		ppbFoStFormat: {
+			block: 'h2',
+			classes: '%value'
+		}
 	};
 
 	tinymce.init( prevu.tmce );
