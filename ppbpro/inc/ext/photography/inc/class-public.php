@@ -96,7 +96,9 @@ class page_builder_photo_addon_Public{
 				$set = $this->set = wp_parse_args( $this->get_photo_settings( $set, $set[ $this->token . '_show' ] ), $defaults );
 				echo '<div ' . $this->attr() . ' class="ppb-photo ppb-photo-' . $set['show'] . '">';
 
-				if ( empty( str_replace( 'unsplash', '', $set['source_type'] ) ) ) {
+				$source_type = str_replace( 'unsplash', '', $set['source_type'] );
+
+				if ( empty( $source_type ) ) {
 					$this->img_from_links( json_decode( $set['source_data'], true ) );
 				} elseif ( method_exists( $this, $get_img_func = 'img_from_' . $set['source_type'] ) ) {
 					$this->$get_img_func( $set );
