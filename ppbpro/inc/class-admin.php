@@ -166,7 +166,7 @@ class Pootle_Page_Builder_Pro_Admin{
 			'label'       => 'Blog posts',
 			'icon_class'  => 'dashicons dashicons-admin-post',
 			'tab'         => '#pootle-ppb-blog-customizer-tab',
-			'ActiveClass' => 'page_builder_photo_addon',
+			'ActiveClass' => 'pootle_page_builder_blog_customizer',
 			'priority'    => 25,
 		);
 		$modules['wc-products'] = array(
