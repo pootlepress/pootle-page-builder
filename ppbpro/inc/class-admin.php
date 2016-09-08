@@ -6,7 +6,7 @@
  * @property string $path Plugin root dir path
  * @property string $version Plugin version
  */
-class Pootle_Page_Builder_Pro_Admin{
+class Pootle_Page_Builder_Pro_Admin {
 
 	/**
 	 * @var 	Pootle_Page_Builder_Pro_Admin Instance
@@ -68,7 +68,7 @@ class Pootle_Page_Builder_Pro_Admin{
 	public function filter_template( $otpl, $id ) {
 		$tpl_key = filter_input( INPUT_GET, 'tpl' );
 		$tpl = ppbpro_get_template( $tpl_key );
-		
+
 		if ( $tpl ) {
 			$pc = ppbpro_get_tpl_pc_data( $tpl_key );
 			if ( $pc ) {
@@ -174,14 +174,6 @@ class Pootle_Page_Builder_Pro_Admin{
 			'icon_class'  => 'dashicons dashicons-cart',
 			'tab'         => '#pootle-wc_prods-tab',
 			'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
-			'priority'    => 30,
-		);
-		$modules['one-pager'] = array(
-			'label'       => 'One Pager Section',
-			'icon_class'  => 'dashicons dashicons-format-aside',
-			'tab'         => "#pootlepb-background-row-tab",
-			'callback'    => 'onePager',
-			'ActiveClass' => 'pootle_page_builder_one_pager',
 			'priority'    => 30,
 		);
 		return $modules;

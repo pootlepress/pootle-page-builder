@@ -274,6 +274,7 @@ final class Pootle_Page_Builder_Front_Css_Js {
 	 */
 	public function enqueue_styles() {
 		wp_enqueue_style( 'ppb-panels-front', POOTLEPB_URL . 'css/front.css', array(), POOTLEPB_VERSION );
+		wp_enqueue_style( 'fontawesome', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css' );
 	}
 
 	/**

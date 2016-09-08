@@ -1328,6 +1328,7 @@ jQuery( function ( $ ) {
 	prevu.tmce.selector		= '.pootle-live-editor-realtime:not(.mce-content-body)';
 	//prevu.tmce.selector		= '.site-info';
 
+	prevu.tmce.verify_html = false;
 	prevu.tmce.inline	= true;
 	prevu.tmce.theme	= 'ppbprevu';
 	prevu.tmce.fontsize_formats	= '30px 35px 40px 50px 70px 100px';
@@ -1342,7 +1343,7 @@ jQuery( function ( $ ) {
 			'h4',
 			'shrameeFonts',
 			'fontsizeselect',
-			'ppbFontStyles',
+			//'ppbFontStyles',
 			'blockquote',
 			'forecolor',
 			'ppblink',
@@ -1635,6 +1636,31 @@ jQuery( function ( $ ) {
 	window.ppbModules.image = function ( $t, ed ) {
 		$t.find( '.ppb-edit-block' ).find( '.dashicons-before.dashicons-format-image' ).click();
 	};
+
+	$( '#fa-icon-choose' ).iconpicker();
+	$( '#fa-icon-color' ).wpColorPicker();
+	window.ppbModules.chooseIconDialog = function ( $t, ed ) {
+		$( '#fa-iconpicker' ).fadeIn();
+		window.ppbModules.$t = $t;
+		window.ppbModules.ed = ed;
+	};
+
+	window.ppbModules.insertIcon = function () {
+		var $t = window.ppbModules.$t,
+			ed = window.ppbModules.ed,
+			iclas = $( '#fa-icon-choose' ).val(),
+			isize = $( '#fa-icon-size' ).val(),
+			icolr = $( '#fa-icon-color' ).val();
+		var icon = '<div style="text-align: center"><i style="font-size:' + isize + 'px;color:' + icolr + '" class="fa ' + iclas + '"><span style="display:none">' + iclas + '</span></i></div>';
+
+		ed.selection.setCursorLocation( ed.getBody().firstChild, 0 );
+
+		ed.selection.collapse( false );
+
+		ed.execCommand( 'mceInsertContent', false, icon );
+		$( '#fa-iconpicker' ).fadeOut();
+	};
+
 	window.ppbModules.unsplash = function ( $t, ed ) {
 		ShrameeUnsplashImage( function ( url ) {
 			var $img = '<img src="' + url + '">';
@@ -1643,6 +1669,7 @@ jQuery( function ( $ ) {
 			ed.execCommand( 'mceInsertContent', false, $img );
 		} );
 	};
+
 	window.ppbModules.button = function ( $t, ed ) {
 		ed.execCommand( 'pbtn_add_btn_cmd' );
 	};

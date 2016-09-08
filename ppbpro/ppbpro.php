@@ -15,6 +15,8 @@ require 'inc/vars.php';
 require 'inc/class-admin.php';
 /** Plugin public class */
 require 'inc/class-public.php';
+/** Including Framework class */
+require 'class-framework.php';
 /** Including Main Plugin class */
 require 'class-ppbpro.php';
 /** Intantiating main plugin class */

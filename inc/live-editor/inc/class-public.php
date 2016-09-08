@@ -266,6 +266,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		wp_enqueue_script( 'ppb-fields', "$url/ppb-deps.js", array( 'wp-color-picker', ), $ver );
 		wp_enqueue_script( 'ppb-ui', "$ppb_js/ppb-ui.js", $jQui_deps, $ver );
 		wp_enqueue_script( 'ppb-unsplash', "$ppb_js/unsplash.js", $jQui_deps, $ver );
+
+		wp_enqueue_script( 'ppb-fa-picker', "$ppb_js/fontawesome-iconpicker.min.js", $jQui_deps, $ver );
+		wp_enqueue_style( 'ppb-fa-picker', "$ppb_js/fontawesome-iconpicker.min.css" );
+
 		wp_enqueue_script( 'ppb-ui-tooltip', "$ppb_js/ui.admin.tooltip.js" );
 		wp_enqueue_script( 'ppble-tmce-view', "$url/tmce.view.js" );
 		wp_enqueue_script( 'ppble-tmce-theme', "$url/tmce.theme.js", array( 'ppble-tmce-view' ) );
@@ -276,6 +280,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			'ppb-ui',
 			'ppble-sd',
 			'ppb-fields',
+			'wp-color-picker',
 		), $ver );
 
 		if ( isset( $_REQUEST['tour'] ) ) {

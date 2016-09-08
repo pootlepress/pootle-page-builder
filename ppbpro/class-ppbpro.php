@@ -7,7 +7,7 @@
  * @static string $path Plugin root dir path
  * @static string $version Plugin version
  */
-class Pootle_Page_Builder_Pro{
+class Pootle_Page_Builder_Pro extends Pootle_Page_Builder_Pro_Framework {
 
 	/**
 	 * @var 	Pootle_Page_Builder_Pro Instance
@@ -86,13 +86,15 @@ class Pootle_Page_Builder_Pro{
 	 * @access  private
 	 * @since   1.0.0
 	 */
-	private function __construct( $file ) {
+	protected function __construct( $file ) {
 
 		self::$token   =   'ppbpro';
 		self::$file    =   $file;
 		self::$url     =   plugin_dir_url( $file );
 		self::$path    =   dirname( $file );
 		self::$version =   '1.0.0';
+
+		parent::__construct();
 
 		register_activation_hook( $file, array( $this, 'activated' ) );
 

@@ -305,32 +305,29 @@ if ( $enabled_modules ) {
 	<?php
 }
 ?>
-
 <div id="ppb-loading-overlay">
 	<div id="ppb-loader"></div>
-	<style>
-		#ppb-loading-overlay,
-		#ppb-loader {
-			position:fixed;
-			top:-9999px;
-			right:-9999px;
-			bottom:-9999px;
-			left:-9999px;
-			z-index: 9999;
-		}
-		#ppb-loading-overlay {
-			background: rgba(0, 0, 0, 0.5);
-			display: none;
-		}
-		#ppb-loader {
-			margin: auto;
-			width: 160px;
-			height: 160px;
-			border: 16px solid #fdb;
-			border-radius: 50%;
-			border-top-color: #ef4832;
-			-webkit-animation: ppb-spin 1.6s linear infinite;
-			animation: ppb-spin 1.6s linear infinite;
-		}
-	</style>
+</div>
+
+<div id="fa-iconpicker" style="display: none;">
+	<header>
+		Insert icon
+	</header>
+	<section>
+		<label>
+			<span>Choose icon</span>
+			<input id="fa-icon-choose" type="text">
+		</label>
+		<label>
+			<span>Icon size</span>
+			<input id="fa-icon-size" value="160" type="number" min="25" max="250" step="5">px
+		</label>
+		<label>
+			<span>Icon color</span>
+			<input id="fa-icon-color" value="#999" type="text">
+		</label>
+	</section>
+	<footer>
+		<a class="button" href="javascript:ppbModules.insertIcon()">Done</a>
+	</footer>
 </div>

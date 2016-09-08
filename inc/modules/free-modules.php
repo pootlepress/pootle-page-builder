@@ -55,6 +55,13 @@ class pootle_page_builder_Unsplash {
 			'ActiveClass' => $this->class,
 			'priority' => 15
 		);
+		$mods["icon"] = array(
+			'label' => 'Icon',
+			'icon_class' => 'dashicons dashicons-lightbulb',
+			'callback' => 'chooseIconDialog',
+			'ActiveClass' => $this->class,
+			'priority' => 15
+		);
 		$mods["pbtn"] = array(
 			'label' => 'Button',
 			'icon_class' => 'dashicons dashicons-upload',

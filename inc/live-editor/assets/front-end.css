@@ -1385,3 +1385,76 @@ a .ppb-module-disabled:after {
 	display: block;
 	height: 1px;
 }
+
+#ppb-loading-overlay,
+#ppb-loader,
+#fa-iconpicker {
+	position:fixed;
+	top:-9999px;
+	right:-9999px;
+	bottom:-9999px;
+	left:-9999px;
+	z-index: 9999;
+	margin: auto;
+}
+#ppb-loading-overlay {
+	background: rgba(0, 0, 0, 0.5);
+	display: none;
+}
+#ppb-loader {
+	width: 160px;
+	height: 160px;
+	border: 16px solid #fdb;
+	border-radius: 50%;
+	border-top-color: #ef4832;
+	-webkit-animation: ppb-spin 1.6s linear infinite;
+	animation: ppb-spin 1.6s linear infinite;
+}
+
+#fa-iconpicker {
+	width: 430px;
+	height: 430px;
+	background: #fff;
+	overflow: auto;
+	border: 1px solid #aaa;
+}
+
+#fa-iconpicker header,
+#fa-iconpicker section,
+#fa-iconpicker footer {
+	padding: 7px 11px;
+	background: #eee;
+	position: absolute;
+	left: 0;
+	right: 0;
+	box-sizing: border-box;
+}
+
+#fa-iconpicker section {
+	top: 43px;
+	bottom: 52px;
+	overflow: auto;
+	background: #fff;
+}
+
+#fa-iconpicker header {
+	top: 0;
+	border-bottom: 1px solid #999;
+	height: 43px;
+}
+
+#fa-iconpicker footer {
+	height: 52px;
+	border-top: 1px solid #999;
+	bottom: 0;
+}
+
+#fa-iconpicker label {
+	display: block;
+	margin: 1em;
+}
+
+#fa-iconpicker label > span {
+	display: inline-block;
+	min-width: 142px;
+}
