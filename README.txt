@@ -128,6 +128,14 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Changelog ==
 
+= 3.1.0 =
+* 2016-08-26
+ * New - Content block position dragging
+ * New - Content block resizing
+ * New - Google fonts in editor
+ * New - Action hook `pootlepb_save_post` executed before saving ppb post data both from live editor and admin end
+ * Tweak - Live editor formatting bar styling
+
 = 3.0.1 =
 * 2016-08-26
  * Tweak - Compatibility with php 5.4
