@@ -129,7 +129,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 == Changelog ==
 
 = 3.1.0 =
-* 2016-08-26
+* 2016-09-08
  * New - Content block position dragging
  * New - Content block resizing
  * New - Google fonts in editor
