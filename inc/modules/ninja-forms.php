@@ -42,10 +42,10 @@ class pootle_page_builder_Ninja_Forms {
 			add_action( 'pootlepb_render_content_block', array( $this, 'shortcode' ), 52 );
 			// Content block panel fields
 			add_filter( 'pootlepb_content_block_fields', array( $this, 'fields' ) );
-
-			$forms = ninja_forms_get_all_forms();
-			foreach ( $forms as $form ) {
-				$this->choices[ $form['id'] ] = "$form[id] - $form[name]";
+			// Get all NinjaForms form ids
+			$form_ids = Ninja_Forms()->forms()->get_all();
+			foreach ( $form_ids as $form_id ) {
+				$this->choices[ $form_id ] = "$form_id - " . Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
 			}
 		}
 	}
