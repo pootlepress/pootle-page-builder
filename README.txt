@@ -15,7 +15,8 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
-= Pootle Pagebuilder pro is a front-end, drag and drop page builder that makes it easy to create beautiful WordPress pages and posts. =
+https://vimeo.com/181944652
+
 If you’ve ever been frustrated with WordPress then you’re going to love how Pootle Pagebuilder gives you complete control over your page layouts.
 
 = What is Pootle Pagebuilder? =
@@ -23,11 +24,6 @@ If you’ve ever been frustrated with WordPress then you’re going to love how 
 Pootle Pagebuilder is a front-end, drag and drop page builder that is the most creative, fun and intuitive way to build stunning looking pages and posts with WordPress.
 
 Anyone can now create a beautiful WordPress website in minutes and no technical knowledge is needed (we promise).
-
-= Can I see Pootle Pagebuilder in action? =
-
- Yes! Watch this video.
-[vimeo https://vimeo.com/180160132]
 
 = What can I do with Pootle Pagebuilder? =
 

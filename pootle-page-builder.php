@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Pootle Pagebuilder
  * Plugin URI: http://pootlepress.com/
- * Description: pootle page builder helps you create stunning pages with full width rows including parallax background images & videos.
+ * Description: Pootle Pagebuilder is a front-end, drag and drop page builder that makes it easy to create beautiful WordPress pages and posts.
  * Version: 3.1.0
  * Author: pootlepress
  * Author URI: http://pootlepress.com/
