@@ -309,25 +309,17 @@ if ( $enabled_modules ) {
 	<div id="ppb-loader"></div>
 </div>
 
-<div id="fa-iconpicker" style="display: none;">
-	<header>
-		Insert icon
-	</header>
-	<section>
-		<label>
-			<span>Choose icon</span>
-			<input id="fa-icon-choose" type="text">
-		</label>
-		<label>
-			<span>Icon size</span>
-			<input id="fa-icon-size" value="160" type="number" min="25" max="250" step="5">px
-		</label>
-		<label>
-			<span>Icon color</span>
-			<input id="fa-icon-color" value="#999" type="text">
-		</label>
-	</section>
-	<footer>
-		<a class="button" href="javascript:ppbModules.insertIcon()">Done</a>
-	</footer>
+<div id="ppb-iconpicker" style="display: none;">
+	<label>
+		<span>Choose icon</span>
+		<input id="ppb-icon-choose" type="text">
+	</label>
+	<label>
+		<span>Icon size</span>
+		<input id="ppb-icon-size" value="160" type="range" min="25" max="295" step="5">
+	</label>
+	<label>
+		<span>Icon color</span>
+		<input id="ppb-icon-color" value="#999" type="text">
+	</label>
 </div>

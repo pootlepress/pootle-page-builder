@@ -16,7 +16,8 @@ global
 	$pootlepb_content_block_tabs,
 	$pootlepb_row_settings_tabs,
 	$ppbpro_addons_data,
-	$pootlepb_modules;
+	$pootlepb_modules,
+	$pootlepb_gradient_css;
 
 /**
  * Content block styling fields
@@ -160,6 +161,13 @@ $pootlepb_row_styling_fields = array(
 		'tab' => 'layout',
 		'priority' => 1,
 	),
+	'accordion'              => array(
+		'name' => 'Make accordion',
+		'type' => 'checkbox',
+		'help-text' => 'Keeps the row hidden by default with an icon above it to show the row.',
+		'tab' => 'layout',
+		'priority' => 1,
+	),
 	'match_col_hi'              => array(
 		'name' => 'Make columns the same height',
 		'type' => 'checkbox',
@@ -220,12 +228,14 @@ $pootlepb_row_styling_fields = array(
 		'options' => array(
 			'' => 'Please choose...',
 			'.bg_color' => 'Background color',
+			'.bg_grad'  => 'Background Gradient',
 			'.bg_image' => 'Background image',
 			'.bg_video' => 'Background video',
 		),
 		'default' => '',
 	),
 
+// Color wrap
 	'bg_color_wrap' => array(
 		'name' => '<div class="bg_section bg_color">',
 		'tab' => 'background',
@@ -237,14 +247,65 @@ $pootlepb_row_styling_fields = array(
 		'name' => __( 'Background Color', 'vantage' ),
 		'tab' => 'background',
 		'type' => 'color',
-		'priority' => 3,
+		'priority' => 2.5,
+	),
+// Gradient wrap
+	'bg_grad_wrap' => array(
+		'name' => '</div><div class="bg_section bg_grad">',
+		'tab' => 'background',
+		'type' => 'html',
+		'priority' => 2.77,
 	),
 
+	'grad_type' => array(
+		'name' => __( 'Gradient Type', 'vantage' ),
+		'tab' => 'background',
+		'type' => 'select',
+		'priority' => 3.13,
+		'options' => array(
+			'' => 'Linear',
+			'radial' => 'Radial',
+			'slant'  => 'Slanting',
+		),
+		'default' => '',
+	),
+	'grad_col1' => array(
+		'name' => __( 'First Color', 'vantage' ),
+		'tab' => 'background',
+		'type' => 'color',
+		'priority' => 3.22,
+	),
+
+	'grad_col2' => array(
+		'name' => __( 'Second Color', 'vantage' ),
+		'tab' => 'background',
+		'type' => 'color',
+		'priority' => 3.31,
+	),
+
+	'grad_opacity' => array(
+		'name' => 'Gradient transparency',
+		'min' => '0',
+		'max' => '1',
+		'step' => '0.02',
+		'default' => '0.88',
+		'tab' => 'background',
+		'type' => 'slider',
+		'priority' => 3.4,
+	),
+
+	'grad_image' => array(
+		'name' => __( 'Image under gradient', 'vantage' ),
+		'tab' => 'background',
+		'type' => 'upload',
+		'priority' => 3.49,
+	),
+// Image wrap
 	'bg_image_wrap' => array(
 		'name' => '</div><div class="bg_section bg_image">',
 		'tab' => 'background',
 		'type' => 'html',
-		'priority' => 4,
+		'priority' => 4.99,
 	),
 
 	'background_image' => array(
@@ -252,6 +313,17 @@ $pootlepb_row_styling_fields = array(
 		'tab' => 'background',
 		'type' => 'upload',
 		'priority' => 5,
+	),
+
+	'bg_overlay_opacity' => array(
+		'name' => 'Overlay color transparency',
+		'min' => '0',
+		'max' => '1',
+		'step' => '0.02',
+		'default' => '0.5',
+		'tab' => 'background',
+		'type' => 'slider',
+		'priority' => 10,
 	),
 
 	'background_image_repeat' => array(
@@ -1155,4 +1227,11 @@ $ppbpro_addons_data = array(
 			'Description' => 'pootle page builder for WooCommerce brings powerful WooCommerce features into page builder. Create stunning pages featuring your products by id, category, attribute, best-selling, top rated and on-sale, plus use pootle page builder on product pages and with WooCommerce Tab Manager.',
 		),
 	),
+);
+
+$pootlepb_gradient_css = array(
+	''       => 'background: -webkit-linear-gradient(%1$s);background: -o-linear-gradient(%1$s);background: -moz-linear-gradient(%1$s);background: linear-gradient(to %1$s);',
+	'radial' => 'background: -webkit-radial-gradient(%1$s);background: -o-radial-gradient(%1$s);background: -moz-radial-gradient(%1$s);background: radial-gradient(%1$s);',
+	'slant'  => 'background: -webkit-linear-gradient(135deg,%1$s);background: -o-linear-gradient(135deg,%1$s);background: -moz-linear-gradient(135deg,%1$s);background: linear-gradient(135deg,%1$s);',
+
 );

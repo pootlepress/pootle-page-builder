@@ -160,6 +160,15 @@ jQuery( function ( $ ) {
 			ppbMatchColHi();
 		};
 
+		$( '.ppb-row-accordion-toggle' ).click( function ( e ) {
+			var $t = $( this ),
+				$ro = $t.siblings( '.panel-row-style' );
+			$t.toggleClass( 'ppb-accordion-open' );
+			$ro
+				.toggleClass( 'ppb-accordion-open' )
+				.slideToggle(500);
+		} );
+
 		$w.resize( ppbCorrectOnResize );
 		ppbCorrectOnResize();
 

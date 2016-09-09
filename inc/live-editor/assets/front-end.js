@@ -91,6 +91,7 @@ jQuery( function ( $ ) {
 		$setTitleDialog = $( '#pootlepb-set-title' ),
 		$postSettingsDialog = $( '#pootlepb-post-settings' ),
 		$ppbIpadColorDialog = $('#ppb-ipad-color-picker'),
+		$iconPicker = $( '#ppb-iconpicker' ),
 		$ppb = $( '#pootle-page-builder' ),
 		$mods = $('#pootlepb-modules-wrap'),
 		$body = $('body'),
@@ -609,7 +610,7 @@ jQuery( function ( $ ) {
 
 				if ( roMinHi ) {
 					$ro.find( '.panel-grid-cell-container, .ppb-col' ).not( '.ppb-block *' )
-						.css( 'min-height', roMinHi );
+					   .css( 'min-height', roMinHi );
 				}
 				$t.find( '.ppb-edit-block .dashicons-before:first' ).click();
 				ui.position.left = parseInt( $t.css( 'margin-left' ) );
@@ -864,6 +865,61 @@ jQuery( function ( $ ) {
 		ppbAjax.title = $( '#ppble-live-page-title' ).val();
 	};
 	$setTitleDialog.ppbDialog( dialogAttr );
+
+	dialogAttr.height = 430;
+	dialogAttr.width =  430;
+	dialogAttr.title = 'Insert icon';
+	dialogAttr.buttons = {
+		'Done' : function () {
+			var iclas = $( '#ppb-icon-choose' ).val(),
+				icolr = $( '#ppb-icon-color' ).val(),
+				isize = $( '#ppb-icon-size' ).val(),
+				style = 'font-size:' + isize + 'px;color:' + icolr,
+				attr = 'style="' + style + '" class="fa ' + iclas + '"',
+				icon = '<i ' + attr + '><span style="display:none">' + iclas + '</span></i>';
+			if ( 'function' == typeof pickFaIcon.callback ) {
+				pickFaIcon.callback( {
+					html : icon,
+					attr : attr,
+					style : style,
+					class : iclas,
+					size : isize,
+					color : icolr
+				} );
+			}
+			$iconPicker.ppbDialog( 'close' );
+		}
+	};
+	dialogAttr.close = function() {};
+	$iconPicker.ppbDialog( dialogAttr );
+	$iconPicker.find( '#ppb-icon-choose' ).iconpicker({
+		placement: 'bottomRight'
+	});
+	$iconPicker.find( '#ppb-icon-color' ).wpColorPicker();
+
+	var pickFaIcon = function ( callback, properties ) {
+		$iconPicker.ppbDialog( 'open' );
+		pickFaIcon.callback = callback;
+
+		var iclas = $( '#ppb-icon-choose' ),
+			icolr = $( '#ppb-icon-color' ),
+			isize = $( '#ppb-icon-size' );
+
+		iclas.val( '' );
+
+		if ( ! properties ) return;
+
+		if ( properties.class ) {
+			iclas.val( properties.class ).change();
+		}
+		if ( properties.color ) {
+			icolr.val( properties.color ).change();
+		}
+		if ( properties.size ) {
+			isize.val( parseInt( properties.size ) ).change();
+		}
+
+	};
 
 	if ( $postSettingsDialog.length ) {
 		dialogAttr.height = 700;
@@ -1365,6 +1421,22 @@ jQuery( function ( $ ) {
 	prevu.tmce.content_css	= "http://wp/ppb/wp-includes/css/dashicons.min.css?ver=4.4.2-alpha-36412";
 	prevu.tmce.setup	= function(editor) {
 
+		editor.onDblClick.add(function(ed, e) {
+			var $i = $( e.target );
+			if ( $i.hasClass( "fa" ) ) {
+				pickFaIcon( function ( icon ) {
+					$i.attr( {
+						class: 'fa ' + icon.class,
+						style: icon.style
+					} );
+				}, {
+					class: $i.attr( 'class' ).replace( 'fa ', '' ),
+					color: $i.css( 'color' ),
+					size: $i.css( 'font-size' ),
+				} );
+			}
+		});
+
 		editor.on('change', function(e) {
 			prevu.saveTmceBlock( $( e.target.targetElm ) );
 		});
@@ -1637,28 +1709,12 @@ jQuery( function ( $ ) {
 		$t.find( '.ppb-edit-block' ).find( '.dashicons-before.dashicons-format-image' ).click();
 	};
 
-	$( '#fa-icon-choose' ).iconpicker();
-	$( '#fa-icon-color' ).wpColorPicker();
 	window.ppbModules.chooseIconDialog = function ( $t, ed ) {
-		$( '#fa-iconpicker' ).fadeIn();
-		window.ppbModules.$t = $t;
-		window.ppbModules.ed = ed;
-	};
-
-	window.ppbModules.insertIcon = function () {
-		var $t = window.ppbModules.$t,
-			ed = window.ppbModules.ed,
-			iclas = $( '#fa-icon-choose' ).val(),
-			isize = $( '#fa-icon-size' ).val(),
-			icolr = $( '#fa-icon-color' ).val();
-		var icon = '<div style="text-align: center"><i style="font-size:' + isize + 'px;color:' + icolr + '" class="fa ' + iclas + '"><span style="display:none">' + iclas + '</span></i></div>';
-
-		ed.selection.setCursorLocation( ed.getBody().firstChild, 0 );
-
-		ed.selection.collapse( false );
-
-		ed.execCommand( 'mceInsertContent', false, icon );
-		$( '#fa-iconpicker' ).fadeOut();
+		pickFaIcon( function ( icon ) {
+			ed.selection.setCursorLocation( ed.getBody().firstChild, 0 );
+			ed.selection.collapse( false );
+			ed.execCommand( 'mceInsertContent', false, '<div style="text-align: center">' + icon.html + '</div>' );
+		} );
 	};
 
 	window.ppbModules.unsplash = function ( $t, ed ) {

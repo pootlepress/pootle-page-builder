@@ -256,7 +256,68 @@ img.ppb-bg-parallax {
 	background: none !important;
 }
 
+.ppb-row-accordion-toggle {
+	display: block;
+	font-size: 50px;
+	text-align: center;
+	height: 50px;
+	width: 50px;
+	color: #fff;
+	background: rgba(0,0,0,0.25);
+	border: 2px solid #fff;
+	border-radius: 50%;
+	box-sizing: border-box;
+	margin: -61px auto 11px;
+	position: relative;
+	z-index: 97;
+	cursor: pointer;
+}
+
+
+.ppb-row-accordion-toggle:before,.ppb-row-accordion-toggle:after{
+	content:'';
+	position:absolute;
+	width: 19px;
+	height: 2px;
+	background-color:white;
+	border-radius:2px;
+	top: 22px;
+	box-shadow:0 0 2px 0 #ccc;
+	-webkit-transition: all 0.25s ease;
+	transition: all 0.35s ease;
+}
+
+.ppb-row-accordion-toggle:before{
+	-webkit-transform:rotate(45deg);
+	-moz-transform:rotate(45deg);
+	transform:rotate(45deg);
+	left: 7px;
+}
+.ppb-row-accordion-toggle:after{
+	-webkit-transform:rotate(-45deg);
+	-moz-transform:rotate(-45deg);
+	transform:rotate(-45deg);
+	right: 7px;
+}
+
+.ppb-row-accordion-toggle.ppb-accordion-open:before,.ppb-row-accordion-toggle.ppb-accordion-open:after{
+	width: 32px;
+	top: 23px;
+}
+
+#xxpootle-page-builder .panel-grid .ppb-row-accordion-toggle ~ .panel-row-style {
+	overflow: hidden;
+	-webkit-transition: all 0.34s ease-in-out;
+	transition: all 0.34s ease-in-out;
+}
+/*
+#pootle-page-builder .panel-grid .ppb-row-accordion-toggle:not(.ppb-accordion-open) ~ .panel-row-style {
+	min-height: 0 !important;
+	height: 0;
+}
+*/
 @media only screen and (min-width: 769px) {
+
 	br.rwd{
 		display: none;
 	}

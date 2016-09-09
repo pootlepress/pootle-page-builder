@@ -28,14 +28,29 @@ final class Pootle_Page_Builder_Custom_Styles {
 		/* Add style attributes */
 		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_style_vars' ), 5, 2 );
 		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_border' ), 10, 2 );
-		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_bg_color' ), 10, 2 );
-		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_bg_image' ), 10, 2 );
-		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_full_width' ), 10, 2 );
+		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_full_width' ), 11, 2 );
 		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_bg_parallax' ), 10, 2 );
 		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_height' ), 10, 3 );
 		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_hide_row' ), 10, 2 );
-		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_bg_vid_css' ), 10, 2 );
 		add_filter( 'pootlepb_row_style_attributes', array( $this, 'row_inline_css' ), 10, 2 );
+	}
+
+	/**
+	 * Set's row border
+	 * @param array $attr
+	 * @param array $style
+	 * @return array
+	 */
+	public function row_border( $attr, $style ) {
+
+		if ( ! empty( $attr['top_border_height'] ) ) {
+			$attr['style'] .= 'border-top: ' . $style['top_border_height'] . 'px solid ' . $style['top_border'] . '; ';
+		}
+		if ( ! empty( $style['bottom_border_height'] ) ) {
+			$attr['style'] .= 'border-bottom: ' . $style['bottom_border_height'] . 'px solid ' . $style['bottom_border'] . '; ';
+		}
+
+		return $attr;
 	}
 
 	/**
@@ -46,14 +61,18 @@ final class Pootle_Page_Builder_Custom_Styles {
 	 */
 	public function row_style_vars( $attr, $style ) {
 
+		$attr['style'] = '';
+
 		//Setting row bg type property
 		$this->row_bg_type = '.bg_image';
 		if ( isset( $style['background_toggle'] ) ) {
 			$this->row_bg_type = $style['background_toggle'];
 		}
 
-		//Init style
-		$attr['style'] = '';
+		$method = 'row_bg_' . str_replace( '.bg_', '', $this->row_bg_type );
+		if ( method_exists( $this, $method ) ) {
+			$attr = $this->$method( $attr, $style );
+		}
 
 		return $attr;
 	}
@@ -74,18 +93,56 @@ final class Pootle_Page_Builder_Custom_Styles {
 	}
 
 	/**
-	 * Set's row border
+	 * Set's row background color
 	 * @param array $attr
 	 * @param array $style
 	 * @return array
 	 */
-	public function row_border( $attr, $style ) {
+	public function row_bg_grad( $attr, $style ) {
 
-		if ( ! empty( $attr['top_border_height'] ) ) {
-			$attr['style'] .= 'border-top: ' . $style['top_border_height'] . 'px solid ' . $style['top_border'] . '; ';
+		foreach( array(
+			'grad_col1' => '#fff',
+			'grad_col2' => '#ccc',
+			'grad_type' => '',
+			'grad_image' => '',
+		) as $k => $v ) {
+			if ( empty( $style[ $k ] ) ) $style[ $k ] = $v;
 		}
-		if ( ! empty( $style['bottom_border_height'] ) ) {
-			$attr['style'] .= 'border-bottom: ' . $style['bottom_border_height'] . 'px solid ' . $style['bottom_border'] . '; ';
+		
+		add_action( 'pootlepb_row_embed_style', function( $css, $style, $rowID ) {
+
+			global $pootlepb_gradient_css;
+
+			$grad_css = sprintf(
+				$pootlepb_gradient_css[ $style['grad_type'] ],
+				"$style[grad_col1],$style[grad_col2]"
+			);
+
+			if ( ! empty( $style['grad_opacity'] ) ) {
+				$grad_css .= 'opacity: ' . ( 1 - $style['bg_overlay_opacity'] ) . ';';
+			}
+			$css .= "$rowID .panel-row-style:before { $grad_css }";
+
+			return $css;
+		}, 11, 3 );
+
+		$attr['style'] .= "background: url('$style[grad_image]') center/cover;";
+
+		return $attr;
+	}
+
+	/**
+	 * Row bg video class and video mobile image
+	 * @param array $attr
+	 * @param array $style
+	 * @return array
+	 */
+	public function row_bg_video( $attr, $style ) {
+
+		$attr['class'][] = 'video-bg';
+
+		if ( ! empty( $style['bg_mobile_image'] ) ) {
+			$attr['style'] .= 'background: url( ' . esc_url( $style['bg_mobile_image'] ) . ' ) center/cover; ';
 		}
 
 		return $attr;
@@ -157,6 +214,10 @@ final class Pootle_Page_Builder_Custom_Styles {
 		if ( ! empty( $style['full_width'] ) ) {
 			$attr['class'][] = 'ppb-stretch-full-width';
 			$attr['class'][] = 'ppb-full-width-no-bg';
+		}
+
+		if ( ! empty( $style['accordion'] ) ) {
+			$attr['style'] .= 'min-height:0;display:none;';
 		}
 
 		if ( ! empty( $style['match_col_hi'] ) ) {
@@ -234,26 +295,6 @@ final class Pootle_Page_Builder_Custom_Styles {
 
 		if ( ! empty( $style['hide_row'] ) ) {
 			$attr['style'] .= 'display:none;';
-		}
-
-		return $attr;
-	}
-
-	/**
-	 * Row bg video class and video mobile image
-	 * @param array $attr
-	 * @param array $style
-	 * @return array
-	 */
-	public function row_bg_vid_css( $attr, $style ) {
-
-		if ( '.bg_video' == $this->row_bg_type ) {
-
-			$attr['class'][] = 'video-bg';
-
-			if ( ! empty( $style['bg_mobile_image'] ) ) {
-				$attr['style'] .= 'background: url( ' . esc_url( $style['bg_mobile_image'] ) . ' ) center/cover; ';
-			}
 		}
 
 		return $attr;

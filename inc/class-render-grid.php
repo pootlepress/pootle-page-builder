@@ -251,6 +251,19 @@ class Pootle_Page_Builder_Render_Grid {
 	 *
 	 * @param array $style
 	 */
+	public function row_accordion( $row ) {
+			if ( ! empty( $row['style']['accordion'] ) ) {
+				?>
+				<span class="ppb-row-accordion-toggle"></span>
+				<?php
+			}
+	}
+
+	/**
+	 * Output row bg video
+	 *
+	 * @param array $style
+	 */
 	public function row_bg_video( $style ) {
 
 		if ( ! empty( $style['bg_video'] ) && ! empty( $style['background_toggle'] ) && '.bg_video' == $style['background_toggle'] ) {
