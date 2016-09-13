@@ -43,7 +43,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 		/* Puts stuff in row */
 		add_action( 'pootlepb_before_row', array( $this, 'row_accordion' ) );
 		add_action( 'pootlepb_before_cells', array( $this, 'row_embed_css' ), 10, 2 );
-		add_action( 'pootlepb_before_cells', array( $this, 'row_bg_video' ) );
+		add_filter( 'pootlepb_row_cell_attributes', array( $this, 'row_animation' ), 10, 4 );
 
 		/* Embed styles */
 		add_action( 'pootlepb_row_embed_style', array( $this, 'row_col_gutter' ), 10, 3 );
@@ -208,6 +208,15 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 				}
 			}
 		}
+	}
+
+	public function row_animation( $attrs, $ci, $gi, $style ) {
+		if ( ! empty( $style['animate_cols'] ) ) {
+			$animate_attrs = json_decode( $style['animate_cols'], 'array' );
+			$attrs = array_merge( $attrs, $animate_attrs );
+		}
+
+		return $attrs;
 	}
 }
 

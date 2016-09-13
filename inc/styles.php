@@ -303,6 +303,7 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]" value=""
 			         data-style-field="<?php echo esc_attr( $key ) ?>"
 			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
+			<button class="button clear-button" onclick="jQuery(this).siblings('input').val('').change();">Remove Image</button><br>
 			<button class="button upload-button">Select Image</button> <small>OR</small>
 			<input placeholder="Search Unsplash..." type="search" style="display: none;">
 			<button style="display: none;" class="button unsplash-button">Search Unsplash</button><?php

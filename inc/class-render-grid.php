@@ -223,7 +223,7 @@ class Pootle_Page_Builder_Render_Grid {
 		$cell_classes = apply_filters( 'pootlepb_row_cell_classes', array( "ppb-col panel-grid-cell $col_class" ), $panels_data );
 
 		$cell_attributes = array( 'class' => implode( ' ', $cell_classes ), 'id'    => $cellId,	);
-		$cell_attributes = apply_filters( 'pootlepb_row_cell_attributes', $cell_attributes, $ci, $gi, $panels_data );
+		$cell_attributes = apply_filters( 'pootlepb_row_cell_attributes', $cell_attributes, $ci, $gi, $panels_data['grids'][ $gi ]['style'], $panels_data );
 
 		return pootlepb_stringify_attributes( $cell_attributes );
 	}
@@ -252,11 +252,26 @@ class Pootle_Page_Builder_Render_Grid {
 	 * @param array $style
 	 */
 	public function row_accordion( $row ) {
-			if ( ! empty( $row['style']['accordion'] ) ) {
-				?>
-				<span class="ppb-row-accordion-toggle"></span>
-				<?php
-			}
+		if ( ! empty( $row['style']['accordion'] ) ) {
+			?>
+			<span class="ppb-row-accordion-toggle" onclick="jQuery( this ).toggleClass( 'ppb-accordion-open' )
+			.siblings( '.panel-row-style' ).slideToggle(520);
+			jQuery('html, body').animate({scrollTop:jQuery(this).offset().top - 50}, 520)"></span>
+			<?php
+		}
+	}
+
+	/**
+	 * Output row bg video
+	 *
+	 * @param array $style
+	 */
+	public function row_bg_ken_burns( $style ) {
+		echo
+			'<div class="ppb-row-kenburns-wrap">' .
+			"<img src='{$style['background_image']}' class='ppb-row-kenburns'>" .
+			'</div>';
+		remove_action( 'pootlepb_before_cells', array( $GLOBALS['Pootle_Page_Builder_Render_Layout'], 'row_bg_ken_burns' ) );
 	}
 
 	/**
@@ -266,7 +281,7 @@ class Pootle_Page_Builder_Render_Grid {
 	 */
 	public function row_bg_video( $style ) {
 
-		if ( ! empty( $style['bg_video'] ) && ! empty( $style['background_toggle'] ) && '.bg_video' == $style['background_toggle'] ) {
+		if ( ! empty( $style['bg_video'] ) ) {
 
 			$videoClasses = 'ppb-bg-video-container';
 
@@ -286,6 +301,7 @@ class Pootle_Page_Builder_Render_Grid {
 			</div>
 		<?php
 		}
+		remove_action( 'pootlepb_before_cells', array( $GLOBALS['Pootle_Page_Builder_Render_Layout'], 'row_bg_video' ) );
 	}
 
 	/**

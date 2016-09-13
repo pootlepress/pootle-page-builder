@@ -8,6 +8,38 @@
 
 		$( 'html' ).trigger( 'pootlepb_admin_input_field_event_handlers', [$this] );
 
+		( function() {
+			var canvas = $this.find( ".bg-grad-prevu" )[0];
+			if ( canvas && canvas.getContext ) {
+				var grd,col1, col2, type,
+					ctx = canvas.getContext( "2d" );
+
+				$this.find( '#row_grad_preset' ).off( 'change' ).on( 'change', function () {
+					var colors = $( this ).val().split(',');
+					$( 'input[data-style-field="grad_col1"]' ).val( colors[0] ).change();
+					$( 'input[data-style-field="grad_col2"]' ).val( colors[1] ).change();
+				} );
+				$this.find( 'input[data-style-field*="grad_col"], select[data-style-field="grad_type"]' ).off( 'change' ).on( 'change', function () {
+					col1 = $( 'input[data-style-field="grad_col1"]' ).val();
+					col2 = $( 'input[data-style-field="grad_col2"]' ).val();
+					type = $( 'select[data-style-field="grad_type"]' ).val();
+					if ( ! type ) {
+						grd = ctx.createLinearGradient( 0, 0, 0, 160 );
+					} else if ( 'radial' == type ) {
+						grd = ctx.createRadialGradient( 125, 80, 0, 125, 80, 160 );
+					} else {
+						grd = ctx.createLinearGradient( 0, 0, 250, 160 );
+					}
+
+					grd.addColorStop( 0, col1 ? col1 : "#fff" );
+					grd.addColorStop( 1, col2 ? col2 : "#ccc" );
+
+					ctx.fillStyle = grd;
+					ctx.fillRect( 0, 0, 250, 160 );
+				} ).change();
+			}
+		} )();
+
 		$this.find( 'input[data-style-field-type="color"]' ).each( function () {
 			$t = $( this );
 			var wpPkrContnr = $t.closest( '.wp-picker-container' );

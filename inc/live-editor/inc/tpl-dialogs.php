@@ -316,7 +316,7 @@ if ( $enabled_modules ) {
 	</label>
 	<label>
 		<span>Icon size</span>
-		<input id="ppb-icon-size" value="160" type="range" min="25" max="295" step="5">
+		<input id="ppb-icon-size" value="160" type="number" min="25" max="295" step="5"> px
 	</label>
 	<label>
 		<span>Icon color</span>

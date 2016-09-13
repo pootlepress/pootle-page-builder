@@ -109,26 +109,29 @@ final class Pootle_Page_Builder_Custom_Styles {
 			if ( empty( $style[ $k ] ) ) $style[ $k ] = $v;
 		}
 		
-		add_action( 'pootlepb_row_embed_style', function( $css, $style, $rowID ) {
-
-			global $pootlepb_gradient_css;
-
-			$grad_css = sprintf(
-				$pootlepb_gradient_css[ $style['grad_type'] ],
-				"$style[grad_col1],$style[grad_col2]"
-			);
-
-			if ( ! empty( $style['grad_opacity'] ) ) {
-				$grad_css .= 'opacity: ' . ( 1 - $style['bg_overlay_opacity'] ) . ';';
-			}
-			$css .= "$rowID .panel-row-style:before { $grad_css }";
-
-			return $css;
-		}, 11, 3 );
+		add_action( 'pootlepb_row_embed_style', array( $this, 'row_bg_grad_css' ), 11, 3 );
 
 		$attr['style'] .= "background: url('$style[grad_image]') center/cover;";
 
 		return $attr;
+	}
+	public function row_bg_grad_css( $css, $style, $rowID ) {
+
+		global $pootlepb_gradient_css;
+
+		$grad_css = sprintf(
+			$pootlepb_gradient_css[ $style['grad_type'] ],
+			"$style[grad_col1],$style[grad_col2]"
+		);
+
+		if ( ! empty( $style['grad_opacity'] ) ) {
+			$grad_css .= 'opacity: ' . ( 1 - $style['bg_overlay_opacity'] ) . ';';
+		}
+		$css .= "$rowID .panel-row-style:before { $grad_css }";
+
+		remove_action( 'pootlepb_row_embed_style', array( $this, 'row_bg_grad_css' ), 11, 3 );
+
+		return $css;
 	}
 
 	/**
@@ -144,6 +147,8 @@ final class Pootle_Page_Builder_Custom_Styles {
 		if ( ! empty( $style['bg_mobile_image'] ) ) {
 			$attr['style'] .= 'background: url( ' . esc_url( $style['bg_mobile_image'] ) . ' ) center/cover; ';
 		}
+
+		add_action( 'pootlepb_before_cells', array( $GLOBALS['Pootle_Page_Builder_Render_Layout'], 'row_bg_video' ) );
 
 		return $attr;
 	}
@@ -241,7 +246,13 @@ final class Pootle_Page_Builder_Custom_Styles {
 		}
 
 		if ( ! empty( $style['background_parallax'] ) ) {
-			$attr['class'][] = 'ppb-parallax';
+			$attr['class'][] = "ppb-row-effect-$style[background_parallax]";
+			if ( 3 == $style['background_parallax'] ) {
+				add_action( 'pootlepb_before_cells', array(
+					$GLOBALS['Pootle_Page_Builder_Render_Layout'],
+					'row_bg_ken_burns'
+				) );
+			}
 		}
 
 		return $attr;

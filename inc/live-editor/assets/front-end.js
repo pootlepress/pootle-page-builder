@@ -601,7 +601,7 @@ jQuery( function ( $ ) {
 		},
 
 		contentDraggable : {
-			handle: '.ppb-edit-block .dashicons-screenoptions',
+			handle: '.ppb-edit-block .dashicons-move',
 			grid: [5,5],
 			start: function (e, ui) {
 				var $t = $( this ),
@@ -713,7 +713,7 @@ jQuery( function ( $ ) {
 
 		insertModule : function( $contentblock, $module ) {
 			var tab = $module.data( 'tab' );
-			$contentblock.find('.dashicons-screenoptions').click();
+			$contentblock.find('.dashicons-move').click();
 
 			var $ed = $contentblock.find( '.mce-content-body' ),
 				ed  = tinymce.get( $ed.attr( 'id' ) );
@@ -885,6 +885,19 @@ jQuery( function ( $ ) {
 					class : iclas,
 					size : isize,
 					color : icolr
+				} );
+			}
+			$iconPicker.ppbDialog( 'close' );
+		},
+		'Remove icon' : function () {
+			if ( 'function' == typeof pickFaIcon.callback ) {
+				pickFaIcon.callback( {
+					html	: '',
+					attr	: '',
+					style	: '',
+					class	: '',
+					size	: '',
+					color	: ''
 				} );
 			}
 			$iconPicker.ppbDialog( 'close' );
@@ -1161,7 +1174,7 @@ jQuery( function ( $ ) {
 		}
 	} );
 
-	$ppb.delegate( '.ppb-edit-block .dashicons-screenoptions', 'click', function () {
+	$ppb.delegate( '.ppb-edit-block .dashicons-move', 'click', function () {
 		if ( prevu.justClickedEditBlock ) {
 			var $t = $( this );
 			window.ppbPanelI = $t.closest( '.pootle-live-editor' ).data( 'index' );
@@ -1424,16 +1437,23 @@ jQuery( function ( $ ) {
 		editor.onDblClick.add(function(ed, e) {
 			var $i = $( e.target );
 			if ( $i.hasClass( "fa" ) ) {
-				pickFaIcon( function ( icon ) {
-					$i.attr( {
-						class: 'fa ' + icon.class,
-						style: icon.style
-					} );
-				}, {
-					class: $i.attr( 'class' ).replace( 'fa ', '' ),
-					color: $i.css( 'color' ),
-					size: $i.css( 'font-size' ),
-				} );
+				pickFaIcon(
+					function ( icon ) {
+						if ( icon.class ) {
+							$i.attr( {
+								class: 'fa ' + icon.class,
+								style: icon.style
+							} );
+						} else {
+							$i.parent('div[style*="text-align: center"]').remove();
+						}
+					},
+					{
+						class: $i.attr( 'class' ).replace( 'fa ', '' ),
+						color: $i.css( 'color' ),
+						size: $i.css( 'font-size' )
+					}
+				);
 			}
 		});
 

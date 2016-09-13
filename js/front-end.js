@@ -67,7 +67,7 @@ jQuery( function ( $ ) {
 		 * @since 0.1.0
 		 */
 		ppbParallax = function () {
-			$( '.ppb-parallax' ).each( function () {
+			$( '.ppb-parallax, .ppb-row-effect-1' ).each( function () {
 
 				//Return ppbSkrollr not set
 				if ( ! ppbSkrollr ) {
@@ -159,15 +159,6 @@ jQuery( function ( $ ) {
 			ppbParallax();
 			ppbMatchColHi();
 		};
-
-		$( '.ppb-row-accordion-toggle' ).click( function ( e ) {
-			var $t = $( this ),
-				$ro = $t.siblings( '.panel-row-style' );
-			$t.toggleClass( 'ppb-accordion-open' );
-			$ro
-				.toggleClass( 'ppb-accordion-open' )
-				.slideToggle(500);
-		} );
 
 		$w.resize( ppbCorrectOnResize );
 		ppbCorrectOnResize();

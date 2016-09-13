@@ -329,7 +329,7 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 								<div class="pootle-live-editor ppb-live-edit-object ppb-edit-block" data-index="0"
 								     data-i_bkp="0">
 			<span title="Drag and Drop content block"
-			      class="dashicons-before dashicons-screenoptions">
+			      class="dashicons-before dashicons-move">
 				<span class="screen-reader-text">Sort Content Block</span>
 				<span class="intro-popup">
 					<b>Touch and drag</b> to sort content block.<br>

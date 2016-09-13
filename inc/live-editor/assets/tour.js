@@ -155,7 +155,7 @@ jQuery( function ( $ ) {
 				content : 'Deletes your <b>row</b>. This is undoable so be sure you want to delete your <b>row</b> :)'
 			},
 			{
-				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-screenoptions' ),
+				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-move' ),
 				head    : 'Drag and Drop Content Block',
 				content : '<ul><li>Drag and drop your <b>content block</b> using this icon &ndash; cool huh?</li><li>Hover over this to make <i>Edit Content</i>, <i>Add Image</i> and <i>Delete Content Block</i> icons appear</li><li>You can also doubleclick here to shortcut to <i>Edit Content</i> panel.</li></ul>'
 			},

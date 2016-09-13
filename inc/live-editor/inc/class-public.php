@@ -480,13 +480,14 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-block"
 		     data-index="<?php echo $content_block['info']['id']; ?>"
 		     data-i_bkp="<?php echo $content_block['info']['id']; ?>">
-			<span href="javascript:void(0)" title="Drag and Drop content block"
-			      class="dashicons-before dashicons-screenoptions">
-				<span class="screen-reader-text">Sort row</span>
+			<span href="javascript:void(0)" title="Drag content block"
+			      class="dashicons-before dashicons-move">
+				<span class="screen-reader-text">Drag content block</span>
 			</span>
 			<span href="javascript:void(0)" title="Edit Content" class="dashicons-before dashicons-edit">
 				<span class="screen-reader-text">Edit Content Block</span>
 			</span>
+			<?php /*
 			<span href="javascript:void(0)" title="Insert image" class="dashicons-before dashicons-format-image">
 				<span class="screen-reader-text">Insert image</span>
 			</span>
@@ -510,7 +511,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				</span>
 				<?php
 			}
-			?>
+			*/?>
 			<span href="javascript:void(0)" title="Delete Content" class="dashicons-before dashicons-no">
 				<span class="screen-reader-text">Delete Content</span>
 			</span>

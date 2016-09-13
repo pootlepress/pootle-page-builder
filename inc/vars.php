@@ -155,7 +155,7 @@ $pootlepb_content_block_styling_fields = array(
  */
 $pootlepb_row_styling_fields = array(
 	//Layout
-	'full_width'              => array(
+	'full_width' => array (
 		'name' => 'Make row go full width',
 		'type' => 'checkbox',
 		'tab' => 'layout',
@@ -174,6 +174,20 @@ $pootlepb_row_styling_fields = array(
 		'tab' => 'layout',
 		'help-text' => 'Requires only one content block to be set in each column. Will not preview in live editor but it will work once published.',
 		'priority' => 2,
+	),
+	'animate_row' => array(
+		'name' => __( 'Row animation', 'vantage' ),
+		'tab' => 'layout',
+		'type' => 'select',
+		'priority' => 2.5,
+		'options' => array(
+			'' => 'None',
+			'{"data-bottom":"transform:translate(0px,0px);opacity:1;","data-bottom-top":"transform:translate( 70px,0px);opacity:0;"}'	=> 'Fade In Left',
+			'{"data-bottom":"transform:translate(0px,0px);opacity:1;","data-bottom-top":"transform:translate(-70px,0px);opacity:0;"}'	=> 'Fade In Right',
+			'{"data-bottom":"transform:translate(0px,0px);opacity:1;","data-bottom-top":"transform:translate( 0px, 70px);opacity:0;"}'	=> 'Fade In Up',
+			'{"data-bottom":"transform:translate(0px,0px);opacity:1;","data-bottom-top":"transform:translate( 0px,-70px);opacity:0;"}'	=> 'Fade In Down',
+		),
+		'default' => '1',
 	),
 	'row_height'              => array(
 		'name'      => __( 'Minimum Row Height', 'ppb-panels' ),
@@ -257,6 +271,27 @@ $pootlepb_row_styling_fields = array(
 		'priority' => 2.77,
 	),
 
+	'bg_grad_prevu' => array(
+		'name' =>
+			'<canvas width="250" height="160" class="bg-grad-prevu"></canvas><div class="field field_type_select"><label>Gradient Presets</label><span>' .
+			'<select id="row_grad_preset">' .
+				'<option value="" selected="selected">Choose a preset...</option>' .
+				'<option value="#AA076B,#61045F">Aubergine</option>' .
+				'<option value="#1A2980,#26D0CE">Aqua Marine</option>' .
+				'<option value="#FF512F,#F09819">Sunrise</option>' .
+				'<option value="#2C3E50,#FD746C">Dusk</option>' .
+				'<option value="#141E30,#243B55">Royal</option>' .
+				'<option value="#42275a,#734b6d">Mauve</option>' .
+				'<option value="#000428,#004e92">Frost</option>' .
+			'</select></span></div>',
+		'tab' =>
+			'background',
+		'type' =>
+			'html',
+		'priority' =>
+			2.779,
+	),
+
 	'grad_type' => array(
 		'name' => __( 'Gradient Type', 'vantage' ),
 		'tab' => 'background',
@@ -334,9 +369,15 @@ $pootlepb_row_styling_fields = array(
 	),
 
 	'background_parallax' => array(
-		'name' => __( 'Parallax Background Image', 'vantage' ),
+		'name' => __( 'Row effect (e.g parallax)', 'vantage' ),
 		'tab' => 'background',
-		'type' => 'checkbox',
+		'type' => 'select',
+		'options' => array(
+			''	=> 'None',
+			'1'	=> 'Parallax',
+			'2'	=> 'Fixed parallax',
+			'3'	=> 'Ken burns',
+		),
 		'priority' => 7,
 	),
 	'background_image_size' => array(
@@ -1231,7 +1272,7 @@ $ppbpro_addons_data = array(
 
 $pootlepb_gradient_css = array(
 	''       => 'background: -webkit-linear-gradient(%1$s);background: -o-linear-gradient(%1$s);background: -moz-linear-gradient(%1$s);background: linear-gradient(to %1$s);',
-	'radial' => 'background: -webkit-radial-gradient(%1$s);background: -o-radial-gradient(%1$s);background: -moz-radial-gradient(%1$s);background: radial-gradient(%1$s);',
+	'radial' => 'background: -webkit-radial-gradient(circle,%1$s);background: -o-radial-gradient(circle,%1$s);background: -moz-radial-gradient(circle,%1$s);background: radial-gradient(circle,%1$s);',
 	'slant'  => 'background: -webkit-linear-gradient(135deg,%1$s);background: -o-linear-gradient(135deg,%1$s);background: -moz-linear-gradient(135deg,%1$s);background: linear-gradient(135deg,%1$s);',
 
 );

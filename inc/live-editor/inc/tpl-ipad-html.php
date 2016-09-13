@@ -16,12 +16,12 @@
 	.panel-grid.tour-active .ppb-edit-row.tour-active span.dashicons-before:not(.dashicons-no):not(.dashicons-editor-code),
 	.panel-grid:hover .ppb-edit-row:hover span.dashicons-before:not(.dashicons-no):not(.dashicons-editor-code),
 	.ppb-block:hover .pootle-live-editor:hover span.dashicons-before,
-	.panel-grid.tour-active .ppb-block .pootle-live-editor.tour-active span.dashicons-before:not(.dashicons-screenoptions) {
+	.panel-grid.tour-active .ppb-block .pootle-live-editor.tour-active span.dashicons-before:not(.dashicons-move) {
 		display: none;
 	}
 
 	.panel-grid:hover .ppb-edit-row:hover span.dashicons-editor-code,
-	.ppb-block:hover .pootle-live-editor:hover span.dashicons-screenoptions {
+	.ppb-block:hover .pootle-live-editor:hover span.dashicons-move {
 		display: inline-block;
 	}
 	.pootle-live-editor-active .ppb-tabs-nav {
