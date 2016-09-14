@@ -1215,7 +1215,7 @@ iframe[src*='/pootle-buttons/'] {
 	right: -340px;
 }
 
-#pootlepb-modules-wrap, #pootlepb-modules-wrap > .dashicons-move {
+#pootlepb-modules-wrap, #pootlepb-modules-wrap > .dashicons-screenoptions {
 	-webkit-box-shadow: 2px 1px 1px rgba(0,0,0,0.25);
 	box-shadow: 2px 1px 1px rgba(0,0,0,0.25);
 }
@@ -1233,7 +1233,7 @@ iframe[src*='/pootle-buttons/'] {
 	right: 0;
 }
 
-#pootlepb-modules-wrap > .dashicons-move, #pootlepb-modules-wrap #pootlepb-modules {
+#pootlepb-modules-wrap > .dashicons-screenoptions, #pootlepb-modules-wrap #pootlepb-modules {
 	position: absolute;
 	top: 0;
 	left: 100%;
@@ -1244,7 +1244,7 @@ iframe[src*='/pootle-buttons/'] {
 	cursor: pointer;
 }
 
-#pootlepb-modules-wrap.position-right > .dashicons-move {
+#pootlepb-modules-wrap.position-right > .dashicons-screenoptions {
 	right: 100%;
 	left: auto;
 }
@@ -1259,7 +1259,7 @@ iframe[src*='/pootle-buttons/'] {
 	overflow: auto;
 }
 
-#pootlepb-modules-wrap > .dashicons-move:before {
+#pootlepb-modules-wrap > .dashicons-screenoptions:before {
 	font-size: 30px;
 	height: auto;
 	width: auto;
