@@ -114,6 +114,7 @@ class pootle_page_builder_for_WooCommerce_Public{
 			$this->id = 'ppb-wc-addon-' . $this->i++;
 			echo '<!--' . $short_code . '-->' . "<div id='$this->id'>" . do_shortcode( $short_code );
 			$this->display_scripts( $set );
+			echo '</div>';
 		}
 	}
 
