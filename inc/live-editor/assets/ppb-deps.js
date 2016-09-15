@@ -40,6 +40,13 @@
 			}
 		} )();
 
+		$this.find( 'input[data-style-field="accordion"]' ).off( 'change' ).on( 'change', function () {
+			if ( $(this).prop('checked') )
+				$this.find( '.accordion_section' ).slideDown();
+			else
+				$this.find( '.accordion_section' ).slideUp();
+		} );
+
 		$this.find( 'input[data-style-field-type="color"]' ).each( function () {
 			$t = $( this );
 			var wpPkrContnr = $t.closest( '.wp-picker-container' );
@@ -57,8 +64,7 @@
 
 		// Uploading Fields aka media selection
 		var ppbFileFrame,
-			ppbMP4VideoFrame,
-			ppbWebmVidFrame;
+			ppbMP4VideoFrame;
 		$this.find( '.upload-button' ).on( 'click', function ( event ) {
 			event.preventDefault();
 
@@ -91,10 +97,14 @@
 		$this.find( 'input[data-style-field-type="upload"]' ).off( 'change' ).change( function() {
 			var $t = $( this );
 			if ( $t.val() ) {
-				$t.show();
-				$t.css( 'background-image', 'url("' + $t.val() + '")' );
+				$t
+					.show()
+					.css( 'background-image', 'url("' + $t.val() + '")' )
+					.siblings('.dashicons').show();
 			} else {
-				$t.hide();
+				$t
+					.hide()
+					.siblings('.dashicons').hide();
 			}
 		} );
 		$this.find( '.unsplash-button' ).attr( 'style', '' ).on( 'click', function ( e ) {

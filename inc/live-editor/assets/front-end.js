@@ -125,12 +125,16 @@ jQuery( function ( $ ) {
 					ppbCorrectOnResize();
 					prevu.ajaxCallback = null;
 				}
-				console.log( $response.find( 'style#pootle-live-editor-styles' ) );
 				$( 'style#pootle-live-editor-styles' ).html( $response.find( 'style#pootle-live-editor-styles' ).html() );
 				if ( ppbAjax.publish ) {
 					prevu.unSavedChanges = false;
-					if( ! prevu.noRedirect )
-						window.location = response;
+					if( ! prevu.noRedirect ) {
+						if ( window.ppbAjaxDebug ) {
+							$body.append( '<div class="ajax-debug">' + response + '</div>' );
+						} else {
+							window.location = response;
+						}
+					}
 				}
 				ppbAjax.publish = 0;
 			} );
@@ -138,6 +142,9 @@ jQuery( function ( $ ) {
 
 		sync : function ( callback, publish ) {
 			logPPBData( 'Before sync' );
+
+			tinyMCE.triggerSave();
+
 			prevu.ajaxCallback = callback;
 			prevu.unSavedChanges = true;
 			prevu.saveTmceBlock( $( '.mce-edit-focus' ) );
@@ -295,6 +302,8 @@ jQuery( function ( $ ) {
 				return;
 			}
 
+			console.log( window.ppbPanelI );
+
 			// Add event handlers
 			panels.addInputFieldEventHandlers( $contentPanel );
 
@@ -317,13 +326,15 @@ jQuery( function ( $ ) {
 
 			ppbData.widgets[window.ppbPanelI].info.style = JSON.stringify( st );
 
+			var $t = $( '.ppb-block.active' );
+
 			prevu.sync( function ( $r, qry ) {
-				var info = ppbData.widgets[window.ppbPanelI].info,
-					$t = $( '.ppb-block.active' ),
-					id = $t.attr( 'id' ),
+				var id = $t.attr( 'id' ),
 					$blk = $r.find( '#' + id ),
 					style = $blk.closest( '.panel-grid-cell' ).children( 'style' ).html(),
 					$cell = $t.closest( '.panel-grid-cell' );
+
+				console.log( $t, id );
 
 				$blk.addClass( 'pootle-live-editor-new-content-block' );
 
@@ -568,8 +579,6 @@ jQuery( function ( $ ) {
 
 				$prev.css( 'width', 100 - ( 100 * widthTaken / $p.width() ) + '%' );
 
-				console.log( 'Parent Width: ' + $p.width() + ';\n Width Taken: ' + ( $prev.outerWidth() + widthTaken ) );
-
 				prevu.resizableCells.correctCellData( $t  );
 				prevu.resizableCells.correctCellData( $prev  );
 
@@ -738,6 +747,7 @@ jQuery( function ( $ ) {
 		},
 
 		moduleDroppable : {
+			accept: '.ppb-module',
 			activeClass: "ppb-drop-module",
 			hoverClass: "ppb-hover-module",
 			drop: function( e, ui ) {
@@ -750,7 +760,6 @@ jQuery( function ( $ ) {
 						prevu.insertModule( $t.find( '.ppb-block' ).last(), $m )
 					}, '<p>&nbsp;</p>' );
 				} else {
-					console.log( e.target );
 					prevu.insertModule( $t, $m )
 				}
 			}
@@ -792,8 +801,6 @@ jQuery( function ( $ ) {
 				ed.selection.select(tinyMCE.activeEditor.getBody(), true);
 				ed.selection.collapse(false);
 				ed.execCommand( 'mceInsertContent', false, $img );
-				tinyMCE.triggerSave();
-
 			});
 
 			// Finally, open the modal
@@ -866,70 +873,91 @@ jQuery( function ( $ ) {
 	};
 	$setTitleDialog.ppbDialog( dialogAttr );
 
-	dialogAttr.height = 430;
-	dialogAttr.width =  430;
+	dialogAttr.height = 610;
+	dialogAttr.width =  520;
 	dialogAttr.title = 'Insert icon';
-	dialogAttr.buttons = {
-		'Done' : function () {
-			var iclas = $( '#ppb-icon-choose' ).val(),
-				icolr = $( '#ppb-icon-color' ).val(),
-				isize = $( '#ppb-icon-size' ).val(),
-				style = 'font-size:' + isize + 'px;color:' + icolr,
-				attr = 'style="' + style + '" class="fa ' + iclas + '"',
-				icon = '<i ' + attr + '><span style="display:none">' + iclas + '</span></i>';
-			if ( 'function' == typeof pickFaIcon.callback ) {
-				pickFaIcon.callback( {
-					html : icon,
-					attr : attr,
-					style : style,
-					class : iclas,
-					size : isize,
-					color : icolr
-				} );
+	dialogAttr.buttons = [
+		{
+			text: 'Remove icon',
+			class: 'ui-button-link',
+			click: function () {
+				if ( 'function' == typeof pickFaIcon.callback ) {
+					pickFaIcon.callback( {
+						html: '',
+						attr: '',
+						style: '',
+						class: '',
+						size: '',
+						color: ''
+					} );
+				}
+				$iconPicker.ppbDialog( 'close' );
 			}
-			$iconPicker.ppbDialog( 'close' );
 		},
-		'Remove icon' : function () {
-			if ( 'function' == typeof pickFaIcon.callback ) {
-				pickFaIcon.callback( {
-					html	: '',
-					attr	: '',
-					style	: '',
-					class	: '',
-					size	: '',
-					color	: ''
-				} );
-			}
-			$iconPicker.ppbDialog( 'close' );
-		}
-	};
+		{
+			text: 'Insert',
+			click: function () {
+				var iclas = $iconPicker.clas.val(),
+					icolr = $iconPicker.colr.val(),
+					isize = $iconPicker.size.val(),
+					style = 'font-size:' + isize + 'px;color:' + icolr,
+					attr = 'style="' + style + '" class="fa ' + iclas + '"',
+					icon = '<i ' + attr + '><span style="display:none">' + iclas + '</span></i>';
+				if ( 'function' == typeof pickFaIcon.callback ) {
+					pickFaIcon.callback( {
+						html: icon,
+						attr: attr,
+						style: style,
+						class: iclas,
+						size: isize,
+						color: icolr
+					} );
+				}
+				$iconPicker.ppbDialog( 'close' );
+			},
+		},
+	];
 	dialogAttr.close = function() {};
 	$iconPicker.ppbDialog( dialogAttr );
 	$iconPicker.find( '#ppb-icon-choose' ).iconpicker({
-		placement: 'bottomRight'
+		placement: 'inline'
 	});
-	$iconPicker.find( '#ppb-icon-color' ).wpColorPicker();
+
+	$iconPicker.clas = $( '#ppb-icon-choose' );
+	$iconPicker.colr = $( '#ppb-icon-color' );
+	$iconPicker.size = $( '#ppb-icon-size' );
+	$iconPicker.prvu = $( '#ppb-icon-preview' );
+
+	prevu.iconPrevu = function ( e ) {
+		var iclas = $iconPicker.clas.val(),
+			icolr = $iconPicker.colr.val(),
+			isize = $iconPicker.size.val(),
+			style = 'font-size:' + isize + 'px;color:' + icolr,
+			attr = 'style="' + style + '" class="fa ' + iclas + '"';
+		console.log( iclas, icolr, isize );
+			$iconPicker.prvu.html( '<i ' + attr + '><span style="display:none">' + iclas + '</span></i>' );
+	};
+
+	$iconPicker.clas.on( 'iconpickerUpdated', prevu.iconPrevu );
+	$iconPicker.colr.wpColorPicker( { change: prevu.iconPrevu } );
+	$iconPicker.size.change( prevu.iconPrevu );
 
 	var pickFaIcon = function ( callback, properties ) {
 		$iconPicker.ppbDialog( 'open' );
 		pickFaIcon.callback = callback;
 
-		var iclas = $( '#ppb-icon-choose' ),
-			icolr = $( '#ppb-icon-color' ),
-			isize = $( '#ppb-icon-size' );
-
-		iclas.val( '' );
-
+		$iconPicker.clas.add( $iconPicker.find( '.iconpicker-search' ) ).val( '' );
+		$iconPicker.prvu.html( '' );
 		if ( ! properties ) return;
 
 		if ( properties.class ) {
-			iclas.val( properties.class ).change();
+			$iconPicker.clas.val( properties.class ).change();
 		}
 		if ( properties.color ) {
-			icolr.val( properties.color ).change();
+			$iconPicker.colr.val( properties.color ).change();
 		}
 		if ( properties.size ) {
-			isize.val( parseInt( properties.size ) ).change();
+			$iconPicker.size.val( parseInt( properties.size ) ).change();
 		}
 
 	};
@@ -961,11 +989,10 @@ jQuery( function ( $ ) {
 		$( '.pootle-live-editor-realtime.has-focus' ).blur();
 	} );
 
-	$ppb.delegate( '.pootle-live-editor.ppb-edit-row', 'click', function () {
-		window.ppbRowI = $( this ).data( 'index' );
+	$ppb.delegate( '.ppb-edit-row .dashicons-before', 'click', function () {
+		window.ppbRowI = $( this ).closest( '.pootle-live-editor' ).data( 'index' );;
 	} );
 	$ppb.delegate( '.ppb-edit-row .dashicons-admin-appearance', 'click', function () {
-		var $t = $( this );
 		$rowPanel.ppbDialog( 'open' );
 	} );
 
@@ -1033,7 +1060,6 @@ jQuery( function ( $ ) {
 			$t           = $( this ),
 			rowI         = $t.closest( '.pootle-live-editor' ).data( 'index' );
 		prevu.deleteCallback = function () {
-			console.log( rowI );
 			ppbData.grids.splice( rowI, 1 );
 
 			$.each( ppbData.widgets, function ( i, v ) {
@@ -1236,7 +1262,6 @@ jQuery( function ( $ ) {
 
 	ppbIpad.Update = function () {
 		prevu.ajaxCallback = function ( no1, no2, url ) {
-			console.log( url + '?ppb-ipad=preview' );
 			window.location = url + '?ppb-ipad=preview';
 		};
 
@@ -1506,7 +1531,6 @@ jQuery( function ( $ ) {
 								if ( formatter.matchNode( node, item.value ) ) {
 									self.value( item.value );
 									self.settings.icon = item.icon;
-									console.log( self );
 									return false;
 								}
 							} );
@@ -1571,8 +1595,6 @@ jQuery( function ( $ ) {
 							$( '.mce-shramee-fonts-control' ).find( '.mce-txt' ).html( 'Font' );
 							value = 'inherit';
 						}
-
-						console.log( value );
 						self.state.set( 'value', value );
 					} );
 				}

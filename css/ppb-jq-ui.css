@@ -150,7 +150,7 @@
     top: -5px
 }
 .ppb-dialog .ui-button .ui-button-text {
-  padding:0;
+    padding:0;
 }
 .ppb-dialog .ui-button {
     display: inline-block;
@@ -215,7 +215,7 @@
     cursor: default
 }
 @media screen and (max-width: 782px) {
-.ppb-dialog     .ui-button {
+    .ppb-dialog     .ui-button {
         padding: 10px 14px;
         line-height: 1;
         font-size: 14px;
@@ -288,7 +288,7 @@
     margin-left: 16px
 }
 .ppb-dialog-buttonpane .ppb-dialog-buttonset {
-    float: right
+    text-align: right;
 }
 .ppb-dialog .ui-draggable .ppb-dialog-titlebar {
     cursor: move
@@ -310,16 +310,16 @@
 }
 
 .ppb-widget-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  min-height: 360px;
-  background: #000;
-  opacity: .7;
-  filter: alpha(opacity=70);
-  z-index: 100101;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    min-height: 360px;
+    background: #000;
+    opacity: .7;
+    filter: alpha(opacity=70);
+    z-index: 100101;
 }
 .ppb-cool-panel-wrap .ppb-tabs-nav li {
     border:  none;

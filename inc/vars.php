@@ -166,7 +166,35 @@ $pootlepb_row_styling_fields = array(
 		'type' => 'checkbox',
 		'help-text' => 'Keeps the row hidden by default with an icon above it to show the row.',
 		'tab' => 'layout',
-		'priority' => 1,
+		'priority' => 1.15,
+	),
+
+	'accordion_sec_wrap' => array(
+		'name' => '<div class="accordion_section" style="display: none">',
+		'tab' => 'layout',
+		'type' => 'html',
+		'priority' => 1.24,
+	),
+
+	'accordion_text' => array(
+		'name' => __( 'Accordion text', 'vantage' ),
+		'tab' => 'layout',
+		'type' => 'text',
+		'help-text' => 'Text displayed above accordion open icon.',
+		'priority' => 1.33,
+	),
+
+	'accordion_text_color' => array(
+		'name' => __( 'Accordion text Color', 'vantage' ),
+		'tab' => 'layout',
+		'type' => 'color',
+		'priority' => 1.42,
+	),
+	'accordion_sec_wrap_close' => array(
+		'name' => '</div>',
+		'tab' => 'layout',
+		'type' => 'html',
+		'priority' => 1.6,
 	),
 	'match_col_hi'              => array(
 		'name' => 'Make columns the same height',
@@ -175,17 +203,17 @@ $pootlepb_row_styling_fields = array(
 		'help-text' => 'Requires only one content block to be set in each column. Will not preview in live editor but it will work once published.',
 		'priority' => 2,
 	),
-	'animate_row' => array(
+	'animate_cols' => array(
 		'name' => __( 'Row animation', 'vantage' ),
 		'tab' => 'layout',
 		'type' => 'select',
 		'priority' => 2.5,
 		'options' => array(
 			'' => 'None',
-			'{"data-bottom":"transform:translate(0px,0px);opacity:1;","data-bottom-top":"transform:translate( 70px,0px);opacity:0;"}'	=> 'Fade In Left',
-			'{"data-bottom":"transform:translate(0px,0px);opacity:1;","data-bottom-top":"transform:translate(-70px,0px);opacity:0;"}'	=> 'Fade In Right',
-			'{"data-bottom":"transform:translate(0px,0px);opacity:1;","data-bottom-top":"transform:translate( 0px, 70px);opacity:0;"}'	=> 'Fade In Up',
-			'{"data-bottom":"transform:translate(0px,0px);opacity:1;","data-bottom-top":"transform:translate( 0px,-70px);opacity:0;"}'	=> 'Fade In Down',
+			'FadeInLeft'	=> 'Fade In Left',
+			'FadeInRight'	=> 'Fade In Right',
+			'FadeInUp'	=> 'Fade In Up',
+			'FadeInDown'	=> 'Fade In Down',
 		),
 		'default' => '1',
 	),

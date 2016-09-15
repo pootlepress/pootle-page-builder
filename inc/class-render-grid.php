@@ -253,8 +253,12 @@ class Pootle_Page_Builder_Render_Grid {
 	 */
 	public function row_accordion( $row ) {
 		if ( ! empty( $row['style']['accordion'] ) ) {
+			$color = empty( $row['style']['accordion_text_color'] ) ? '#fff' : $row['style']['accordion_text_color'];
+			if ( ! empty( $row['style']['accordion_text'] ) ) {
+				echo "<h2 class='ppb-row-accordion-text' style='color:$color;'>{$row['style']['accordion_text']}</h2>";
+			}
 			?>
-			<span class="ppb-row-accordion-toggle" onclick="jQuery( this ).toggleClass( 'ppb-accordion-open' )
+			<span class="ppb-row-accordion-toggle" style='border-color:<?php echo $color ?>;' onclick="jQuery( this ).toggleClass( 'ppb-accordion-open' )
 			.siblings( '.panel-row-style' ).slideToggle(520);
 			jQuery('html, body').animate({scrollTop:jQuery(this).offset().top - 50}, 520)"></span>
 			<?php

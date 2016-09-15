@@ -386,8 +386,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 				foreach ( $_POST['data']['widgets'] as $i => $wid ) {
 					if ( ! empty( $wid['info']['style'] ) ) {
-						$_POST['data']['widgets'][ $i ]['info']['style'] = stripslashes( $wid['info']['style'] );
-						$_POST['data']['widgets'][ $i ]['text']          = stripslashes( $wid['text'] );
+						$_POST['data']['widgets'][ $i ]['info']['style'] = wp_unslash( $wid['info']['style'] );
+						$_POST['data']['widgets'][ $i ]['text']          = wp_unslash( $wid['text'] );
 					}
 				}
 
@@ -410,6 +410,12 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				 */
 				do_action( 'pootlepb_save_post', $_POST['data'], $id, get_post( $id ) );
 
+				foreach ( $_POST['data']['widgets'] as $i => $wid ) {
+					if ( ! empty( $wid['info']['style'] ) ) {
+						$_POST['data']['widgets'][ $i ]['info']['style'] = wp_slash( $wid['info']['style'] );
+						$_POST['data']['widgets'][ $i ]['text']          = wp_slash( $wid['text'] );
+					}
+				}
 				// Update PPB data
 				update_post_meta( $id, 'panels_data', $_POST['data'] );
 

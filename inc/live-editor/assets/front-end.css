@@ -961,6 +961,16 @@ body .ppb-dialog {
 	background: #eee;
 }
 
+.pootle-live-editor-active .ppb-dialog button.ui-button-link {
+	background: none;
+	border: none;
+	box-shadow: none;
+	display: inline;
+	float: left;
+	padding: 0 !important;
+	margin: 0;
+}
+
 .pootlepb-dialog label {
 	display: block;
 }
@@ -1017,7 +1027,7 @@ body .ppb-dialog {
 }
 
 .ppb-tabs-panel .field {
-	margin: 16px 0;
+	margin: 16px 0 0;
 }
 
 .ppb-tabs-panel .field * {
@@ -1032,6 +1042,22 @@ body .ppb-dialog {
 .ppb-tabs-panel .field > span > * {
 	max-width: 100%;
 	font-size: 14px !important;
+}
+
+.ppb-tabs-panel .field > span > .dashicons {
+	font-size: 0 !important;
+}
+
+.ppb-tabs-panel .field > span > input[data-style-field-type="upload"] + .dashicons {
+	position: relative;
+	top: -119px;
+	left: 178px;
+	color: #e25c4e;
+	text-shadow: 0 0 1px #000;
+}
+
+.ppb-tabs-panel .field > span > .dashicons:before {
+	font-size: 25px;
 }
 
 .ppb-tabs-panel .field > * {
@@ -1430,9 +1456,15 @@ a .ppb-module-disabled:after {
 	margin: 1em;
 }
 
+#ppb-iconpicker label > * {
+	display: inline-block;
+	vertical-align: middle;
+}
+
 #ppb-iconpicker label > span {
 	display: inline-block;
 	min-width: 142px;
+	margin: 1em 0;
 }
 #ppb-iconpicker label > input {
 	width: 200px;
