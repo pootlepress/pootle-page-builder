@@ -16,6 +16,9 @@ final class Pootle_Page_Builder_Admin {
 	 */
 	protected static $instance;
 
+	/** @var array Post types supported by ppb */
+	protected $post_types;
+
 	/**
 	 * Magic __construct
 	 * @since 0.1.0
@@ -62,15 +65,24 @@ final class Pootle_Page_Builder_Admin {
 		//Save panel data on post save
 		add_action( 'save_post', array( $this, 'save_post' ), 10, 2 );
 
+		// Post actions
+		add_action( 'page_row_actions', array( $this, 'post_row_actions' ), 10, 2 );
+		add_action( 'post_row_actions', array( $this, 'post_row_actions' ), 10, 2 );
+
 		//Allow the save post to save panels data
 		add_filter( 'pootlepb_save_post_pass', array( $this, 'save_post_or_not' ), 10, 2 );
 		add_filter( 'wp_insert_post_empty_content', array( $this, 'is_pb_post_empty' ), 25, 2 );
 		//Settings
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-		add_action( 'admin_init', array( $this, 'options_init' ) );
-		add_action( 'admin_init', array( $this, 'add_new' ) );
+		add_action( 'admin_init', array( $this, 'init' ) );
 
 		add_action( '', array( $this, '' ) );
+	}
+
+	public function init() {
+		$this->post_types = pootlepb_posts();
+		$this->options_init();
+		$this->add_new();
 	}
 
 	/**
@@ -332,10 +344,22 @@ final class Pootle_Page_Builder_Admin {
 	 * @since 0.1.0
 	 */
 	public function pootlepb_options_sanitize_display( $vals ) {
-
 		//Enable Responsive media queries
 		$vals['responsive']      = ! empty( $vals['responsive'] );
-
 		return $vals;
+	}
+
+	/**
+	 * Filters the row actions
+	 * @filter post_row_actions
+	 */
+	public function post_row_actions( $actions, $post ) {
+
+		if( in_array( $post->post_type, $this->post_types ) && pootlepb_uses_pb( $post ) ) {
+			
+			$nonce_url = wp_nonce_url( get_the_permalink( $post->ID ), 'ppb-live-edit-nonce', 'ppbLiveEditor' );
+			$actions['live-edit'] = '<a href="' . $nonce_url . '" aria-label="Edit “Home”">Live Edit</a>';
+		}
+		return $actions;
 	}
 }

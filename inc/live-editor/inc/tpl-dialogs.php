@@ -313,7 +313,6 @@ if ( $enabled_modules ) {
 	<label>
 		<span>Choose icon</span>
 		<input id="ppb-icon-choose" type="hidden">
-		<i class="fa "></i>
 	</label>
 	<label>
 		<span>Icon size</span>
@@ -322,6 +321,10 @@ if ( $enabled_modules ) {
 	<label>
 		<span>Icon color</span>
 		<input id="ppb-icon-color" value="#999" type="text">
+	</label>
+	<label>
+		<span>Icon link</span>
+		<input id="ppb-icon-link" type="url">
 	</label>
 	<label>
 		<span>Preview</span>

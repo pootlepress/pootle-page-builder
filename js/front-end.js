@@ -26,12 +26,22 @@ jQuery( function ( $ ) {
 	 * Adds full width functionality
 	 * @since 0.1.0
 	 */
-	ppbFullWidth = function ( selector ) {
-		if ( ! selector ) {
-			selector = '.ppb-stretch-full-width';
+	function ppbFullWidth( el ) {
+		var $el;
+		if ( ! el ) {
+			el = '.ppb-stretch-full-width';
 		}
-		$( selector ).each( function () {
-			var $t = $( this );
+		if ( el instanceof jQuery ) {
+			$el = el;
+		} else {
+			$el = $( el );
+		}
+		$el.each( function () {
+			var
+				$t = $( this ),
+				display = $t.css('display');
+
+			$t.css( 'display', 'block' );
 
 			$t.css( {'margin-left': 0, 'margin-right': 0, 'padding-left': 0, 'padding-right': 0} );
 
@@ -45,6 +55,7 @@ jQuery( function ( $ ) {
 				'padding-right': rightSpace,
 				'border-left': 0,
 				'border-right': 0,
+				'display' : display
 			} );
 
 			$t.removeClass( 'ppb-full-width-no-bg' );
@@ -66,7 +77,7 @@ jQuery( function ( $ ) {
 		 * Adds parallax functionality
 		 * @since 0.1.0
 		 */
-		ppbParallax = function () {
+		function ppbParallax() {
 			$( '.ppb-parallax, .ppb-row-effect-1' ).each( function () {
 
 				//Return ppbSkrollr not set
@@ -139,7 +150,7 @@ jQuery( function ( $ ) {
 
 		};
 
-		ppbMatchColHi = function () {
+		function ppbMatchColHi() {
 			$( '.ppb-match-col-hi' ).each( function () {
 				var $t = $( this ),
 					cols = $t.find( '.ppb-col' );

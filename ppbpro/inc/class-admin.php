@@ -176,6 +176,14 @@ class Pootle_Page_Builder_Pro_Admin {
 			'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
 			'priority'    => 30,
 		);
+		$modules['one-pager'] = array(
+			'label'       => 'One Pager Section',
+			'icon_class'  => 'dashicons dashicons-format-aside',
+			'tab'         => "#pootlepb-background-row-tab",
+			'callback'    => 'onePager',
+			'ActiveClass' => 'pootle_page_builder_one_pager',
+			'priority'    => 30,
+		);
 		return $modules;
 	}
 

@@ -8,8 +8,17 @@
 
 		$( 'html' ).trigger( 'pootlepb_admin_input_field_event_handlers', [$this] );
 
+		// Accordion settings slide toggle
+		$this.find( 'input[data-style-field="accordion"]' ).off( 'change' ).on( 'change', function () {
+			if ( $(this).prop('checked') )
+				$this.find( '.accordion_section' ).slideDown();
+			else
+				$this.find( '.accordion_section' ).slideUp();
+		} );
+
+		// Gradients preview
 		( function() {
-			var canvas = $this.find( ".bg-grad-prevu" )[0];
+			var canvas = $this.find( ".bg-grad-prevu" ).show()[0];
 			if ( canvas && canvas.getContext ) {
 				var grd,col1, col2, type,
 					ctx = canvas.getContext( "2d" );
@@ -40,13 +49,7 @@
 			}
 		} )();
 
-		$this.find( 'input[data-style-field="accordion"]' ).off( 'change' ).on( 'change', function () {
-			if ( $(this).prop('checked') )
-				$this.find( '.accordion_section' ).slideDown();
-			else
-				$this.find( '.accordion_section' ).slideUp();
-		} );
-
+		// Color fields
 		$this.find( 'input[data-style-field-type="color"]' ).each( function () {
 			$t = $( this );
 			var wpPkrContnr = $t.closest( '.wp-picker-container' );
@@ -93,7 +96,7 @@
 			ppbFileFrame.open();
 		} );
 
-		$this.find( 'input[data-style-field-type="upload"] ~ input[type="search"]' ).attr( 'style', '' );
+		$this.find( 'input[data-style-field-type="upload"] ~ .search-unsplash-wrap' ).attr( 'style', '' );
 		$this.find( 'input[data-style-field-type="upload"]' ).off( 'change' ).change( function() {
 			var $t = $( this );
 			if ( $t.val() ) {
@@ -110,9 +113,9 @@
 		$this.find( '.unsplash-button' ).attr( 'style', '' ).on( 'click', function ( e ) {
 			e.preventDefault();
 			var
-				$textFields = $( this ).siblings( 'input' ),
-				$textField = $textFields.filter( '[type="text"]' ),
-				$searchField = $textFields.filter( '[type="search"]' );
+				$t = $( this ),
+				$searchField = $t.siblings( 'input[type="search"]' ),
+				$textField = $t.closest('.field_type_upload').find( 'input[data-style-field-type="upload"]' );
 			if ( ! $searchField.is(':visible') ) {
 				$searchField.show();
 				return;

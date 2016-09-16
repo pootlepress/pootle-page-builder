@@ -304,9 +304,13 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 			         data-style-field="<?php echo esc_attr( $key ) ?>"
 			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
 			<span class="dashicons dashicons-no-alt" onclick="jQuery(this).siblings('input').val('').change();">Remove Image</span><br>
-			<button class="button upload-button">Select Image</button> <small>OR</small>
-			<input placeholder="Search Unsplash..." type="search" style="display: none;">
-			<button style="display: none;" class="button unsplash-button">Search Unsplash</button><?php
+			<button class="button upload-button">Select Image</button>
+			<span class="search-unsplash-wrap" style="display: none;">
+				<small>OR</small>
+				<input placeholder="Search Unsplash..." type="search">
+				<span class="dashicons dashicons-search unsplash-button">Search Unsplash</span>
+			</span>
+			<?php
 			break;
 		case 'uploadVid':
 			?><input <?php echo $placeholder ?> type="text" id="pp-pb-<?php esc_attr_e( $key ) ?>"

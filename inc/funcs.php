@@ -166,12 +166,30 @@ function pootlepb_stringify_attributes( $attributes ) {
  * @return bool
  * @since 0.1.0
  */
-function pootlepb_is_panel( $can_edit = false ) {
+function pootlepb_is_panel( $can_edit = false, $post = false ) {
 	// Check if this is a panel
-	$ppb_data = get_post_meta( get_the_ID(), 'panels_data', true );
-	$is_panel = ( is_singular() && ! empty( $ppb_data['grids'] ) );
+	$is_panel = ( is_singular() && pootlepb_uses_pb( $post ) );
 
 	return $is_panel && ( ! $can_edit || current_user_can( 'edit_post', get_the_ID() ) );
+}
+
+/**
+ * Check if we're currently viewing a panel.
+ *
+ * @param WP_Post|int|bool $post Also check if the user can edit this page
+ *
+ * @return bool
+ * @since 0.1.0
+ */
+function pootlepb_uses_pb( $post = false ) {
+	if ( ! $post ) {
+		$post = get_the_ID();
+	} else if ( $post instanceof WP_Post ) {
+		$post = $post->ID;
+	}
+	// Check if this is a panel
+	$ppb_data = get_post_meta( $post, 'panels_data', true );
+	return ! empty( $ppb_data['grids'] );
 }
 
 /**
@@ -238,10 +256,8 @@ function pootlepb_settings( $key = '' ) {
 			$settings = array();
 		}
 
-		$post_types = apply_filters( 'pootlepb_builder_post_types', array( 'page', 'post', ) );
-
 		$settings = wp_parse_args( $settings, array(
-			'post-types'    => $post_types, // Supported post types
+			'post-types'    => pootlepb_posts(), // Supported post types
 			'responsive'    => ! isset( $set['responsive'] )    ? true : $set['responsive'] == '1', // RWD?
 			'mobile-width'  => ! isset( $set['mobile-width'] )  ? 780  : $set['mobile-width'],      // Width for RWD
 			'margin-bottom' => ! isset( $set['margin-bottom'] ) ? 0	   : $set['margin-bottom'],     // for cell
@@ -256,6 +272,14 @@ function pootlepb_settings( $key = '' ) {
 	}
 
 	return $settings;
+}
+
+/**
+ * Get post types supported by ppb
+ * @return array Supported post types
+ */
+function pootlepb_posts() {
+	return apply_filters( 'pootlepb_builder_post_types', array( 'page', 'post', ) );
 }
 
 /**
@@ -412,8 +436,4 @@ function pootlepb_rand( $length = 16 ) {
 	}
 
 	return $randomString;
-}
-
-function pootlepb_le_filter_modules( &$modules ) {
-	
 }

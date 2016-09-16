@@ -71,7 +71,6 @@ jQuery( function ( $ ) {
 			$t.draggable( prevu.contentDraggable );
 			$t.resizable( prevu.contentResizable );
 			$t.droppable( prevu.moduleDroppable );
-
 		} );
 	};
 
@@ -417,11 +416,11 @@ jQuery( function ( $ ) {
 				var id = '#pg-' + qry.post + '-' + window.ppbRowI,
 					$ro = $r.find( id );
 
-				$ro.addClass( 'pootle-live-editor-new-content-block' );
+				$ro.addClass( 'pootle-live-editor-new-row' );
 
 				$( id ).replaceWith( $ro );
 
-				$ro = $( '.pootle-live-editor-new-content-block' );
+				$ro = $( '.pootle-live-editor-new-row' );
 				$( 'html' ).trigger( 'pootlepb_le_content_updated', [$ro] );
 				$ro.removeClass( 'pootle-live-editor-new-cell' );
 
@@ -792,10 +791,16 @@ jQuery( function ( $ ) {
 			// When an image is selected, run a callback.
 			prevu.insertImageFrame.on('select', function () {
 				// We set multiple to false so only get one image from the uploader
-				attachment = prevu.insertImageFrame.state().get('selection').first().toJSON();
+				var img = prevu.insertImageFrame.state().get('selection').first().toJSON();
 
-				// Do something with attachment.id and/or attachment.url here
-				var $img = '<img src="' + attachment.url + '">';
+				console.log( img );
+
+				// Do something with img.id and/or img.url here
+				var $img =
+					'<figure id="attachment_' + img.id + '" class="' + ( img.caption ? 'wp-caption' : '' ) + '">' +
+					'<img class="size-medium wp-image-' + img.id + '" src="' + img.url + '" alt="' + img.alt + '">' +
+					( img.caption ? '<figcaption class="wp-caption-text">' + img.caption + '</figcaption>' : '' ) +
+					'</figure>';
 
 				var ed = tinymce.get( prevu.activeEditor.attr( 'id' ) );
 				ed.selection.select(tinyMCE.activeEditor.getBody(), true);
@@ -897,9 +902,11 @@ jQuery( function ( $ ) {
 		{
 			text: 'Insert',
 			click: function () {
+				$iconPicker.ppbDialog( 'close' );
 				var iclas = $iconPicker.clas.val(),
 					icolr = $iconPicker.colr.val(),
 					isize = $iconPicker.size.val(),
+					ilink = $iconPicker.link.val(),
 					style = 'font-size:' + isize + 'px;color:' + icolr,
 					attr = 'style="' + style + '" class="fa ' + iclas + '"',
 					icon = '<i ' + attr + '><span style="display:none">' + iclas + '</span></i>';
@@ -910,10 +917,10 @@ jQuery( function ( $ ) {
 						style: style,
 						class: iclas,
 						size: isize,
-						color: icolr
+						color: icolr,
+						link: ilink
 					} );
 				}
-				$iconPicker.ppbDialog( 'close' );
 			},
 		},
 	];
@@ -926,6 +933,7 @@ jQuery( function ( $ ) {
 	$iconPicker.clas = $( '#ppb-icon-choose' );
 	$iconPicker.colr = $( '#ppb-icon-color' );
 	$iconPicker.size = $( '#ppb-icon-size' );
+	$iconPicker.link = $( '#ppb-icon-link' );
 	$iconPicker.prvu = $( '#ppb-icon-preview' );
 
 	prevu.iconPrevu = function ( e ) {
@@ -958,6 +966,9 @@ jQuery( function ( $ ) {
 		}
 		if ( properties.size ) {
 			$iconPicker.size.val( parseInt( properties.size ) ).change();
+		}
+		if ( properties.link ) {
+			$iconPicker.link.val( parseInt( properties.link ) ).change();
 		}
 
 	};
@@ -1425,7 +1436,7 @@ jQuery( function ( $ ) {
 	prevu.tmce.verify_html = false;
 	prevu.tmce.inline	= true;
 	prevu.tmce.theme	= 'ppbprevu';
-	prevu.tmce.fontsize_formats	= '30px 35px 40px 50px 70px 100px';
+	prevu.tmce.fontsize_formats	= '20px 25px 30px 35px 40px 50px 70px 100px';
 
 	//console.log( prevu.tmce );
 
@@ -1469,8 +1480,16 @@ jQuery( function ( $ ) {
 								class: 'fa ' + icon.class,
 								style: icon.style
 							} );
+							if ( icon.link ) {
+								var $a = $i.parent('a');
+								if ( ! $a.length ) {
+									$i.wrap('<a></a>');
+									$a = $i.parent('a');
+								}
+								$a.attr( 'href', icon.link );
+							}
 						} else {
-							$i.parent('div[style*="text-align: center"]').remove();
+							$i.closest('div[style*="text-align: center"]').remove();
 						}
 					},
 					{
@@ -1755,6 +1774,11 @@ jQuery( function ( $ ) {
 		pickFaIcon( function ( icon ) {
 			ed.selection.setCursorLocation( ed.getBody().firstChild, 0 );
 			ed.selection.collapse( false );
+
+			if ( icon.link ) {
+				icon.html = '<a href="' + icon.link + '">' + icon.html + '</a>';
+			}
+
 			ed.execCommand( 'mceInsertContent', false, '<div style="text-align: center">' + icon.html + '</div>' );
 		} );
 	};
@@ -1791,5 +1815,9 @@ jQuery( function ( $ ) {
 		$body.find( '[data-font]' ).not( '[data-font="%gfont"]' ).each( function(){
 			ppbAjax.data.google_fonts.push( $( this ).attr( 'data-font' ) );
 		} );
+	} );
+	$( 'html' ).on( 'pootlepb_le_content_updated', function ( e, $t ) {
+		console.log( $t );
+		ppbSkrollr.refresh( $t.find('.ppb-col') );
 	} );
 } );

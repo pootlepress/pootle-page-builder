@@ -439,8 +439,12 @@ img.ppb-bg-parallax {
 
 /* FadeInLeft */
 
+[data-animation="FadeInLeft"],
 .ppbFadeInLeft {
-	animation: ppbFadeInLeft 1.6s both;
+	-webkit-animation: ppbFadeInLeft .7s;
+	-webkit-animation-fill-mode: both;
+	animation: ppbFadeInLeft .7s;
+	animation-fill-mode: both;
 }
 @-webkit-keyframes ppbFadeInLeft{
 	0%   {-webkit-transform: translate(70px, 0px); opacity: 0;}
@@ -452,9 +456,16 @@ img.ppb-bg-parallax {
 }
 
 /* FadeInRight */
+.ppb-transparent {
+	opacity: 0;
+}
 
+[data-animation="FadeInRight"],
 .ppbFadeInRight {
-	animation: ppbFadeInRight 1.6s both;
+	-webkit-animation: ppbFadeInRight .7s;
+	-webkit-animation-fill-mode: both;
+	animation: ppbFadeInRight .7s;
+	animation-fill-mode: both;
 }
 @-webkit-keyframes ppbFadeInRight{
 	0%   {-webkit-transform: translate(-70px, 0px); opacity: 0;}
@@ -467,8 +478,12 @@ img.ppb-bg-parallax {
 
 /* FadeInUp */
 
+[data-animation="FadeInUp"],
 .ppbFadeInUp {
-	animation: ppbFadeInUp 1.6s both;
+	-webkit-animation: ppbFadeInUp .7s;
+	-webkit-animation-fill-mode: both;
+	animation: ppbFadeInUp .7s;
+	animation-fill-mode: both;
 }
 @-webkit-keyframes ppbFadeInUp{
 	0%   {-webkit-transform: translate(0px, 70px); opacity: 0;}
@@ -481,8 +496,12 @@ img.ppb-bg-parallax {
 
 /* FadeInDown */
 
+[data-animation="FadeInDown"],
 .ppbFadeInDown {
-	animation: ppbFadeInDown 1.6s both;
+	-webkit-animation: ppbFadeInDown .7s;
+	-webkit-animation-fill-mode: both;
+	animation: ppbFadeInDown .7s;
+	animation-fill-mode: both;
 }
 @-webkit-keyframes ppbFadeInDown{
 	0%   {-webkit-transform: translate(0px, -70px); opacity: 0;}

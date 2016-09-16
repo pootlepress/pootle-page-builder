@@ -301,17 +301,27 @@ $pootlepb_row_styling_fields = array(
 
 	'bg_grad_prevu' => array(
 		'name' =>
-			'<canvas width="250" height="160" class="bg-grad-prevu"></canvas><div class="field field_type_select"><label>Gradient Presets</label><span>' .
-			'<select id="row_grad_preset">' .
-				'<option value="" selected="selected">Choose a preset...</option>' .
-				'<option value="#AA076B,#61045F">Aubergine</option>' .
-				'<option value="#1A2980,#26D0CE">Aqua Marine</option>' .
-				'<option value="#FF512F,#F09819">Sunrise</option>' .
-				'<option value="#2C3E50,#FD746C">Dusk</option>' .
-				'<option value="#141E30,#243B55">Royal</option>' .
-				'<option value="#42275a,#734b6d">Mauve</option>' .
-				'<option value="#000428,#004e92">Frost</option>' .
-			'</select></span></div>',
+			'<canvas style="display: none" width="250" height="160" class="bg-grad-prevu"></canvas><div class="field field_type_select"><label>Gradient Presets</label><span>' .
+			'<select id="row_grad_preset">' . <<<OPTIONS
+				<option value="" selected="selected">Choose a preset...</option>
+				<option value="#f7ff00,#db36a4">Alihossein</option>
+				<option value="#1A2980,#26D0CE">Aqua</option>
+				<option value="#AA076B,#61045F">Aubergine</option>
+				<option value="#DAD299,#B0DAB9">Autumn</option>
+				<option value="#00C9FF,#92FE9D">Back To Earth</option>
+				<option value="#ECE9E6,#FFFFFF">Clouds</option>
+				<option value="#f857a6,#ff5858">Day Tripper</option>
+				<option value="#2C3E50,#FD746C">Dusk</option>
+				<option value="#43cea2,#185a9d">Endless River</option>
+				<option value="#000428,#004e92">Frost</option>
+				<option value="#fd746c,#ff9068">Haikus</option>
+				<option value="#42275a,#734b6d">Mauve</option>
+				<option value="#141E30,#243B55">Royal</option>
+				<option value="#1CD8D2,#93EDC7">Sea Blizz</option>
+				<option value="#fe8c00,#f83600">SoundCloud</option>
+				<option value="#FF512F,#F09819">Sunrise</option>
+OPTIONS
+			. '</select></span></div>',
 		'tab' =>
 			'background',
 		'type' =>
@@ -387,13 +397,6 @@ $pootlepb_row_styling_fields = array(
 		'tab' => 'background',
 		'type' => 'slider',
 		'priority' => 10,
-	),
-
-	'background_image_repeat' => array(
-		'name' => __( 'Repeat Background Image', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'checkbox',
-		'priority' => 6,
 	),
 
 	'background_parallax' => array(

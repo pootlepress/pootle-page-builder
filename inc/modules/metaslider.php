@@ -7,6 +7,9 @@ class pootle_page_builder_Meta_Slider {
 	/** @var pootle_page_builder_Meta_Slider Instance */
 	private static $_instance = null;
 
+	/** @var int Tracks slider in the page */
+	private $id = 1;
+
 	/**
 	 * Gets pootle_page_builder_Meta_Slider instance
 	 * @return pootle_page_builder_Meta_Slider instance
@@ -64,13 +67,38 @@ class pootle_page_builder_Meta_Slider {
 			'priority' => 1,
 			'tab' => $this->token,
 		);
+
+		$fields[ $this->token . '-full-width' ] = array(
+			'name' => 'Stretch to full width',
+			'type' => 'checkbox',
+			'priority' => 2,
+			'tab' => $this->token,
+		);
 		return $fields;
 	}
 
 	public function shortcode( $info ) {
 		$set = json_decode( $info['info']['style'], true );
 		if ( ! empty( $set[ $this->token ] ) ) {
-			echo do_shortcode( $set[ $this->token ] );
+			$id     = 'ppb-meta-slider-' . $this->id ++;
+			$slider = do_shortcode( $set[ $this->token ] );
+			echo <<<HTML
+<div id='$id'>$slider</div>
+<script>
+( function( $ ) {
+	var ro = $('#$id').closest('.ppb-row.ppb-stretch-full-width');
+	if ( ro.length ) {
+		ro.addClass('ppb-meta-slider-full-width')
+	}
+} )( jQuery );
+</script>
+<style>
+.ppb-row.ppb-meta-slider-full-width {
+	padding: 0!important;
+}
+</style>
+HTML;
+
 		}
 	}
 

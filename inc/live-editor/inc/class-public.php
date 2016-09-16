@@ -123,7 +123,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 				return true;
 			}
-		} else if ( wp_verify_nonce( $this->nonce, 'ppb-live-' . $id ) ) {
+		} else if ( wp_verify_nonce( $this->nonce, 'ppb-live-edit-nonce' ) || wp_verify_nonce( $this->nonce, 'ppb-live-' . $id ) ) {
 			$this->actions();
 			return true;
 		} else {
