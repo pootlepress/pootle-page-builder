@@ -9,24 +9,23 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.7-alpha-38356
-Stable tag: 3.1.0
+Stable tag: 3.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
+
+Pootle Pagebuilder is a front-end, drag and drop page builder that makes it easy to create beautiful WordPress pages and posts.
 
 == Description ==
 
 https://vimeo.com/181944652
 
-If you’ve ever been frustrated with WordPress then you’re going to love how Pootle Pagebuilder
-gives you complete control over your page layouts.
+If youâ€™ve ever been frustrated with WordPress then youâ€™re going to love how Pootle Pagebuilder gives you complete control over your page layouts.
 
 = What is Pootle Pagebuilder? =
 
-Pootle Pagebuilder is a front-end, drag and drop page builder that is the most creative, fun and
-intuitive way to build stunning looking pages and posts with WordPress.
+Pootle Pagebuilder is a front-end, drag and drop page builder that is the most creative, fun and intuitive way to build stunning looking pages and posts with WordPress.
 
-Anyone can now create a beautiful WordPress website in minutes and no technical knowledge is
-needed (we promise).
+Anyone can now create a beautiful WordPress website in minutes and no technical knowledge is needed (we promise).
 
 = What can I do with Pootle Pagebuilder? =
 
@@ -52,7 +51,7 @@ We have made sure Pootle Pagebuilder:
 * Lean and fast - the code is well written and fully optimized and tested for performance and speed.
 * The free version of Pootle Pagebuilder has amazing features such as parallax and video backgrounds.
 
-= We’re super-excited to now also offer a Pro version that adds the following additional, powerful functionality; =
+= Weâ€™re super-excited to now also offer a Pro version that adds the following additional, powerful functionality; =
 
 = Pootle Pagebuilder Pro features =
 
@@ -122,10 +121,35 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
-= 3.0.0 =
+= 3.5.0 =
  * This is a major release please backup your site before installing
 
 == Changelog ==
+
+= 3.5.0 =
+* 2016-09-20
+ * New - Row background effect - Fixed background parallax
+ * New - Row background effect - Ken burns
+ * New - Row accordion
+ * New - Row animations
+ * New - Row gradients
+ * New - Row gradient over image
+ * New - Font Awesome icons module
+ * New - One Pager module
+ * New - WooCommerce Carousel
+ * Tweak - Removed rag adjust
+ * Tweak - `pootlepb_row_cell_attributes` now include current rows settings as 4th parameters
+ * Tweak - `pootlepb_uses_pb( $post )` to check if post uses pootle page builder
+ * Tweak - New font sizes 20px and 25px
+ * Fix - Compatibility with latest Ninja forms plugin
+
+= 3.1.0 =
+* 2016-09-08
+ * New - Content block position dragging
+ * New - Content block resizing
+ * New - Google fonts in editor
+ * New - Action hook `pootlepb_save_post` executed before saving ppb post data both from live editor and admin end
+ * Tweak - Live editor formatting bar styling
 
 = 3.0.1 =
 * 2016-08-26
@@ -239,7 +263,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * Fix - Slider control supports min, max, step and default in row settings panel and content editor panel
  * Fix - Placeholder for input fields in row settings panel and content editor panel
 
-= 0.2.3 = 
+= 0.2.3 =
 * 2015-07-20
  * New - row panel and content panel support custom field type rendering via dynamic hook
  * Tweak - parallax disabled for mobile
@@ -248,7 +272,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * Tweak - force responsive image to display instead of background video for mobile
  * Fix - formatting and sizing in the visual editor
  * Fix - editor now full height of container
- * Fix - page builder content now saves when page title is empty 
+ * Fix - page builder content now saves when page title is empty
 
 = 0.2.2 =
 * 2015-07-16
