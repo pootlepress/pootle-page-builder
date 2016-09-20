@@ -125,7 +125,7 @@ final class Pootle_Page_Builder_Custom_Styles {
 		);
 
 		if ( ! empty( $style['grad_opacity'] ) ) {
-			$grad_css .= 'opacity: ' . ( 1 - $style['bg_overlay_opacity'] ) . ';';
+			$grad_css .= 'opacity: ' . ( 1 - $style['grad_opacity'] ) . ';';
 		}
 		$css .= "$rowID .panel-row-style:before { $grad_css }";
 

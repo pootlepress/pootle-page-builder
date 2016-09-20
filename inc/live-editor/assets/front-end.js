@@ -968,7 +968,7 @@ jQuery( function ( $ ) {
 			$iconPicker.size.val( parseInt( properties.size ) ).change();
 		}
 		if ( properties.link ) {
-			$iconPicker.link.val( parseInt( properties.link ) ).change();
+			$iconPicker.link.val( properties.link ).change();
 		}
 
 	};
@@ -1473,6 +1473,7 @@ jQuery( function ( $ ) {
 		editor.onDblClick.add(function(ed, e) {
 			var $i = $( e.target );
 			if ( $i.hasClass( "fa" ) ) {
+				var $a = $i.parent('a');
 				pickFaIcon(
 					function ( icon ) {
 						if ( icon.class ) {
@@ -1481,12 +1482,13 @@ jQuery( function ( $ ) {
 								style: icon.style
 							} );
 							if ( icon.link ) {
-								var $a = $i.parent('a');
 								if ( ! $a.length ) {
 									$i.wrap('<a></a>');
 									$a = $i.parent('a');
 								}
 								$a.attr( 'href', icon.link );
+							} else {
+								$i.unwrap( 'a' );
 							}
 						} else {
 							$i.closest('div[style*="text-align: center"]').remove();
@@ -1495,7 +1497,8 @@ jQuery( function ( $ ) {
 					{
 						class: $i.attr( 'class' ).replace( 'fa ', '' ),
 						color: $i.css( 'color' ),
-						size: $i.css( 'font-size' )
+						size: $i.css( 'font-size' ),
+						link: $a.attr( 'href' )
 					}
 				);
 			}
@@ -1767,7 +1770,7 @@ jQuery( function ( $ ) {
 	$ppb.find( '.ppb-block, .ppb-live-add-object.add-row' ).droppable( prevu.moduleDroppable );
 
 	window.ppbModules.image = function ( $t, ed ) {
-		$t.find( '.ppb-edit-block' ).find( '.dashicons-before.dashicons-format-image' ).click();
+		prevu.insertImage();
 	};
 
 	window.ppbModules.chooseIconDialog = function ( $t, ed ) {

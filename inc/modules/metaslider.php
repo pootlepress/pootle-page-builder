@@ -67,13 +67,6 @@ class pootle_page_builder_Meta_Slider {
 			'priority' => 1,
 			'tab' => $this->token,
 		);
-
-		$fields[ $this->token . '-full-width' ] = array(
-			'name' => 'Stretch to full width',
-			'type' => 'checkbox',
-			'priority' => 2,
-			'tab' => $this->token,
-		);
 		return $fields;
 	}
 
