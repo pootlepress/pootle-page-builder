@@ -1488,7 +1488,8 @@ jQuery( function ( $ ) {
 								}
 								$a.attr( 'href', icon.link );
 							} else {
-								$i.unwrap( 'a' );
+								if ( $i.parent('a').length )
+									$i.unwrap();
 							}
 						} else {
 							$i.closest('div[style*="text-align: center"]').remove();
