@@ -719,7 +719,7 @@ jQuery( function ( $ ) {
 
 		insertModule : function( $contentblock, $module ) {
 			var tab = $module.data( 'tab' );
-			$contentblock.find('.dashicons-move').click();
+			$contentblock.find( '.dashicons-move' ).click();
 
 			var $ed = $contentblock.find( '.mce-content-body' ),
 				ed  = tinymce.get( $ed.attr( 'id' ) );
@@ -728,7 +728,7 @@ jQuery( function ( $ ) {
 
 			if ( $module.data( 'callback' ) ) {
 				if ( typeof window.ppbModules[ $module.data( 'callback' ) ] == 'function' )
-					window.ppbModules[ $module.data( 'callback' ) ]( $contentblock, ed, $ );
+					window.ppbModules[ $module.data( 'callback' ) ]( $contentblock, ed, $ed );
 			}
 
 			if ( tab ) {
@@ -1774,7 +1774,7 @@ jQuery( function ( $ ) {
 		prevu.insertImage();
 	};
 
-	window.ppbModules.chooseIconDialog = function ( $t, ed ) {
+	window.ppbModules.chooseIconDialog = function ( $t, ed, $ed ) {
 		pickFaIcon( function ( icon ) {
 			ed.selection.setCursorLocation( ed.getBody().firstChild, 0 );
 			ed.selection.collapse( false );
@@ -1783,8 +1783,8 @@ jQuery( function ( $ ) {
 				icon.html = '<a href="' + icon.link + '">' + icon.html + '</a>';
 			}
 
-			ed.execCommand( 'mceInsertContent', false, '<div class="ppb-fa-icon" style="text-align: center">' + icon.html + '</div>' );
-			prevu.saveTmceBlock( ed );
+			$ed.prepend( '<div class="ppb-fa-icon" style="text-align: center">' + icon.html + '</div>' )
+			prevu.saveTmceBlock( $ed );
 		} );
 	};
 
