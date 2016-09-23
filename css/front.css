@@ -370,6 +370,12 @@ img.ppb-bg-parallax {
 	-webkit-transition: all 0.34s ease-in-out;
 	transition: all 0.34s ease-in-out;
 }
+
+.ppb-fa-icon a, .ppb-fa-icon a[href] {
+	text-decoration: none;
+	font-weight: normal;
+	box-shadow: none;
+}
 /*
 #pootle-page-builder .panel-grid .ppb-row-accordion-toggle:not(.ppb-accordion-open) ~ .panel-row-style {
 	min-height: 0 !important;

@@ -1491,7 +1491,7 @@ jQuery( function ( $ ) {
 									$i.unwrap();
 							}
 						} else {
-							$i.closest('div[style*="text-align: center"]').remove();
+							$i.closest('div.ppb-fa-icon').remove();
 						}
 						prevu.saveTmceBlock( $( $i.closest('.mce-content-body') ) );
 					},
@@ -1783,7 +1783,7 @@ jQuery( function ( $ ) {
 				icon.html = '<a href="' + icon.link + '">' + icon.html + '</a>';
 			}
 
-			ed.execCommand( 'mceInsertContent', false, '<div style="text-align: center">' + icon.html + '</div>' );
+			ed.execCommand( 'mceInsertContent', false, '<div class="ppb-fa-icon" style="text-align: center">' + icon.html + '</div>' );
 			prevu.saveTmceBlock( ed );
 		} );
 	};
