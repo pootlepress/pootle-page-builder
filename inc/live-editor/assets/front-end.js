@@ -142,8 +142,6 @@ jQuery( function ( $ ) {
 		sync : function ( callback, publish ) {
 			logPPBData( 'Before sync' );
 
-			tinyMCE.triggerSave();
-
 			prevu.ajaxCallback = callback;
 			prevu.unSavedChanges = true;
 			prevu.saveTmceBlock( $( '.mce-edit-focus' ) );
