@@ -44,7 +44,7 @@ class pootle_page_builder_Ninja_Forms {
 			add_filter( 'pootlepb_content_block_fields', array( $this, 'fields' ) );
 
 			// Get all NinjaForms form ids
-			$form_ids = Ninja_Forms()->forms()->get_all();
+			$form_ids = method_exists( Ninja_Forms(), 'forms' ) ? Ninja_Forms()->forms()->get_all() : array();
 			foreach ( $form_ids as $form_id ) {
 				$this->choices[ $form_id ] = "$form_id - " . Ninja_Forms()->form( $form_id )->get_setting( 'form_title' );
 			}

@@ -1494,6 +1494,7 @@ jQuery( function ( $ ) {
 						} else {
 							$i.closest('div[style*="text-align: center"]').remove();
 						}
+						prevu.saveTmceBlock( $( $i.closest('.mce-content-body') ) );
 					},
 					{
 						class: $i.attr( 'class' ).replace( 'fa ', '' ),
@@ -1784,6 +1785,7 @@ jQuery( function ( $ ) {
 			}
 
 			ed.execCommand( 'mceInsertContent', false, '<div style="text-align: center">' + icon.html + '</div>' );
+			prevu.saveTmceBlock( $( $i.closest('.mce-content-body') ) );
 		} );
 	};
 
