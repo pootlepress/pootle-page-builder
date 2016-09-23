@@ -813,6 +813,7 @@ jQuery( function ( $ ) {
 		},
 
 		saveTmceBlock : function ( $ed ) {
+			console.log( 'Saving TMCE block.', $ed );
 			if ( ! $ed || ! $ed.length ) return;
 			var blockI = $ed.siblings( '.pootle-live-editor' ).data( 'index' );
 			if ( ! ppbData.widgets[blockI] ) return;
@@ -1785,7 +1786,7 @@ jQuery( function ( $ ) {
 			}
 
 			ed.execCommand( 'mceInsertContent', false, '<div style="text-align: center">' + icon.html + '</div>' );
-			prevu.saveTmceBlock( $( $i.closest('.mce-content-body') ) );
+			prevu.saveTmceBlock( ed );
 		} );
 	};
 
