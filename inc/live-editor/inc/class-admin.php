@@ -111,7 +111,7 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 			'href'   => $new_live_page_url . '&post_type=post'
 		) );
 
-		if ( wp_verify_nonce( $nonce, 'ppb-live-' . get_the_id() ) ) {
+		if ( wp_verify_nonce( $nonce, 'ppb-live-edit-nonce' ) || wp_verify_nonce( $nonce, 'ppb-live-' . get_the_id() ) ) {
 			if ( 'draft' == Pootle_Page_Builder_Live_Editor_Public::instance()->post_status() ) {
 				$args = array(
 					'id'    => 'ppb-publish',
