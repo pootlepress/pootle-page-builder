@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.7-alpha-38356
-Stable tag: 3.5.0
+Stable tag: 3.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,7 +19,7 @@ Pootle Pagebuilder is a front-end, drag and drop page builder that makes it easy
 
 https://vimeo.com/181944652
 
-If youâ€™ve ever been frustrated with WordPress then youâ€™re going to love how Pootle Pagebuilder gives you complete control over your page layouts.
+If you've ever been frustrated with WordPress then you're going to love how Pootle Pagebuilder gives you complete control over your page layouts.
 
 = What is Pootle Pagebuilder? =
 
@@ -51,7 +51,7 @@ We have made sure Pootle Pagebuilder:
 * Lean and fast - the code is well written and fully optimized and tested for performance and speed.
 * The free version of Pootle Pagebuilder has amazing features such as parallax and video backgrounds.
 
-= Weâ€™re super-excited to now also offer a Pro version that adds the following additional, powerful functionality; =
+= We're super-excited to now also offer a Pro version that adds the following additional, powerful functionality; =
 
 = Pootle Pagebuilder Pro features =
 
@@ -125,6 +125,10 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * This is a major release please backup your site before installing
 
 == Changelog ==
+
+= 3.5.1 =
+* 2016-09-25
+* Fix - Error on sites using php 5.4 and lower
 
 = 3.5.0 =
 * 2016-09-20
