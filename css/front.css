@@ -382,7 +382,7 @@ img.ppb-bg-parallax {
 	height: 0;
 }
 */
-@media only screen and (min-width: 769px) {
+@media screen and (min-width: 769px) {
 
 	br.rwd{
 		display: none;
@@ -406,9 +406,20 @@ img.ppb-bg-parallax {
 
 }
 
-@media only screen and (max-width: 1024px) {
+@media screen and (min-width: 1025px) {
+	.ppb-desktop-transparent {
+		opacity: 0;
+	}
 
-	.ppb-bg-video.hide-on-mobile {
+	.hide-on-desktop {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 1024px) and (min-width: 769px) {
+
+	.ppb-bg-video.hide-on-mobile,
+	.hide-on-tablet {
 		display: none;
 	}
 
@@ -418,9 +429,14 @@ img.ppb-bg-parallax {
 	}
 }
 
-@media only screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
 	.hide-on-mobile {
 		display: none;
+	}
+
+	.ppb-no-mobile-spacing {
+		padding: 0 !important;
+		margin: 0 !important;
 	}
 }
 
@@ -462,10 +478,6 @@ img.ppb-bg-parallax {
 }
 
 /* FadeInRight */
-.ppb-transparent {
-	opacity: 0;
-}
-
 [data-animation="FadeInRight"],
 .ppbFadeInRight {
 	-webkit-animation: ppbFadeInRight .7s;
