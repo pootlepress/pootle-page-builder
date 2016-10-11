@@ -1435,7 +1435,7 @@ jQuery( function ( $ ) {
 	prevu.tmce.verify_html = false;
 	prevu.tmce.inline	= true;
 	prevu.tmce.theme	= 'ppbprevu';
-	prevu.tmce.fontsize_formats	= '20px 25px 30px 35px 40px 50px 70px 100px';
+	prevu.tmce.fontsize_formats	= '20px 25px 30px 35px 40px 50px 70px 100px 150px 200px';
 
 	//console.log( prevu.tmce );
 

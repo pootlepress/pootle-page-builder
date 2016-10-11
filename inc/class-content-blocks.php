@@ -132,6 +132,15 @@ final class Pootle_Page_Builder_Content_Block {
 		 * @since 0.1.0
 		 */
 		$attr = apply_filters( 'pootlepb_content_block_attributes', $attr, $styleArray, $id );
+
+		/**
+		 * Filters content block embedded styles
+		 * @var array $attr Content block attributes
+		 * @var array $style Content block style settings
+		 * @var string $id Unique ID of content block
+		 * @since 0.1.0
+		 */
+		$styleWithSelector = apply_filters( 'pootlepb_content_block_embed_styles', $styleWithSelector, $styleArray, $id );
 	}
 
 	/**

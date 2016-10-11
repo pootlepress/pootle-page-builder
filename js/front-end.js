@@ -55,7 +55,7 @@ jQuery( function ( $ ) {
 				'padding-right': rightSpace,
 				'border-left': 0,
 				'border-right': 0,
-				'display' : display
+				'display' : ''
 			} );
 
 			$t.removeClass( 'ppb-full-width-no-bg' );

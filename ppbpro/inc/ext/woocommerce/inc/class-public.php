@@ -186,7 +186,38 @@ class pootle_page_builder_for_WooCommerce_Public{
 					itemsDesktop : false,
 					itemsDesktopSmall : [ 1060, Math.max( 1, acros - 1, acrosBy2 ) ],
 					itemsTablet: [ 790, Math.max( 1, acrosBy2 ) ],
-					itemsMobile : [ 430, 1 ] // itemsMobile disabled - inherit from itemsTablet option
+					itemsMobile : [ 430, 1 ]
+				} );
+			} )( jQuery );
+		</script>
+		<?php
+	}
+
+	/**
+	 * Renders js for carousel
+	 * @param array $set Content block settings
+	 */
+	private function display_slider_scripts( $set ) {
+		$items = empty( $set['wc_prods-columns'] ) ? 4 : $set['wc_prods-columns'];
+		?>
+		<style>
+			#<?php echo $this->id ?> ul.products li.product.type-product {
+				width: auto;
+				margin: 0 auto !important;
+				float: none;
+				padding: 0 2px !important;
+			}
+		</style>
+		<script>
+			( function( $ ) {
+				var $car = $( '#<?php echo $this->id ?> ul.products' );
+				$car.addClass( 'owl-carousel' ).owlCarousel( {
+					navigation: true,
+					items : 1,
+					itemsDesktop : false,
+					itemsDesktopSmall : [ 1060, 1 ],
+					itemsTablet: [ 790, 1 ],
+					itemsMobile : [ 430, 1 ]
 				} );
 			} )( jQuery );
 		</script>

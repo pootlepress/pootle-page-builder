@@ -166,6 +166,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'options' => array(
 				''         => 'Grid',
 				'carousel' => 'Carousel',
+				'slider' => 'Slider',
 			),
 			'default' => '',
 		);

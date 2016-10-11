@@ -161,7 +161,7 @@ class Lib_Customizer_Postmeta {
 
 		//Add settings
 		$manager->add_setting(
-			new Lib_Customize_Setting(
+			new Shramee_Post_Meta_Customize_Setting(
 				$manager,
 				$option['id'],
 				array(

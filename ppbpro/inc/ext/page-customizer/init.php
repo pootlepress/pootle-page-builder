@@ -383,12 +383,14 @@ final class Pootle_Page_Customizer {
 			$post_id = $post->ID;
 		}
 
-		$ret = get_post_meta( $post_id, $this->token, true );
-		if ( ! empty( $ret[ $id ] ) ) {
-			return $ret[ $id ];
+		$post_meta = get_post_meta( $post_id, $this->token, true );
+		if ( ! empty( $post_meta[ $id ] ) ) {
+			$return = $post_meta[ $id ];
 		} else {
-			return $default;
+			$return = $default;
 		}
+
+		return apply_filters( "post_meta_customize_setting_$this->token[$id]", $return, $id );
 	}
 
 	private function get_meta_key( $section, $id ) {

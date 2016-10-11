@@ -953,7 +953,7 @@ body .ppb-dialog {
 	box-shadow: none;
 }
 
-.ppb-tabs-panel input[type='text'], .ppb-tabs-panel input[type='search'], .ppb-tabs-panel input[type='number'] {
+.ppb-tabs-panel select, .ppb-tabs-panel input[type='text'], .ppb-tabs-panel input[type='search'], .ppb-tabs-panel input[type='number'] {
 	width: 200px;
 }
 
