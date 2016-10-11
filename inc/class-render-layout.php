@@ -214,7 +214,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 		if ( ! empty( $style['animate_cols'] ) ) {
 			$attrs['data--100-bottom-top'] = "@data-animation:!$style[animate_cols]";
 			$attrs['data-bottom-top'] = "@data-animation:!0";
-			$attrs['class'] .= "ppb-transparent";
+			$attrs['class'] .= "ppb-desktop-transparent";
 		}
 
 		return $attrs;
