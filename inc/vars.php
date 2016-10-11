@@ -1299,6 +1299,14 @@ $ppbpro_addons_data = array(
 			'Description' => 'pootle page builder for WooCommerce brings powerful WooCommerce features into page builder. Create stunning pages featuring your products by id, category, attribute, best-selling, top rated and on-sale, plus use pootle page builder on product pages and with WooCommerce Tab Manager.',
 		),
 	),
+	array(
+		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2014/08/jm-pic-258x300.png',
+		'path' => 'mobile-designer',
+		'plugin' => array(
+			'Name' => 'pootle page builder Mobile Designer',
+			'Description' => 'Lovely plugin to customize how your page looks on mobile devices ;)',
+		),
+	),
 );
 
 $pootlepb_gradient_css = array(
