@@ -1260,7 +1260,7 @@ $pootlepb_modules = array(
 
 $ppbpro_addons_data = array(
 	array(
-		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/08/icon-post-customizer-add-on-400x400.jpg',
+		'img'  => 'https://pootlepress.github.io/pootle-page-builder/module-icons/blog-customizer.jpg',
 		'path' => 'blog-customizer',
 		'plugin' => array(
 			'Name' => 'pootle page builder blog customizer',
@@ -1268,7 +1268,7 @@ $ppbpro_addons_data = array(
 		),
 	),
 	array(
-		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/10/page-customizer-icon-400x400.png',
+		'img'  => 'https://pootlepress.github.io/pootle-page-builder/module-icons/page-customizer.png',
 		'path' => 'page-customizer',
 		'plugin' => array(
 			'Name' => 'Page customizer',
@@ -1276,7 +1276,7 @@ $ppbpro_addons_data = array(
 		),
 	),
 	array(
-		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/12/photography-add-on-icon-400x400.jpg',
+		'img'  => 'https://pootlepress.github.io/pootle-page-builder/module-icons/photography.jpg',
 		'path' => 'photography',
 		'plugin' => array(
 			'Name' => 'Pootle page builder Photography add on',
@@ -1284,7 +1284,7 @@ $ppbpro_addons_data = array(
 		),
 	),
 	array(
-		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/10/one-pager-400x400.png',
+		'img'  => 'https://pootlepress.github.io/pootle-page-builder/module-icons/one-pager.png',
 		'path' => 'one-pager',
 		'plugin' => array(
 			'Name' => 'pootle page builder one pager',
@@ -1292,7 +1292,7 @@ $ppbpro_addons_data = array(
 		),
 	),
 	array(
-		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2015/08/ppb-woocommmerce-add-on-400x400.jpg',
+		'img'  => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
 		'path' => 'woocommerce',
 		'plugin' => array(
 			'Name' => 'pootle page builder for WooCommerce',
