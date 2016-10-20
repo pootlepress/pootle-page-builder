@@ -143,7 +143,7 @@
         },
         open: function () {
             this.element.show().iris('toggle');
-            if ( ! ppbAjax || !ppbAjax.ipad ) {
+            if ( typeof ppbAjax == 'undefined' || !ppbAjax.ipad ) {
                 this.element.focus();
             }
             this.button.removeClass('hidden');

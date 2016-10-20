@@ -37,13 +37,6 @@ jQuery(function ($) {
                     active: 0
                 });
 
-                $t.find('.field_row_height input').prop('disabled', false);
-                if (0 < $('#grid-styles-dialog').data('container').find('.panel').length) {
-                    $t
-                        .find('.field_row_height input').val('')
-                        .prop('disabled', true);
-                }
-
                 panels.addInputFieldEventHandlers($('#grid-styles-dialog'));
 
                 var $bgToggle = $t.find('[data-style-field=background_toggle]'),

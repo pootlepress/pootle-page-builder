@@ -1,4 +1,4 @@
-# pootle page builder addon boilerplate
+# Pootle Post Builder Addon
 A structured, object oriented foundation to help you quickly navigate your way to making awesome pootle page builder add ons.
 
 ## Contents

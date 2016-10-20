@@ -78,9 +78,7 @@ ksort( $panel_tabs );
 	</div>
 
 <?php
-$row_panel_tabs = apply_filters( 'pootlepb_le_row_block_tabs', $panel_tabs );
-
-$row_panel_tabs = array(
+$row_panel_tabs = apply_filters( 'pootlepb_le_row_settings_tabs', array(
 	'background' => array(
 		'label'    => 'Background',
 		'priority' => 1,
@@ -93,7 +91,7 @@ $row_panel_tabs = array(
 		'label'    => 'Advanced',
 		'priority' => 10,
 	),
-);
+) );
 
 ?>
 	<div class="pootlepb-dialog" id="pootlepb-row-editor-panel">
