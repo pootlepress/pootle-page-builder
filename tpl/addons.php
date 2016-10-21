@@ -32,7 +32,7 @@ $xml = get_transient( 'pootlepb-addons-data' );
 
 // No transient
 if( empty( $xml ) || filter_input( INPUT_GET, 'reload-data' ) ) {
-	$url = 'http://pootlepress.github.io/pootle-page-builder/add-ons.xml';
+	$url = 'https://pootlepress.github.io/pootle-page-builder/add-ons.xml';
 	$xml = file_get_contents( $url );
 	// Save the API response so we don't have to call again until tomorrow.
 	set_transient( 'pootlepb-addons-data', $xml, DAY_IN_SECONDS );

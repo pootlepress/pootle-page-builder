@@ -69,6 +69,14 @@ class pootle_page_builder_Unsplash {
 			'ActiveClass' => $this->class,
 			'priority' => 20
 		);
+		$mods["full-video"] = array(
+			'label' => 'Row Video',
+			'icon_class' => 'dashicons dashicons-video-alt3',
+			'tab' => "#pootlepb-layout-row-tab",
+			'callback' => 'video',
+			'ActiveClass' => $this->class,
+			'priority' => 20
+		);
 		return $mods;
 	}
 }

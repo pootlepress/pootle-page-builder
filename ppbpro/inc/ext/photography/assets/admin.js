@@ -17,6 +17,7 @@ jQuery( function ( $ ) {
 
 	$html.on('pootlepb_admin_content_block_title', function (e, $t, data) {
 
+		console.log( data );
 		if( typeof data == 'undefined' ) {
 			return;
 		}

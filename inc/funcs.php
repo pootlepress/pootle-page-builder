@@ -249,21 +249,67 @@ function pootlepb_settings( $key = '' ) {
 	if ( empty( $settings ) ) {
 		$set = get_option( 'pootlepb_display', array() );
 
-		$settings = get_theme_support( 'ppb-panels' );
-		if ( ! empty( $settings ) ) {
-			$settings = $settings[0];
+		$theme_settings = get_theme_support( 'ppb-panels' );
+		if ( ! empty( $theme_settings ) ) {
+			$theme_settings = $theme_settings[0];
 		} else {
-			$settings = array();
+			$theme_settings = array();
 		}
 
+		$settings = wp_parse_args( $set, $theme_settings );
+
 		$settings = wp_parse_args( $settings, array(
-			'post-types'    => pootlepb_posts(), // Supported post types
-			'responsive'    => ! isset( $set['responsive'] )    ? true : $set['responsive'] == '1', // RWD?
-			'mobile-width'  => ! isset( $set['mobile-width'] )  ? 780  : $set['mobile-width'],      // Width for RWD
-			'margin-bottom' => ! isset( $set['margin-bottom'] ) ? 0	   : $set['margin-bottom'],     // for cell
-			'margin-sides'  => ! isset( $set['margin-sides'] )  ? 10   : $set['margin-sides'],      // for cells
-			'inline-css'    => true,        // CSS in HTML? or seperate file
+			'post-types'    => pootlepb_posts(),
+			'responsive'    => true,
+			'mobile-width'  => 780,
+			'margin-bottom' => 0,
+			'margin-sides'  => 10,
+			'inline-css'    => true,
 			'modules-position' => ! isset( $set['modules-position'] )  ? 'left' : $set['modules-position'],
+			'editor-fonts' => array(
+				'Arial, sans-serif',
+				'Verdana, Geneva, sans-serif',
+				'"Trebuchet MS", Tahoma, sans-serif',
+				'Georgia, serif',
+				'"Times New Roman", serif',
+				'Tahoma, Geneva, Verdana, sans-serif',
+				'Palatino, "Palatino Linotype", serif',
+				'"Helvetica Neue", Helvetica, sans-serif',
+				'Calibri, Candara, Segoe, Optima, sans-serif',
+				'"Myriad Pro", Myriad, sans-serif',
+				'"Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", sans-serif',
+				'"Arial Black", sans-serif',
+				'"Gill Sans", "Gill Sans MT", Calibri, sans-serif',
+				'Geneva, Tahoma, Verdana, sans-serif',
+				'Impact, Charcoal, sans-serif',
+				'Courier, "Courier New", monospace',
+				'"Century Gothic", sans-serif',
+				'Abril Fatface',
+				'Amatic SC',
+				'Dancing Script',
+				'Droid Serif',
+				'Great Vibes',
+				'Inconsolata',
+				'Indie Flower',
+				'Lato',
+				'Lobster',
+				'Lora',
+				'Oswald',
+				'Pacifico',
+				'Passion One',
+				'Patua One',
+				'Playfair Display',
+				'Poiret One',
+				'Raleway',
+				'Roboto',
+				'Roboto Condensed',
+				'Roboto Mono',
+				'Roboto Slab',
+				'Shadows Into Light',
+				'Sigmar One',
+				'Source Sans Pro',
+				'Ubuntu Mono',
+			),
 		) );
 	}
 

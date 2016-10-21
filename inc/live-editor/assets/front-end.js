@@ -738,7 +738,7 @@ jQuery( function ( $ ) {
 					$contentblock.find('.ppb-edit-block .dashicons-edit' ).click();
 				}
 
-				$( 'a.ppb-tabs-anchors[href="' + tab + '"]' ).click();
+				$( 'a.ppb-tabs-anchor[href="' + tab + '"]' ).click();
 			}
 			$loader.fadeOut(500);
 		},
@@ -1564,13 +1564,12 @@ jQuery( function ( $ ) {
 			}
 		} );
 		editor.addButton( 'shrameeFonts', function() {
-			var items = [
-				{text: 'Default', value: 'inherit'},
-				// System Fonts
-				{text: 'Georgia', value: 'Georgia, serif'}, {text: 'Arial Black', value: '"Arial Black", Gadget, sans-serif'}, {text: 'Comic Sans MS', value: '"Comic Sans MS", cursive, sans-serif'}, {text: 'Impact', value: 'Impact, Charcoal, sans-serif'}, {text: 'Courier New', value: '"Courier New", Courier, monospace'},
-				// Google Fonts
-				{text: 'Abril Fatface', value: 'Abril Fatface'}, {text: 'Amatic SC', value: 'Amatic SC'}, {text: 'Dancing Script', value: 'Dancing Script'}, {text: 'Droid Serif', value: 'Droid Serif'}, {text: 'Great Vibes', value: 'Great Vibes'}, {text: 'Inconsolata', value: 'Inconsolata'}, {text: 'Indie Flower', value: 'Indie Flower'}, {text: 'Lato', value: 'Lato'}, {text: 'Lobster', value: 'Lobster'}, {text: 'Lora', value: 'Lora'}, {text: 'Oswald', value: 'Oswald'}, {text: 'Pacifico', value: 'Pacifico'}, {text: 'Passion One', value: 'Passion One'}, {text: 'Patua One', value: 'Patua One'}, {text: 'Playfair Display', value: 'Playfair Display'}, {text: 'Poiret One', value: 'Poiret One'}, {text: 'Raleway', value: 'Raleway'}, {text: 'Roboto', value: 'Roboto'}, {text: 'Roboto Condensed', value: 'Roboto Condensed'}, {text: 'Roboto Mono', value: 'Roboto Mono'}, {text: 'Roboto Slab', value: 'Roboto Slab'}, {text: 'Shadows Into Light', value: 'Shadows Into Light'}, {text: 'Sigmar One', value: 'Sigmar One'}, {text: 'Source Sans Pro', value: 'Source Sans Pro'}, {text: 'Ubuntu Mono', value: 'Ubuntu Mono'},
-			]
+			var items = [{text: 'Default', value: 'inherit'},];
+			for( var i = 0; i < ppbEditorFonts.length; i++ ) {
+				var font = { text: ppbEditorFonts[i], value: ppbEditorFonts[i] };
+				font.text = font.text.split( ',' )[0].replace(/\"/g, "");
+				items.push( font ) // Add font to list
+			}
 			return {
 				type: 'listbox',
 				text: 'Font',

@@ -108,71 +108,73 @@
      */
     panelsCreatePanel = function (type, data) {
 
-        var newPanelId = newPanelIdInit++;
+        var newPanelId = newPanelIdInit ++;
 
-        var dialogWrapper = $(this);
+        var dialogWrapper = $( this );
 
         // Hide the undo message
-        $('#panels-undo-message').fadeOut(function () {
-            $(this).remove()
-        });
-        var panel = $('<div class="panel new-panel"><div class="panel-wrapper"><div class="title"><h4></h4><span class="actions"></span></div></div></div>');
+        $( '#panels-undo-message' ).fadeOut( function () {
+            $( this ).remove()
+        } );
+        var panel = $( '<div class="panel new-panel"><div class="panel-wrapper"><div class="title"><h4></h4><span class="actions"></span></div></div></div>' );
 
         window.activeDialog = undefined;
 
         // normalize data.info.style to be object
         var widgetStyleJson = "{}";
-        if (typeof data != 'undefined') {
-            if (typeof data.info == 'undefined') {
-                data.info = {};
-            }
-            if (typeof data.info.style == 'string') {
-                widgetStyleJson = data.info.style;
 
-                data.info.style = JSON.parse(data.info.style);
-
-            } else if (typeof data.info.style == 'object') {
-                widgetStyleJson = JSON.stringify(data.info.style);
-            } else {
-                widgetStyleJson = "{}";
-            }
+        if ( typeof data == 'undefined' ) {
+            data = {};
+        }
+        if ( typeof data.info == 'undefined' ) {
+            data.info = {
+                style: '{}'
+            };
+        }
+        if ( typeof data.info.style == 'string' ) {
+            widgetStyleJson = data.info.style;
+            data.info.style = JSON.parse( data.info.style );
+        } else if ( typeof data.info.style == 'object' ) {
+            widgetStyleJson = JSON.stringify( data.info.style );
+        } else {
+            widgetStyleJson = "{}";
         }
 
         panel
-            .attr('data-type', type)
-            .append($('<input type="hidden" name="widgets[' + newPanelId + '][data]" type="hidden">').val(JSON.stringify(data)))
-            .append($('<input type="hidden" name="widgets[' + newPanelId + '][info][raw]" type="hidden">').val(0))
-            .append($('<input type="hidden" name="widgets[' + newPanelId + '][info][grid]" type="hidden">'))
-            .append($('<input type="hidden" name="widgets[' + newPanelId + '][info][cell]" type="hidden">'))
-            .append($('<input type="hidden" name="widgets[' + newPanelId + '][info][id]" type="hidden">').val(newPanelId))
-            .append($('<input type="hidden" name="widgets[' + newPanelId + '][info][class]" type="hidden">').val(type))
-            .append($('<input type="hidden" name="widgets[' + newPanelId + '][info][style]" type="hidden">').val(widgetStyleJson))
-            .append($('<input type="hidden" name="panel_order[]" type="hidden">').val(newPanelId))
-            .data({
+            .attr( 'data-type', type )
+            .append( $( '<input type="hidden" name="widgets[' + newPanelId + '][data]" type="hidden">' ).val( JSON.stringify( data ) ) )
+            .append( $( '<input type="hidden" name="widgets[' + newPanelId + '][info][raw]" type="hidden">' ).val( 0 ) )
+            .append( $( '<input type="hidden" name="widgets[' + newPanelId + '][info][grid]" type="hidden">' ) )
+            .append( $( '<input type="hidden" name="widgets[' + newPanelId + '][info][cell]" type="hidden">' ) )
+            .append( $( '<input type="hidden" name="widgets[' + newPanelId + '][info][id]" type="hidden">' ).val( newPanelId ) )
+            .append( $( '<input type="hidden" name="widgets[' + newPanelId + '][info][class]" type="hidden">' ).val( type ) )
+            .append( $( '<input type="hidden" name="widgets[' + newPanelId + '][info][style]" type="hidden">' ).val( widgetStyleJson ) )
+            .append( $( '<input type="hidden" name="panel_order[]" type="hidden">' ).val( newPanelId ) )
+            .data( {
                 // We need this data to update the title
                 'title-field': undefined,
                 'title': 'Editor',
                 'raw': false
-            })
-            .end().find('.title h4').html('Editor');
+            } )
+            .end().find( '.title h4' ).html( 'Editor' );
 
         // Set the title
-        $('html').trigger( 'pootlepb_admin_content_block_title', [ panel, data ] );
+        $( 'html' ).trigger( 'pootlepb_admin_content_block_title', [panel, data] );
 
         // Add the action buttons
         panel
-            .find('.title .actions')
+            .find( '.title .actions' )
             .append(
-            $('<a data-tooltip="' + panels.i10n.buttons.delete + '"></a>').addClass('dashicons-before dashicons-dismiss delete')
-        )
+                $( '<a data-tooltip="' + panels.i10n.buttons.delete + '"></a>' ).addClass( 'dashicons-before dashicons-dismiss delete' )
+            )
             .append(
-            $('<a data-tooltip="' + panels.i10n.buttons.duplicate + '"></a>').addClass('dashicons-before dashicons-admin-page duplicate')
-        )
+                $( '<a data-tooltip="' + panels.i10n.buttons.duplicate + '"></a>' ).addClass( 'dashicons-before dashicons-admin-page duplicate' )
+            )
             .append(
-            $('<a data-tooltip="' + panels.i10n.buttons.edit + '"></a>').addClass('dashicons-before dashicons-edit edit')
-        );
+                $( '<a data-tooltip="' + panels.i10n.buttons.edit + '"></a>' ).addClass( 'dashicons-before dashicons-edit edit' )
+            );
 
-        panels.setupPanelButtons(panel);
+        panels.setupPanelButtons( panel );
 
         return panel;
     };

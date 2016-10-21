@@ -59,14 +59,7 @@ jQuery(function ($) {
             return false;
         }
 
-        // Make sure the number is between 1 and 10.
-        num = Math.min(10, Math.max(1, Math.round(num)));
-        var gridContainer = window.panels.createGrid(num);
-
-        panels.ppbGridEvents(gridContainer);
-
-        if (panels.animations) gridContainer.hide().slideDown();
-        else gridContainer.show();
+        panel.addGrid( num );
 
         $('#grid-add-dialog').ppbDialog('close');
     };
@@ -352,20 +345,29 @@ jQuery(function ($) {
             },
             buttons: [
                 {
-                    text: $contentSwitchDialog.attr('data-button-i-know'),
-                    class: 'button i-know',
+                    text: $contentSwitchDialog.attr('data-button-cancel'),
+                    class: 'button cancel',
+                    click: function () {
+                        $(this).ppbDialog("close");
+                    }
+                },
+                {
+                    text: $contentSwitchDialog.attr('data-button-no'),
+                    class: 'button no',
                     click: function () {
                         activate_panels();
                         $(this).ppbDialog("close");
                     }
                 },
                 {
-                    text: $contentSwitchDialog.attr('data-button-stop'),
-                    class: 'button pootle stop',
+                    text: $contentSwitchDialog.attr('data-button-yes'),
+                    class: 'button pootle yes',
                     click: function () {
+                        activate_panels();
+                        panels.addPanel( panelsCreatePanel( 'Pootle_PB_Content_Block', {text: tinymce.get( 'content' ).getContent()} ) );
                         $(this).ppbDialog("close");
                     }
-                }
+                },
             ]
         });
 
@@ -485,7 +487,9 @@ jQuery(function ($) {
                     $('#content-loss-dialog').ppbDialog('open');
 
                 } else {
-                    activate_panels()
+
+                   activate_panels();
+
                 }
 
             })

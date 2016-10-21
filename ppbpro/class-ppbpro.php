@@ -164,6 +164,9 @@ class Pootle_Page_Builder_Pro extends Pootle_Page_Builder_Pro_Framework {
 		add_action( 'pootlepb_row_settings_fields', array( $this->admin, 'row_fields' ), 999 );
 		//Pro modules
 		add_action( 'pootlepb_modules', array( $this->admin, 'modules' ), 25 );
+		// Admin settings
+		add_action( 'pootlepb_setting_fields', array( $this->admin, 'settings' ) );
+
 	}
 
 	/**

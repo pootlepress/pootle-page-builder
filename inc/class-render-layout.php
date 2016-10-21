@@ -42,6 +42,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 
 		/* Puts stuff in row */
 		add_action( 'pootlepb_before_row', array( $this, 'row_accordion' ) );
+		add_action( 'pootlepb_before_row', array( $this, 'row_video' ) );
 		add_action( 'pootlepb_before_cells', array( $this, 'row_embed_css' ), 10, 2 );
 		add_filter( 'pootlepb_row_cell_attributes', array( $this, 'row_animation' ), 10, 4 );
 

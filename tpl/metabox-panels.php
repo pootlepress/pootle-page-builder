@@ -129,13 +129,14 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 	</div>
 
 	<div id="content-loss-dialog" data-title="<?php esc_attr_e( 'Changing to Page Builder', 'ppb-panels' ) ?>"
-	     data-button-i-know="<?php esc_attr_e( "I know what I'm doing", 'ppb-panels' ) ?>"
-	     data-button-stop="<?php esc_attr_e( "Yep, I'll stop and create a new page", 'ppb-panels' ) ?>"
+	     data-button-no="<?php esc_attr_e( "Discard content", 'ppb-panels' ) ?>"
+	     data-button-yes="<?php esc_attr_e( "Yes, please", 'ppb-panels' ) ?>"
+	     data-button-cancel="<?php esc_attr_e( "Cancel", 'ppb-panels' ) ?>"
 	     class="panels-admin-dialog">
 		<p>
-			<?php _e( 'Slow down tiger! Do you realise that changing to Page Builder for this page will make all your page content disappear forever?', 'ppb-panels' ) ?>
+			<?php _e( 'Your page already has some content on this page, you\'ll lose it if you save the page in Pootle Pagebuilder.', 'ppb-panels' ) ?>
 			<br><br>
-			<?php _e( 'Why not create a new page instead?', 'ppb-panels' ) ?>
+			<?php _e( 'Would you like to copy it over to Pootle Pagebuilder?', 'ppb-panels' ) ?>
 		</p>
 	</div>
 

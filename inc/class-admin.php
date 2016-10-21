@@ -252,11 +252,17 @@ final class Pootle_Page_Builder_Admin {
 			$this,
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'modules-position' ) );
-		// The display fields
+		// Hard uninstall
 		add_settings_field( 'hard-uninstall', __( 'Delete ALL data on uninstall', 'ppb-panels' ), array(
 			$this,
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'hard-uninstall' ) );
+
+		do_action( 'pootlepb_setting_fields', array(
+			'page' => 'pootlepage-display',
+			'section' => 'display',
+			'setting' => 'pootlepb_display',
+		) );
 	}
 
 	/**
@@ -344,6 +350,7 @@ final class Pootle_Page_Builder_Admin {
 	 * @since 0.1.0
 	 */
 	public function pootlepb_options_sanitize_display( $vals ) {
+		print_awesome_r( $vals );
 		//Enable Responsive media queries
 		$vals['responsive']      = ! empty( $vals['responsive'] );
 		return $vals;

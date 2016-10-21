@@ -161,6 +161,13 @@ $pootlepb_row_styling_fields = array(
 		'tab' => 'layout',
 		'priority' => 1,
 	),
+	'row_video' => array (
+		'name' => 'Add video before content',
+		'type' => 'text',
+		'tab' => 'layout',
+		'help-text' => 'Make the row full width to make the video full width too.',
+		'priority' => 1,
+	),
 	'accordion'              => array(
 		'name' => 'Make accordion',
 		'type' => 'checkbox',
@@ -212,7 +219,7 @@ $pootlepb_row_styling_fields = array(
 			'' => 'None',
 			'FadeInLeft'	=> 'Fade In Left',
 			'FadeInRight'	=> 'Fade In Right',
-			'FadeInUp'	=> 'Fade In Up',
+			'FadeInUp'		=> 'Fade In Up',
 			'FadeInDown'	=> 'Fade In Down',
 		),
 		'default' => '1',
@@ -1300,7 +1307,7 @@ $ppbpro_addons_data = array(
 		),
 	),
 	array(
-		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2014/08/jm-pic-258x300.png',
+		'img'  => 'http://www.pootlepress.com/wp-content/uploads/2014/08/jm-pic-258x300.png', //@TODO add https image
 		'path' => 'mobile-designer',
 		'plugin' => array(
 			'Name' => 'pootle page builder Mobile Designer',

@@ -188,6 +188,28 @@ class Pootle_Page_Builder_Pro_Admin {
 	}
 
 	/**
+	 * Register pro settings
+	 * @action admin_notices
+	 * @since 0.1.0
+	 *
+	 * @param array $args Args for settings fields
+	 */
+	public function settings( $args ) {
+		add_settings_field( 'editor-fonts', __( 'Live editor fonts', 'ppb-panels' ), function( $args ) {
+			global $pootlepb_font;
+
+			$values = pootlepb_settings( 'editor-fonts' );
+
+			echo "<select style='height:250px' multiple='multiple' name='$args[setting][editor-fonts][]'>";
+			foreach ( $pootlepb_font as $font => $Font ) {
+				echo "<option value='$font'" . selected( in_array( $font, $values ), true, false ) . ">$Font</option>";
+			}
+			echo '</select>';
+		}, $args['page'], $args['section'], $args );
+
+	}
+
+	/**
 	 * Enqueue admin scripts and styles
 	 * @global $pagenow
 	 * @action admin_notices

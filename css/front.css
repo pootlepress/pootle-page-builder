@@ -201,6 +201,20 @@ ul.wooTabs {
 	overflow: hidden;
 }
 
+.ppb-row-video {
+	display: block;
+	padding-top: 56.25%;
+	position: relative;
+}
+.ppb-row-video iframe {
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
 .ppb-row-kenburns-wrap,
 .ppb-bg-video-container {
 	top: 0;

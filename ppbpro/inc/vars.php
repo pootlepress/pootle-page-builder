@@ -43,7 +43,7 @@ function ppbpro_get_templates() {
 	return get_option( 'ppbpro-templates', array() );
 }
 function ppbpro_query_templates( $tpls ) {
-	$url = 'http://pootlepress.github.io/pootle-page-builder/templates.json';
+	$url = 'https://pootlepress.github.io/pootle-page-builder/templates.json';
 	$qtpls = json_decode( file_get_contents( $url ), 'Array' );
 	if ( $qtpls ) {
 		update_option( 'ppbpro-templates', wp_parse_args( $qtpls, $tpls ) );

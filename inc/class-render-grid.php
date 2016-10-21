@@ -247,6 +247,17 @@ class Pootle_Page_Builder_Render_Grid {
 	}
 
 	/**
+	 * Output row video
+	 *
+	 * @param array $style
+	 */
+	public function row_video( $row ) {
+		if ( ! empty( $row['style']['row_video'] ) ) {
+			echo '<div class="ppb-row-video">' . wp_oembed_get( $row['style']['row_video'] ) . '</div>';
+		}
+	}
+
+	/**
 	 * Output row bg video
 	 *
 	 * @param array $style

@@ -86,7 +86,7 @@ $live_page_url = wp_nonce_url( $live_page_url, 'ppb-new-live-post', 'ppbLiveEdit
 			$tpl = strtolower( $Tpl );
 			$img_url = "$thmb_url/$tpl.png";
 			if ( ! file_exists( "$thmb_pth/$tpl.png" ) ) {
-				$img_url = "http://pootlepress.github.io/pootle-page-builder/tpl-thumbs/$tpl.png";
+				$img_url = "https://pootlepress.github.io/pootle-page-builder/tpl-thumbs/$tpl.png";
 			}
 			echo "<a class='ppb-template' href='$live_page_url&tpl=$Tpl'><div class='ppb-tpl-img' style='background-image:url(\"$img_url\")'><div class='dashicons dashicons-plus'><div>Add Page with this template</div></div></div>$Tpl</a>";
 		}

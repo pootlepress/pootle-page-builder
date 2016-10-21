@@ -38,12 +38,19 @@ jQuery( function ( $ ) {
 		}
 		$el.each( function () {
 			var
-				$t = $( this ),
+				$t = $( this ).closest( '.panel-grid' ),
 				display = $t.css('display');
 
 			$t.css( 'display', 'block' );
 
-			$t.css( {'margin-left': 0, 'margin-right': 0, 'padding-left': 0, 'padding-right': 0} );
+			$t.css( {
+				'margin-left': 0,
+				'margin-right': 0,
+				'padding-left': 0,
+				'padding-right': 0,
+				'border-left': 0,
+				'border-right': 0,
+			} );
 
 			var leftSpace = $t.offset().left,
 				rightSpace = $w.outerWidth() - leftSpace - $t.parent().outerWidth();
@@ -51,6 +58,8 @@ jQuery( function ( $ ) {
 			$t.css( {
 				'margin-left': - leftSpace,
 				'margin-right': - rightSpace,
+			} );
+			$t.children('.ppb-row').css( {
 				'padding-left': leftSpace,
 				'padding-right': rightSpace,
 				'border-left': 0,

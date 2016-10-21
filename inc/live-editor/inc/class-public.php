@@ -315,6 +315,9 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		if ( count( $panels_data ) > 0 ) {
 			wp_localize_script( 'pootle-live-editor', 'ppbData', $panels_data );
 		}
+
+		wp_localize_script( 'pootle-live-editor', 'ppbEditorFonts', pootlepb_settings( 'editor-fonts' ) );
+
 		wp_localize_script( 'pootle-live-editor', 'ppbPost', array(
 			'status' => get_post_status(),
 		) );
