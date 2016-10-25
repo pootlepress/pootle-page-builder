@@ -68,6 +68,7 @@ jQuery( function ( $ ) {
 			} );
 
 			$t.removeClass( 'ppb-full-width-no-bg' );
+			$t.find( '.ppb-full-width-no-bg' ).removeClass( 'ppb-full-width-no-bg' );
 		} );
 	};
 	ppbFullWidth();

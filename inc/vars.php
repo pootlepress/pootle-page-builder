@@ -116,6 +116,17 @@ $pootlepb_content_block_styling_fields = array(
 		'css'  => 'max-width',
 		'tab' => 'style',
 	),
+	'rotate'          => array(
+		'name' => 'Rotate angle',
+		'type' => 'number',
+		'priority' => 5,
+		'min'  => '-999',
+		'max'  => '999',
+		'step' => '1',
+		'unit' => 'deg',
+		'css'  => 'transform:rotate(%1$s);-webkit-transform:rotate(%1$s);',
+		'tab' => 'style',
+	),
 	'padding-mobile'          => array(
 		'name' => 'Keep custom margin and padding on mobile',
 		'type' => 'checkbox',

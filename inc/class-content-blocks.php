@@ -185,8 +185,8 @@ final class Pootle_Page_Builder_Content_Block {
 
 			if ( ! isset( $field['selector'] ) ) {
 				//No selector
-				if ( strpos( $field['css'], '%s' ) ) {
-					$inlineStyle .= sprintf( $field['css'], $styleArray[ $key ] );
+				if ( strpos( $field['css'], '%s' ) || strpos( $field['css'], '%1$s' ) ) {
+					$inlineStyle .= sprintf( $field['css'], $styleArray[ $key ] . $unit );
 				} else {
 					$inlineStyle .= $field['css'] . ': ' . $styleArray[ $key ] . $unit . ';';
 				}

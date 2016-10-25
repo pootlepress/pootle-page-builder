@@ -71,6 +71,21 @@ jQuery( function ( $ ) {
 			$t.draggable( prevu.contentDraggable );
 			$t.resizable( prevu.contentResizable );
 			$t.droppable( prevu.moduleDroppable );
+			$t.rotatable( {
+				handle: $t.find('.rotatable-handle'),
+				start: function ( e ) {
+					var $t = e.target;
+					$t.find( '.ppb-edit-block .dashicons-before:first' ).click();
+					$t.css( { maxWidth: 9999 } );
+				},
+				stop: function( e, ui ){
+					var st = JSON.parse( ppbData.widgets[window.ppbPanelI].info.style ),
+						$t = e.target;
+					st['rotate'] = ui.deg;
+					console.log( st, ui );
+					ppbData.widgets[window.ppbPanelI].info.style = JSON.stringify( st );
+				}
+			} );
 		} );
 	};
 
@@ -678,9 +693,7 @@ jQuery( function ( $ ) {
 			start: function (e, ui) {
 				var $t = $( this );
 				$t.find( '.ppb-edit-block .dashicons-before:first' ).click();
-				$t.css( {
-					maxWidth: 9999,
-				} );
+				$t.css( { maxWidth: 9999 } );
 			},
 			stop: function (event, ui) {
 				var st = JSON.parse( ppbData.widgets[window.ppbPanelI].info.style ),
@@ -1441,22 +1454,27 @@ jQuery( function ( $ ) {
 
 	if ( ! ppbAjax.ipad ) {
 		prevu.tmce.toolbar = [
+			'ppbHeadings',
+			'|',
 			'h1',
 			'h2',
 			'h3',
 			'h4',
+			'|',
+			'blockquote',
+			'ppbFontControls',
+			'|',
 			'shrameeFonts',
 			'fontsizeselect',
-			//'ppbFontStyles',
-			'blockquote',
 			'forecolor',
-			'ppblink',
 			'bold',
 			'italic',
+			'|',
+			'ppblink',
+			'|',
 			'alignleft',
 			'aligncenter',
 			'alignright',
-			'ppbInsertImage'
 		];
 		$postSettingsDialog.find('select').chosen();
 	} else {
@@ -1512,12 +1530,48 @@ jQuery( function ( $ ) {
 			var $t = $( e.target.targetElm );
 			$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
 			$t.parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
+
+			var $bGrp = $( '.ppb-tmce-btn-grp-toggle' ).closest( '.mce-btn-group' )
+
+			$.each( $bGrp, function ( i, v ) {
+				$( v ).next().hide().addClass('ppb-tmce-btn-grp-toggle-fields');
+			} );
 		});
 		editor.addButton('ppbInsertImage', {
 			text: '',
 			icon: 'dashicons dashicons-format-image',
 			onclick: function () {
 				ppbIpad.insertImage();
+			}
+		});
+		editor.addButton('ppbFontControls', {
+			text: 'Font controls',
+			icon: 'dashicons ppb-tmce-btn-grp-toggle dashicons-editor-textcolor',
+			onclick: function ( e ) {
+				var $t = $( e.target ).closest( '.mce-btn-group' ),
+					$trgt = $t.next( '.mce-btn-group' );
+				if ( $trgt.is(':visible') ) {
+					$('.ppb-tmce-btn-grp-toggle-fields').hide();
+				} else {
+					$('.ppb-tmce-btn-grp-toggle-fields').hide();
+					$trgt.show();
+				}
+			}
+		});
+		editor.addButton('ppbHeadings', {
+			text: ' Headings',
+			icon: 'dashicons ppb-tmce-btn-grp-toggle dashicons-archive',
+			tooltip: 'Headings',
+			onclick: function ( e ) {
+				var $t = $( e.target ).closest( '.mce-btn-group' ),
+					$trgt = $t.next( '.mce-btn-group' );
+				if ( $trgt.is(':visible') ) {
+					$('.ppb-tmce-btn-grp-toggle-fields').hide();
+				} else {
+					$('.ppb-tmce-btn-grp-toggle-fields').hide();
+					$trgt.show();
+				}
+				//$bgrp.css( 'left', $t.position().left + $t.width() - $bgrp.width() );
 			}
 		});
 

@@ -228,16 +228,11 @@ body .ppb-dialog {
 	font: 14px sans-serif;
 }
 
-.pootle-live-editor.ppb-edit-row .dashicons-before:before {
-}
-
-.pootle-live-editor.ppb-edit-row .dashicons-before:hover:before {
-}
-
 .pootlepb-dialog textarea, .pootlepb-dialog input[type='text'] {
 	width: 250px;
 }
 
+.pootle-live-editor-active .rotatable-handle:before,
 .pootle-live-editor .dashicons-before:before {
 	font-size: 25px;
 	width: 25px;
@@ -251,7 +246,21 @@ body .ppb-dialog {
 	border-radius: 50%;
 	box-sizing: content-box;
 }
-
+.pootle-live-editor-active .rotatable-handle {
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	margin: 0 -17px;
+	z-index: 7;
+	display: none;
+}
+.ppb-block:hover .rotatable-handle {
+	display: block;
+}
+.pootle-live-editor-active .rotatable-handle:before {
+	display: block;
+}
+.pootle-live-editor-active .rotatable-handle:hover:before,
 .pootle-live-editor .dashicons-before:hover:before {
 	color: #fff;
 	background: #ef4832;
@@ -454,11 +463,6 @@ body .ppb-dialog {
 	transition: padding 0.25s;
 }
 
-/*
-.panel-grid:hover .ppb-edit-row:hover ~ .ppb-row .panel-grid-cell-container {
-	padding-top: 45px;
-}
-*/
 .panel-grid-cell {
 	position: relative;
 	left: 0 !important;
@@ -486,7 +490,6 @@ body .ppb-dialog {
 	left: auto;
 	right: 0;
 	border: none;
-	border-right: 1px dashed #ef4832;
 }
 
 .ui-resizable-handle {
@@ -503,6 +506,26 @@ body .ppb-dialog {
 	cursor: ew-resize;
 }
 
+.ppb-block .ui-resizable-handle {
+	border: none;
+}
+.ppb-block .ui-resizable-e:before, .ppb-block .ui-resizable-w:before {
+	content: '\f0d9';
+	display: block;
+	font: 25px fontAwesome;
+	position: absolute;
+	top: 50%;
+	left: -16px;
+	right: 0;
+	margin: -7px auto;
+	text-align:center;
+	color: #ed4832;
+}
+.ppb-block .ui-resizable-e:before {
+	content: '\f0da';
+	left: 0;
+	right: -16px;
+}
 .panel-grid.tour-active .resize-cells ~ .ui-resizable-handle, .panel-grid:hover .resize-cells ~ .ui-resizable-handle, .ppb-cols-resizing .ui-resizable-handle {
 	display: block;
 	visibility: visible;
@@ -1188,10 +1211,9 @@ iframe[src*='/pootle-buttons/'] {
 	border-top-color: #fff !important;
 }
 
-.mce-tinymce.mce-tinymce-inline .mce-btn-group .mce-btn:focus,
-.mce-tinymce.mce-tinymce-inline .mce-btn-group .mce-btn:hover {
+.mce-tinymce.mce-tinymce-inline .mce-btn-group .mce-btn:focus button,
+.mce-tinymce.mce-tinymce-inline .mce-btn-group .mce-btn:hover button {
 	background: rgba(0,0,0,0.2);
-	border: 0;
 }
 
 .mce-tinymce.mce-tinymce-inline .mce-ico {
@@ -1210,12 +1232,21 @@ iframe[src*='/pootle-buttons/'] {
 	border-right: 1px solid rgba(0,0,0,0.2);
 }
 
+.mce-tinymce.mce-tinymce-inline .mce-container .mce-container .mce-last button {
+	border-right: none;
+}
+
 .mce-tinymce.mce-tinymce-inline .mce-btn-group .mce-btn button + button {
 	border-left: 0;
 	padding: 7px 7px 7px 0;
 }
-
-.mce-tinymce.mce-tinymce-inline .mce-btn-group .mce-btn.mce-active, .mce-toolbar .mce-btn-group .mce-btn:active, .qt-dfw.active {
+.mce-container.mce-container .mce-btn-group .mce-btn,
+.mce-container.mce-container .mce-btn-group .mce-btn:hover,
+.mce-container.mce-toolbar .mce-btn-group .mce-btn.mce-active,
+.mce-toolbar .mce-btn-group .mce-btn:active, .qt-dfw.active {
+	background: #ef4832;
+}
+.mce-tinymce.mce-tinymce-inline .mce-btn-group .mce-btn.mce-active button, .mce-toolbar .mce-btn-group .mce-btn:active button, .qt-dfw.active button {
 	background: rgba(0,0,0,0.2);
 }
 
@@ -1233,6 +1264,30 @@ iframe[src*='/pootle-buttons/'] {
 
 .mce-toolbar .mce-btn.mce-disabled {
 	display: none;
+}
+
+.mce-tinymce.mce-tinymce-inline .mce-btn-group.ppb-tmce-btn-grp-toggle-fields {
+	position: absolute;
+	bottom: 106%;
+	left: -16px;
+	text-align: center;
+	text-align: center;
+	text-align: center;
+	background: #ef4832;
+	padding: 0 16px;
+	border-radius: 999px;
+}
+
+.mce-tinymce.mce-tinymce-inline .mce-btn-group.ppb-tmce-btn-grp-toggle-fields .mce-first button {
+	border-left: none;
+}
+
+.mce-tinymce.mce-tinymce-inline .mce-btn-group.ppb-tmce-btn-grp-toggle-fields * {
+	text-align: center;
+}
+
+.mce-tinymce.mce-tinymce-inline .mce-btn-group {
+	position: relative;
 }
 
 .wp-core-ui input {
