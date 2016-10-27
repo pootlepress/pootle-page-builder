@@ -232,6 +232,7 @@ final class Pootle_Page_Builder_Admin {
 			'pootlepb_options_sanitize_display',
 		) );
 		register_setting( 'pootlepage-display', 'pootlepb-hard-uninstall' );
+		register_setting( 'pootlepage-display', 'pootlepb-content-deactivation' );
 		register_setting( 'ppbpro_modules', 'ppb_enabled_addons' );
 		register_setting( 'ppbpro_modules', 'ppb_disabled_addons' );
 
@@ -253,10 +254,15 @@ final class Pootle_Page_Builder_Admin {
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'modules-position' ) );
 		// Hard uninstall
-		add_settings_field( 'hard-uninstall', __( 'Keep on uninstall', 'ppb-panels' ), array(
+		add_settings_field( 'hard-uninstall', __( 'Delete ALL data on uninstall', 'ppb-panels' ), array(
 			$this,
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'hard-uninstall' ) );
+		// Content on deactivation
+		add_settings_field( 'pootlepb-content-deactivation', __( 'On deactivation', 'ppb-panels' ), array(
+			$this,
+			'options_field_generic',
+		), 'pootlepage-display', 'display', array( 'type' => 'pootlepb-content-deactivation' ) );
 
 		do_action( 'pootlepb_setting_fields', array(
 			'page' => 'pootlepage-display',
@@ -306,14 +312,19 @@ final class Pootle_Page_Builder_Admin {
 		$name = 'name="' . esc_attr( $groupName ) . '[' . esc_attr( $args['type'] ) . ']"';
 		$value = isset( $settings[ $args['type'] ] ) ? $settings[ $args['type'] ] : '';
 		switch ( $args['type'] ) {
-			case 'hard-uninstall' :
+			case 'pootlepb-content-deactivation' :
 				?><label>
-				<select name="pootlepb-hard-uninstall" id="pootlepb-hard-uninstall" value="1">
-					<option value="">Content and Layout html</option>
-					<option value="1">Just Content</option>
-					<option value="nothing">Nothing</option>
+				<select name="pootlepb-content-deactivation" id="pootlepb-content-deactivation">
+					<option <?php selected( get_option( 'pootlepb-content-deactivation', '' ), '' ) ?> value="">Keep content and layout HTML</option>
+					<option <?php selected( get_option( 'pootlepb-content-deactivation', '' ), 'content' ) ?> value="content">Just keep the content</option>
 				</select>
-			</label>
+				</label>
+				<?php
+				break;
+			case 'hard-uninstall' :
+				?><label><input type="checkbox" name="pootlepb-hard-uninstall" id="pootlepb-hard-uninstall"
+				<?php checked( get_option( 'pootlepb-hard-uninstall' ) ) ?>
+				                value="1"/> <?php _e( 'Enabled', 'ppb-panels' ) ?></label>
 				<?php
 				break;
 			case 'responsive' :

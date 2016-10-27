@@ -19,7 +19,11 @@ function pootlepb_text_content( $content, $post = null ) {
 
 	if ( empty( $post->ID ) ) return $content;
 
-	return $content . pootlepb_get_text_content( $post->ID );
+	if( 'content' == get_option( 'pootlepb-content-deactivation' ) ) {
+		return pootlepb_get_text_content( $post->ID );
+	} else {
+		return Pootle_Page_Builder_Render_Layout::render( $post->ID );
+	}
 }
 
 add_filter( 'content_save_pre', 'pootlepb_text_content', 10, 2 );

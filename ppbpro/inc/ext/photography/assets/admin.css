@@ -44,3 +44,8 @@
 #pootle-ppb-photo-addon-tab .photo_tax_terms {
     display:none;
 }
+
+/* Videos */
+#pootle-ppb-photo-addon-tab .photo-images .img[data-img-url$='.mp4'] {
+    background: url( 'https://cdn0.iconfinder.com/data/icons/file-formats-glyph/2048/1749_-_MP4-512.png' ) center/cover !important;
+}

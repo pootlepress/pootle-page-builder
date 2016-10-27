@@ -81,7 +81,7 @@ class page_builder_photo_addon_Admin{
 			'type' => 'slider_source',
 			'options' => array(
 				''				=> 'Media library',
-				'unsplash'				=> 'Unsplash',
+				'unsplash'		=> 'Unsplash',
 				'rcnt_posts'	=> 'Recent Posts',
 				'cat'   		=> 'Categories',
 				'tax'   		=> 'Taxonomy',
@@ -165,6 +165,17 @@ class page_builder_photo_addon_Admin{
 				''			=> 'Normal Grid',
 				'masonry'	=> 'Masonry',
 				'photo-listing'		=> 'Photo Listing',
+			),
+			'priority' => 3,
+			'tab' => $this->token,
+		);
+		$fields[ $prefix . 'gallery_attr_dim' ] = array(
+			'name' => 'Image as',
+			'type' => 'select',
+			'options' => array(
+				''		=> 'Square',
+				'circ'	=> 'Circle',
+				'rect'	=> 'Rectangle',
 			),
 			'priority' => 3,
 			'tab' => $this->token,

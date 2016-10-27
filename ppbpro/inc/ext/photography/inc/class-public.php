@@ -20,6 +20,7 @@ class page_builder_photo_addon_Public{
 	protected $attr;
 	protected $method;
 	protected $id = 0;
+	protected $vids = array();
 
 	/**
 	 * Main Pootle page builder Photography add on Instance
@@ -246,6 +247,12 @@ class page_builder_photo_addon_Public{
 
 	public function show_gallery( $images ) {
 		if ( count( $images ) ) {
+
+			$attr = wp_parse_args( $this->attr, array(
+				'type'	=> '',
+				'dim'	=> '',
+			) );
+
 			if ( ! empty( $this->set['max'] ) && $this->set['max'] <= count( $images ) ) {
 				$images = array_slice( $images, 0, $this->set['max'] );
 			}
@@ -256,22 +263,32 @@ class page_builder_photo_addon_Public{
 					'<span class="control control-blocks active"></span>' .
 					'</div>';
 			}
-			list( $pre, $suff ) = $this->get_gallery_prefix_suffix( $this->set );
-			echo '<div class="ppb-photo-gallery-items">';
+			list( $a_open, $a_close ) = $this->get_gallery_prefix_suffix( $this->set );
+
+			$classes = "ppb-photo-gallery-items ppb-photo-gallery-type-$attr[type] ppb-photo-gallery-dim-$attr[dim]";
+
+			echo "<div class='$classes'>";
+
 			foreach ( $images as $img ) {
 				$caption = '';
+				$pre = $a_open;
+				$suff = $a_close;
 				$url = wp_get_attachment_image_src( $img['id'], $this->set['size'] );
 				$url = $url ? $url[0] : $img['img'];
 				if ( ! empty( $img['title'] ) ) {
 					$caption = '<p class="ppb-photo-caption">' . $img['title'] . '</p>';
 				}
 				//Output image and caption
-				if ( empty( $this->attr['type'] ) ) {
-					$img_tag = "<div class='img' style='background-image: url($url);'></div>";
-				} else if ( 'photo-listing' == $this->attr['type'] ) {
-					$img_tag = "<img src='$url'>";
-				} else {
-					$img_tag = "<img src='$url'>";
+				$img_tag = "<img src='$url'>";
+				$file_type = wp_check_filetype( $url );
+				if ( strpos( $file_type['type'], 'mp4' ) ) {
+					$img_tag =
+						"<video loop autoplay><source src='$url' type='video/mp4'>" .
+						"Your browser does not support the video tag.</video>";
+					$i = array_push( $this->vids, $url ) - 1;
+					if ( strpos( $pre, "class='thickbox' rel='ppb-photo-gallery-" ) ) {
+						$pre = "<a href='#TB_inline?height=630&width=1120&inlineId=ppb-photo-video-tb-$i' class='thickbox'>";
+					}
 				}
 
 				$pre = str_replace( '%full_img_url%', $img['img'], $pre );
@@ -285,6 +302,9 @@ class page_builder_photo_addon_Public{
 				$pre = str_replace( $permalink, '%permalink%', $pre );
 			}
 			echo '</div>';
+			foreach ( $this->vids as $i => $url ) {
+				echo "<div id='ppb-photo-video-tb-$i' style='display: none;'><video class='ppb-photo-video-tb' loop autoplay controls><source src='$url' type='video/mp4'>Your browser does not support the video tag.</video></div>";
+			}
 		}
 	}
 
