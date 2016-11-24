@@ -5,6 +5,7 @@ if ( ! class_exists( 'Lib_Customize_Alpha_Color_Control' ) ) {
 	 */
 	class Lib_Customize_Alpha_Color_Control extends WP_Customize_Control {
 		public $type = 'lib_color';
+		public $default = '';
 
 		public $statuses;
 
@@ -36,7 +37,7 @@ if ( ! class_exists( 'Lib_Customize_Alpha_Color_Control' ) ) {
 				if ( ! empty( $this->description ) ) : ?>
 					<span class="description customize-control-description"><?php echo $this->description; ?></span>
 				<?php endif; ?>
-				<input class="color-picker-hex" data-alpha="true" type="text" value="<?php echo esc_attr( $this->value() ); ?>" <?php $this->link(); ?> />
+				<input class="color-picker-hex" data-alpha="true" type="text" data-default-color="<?php echo $this->default; ?>" value="<?php echo esc_attr( $this->value() ); ?>" <?php $this->link(); ?> />
 			</label>
 			<?php
 		}

@@ -76,7 +76,26 @@ final class Pootle_Page_Builder_Admin {
 		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
 		add_action( 'admin_init', array( $this, 'init' ) );
 
-		add_action( '', array( $this, '' ) );
+		ppb_fs()->add_filter('connect_message', array( $this, 'fs_message' ), 10, 6);
+	}
+
+	function fs_message (
+		$message,
+		$user_first_name,
+		$plugin_title,
+		$user_login,
+		$site_link,
+		$freemius_link
+	) {
+		return sprintf(
+			__fs( 'hey-x' ) . '<br>' .
+			__( 'Never miss an important update - Opt-in to our security and feature updates notifications, and non-sensitive diagnostic tracking with freemius.com', 'pootle-page-builder' ),
+			$user_first_name,
+			'<b>' . $plugin_title . '</b>',
+			'<b>' . $user_login . '</b>',
+			$site_link,
+			$freemius_link
+		);
 	}
 
 	public function init() {

@@ -1235,6 +1235,28 @@ iframe[src*='/pootle-buttons/'] {
 	display: none;
 }
 
+.mce-tinymce.mce-tinymce-inline .mce-btn-group.ppb-tmce-btn-grp-toggle-fields {
+	position: absolute;
+	bottom: 106%;
+	left: -16px;
+	text-align: center;
+	background: #ef4832;
+	padding: 0 16px;
+	border-radius: 999px;
+}
+
+.mce-tinymce.mce-tinymce-inline .mce-btn-group.ppb-tmce-btn-grp-toggle-fields .mce-first button {
+	border-left: none;
+}
+
+.mce-tinymce.mce-tinymce-inline .mce-btn-group.ppb-tmce-btn-grp-toggle-fields * {
+	text-align: center;
+}
+
+.mce-tinymce.mce-tinymce-inline .mce-btn-group {
+	position: relative;
+}
+
 .wp-core-ui input {
 	padding: 4px;
 	background: #fff;

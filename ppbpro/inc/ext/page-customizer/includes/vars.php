@@ -15,6 +15,7 @@ $page_customizer_fields = array(
 		'label'   => 'Background',
 		'type'    => 'select',
 		'choices' => array(
+			''      => 'Default',
 			'color' => 'Color',
 			'image' => 'Image',
 			'video' => 'Video',

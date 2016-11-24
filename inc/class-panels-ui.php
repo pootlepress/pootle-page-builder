@@ -158,6 +158,7 @@ final class Pootle_Page_Builder_Admin_UI {
 
 		//Panels Data
 		$panels_data = $this->get_current_admin_panels_data();
+
 		if ( count( $panels_data ) > 0 ) {
 			wp_localize_script( 'pootlepb-ui-admin', 'panelsData', $panels_data );
 		}

@@ -8,9 +8,9 @@ jQuery(function($){
 		$bg_url = $( '#customize-control-pootle-page-customizer-background-image, .ppc-field.background-responsive-image .image-upload-path' ),
 		$bg_options = $( '#customize-control-pootle-page-customizer-background-repeat, #customize-control-pootle-page-customizer-background-position, #customize-control-pootle-page-customizer-background-attachment' );
 
-	$bg.find('select[data-customize-setting-link="pootle-page-customizer[background-type]"]' ).change( function () {
+	$('select[data-customize-setting-link="pootle-page-customizer[background-type]"]' ).change( function () {
 		var $t = $( this ),
-			$all = $bg.find( '[id*="customize-control-pootle-page-customizer-background"]' )
+			$all = $( '[id*="customize-control-pootle-page-customizer-background"]' )
 				.not('#customize-control-pootle-page-customizer-background-type');
 		$all.hide();
 
