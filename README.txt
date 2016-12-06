@@ -121,10 +121,19 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
-= 3.5.0 =
- * This is a major release please backup your site before installing
+= 3.6.0 =
+ * WP 4.7 compatibility and minor bug fixes
 
 == Changelog ==
+
+= 3.6.0 =
+* 2016-12-06
+* Fix - Row animation hiding row on mobile devices.
+* Fix - Content keeping on deactivation
+* Fix - Page customizer WPv4.7 compatibility
+* Fix - SFP page customizer conflict
+* Tweak - Freemius welcome message
+* Tweak - Images coming via `https` protocol
 
 = 3.5.1 =
 * 2016-09-25
