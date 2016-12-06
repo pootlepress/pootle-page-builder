@@ -101,7 +101,7 @@ class Pootle_Page_Builder_Live_Editor {
 		self::$path    =   plugin_dir_path( $file ) . 'live-editor/';
 		self::$version =   '2.0.0';
 
-		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'plugins_loaded', array( $this, 'init' ) );
 	} // End __construct()
 
 	/**
