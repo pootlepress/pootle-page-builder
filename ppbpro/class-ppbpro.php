@@ -98,7 +98,7 @@ class Pootle_Page_Builder_Pro extends Pootle_Page_Builder_Pro_Framework {
 
 		register_activation_hook( $file, array( $this, 'activated' ) );
 
-		add_action( 'plugins_loaded', array( $this, 'init' ) );
+		add_action( 'plugins_loaded', array( $this, 'init' ), 7 );
 	} // End __construct()
 
 	/**
