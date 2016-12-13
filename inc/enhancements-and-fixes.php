@@ -17,7 +17,9 @@
 function pootlepb_text_content( $content, $post = null ) {
 	if ( empty( $post ) ) global $post;
 
-	if ( empty( $post->ID ) ) return $content;
+	$post_id = empty( $post->ID ) ? $post->ID : false;
+
+	if ( ! apply_filters( 'pootlepb_dump_ppb_content', (bool) $post_id, $post_id ) ) return $content;
 
 	if( 'content' == get_option( 'pootlepb-content-deactivation' ) ) {
 		$ppb_output = pootlepb_get_text_content( $post->ID );

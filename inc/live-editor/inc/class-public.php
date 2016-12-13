@@ -140,6 +140,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		$this->_active = true;
 
+		do_action( 'pootlepb_live_editor_init' );
+
 		$this->addons = apply_filters( 'pootlepb_le_content_block_tabs', array() );
 
 		remove_filter( 'pootlepb_content_block', array(
@@ -167,6 +169,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		add_filter( 'body_class', array( $this, 'body_class' ) );
 		add_filter( 'post_class', array( $this, 'post_type_class' ), 10, 3 );
 
+		do_action( 'pootlepb_live_editor_after_init' );
 	}
 
 	/**
@@ -420,7 +423,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				update_post_meta( $id, 'panels_data', $_POST['data'] );
 
 				// Generate post content
-				$live_page_post['post_content'] = pootlepb_get_text_content( $id );
+				$post_content = pootlepb_text_content( '', (object) $live_page_post );
+				if ( $post_content ) {
+					$live_page_post['post_content'] = $post_content;
+				}
 
 				// Update post
 				wp_update_post( $live_page_post, true );

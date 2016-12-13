@@ -98,7 +98,7 @@ class Pootle_Page_Builder_Live_Editor {
 		self::$token   =   'pootle-live-editor';
 		self::$file    =   $file;
 		self::$url     =   plugin_dir_url( $file ) . 'inc/live-editor/';
-		self::$path    =   plugin_dir_path( $file ) . 'live-editor/';
+		self::$path    =   plugin_dir_path( $file ) . 'inc/live-editor/';
 		self::$version =   '2.0.0';
 
 		add_action( 'plugins_loaded', array( $this, 'init' ) );
