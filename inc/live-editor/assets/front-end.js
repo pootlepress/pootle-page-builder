@@ -428,13 +428,11 @@ jQuery( function ( $ ) {
 		},
 
 		addRow : function ( callback, blockText ) {
-			//console.log( "adding row" );
 			window.ppbRowI = ppbData.grids.length;
-			var num_cells;
+			var num_cells = parseInt( $('#ppb-row-add-cols' ).val() );
 
 			logPPBData( 'Adding row' );
 
-			num_cells = parseInt( $('#ppb-row-add-cols' ).val() );
 			var row = {
 				id: window.ppbRowI,
 				cells: num_cells,
@@ -754,7 +752,9 @@ jQuery( function ( $ ) {
 				if ( $t.hasClass('add-row') ) {
 					$( '#ppb-row-add-cols' ).val( '1' );
 					prevu.addRow( function ( $t ) {
-						prevu.insertModule( $t.find( '.ppb-block' ).last(), $m )
+						setTimeout( function() {
+							prevu.insertModule( $t.find( '.ppb-block' ).last(), $m )
+						}, 106 );
 					}, '<p>&nbsp;</p>' );
 				} else {
 					prevu.insertModule( $t, $m )
