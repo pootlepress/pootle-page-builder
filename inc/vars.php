@@ -1295,7 +1295,7 @@ $ppbpro_addons_data = array(
 		'img'  => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
 		'path' => 'woocommerce',
 		'plugin' => array(
-			'Name' => 'pootle page builder for WooCommerce',
+			'Name' => 'WooCommerce builder (Shop)',
 			'Description' => 'pootle page builder for WooCommerce brings powerful WooCommerce features into page builder. Create stunning pages featuring your products by id, category, attribute, best-selling, top rated and on-sale, plus use pootle page builder on product pages and with WooCommerce Tab Manager.',
 		),
 	),

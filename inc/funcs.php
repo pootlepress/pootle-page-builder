@@ -435,3 +435,37 @@ function pootlepb_rand( $length = 16 ) {
 
 	return $randomString;
 }
+
+/**
+ * Gets free addons available for Pootle Pagebuilder Pro
+ * @return array
+ */
+function pootlepb_free_modules_for_pro() {
+	$modules = array(
+		'wc-productbuilder' => array(
+			'Name'        => 'WooCommerce builder (Product)',
+			'Description' => 'Take total control of your WooCommerce product page, requires WooCommerce builder (Shop)',
+			'InstallURI'  => admin_url( "/plugin-install.php?s=WooCommerce builder&tab=search&type=term" ),
+			'AuthorURI'   => 'https://pootlepress.com',
+			'Author'      => 'pootlepress',
+			'Image'       => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
+			'ActiveClass' => 'PPB_Product_Builder',
+		),
+	);
+
+	$body = get_transient( 'pootlepb_free_modules_for_pro' );
+
+	if ( ! $body ) {
+		$response = wp_remote_get( "https://pootlepress.github.io/pootle-page-builder/free-pro-modules.json" );
+		if( is_array( $response ) ) {
+			$body = json_decode( $response['body'], 'array' );
+			if ( is_array( $body ) ) {
+				set_transient( 'pootlepb_free_modules_for_pro', $body, DAY_IN_SECONDS );
+			} else {
+				$body = array();
+			}
+		}
+	}
+
+	return array_merge( $modules, $body );
+}

@@ -112,6 +112,48 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 			</div>
 			<?php
 		}
+
+		// Free pro addons
+		$pootlepb_pro_free_modules = pootlepb_free_modules_for_pro();
+		foreach ( $pootlepb_pro_free_modules as $slug => $plugin ) {
+			$card_classes = class_exists( $plugin['ActiveClass'] ) ? 'ppb-addon-card active' : 'ppb-addon-card';
+			?>
+			<div id="<?php echo $slug ?>" class="ppb-addon-card-wrap">
+				<div class="<?php echo $card_classes; ?>">
+					<div class="ppb-addon-img">
+						<a class="thickbox"
+						   style="background-image: url(<?php echo $plugin['Image']; ?>);"></a>
+					</div>
+
+					<div class="ppb-addon-details">
+						<div class="ppb-addon-name">
+							<h3><?php echo $plugin['Name']; ?></h3>
+						</div>
+						<div class="desc ppb-addon-description">
+							<p class="ppb-addon-description"><?php echo strip_tags( $plugin['Description'], '<a>' ); ?></p>
+							<cite><?php echo "By <a href='$plugin[AuthorURI]'>$plugin[Author]</a>"; ?></cite>
+						</div>
+					</div>
+					<div class="ppb-addon-footer">
+						<div class="ppb-addon-controls ppb-addon-installed">
+							<?php
+							if ( strpos( $card_classes, 'active' ) ) {
+								echo '<span class="dashicons dashicons-yes"></span>';
+								_e( 'This addon is active!', 'ppbpro' );
+							} else if ( is_dir( WP_PLUGIN_DIR . '/' . $slug ) ) {
+								$activate_url = admin_url( "plugins.php" );
+								echo "<a href='$activate_url' target='_blank' class='button pootle right'>" . __( 'Activate' ) . "</a>";
+							} else {
+								echo "<a href='$plugin[InstallURI]' class='button pootle right'>" . __( 'Install' ) . "</a>";
+							}
+							?>
+							<div class="clear"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
 		?>
 		<div class="clear"></div>
 		<?php
