@@ -3,7 +3,7 @@
  * Plugin Name: Pootle Pagebuilder
  * Plugin URI: http://pootlepress.com/
  * Description: Pootle Pagebuilder is a front-end, drag and drop page builder that makes it easy to create beautiful WordPress pages and posts.
- * Version: 3.6.1-alpha
+ * Version: 3.7.0-beta
  * Author: pootlepress
  * Author URI: http://pootlepress.com/
  * License: GPL version 3
