@@ -8,8 +8,8 @@ Author URI: http://www.pootlepress.com
 Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
-Tested up to: 4.7-alpha-38356
-Stable tag: 3.5.1
+Tested up to: 4.7
+Stable tag: 3.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,6 +125,13 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * WP 4.7 compatibility and minor bug fixes
 
 == Changelog ==
+
+= 3.6.0 =
+* 2016-12-39
+* Dev - New filter hook `pootlepb_dump_ppb_content` allows skipping dumping of contents
+* Dev - New action hook `pootlepb_live_editor_init`
+* Dev - New action hook `pootlepb_live_editor_after_init`
+* Dev - Fixed live editor ajax call post functions not working
 
 = 3.6.0 =
 * 2016-12-06

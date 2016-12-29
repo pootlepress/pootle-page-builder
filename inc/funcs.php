@@ -445,11 +445,11 @@ function pootlepb_free_modules_for_pro() {
 		'wc-productbuilder' => array(
 			'Name'        => 'WooCommerce builder (Product)',
 			'Description' => 'Take total control of your WooCommerce product page, requires WooCommerce builder (Shop)',
-			'InstallURI'  => admin_url( "/plugin-install.php?s=WooCommerce builder&tab=search&type=term" ),
+			'InstallURI'  => admin_url( "/plugin-install.php?s=Woobuilder&tab=search&type=term" ),
 			'AuthorURI'   => 'https://pootlepress.com',
 			'Author'      => 'pootlepress',
 			'Image'       => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
-			'ActiveClass' => 'PPB_Product_Builder',
+			'ActiveClass' => 'WooBuilder',
 		),
 	);
 
