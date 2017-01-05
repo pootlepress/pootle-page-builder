@@ -30,29 +30,6 @@ require_once( dirname( __FILE__ ) . '/includes/class-customizer-postmeta.php' );
 //Post meta customizer
 require_once( dirname( __FILE__ ) . '/includes/class-public-styles.php' );
 
-/** Addon update API */
-add_action( 'plugins_loaded', 'pootle_page_customizer_api_init' );
-
-/**
- * Instantiates Pootle_Page_Builder_Addon_Manager with current add-on data
- * @action plugins_loaded
- */
-function pootle_page_customizer_api_init() {
-	$instance = Pootle_Page_Customizer();
-	//Return if POOTLEPB_DIR not defined
-	if ( ! defined( 'POOTLEPB_DIR' ) ) { return; }
-	/** Including PootlePress_API_Manager class */
-	require_once POOTLEPB_DIR . 'inc/addon-manager/class-manager.php';
-	/** Instantiating PootlePress_API_Manager */
-	new Pootle_Page_Builder_Addon_Manager(
-		$instance->token,
-		'Page Customizer',
-		$instance->version,
-		__FILE__,
-		$instance->token
-	);
-}
-
 /**
  * Returns the main instance of Pootle_Page_Customizer to prevent the need to use globals.
  *
