@@ -35,12 +35,92 @@ div.pootle.updated {
 ul.ppb-side-25 li {
     display:block;
 }
+
 .ppb-side-25 {
     float: left;
     width: 25%;
 }
 
+.ppb-side-50 {
+    float: left;
+    width: 50%;
+}
+
 .ppb-main-70 {
     float: right;
     width: 70%;
+}
+
+/******* Thickbox styles */
+
+.wp-admin #TB_overlay{
+    opacity: 0.88;
+}
+
+.wp-admin #TB_window {
+    background: none;
+}
+
+.wp-admin #TB_window img#TB_Image {
+    margin: 0;
+    display: block;
+    width: 100%;
+    border: 2px solid #fff;
+}
+
+.wp-admin #TB_secondLine {
+    position: fixed;
+    top: 7px;
+    bottom: 7px;
+    left: 16px;
+    right: 16px;
+}
+
+.wp-admin #TB_secondLine a {
+    display: block;
+}
+
+.wp-admin #TB_prev,
+.wp-admin #TB_next {
+    margin-top: -25px;
+    font-size: 0;
+    position: absolute;
+    top:50%;
+    left: -7px;
+}
+.wp-admin .tb-close-icon:before,
+.wp-admin #TB_prev a:before,
+.wp-admin #TB_next a:before {
+    color: #fff;
+    font-size: 34px;
+    line-height: 50px;
+    width: 50px;
+    text-align: center;
+    padding: 0;
+    display: block;
+}
+
+.wp-admin #TB_next {
+    left:auto;
+    right: -7px;
+}
+
+.wp-admin #TB_caption {
+    display: block;
+    height: 0;
+    padding: 0;
+}
+
+.wp-admin #TB_closeWindow {
+    height: 0;
+    padding: 0;
+}
+.wp-admin .tb-close-icon {
+    position: fixed;
+    height: auto;
+    width: auto;
+}
+.wp-admin div#TB_title {
+    height: 0;
+    border: none;
 }

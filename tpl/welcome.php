@@ -28,55 +28,50 @@ $ajax_with_nonce = wp_nonce_url( admin_url( 'admin-ajax.php' ), 'ppb-new-live-po
 		<a href="http://docs.pootlepress.com/" class="button pootle">Docs</a>
 		<b>Version <?php echo esc_attr( POOTLEPB_VERSION ); ?></b>
 	</p>
-
 	<hr>
-	<h4>How to use page builder</h4>
+	<?php echo '<div class="ppb-video-container">' . wp_oembed_get( 'https://vimeo.com/181944652' ) . '</div>'; ?>
+	<div class="ppb-side-50">
+		<h3>Free features</h3>
 
-	<p>Page Builder is easy to use but you can check out the video below to get started.</p>
+		<ul>
+			<li><a class="thickbox" href="https://player.vimeo.com/video/185787894?k=v&TB_iframe=true&height=540&width=960">Basic usage</a></li>
 
-	<div class="ppb-video-container">
-		<iframe src="https://player.vimeo.com/video/164802830" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><p><a href="https://vimeo.com/164802830">Pootle pagebuilder - the basics</a> from <a href="https://vimeo.com/user8529687">pootlepress</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
+			<li><a class="thickbox" href="https://player.vimeo.com/video/180052795?k=v&TB_iframe=true&height=540&width=960">Adding drag and drop modules into page</a></li>
+
+			<li><a class="thickbox" href="https://player.vimeo.com/video/192113398?k=v&TB_iframe=true&height=540&width=960">Adding a hero photo to the top of your page</a></li>
+
+			<li><a class="thickbox" href="https://player.vimeo.com/video/185792519?k=v&TB_iframe=true&height=540&width=960">Snap to grid for pixel perfect layout</a></li>
+
+			<li><a class="thickbox" href="https://player.vimeo.com/video/197875188?k=v&TB_iframe=true&height=540&width=960">Row Animations</a></li>
+
+			<li><a class="thickbox" href="https://player.vimeo.com/video/185800528?k=v&TB_iframe=true&height=540&width=960">Background image effects (parallax)</a></li>
+
+			<li><a class="thickbox" href="https://player.vimeo.com/video/185803787?k=v&TB_iframe=true&height=540&width=960">Gradient backgrounds</a></li>
+
+			<li><a class="thickbox" href="https://player.vimeo.com/video/185800527?k=v&TB_iframe=true&height=540&width=960">Accordians</a></li>
+
+			<li><a class="thickbox" href="https://player.vimeo.com/video/185801458?k=v&TB_iframe=true&height=540&width=960">Adding icons</a></li>
+		</ul>
 	</div>
+	<div class="ppb-side-50">
+		<h3>Pro features</h3>
+		<ul>
+			<li><a class="thickbox" href="https://player.vimeo.com/video/197584823?k=v&TB_iframe=true&height=540&width=960">WooCommerce Builder (for individual products)</a></li>
 
-	<h4>pootle page builder pro</h4>
-	<p>Upgrade to Pootle pagebuilder pro and get all this extra functionality</p>
-	<p>Creating a beautiful blog or news page</p>
-	<div class="ppb-video-container">
-		<iframe src="https://player.vimeo.com/video/163400847" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><p><a href="https://vimeo.com/164802830">Pootle pagebuilder - the basics</a> from <a href="https://vimeo.com/user8529687">pootlepress</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-	</div>
+			<li><a class="thickbox" href="https://player.vimeo.com/video/197742676?k=v&TB_iframe=true&height=540&width=960">WooCommerce Builder (for your shop pages)</a></li>
 
-	<p>Create stunning WooCommerce pages</p>
-	<div class="ppb-video-container">
-		<iframe src="https://player.vimeo.com/video/163403782" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><p><a href="https://vimeo.com/164802830">Pootle pagebuilder - the basics</a> from <a href="https://vimeo.com/user8529687">pootlepress</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-	</div>
+			<li><a class="thickbox" href="https://player.vimeo.com/video/163400847?k=v&TB_iframe=true&height=540&width=960">Blog and Posts customizer</a></li>
 
-	<p>Works with your favourite plugins</p>
-	<div class="ppb-video-container">
-		<iframe src="https://player.vimeo.com/video/163405802" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe><p><a href="https://vimeo.com/164802830">Pootle pagebuilder - the basics</a> from <a href="https://vimeo.com/user8529687">pootlepress</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-	</div>
+			<li><a class="thickbox" href="https://player.vimeo.com/video/191164397?k=v&TB_iframe=true&height=540&width=960">Create landing pages, sale pages and squeeze pages</a></li>
 
+			<li><a class="thickbox" href="https://player.vimeo.com/video/197873693?k=v&TB_iframe=true&height=540&width=960">One Page websites</a></li>
 
-	<div class="changelog">
-		<div class="feature-section col three-col">
-			<div>
-				<h4>Easy to use</h4>
-				<p>We've designed pootle page builder to look and work as much like WordPress as possible. We've worked hard to make the easy features intuitive and the complex features straight-forward to use. Look out for tooltips (these are small question mark icons in grey than you can hover over for more information)</p>
-			</div>
-			<div>
-				<h4>All themes</h4>
-				<p>page builder works on all themes, so you can change the theme of your website but still keep using page builder!</p>
-			</div>
-			<div class="last-feature">
-				<h4>Amazing Rows</h4>
-				<p>Rows in page builder allow you to add background colors, images or autoplay videos. Row background images can have a parallax effect. They can also be full width.</p>
-			</div>
-		</div>
-	</div>
+			<li><a class="thickbox" href="https://player.vimeo.com/video/190233819?k=v&TB_iframe=true&height=540&width=960">Pootle slider</a></li>
 
-	<hr>
+			<li><a class="thickbox" href="https://player.vimeo.com/video/166312827?k=v&TB_iframe=true&height=540&width=960">Pro slideshows and galleries</a></li>
 
-	<div class="return-to-dashboard">
-		<a href="<?php echo esc_url( admin_url( 'admin.php?page=page_builder_settings' ) ); ?>">Go to Page Builder Settings</a>
+			<li><a class="thickbox" href="https://player.vimeo.com/video/166309495?k=v&TB_iframe=true&height=540&width=960">Starter templates</a></li>
+		</ul>
+		&nbsp;
 	</div>
 </div>
-

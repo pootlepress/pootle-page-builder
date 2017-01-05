@@ -8,14 +8,16 @@ Author URI: http://www.pootlepress.com
 Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
-Tested up to: 4.7
-Stable tag: 3.7.0
+Tested up to: 4.7.0
+Stable tag: 3.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Pootle Pagebuilder is a front-end, drag and drop page builder that makes it easy to create beautiful WordPress pages and posts.
 
 == Description ==
+
+> **If I was to use a page builder on one of my sites, Pootle Page Builder would be in the running for my top choice** -  *Pippin Williamson - WordPress guru*
 
 https://vimeo.com/181944652
 
@@ -40,9 +42,28 @@ With Pootle Pagebuilder you can:
 * Add parallax background images to rows
 * Add CSS customizations (for advanced users)
 
+Basic operation
+https://vimeo.com/185787894
+
+Pixel perfect drag and drop
+https://vimeo.com/185792519
+
+Row animations
+https://vimeo.com/185800528
+
+Gradients
+https://vimeo.com/185803787
+
+Customizable Icons
+https://vimeo.com/185801458
+
+Elegant Accordions
+https://vimeo.com/185800527
+
 = Is there anything else you can tell me about Pootle Pagebuilder? =
 
 We have made sure Pootle Pagebuilder:
+
 * Works on any theme.
 * Works with your favourite plugins e.g Ninja forms.
 * Is mobile friendly. The pages you create with Pootle Pagebuilder  will work seamlessly on desktop and mobile.
@@ -125,13 +146,6 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * WP 4.7 compatibility and minor bug fixes
 
 == Changelog ==
-
-= 3.6.0 =
-* 2016-12-39
-* Dev - New filter hook `pootlepb_dump_ppb_content` allows skipping dumping of contents
-* Dev - New action hook `pootlepb_live_editor_init`
-* Dev - New action hook `pootlepb_live_editor_after_init`
-* Dev - Fixed live editor ajax call post functions not working
 
 = 3.6.0 =
 * 2016-12-06
