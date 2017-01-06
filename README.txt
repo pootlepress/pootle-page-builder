@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.7.0
-Stable tag: 3.6.0
+Stable tag: 3.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -146,6 +146,17 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * WP 4.7 compatibility and minor bug fixes
 
 == Changelog ==
+
+= 3.7.0 =
+* 2017-01-06
+* New - Free modules available for pro
+* Fix - Page customizer license key missing
+* Tweak - Post Loop in live editor admin ajax action
+* Tweak - Welcome page revamped
+* Tweak - FS sdk updated
+* Dev - Filter `pootlepb_dump_ppb_content` to skip post content dump by ppb
+* Dev - Action `pootlepb_live_editor_init`
+* Dev - Action `pootlepb_live_editor_after_init`
 
 = 3.6.0 =
 * 2016-12-06
