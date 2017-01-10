@@ -436,20 +436,25 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 				$the_query = new WP_Query( array(
 					'post_type' => 'any',
+					'post_status' => 'any',
 					'post__in' => array( $id ),
 					'ignore_sticky_posts' => 1,
 					) );
 
+				$the_query->have_posts();
 				if ( $the_query->have_posts() ) {
 					while ( $the_query->have_posts() ) {
 						$the_query->the_post();
 
-						$live_page_post = $this->savePostMeta( array( 'ID' => $id ) );
+						//$live_page_post = $this->savePostMeta( array( 'ID' => $id ) );
 
 						// Update post
-						wp_update_post( $live_page_post, true );
+						//wp_update_post( $live_page_post, true );
 						echo Pootle_Page_Builder_Render_Layout::render( $id, $_POST['data'] );
 					}
+				} else {
+					// Return data even if the post can't be queried
+					echo Pootle_Page_Builder_Render_Layout::render( $id, $_POST['data'] );
 				}
 			}
 		}

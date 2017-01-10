@@ -118,6 +118,11 @@ jQuery( function ( $ ) {
 		syncAjax : function () {
 
 			return jQuery.post( ppbAjax.url, ppbAjax, function ( response ) {
+				console.log( 'Response \n', response.replace(/ /g, '') );
+				if ( ! response.replace(/ /g, '') ) {
+					console.log( 'Error: No response from server at ' + ppbAjax.url );
+					return;
+				}
 				var $response = $( $.parseHTML( response, document, true ) );
 				if ( 'function' == typeof prevu.ajaxCallback ) {
 					prevu.ajaxCallback( $response, ppbAjax, response );
@@ -331,8 +336,6 @@ jQuery( function ( $ ) {
 					style = $blk.closest( '.panel-grid-cell' ).children( 'style' ).html(),
 					$cell = $t.closest( '.panel-grid-cell' );
 
-				console.log( $t, id );
-
 				$blk.addClass( 'pootle-live-editor-new-content-block' );
 
 				$t.replaceWith( $blk );
@@ -471,11 +474,14 @@ jQuery( function ( $ ) {
 
 			$addRowDialog.ppbDialog( 'close' );
 
-			prevu.sync( function( $r, qry ) {
+			prevu.sync( function( $r, qry, html ) {
 				var $ro   = $r.find( '#pg-' + qry.post + '-' + window.ppbRowI ),
 					$cols = $ro.find( '.panel-grid-cell-container > .panel-grid-cell' );
-				$cols.css( 'width', ( 100 - num_cells + 1 ) / num_cells + '%' );
+
+				$cols.css( 'width', ( 100 - num_cells + 1 ) / num_cells + '%' ); // Columns width
+
 				$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
+
 				$ro.find( '.pootle-live-editor-realtime:eq(0)' ).parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
 				$( '.pootle-live-editor.add-row' ).before( $ro );
 				$ro = $( '#pg-' + qry.post + '-' + window.ppbRowI );
@@ -751,9 +757,9 @@ jQuery( function ( $ ) {
 				$loader.fadeIn(500);
 				if ( $t.hasClass('add-row') ) {
 					$( '#ppb-row-add-cols' ).val( '1' );
-					prevu.addRow( function ( $t ) {
+					prevu.addRow( function ( $row ) {
 						setTimeout( function() {
-							prevu.insertModule( $t.find( '.ppb-block' ).last(), $m )
+							prevu.insertModule( $row.find( '.ppb-block' ).last(), $m )
 						}, 106 );
 					}, '<p>&nbsp;</p>' );
 				} else {
