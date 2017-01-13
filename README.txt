@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.7.0
-Stable tag: 3.7.0
+Stable tag: 3.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -147,6 +147,11 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Changelog ==
 
+= 3.7.1 =
+* 2017-01-13
+* Tweak - Live editor ajax loop no posts fallback
+* Tweak - Adds a console error if AJAX request response is not as expected instead of failing
+
 = 3.7.0 =
 * 2017-01-06
 * New - Free modules available for pro
@@ -160,7 +165,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 = 3.6.0 =
 * 2016-12-06
-* Fix - Row animation hiding row on mobile devices.
+* Fix - Row animation hiding row on mobile devices
 * Fix - Content keeping on deactivation
 * Fix - Page customizer WPv4.7 compatibility
 * Fix - SFP page customizer conflict
@@ -260,8 +265,8 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 = 1.1.0 =
 * 2016-02-18
- * New - Added rag adjust fixing text to enhance readability in fluid layouts.
- * New - New filter `pootlepb_rag_adjust_elements` to add or remove elements to adjust text in.
+ * New - Added rag adjust fixing text to enhance readability in fluid layouts
+ * New - New filter `pootlepb_rag_adjust_elements` to add or remove elements to adjust text in
  * New - Action hook `pootlepb_before_row` added Grid Index as sencond argument
  * New - Action hook `pootlepb_after_row` added Grid Index as sencond argument
  * New - New pootle page builder action hook `pootlepb_before_content_blocks` runs before content blocks are rendered in cell

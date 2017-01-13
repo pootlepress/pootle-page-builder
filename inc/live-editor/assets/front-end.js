@@ -118,7 +118,6 @@ jQuery( function ( $ ) {
 		syncAjax : function () {
 
 			return jQuery.post( ppbAjax.url, ppbAjax, function ( response ) {
-				console.log( 'Response \n', response.replace(/ /g, '') );
 				if ( ! response.replace(/ /g, '') ) {
 					console.log( 'Error: No response from server at ' + ppbAjax.url );
 					return;
@@ -303,8 +302,6 @@ jQuery( function ( $ ) {
 			if ( 'undefined' == typeof ppbData.widgets[window.ppbPanelI] ) {
 				return;
 			}
-
-			console.log( window.ppbPanelI );
 
 			// Add event handlers
 			panels.addInputFieldEventHandlers( $contentPanel );
@@ -797,8 +794,6 @@ jQuery( function ( $ ) {
 				// We set multiple to false so only get one image from the uploader
 				var img = prevu.insertImageFrame.state().get('selection').first().toJSON();
 
-				console.log( img );
-
 				// Do something with img.id and/or img.url here
 				var $img =
 					'<figure id="attachment_' + img.id + '" class="' + ( img.caption ? 'wp-caption' : '' ) + '">' +
@@ -817,7 +812,6 @@ jQuery( function ( $ ) {
 		},
 
 		saveTmceBlock : function ( $ed ) {
-			console.log( 'Saving TMCE block.', $ed );
 			if ( ! $ed || ! $ed.length ) return;
 			var blockI = $ed.siblings( '.pootle-live-editor' ).data( 'index' );
 			if ( ! ppbData.widgets[blockI] ) return;
@@ -947,7 +941,6 @@ jQuery( function ( $ ) {
 			isize = $iconPicker.size.val(),
 			style = 'font-size:' + isize + 'px;color:' + icolr,
 			attr = 'style="' + style + '" class="fa ' + iclas + '"';
-		console.log( iclas, icolr, isize );
 			$iconPicker.prvu.html( '<i ' + attr + '><span style="display:none">' + iclas + '</span></i>' );
 	};
 
@@ -1251,7 +1244,6 @@ jQuery( function ( $ ) {
 			return;
 		}
 		var $editBar = $block.children('.pootle-live-editor');
-		//console.log( $editBar.data( 'index' ) );
 		window.ppbPanelI = $editBar.data( 'index' );
 		$contentPanel.ppbDialog( 'open' );
 	};
@@ -1369,10 +1361,7 @@ jQuery( function ( $ ) {
 			tinymce.activeEditor.execCommand('mceBlockQuote')
 		},
 		Color  : function () {
-			//console.log( $( window ).scrollTop() );
-			//console.log( $( '.ppb-block.active' ).offset().top );
 			var posTop = Math.max( $( window ).scrollTop(), $( '.ppb-block.active' ).offset().top );
-			//console.log( posTop );
 			$ppbIpadColorDialog.show().css('top', posTop );
 		},
 		Link   : function () {
@@ -1442,8 +1431,6 @@ jQuery( function ( $ ) {
 	prevu.tmce.inline	= true;
 	prevu.tmce.theme	= 'ppbprevu';
 	prevu.tmce.fontsize_formats	= '20px 25px 30px 35px 40px 50px 70px 100px';
-
-	//console.log( prevu.tmce );
 
 	if ( ! ppbAjax.ipad ) {
 		prevu.tmce.toolbar = [
@@ -1828,7 +1815,6 @@ jQuery( function ( $ ) {
 		} );
 	} );
 	$( 'html' ).on( 'pootlepb_le_content_updated', function ( e, $t ) {
-		console.log( $t );
 		ppbSkrollr.refresh( $t.find('.ppb-col') );
 	} );
 } );
