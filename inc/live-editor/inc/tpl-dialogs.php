@@ -243,14 +243,18 @@ $enabled_modules = apply_filters( 'pootlepb_enabled_addons', $enabled_modules );
 $disabled_modules = apply_filters( 'pootlepb_disabled_addons', $disabled_modules );
 
 // Removing disabled modules
-foreach ( $disabled_modules as $id ) {
-	unset( $ppb_modules[ $id ] );
+if ( $disabled_modules ) {
+	foreach ( $disabled_modules as $id ) {
+		unset( $ppb_modules[ $id ] );
+	}
 }
 
 // Prioritizing active modules
-foreach ( $enabled_modules as $i => $id ) {
-	if ( ! empty( $ppb_modules[ $id ] ) ) {
-		$ppb_modules[ $id ]['priority'] = $i * 2 + 1;
+if ( $disabled_modules ) {
+	foreach ( $enabled_modules as $i => $id ) {
+		if ( ! empty( $ppb_modules[ $id ] ) ) {
+			$ppb_modules[ $id ]['priority'] = $i * 2 + 1;
+		}
 	}
 }
 
