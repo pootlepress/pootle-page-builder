@@ -331,6 +331,10 @@ if ( $enabled_modules ) {
 		<input id="ppb-icon-link" type="url">
 	</label>
 	<label>
+		<span>Display inline</span>
+		<input id="ppb-icon-inline" type="checkbox">
+	</label>
+	<label>
 		<span>Preview</span>
 		<span id="ppb-icon-preview"></span>
 	</label>

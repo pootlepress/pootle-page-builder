@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Pootle Page Builder Live Editor Admin class
  * @property string token Plugin token

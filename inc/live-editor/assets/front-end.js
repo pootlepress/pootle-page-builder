@@ -1754,12 +1754,17 @@ jQuery(function($) {
   };
   window.ppbModules.chooseIconDialog = function($t, ed, $ed) {
     pickFaIcon(function(icon) {
+      var tag;
       ed.selection.setCursorLocation(ed.getBody().firstChild, 0);
       ed.selection.collapse(false);
+      tag = 'div';
       if (icon.link) {
         icon.html = '<a href="' + icon.link + '">' + icon.html + '</a>';
       }
-      $ed.prepend('<div class="ppb-fa-icon" style="text-align: center">' + icon.html + '</div>');
+      if ($('#ppb-icon-inline').prop('checked')) {
+        tag = 'span';
+      }
+      $ed.prepend('<' + tag + ' class="ppb-fa-icon" style="text-align: center;">&nbsp;&nbsp;' + icon.html + '&nbsp;&nbsp;</div>');
       prevu.saveTmceBlock($ed);
     });
   };

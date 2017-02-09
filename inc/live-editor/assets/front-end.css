@@ -1391,6 +1391,7 @@ a .ppb-module-disabled:after {
 	height: 50px;
 	line-height: 50px;
 	width: 20%;
+	text-align: center;
 }
 
 .ppb-module-disabled .icon:before, .ppb-module .icon:before {

@@ -1620,9 +1620,17 @@ jQuery ($) ->
 		pickFaIcon (icon) ->
 			ed.selection.setCursorLocation ed.getBody().firstChild, 0
 			ed.selection.collapse false
+
+			tag = 'div';
+
 			if icon.link
 				icon.html = '<a href="' + icon.link + '">' + icon.html + '</a>'
-			$ed.prepend '<div class="ppb-fa-icon" style="text-align: center">' + icon.html + '</div>'
+
+			if $('#ppb-icon-inline').prop('checked')
+				tag = 'span'
+
+
+			$ed.prepend '<' + tag + ' class="ppb-fa-icon" style="text-align: center;">&nbsp;&nbsp;' + icon.html + '&nbsp;&nbsp;</div>'
 			prevu.saveTmceBlock $ed
 			return
 		return
