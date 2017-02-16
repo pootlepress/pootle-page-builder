@@ -149,7 +149,7 @@ class page_builder_photo_addon{
 		//Add/Modify row html attributes
 		add_filter( 'pootlepb_row_style_attributes',		array( $this->public, 'row_attr' ), 10, 2 );
 		//Checking for slider/gallery setting
-		add_action( 'pootlepb_render_content_block', array( $this->public, 'gallery_or_slider' ), 52 );
+		add_action( 'pootlepb_render_content_block',		array( $this->public, 'gallery_or_slider' ), 52 );
 
 	} // End enqueue()
 

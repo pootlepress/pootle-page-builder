@@ -291,7 +291,7 @@ jQuery ($) ->
 				if $cell.children('style').length
 					$cell.children('style').html style
 				else if style
-					$style = $('<style>').html(style)
+					$style = $('<style>').html style
 					$cell.prepend $style
 				tinymce.init prevu.tmce
 				return
