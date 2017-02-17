@@ -6,8 +6,6 @@
  * Time: 4:06 PM
  */
 
-global $ppbpro_addons_data, $ppbpro_tpl;
-
 /**
  * Returns template data if $tpl is set else returns the template keys
  * @param string $tpl Template key
