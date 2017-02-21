@@ -68,6 +68,8 @@ jQuery ($) ->
 			$t.draggable prevu.contentDraggable
 			$t.resizable prevu.contentResizable
 			$t.droppable prevu.moduleDroppable
+			$t.removeClass 'ppb-content-v-center ppb-content-h-center' # No centering classes
+
 			return
 		return
 
@@ -436,7 +438,7 @@ jQuery ($) ->
 				# Save content block
 				prevu.saveTmceBlock $focussedContent
 				$focussedContent.removeClass 'mce-edit-focus'
-				if newI == olI
+				if `newI == olI`
 					return
 				ppbData.grids.ppbPrevuMove olI, newI
 				range = [
@@ -451,7 +453,7 @@ jQuery ($) ->
 					if v and v.info
 						gi = parseInt(v.info.grid)
 						if range[0] <= gi and range[1] >= gi
-							if gi == olI
+							if `gi == olI`
 								ppbData.widgets[i].info.grid = newI
 							else
 								ppbData.widgets[i].info.grid = gi + diff
@@ -461,7 +463,7 @@ jQuery ($) ->
 						gi = parseInt(v.grid)
 						ppbData.grid_cells[i].old_grid = gi
 						if range[0] <= gi and range[1] >= gi
-							if gi == olI
+							if `gi == olI`
 								ppbData.grid_cells[i].grid = newI
 							else
 								ppbData.grid_cells[i].grid = gi + diff
@@ -554,7 +556,25 @@ jQuery ($) ->
 				st = JSON.parse(ppbData.widgets[window.ppbPanelI].info.style)
 				margin = {}
 				$t = $(this)
-				$t.closest('.panel-row-style').removeClass 'pootle-guides-x pootle-guides-y'
+				center =
+					h: 'ppb-content-h-center'
+					v: 'ppb-content-v-center'
+				$ro = $t.closest('.panel-row-style')
+
+				# Ensuring st['class'] exists
+				st['class'] = if st['class'] then st['class'] else ''
+
+				if ( $ro.hasClass 'pootle-guides-y' )
+					st['class'] += if 0 > st['class'].indexOf( center.h ) then " #{center.h}" else ''
+				else
+					st['class'] = st['class'].replace( new RegExp("[ ]?#{center.h}", "gi"), '' )
+
+				if ( $ro.hasClass 'pootle-guides-x' )
+					st['class'] += if 0 > st['class'].indexOf( center.v ) then " #{center.v}" else ''
+				else
+					st['class'] = st['class'].replace( new RegExp("[ ]?#{center.v}", "gi"), '' )
+
+				$ro.removeClass 'pootle-guides-x pootle-guides-y'
 				st['margin-top'] = Math.max(1, ui.position.top + parseInt($t.css('margin-top')))
 				st['margin-left'] = Math.max(1, ui.position.left + parseInt($t.css('margin-left')))
 				$t.css
@@ -851,7 +871,7 @@ jQuery ($) ->
 			if v and v.info
 				blocks.push $.extend(true, {}, v)
 				gi = parseInt(v.info.grid)
-				if gi == rowI
+				if `gi == rowI`
 					newBlock = $.extend(true, {}, v)
 					newBlock.info.grid = nuI
 					blocks.push newBlock
@@ -863,7 +883,7 @@ jQuery ($) ->
 			if v
 				cells.push $.extend(true, {}, v)
 				gi = parseInt(v.grid)
-				if gi == rowI
+				if `gi == rowI`
 					newCell = $.extend(true, {}, v)
 					newCell.grid = nuI
 					cells.push newCell
@@ -891,7 +911,7 @@ jQuery ($) ->
 			ppbData.grids.splice rowI, 1
 			$.each ppbData.widgets, (i, v) ->
 				if v and v.info
-					if rowI == v.info.grid
+					if `rowI == v`.info.grid
 						removeBlocks.push i
 					else if rowI < v.info.grid
 						ppbData.widgets[i].info.grid--
@@ -899,7 +919,7 @@ jQuery ($) ->
 			$.each ppbData.grid_cells, (i, v) ->
 				if v
 					gi = parseInt(v.grid)
-					if rowI == gi
+					if `rowI == gi`
 						removeCells.push i
 					else if rowI < gi
 						ppbData.grid_cells[i].old_grid = gi

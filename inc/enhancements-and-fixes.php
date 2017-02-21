@@ -17,14 +17,14 @@
 function pootlepb_text_content( $content, $post = null ) {
 	if ( empty( $post ) ) global $post;
 
-	$post_id = empty( $post->ID ) ? $post->ID : false;
+	$post_id = empty( $post->ID ) ? false : $post->ID;
 
 	if ( ! apply_filters( 'pootlepb_dump_ppb_content', (bool) $post_id, $post_id ) ) return $content;
 
-	if( 'content' == get_option( 'pootlepb-content-deactivation' ) ) {
-		$ppb_output = pootlepb_get_text_content( $post->ID );
-	} else {
+	if( 'layout' == get_option( 'pootlepb-content-deactivation' ) ) {
 		$ppb_output = Pootle_Page_Builder_Render_Layout::render( $post->ID );
+	} else {
+		$ppb_output = pootlepb_get_text_content( $post->ID );
 	}
 
 	if ( $ppb_output ) {
@@ -87,7 +87,7 @@ function pootlepb_wp_import_post_meta( $post_meta ) {
 		if ( 'panels_data' == $meta['key'] ) {
 			$value = $meta['value'];
 			$value = preg_replace( "/[\r\n]/", '<<<br>>>', $value );
-			$value = preg_replace( '!s:(\d+):"(.*?)";!e', "'s:'.strlen('$2').':\"$2\";'", $value );
+			$value = preg_replace( '!s:(\d+):"(.*?)";!', "'s:'.strlen('$2').':\"$2\";'", $value );
 			$value = unserialize( $value );
 			$value = array_map( 'pootlepb_wp_import_post_meta_map', $value );
 

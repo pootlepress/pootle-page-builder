@@ -55,7 +55,7 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						src: ['**/*.coffee'],
-						ext: '.js',
+						ext: '.cs.js',
 						rename: function( dest, src ) {
 							return src.replace( 'coffee/', '' );
 						},
@@ -70,7 +70,7 @@ module.exports = function(grunt) {
 				files: [
 					{
 						expand: true,
-						src: ['**/js/*.js', '!**/*.min.js'],
+						src: ['**/*.cs.js', '!**/*.min.js'],
 						ext: '.min.js',
 						extDot: 'first',
 					},

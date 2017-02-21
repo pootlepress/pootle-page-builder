@@ -78,6 +78,7 @@ jQuery(function($) {
       $t.draggable(prevu.contentDraggable);
       $t.resizable(prevu.contentResizable);
       $t.droppable(prevu.moduleDroppable);
+      $t.removeClass('ppb-content-v-center ppb-content-h-center');
     });
   };
   $.fn.prevuRowInit = function() {
@@ -499,7 +500,7 @@ jQuery(function($) {
         $focussedContent = $('.mce-edit-focus');
         prevu.saveTmceBlock($focussedContent);
         $focussedContent.removeClass('mce-edit-focus');
-        if (newI === olI) {
+        if (newI == olI) {
           return;
         }
         ppbData.grids.ppbPrevuMove(olI, newI);
@@ -514,7 +515,7 @@ jQuery(function($) {
           if (v && v.info) {
             gi = parseInt(v.info.grid);
             if (range[0] <= gi && range[1] >= gi) {
-              if (gi === olI) {
+              if (gi == olI) {
                 ppbData.widgets[i].info.grid = newI;
               } else {
                 ppbData.widgets[i].info.grid = gi + diff;
@@ -528,7 +529,7 @@ jQuery(function($) {
             gi = parseInt(v.grid);
             ppbData.grid_cells[i].old_grid = gi;
             if (range[0] <= gi && range[1] >= gi) {
-              if (gi === olI) {
+              if (gi == olI) {
                 ppbData.grid_cells[i].grid = newI;
               } else {
                 ppbData.grid_cells[i].grid = gi + diff;
@@ -631,11 +632,27 @@ jQuery(function($) {
         }
       },
       stop: function(e, ui) {
-        var $t, margin, st;
+        var $ro, $t, center, margin, st;
         st = JSON.parse(ppbData.widgets[window.ppbPanelI].info.style);
         margin = {};
         $t = $(this);
-        $t.closest('.panel-row-style').removeClass('pootle-guides-x pootle-guides-y');
+        center = {
+          h: 'ppb-content-h-center',
+          v: 'ppb-content-v-center'
+        };
+        $ro = $t.closest('.panel-row-style');
+        st['class'] = st['class'] ? st['class'] : '';
+        if ($ro.hasClass('pootle-guides-y')) {
+          st['class'] += 0 > st['class'].indexOf(center.h) ? " " + center.h : '';
+        } else {
+          st['class'] = st['class'].replace(new RegExp("[ ]?" + center.h, "gi"), '');
+        }
+        if ($ro.hasClass('pootle-guides-x')) {
+          st['class'] += 0 > st['class'].indexOf(center.v) ? " " + center.v : '';
+        } else {
+          st['class'] = st['class'].replace(new RegExp("[ ]?" + center.v, "gi"), '');
+        }
+        $ro.removeClass('pootle-guides-x pootle-guides-y');
         st['margin-top'] = Math.max(1, ui.position.top + parseInt($t.css('margin-top')));
         st['margin-left'] = Math.max(1, ui.position.left + parseInt($t.css('margin-left')));
         $t.css({
@@ -961,7 +978,7 @@ jQuery(function($) {
       if (v && v.info) {
         blocks.push($.extend(true, {}, v));
         gi = parseInt(v.info.grid);
-        if (gi === rowI) {
+        if (gi == rowI) {
           newBlock = $.extend(true, {}, v);
           newBlock.info.grid = nuI;
           blocks.push(newBlock);
@@ -976,7 +993,7 @@ jQuery(function($) {
       if (v) {
         cells.push($.extend(true, {}, v));
         gi = parseInt(v.grid);
-        if (gi === rowI) {
+        if (gi == rowI) {
           newCell = $.extend(true, {}, v);
           newCell.grid = nuI;
           cells.push(newCell);
@@ -1007,7 +1024,7 @@ jQuery(function($) {
       ppbData.grids.splice(rowI, 1);
       $.each(ppbData.widgets, function(i, v) {
         if (v && v.info) {
-          if (rowI === v.info.grid) {
+          if (rowI == v.info.grid) {
             removeBlocks.push(i);
           } else if (rowI < v.info.grid) {
             ppbData.widgets[i].info.grid--;
@@ -1018,7 +1035,7 @@ jQuery(function($) {
         var gi;
         if (v) {
           gi = parseInt(v.grid);
-          if (rowI === gi) {
+          if (rowI == gi) {
             removeCells.push(i);
           } else if (rowI < gi) {
             ppbData.grid_cells[i].old_grid = gi;

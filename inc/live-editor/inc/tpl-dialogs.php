@@ -15,6 +15,11 @@ $panel_tabs = array(
 			'class'    => 'pootle-style-fields',
 			'priority' => 2,
 		),
+		'advanced'            => array(
+			'label'    => 'Advanced',
+			'class'    => 'pootle-style-fields',
+			'priority' => 2,
+		),
 		'editor-separator' => array(
 			'priority' => 3,
 		),
