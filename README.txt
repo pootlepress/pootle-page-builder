@@ -1,6 +1,6 @@
 === Pootle Pagebuilder ===
 
-Contributors: pootlepress, nickburne, shramee
+Contributors: pootlepress, shramee, jamesmarsland
 Plugin Name: pootle page builder
 Plugin URI: http://www.pootlepress.com/page-builder
 Tags: page builder, pagebuilder, pootlepress, pootle page builder, pootlepagebuilder, pootle pagebuilder, layout, layouts, layout builder, layout customizer, content builder, landing pages, landing page builder, site origin

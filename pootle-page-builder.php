@@ -4,7 +4,7 @@
  * Plugin URI: http://pootlepress.com/
  * Description: Pootle Pagebuilder is a front-end, drag and drop page builder that makes it easy to create beautiful WordPress pages and posts.
  * Version: 3.7.1
- * Author: Shramee Jamie M
+ * Author: Pootlepress
  * Author URI: http://pootlepress.com/
  * License: GPL version 3
  * @developer http://wpdevelopment.me <shramee@wpdevelopment.me>
