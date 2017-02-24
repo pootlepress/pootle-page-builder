@@ -11,7 +11,12 @@ jQuery(function($, undef){
 
 			picker.val( control.setting() ).libColorPicker({
 				change: function() {
-					control.setting.set( picker.libColorPicker('color') );
+					try {
+						control.setting.set( picker.libColorPicker('color') );
+					}
+					catch (e) {
+						console.log(e); // pass exception object to error handler
+					}
 				},
 				clear: function() {
 					control.setting.set( '' );

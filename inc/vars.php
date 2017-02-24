@@ -161,6 +161,12 @@ $pootlepb_row_styling_fields = array(
 		'tab' => 'layout',
 		'priority' => 1,
 	),
+	'full_height' => array (
+		'name' => 'Make row go full height',
+		'type' => 'checkbox',
+		'tab' => 'layout',
+		'priority' => 1.06,
+	),
 	'accordion'              => array(
 		'name' => 'Make accordion',
 		'type' => 'checkbox',
