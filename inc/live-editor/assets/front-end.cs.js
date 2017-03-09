@@ -580,15 +580,12 @@ jQuery(function($) {
         }
       },
       correctCellData: function($t) {
-        var availWidth, i, weight, width;
-        width = $t.outerWidth();
-        availWidth = width;
-        $t.siblings('.ppb-col').each(function() {
-          return availWidth += $(this).outerWidth();
-        });
+        var i, pWidth, weight, width;
+        width = $t.outerWidth() - 1;
+        pWidth = $t.parent().width() + 1;
         i = $('.panel-grid-cell-container > .panel-grid-cell').not('.ppb-block *').index($t);
-        weight = Math.floor(10000 * width / availWidth) / 10000;
-        $t.find('.pootle-live-editor.resize-cells').html('<div class="weight">' + Math.floor(1000 * weight) / 10 + '%</div>');
+        weight = Math.floor(10000 * width / pWidth) / 10000;
+        $t.find('.pootle-live-editor.resize-cells').html('<div class="weight">' + Math.round(1000 * weight) / 10 + '%</div>');
         ppbData.grid_cells[i].weight = weight;
         return weight;
       }
