@@ -844,10 +844,13 @@ jQuery ($) ->
 			return
 
 		$postSettingsDialog.ppbDialog dialogAttr
-	#$setTitleDialog = $postSettingsDialog;
+
+	###
+	$setTitleDialog = $postSettingsDialog;
 	$('.panel-grid-cell-container > .panel-grid-cell').not('.ppb-block *').each ->
 		prevu.resizableCells.correctCellData $(this)
 		return
+	###
 	$ppb.delegate '.pootle-live-editor .dashicons-before', 'mousedown', ->
 		$('.pootle-live-editor-realtime.has-focus').blur()
 		return
