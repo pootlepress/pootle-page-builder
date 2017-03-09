@@ -584,10 +584,9 @@ jQuery(function($) {
         width = $t.outerWidth() - 1;
         pWidth = $t.parent().width() + 1;
         i = $('.panel-grid-cell-container > .panel-grid-cell').not('.ppb-block *').index($t);
-        weight = Math.floor(10000 * width / pWidth) / 10000;
+        weight = Math.floor(1000 * width / pWidth) / 1000;
         $t.find('.pootle-live-editor.resize-cells').html('<div class="weight">' + Math.round(1000 * weight) / 10 + '%</div>');
-        ppbData.grid_cells[i].weight = weight;
-        return weight;
+        return ppbData.grid_cells[i].weight = weight;
       }
     },
     contentDraggable: {
