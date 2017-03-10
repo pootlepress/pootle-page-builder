@@ -476,6 +476,12 @@ jQuery ($) ->
 				return
 		resizableCells:
 			handles: 'w'
+			start: ->
+				prevu.resizableCells.correctCellData $(this)
+				$(this).siblings('.panel-grid-cell').each ->
+					prevu.resizableCells.correctCellData $(this)
+					return
+				return
 			stop: (event, ui) ->
 				$(this).parent().removeClass 'ppb-cols-resizing'
 				return
@@ -483,37 +489,35 @@ jQuery ($) ->
 				$t = $(this)
 				$p = $t.parent()
 				$prev = $t.prev()
-				widthTaken = 0
+				widthTaken = 1
 				widthNow = ui.size.width
 				originalWidth = ui.originalSize.width
+				totalWidth = $p.innerWidth()
 				$p.addClass 'ppb-cols-resizing'
-				$t.css 'width', 100 * $t.innerWidth() / ($p.innerWidth()+1) + '%'
+				$t.css 'width', 100 * $t.innerWidth() / totalWidth + '%'
 				$prev.siblings('.panel-grid-cell').each ->
-					`var $t`
-					$t = $(this)
-					widthTaken += $t.outerWidth()
+					widthTaken += $(this).outerWidth()
 					return
 				widthTaken += parseInt($prev.css('padding-left')) + parseInt($prev.css('padding-right'))
-				$prev.css 'width', 100 - (100 * widthTaken / $p.width()) + '%'
+				$prev.css 'width', (100 * ( totalWidth - widthTaken - 1 ) / totalWidth) + '%'
 				prevu.resizableCells.correctCellData $t
 				prevu.resizableCells.correctCellData $prev
 				prevu.unSavedChanges = true
-				if originalWidth < widthNow
-#Increasing width
+				if originalWidth < widthNow #Increasing width
 					if $p.width() * 0.93 < widthTaken
 						$t.resizable('widget').trigger 'mouseup'
-				else
-#Decreasing width
+				else #Decreasing width
 					if $p.width() * 0.07 > $t.width()
 						$t.resizable('widget').trigger 'mouseup'
 				return
 			correctCellData: ($t) ->
-				width = $t.outerWidth() - 1
+				width = $t.outerWidth()
 				pWidth = $t.parent().width() + 1
 				i = $('.panel-grid-cell-container > .panel-grid-cell').not('.ppb-block *').index($t)
 				weight = Math.floor(10000 * width / pWidth) / 10000
 				$t.find('.pootle-live-editor.resize-cells').html '<div class="weight">' + Math.round(1000 * weight) / 10 + '%</div>'
 				ppbData.grid_cells[i].weight = weight
+				weight
 		contentDraggable:
 			handle: '.ppb-edit-block .dashicons-move'
 			grid: [

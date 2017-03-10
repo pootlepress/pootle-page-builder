@@ -546,26 +546,31 @@ jQuery(function($) {
     },
     resizableCells: {
       handles: 'w',
+      start: function() {
+        prevu.resizableCells.correctCellData($(this));
+        $(this).siblings('.panel-grid-cell').each(function() {
+          prevu.resizableCells.correctCellData($(this));
+        });
+      },
       stop: function(event, ui) {
         $(this).parent().removeClass('ppb-cols-resizing');
       },
       resize: function(event, ui) {
-        var $p, $prev, $t, originalWidth, widthNow, widthTaken;
+        var $p, $prev, $t, originalWidth, totalWidth, widthNow, widthTaken;
         $t = $(this);
         $p = $t.parent();
         $prev = $t.prev();
-        widthTaken = 0;
+        widthTaken = 1;
         widthNow = ui.size.width;
         originalWidth = ui.originalSize.width;
+        totalWidth = $p.innerWidth();
         $p.addClass('ppb-cols-resizing');
-        $t.css('width', 100 * $t.innerWidth() / ($p.innerWidth() + 1) + '%');
+        $t.css('width', 100 * $t.innerWidth() / totalWidth + '%');
         $prev.siblings('.panel-grid-cell').each(function() {
-          var $t;
-          $t = $(this);
-          widthTaken += $t.outerWidth();
+          widthTaken += $(this).outerWidth();
         });
         widthTaken += parseInt($prev.css('padding-left')) + parseInt($prev.css('padding-right'));
-        $prev.css('width', 100 - (100 * widthTaken / $p.width()) + '%');
+        $prev.css('width', (100 * (totalWidth - widthTaken - 1) / totalWidth) + '%');
         prevu.resizableCells.correctCellData($t);
         prevu.resizableCells.correctCellData($prev);
         prevu.unSavedChanges = true;
@@ -581,12 +586,13 @@ jQuery(function($) {
       },
       correctCellData: function($t) {
         var i, pWidth, weight, width;
-        width = $t.outerWidth() - 1;
+        width = $t.outerWidth();
         pWidth = $t.parent().width() + 1;
         i = $('.panel-grid-cell-container > .panel-grid-cell').not('.ppb-block *').index($t);
         weight = Math.floor(10000 * width / pWidth) / 10000;
         $t.find('.pootle-live-editor.resize-cells').html('<div class="weight">' + Math.round(1000 * weight) / 10 + '%</div>');
-        return ppbData.grid_cells[i].weight = weight;
+        ppbData.grid_cells[i].weight = weight;
+        return weight;
       }
     },
     contentDraggable: {

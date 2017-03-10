@@ -14,7 +14,7 @@
 if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 
 	/** Pootle page builder current version */
-	define( 'POOTLEPB_VERSION', '3.7.1.alpha' );
+	define( 'POOTLEPB_VERSION', '3.7.1.alpha1' );
 	/** Pootle page builder __FILE__ */
 	define( 'POOTLEPB_BASE_FILE', __FILE__ );
 	/** Pootle page builder plugin directory path */
