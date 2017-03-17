@@ -63,6 +63,8 @@
 	display: inline-block;
 	vertical-align: top;
 	width: 100%;
+	min-height: inherit;
+	position: relative;
 }
 
 .panel-grid-cell .panel {
@@ -233,6 +235,8 @@ img.ppb-row-kenburns {
 	animation: 115s ppb_kenburns linear infinite;
 }
 
+
+
 @-webkit-keyframes ppb_kenburns {
 	0% {
 		-webkit-transform: scale(1.3) translate(-10%, 10%);
@@ -299,6 +303,7 @@ img.ppb-bg-parallax {
 .panel-grid-cell-container {
 	position: relative;
 	z-index: 30; /* row content needs to be on top of row background color */
+	min-height: inherit;
 }
 
 .ppb-full-width-no-bg, .ppb-full-width-no-bg:before{
@@ -376,6 +381,22 @@ img.ppb-bg-parallax {
 	font-weight: normal;
 	box-shadow: none;
 }
+
+.ppb-content-h-center {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+.ppb-content-v-center {
+	margin-top: auto !important;
+	margin-bottom: auto !important;
+	top: 50%;
+	left: 0;
+	right: 0;
+	position: absolute;
+	-webkit-transform: translateY( -50% );
+	transform: translateY( -50% );
+}
+
 /*
 #pootle-page-builder .panel-grid .ppb-row-accordion-toggle:not(.ppb-accordion-open) ~ .panel-row-style {
 	min-height: 0 !important;
@@ -437,6 +458,20 @@ img.ppb-bg-parallax {
 	.ppb-no-mobile-spacing {
 		padding: 0 !important;
 		margin: 0 !important;
+	}
+	.ppb-content-h-center.ppb-no-mobile-spacing,
+	.ppb-content-v-center.ppb-no-mobile-spacing {
+		position: static;
+		-webkit-transform: translateY( 0 );
+		transform: translateY( 0 );
+	}
+
+	.panel-grid-cell {
+		min-height: 0;
+	}
+
+	.panel-grid-cell:first-of-type:last-of-type {
+		min-height: inherit;
 	}
 }
 

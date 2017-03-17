@@ -811,9 +811,8 @@
                 click: function () {
                     doneClicked = true;
                     var editor = $('#ppbeditor');
-                    if( ! editor.is(':visible') ) {
-                        editor.val(tinyMCE.get('ppbeditor').getContent());
-                    }
+                    jQuery('#ppbeditor-tmce').click()
+                    editor.val(tinyMCE.get('ppbeditor').getContent());
 
                     $(this).trigger('panelsdone', $currentPanel, activeDialog);
 

@@ -15,6 +15,11 @@ $panel_tabs = array(
 			'class'    => 'pootle-style-fields',
 			'priority' => 2,
 		),
+		'advanced'            => array(
+			'label'    => 'Advanced',
+			'class'    => 'pootle-style-fields',
+			'priority' => 2,
+		),
 		'editor-separator' => array(
 			'priority' => 3,
 		),
@@ -243,14 +248,18 @@ $enabled_modules = apply_filters( 'pootlepb_enabled_addons', $enabled_modules );
 $disabled_modules = apply_filters( 'pootlepb_disabled_addons', $disabled_modules );
 
 // Removing disabled modules
-foreach ( $disabled_modules as $id ) {
-	unset( $ppb_modules[ $id ] );
+if ( $disabled_modules ) {
+	foreach ( $disabled_modules as $id ) {
+		unset( $ppb_modules[ $id ] );
+	}
 }
 
 // Prioritizing active modules
-foreach ( $enabled_modules as $i => $id ) {
-	if ( ! empty( $ppb_modules[ $id ] ) ) {
-		$ppb_modules[ $id ]['priority'] = $i * 2 + 1;
+if ( $disabled_modules ) {
+	foreach ( $enabled_modules as $i => $id ) {
+		if ( ! empty( $ppb_modules[ $id ] ) ) {
+			$ppb_modules[ $id ]['priority'] = $i * 2 + 1;
+		}
 	}
 }
 
@@ -325,6 +334,10 @@ if ( $enabled_modules ) {
 	<label>
 		<span>Icon link</span>
 		<input id="ppb-icon-link" type="url">
+	</label>
+	<label>
+		<span>Display inline</span>
+		<input id="ppb-icon-inline" type="checkbox">
 	</label>
 	<label>
 		<span>Preview</span>

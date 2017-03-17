@@ -87,7 +87,7 @@ class pootle_page_builder_for_WooCommerce_Public{
 			$tab_content = $pootlepb;
 		}
 
-		return $tab_content;
+		return apply_filters( 'the_content', $tab_content );
 
 	}
 

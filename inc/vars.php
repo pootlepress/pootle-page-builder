@@ -161,6 +161,12 @@ $pootlepb_row_styling_fields = array(
 		'tab' => 'layout',
 		'priority' => 1,
 	),
+	'full_height' => array (
+		'name' => 'Make row go full height',
+		'type' => 'checkbox',
+		'tab' => 'layout',
+		'priority' => 1.06,
+	),
 	'accordion'              => array(
 		'name' => 'Make accordion',
 		'type' => 'checkbox',
@@ -1259,45 +1265,65 @@ $pootlepb_modules = array(
 );
 
 $ppbpro_addons_data = array(
-	array(
-		'img'  => 'https://pootlepress.github.io/pootle-page-builder/module-icons/blog-customizer.jpg',
-		'path' => 'blog-customizer',
+	'wc-productbuilder' => array(
+		'free'        => true,
+		'Name'        => 'WooCommerce builder (Product)',
+		'Description' => 'Take total control of your WooCommerce product page, requires WooCommerce builder (Shop)',
+		'InstallURI'  => admin_url( "/plugin-install.php?s=Woobuilder&tab=search&type=term" ),
+		'AuthorURI'   => 'https://pootlepress.com',
+		'Author'      => 'pootlepress',
+		'Image'       => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
+		'ActiveClass' => 'WooBuilder',
+	),
+	'wc-shopbuilder'    => array(
+		'img'    => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
+		'path'   => 'woocommerce',
 		'plugin' => array(
-			'Name' => 'pootle page builder blog customizer',
+			'Name'        => 'WooCommerce builder (Shop)',
+			'Description' => 'pootle page builder for WooCommerce brings powerful WooCommerce features into page builder. Create stunning pages featuring your products by id, category, attribute, best-selling, top rated and on-sale, plus use pootle page builder on product pages and with WooCommerce Tab Manager.',
+		),
+	),
+	'blog-customizer'   => array(
+		'img'    => 'https://pootlepress.github.io/pootle-page-builder/module-icons/blog-customizer.jpg',
+		'path'   => 'blog-customizer',
+		'plugin' => array(
+			'Name'        => 'pootle page builder blog customizer',
 			'Description' => 'Blog customizer for pootle page builder helps you create a beautiful blog page',
 		),
 	),
-	array(
-		'img'  => 'https://pootlepress.github.io/pootle-page-builder/module-icons/page-customizer.png',
-		'path' => 'page-customizer',
+	'page-customizer'   => array(
+		'img'    => 'https://pootlepress.github.io/pootle-page-builder/module-icons/page-customizer.png',
+		'path'   => 'page-customizer',
 		'plugin' => array(
-			'Name' => 'Page customizer',
+			'Name'        => 'Page customizer',
 			'Description' => 'Page customizer adds options for individual pages. Add a fullscreen background video, change page background image and color, change header background image and color. Hide header, titles, breadcrumbs, sidebar and footer. Mobile options to change background image and color for phones and tablets.',
 		),
 	),
-	array(
-		'img'  => 'https://pootlepress.github.io/pootle-page-builder/module-icons/photography.jpg',
-		'path' => 'photography',
+	'photography'       => array(
+		'img'    => 'https://pootlepress.github.io/pootle-page-builder/module-icons/photography.jpg',
+		'path'   => 'photography',
 		'plugin' => array(
-			'Name' => 'Pootle page builder Photography add on',
+			'Name'        => 'Pootle page builder Photography add on',
 			'Description' => 'Create stunning slideshows and galleries in minutes.',
 		),
 	),
-	array(
-		'img'  => 'https://pootlepress.github.io/pootle-page-builder/module-icons/one-pager.png',
-		'path' => 'one-pager',
+	'one-pager'         => array(
+		'img'    => 'https://pootlepress.github.io/pootle-page-builder/module-icons/one-pager.png',
+		'path'   => 'one-pager',
 		'plugin' => array(
-			'Name' => 'pootle page builder one pager',
+			'Name'        => 'pootle page builder one pager',
 			'Description' => 'pootle page builder one pager helps you to create beautiful one page websites with any theme.',
 		),
 	),
-	array(
-		'img'  => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
-		'path' => 'woocommerce',
-		'plugin' => array(
-			'Name' => 'WooCommerce builder (Shop)',
-			'Description' => 'pootle page builder for WooCommerce brings powerful WooCommerce features into page builder. Create stunning pages featuring your products by id, category, attribute, best-selling, top rated and on-sale, plus use pootle page builder on product pages and with WooCommerce Tab Manager.',
-		),
+	'business-pack' => array(
+		'free'        => true,
+		'Name'        => 'Pootle Pagebuilder Business Pack',
+		'Description' => 'Add Tabs, Accordions, Testimonials, Incrementing numbers and Google Maps easily in Pootle Pagebuilder Pro.',
+		'InstallURI'  => admin_url( "/plugin-install.php?s=Pootle+Pagebuilder+Business&tab=search&type=term" ),
+		'AuthorURI'   => 'https://pootlepress.com',
+		'Author'      => 'pootlepress',
+		'Image'       => 'https://image.flaticon.com/icons/svg/45/45696.svg',
+		'ActiveClass' => 'WooBuilder',
 	),
 );
 

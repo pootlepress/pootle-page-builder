@@ -40,7 +40,7 @@ final class Pootle_Page_Builder_Admin {
 		/** Content block - Editor panel and output */
 		require_once POOTLEPB_DIR . 'inc/class-content-blocks.php';
 		/** Take care of styling fields */
-		require_once POOTLEPB_DIR . 'inc/styles.php';
+		require_once POOTLEPB_DIR . 'inc/styles-fields.php';
 		/** Handles PPB meta data *Revisions * */
 		require_once POOTLEPB_DIR . 'inc/revisions.php';
 		/** More styling */
