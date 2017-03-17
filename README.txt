@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.7.0
-Stable tag: 3.7.1
+Stable tag: 3.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -146,6 +146,16 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * WP 4.7 compatibility and minor bug fixes
 
 == Changelog ==
+
+= 3.7.2 =
+* 2017-03-17
+* New - Horizontal and vertical center on mobile
+* New - Full height row
+* New - Advanced content setting tab in live editor
+* Fix - Page builder content dump in post content not working SEO not working
+* Fix - Customizer JS console error caused by page customizer
+* Fix - Videos and shortcodes not rendering in products built with page builder
+* Tweak - CoffeeScript for preprocessing live editor JS
 
 = 3.7.1 =
 * 2017-01-13
