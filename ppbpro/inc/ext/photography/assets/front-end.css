@@ -230,7 +230,7 @@ html[xmlns] .ppb-photo-slider .slides {
 	content: '\f003';
 }
 
-.flex-control-nav {
+.ppb-photo .flex-control-nav {
 	z-index: 7;
 	width: 100%;
 	position: absolute;

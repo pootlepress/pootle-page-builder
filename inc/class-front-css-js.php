@@ -196,7 +196,7 @@ final class Pootle_Page_Builder_Front_Css_Js {
 
 			// Add CSS to prevent overflow on mobile resolution.
 			$panel_grid_css      = 'margin-left: 0 !important; margin-right: 0 !important;';
-			$panel_grid_cell_css = 'padding: 0 !important; width: 100% !important;';
+			$panel_grid_cell_css = 'padding: 0 !important; max-width: 100% !important;';
 
 			$this->css( $panel_grid_css, '.panel-grid', $panels_mobile_width );
 			$this->css( $panel_grid_cell_css, '.panel-grid-cell', $panels_mobile_width );
