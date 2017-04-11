@@ -442,8 +442,6 @@ jQuery(function($) {
           style: ''
         }
       };
-      cells = void 0;
-      block = void 0;
       ppbData.grids.push(row);
       cells = {
         grid: window.ppbRowI,
@@ -485,63 +483,64 @@ jQuery(function($) {
         }
       });
     },
+    syncRowPosition: function(olI, newI) {
+      var $focussedContent, diff, range;
+      diff = -1;
+      $focussedContent = $('.mce-edit-focus');
+      prevu.saveTmceBlock($focussedContent);
+      $focussedContent.removeClass('mce-edit-focus');
+      if (newI == olI) {
+        return;
+      }
+      ppbData.grids.ppbPrevuMove(olI, newI);
+      range = [olI, newI].sort(function(a, b) {
+        return a - b;
+      });
+      if (newI < olI) {
+        diff = 1;
+      }
+      $.each(ppbData.widgets, function(i, v) {
+        var gi;
+        if (v && v.info) {
+          gi = parseInt(v.info.grid);
+          if (range[0] <= gi && range[1] >= gi) {
+            if (gi == olI) {
+              ppbData.widgets[i].info.grid = newI;
+            } else {
+              ppbData.widgets[i].info.grid = gi + diff;
+            }
+          }
+        }
+      });
+      $.each(ppbData.grid_cells, function(i, v) {
+        var gi;
+        if (v) {
+          gi = parseInt(v.grid);
+          ppbData.grid_cells[i].old_grid = gi;
+          if (range[0] <= gi && range[1] >= gi) {
+            if (gi == olI) {
+              ppbData.grid_cells[i].grid = newI;
+            } else {
+              ppbData.grid_cells[i].grid = gi + diff;
+            }
+          }
+        }
+      });
+      prevu.resort();
+      prevu.sync(function() {
+        prevu.reset('noSort');
+      });
+      return logPPBData('Moved row ' + olI + ' => ' + newI);
+    },
     rowsSortable: {
       items: '> .panel-grid',
       handle: '.ppb-edit-row .dashicons-before:first',
       start: function(e, ui) {
+        console.log(this);
         $(this).data('draggingRowI', ui.item.index());
       },
       update: function(e, ui) {
-        var $focussedContent, $t, diff, newI, olI, range;
-        $t = $(this);
-        olI = $t.data('draggingRowI');
-        newI = ui.item.index();
-        diff = -1;
-        $focussedContent = $('.mce-edit-focus');
-        prevu.saveTmceBlock($focussedContent);
-        $focussedContent.removeClass('mce-edit-focus');
-        if (newI == olI) {
-          return;
-        }
-        ppbData.grids.ppbPrevuMove(olI, newI);
-        range = [olI, newI].sort(function(a, b) {
-          return a - b;
-        });
-        if (newI < olI) {
-          diff = 1;
-        }
-        $.each(ppbData.widgets, function(i, v) {
-          var gi;
-          if (v && v.info) {
-            gi = parseInt(v.info.grid);
-            if (range[0] <= gi && range[1] >= gi) {
-              if (gi == olI) {
-                ppbData.widgets[i].info.grid = newI;
-              } else {
-                ppbData.widgets[i].info.grid = gi + diff;
-              }
-            }
-          }
-        });
-        $.each(ppbData.grid_cells, function(i, v) {
-          var gi;
-          if (v) {
-            gi = parseInt(v.grid);
-            ppbData.grid_cells[i].old_grid = gi;
-            if (range[0] <= gi && range[1] >= gi) {
-              if (gi == olI) {
-                ppbData.grid_cells[i].grid = newI;
-              } else {
-                ppbData.grid_cells[i].grid = gi + diff;
-              }
-            }
-          }
-        });
-        prevu.resort();
-        prevu.sync(function() {
-          prevu.reset('noSort');
-        });
-        logPPBData('Moved row ' + olI + ' => ' + newI);
+        prevu.syncRowPosition($ppb.data('draggingRowI'), ui.item.index());
       }
     },
     resizableCells: {
@@ -816,7 +815,10 @@ jQuery(function($) {
   panels.addInputFieldEventHandlers($rowPanel);
   dialogAttr.title = 'Add row';
   dialogAttr.dialogClass = dialogAttr.open = null;
-  dialogAttr.buttons.Done = prevu.addRow;
+  dialogAttr.buttons.Done = function() {
+    prevu.addRow($addRowDialog.callback);
+    return $addRowDialog.callback = null;
+  };
   dialogAttr.height = ppbAjax.ipad ? 268 : 232;
   dialogAttr.width = 340;
   $addRowDialog.ppbDialog(dialogAttr);
@@ -1143,6 +1145,17 @@ jQuery(function($) {
         err = error1;
       }
     }
+  });
+  $ppb.delegate('.ppb-edit-row .dashicons-arrow-down-alt', 'click', function() {
+    var $row;
+    $row = $(this).closest('.ppb-row');
+    $addRowDialog.callback = function($t) {
+      $ppb.data('draggingRowI', $t.index());
+      $t.insertBefore($row);
+      $ppb.sortable('refresh');
+      return prevu.syncRowPosition($ppb.data('draggingRowI'), $t.index());
+    };
+    return $ppb.find('.pootle-live-editor.add-row .dashicons-plus').click();
   });
   $ppb.delegate('.ppb-edit-row .dashicons-editor-code', 'click', function() {
     var $t, err, error;

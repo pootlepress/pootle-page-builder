@@ -102,7 +102,7 @@ jQuery ($) ->
 		title: 'Edit content block'
 		height: $(window).height() - 50
 		width: $(window).width() - 50
-		buttons: Done: ->
+		buttons: Done: -> return
 	prevu =
 		noRedirect: false
 		debug: true
@@ -385,8 +385,6 @@ jQuery ($) ->
 					margin_top: '0'
 					row_height: '0'
 					style: ''
-			cells = undefined
-			block = undefined
 			ppbData.grids.push row
 			cells =
 				grid: window.ppbRowI
@@ -423,56 +421,56 @@ jQuery ($) ->
 					callback $ro
 				return
 			return
+		syncRowPosition: ( olI, newI ) ->
+			diff = -1
+			$focussedContent = $('.mce-edit-focus')
+			# Save content block
+			prevu.saveTmceBlock $focussedContent
+			$focussedContent.removeClass 'mce-edit-focus'
+			if `newI == olI`
+				return
+			ppbData.grids.ppbPrevuMove olI, newI
+			range = [
+				olI
+				newI
+			].sort((a, b) ->
+				a - b
+			)
+			if newI < olI
+				diff = 1
+			$.each ppbData.widgets, (i, v) ->
+				if v and v.info
+					gi = parseInt(v.info.grid)
+					if range[0] <= gi and range[1] >= gi
+						if `gi == olI`
+							ppbData.widgets[i].info.grid = newI
+						else
+							ppbData.widgets[i].info.grid = gi + diff
+				return
+			$.each ppbData.grid_cells, (i, v) ->
+				if v
+					gi = parseInt(v.grid)
+					ppbData.grid_cells[i].old_grid = gi
+					if range[0] <= gi and range[1] >= gi
+						if `gi == olI`
+							ppbData.grid_cells[i].grid = newI
+						else
+							ppbData.grid_cells[i].grid = gi + diff
+				return
+			prevu.resort()
+			prevu.sync ->
+				prevu.reset 'noSort'
+				return
+			logPPBData 'Moved row ' + olI + ' => ' + newI
 		rowsSortable:
 			items: '> .panel-grid'
 			handle: '.ppb-edit-row .dashicons-before:first'
 			start: (e, ui) ->
-				$(this).data 'draggingRowI', ui.item.index()
+				console.log( this );
+				$( this ).data 'draggingRowI', ui.item.index()
 				return
 			update: (e, ui) ->
-				$t = $(this)
-				olI = $t.data('draggingRowI')
-				newI = ui.item.index()
-				diff = -1
-				$focussedContent = $('.mce-edit-focus')
-				# Save content block
-				prevu.saveTmceBlock $focussedContent
-				$focussedContent.removeClass 'mce-edit-focus'
-				if `newI == olI`
-					return
-				ppbData.grids.ppbPrevuMove olI, newI
-				range = [
-					olI
-					newI
-				].sort((a, b) ->
-					a - b
-				)
-				if newI < olI
-					diff = 1
-				$.each ppbData.widgets, (i, v) ->
-					if v and v.info
-						gi = parseInt(v.info.grid)
-						if range[0] <= gi and range[1] >= gi
-							if `gi == olI`
-								ppbData.widgets[i].info.grid = newI
-							else
-								ppbData.widgets[i].info.grid = gi + diff
-					return
-				$.each ppbData.grid_cells, (i, v) ->
-					if v
-						gi = parseInt(v.grid)
-						ppbData.grid_cells[i].old_grid = gi
-						if range[0] <= gi and range[1] >= gi
-							if `gi == olI`
-								ppbData.grid_cells[i].grid = newI
-							else
-								ppbData.grid_cells[i].grid = gi + diff
-					return
-				prevu.resort()
-				prevu.sync ->
-					prevu.reset 'noSort'
-					return
-				logPPBData 'Moved row ' + olI + ' => ' + newI
+				prevu.syncRowPosition( $ppb.data( 'draggingRowI' ), ui.item.index() );
 				return
 		resizableCells:
 			handles: 'w'
@@ -712,12 +710,17 @@ jQuery ($) ->
 	dialogAttr.buttons.Done = prevu.saveRow
 	$rowPanel.ppbTabs().ppbDialog dialogAttr
 	panels.addInputFieldEventHandlers $rowPanel
+
 	dialogAttr.title = 'Add row'
 	dialogAttr.dialogClass = dialogAttr.open = null
-	dialogAttr.buttons.Done = prevu.addRow
+	dialogAttr.buttons.Done = () ->
+		prevu.addRow $addRowDialog.callback
+		$addRowDialog.callback = null
+
 	dialogAttr.height = if ppbAjax.ipad then 268 else 232
 	dialogAttr.width = 340
 	$addRowDialog.ppbDialog dialogAttr
+
 	dialogAttr.title = 'Are you sure'
 	dialogAttr.buttons =
 		'Yes': ->
@@ -1014,6 +1017,18 @@ jQuery ($) ->
 				webkit.messageHandlers.heySwift.postMessage 'showTextFormatting'
 			catch err
 		return
+
+	$ppb.delegate '.ppb-edit-row .dashicons-arrow-down-alt', 'click', ->
+		$row = $( this ).closest '.ppb-row'
+		$addRowDialog.callback = ( $t ) ->
+			$ppb.data 'draggingRowI', $t.index()
+			$t.insertBefore( $row )
+			$ppb.sortable 'refresh'
+			prevu.syncRowPosition $ppb.data( 'draggingRowI' ), $t.index()
+		$ppb
+			.find '.pootle-live-editor.add-row .dashicons-plus'
+			.click()
+
 	$ppb.delegate '.ppb-edit-row .dashicons-editor-code', 'click', ->
 		if prevu.justClickedEditRow
 			try
