@@ -122,16 +122,17 @@ jQuery(function($) {
     justClickedEditBlock: false,
     syncAjax: function() {
       return jQuery.post(ppbAjax.url, ppbAjax, function(response) {
-        var $response;
+        var $response, callback;
         if (!response.replace(RegExp(' ', 'g'), '')) {
           console.log('Error: No response from server at ' + ppbAjax.url);
           return;
         }
         $response = $($.parseHTML(response, document, true));
         if ('function' === typeof prevu.ajaxCallback) {
-          prevu.ajaxCallback($response, ppbAjax, response);
+          callback = prevu.ajaxCallback;
+          delete prevu.ajaxCallback;
+          callback($response, ppbAjax, response);
           ppbCorrectOnResize();
-          prevu.ajaxCallback = null;
         }
         $('style#pootle-live-editor-styles').html($response.find('style#pootle-live-editor-styles').html());
         if (ppbAjax.publish) {

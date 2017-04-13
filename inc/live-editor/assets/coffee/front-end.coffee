@@ -116,9 +116,10 @@ jQuery ($) ->
 					return
 				$response = $($.parseHTML(response, document, true))
 				if 'function' == typeof prevu.ajaxCallback
-					prevu.ajaxCallback $response, ppbAjax, response
+					callback = prevu.ajaxCallback
+					delete prevu.ajaxCallback
+					callback $response, ppbAjax, response
 					ppbCorrectOnResize()
-					prevu.ajaxCallback = null
 				$('style#pootle-live-editor-styles').html $response.find('style#pootle-live-editor-styles').html()
 				if ppbAjax.publish
 					prevu.unSavedChanges = false
