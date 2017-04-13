@@ -53,27 +53,29 @@ ksort( $panel_tabs );
 			}
 			?>
 		</ul>
-		<?php
-		//Output the tabs
-		foreach ( $panel_tabs as $tabs ) {
-			foreach ( $tabs as $k => $tab ) {
-				if ( empty( $tab['label'] ) ) {
-					continue;
-				}
-				if ( empty( $tab['class'] ) ) {
-					$tab['class'] = '';
-				}
+		<div class="content-wrap">
+			<a href="javascript:void()" class="back">Back</a>
+			<?php
+			//Output the tabs
+			foreach ( $panel_tabs as $tabs ) {
+				foreach ( $tabs as $k => $tab ) {
+					if ( empty( $tab['label'] ) ) {
+						continue;
+					}
+					if ( empty( $tab['class'] ) ) {
+						$tab['class'] = '';
+					}
 
-				echo "\n\n<div id='pootle-$k-tab' class='tab-contents pootle-style-fields $tab[class]'>";
-				echo "<h3>$tab[label]</h3>";
-				do_action( "pootlepb_content_block_{$k}_tab" );
-				pootlepb_block_dialog_fields_output( $k );
-				do_action( "pootlepb_content_block_{$k}_tab_after_fields" );
-				echo '</div>';
+					echo "\n\n<div id='pootle-$k-tab' class='tab-contents pootle-style-fields $tab[class]'>";
+					echo "<h3>$tab[label]</h3>";
+					do_action( "pootlepb_content_block_{$k}_tab" );
+					pootlepb_block_dialog_fields_output( $k );
+					do_action( "pootlepb_content_block_{$k}_tab_after_fields" );
+					echo '</div>';
+				}
 			}
-		}
-		?>
-
+			?>
+		</div>
 	</div>
 
 	<div id="pootlepb-confirm-delete" class="pootlepb-dialog">
@@ -114,24 +116,27 @@ $row_panel_tabs = array(
 			}
 			?>
 		</ul>
-		<?php
-		//Output the tab panels
-		foreach ( $row_panel_tabs as $k => $tab ) {
-			if ( empty( $tab['label'] ) ) {
-				continue;
-			}
-			?>
-			<div id="pootlepb-<?php echo $k; ?>-row-tab" class="pootlepb-row-tab">
-
-				<?php
-				do_action( "pootlepb_row_settings_{$k}_tab" );
-				pootlepb_row_dialog_fields_output( $k );
-				do_action( "pootlepb_row_settings_{$k}_tab_after_fields" );
-				?>
-
-			</div>
+		<div class="content-wrap">
+			<a href="javascript:void()" class="back">Back</a>
 			<?php
-		} ?>
+			//Output the tab panels
+			foreach ( $row_panel_tabs as $k => $tab ) {
+				if ( empty( $tab['label'] ) ) {
+					continue;
+				}
+				?>
+				<div id="pootlepb-<?php echo $k; ?>-row-tab" class="pootlepb-row-tab">
+
+					<?php
+					do_action( "pootlepb_row_settings_{$k}_tab" );
+					pootlepb_row_dialog_fields_output( $k );
+					do_action( "pootlepb_row_settings_{$k}_tab_after_fields" );
+					?>
+
+				</div>
+				<?php
+			} ?>
+		</div>
 	</div>
 	<div class="pootlepb-dialog" id="pootlepb-add-row">
 		<label>

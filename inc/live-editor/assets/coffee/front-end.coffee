@@ -83,6 +83,7 @@ jQuery ($) ->
 
 	$contentPanel = $('#pootlepb-content-editor-panel')
 	$rowPanel = $('#pootlepb-row-editor-panel')
+	$panels = $rowPanel.add( $contentPanel )
 	$deleteDialog = $('#pootlepb-confirm-delete')
 	$deletingWhat = $('#pootlepb-deleting-item')
 	$addRowDialog = $('#pootlepb-add-row')
@@ -298,7 +299,7 @@ jQuery ($) ->
 					$cell.prepend $style
 				tinymce.init prevu.tmce
 				return
-			$contentPanel.ppbDialog 'close'
+#			$contentPanel.ppbDialog 'close'
 			return
 		editRow: ->
 			$bgToggle = $rowPanel.find('[data-style-field=background_toggle]')
@@ -352,7 +353,7 @@ jQuery ($) ->
 				$ro.removeClass 'pootle-live-editor-new-cell'
 				$(id).prevuRowInit()
 				return
-			$rowPanel.ppbDialog 'close'
+#			$rowPanel.ppbDialog 'close'
 			return
 		addRow: (callback, blockText) ->
 			window.ppbRowI = ppbData.grids.length
@@ -702,14 +703,53 @@ jQuery ($) ->
 			$postSettingsDialog.ppbDialog 'open'
 			return
 		tmce: $.extend(true, {}, tinyMCEPreInit.mceInit.ppbeditor)
+		sidePanelNav: ->
+			$t = $ this
+			$p = $t.closest '.ppb-cool-panel'
+			if $t.hasClass 'back'
+				$p.removeClass 'show-panel'
+			else
+				$p.addClass 'show-panel'
+		closeSidePanel: (callback) ->
+			->
+				$body.css 'margin-left', 0
+				$panels.removeClass 'show-panel'
+				if typeof callback is 'function' then callback()
+		openSidePanel: (callback) ->
+			->
+				$body.css 'margin-left', 300
+				if typeof callback is 'function' then callback()
+
+
 	prevu.showdown = new (showdown.Converter)
-	dialogAttr.open = prevu.editPanel
-	dialogAttr.buttons.Done = prevu.savePanel
+	dialogAttr.open = prevu.openSidePanel( prevu.editPanel )
+	dialogAttr.buttons.Done =  prevu.savePanel
+	dialogAttr.close = prevu.closeSidePanel()
 	$contentPanel.ppbTabs().ppbDialog dialogAttr
+
 	dialogAttr.title = 'Edit row'
-	dialogAttr.open = prevu.editRow
+	dialogAttr.open = prevu.openSidePanel( prevu.editRow )
 	dialogAttr.buttons.Done = prevu.saveRow
+	dialogAttr.close = prevu.closeSidePanel()
 	$rowPanel.ppbTabs().ppbDialog dialogAttr
+
+	$panels.find( 'a' ).click prevu.sidePanelNav
+
+	$panels.find( '[data-style-field], [dialog-field]' ).change ->
+		return
+		$t = $ this
+		$d = $t.closest '.ppb-dialog-buttons.show-panel'
+		if ( $d.length )
+			to = $d.data 'saveTimeout'
+			if ( to )
+				clearTimeout( to )
+
+			$d.data( 'saveTimeout', setTimeout(
+				->
+					$d.find( '.ppb-dialog-buttonset button' ).click()
+				, 1600
+			) )
+
 	panels.addInputFieldEventHandlers $rowPanel
 
 	dialogAttr.title = 'Add row'
@@ -1708,4 +1748,4 @@ jQuery ($) ->
 			ppbAjax.data.google_fonts.push $(this).attr('data-font')
 
 	$('html').on 'pootlepb_le_content_updated', (e, $t) ->
-		ppbSkrollr.refresh $t.find('.ppb-col')
+		ppbSkrollr.refresh $t.find( '.ppb-col' );

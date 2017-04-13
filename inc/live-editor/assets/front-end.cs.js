@@ -64,7 +64,7 @@ logPPBData = function(a, b, c) {
 };
 
 jQuery(function($) {
-  var $addRowDialog, $body, $contentPanel, $deleteDialog, $deletingWhat, $iconPicker, $loader, $mods, $postSettingsDialog, $ppb, $ppbIpadColorDialog, $rowPanel, $setTitleDialog, dialogAttr, pickFaIcon, prevu;
+  var $addRowDialog, $body, $contentPanel, $deleteDialog, $deletingWhat, $iconPicker, $loader, $mods, $panels, $postSettingsDialog, $ppb, $ppbIpadColorDialog, $rowPanel, $setTitleDialog, dialogAttr, pickFaIcon, prevu;
   $.each(ppbData.grids, function(i, v) {
     ppbData.grids[i].id = i;
   });
@@ -91,6 +91,7 @@ jQuery(function($) {
   };
   $contentPanel = $('#pootlepb-content-editor-panel');
   $rowPanel = $('#pootlepb-row-editor-panel');
+  $panels = $rowPanel.add($contentPanel);
   $deleteDialog = $('#pootlepb-confirm-delete');
   $deletingWhat = $('#pootlepb-deleting-item');
   $addRowDialog = $('#pootlepb-add-row');
@@ -341,7 +342,6 @@ jQuery(function($) {
         }
         tinymce.init(prevu.tmce);
       });
-      $contentPanel.ppbDialog('close');
     },
     editRow: function() {
       var $bgToggle, dt, st;
@@ -406,7 +406,6 @@ jQuery(function($) {
         $ro.removeClass('pootle-live-editor-new-cell');
         $(id).prevuRowInit();
       });
-      $rowPanel.ppbDialog('close');
     },
     addRow: function(callback, blockText) {
       var block, cells, i, id, num_cells, row;
@@ -803,16 +802,61 @@ jQuery(function($) {
     postSettings: function() {
       $postSettingsDialog.ppbDialog('open');
     },
-    tmce: $.extend(true, {}, tinyMCEPreInit.mceInit.ppbeditor)
+    tmce: $.extend(true, {}, tinyMCEPreInit.mceInit.ppbeditor),
+    sidePanelNav: function() {
+      var $p, $t;
+      $t = $(this);
+      $p = $t.closest('.ppb-cool-panel');
+      if ($t.hasClass('back')) {
+        return $p.removeClass('show-panel');
+      } else {
+        return $p.addClass('show-panel');
+      }
+    },
+    closeSidePanel: function(callback) {
+      return function() {
+        $body.css('margin-left', 0);
+        $panels.removeClass('show-panel');
+        if (typeof callback === 'function') {
+          return callback();
+        }
+      };
+    },
+    openSidePanel: function(callback) {
+      return function() {
+        $body.css('margin-left', 300);
+        if (typeof callback === 'function') {
+          return callback();
+        }
+      };
+    }
   };
   prevu.showdown = new showdown.Converter;
-  dialogAttr.open = prevu.editPanel;
+  dialogAttr.open = prevu.openSidePanel(prevu.editPanel);
   dialogAttr.buttons.Done = prevu.savePanel;
+  dialogAttr.close = prevu.closeSidePanel();
   $contentPanel.ppbTabs().ppbDialog(dialogAttr);
   dialogAttr.title = 'Edit row';
-  dialogAttr.open = prevu.editRow;
+  dialogAttr.open = prevu.openSidePanel(prevu.editRow);
   dialogAttr.buttons.Done = prevu.saveRow;
+  dialogAttr.close = prevu.closeSidePanel();
   $rowPanel.ppbTabs().ppbDialog(dialogAttr);
+  $panels.find('a').click(prevu.sidePanelNav);
+  $panels.find('[data-style-field], [dialog-field]').change(function() {
+    var $d, $t, to;
+    return;
+    $t = $(this);
+    $d = $t.closest('.ppb-dialog-buttons.show-panel');
+    if ($d.length) {
+      to = $d.data('saveTimeout');
+      if (to) {
+        clearTimeout(to);
+      }
+      return $d.data('saveTimeout', setTimeout(function() {
+        return $d.find('.ppb-dialog-buttonset button').click();
+      }, 1600));
+    }
+  });
   panels.addInputFieldEventHandlers($rowPanel);
   dialogAttr.title = 'Add row';
   dialogAttr.dialogClass = dialogAttr.open = null;
