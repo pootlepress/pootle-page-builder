@@ -468,6 +468,20 @@ body .ppb-dialog {
 	}
 }
 
+#pootlepb-content-editor-panel {
+	li {
+		visibility: hidden;
+		max-height: 0;
+		overflow: hidden;
+		&.content-block-tab-editor,
+		&.content-block-tab-style,
+		&.content-block-tab-advanced {
+			visibility: visible;
+			max-height: none;
+		}
+	}
+}
+
 #pootlepb-confirm-delete, #pootlepb-add-row {
 	padding: 25px 18px;
 	font: 16px sans-serif;

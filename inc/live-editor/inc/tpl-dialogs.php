@@ -42,13 +42,10 @@ ksort( $panel_tabs );
 						echo '<li class="ppb-separator"></li>';
 						continue;
 					}
-					echo "
-					<li>
-						<a class='ppb-tabs-anchors ppb-content-block-tab-$k' href='#pootle-$k-tab'>
-							$tab[label]
-						</a>
-					</li>
-					";
+					echo
+						"<li class='content-block-tab content-block-tab-$k'>" .
+							"<a class='ppb-tabs-anchors' href='#pootle-$k-tab'>$tab[label]</a>" .
+						'</li>';
 				}
 			}
 			?>
