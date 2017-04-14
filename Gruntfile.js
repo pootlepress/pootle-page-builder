@@ -70,9 +70,7 @@ module.exports = function(grunt) {
 			minify: {
 				options: {
 					sourceMap: true,
-					sourceMapIn: function( file ){
-						return file + '.map';
-					}
+					sourceMapIn: function( file ){return file + '.map';}
 				},
 				files: [
 					{
@@ -105,5 +103,5 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.registerTask( 'default', ['sass', 'autoprefixer', 'coffee', 'uglify', 'watch'] );
-	grunt.registerTask( 'default', ['coffee', 'uglify'] );
+//	grunt.registerTask( 'default', ['coffee', 'uglify'] );
 };

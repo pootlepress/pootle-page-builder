@@ -147,6 +147,7 @@ jQuery(function($) {
           }
         }
         ppbAjax.publish = 0;
+        $loader.fadeOut(250);
       });
     },
     sync: function(callback, publish) {
@@ -157,6 +158,7 @@ jQuery(function($) {
       prevu.saveTmceBlock($('.mce-edit-focus'));
       delete ppbAjax.data;
       ppbAjax.data = ppbData;
+      $loader.fadeIn(250);
       if (publish) {
         ppbAjax.publish = publish;
         $body.trigger('savingPPB');
@@ -361,6 +363,7 @@ jQuery(function($) {
           st[key] = '';
         }
         if ($t.attr('type') === 'checkbox') {
+          $t.prop('checked', false);
           if (st[key]) {
             $t.prop('checked', true);
           }
@@ -387,10 +390,8 @@ jQuery(function($) {
           if ($t.prop('checked')) {
             st[key] = 1;
           }
-          $t.prop('checked', false);
         } else {
           st[key] = $t.val();
-          $t.val('');
         }
         $t.change();
       });
@@ -733,7 +734,6 @@ jQuery(function($) {
         }
         $('a.ppb-tabs-anchors[href="' + tab + '"]').click();
       }
-      $loader.fadeOut(500);
     },
     moduleDroppable: {
       accept: '.ppb-module',
@@ -743,7 +743,6 @@ jQuery(function($) {
         var $m, $t;
         $m = ui.draggable;
         $t = $(this);
-        $loader.fadeIn(500);
         if ($t.hasClass('add-row')) {
           $('#ppb-row-add-cols').val('1');
           prevu.addRow((function($row) {
@@ -829,6 +828,25 @@ jQuery(function($) {
           return callback();
         }
       };
+    },
+    saveFieldsOnChange: function() {
+      var $d, $t, to;
+      $t = $(this);
+      $d = $t.closest('.ppb-dialog-buttons.show-panel');
+      if (!$d.length) {
+        return;
+      }
+      to = $d.data('saveTimeout');
+      if (to === 'saving') {
+        return;
+      } else if (to) {
+        clearTimeout(to);
+      }
+      return $d.data('saveTimeout', setTimeout(function() {
+        $d.data('saveTimeout', 'saving');
+        $d.find('.ppb-dialog-buttonset button').click();
+        return $d.data('saveTimeout', '');
+      }, 2500));
     }
   };
   prevu.showdown = new showdown.Converter;
@@ -846,14 +864,17 @@ jQuery(function($) {
     var $d, $t, to;
     $t = $(this);
     $d = $t.closest('.ppb-dialog-buttons.show-panel');
-    console.log($d);
     if ($d.length) {
       to = $d.data('saveTimeout');
-      if (to) {
+      if (to === 'saving') {
+        return;
+      } else if (to) {
         clearTimeout(to);
       }
       return $d.data('saveTimeout', setTimeout(function() {
-        return $d.find('.ppb-dialog-buttonset button').click();
+        $d.data('saveTimeout', 'saving');
+        $d.find('.ppb-dialog-buttonset button').click();
+        return $d.data('saveTimeout', '');
       }, 2500));
     }
   });

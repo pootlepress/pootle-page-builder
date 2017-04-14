@@ -222,7 +222,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		$this->l10n_scripts();
 
 		$ver = POOTLEPB_VERSION;
-		$url = $this->url . '/assets';
+		$url = $this->url . 'assets';
 		wp_enqueue_style( 'pootlepb-ui-styles', POOTLEPB_URL . 'css/ppb-jq-ui.css', array(), $ver );
 		wp_enqueue_style( 'ppb-panels-live-editor-css', "$url/front-end.css", array(), $ver );
 		wp_enqueue_style( 'wp-color-picker' );
@@ -245,7 +245,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 	protected function enqueue_scripts() {
 		global $pootlepb_color_deps;
-		$url       = $this->url . '/assets';
+		$url       = $this->url . 'assets';
 		$jQui_deps = array(
 			'jquery',
 			'jquery-ui-slider',
@@ -279,7 +279,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		wp_enqueue_script( 'ppble-sd', "$url/showdown.min.js", array( 'ppb-ui', 'ppb-fields', ), $ver );
 
-		wp_enqueue_script( 'pootle-live-editor', "$url/front-end.min.js", array(
+		$suff = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? 'dev.js' : 'min.js';
+		wp_enqueue_script( 'pootle-live-editor', "$url/front-end.$suff", array(
 			'ppb-ui',
 			'ppble-sd',
 			'ppb-fields',

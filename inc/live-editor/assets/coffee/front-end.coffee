@@ -130,6 +130,7 @@ jQuery ($) ->
 						else
 							window.location = response
 				ppbAjax.publish = 0
+				$loader.fadeOut 250
 				return
 		sync: (callback, publish) ->
 			logPPBData 'Before sync'
@@ -138,6 +139,9 @@ jQuery ($) ->
 			prevu.saveTmceBlock $('.mce-edit-focus')
 			delete ppbAjax.data
 			ppbAjax.data = ppbData
+
+			$loader.fadeIn 250
+
 			if publish
 				ppbAjax.publish = publish
 				$body.trigger 'savingPPB'
@@ -312,9 +316,12 @@ jQuery ($) ->
 			$rowPanel.find('[data-style-field]').each ->
 				$t = $(this)
 				key = $t.attr('data-style-field')
+
 				if 'undefined' == typeof st[key]
 					st[key] = ''
+
 				if $t.attr('type') == 'checkbox'
+					$t.prop 'checked', false
 					if st[key]
 						$t.prop 'checked', true
 				else if $t.attr('data-style-field-type') == 'slider'
@@ -336,10 +343,8 @@ jQuery ($) ->
 					st[key] = ''
 					if $t.prop('checked')
 						st[key] = 1
-					$t.prop 'checked', false
 				else
 					st[key] = $t.val()
-					$t.val ''
 				$t.change()
 				return
 			ppbData.grids[window.ppbRowI].style = st
@@ -638,7 +643,6 @@ jQuery ($) ->
 				else
 					$contentblock.find('.ppb-edit-block .dashicons-edit').click()
 				$('a.ppb-tabs-anchors[href="' + tab + '"]').click()
-			$loader.fadeOut 500
 			return
 		moduleDroppable:
 			accept: '.ppb-module'
@@ -647,7 +651,6 @@ jQuery ($) ->
 			drop: (e, ui) ->
 				$m = ui.draggable
 				$t = $(this)
-				$loader.fadeIn 500
 				if $t.hasClass('add-row')
 					$('#ppb-row-add-cols').val '1'
 					prevu.addRow (($row) ->
@@ -719,6 +722,26 @@ jQuery ($) ->
 			->
 				$body.css 'margin-left', 300
 				if typeof callback is 'function' then callback()
+		saveFieldsOnChange: () ->
+			$t = $ this
+			$d = $t.closest '.ppb-dialog-buttons.show-panel'
+
+			if ! $d.length then return
+
+			to = $d.data 'saveTimeout'
+			if ( to == 'saving' )
+				return;
+			else if ( to )
+				clearTimeout( to )
+
+			$d.data( 'saveTimeout', setTimeout(
+				->
+					$d.data( 'saveTimeout', 'saving' )
+					$d.find( '.ppb-dialog-buttonset button' ).click()
+					$d.data( 'saveTimeout', '' )
+			, 2500
+			) )
+
 
 
 	prevu.showdown = new (showdown.Converter)
@@ -736,18 +759,22 @@ jQuery ($) ->
 	$panels.find( 'a' ).click prevu.sidePanelNav
 
 	$panels.find( '[data-style-field], [dialog-field]' ).change ->
-		return
+#		return
 		$t = $ this
 		$d = $t.closest '.ppb-dialog-buttons.show-panel'
 		if ( $d.length )
 			to = $d.data 'saveTimeout'
-			if ( to )
+			if ( to == 'saving' )
+				return;
+			else if ( to )
 				clearTimeout( to )
 
 			$d.data( 'saveTimeout', setTimeout(
 				->
+					$d.data( 'saveTimeout', 'saving' )
 					$d.find( '.ppb-dialog-buttonset button' ).click()
-				, 1600
+					$d.data( 'saveTimeout', '' )
+				, 2500
 			) )
 
 	panels.addInputFieldEventHandlers $rowPanel

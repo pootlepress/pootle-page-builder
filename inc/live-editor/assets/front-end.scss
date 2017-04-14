@@ -431,6 +431,11 @@ body .ppb-dialog {
 			.dashicons:before {
 				font-size: 25px;
 			}
+			&:after {
+				content: '';
+				display: block;
+				clear: both;
+			}
 		}
 
 		&.field_type_checkbox > label + span {
