@@ -716,10 +716,12 @@ jQuery ($) ->
 			->
 				$body.css 'margin-left', 0
 				$panels.removeClass 'show-panel'
+				ppbCorrectOnResize()
 				if typeof callback is 'function' then callback()
 		openSidePanel: (callback) ->
 			->
 				$body.css 'margin-left', 300
+				ppbCorrectOnResize()
 				if typeof callback is 'function' then callback()
 		saveFieldsOnChange: ()		->
 			$t = $ this

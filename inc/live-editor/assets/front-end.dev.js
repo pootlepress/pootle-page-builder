@@ -815,6 +815,7 @@ jQuery(function($) {
       return function() {
         $body.css('margin-left', 0);
         $panels.removeClass('show-panel');
+        ppbCorrectOnResize();
         if (typeof callback === 'function') {
           return callback();
         }
@@ -823,6 +824,7 @@ jQuery(function($) {
     openSidePanel: function(callback) {
       return function() {
         $body.css('margin-left', 300);
+        ppbCorrectOnResize();
         if (typeof callback === 'function') {
           return callback();
         }
