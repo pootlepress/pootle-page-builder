@@ -279,7 +279,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		wp_enqueue_script( 'ppble-sd', "$url/showdown.min.js", array( 'ppb-ui', 'ppb-fields', ), $ver );
 
-		wp_enqueue_script( 'pootle-live-editor', "$url/front-end.cs.js", array(
+		wp_enqueue_script( 'pootle-live-editor', "$url/front-end.min.js", array(
 			'ppb-ui',
 			'ppble-sd',
 			'ppb-fields',
