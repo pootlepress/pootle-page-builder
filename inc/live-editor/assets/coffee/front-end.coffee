@@ -345,7 +345,6 @@ jQuery ($) ->
 						st[key] = 1
 				else
 					st[key] = $t.val()
-				$t.change()
 				return
 			ppbData.grids[window.ppbRowI].style = st
 			prevu.sync ($r, qry) ->
@@ -722,27 +721,23 @@ jQuery ($) ->
 			->
 				$body.css 'margin-left', 300
 				if typeof callback is 'function' then callback()
-		saveFieldsOnChange: () ->
+		saveFieldsOnChange: ()		->
 			$t = $ this
 			$d = $t.closest '.ppb-dialog-buttons.show-panel'
+			if ( $d.length )
+				to = $d.data 'saveTimeout'
+				if ( to == 'saving' )
+					return;
+				else if ( to )
+					clearTimeout( to )
 
-			if ! $d.length then return
-
-			to = $d.data 'saveTimeout'
-			if ( to == 'saving' )
-				return;
-			else if ( to )
-				clearTimeout( to )
-
-			$d.data( 'saveTimeout', setTimeout(
-				->
-					$d.data( 'saveTimeout', 'saving' )
-					$d.find( '.ppb-dialog-buttonset button' ).click()
-					$d.data( 'saveTimeout', '' )
-			, 2500
-			) )
-
-
+				$d.data( 'saveTimeout', setTimeout(
+					->
+						$d.data( 'saveTimeout', 'saving' )
+						$d.find( '.ppb-dialog-buttonset button' ).click()
+						$d.data( 'saveTimeout', '' )
+				, 2500
+				) )
 
 	prevu.showdown = new (showdown.Converter)
 	dialogAttr.open = prevu.openSidePanel( prevu.editPanel )
@@ -758,24 +753,7 @@ jQuery ($) ->
 
 	$panels.find( 'a' ).click prevu.sidePanelNav
 
-	$panels.find( '[data-style-field], [dialog-field]' ).change ->
-#		return
-		$t = $ this
-		$d = $t.closest '.ppb-dialog-buttons.show-panel'
-		if ( $d.length )
-			to = $d.data 'saveTimeout'
-			if ( to == 'saving' )
-				return;
-			else if ( to )
-				clearTimeout( to )
-
-			$d.data( 'saveTimeout', setTimeout(
-				->
-					$d.data( 'saveTimeout', 'saving' )
-					$d.find( '.ppb-dialog-buttonset button' ).click()
-					$d.data( 'saveTimeout', '' )
-				, 2500
-			) )
+	$panels.on 'change', '[data-style-field], [dialog-field]', prevu.saveFieldsOnChange
 
 	panels.addInputFieldEventHandlers $rowPanel
 

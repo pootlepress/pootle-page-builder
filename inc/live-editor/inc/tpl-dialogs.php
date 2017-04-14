@@ -51,7 +51,7 @@ ksort( $panel_tabs );
 			?>
 		</ul>
 		<div class="content-wrap">
-			<a href="javascript:void()" class="back">Back</a>
+			<a href="javascript:void(0)" class="back">Back</a>
 			<?php
 			//Output the tabs
 			foreach ( $panel_tabs as $tabs ) {
@@ -114,7 +114,7 @@ $row_panel_tabs = array(
 			?>
 		</ul>
 		<div class="content-wrap">
-			<a href="javascript:void()" class="back">Back</a>
+			<a href="javascript:void(0)" class="back">Back</a>
 			<?php
 			//Output the tab panels
 			foreach ( $row_panel_tabs as $k => $tab ) {
@@ -125,6 +125,7 @@ $row_panel_tabs = array(
 				<div id="pootlepb-<?php echo $k; ?>-row-tab" class="pootlepb-row-tab">
 
 					<?php
+					echo "<h3>$tab[label]</h3>";
 					do_action( "pootlepb_row_settings_{$k}_tab" );
 					pootlepb_row_dialog_fields_output( $k );
 					do_action( "pootlepb_row_settings_{$k}_tab_after_fields" );

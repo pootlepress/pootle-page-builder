@@ -393,7 +393,6 @@ jQuery(function($) {
         } else {
           st[key] = $t.val();
         }
-        $t.change();
       });
       ppbData.grids[window.ppbRowI].style = st;
       prevu.sync(function($r, qry) {
@@ -833,20 +832,19 @@ jQuery(function($) {
       var $d, $t, to;
       $t = $(this);
       $d = $t.closest('.ppb-dialog-buttons.show-panel');
-      if (!$d.length) {
-        return;
+      if ($d.length) {
+        to = $d.data('saveTimeout');
+        if (to === 'saving') {
+          return;
+        } else if (to) {
+          clearTimeout(to);
+        }
+        return $d.data('saveTimeout', setTimeout(function() {
+          $d.data('saveTimeout', 'saving');
+          $d.find('.ppb-dialog-buttonset button').click();
+          return $d.data('saveTimeout', '');
+        }, 2500));
       }
-      to = $d.data('saveTimeout');
-      if (to === 'saving') {
-        return;
-      } else if (to) {
-        clearTimeout(to);
-      }
-      return $d.data('saveTimeout', setTimeout(function() {
-        $d.data('saveTimeout', 'saving');
-        $d.find('.ppb-dialog-buttonset button').click();
-        return $d.data('saveTimeout', '');
-      }, 2500));
     }
   };
   prevu.showdown = new showdown.Converter;
@@ -860,24 +858,7 @@ jQuery(function($) {
   dialogAttr.close = prevu.closeSidePanel();
   $rowPanel.ppbTabs().ppbDialog(dialogAttr);
   $panels.find('a').click(prevu.sidePanelNav);
-  $panels.find('[data-style-field], [dialog-field]').change(function() {
-    var $d, $t, to;
-    $t = $(this);
-    $d = $t.closest('.ppb-dialog-buttons.show-panel');
-    if ($d.length) {
-      to = $d.data('saveTimeout');
-      if (to === 'saving') {
-        return;
-      } else if (to) {
-        clearTimeout(to);
-      }
-      return $d.data('saveTimeout', setTimeout(function() {
-        $d.data('saveTimeout', 'saving');
-        $d.find('.ppb-dialog-buttonset button').click();
-        return $d.data('saveTimeout', '');
-      }, 2500));
-    }
-  });
+  $panels.on('change', '[data-style-field], [dialog-field]', prevu.saveFieldsOnChange);
   panels.addInputFieldEventHandlers($rowPanel);
   dialogAttr.title = 'Add row';
   dialogAttr.dialogClass = dialogAttr.open = null;
@@ -1908,3 +1889,5 @@ jQuery(function($) {
     return ppbSkrollr.refresh($t.find('.ppb-col'));
   });
 });
+
+//# sourceMappingURL=front-end.dev.js.map
