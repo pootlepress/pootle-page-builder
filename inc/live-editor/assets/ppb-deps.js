@@ -171,7 +171,7 @@
 		slider_val_update = function ( valu, $t, $f, $spn ) {
 			var max = $t.data( 'max' );
 			//Update values on slide
-			$f.val( valu );
+			$f.val( valu ).change();
 
 			if ( $t.data( 'show-actual-val' ) ) {
 				$spn.text( valu + $t.data( 'unit' ) );

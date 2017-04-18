@@ -470,7 +470,7 @@ jQuery ($) ->
 			logPPBData 'Moved row ' + olI + ' => ' + newI
 		rowsSortable:
 			items: '> .panel-grid'
-			handle: '.ppb-edit-row .dashicons-before:first'
+			handle: '.ppb-edit-row .drag-handle'
 			start: (e, ui) ->
 				console.log( this );
 				$( this ).data 'draggingRowI', ui.item.index()
@@ -523,7 +523,7 @@ jQuery ($) ->
 				ppbData.grid_cells[i].weight = weight
 				weight
 		contentDraggable:
-			handle: '.ppb-edit-block .dashicons-move'
+			handle: '.ppb-edit-block .drag-handle'
 			grid: [
 				5
 				5
@@ -594,7 +594,7 @@ jQuery ($) ->
 				ppbData.widgets[window.ppbPanelI].info.style = JSON.stringify(st)
 				return
 		contentResizable:
-			handles: 'e, w'
+			handles: 'ne, se, sw, nw'
 			start: (e, ui) ->
 				$t = $(this)
 				$t.find('.ppb-edit-block .dashicons-before:first').click()
@@ -638,9 +638,9 @@ jQuery ($) ->
 					window.ppbModules[$module.data('callback')] $contentblock, ed, $ed
 			if tab
 				if 0 < tab.indexOf('-row-tab')
-					$('.panel-grid.active').find('.ppb-edit-row .dashicons-admin-appearance').click()
+					$('.panel-grid.active').find('.ppb-edit-row .settings-dialog').click()
 				else
-					$contentblock.find('.ppb-edit-block .dashicons-edit').click()
+					$contentblock.find('.ppb-edit-block .settings-dialog').click()
 				$('a.ppb-tabs-anchors[href="' + tab + '"]').click()
 			return
 		moduleDroppable:
@@ -755,7 +755,7 @@ jQuery ($) ->
 
 	$panels.find( 'a' ).click prevu.sidePanelNav
 
-	$panels.on 'change', '[data-style-field], [dialog-field]', prevu.saveFieldsOnChange
+	$panels.on 'change', '[data-style-field], [dialog-field], input, textarea', prevu.saveFieldsOnChange
 
 	panels.addInputFieldEventHandlers $rowPanel
 
@@ -911,7 +911,7 @@ jQuery ($) ->
 	$ppb.delegate '.ppb-edit-row .dashicons-before', 'click', ->
 		window.ppbRowI = $(this).closest('.pootle-live-editor').data('index')
 		return
-	$ppb.delegate '.ppb-edit-row .dashicons-admin-appearance', 'click', ->
+	$ppb.delegate '.ppb-edit-row .settings-dialog', 'click', ->
 		$rowPanel.ppbDialog 'open'
 		return
 	$ppb.delegate '.ppb-edit-row .dashicons-admin-page', 'click', ->
@@ -1016,7 +1016,7 @@ jQuery ($) ->
 		window.ppbPanelI = $t.closest('.pootle-live-editor').data('index')
 		prevu.activeEditor = $(this).closest('.ppb-block').children('.pootle-live-editor-realtime')
 		return
-	$ppb.delegate '.ppb-edit-block .dashicons-edit', 'click', ->
+	$ppb.delegate '.ppb-edit-block .settings-dialog', 'click', ->
 		$contentPanel.ppbDialog 'open'
 		return
 	$ppb.delegate '.ppb-edit-block .dashicons-no', 'click', ->
@@ -1066,7 +1066,7 @@ jQuery ($) ->
 			catch err
 		return
 
-	$ppb.delegate '.ppb-edit-row .dashicons-arrow-down-alt', 'click', ->
+	$ppb.delegate '.ppb-edit-row .insert-row', 'click', ->
 		$row = $( this ).closest '.ppb-row'
 		$addRowDialog.callback = ( $t ) ->
 			$ppb.data 'draggingRowI', $t.index()
@@ -1745,7 +1745,7 @@ jQuery ($) ->
 		ppbData.grids[ppbRowI].style.row_height = '500'
 
 	window.ppbModules.onePager = ($t) ->
-		$t.find('.ppb-edit-block .dashicons-edit').click()
+		$t.find('.ppb-edit-block .settings-dialog').click()
 		$('a.ppb-tabs-anchors[href="#pootle-ppb-1-pager-tab"]').click()
 		ppbModules.heroSection $t
 

@@ -6,13 +6,13 @@ global $pootlepb_row_settings_tabs;
 
 $panel_tabs = array(
 	'-' => array(
-		'editor'           => array(
-			'label'    => 'Editor',
-			'priority' => 1,
-		),
 		'style'            => array(
 			'label'    => 'Style',
 			'class'    => 'pootle-style-fields',
+			'priority' => 1,
+		),
+		'editor'           => array(
+			'label'    => 'Editor',
 			'priority' => 2,
 		),
 		'advanced'            => array(

@@ -135,7 +135,7 @@ class Pootle_Page_Builder_Live_Editor {
 		// Enqueues the admin scripts
 		add_action( 'pootlepb_enqueue_admin_scripts', array( $this->admin, 'enqueue' ) );
 		//Adds Live editor link
-		add_action( 'admin_bar_menu', array( $this->admin, 'admin_bar_menu' ), 999 );
+		add_action( 'admin_bar_menu', array( $this->admin, 'admin_bar_menu' ), 9999 );
 		//Ajax action to save live editor data and render new grid
 		add_action( 'wp', array( $this->admin, 'browser_cache_page' ) );
 	}

@@ -534,7 +534,7 @@ jQuery(function($) {
     },
     rowsSortable: {
       items: '> .panel-grid',
-      handle: '.ppb-edit-row .dashicons-before:first',
+      handle: '.ppb-edit-row .drag-handle',
       start: function(e, ui) {
         console.log(this);
         $(this).data('draggingRowI', ui.item.index());
@@ -595,7 +595,7 @@ jQuery(function($) {
       }
     },
     contentDraggable: {
-      handle: '.ppb-edit-block .dashicons-move',
+      handle: '.ppb-edit-block .drag-handle',
       grid: [5, 5],
       start: function(e, ui) {
         var $ro, $t, roMinHi;
@@ -671,7 +671,7 @@ jQuery(function($) {
       }
     },
     contentResizable: {
-      handles: 'e, w',
+      handles: 'ne, se, sw, nw',
       start: function(e, ui) {
         var $t;
         $t = $(this);
@@ -727,9 +727,9 @@ jQuery(function($) {
       }
       if (tab) {
         if (0 < tab.indexOf('-row-tab')) {
-          $('.panel-grid.active').find('.ppb-edit-row .dashicons-admin-appearance').click();
+          $('.panel-grid.active').find('.ppb-edit-row .settings-dialog').click();
         } else {
-          $contentblock.find('.ppb-edit-block .dashicons-edit').click();
+          $contentblock.find('.ppb-edit-block .settings-dialog').click();
         }
         $('a.ppb-tabs-anchors[href="' + tab + '"]').click();
       }
@@ -860,7 +860,7 @@ jQuery(function($) {
   dialogAttr.close = prevu.closeSidePanel();
   $rowPanel.ppbTabs().ppbDialog(dialogAttr);
   $panels.find('a').click(prevu.sidePanelNav);
-  $panels.on('change', '[data-style-field], [dialog-field]', prevu.saveFieldsOnChange);
+  $panels.on('change', '[data-style-field], [dialog-field], input, textarea', prevu.saveFieldsOnChange);
   panels.addInputFieldEventHandlers($rowPanel);
   dialogAttr.title = 'Add row';
   dialogAttr.dialogClass = dialogAttr.open = null;
@@ -1019,7 +1019,7 @@ jQuery(function($) {
   $ppb.delegate('.ppb-edit-row .dashicons-before', 'click', function() {
     window.ppbRowI = $(this).closest('.pootle-live-editor').data('index');
   });
-  $ppb.delegate('.ppb-edit-row .dashicons-admin-appearance', 'click', function() {
+  $ppb.delegate('.ppb-edit-row .settings-dialog', 'click', function() {
     $rowPanel.ppbDialog('open');
   });
   $ppb.delegate('.ppb-edit-row .dashicons-admin-page', 'click', function() {
@@ -1140,7 +1140,7 @@ jQuery(function($) {
     window.ppbPanelI = $t.closest('.pootle-live-editor').data('index');
     prevu.activeEditor = $(this).closest('.ppb-block').children('.pootle-live-editor-realtime');
   });
-  $ppb.delegate('.ppb-edit-block .dashicons-edit', 'click', function() {
+  $ppb.delegate('.ppb-edit-block .settings-dialog', 'click', function() {
     $contentPanel.ppbDialog('open');
   });
   $ppb.delegate('.ppb-edit-block .dashicons-no', 'click', function() {
@@ -1195,7 +1195,7 @@ jQuery(function($) {
       }
     }
   });
-  $ppb.delegate('.ppb-edit-row .dashicons-arrow-down-alt', 'click', function() {
+  $ppb.delegate('.ppb-edit-row .insert-row', 'click', function() {
     var $row;
     $row = $(this).closest('.ppb-row');
     $addRowDialog.callback = function($t) {
@@ -1877,7 +1877,7 @@ jQuery(function($) {
     return ppbData.grids[ppbRowI].style.row_height = '500';
   };
   window.ppbModules.onePager = function($t) {
-    $t.find('.ppb-edit-block .dashicons-edit').click();
+    $t.find('.ppb-edit-block .settings-dialog').click();
     $('a.ppb-tabs-anchors[href="#pootle-ppb-1-pager-tab"]').click();
     return ppbModules.heroSection($t);
   };

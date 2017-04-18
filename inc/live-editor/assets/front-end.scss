@@ -400,11 +400,14 @@ body .ppb-dialog {
 	height: calc(100% - 45px);
 	overflow: auto;
 	box-sizing: border-box;
-	.field {
-		padding: 1.1em;
+	.field, h3 {
+		padding: 16px;
+		background: #f5f5f5;
+		margin: 0;
 		position: relative;
 		border-bottom: 1px solid #ddd;
-		background: #f5f5f5;
+	}
+	.field {
 		* {
 			vertical-align: middle;
 		}
@@ -469,7 +472,7 @@ body .ppb-dialog {
 }
 
 #pootlepb-content-editor-panel {
-	li {
+	li.content-block-tab {
 		visibility: hidden;
 		max-height: 0;
 		overflow: hidden;
@@ -620,18 +623,46 @@ body .ppb-dialog {
 	}
 	.ppb-block {
 		&:hover .ui-resizable-handle {
-			display: block !important;
+			display: block!important;
 			visibility: visible;
-			width: 7px;
-			margin: 0 -3px;
-			top: 0;
-			bottom: 0;
 		}
-		.ui-resizable-handle.ui-resizable-e {
+		.ui-resizable-handle {
+			&:hover {
+				transform: scale(1);
+			}
+			transform: scale(0.5);
+			transition: all 0.25s;
+			position: absolute;
+			height: 14px;
+			width: 14px;
+			margin: -7px;
+			border-radius: 50%;
+			border: 1px solid;
+			background: #ffffff;
+			top: auto;
+			bottom: auto;
 			left: auto;
+			right: auto;
+		}
+		.ui-resizable-ne {
+			cursor: ne-resize;
+			top: 0;
 			right: 0;
-			border: none;
-			border-right: 1px dashed #ef4832;
+		}
+		.ui-resizable-se {
+			cursor: se-resize;
+			bottom: 0;
+			right: 0;
+		}
+		.ui-resizable-sw {
+			cursor: sw-resize;
+			bottom: 0;
+			left: 0;
+		}
+		.ui-resizable-nw {
+			cursor: nw-resize;
+			top: 0;
+			left: 0;
 		}
 	}
 }
@@ -1114,6 +1145,8 @@ body .ppb-dialog {
 
 .search-unsplash-wrap {
 	position: relative;
+	display: block;
+	float: left;
 	.dashicons {
 		position: absolute;
 		top: 0;
@@ -1648,4 +1681,9 @@ a .ppb-module-disabled:after {
 			}
 		}
 	}
+}
+
+// WP Color Picker fix saturation slider dropping down
+.wp-picker-holder .iris-picker .iris-square {
+	margin-right: 9%;
 }
