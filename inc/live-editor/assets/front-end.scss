@@ -207,7 +207,28 @@
 }
 
 body .ppb-dialog {
-	font: 14px sans-serif;
+	h1, h2, h3, h4, h5 ,h6, p, a {
+		font: 14px sans-serif;
+	}
+	h1 {
+		font-size: 2em;
+	}
+	.ppb-dialog-title, h2 {
+		font-size: 1.6em;
+	}
+	h3 {
+		font-size: 1.4em;
+	}
+	h4 {
+		font-size: 1.2em;
+	}
+	h6 {
+		font-size: 0.9em;
+	}
+}
+
+.ppb-dialog > * {
+	font-family: inherit;
 }
 
 .pootle-live-editor.ppb-edit-row .dashicons-before {
@@ -476,6 +497,7 @@ body .ppb-dialog {
 		visibility: hidden;
 		max-height: 0;
 		overflow: hidden;
+		&.content-block-tab-html_editor,
 		&.content-block-tab-editor,
 		&.content-block-tab-style,
 		&.content-block-tab-advanced {
@@ -623,46 +645,42 @@ body .ppb-dialog {
 	}
 	.ppb-block {
 		&:hover .ui-resizable-handle {
-			display: block!important;
+			display: block !important;
 			visibility: visible;
+			border: none;
 		}
 		.ui-resizable-handle {
-			&:hover {
+			.top:hover,
+			.bottom:hover {
 				transform: scale(1);
 			}
-			transform: scale(0.5);
-			transition: all 0.25s;
+			cursor: ew-resize;
 			position: absolute;
-			height: 14px;
-			width: 14px;
-			margin: -7px;
-			border-radius: 50%;
-			border: 1px solid;
-			background: #ffffff;
-			top: auto;
-			bottom: auto;
-			left: auto;
-			right: auto;
-		}
-		.ui-resizable-ne {
-			cursor: ne-resize;
 			top: 0;
-			right: 0;
-		}
-		.ui-resizable-se {
-			cursor: se-resize;
-			bottom: 0;
-			right: 0;
-		}
-		.ui-resizable-sw {
-			cursor: sw-resize;
 			bottom: 0;
 			left: 0;
-		}
-		.ui-resizable-nw {
-			cursor: nw-resize;
-			top: 0;
-			left: 0;
+			&.ui-resizable-e {
+				left: auto;
+				right: 0;
+			}
+			.top,
+			.bottom {
+				content: '';
+				transform: scale(0.5);
+				transition: all 0.25s;
+				position: absolute;
+				height: 14px;
+				width: 14px;
+				margin: -7px;
+				border-radius: 50%;
+				border: 1px solid #ef4832;
+				background: #ffffff;
+				top: 0;
+			}
+			.bottom {
+				top: auto;
+				bottom: 0;
+			}
 		}
 	}
 }
@@ -1686,4 +1704,24 @@ a .ppb-module-disabled:after {
 // WP Color Picker fix saturation slider dropping down
 .wp-picker-holder .iris-picker .iris-square {
 	margin-right: 9%;
+}
+
+/** Ace editor */
+#editor {
+	position: absolute;
+	top: 101px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+pre.ace_editor.ace-tm {
+	height: calc( 100% - 88px );
+}
+
+#ppb-tooltip {
+	font: 16px sans-serif;
+	position: absolute;
+	top:0;
+	left:0;
 }

@@ -18,7 +18,7 @@
 
 		// Gradients preview
 		( function() {
-			var canvas = $this.find( ".bg-grad-prevu" ).show()[0];
+			var canvas = $this.find( ".bg-grad-prevu" )[0];
 			if ( canvas && canvas.getContext ) {
 				var grd,col1, col2, type,
 					ctx = canvas.getContext( "2d" );
@@ -32,6 +32,13 @@
 					col1 = $( 'input[data-style-field="grad_col1"]' ).val();
 					col2 = $( 'input[data-style-field="grad_col2"]' ).val();
 					type = $( 'select[data-style-field="grad_type"]' ).val();
+
+					if ( ! col1 || ! col2 ) {
+						canvas.style.display = 'none';
+						return;
+					}
+
+					canvas.style.display = 'block';
 					if ( ! type ) {
 						grd = ctx.createLinearGradient( 0, 0, 0, 160 );
 					} else if ( 'radial' == type ) {

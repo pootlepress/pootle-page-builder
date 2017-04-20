@@ -552,6 +552,14 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				<span class="screen-reader-text">Delete Content</span>
 			</span>
 		</div>
+		<div class="ui-resizable-handle ui-resizable-e">
+			<div class="top"></div>
+			<div class="bottom"></div>
+		</div>
+		<div class="ui-resizable-handle ui-resizable-w">
+			<div class="top"></div>
+			<div class="bottom"></div>
+		</div>
 		<?php
 	}
 

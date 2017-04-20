@@ -26,6 +26,14 @@ $panel_tabs = array(
 	)
 );
 
+add_filter( 'mce_buttons', function ( $buttons ) {
+	return array('formatselect','bold','italic','bullist','numlist','link','fullscreen','wp_adv',);
+} );
+
+add_filter( 'mce_buttons_2', function ( $buttons ) {
+	return 	array('strikethrough','hr','forecolor','pastetext','removeformat','charmap','outdent','indent','undo','redo', );
+} );
+
 foreach ( $this->addons as $k => $tab ) {
 	$panel_tabs[ $tab['label'] ][ $k ] = $tab;
 }
@@ -347,3 +355,4 @@ if ( $enabled_modules ) {
 		<span id="ppb-icon-preview"></span>
 	</label>
 </div>
+<div id="ppb-tooltip"></div>

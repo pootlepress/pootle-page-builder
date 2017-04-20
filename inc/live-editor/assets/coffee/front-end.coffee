@@ -594,7 +594,9 @@ jQuery ($) ->
 				ppbData.widgets[window.ppbPanelI].info.style = JSON.stringify(st)
 				return
 		contentResizable:
-			handles: 'ne, se, sw, nw'
+			handles:
+				e: '.ui-resizable-e'
+				w: '.ui-resizable-w'
 			start: (e, ui) ->
 				$t = $(this)
 				$t.find('.ppb-edit-block .dashicons-before:first').click()
@@ -631,8 +633,9 @@ jQuery ($) ->
 			$contentblock.find('.dashicons-move').click()
 			$ed = $contentblock.find('.mce-content-body')
 			ed = tinymce.get($ed.attr('id'))
-			ed.selection.select tinyMCE.activeEditor.getBody(), true
-			ed.selection.collapse false
+			if ( ed )
+				ed.selection.select tinyMCE.activeEditor.getBody(), true
+				ed.selection.collapse false
 			if $module.data('callback')
 				if typeof window.ppbModules[$module.data('callback')] == 'function'
 					window.ppbModules[$module.data('callback')] $contentblock, ed, $ed
@@ -751,11 +754,21 @@ jQuery ($) ->
 	dialogAttr.open = prevu.openSidePanel( prevu.editRow )
 	dialogAttr.buttons.Done = prevu.saveRow
 	dialogAttr.close = prevu.closeSidePanel()
-	$rowPanel.ppbTabs().ppbDialog dialogAttr
+	$rowPanel.ppbTabs( {
+		activate: ( e, ui ) ->
+			if ui.newPanel
+				ui.newPanel.find( '#ppbeditor_ifr' ).css( 'height', ui.newTab.innerHeight() - 268 )
+	} ).ppbDialog dialogAttr
 
 	$panels.find( 'a' ).click prevu.sidePanelNav
 
 	$panels.on 'change', '[data-style-field], [dialog-field], input, textarea', prevu.saveFieldsOnChange
+
+	setTimeout(
+		->
+			tinyMCE.get( 'ppbeditor' ).on 'change', prevu.saveFieldsOnChange
+		700
+	);
 
 	panels.addInputFieldEventHandlers $rowPanel
 
@@ -1665,7 +1678,7 @@ jQuery ($) ->
 		return
 	$('.ppb-edit-block').click ->
 		editorid = $(this).siblings('.mce-content-body').attr('id')
-		tinymce.get(editorid).focus()
+		if tinymce.get(editorid) then tinymce.get(editorid).focus()
 		return
 	$('#ppble-feat-img-prevu').click ->
 		event.preventDefault()
@@ -1748,6 +1761,17 @@ jQuery ($) ->
 		$t.find('.ppb-edit-block .settings-dialog').click()
 		$('a.ppb-tabs-anchors[href="#pootle-ppb-1-pager-tab"]').click()
 		ppbModules.heroSection $t
+
+	$tooltip = $ '#ppb-tooltip'
+	$body.on 'hover', (e) ->
+		if ( $(e.target).closest( '.pbtn,.ppb-fa-icon' ).length )
+			console.log e
+#			$tooltip.show().html( 'Double click to edit' ).css( {
+#				top: e.clientY,
+#				left: e.clientX,
+#			} );
+		else
+			$tooltip.hide()
 
 	$body.on 'savingPPB', ->
 		ppbAjax.data.google_fonts = []

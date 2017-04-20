@@ -64,7 +64,7 @@ logPPBData = function(a, b, c) {
 };
 
 jQuery(function($) {
-  var $addRowDialog, $body, $contentPanel, $deleteDialog, $deletingWhat, $iconPicker, $loader, $mods, $panels, $postSettingsDialog, $ppb, $ppbIpadColorDialog, $rowPanel, $setTitleDialog, dialogAttr, pickFaIcon, prevu;
+  var $addRowDialog, $body, $contentPanel, $deleteDialog, $deletingWhat, $iconPicker, $loader, $mods, $panels, $postSettingsDialog, $ppb, $ppbIpadColorDialog, $rowPanel, $setTitleDialog, $tooltip, dialogAttr, pickFaIcon, prevu;
   $.each(ppbData.grids, function(i, v) {
     ppbData.grids[i].id = i;
   });
@@ -671,7 +671,10 @@ jQuery(function($) {
       }
     },
     contentResizable: {
-      handles: 'ne, se, sw, nw',
+      handles: {
+        e: '.ui-resizable-e',
+        w: '.ui-resizable-w'
+      },
       start: function(e, ui) {
         var $t;
         $t = $(this);
@@ -718,8 +721,10 @@ jQuery(function($) {
       $contentblock.find('.dashicons-move').click();
       $ed = $contentblock.find('.mce-content-body');
       ed = tinymce.get($ed.attr('id'));
-      ed.selection.select(tinyMCE.activeEditor.getBody(), true);
-      ed.selection.collapse(false);
+      if (ed) {
+        ed.selection.select(tinyMCE.activeEditor.getBody(), true);
+        ed.selection.collapse(false);
+      }
       if ($module.data('callback')) {
         if (typeof window.ppbModules[$module.data('callback')] === 'function') {
           window.ppbModules[$module.data('callback')]($contentblock, ed, $ed);
@@ -858,9 +863,18 @@ jQuery(function($) {
   dialogAttr.open = prevu.openSidePanel(prevu.editRow);
   dialogAttr.buttons.Done = prevu.saveRow;
   dialogAttr.close = prevu.closeSidePanel();
-  $rowPanel.ppbTabs().ppbDialog(dialogAttr);
+  $rowPanel.ppbTabs({
+    activate: function(e, ui) {
+      if (ui.newPanel) {
+        return ui.newPanel.find('#ppbeditor_ifr').css('height', ui.newTab.innerHeight() - 268);
+      }
+    }
+  }).ppbDialog(dialogAttr);
   $panels.find('a').click(prevu.sidePanelNav);
   $panels.on('change', '[data-style-field], [dialog-field], input, textarea', prevu.saveFieldsOnChange);
+  setTimeout(function() {
+    return tinyMCE.get('ppbeditor').on('change', prevu.saveFieldsOnChange);
+  }, 700);
   panels.addInputFieldEventHandlers($rowPanel);
   dialogAttr.title = 'Add row';
   dialogAttr.dialogClass = dialogAttr.open = null;
@@ -1804,7 +1818,9 @@ jQuery(function($) {
   $('.ppb-edit-block').click(function() {
     var editorid;
     editorid = $(this).siblings('.mce-content-body').attr('id');
-    tinymce.get(editorid).focus();
+    if (tinymce.get(editorid)) {
+      tinymce.get(editorid).focus();
+    }
   });
   $('#ppble-feat-img-prevu').click(function() {
     var ppbFeaturedImageFrame;
@@ -1881,6 +1897,14 @@ jQuery(function($) {
     $('a.ppb-tabs-anchors[href="#pootle-ppb-1-pager-tab"]').click();
     return ppbModules.heroSection($t);
   };
+  $tooltip = $('#ppb-tooltip');
+  $body.on('hover', function(e) {
+    if (($(e.target).closest('.pbtn,.ppb-fa-icon').length)) {
+      return console.log(e);
+    } else {
+      return $tooltip.hide();
+    }
+  });
   $body.on('savingPPB', function() {
     ppbAjax.data.google_fonts = [];
     return $body.find('[data-font]').not('[data-font="%gfont"]').each(function() {
