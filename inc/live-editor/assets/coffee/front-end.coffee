@@ -716,11 +716,11 @@ jQuery ($) ->
 			else
 				$p.addClass 'show-panel'
 		closeSidePanel: (callback) ->
-			->
+			(e,ui)->
 				$body.css 'margin-left', 0
-				$panels.removeClass 'show-panel'
-				ppbCorrectOnResize()
-				if typeof callback is 'function' then callback()
+				$( this ).closest( '.show-panel' ).removeClass 'show-panel'
+				ppbCorrectOnResize( )
+				if typeof callback is 'function' then callback( )
 		openSidePanel: (callback) ->
 			->
 				$body.css 'margin-left', 300
@@ -747,13 +747,12 @@ jQuery ($) ->
 	prevu.showdown = new (showdown.Converter)
 	dialogAttr.open = prevu.openSidePanel( prevu.editPanel )
 	dialogAttr.buttons.Done =  prevu.savePanel
-	dialogAttr.close = prevu.closeSidePanel()
+	dialogAttr.close = prevu.closeSidePanel() # Returns callback
 	$contentPanel.ppbTabs().ppbDialog dialogAttr
 
 	dialogAttr.title = 'Edit row'
 	dialogAttr.open = prevu.openSidePanel( prevu.editRow )
 	dialogAttr.buttons.Done = prevu.saveRow
-	dialogAttr.close = prevu.closeSidePanel()
 	$rowPanel.ppbTabs( {
 		activate: ( e, ui ) ->
 			if ui.newPanel
@@ -766,7 +765,7 @@ jQuery ($) ->
 
 	setTimeout(
 		->
-			tinyMCE.get( 'ppbeditor' ).on 'change', prevu.saveFieldsOnChange
+			tinyMCE.get('ppbeditor').onChange.add prevu.saveFieldsOnChange
 		700
 	);
 
@@ -858,11 +857,11 @@ jQuery ($) ->
 
 	$iconPicker.ppbDialog dialogAttr
 	$iconPicker.find('#ppb-icon-choose').iconpicker placement: 'inline'
-	$iconPicker.clas = $('#ppb-icon-choose')
-	$iconPicker.colr = $('#ppb-icon-color')
-	$iconPicker.size = $('#ppb-icon-size')
-	$iconPicker.link = $('#ppb-icon-link')
-	$iconPicker.prvu = $('#ppb-icon-preview')
+	$iconPicker.clas = $ '#ppb-icon-choose'
+	$iconPicker.colr = $ '#ppb-icon-color'
+	$iconPicker.size = $ '#ppb-icon-size'
+	$iconPicker.link = $ '#ppb-icon-link'
+	$iconPicker.prvu = $ '#ppb-icon-preview'
 
 	prevu.iconPrevu = (e) ->
 		iclas = $iconPicker.clas.val()
@@ -1763,14 +1762,12 @@ jQuery ($) ->
 		ppbModules.heroSection $t
 
 	$tooltip = $ '#ppb-tooltip'
-	$body.on 'hover', (e) ->
-		if ( $(e.target).closest( '.pbtn,.ppb-fa-icon' ).length )
-			console.log e
-#			$tooltip.show().html( 'Double click to edit' ).css( {
-#				top: e.clientY,
-#				left: e.clientX,
-#			} );
-		else
+	$body.on 'mouseenter', 'a.pbtn,.ppb-fa-icon', (e) ->
+			$tooltip.show().html( 'Double click to edit' ).css(
+				top: e.clientY,
+				left: e.clientX,
+			)
+	$body.on 'mouseleave', 'a.pbtn,.ppb-fa-icon', (e) ->
 			$tooltip.hide()
 
 	$body.on 'savingPPB', ->

@@ -817,9 +817,9 @@ jQuery(function($) {
       }
     },
     closeSidePanel: function(callback) {
-      return function() {
+      return function(e, ui) {
         $body.css('margin-left', 0);
-        $panels.removeClass('show-panel');
+        $(this).closest('.show-panel').removeClass('show-panel');
         ppbCorrectOnResize();
         if (typeof callback === 'function') {
           return callback();
@@ -862,7 +862,6 @@ jQuery(function($) {
   dialogAttr.title = 'Edit row';
   dialogAttr.open = prevu.openSidePanel(prevu.editRow);
   dialogAttr.buttons.Done = prevu.saveRow;
-  dialogAttr.close = prevu.closeSidePanel();
   $rowPanel.ppbTabs({
     activate: function(e, ui) {
       if (ui.newPanel) {
@@ -873,7 +872,7 @@ jQuery(function($) {
   $panels.find('a').click(prevu.sidePanelNav);
   $panels.on('change', '[data-style-field], [dialog-field], input, textarea', prevu.saveFieldsOnChange);
   setTimeout(function() {
-    return tinyMCE.get('ppbeditor').on('change', prevu.saveFieldsOnChange);
+    return tinyMCE.get('ppbeditor').onChange.add(prevu.saveFieldsOnChange);
   }, 700);
   panels.addInputFieldEventHandlers($rowPanel);
   dialogAttr.title = 'Add row';
@@ -1898,12 +1897,14 @@ jQuery(function($) {
     return ppbModules.heroSection($t);
   };
   $tooltip = $('#ppb-tooltip');
-  $body.on('hover', function(e) {
-    if (($(e.target).closest('.pbtn,.ppb-fa-icon').length)) {
-      return console.log(e);
-    } else {
-      return $tooltip.hide();
-    }
+  $body.on('mouseenter', 'a.pbtn,.ppb-fa-icon', function(e) {
+    return $tooltip.show().html('Double click to edit').css({
+      top: e.clientY,
+      left: e.clientX
+    });
+  });
+  $body.on('mouseleave', 'a.pbtn,.ppb-fa-icon', function(e) {
+    return $tooltip.hide();
   });
   $body.on('savingPPB', function() {
     ppbAjax.data.google_fonts = [];

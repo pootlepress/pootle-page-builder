@@ -355,4 +355,4 @@ if ( $enabled_modules ) {
 		<span id="ppb-icon-preview"></span>
 	</label>
 </div>
-<div id="ppb-tooltip"></div>
+<div id="ppb-tooltip" style="display:none"></div>

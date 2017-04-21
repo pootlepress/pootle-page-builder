@@ -207,13 +207,14 @@
 }
 
 body .ppb-dialog {
+	font: 14px sans-serif;
 	h1, h2, h3, h4, h5 ,h6, p, a {
-		font: 14px sans-serif;
+		font: inherit;
 	}
 	h1 {
 		font-size: 2em;
 	}
-	.ppb-dialog-title, h2 {
+	h2 {
 		font-size: 1.6em;
 	}
 	h3 {
@@ -648,12 +649,10 @@ body .ppb-dialog {
 			display: block !important;
 			visibility: visible;
 			border: none;
+			width: 7px;
+			z-index: 9;
 		}
 		.ui-resizable-handle {
-			.top:hover,
-			.bottom:hover {
-				transform: scale(1);
-			}
 			cursor: ew-resize;
 			position: absolute;
 			top: 0;
@@ -662,16 +661,19 @@ body .ppb-dialog {
 			&.ui-resizable-e {
 				left: auto;
 				right: 0;
+				> * {
+					right: 0;
+				}
 			}
 			.top,
 			.bottom {
 				content: '';
-				transform: scale(0.5);
+				transform: scale(0.7);
 				transition: all 0.25s;
 				position: absolute;
-				height: 14px;
-				width: 14px;
-				margin: -7px;
+				height: 16px;
+				width: 16px;
+				margin: -8px;
 				border-radius: 50%;
 				border: 1px solid #ef4832;
 				background: #ffffff;
@@ -680,6 +682,9 @@ body .ppb-dialog {
 			.bottom {
 				top: auto;
 				bottom: 0;
+			}
+			> *:hover {
+				transform: scale(1);
 			}
 		}
 	}
@@ -1720,8 +1725,13 @@ pre.ace_editor.ace-tm {
 }
 
 #ppb-tooltip {
-	font: 16px sans-serif;
-	position: absolute;
-	top:0;
-	left:0;
+	font: 14px/1 sans-serif;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99999;
+	background: #333;
+	color: #fff;
+	padding: 3px 5px;
+	border-radius: 3px;
 }
