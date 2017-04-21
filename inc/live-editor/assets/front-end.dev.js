@@ -872,7 +872,9 @@ jQuery(function($) {
   $panels.find('a').click(prevu.sidePanelNav);
   $panels.on('change', '[data-style-field], [dialog-field], input, textarea', prevu.saveFieldsOnChange);
   setTimeout(function() {
-    return tinyMCE.get('ppbeditor').onChange.add(prevu.saveFieldsOnChange);
+    return tinyMCE.get('ppbeditor').on('change keyup paste', function() {
+      return prevu.saveFieldsOnChange.apply(this.container);
+    });
   }, 700);
   panels.addInputFieldEventHandlers($rowPanel);
   dialogAttr.title = 'Add row';

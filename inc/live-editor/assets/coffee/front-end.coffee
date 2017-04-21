@@ -765,8 +765,12 @@ jQuery ($) ->
 
 	setTimeout(
 		->
-			tinyMCE.get('ppbeditor').onChange.add prevu.saveFieldsOnChange
-		700
+			tinyMCE.get('ppbeditor').on(
+				'change keyup paste',
+				->
+					prevu.saveFieldsOnChange.apply this.container
+			)
+		, 700
 	);
 
 	panels.addInputFieldEventHandlers $rowPanel

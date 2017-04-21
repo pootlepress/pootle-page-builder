@@ -208,8 +208,10 @@
 
 body .ppb-dialog {
 	font: 14px sans-serif;
+	color: #333;
 	h1, h2, h3, h4, h5 ,h6, p, a {
 		font: inherit;
+		color: inherit;
 	}
 	h1 {
 		font-size: 2em;
@@ -394,14 +396,14 @@ body .ppb-dialog {
 	}
 
 	.content-wrap {
-		left:100%;
+		display: none;
 		transition: left 0.35s;
 		background: #fff;
 	}
 
 	&.show-panel {
 		.content-wrap {
-			left: 0;
+			display: block;
 		}
 		.ppb-tabs-nav {
 			left: -100%;
