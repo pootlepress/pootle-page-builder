@@ -4,7 +4,6 @@
 jQuery( function ( $ ) {
 	$.prototype.tour = function ( slides, options ) {
 		var
-
 			$w = $(window),
 			docW = $(document).width(),
 			docH = $(document).height(),
@@ -49,6 +48,8 @@ jQuery( function ( $ ) {
 		options.endTourText = options.endTourText ? options.endTourText : "End Tour";
 		options.moreText = options.moreText ? options.moreText : "Next";
 		options.completeText = options.completeText ? options.completeText : "Thanks!";
+		options.beforeSlide = options.beforeSlide ? options.beforeSlide : function(){};
+		options.afterSlide = options.afterSlide ? options.afterSlide : function(){};
 
 		this.html(
 			'<div class="tour-header"><span class="tour-arrow"></span>' + options.beforeHeading + '<span class="tour-heading">Content Block</span>' + options.afterHeading + '</div>' +
@@ -63,59 +64,52 @@ jQuery( function ( $ ) {
 			if ( $$.slide == slides.length ) {
 				return;
 			}
-			var i = $$.slide;
-			switch ( i ) {
-				case 2: // Adding Row
-					if ( ! $addRowDialog.ppbDialog( 'isOpen' ) ) {
-						$addRowDialog.ppbDialog( 'open' );
-					}
-					break;
-				case 3:
-					if ( $addRowDialog.ppbDialog( 'isOpen' ) ) {
-						$( '#pootlepb-add-row' ).siblings( '.ppb-dialog-buttonpane' ).find( 'button' ).click();
-					}
-					$row.addClass( 'tour-active' );
-					break;
-				case 5:
-					$row.children( '.ppb-edit-row' ).addClass( 'tour-active' );
-					break;
-				case 7:
-					$row.children( '.ppb-edit-row' ).removeClass( 'tour-active' );
-					$block.children( '.ppb-edit-block' ).addClass( 'tour-active' );
-					break;
-				case 10:
-					$block.children( '.ppb-edit-block' ).removeClass( 'tour-active' );
-					$row.removeClass( 'tour-active' );
-					$( '.ui-resizable-handle.ui-resizable-w' ).eq(1).parents( '.panel-grid' ).addClass( 'tour-active' );
-			}
-			var el  = slides[i].el,
-			    $el = el instanceof jQuery ? el : $( el );
-			$$.position( $el );
-			$$.heading( slides[i].head );
-			$$.content( slides[i].content );
+			var
+				i = $$.slide,
+				delay = 25;
 
-			if ( 0 == i ) {
-				$d.addClass( 'tour-no-arrow' ).css( {
-					top : $w.scrollTop() + ( window.innerHeight - $d.innerHeight() ) / 2,
-					left: ( window.innerWidth - $d.innerWidth() ) / 2
-				} );
-			} else if ( 1 == i ) {
-				$d.removeClass( 'tour-no-arrow' )
+			options.beforeSlide( i );
+
+			if ( typeof slides[i].callback === 'function' ) {
+				slides[i].callback( i );
+			}
+			if ( typeof slides[i].delay === 'number' ) {
+				delay = slides[i].delay;
 			}
 
-			$$.slide ++;
-			if ( $$.slide == slides.length ) {
-				$( this ).html( options.completeText );
-				$d.find( '.tour-skip' ).hide();
-				$( '.tour-active' ).removeClass( 'tour-active' );
-			}
-			$d.show( 0 );
+			setTimeout( function () {
+				var el  = slides[i].el,
+					$el = el instanceof jQuery ? el : $( el );
+				$$.position( $el );
+				$$.heading( slides[i].head );
+				$$.content( slides[i].content );
+
+				if ( 0 == i ) {
+					$d.addClass( 'tour-no-arrow' ).css( {
+						top : $w.scrollTop() + ( window.innerHeight - $d.innerHeight() ) / 2,
+						left: ( window.innerWidth - $d.innerWidth() ) / 2
+					} );
+				} else if ( 1 == i ) {
+					$d.removeClass( 'tour-no-arrow' )
+				}
+
+				$$.slide ++;
+				if ( $$.slide == slides.length ) {
+					$( this ).html( options.completeText );
+					$d.find( '.tour-skip' ).hide();
+					$( '.tour-active' ).removeClass( 'tour-active' );
+				}
+				$d.show( 0 );
+				options.afterSlide( i );
+			}, delay );
+
 		} ).click();
 
 	};
-	var $row          = $( '.panel-grid' ).eq( 0 ),
-	    $block        = $row.find( '.ppb-block' ).eq( 0 ),
-	    $addRowDialog = $( '#pootlepb-add-row' );
+	var $row = $( '.panel-grid' ).eq( 0 ),
+		$block = $row.find( '.ppb-block' ).eq( 0 ),
+		$addRowDialog = $( '#pootlepb-add-row' ),
+		$modules = $( '#pootlepb-modules-wrap' );
 
 	$( '#ppb-tour-dialog' ).tour(
 		[
@@ -140,19 +134,19 @@ jQuery( function ( $ ) {
 				content : 'Click here to directly add copy to your content block &ndash; snazzy!'
 			},
 			{
-				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-editor-code' ),
-				head    : 'Row Sorting',
-				content : '<ul><li>Drag and drop your <b>row</b> using this icon &ndash; cool huh?</li><li>Hover over this to make <i>Row Styling</i> and <i>Delete Row</i> icons appear</li><li>You can also doubleclick here to shortcut to <i>Row Styling</i> panel.</li></ul>'
-			},
-			{
-				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-admin-appearance' ),
+				el      : $row.children( '.ppb-edit-row' ).find( '.settings-dialog' ),
 				head    : 'Row Styling',
 				content : 'Edit your <b>row</b> here.<ul><li>Set <b>row</b> background: colour, image or video</li><li>Set <b>row</b> layout: full&ndash;width, height, margin and gutter</li><li>Set advanced CSS styles.</li></ul>'
 			},
 			{
+				el      : $row.children( '.ppb-edit-row' ).find( '.drag-handle' ),
+				head    : 'Row Sorting',
+				content : '<ul><li>Drag and drop your <b>row</b> using this icon &ndash; cool huh?</li><li>Hover over this to make <i>Row Styling</i> and <i>Delete Row</i> icons appear</li><li>You can also doubleclick here to shortcut to <i>Row Styling</i> panel.</li></ul>'
+			},
+			{
 				el      : $row.children( '.ppb-edit-row' ).find( '.dashicons-no' ),
 				head    : 'Delete Row',
-				content : 'Deletes your <b>row</b>. This is undoable so be sure you want to delete your <b>row</b> :)'
+				content : 'Deletes your <b>row</b>. This is undoable so be sure you want to <b>delete your row</b> :)'
 			},
 			{
 				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-move' ),
@@ -168,6 +162,17 @@ jQuery( function ( $ ) {
 				el      : $block.children( '.ppb-edit-block' ).find( '.dashicons-no' ),
 				head    : 'Delete Content',
 				content : 'Deletes your <b>content block</b>. This is undoable so be sure you want to delete your <b>content block</b> :)'
+			},
+			{
+				el      : $modules.children( '.dashicons-screenoptions' ),
+				head    : 'Drag and drop modules',
+				content : 'Click here to show available modules :)'
+			},
+			{
+				el      : $modules.find( '.ppb-module' ).eq(2),
+				head    : 'Drag and drop modules',
+				content : '<ul><li>Drag and drop module of your choice into any content block</li><li>You can drag module into new row icon to add your module into a new row &ndash; cool huh?</li></ul>',
+				delay: 500
 			},
 			{
 				el      : '.ppb-col + .ppb-col .ui-resizable-handle.ui-resizable-w',
@@ -186,6 +191,38 @@ jQuery( function ( $ ) {
 			endTourText      : '<span class="dashicons dashicons-dismiss"></span> End Tour',
 			moreText      : '<span class="dashicons dashicons-controls-play"></span> Next',
 			completeText      : '<span class="dashicons dashicons-controls-play"></span> Finish Tour',
+			beforeSlide: function( i ) {
+				switch ( i ) {
+					case 2: // Adding Row
+						if ( ! $addRowDialog.ppbDialog( 'isOpen' ) ) {
+							$addRowDialog.ppbDialog( 'open' );
+							$( '#ppb-row-add-cols' ).val( 2 );
+						}
+						break;
+					case 3:
+						if ( $addRowDialog.ppbDialog( 'isOpen' ) ) {
+							$( '#ppb-row-add-cols' ).val( 2 );
+							$( '#pootlepb-add-row' ).siblings( '.ppb-dialog-buttonpane' ).find( 'button' ).click();
+						}
+						$row.addClass( 'tour-active' );
+						break;
+					case 5:
+						$row.children( '.ppb-edit-row' ).addClass( 'tour-active' );
+						break;
+					case 7:
+						$row.children( '.ppb-edit-row' ).removeClass( 'tour-active' );
+						$block.children( '.ppb-edit-block' ).addClass( 'tour-active' );
+						break;
+					case 11:
+						$modules.children( '.dashicons-screenoptions' ).click();
+						break;
+					case 12:
+						$modules.children( '.dashicons-screenoptions' ).click();
+						$block.children( '.ppb-edit-block' ).removeClass( 'tour-active' );
+						$row.removeClass( 'tour-active' );
+						$( '.ui-resizable-handle.ui-resizable-w' ).eq(1).parents( '.panel-grid' ).addClass( 'tour-active' );
+				}
+			},
 		}
 	);
 } );
