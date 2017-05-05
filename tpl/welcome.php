@@ -29,7 +29,7 @@ $ajax_with_nonce = wp_nonce_url( admin_url( 'admin-ajax.php' ), 'ppb-new-live-po
 		<b>Version <?php echo esc_attr( POOTLEPB_VERSION ); ?></b>
 	</p>
 	<hr>
-	<?php echo '<div class="ppb-video-container">' . wp_oembed_get( 'https://vimeo.com/181944652' ) . '</div>'; ?>
+	<?php echo '<div class="ppb-video-container">' . wp_oembed_get( 'https://vimeo.com/215980602' ) . '</div>'; ?>
 	<div class="ppb-side-50">
 		<h3>Free features</h3>
 
