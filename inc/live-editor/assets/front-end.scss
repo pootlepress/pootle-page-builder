@@ -1737,3 +1737,11 @@ pre.ace_editor.ace-tm {
 	padding: 3px 5px;
 	border-radius: 3px;
 }
+
+// Hide unrendered dialogs
+.pootlepb-dialog {
+	display: none;
+}
+.ppb-dialog .pootlepb-dialog {
+	display: block;
+}
