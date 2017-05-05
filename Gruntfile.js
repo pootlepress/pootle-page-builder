@@ -2,19 +2,6 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-		/** Autoprefixing */
-		autoprefixer: {
-			options : {
-				browsers : ['last 5 versions'],
-			},
-			multiple_files : {
-				expand : true,
-				flatten : true,
-				src : '*.css',
-				dest : ''
-			}
-		},
-
 		/** Sass decompiling */
 		sass: {
 			dist: {
@@ -43,10 +30,24 @@ module.exports = function(grunt) {
 			}
 		},
 
+		/** Autoprefixing */
+		autoprefixer: {
+			options : {
+				browsers : ['last 5 versions'],
+			},
+			multiple_files : {
+				expand : true,
+				flatten : true,
+				src : '*.css',
+				dest : ''
+			}
+		},
+
 		/** CoffeeScript decompiling */
 		coffee: {
 			coffee_to_js: {
 				options: {
+					sourceMap: true,
 					bare: true
 				},
 				expand: true,
@@ -55,7 +56,7 @@ module.exports = function(grunt) {
 					{
 						expand: true,
 						src: ['**/*.coffee'],
-						ext: '.cs.js',
+						ext: '.dev.js',
 						rename: function( dest, src ) {
 							return src.replace( 'coffee/', '' );
 						},
@@ -67,10 +68,14 @@ module.exports = function(grunt) {
 		/** Minify JS */
 		uglify : {
 			minify: {
+				options: {
+					sourceMap: true,
+					sourceMapIn: function( file ){return file + '.map';}
+				},
 				files: [
 					{
 						expand: true,
-						src: ['**/*.cs.js', '!**/*.min.js'],
+						src: ['**/*.dev.js', '!**/*.min.js'],
 						ext: '.min.js',
 						extDot: 'first',
 					},
@@ -97,5 +102,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-coffee');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.registerTask('default',['watch']);
+	grunt.registerTask( 'default', ['sass', 'autoprefixer', 'coffee', 'uglify', 'watch'] );
+//	grunt.registerTask( 'default', ['coffee', 'uglify'] );
 };

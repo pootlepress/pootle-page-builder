@@ -64,7 +64,7 @@ logPPBData = function(a, b, c) {
 };
 
 jQuery(function($) {
-  var $addRowDialog, $body, $contentPanel, $deleteDialog, $deletingWhat, $iconPicker, $loader, $mods, $panels, $postSettingsDialog, $ppb, $ppbIpadColorDialog, $rowPanel, $setTitleDialog, dialogAttr, pickFaIcon, prevu;
+  var $addRowDialog, $body, $contentPanel, $deleteDialog, $deletingWhat, $iconPicker, $loader, $mods, $panels, $postSettingsDialog, $ppb, $ppbIpadColorDialog, $rowPanel, $setTitleDialog, $tooltip, dialogAttr, pickFaIcon, prevu;
   $.each(ppbData.grids, function(i, v) {
     ppbData.grids[i].id = i;
   });
@@ -147,6 +147,7 @@ jQuery(function($) {
           }
         }
         ppbAjax.publish = 0;
+        $loader.fadeOut(250);
       });
     },
     sync: function(callback, publish) {
@@ -157,6 +158,7 @@ jQuery(function($) {
       prevu.saveTmceBlock($('.mce-edit-focus'));
       delete ppbAjax.data;
       ppbAjax.data = ppbData;
+      $loader.fadeIn(250);
       if (publish) {
         ppbAjax.publish = publish;
         $body.trigger('savingPPB');
@@ -361,6 +363,7 @@ jQuery(function($) {
           st[key] = '';
         }
         if ($t.attr('type') === 'checkbox') {
+          $t.prop('checked', false);
           if (st[key]) {
             $t.prop('checked', true);
           }
@@ -387,12 +390,9 @@ jQuery(function($) {
           if ($t.prop('checked')) {
             st[key] = 1;
           }
-          $t.prop('checked', false);
         } else {
           st[key] = $t.val();
-          $t.val('');
         }
-        $t.change();
       });
       ppbData.grids[window.ppbRowI].style = st;
       prevu.sync(function($r, qry) {
@@ -534,7 +534,7 @@ jQuery(function($) {
     },
     rowsSortable: {
       items: '> .panel-grid',
-      handle: '.ppb-edit-row .dashicons-before:first',
+      handle: '.ppb-edit-row .drag-handle',
       start: function(e, ui) {
         console.log(this);
         $(this).data('draggingRowI', ui.item.index());
@@ -595,7 +595,7 @@ jQuery(function($) {
       }
     },
     contentDraggable: {
-      handle: '.ppb-edit-block .dashicons-move',
+      handle: '.ppb-edit-block .drag-handle',
       grid: [5, 5],
       start: function(e, ui) {
         var $ro, $t, roMinHi;
@@ -671,7 +671,10 @@ jQuery(function($) {
       }
     },
     contentResizable: {
-      handles: 'e, w',
+      handles: {
+        e: '.ui-resizable-e',
+        w: '.ui-resizable-w'
+      },
       start: function(e, ui) {
         var $t;
         $t = $(this);
@@ -718,8 +721,10 @@ jQuery(function($) {
       $contentblock.find('.dashicons-move').click();
       $ed = $contentblock.find('.mce-content-body');
       ed = tinymce.get($ed.attr('id'));
-      ed.selection.select(tinyMCE.activeEditor.getBody(), true);
-      ed.selection.collapse(false);
+      if (ed) {
+        ed.selection.select(tinyMCE.activeEditor.getBody(), true);
+        ed.selection.collapse(false);
+      }
       if ($module.data('callback')) {
         if (typeof window.ppbModules[$module.data('callback')] === 'function') {
           window.ppbModules[$module.data('callback')]($contentblock, ed, $ed);
@@ -727,13 +732,12 @@ jQuery(function($) {
       }
       if (tab) {
         if (0 < tab.indexOf('-row-tab')) {
-          $('.panel-grid.active').find('.ppb-edit-row .dashicons-admin-appearance').click();
+          $('.panel-grid.active').find('.ppb-edit-row .settings-dialog').click();
         } else {
-          $contentblock.find('.ppb-edit-block .dashicons-edit').click();
+          $contentblock.find('.ppb-edit-block .settings-dialog').click();
         }
         $('a.ppb-tabs-anchors[href="' + tab + '"]').click();
       }
-      $loader.fadeOut(500);
     },
     moduleDroppable: {
       accept: '.ppb-module',
@@ -743,7 +747,6 @@ jQuery(function($) {
         var $m, $t;
         $m = ui.draggable;
         $t = $(this);
-        $loader.fadeIn(500);
         if ($t.hasClass('add-row')) {
           $('#ppb-row-add-cols').val('1');
           prevu.addRow((function($row) {
@@ -814,9 +817,10 @@ jQuery(function($) {
       }
     },
     closeSidePanel: function(callback) {
-      return function() {
+      return function(e, ui) {
         $body.css('margin-left', 0);
-        $panels.removeClass('show-panel');
+        $(this).closest('.show-panel').removeClass('show-panel');
+        ppbCorrectOnResize();
         if (typeof callback === 'function') {
           return callback();
         }
@@ -825,10 +829,29 @@ jQuery(function($) {
     openSidePanel: function(callback) {
       return function() {
         $body.css('margin-left', 300);
+        ppbCorrectOnResize();
         if (typeof callback === 'function') {
           return callback();
         }
       };
+    },
+    saveFieldsOnChange: function() {
+      var $d, $t, to;
+      $t = $(this);
+      $d = $t.closest('.ppb-dialog-buttons.show-panel');
+      if ($d.length) {
+        to = $d.data('saveTimeout');
+        if (to === 'saving') {
+          return;
+        } else if (to) {
+          clearTimeout(to);
+        }
+        return $d.data('saveTimeout', setTimeout(function() {
+          $d.data('saveTimeout', 'saving');
+          $d.find('.ppb-dialog-buttonset button').click();
+          return $d.data('saveTimeout', '');
+        }, 2500));
+      }
     }
   };
   prevu.showdown = new showdown.Converter;
@@ -839,24 +862,20 @@ jQuery(function($) {
   dialogAttr.title = 'Edit row';
   dialogAttr.open = prevu.openSidePanel(prevu.editRow);
   dialogAttr.buttons.Done = prevu.saveRow;
-  dialogAttr.close = prevu.closeSidePanel();
-  $rowPanel.ppbTabs().ppbDialog(dialogAttr);
-  $panels.find('a').click(prevu.sidePanelNav);
-  $panels.find('[data-style-field], [dialog-field]').change(function() {
-    var $d, $t, to;
-    $t = $(this);
-    $d = $t.closest('.ppb-dialog-buttons.show-panel');
-    console.log($d);
-    if ($d.length) {
-      to = $d.data('saveTimeout');
-      if (to) {
-        clearTimeout(to);
+  $rowPanel.ppbTabs({
+    activate: function(e, ui) {
+      if (ui.newPanel) {
+        return ui.newPanel.find('#ppbeditor_ifr').css('height', ui.newTab.innerHeight() - 268);
       }
-      return $d.data('saveTimeout', setTimeout(function() {
-        return $d.find('.ppb-dialog-buttonset button').click();
-      }, 2500));
     }
-  });
+  }).ppbDialog(dialogAttr);
+  $panels.find('a').click(prevu.sidePanelNav);
+  $panels.on('change', '[data-style-field], [dialog-field], input, textarea', prevu.saveFieldsOnChange);
+  setTimeout(function() {
+    return tinyMCE.get('ppbeditor').on('change keyup paste', function() {
+      return prevu.saveFieldsOnChange.apply(this.container);
+    });
+  }, 700);
   panels.addInputFieldEventHandlers($rowPanel);
   dialogAttr.title = 'Add row';
   dialogAttr.dialogClass = dialogAttr.open = null;
@@ -1015,7 +1034,7 @@ jQuery(function($) {
   $ppb.delegate('.ppb-edit-row .dashicons-before', 'click', function() {
     window.ppbRowI = $(this).closest('.pootle-live-editor').data('index');
   });
-  $ppb.delegate('.ppb-edit-row .dashicons-admin-appearance', 'click', function() {
+  $ppb.delegate('.ppb-edit-row .settings-dialog', 'click', function() {
     $rowPanel.ppbDialog('open');
   });
   $ppb.delegate('.ppb-edit-row .dashicons-admin-page', 'click', function() {
@@ -1136,7 +1155,7 @@ jQuery(function($) {
     window.ppbPanelI = $t.closest('.pootle-live-editor').data('index');
     prevu.activeEditor = $(this).closest('.ppb-block').children('.pootle-live-editor-realtime');
   });
-  $ppb.delegate('.ppb-edit-block .dashicons-edit', 'click', function() {
+  $ppb.delegate('.ppb-edit-block .settings-dialog', 'click', function() {
     $contentPanel.ppbDialog('open');
   });
   $ppb.delegate('.ppb-edit-block .dashicons-no', 'click', function() {
@@ -1191,7 +1210,7 @@ jQuery(function($) {
       }
     }
   });
-  $ppb.delegate('.ppb-edit-row .dashicons-arrow-down-alt', 'click', function() {
+  $ppb.delegate('.ppb-edit-row .insert-row', 'click', function() {
     var $row;
     $row = $(this).closest('.ppb-row');
     $addRowDialog.callback = function($t) {
@@ -1800,7 +1819,9 @@ jQuery(function($) {
   $('.ppb-edit-block').click(function() {
     var editorid;
     editorid = $(this).siblings('.mce-content-body').attr('id');
-    tinymce.get(editorid).focus();
+    if (tinymce.get(editorid)) {
+      tinymce.get(editorid).focus();
+    }
   });
   $('#ppble-feat-img-prevu').click(function() {
     var ppbFeaturedImageFrame;
@@ -1873,10 +1894,20 @@ jQuery(function($) {
     return ppbData.grids[ppbRowI].style.row_height = '500';
   };
   window.ppbModules.onePager = function($t) {
-    $t.find('.ppb-edit-block .dashicons-edit').click();
+    $t.find('.ppb-edit-block .settings-dialog').click();
     $('a.ppb-tabs-anchors[href="#pootle-ppb-1-pager-tab"]').click();
     return ppbModules.heroSection($t);
   };
+  $tooltip = $('#ppb-tooltip');
+  $body.on('mouseenter', 'a.pbtn,.ppb-fa-icon', function(e) {
+    return $tooltip.show().html('Double click to edit').css({
+      top: e.clientY,
+      left: e.clientX
+    });
+  });
+  $body.on('mouseleave', 'a.pbtn,.ppb-fa-icon', function(e) {
+    return $tooltip.hide();
+  });
   $body.on('savingPPB', function() {
     ppbAjax.data.google_fonts = [];
     return $body.find('[data-font]').not('[data-font="%gfont"]').each(function() {
@@ -1887,3 +1918,5 @@ jQuery(function($) {
     return ppbSkrollr.refresh($t.find('.ppb-col'));
   });
 });
+
+//# sourceMappingURL=front-end.dev.js.map

@@ -59,10 +59,6 @@
 	filter: Alpha(Opacity = 0);
 }
 
-.ppb-front {
-	z-index: 99999;
-}
-
 .ppb-state-disabled {
 	cursor: default !important;
 }
@@ -72,14 +68,6 @@
 	text-indent: -99999px;
 	overflow: hidden;
 	background-repeat: no-repeat;
-}
-
-.ppb-widget-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
 }
 
 .ui-slider {
@@ -220,6 +208,30 @@
 
 body .ppb-dialog {
 	font: 14px sans-serif;
+	color: #333;
+	h1, h2, h3, h4, h5 ,h6, p, a {
+		font: inherit;
+		color: inherit;
+	}
+	h1 {
+		font-size: 2em;
+	}
+	h2 {
+		font-size: 1.6em;
+	}
+	h3 {
+		font-size: 1.4em;
+	}
+	h4 {
+		font-size: 1.2em;
+	}
+	h6 {
+		font-size: 0.9em;
+	}
+}
+
+.ppb-dialog > * {
+	font-family: inherit;
 }
 
 .pootle-live-editor.ppb-edit-row .dashicons-before {
@@ -252,11 +264,6 @@ body .ppb-dialog {
 	}
 }
 
-.ppb-tabs-nav li {
-	display: block;
-	padding: 7px;
-	margin: 3px;
-}
 
 .ppb-state-active span {
 	font-weight: bold;
@@ -325,26 +332,181 @@ body .ppb-dialog {
 	display: inline-block;
 }
 
-.ppb-tabs-nav {
-	background: #f5f5f5;
-	width: 200px;
-	padding: 20px;
-	margin: 0;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	border-right: 1px solid #ddd;
-	box-sizing: border-box;
-}
-
 .ppb-dialog-content {
 	padding: 0;
 }
 
-.ppb-cool-panel {
-	.ppb-dialog-titlebar, .ppb-tabs-panel, .ppb-dialog-buttonpane {
-		margin-left: 200px;
+.ppb-cool-panel.ppb-dialog {
+	position: fixed;
+	left: 0 !important;
+	top: 0!important;
+	bottom: 0;
+	right: auto;
+	width: 300px !important;
+	overflow:hidden;
+
+	.ppb-tabs-nav,
+	.ppb-dialog-titlebar,
+	.content-wrap,
+	.ppb-dialog-buttonpane {
+		position: absolute;
+		top:37px;
+		bottom:0;
+		left:0;
+		width: 100%;
+	}
+
+	.ppb-tabs-nav {
+		li {
+			display: block;
+			padding: 0;
+			margin: 0;
+		}
+	}
+
+	.ppb-tabs-nav a,
+	.content-wrap a.back {
+		color: #655;
+		font-weight: normal;
+		display: block;
+		padding: 1em;
+		border-bottom: 1px solid #ccc;
+		&:before {
+			content: "\f345";
+			line-height: 1;
+			font: normal 20px/16px dashicons;
+			vertical-align: top;
+			text-align: center;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			float: right;
+		}
+	}
+
+	.content-wrap a.back:before {
+		content: '\f341';
+		float: left;
+		margin-right: 16px;
+	}
+
+	.ppb-dialog-titlebar {
+		top:0;
+		bottom:auto;
+		height: 37px;
+	}
+
+	.content-wrap {
+		display: none;
+		transition: left 0.35s;
+		background: #fff;
+	}
+
+	&.show-panel {
+		.content-wrap {
+			display: block;
+		}
+		.ppb-tabs-nav {
+			left: -100%;
+		}
+	}
+
+	.ppb-dialog-buttonpane {
+		display: none;
+	}
+}
+
+.ppb-dialog.show-panel ~ .ppb-widget-overlay {
+	background: rgba(0,0,0,0);
+}
+
+.ppb-tabs-panel {
+	background: #fff;
+	height: calc(100% - 45px);
+	overflow: auto;
+	box-sizing: border-box;
+	.field, h3 {
+		padding: 16px;
+		background: #f5f5f5;
+		margin: 0;
+		position: relative;
+		border-bottom: 1px solid #ddd;
+	}
+	.field {
+		* {
+			vertical-align: middle;
+		}
+		.wp-picker-holder {
+			display: block;
+		}
+		> span {
+			margin-top: 1em;
+			display: block;
+			* {
+				max-width: 100%;
+				font-size: 14px !important;
+			}
+			.dashicons {
+				font-size: 0 !important;
+			}
+			input[data-style-field-type="upload"] + .dashicons {
+				position: relative;
+				top: -119px;
+				left: 178px;
+				color: #e25c4e;
+				text-shadow: 0 0 1px #000;
+			}
+			.dashicons:before {
+				font-size: 25px;
+			}
+			&:after {
+				content: '';
+				display: block;
+				clear: both;
+			}
+		}
+
+		&.field_type_checkbox > label + span {
+			position: absolute;
+			top: 0;
+			right: 1em;
+			width: auto;
+		}
+
+		.tooltip {
+			margin-top: 1em;
+			height: auto;
+			font: inherit;
+			text-align: left;
+		}
+		.tooltip:before {
+			content: attr(data-tooltip);
+			height: auto;
+		}
+
+		> * {
+			width: 100%;
+		}
+		label {
+			display: block;
+		}
+	}
+	img {
+		display: inline-block;
+	}
+}
+
+#pootlepb-content-editor-panel {
+	li.content-block-tab {
+		visibility: hidden;
+		max-height: 0;
+		overflow: hidden;
+		&.content-block-tab-html_editor,
+		&.content-block-tab-editor,
+		&.content-block-tab-style,
+		&.content-block-tab-advanced {
+			visibility: visible;
+			max-height: none;
+		}
 	}
 }
 
@@ -355,22 +517,6 @@ body .ppb-dialog {
 
 .panel-grid:hover ~ .pootle-live-editor.add-row {
 	visibility: hidden;
-}
-
-.ppb-tabs-panel {
-	background: #fff;
-	padding: 20px;
-	height: 100%;
-	.field {
-		margin-bottom: 7px;
-		label {
-			width: 250px;
-			display: inline-block;
-		}
-	}
-	img {
-		display: inline-block;
-	}
 }
 
 .ppb-dialog-buttonpane:after {
@@ -504,16 +650,44 @@ body .ppb-dialog {
 		&:hover .ui-resizable-handle {
 			display: block !important;
 			visibility: visible;
+			border: none;
 			width: 7px;
-			margin: 0 -3px;
+			z-index: 9;
+		}
+		.ui-resizable-handle {
+			cursor: ew-resize;
+			position: absolute;
 			top: 0;
 			bottom: 0;
-		}
-		.ui-resizable-handle.ui-resizable-e {
-			left: auto;
-			right: 0;
-			border: none;
-			border-right: 1px dashed #ef4832;
+			left: 0;
+			&.ui-resizable-e {
+				left: auto;
+				right: 0;
+				> * {
+					right: 0;
+				}
+			}
+			.top,
+			.bottom {
+				content: '';
+				transform: scale(0.7);
+				transition: all 0.25s;
+				position: absolute;
+				height: 16px;
+				width: 16px;
+				margin: -8px;
+				border-radius: 50%;
+				border: 1px solid #ef4832;
+				background: #ffffff;
+				top: 0;
+			}
+			.bottom {
+				top: auto;
+				bottom: 0;
+			}
+			> *:hover {
+				transform: scale(1);
+			}
 		}
 	}
 }
@@ -685,6 +859,7 @@ body .ppb-dialog {
 	left: 0;
 	width: 100%;
 	height: 100%;
+	transition: background 0.25s;
 }
 
 .ui-slider {
@@ -827,20 +1002,6 @@ body .ppb-dialog {
 	}
 }
 
-.ppb-tabs-nav li {
-	display: block;
-	padding: 7px;
-	margin: 3px;
-	a {
-		color: #428bca;
-		font-weight: normal;
-	}
-	&.ppb-state-active a {
-		color: #169;
-		font-weight: bold;
-	}
-}
-
 .ppb-state-active span {
 	font-weight: bold;
 }
@@ -903,9 +1064,6 @@ body .ppb-dialog {
 }
 
 .bg-grad-prevu {
-	position: absolute;
-	top: 106px;
-	right: 25px;
 	border: 1px solid #aaa;
 }
 
@@ -954,26 +1112,8 @@ body .ppb-dialog {
 	}
 }
 
-.ppb-tabs-nav {
-	background: #f5f5f5;
-	width: 200px;
-	padding: 20px;
-	margin: 0;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	border-right: 1px solid #ddd;
-}
-
 .ppb-dialog-content {
 	padding: 0;
-}
-
-.ppb-cool-panel {
-	.ppb-dialog-titlebar, .ppb-tabs-panel, .ppb-dialog-buttonpane {
-		margin-left: 200px;
-	}
 }
 
 #pootlepb-add-row, #pootlepb-set-title, #pootlepb-post-settings {
@@ -1030,6 +1170,8 @@ body .ppb-dialog {
 
 .search-unsplash-wrap {
 	position: relative;
+	display: block;
+	float: left;
 	.dashicons {
 		position: absolute;
 		top: 0;
@@ -1097,56 +1239,6 @@ body .ppb-dialog {
 
 .panel-grid:hover ~ .pootle-live-editor.add-row {
 	visibility: hidden;
-}
-
-.ppb-tabs-panel {
-	background: #fff;
-	padding: 20px;
-	height: 100%;
-	.field {
-		margin: 16px 0 0;
-		* {
-			vertical-align: middle;
-			display: inline-block;
-		}
-		.wp-picker-holder {
-			display: block;
-		}
-		> {
-			span > {
-				* {
-					max-width: 100%;
-					font-size: 14px !important;
-				}
-				.dashicons {
-					font-size: 0 !important;
-				}
-				input[data-style-field-type="upload"] + .dashicons {
-					position: relative;
-					top: -119px;
-					left: 178px;
-					color: #e25c4e;
-					text-shadow: 0 0 1px #000;
-				}
-				.dashicons:before {
-					font-size: 25px;
-				}
-			}
-			* {
-				max-width: 49.3%;
-			}
-		}
-		label {
-			width: 250px;
-			display: inline-block;
-			&.ppb-panels-checkbox-label {
-				width: auto;
-			}
-		}
-	}
-	img {
-		display: inline-block;
-	}
 }
 
 .ppb-dialog-buttonpane:after {
@@ -1614,4 +1706,34 @@ a .ppb-module-disabled:after {
 			}
 		}
 	}
+}
+
+// WP Color Picker fix saturation slider dropping down
+.wp-picker-holder .iris-picker .iris-square {
+	margin-right: 9%;
+}
+
+/** Ace editor */
+#editor {
+	position: absolute;
+	top: 101px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+
+pre.ace_editor.ace-tm {
+	height: calc( 100% - 88px );
+}
+
+#ppb-tooltip {
+	font: 14px/1 sans-serif;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 99999;
+	background: #333;
+	color: #fff;
+	padding: 3px 5px;
+	border-radius: 3px;
 }

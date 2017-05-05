@@ -307,7 +307,7 @@ $pootlepb_row_styling_fields = array(
 
 	'bg_grad_prevu' => array(
 		'name' =>
-			'<canvas style="display: none" width="250" height="160" class="bg-grad-prevu"></canvas><div class="field field_type_select"><label>Gradient Presets</label><span>' .
+			'<div class="field field_type_select"><label>Gradient Presets</label><span>' .
 			'<select id="row_grad_preset">' . <<<OPTIONS
 				<option value="" selected="selected">Choose a preset...</option>
 				<option value="#f7ff00,#db36a4">Alihossein</option>
@@ -327,7 +327,8 @@ $pootlepb_row_styling_fields = array(
 				<option value="#fe8c00,#f83600">SoundCloud</option>
 				<option value="#FF512F,#F09819">Sunrise</option>
 OPTIONS
-			. '</select></span></div>',
+			. '</select></span></div>' .
+			'<canvas style="display: none;margin:auto;" width="160" height="90" class="bg-grad-prevu"></canvas>',
 		'tab' =>
 			'background',
 		'type' =>

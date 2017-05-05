@@ -190,7 +190,7 @@ final class Pootle_Page_Builder_Front_Css_Js {
 			// Mobile Responsive
 
 			$this->css( 'float:none', '#pg-' . $post_id . '-' . $gi . ' .panel-grid-cell', $panels_mobile_width );
-			$this->css( 'width:auto', '#pg-' . $post_id . '-' . $gi . ' .panel-grid-cell', $panels_mobile_width );
+			$this->css( 'width:100%', '#pg-' . $post_id . '-' . $gi . ' .panel-grid-cell', $panels_mobile_width );
 
 			$this->css( 'margin-bottom: 1' . $panels_margin_bottom . 'px', '.panel-grid-cell:not(:last-child)', $panels_mobile_width );
 

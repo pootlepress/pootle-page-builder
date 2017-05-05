@@ -200,6 +200,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 0.1.0
 	 */
 	public function preview_styles() {
+		global $pootlepb_current_post;
+		if ( $this->post_id != $pootlepb_current_post ) return;
 		global $pootlepb_inline_css;
 
 		if ( empty( $pootlepb_inline_css ) ) {
@@ -222,7 +224,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		$this->l10n_scripts();
 
 		$ver = POOTLEPB_VERSION;
-		$url = $this->url . '/assets';
+		$url = $this->url . 'assets';
 		wp_enqueue_style( 'pootlepb-ui-styles', POOTLEPB_URL . 'css/ppb-jq-ui.css', array(), $ver );
 		wp_enqueue_style( 'ppb-panels-live-editor-css', "$url/front-end.css", array(), $ver );
 		wp_enqueue_style( 'wp-color-picker' );
@@ -245,7 +247,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 	protected function enqueue_scripts() {
 		global $pootlepb_color_deps;
-		$url       = $this->url . '/assets';
+		$url       = $this->url . 'assets';
 		$jQui_deps = array(
 			'jquery',
 			'jquery-ui-slider',
@@ -279,7 +281,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		wp_enqueue_script( 'ppble-sd', "$url/showdown.min.js", array( 'ppb-ui', 'ppb-fields', ), $ver );
 
-		wp_enqueue_script( 'pootle-live-editor', "$url/front-end.cs.js", array(
+		$suff = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? 'dev.js' : 'min.js';
+		wp_enqueue_script( 'pootle-live-editor', "$url/front-end.$suff", array(
 			'ppb-ui',
 			'ppble-sd',
 			'ppb-fields',
@@ -478,19 +481,21 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 1.1.0
 	 */
 	public function edit_row( $data, $gi = 0 ) {
-		if ( ! $this->_active ) return;
+		if ( ! $this->_active || $this->post_id != get_the_ID() ) return;
 		?>
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-row" data-index="<?php echo $gi; ?>"
 		     data-i_bkp="<?php echo $gi; ?>">
-			<span href="javascript:void(0)" title="Row Sorting" class="dashicons-before dashicons-editor-code">
-				<span class="screen-reader-text">Sort row</span>
-			</span>
-			<span href="javascript:void(0)" title="Insert Row" class="dashicons-before dashicons-arrow-down-alt">
-				<span class="screen-reader-text">Insert row</span>
-			</span>
-			<span href="javascript:void(0)" title="Row Styling" class="dashicons-before dashicons-admin-appearance">
+			<span href="javascript:void(0)" title="Row Styling" class="dashicons-before settings-dialog dashicons-edit">
 				<span class="screen-reader-text">Edit Row</span>
 			</span>
+			<span href="javascript:void(0)" title="Row Sorting" class="dashicons-before drag-handle dashicons-editor-code">
+				<span class="screen-reader-text">Sort row</span>
+			</span>
+			<?php /*
+ 			<span href="javascript:void(0)" title="Insert Row" class="dashicons-before insert-row dashicons-plus">
+				<span class="screen-reader-text">Insert row</span>
+			</span>
+ 			*/?>
 			<?php /*
 			<span href="javascript:void(0)" title="Duplicate Row" class="dashicons-before dashicons-admin-page">
 				<span class="screen-reader-text">Duplicate Row</span>
@@ -512,11 +517,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-block"
 		     data-index="<?php echo $content_block['info']['id']; ?>"
 		     data-i_bkp="<?php echo $content_block['info']['id']; ?>">
-			<span href="javascript:void(0)" title="Drag content block"
-			      class="dashicons-before dashicons-move">
+			<span href="javascript:void(0)" title="Drag content block" class="dashicons-before drag-handle dashicons-move">
 				<span class="screen-reader-text">Drag content block</span>
 			</span>
-			<span href="javascript:void(0)" title="Edit Content" class="dashicons-before dashicons-edit">
+			<span href="javascript:void(0)" title="Edit Content" class="dashicons-before settings-dialog dashicons-edit">
 				<span class="screen-reader-text">Edit Content Block</span>
 			</span>
 			<?php /*
@@ -544,9 +548,17 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				<?php
 			}
 			*/?>
-			<span href="javascript:void(0)" title="Delete Content" class="dashicons-before dashicons-no">
+			<span href="javascript:void(0)" title="Delete Content" class="dashicons-before delete dashicons-no">
 				<span class="screen-reader-text">Delete Content</span>
 			</span>
+		</div>
+		<div class="ui-resizable-handle ui-resizable-e">
+			<div class="top"></div>
+			<div class="bottom"></div>
+		</div>
+		<div class="ui-resizable-handle ui-resizable-w">
+			<div class="top"></div>
+			<div class="bottom"></div>
 		</div>
 		<?php
 	}

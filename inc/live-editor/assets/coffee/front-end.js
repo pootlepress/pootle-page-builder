@@ -1174,7 +1174,7 @@ jQuery(function($) {
     }
   });
   $body.on('click touchstart', function(e) {
-    var $t, err, error, error1;
+    var $t, err;
     $t = $(e.target);
     if (!$t.closest('.ppb-block').length || $t.closest('.ppb-edit-row .dashicons-before, .ppb-edit-block .dashicons-before').length) {
       try {
@@ -1186,8 +1186,8 @@ jQuery(function($) {
     } else {
       try {
         webkit.messageHandlers.heySwift.postMessage('showTextFormatting');
-      } catch (error1) {
-        err = error1;
+      } catch (error) {
+        err = error;
       }
     }
   });
@@ -1203,7 +1203,7 @@ jQuery(function($) {
     return $ppb.find('.pootle-live-editor.add-row .dashicons-plus').click();
   });
   $ppb.delegate('.ppb-edit-row .dashicons-editor-code', 'click', function() {
-    var $t, err, error;
+    var $t, err;
     if (prevu.justClickedEditRow) {
       try {
         webkit.messageHandlers.heySwift.postMessage('hideKeyboard');
@@ -1281,7 +1281,7 @@ jQuery(function($) {
     $addRowDialog.ppbDialog('open');
   };
   ppbIpad.Update = function() {
-    var butt, err, error;
+    var butt, err;
     prevu.ajaxCallback = function(no1, no2, url) {
       window.location = url + '?ppb-ipad=preview';
     };
@@ -1295,7 +1295,7 @@ jQuery(function($) {
         {
           text: 'Save Draft',
           click: function() {
-            var err, error;
+            var err;
             $setTitleDialog.ppbDialog('close');
             try {
               webkit.messageHandlers.heySwift.postMessage('updatedLoadingPreview');
@@ -1313,7 +1313,7 @@ jQuery(function($) {
             primary: 'ipad-publish'
           },
           click: function() {
-            var err, error;
+            var err;
             $setTitleDialog.ppbDialog('close');
             try {
               webkit.messageHandlers.heySwift.postMessage('updatedLoadingPreview');

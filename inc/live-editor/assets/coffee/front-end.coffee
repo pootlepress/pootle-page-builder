@@ -83,6 +83,7 @@ jQuery ($) ->
 
 	$contentPanel = $('#pootlepb-content-editor-panel')
 	$rowPanel = $('#pootlepb-row-editor-panel')
+	$panels = $rowPanel.add( $contentPanel )
 	$deleteDialog = $('#pootlepb-confirm-delete')
 	$deletingWhat = $('#pootlepb-deleting-item')
 	$addRowDialog = $('#pootlepb-add-row')
@@ -129,6 +130,7 @@ jQuery ($) ->
 						else
 							window.location = response
 				ppbAjax.publish = 0
+				$loader.fadeOut 250
 				return
 		sync: (callback, publish) ->
 			logPPBData 'Before sync'
@@ -137,6 +139,9 @@ jQuery ($) ->
 			prevu.saveTmceBlock $('.mce-edit-focus')
 			delete ppbAjax.data
 			ppbAjax.data = ppbData
+
+			$loader.fadeIn 250
+
 			if publish
 				ppbAjax.publish = publish
 				$body.trigger 'savingPPB'
@@ -298,7 +303,7 @@ jQuery ($) ->
 					$cell.prepend $style
 				tinymce.init prevu.tmce
 				return
-			$contentPanel.ppbDialog 'close'
+#			$contentPanel.ppbDialog 'close'
 			return
 		editRow: ->
 			$bgToggle = $rowPanel.find('[data-style-field=background_toggle]')
@@ -311,9 +316,12 @@ jQuery ($) ->
 			$rowPanel.find('[data-style-field]').each ->
 				$t = $(this)
 				key = $t.attr('data-style-field')
+
 				if 'undefined' == typeof st[key]
 					st[key] = ''
+
 				if $t.attr('type') == 'checkbox'
+					$t.prop 'checked', false
 					if st[key]
 						$t.prop 'checked', true
 				else if $t.attr('data-style-field-type') == 'slider'
@@ -335,11 +343,8 @@ jQuery ($) ->
 					st[key] = ''
 					if $t.prop('checked')
 						st[key] = 1
-					$t.prop 'checked', false
 				else
 					st[key] = $t.val()
-					$t.val ''
-				$t.change()
 				return
 			ppbData.grids[window.ppbRowI].style = st
 			prevu.sync ($r, qry) ->
@@ -352,7 +357,7 @@ jQuery ($) ->
 				$ro.removeClass 'pootle-live-editor-new-cell'
 				$(id).prevuRowInit()
 				return
-			$rowPanel.ppbDialog 'close'
+#			$rowPanel.ppbDialog 'close'
 			return
 		addRow: (callback, blockText) ->
 			window.ppbRowI = ppbData.grids.length
@@ -465,7 +470,7 @@ jQuery ($) ->
 			logPPBData 'Moved row ' + olI + ' => ' + newI
 		rowsSortable:
 			items: '> .panel-grid'
-			handle: '.ppb-edit-row .dashicons-before:first'
+			handle: '.ppb-edit-row .drag-handle'
 			start: (e, ui) ->
 				console.log( this );
 				$( this ).data 'draggingRowI', ui.item.index()
@@ -518,7 +523,7 @@ jQuery ($) ->
 				ppbData.grid_cells[i].weight = weight
 				weight
 		contentDraggable:
-			handle: '.ppb-edit-block .dashicons-move'
+			handle: '.ppb-edit-block .drag-handle'
 			grid: [
 				5
 				5
@@ -589,7 +594,9 @@ jQuery ($) ->
 				ppbData.widgets[window.ppbPanelI].info.style = JSON.stringify(st)
 				return
 		contentResizable:
-			handles: 'e, w'
+			handles:
+				e: '.ui-resizable-e'
+				w: '.ui-resizable-w'
 			start: (e, ui) ->
 				$t = $(this)
 				$t.find('.ppb-edit-block .dashicons-before:first').click()
@@ -626,18 +633,18 @@ jQuery ($) ->
 			$contentblock.find('.dashicons-move').click()
 			$ed = $contentblock.find('.mce-content-body')
 			ed = tinymce.get($ed.attr('id'))
-			ed.selection.select tinyMCE.activeEditor.getBody(), true
-			ed.selection.collapse false
+			if ( ed )
+				ed.selection.select tinyMCE.activeEditor.getBody(), true
+				ed.selection.collapse false
 			if $module.data('callback')
 				if typeof window.ppbModules[$module.data('callback')] == 'function'
 					window.ppbModules[$module.data('callback')] $contentblock, ed, $ed
 			if tab
 				if 0 < tab.indexOf('-row-tab')
-					$('.panel-grid.active').find('.ppb-edit-row .dashicons-admin-appearance').click()
+					$('.panel-grid.active').find('.ppb-edit-row .settings-dialog').click()
 				else
-					$contentblock.find('.ppb-edit-block .dashicons-edit').click()
+					$contentblock.find('.ppb-edit-block .settings-dialog').click()
 				$('a.ppb-tabs-anchors[href="' + tab + '"]').click()
-			$loader.fadeOut 500
 			return
 		moduleDroppable:
 			accept: '.ppb-module'
@@ -646,7 +653,6 @@ jQuery ($) ->
 			drop: (e, ui) ->
 				$m = ui.draggable
 				$t = $(this)
-				$loader.fadeIn 500
 				if $t.hasClass('add-row')
 					$('#ppb-row-add-cols').val '1'
 					prevu.addRow (($row) ->
@@ -702,14 +708,71 @@ jQuery ($) ->
 			$postSettingsDialog.ppbDialog 'open'
 			return
 		tmce: $.extend(true, {}, tinyMCEPreInit.mceInit.ppbeditor)
+		sidePanelNav: ->
+			$t = $ this
+			$p = $t.closest '.ppb-cool-panel'
+			if $t.hasClass 'back'
+				$p.removeClass 'show-panel'
+			else
+				$p.addClass 'show-panel'
+		closeSidePanel: (callback) ->
+			(e,ui)->
+				$body.css 'margin-left', 0
+				$( this ).closest( '.show-panel' ).removeClass 'show-panel'
+				ppbCorrectOnResize( )
+				if typeof callback is 'function' then callback( )
+		openSidePanel: (callback) ->
+			->
+				$body.css 'margin-left', 300
+				ppbCorrectOnResize()
+				if typeof callback is 'function' then callback()
+		saveFieldsOnChange: ()		->
+			$t = $ this
+			$d = $t.closest '.ppb-dialog-buttons.show-panel'
+			if ( $d.length )
+				to = $d.data 'saveTimeout'
+				if ( to == 'saving' )
+					return;
+				else if ( to )
+					clearTimeout( to )
+
+				$d.data( 'saveTimeout', setTimeout(
+					->
+						$d.data( 'saveTimeout', 'saving' )
+						$d.find( '.ppb-dialog-buttonset button' ).click()
+						$d.data( 'saveTimeout', '' )
+				, 2500
+				) )
+
 	prevu.showdown = new (showdown.Converter)
-	dialogAttr.open = prevu.editPanel
-	dialogAttr.buttons.Done = prevu.savePanel
+	dialogAttr.open = prevu.openSidePanel( prevu.editPanel )
+	dialogAttr.buttons.Done =  prevu.savePanel
+	dialogAttr.close = prevu.closeSidePanel() # Returns callback
 	$contentPanel.ppbTabs().ppbDialog dialogAttr
+
 	dialogAttr.title = 'Edit row'
-	dialogAttr.open = prevu.editRow
+	dialogAttr.open = prevu.openSidePanel( prevu.editRow )
 	dialogAttr.buttons.Done = prevu.saveRow
-	$rowPanel.ppbTabs().ppbDialog dialogAttr
+	$rowPanel.ppbTabs( {
+		activate: ( e, ui ) ->
+			if ui.newPanel
+				ui.newPanel.find( '#ppbeditor_ifr' ).css( 'height', ui.newTab.innerHeight() - 268 )
+	} ).ppbDialog dialogAttr
+
+	$panels.find( 'a' ).click prevu.sidePanelNav
+
+	$panels.on 'change', '[data-style-field], [dialog-field], input, textarea', prevu.saveFieldsOnChange
+
+	setTimeout(
+		->
+			tinyMCE.get('ppbeditor').on(
+				'change keyup paste',
+				->
+					prevu.saveFieldsOnChange.apply this.container
+			)
+		, 700
+	);
+
 	panels.addInputFieldEventHandlers $rowPanel
 
 	dialogAttr.title = 'Add row'
@@ -798,11 +861,11 @@ jQuery ($) ->
 
 	$iconPicker.ppbDialog dialogAttr
 	$iconPicker.find('#ppb-icon-choose').iconpicker placement: 'inline'
-	$iconPicker.clas = $('#ppb-icon-choose')
-	$iconPicker.colr = $('#ppb-icon-color')
-	$iconPicker.size = $('#ppb-icon-size')
-	$iconPicker.link = $('#ppb-icon-link')
-	$iconPicker.prvu = $('#ppb-icon-preview')
+	$iconPicker.clas = $ '#ppb-icon-choose'
+	$iconPicker.colr = $ '#ppb-icon-color'
+	$iconPicker.size = $ '#ppb-icon-size'
+	$iconPicker.link = $ '#ppb-icon-link'
+	$iconPicker.prvu = $ '#ppb-icon-preview'
 
 	prevu.iconPrevu = (e) ->
 		iclas = $iconPicker.clas.val()
@@ -864,7 +927,7 @@ jQuery ($) ->
 	$ppb.delegate '.ppb-edit-row .dashicons-before', 'click', ->
 		window.ppbRowI = $(this).closest('.pootle-live-editor').data('index')
 		return
-	$ppb.delegate '.ppb-edit-row .dashicons-admin-appearance', 'click', ->
+	$ppb.delegate '.ppb-edit-row .settings-dialog', 'click', ->
 		$rowPanel.ppbDialog 'open'
 		return
 	$ppb.delegate '.ppb-edit-row .dashicons-admin-page', 'click', ->
@@ -969,7 +1032,7 @@ jQuery ($) ->
 		window.ppbPanelI = $t.closest('.pootle-live-editor').data('index')
 		prevu.activeEditor = $(this).closest('.ppb-block').children('.pootle-live-editor-realtime')
 		return
-	$ppb.delegate '.ppb-edit-block .dashicons-edit', 'click', ->
+	$ppb.delegate '.ppb-edit-block .settings-dialog', 'click', ->
 		$contentPanel.ppbDialog 'open'
 		return
 	$ppb.delegate '.ppb-edit-block .dashicons-no', 'click', ->
@@ -1019,7 +1082,7 @@ jQuery ($) ->
 			catch err
 		return
 
-	$ppb.delegate '.ppb-edit-row .dashicons-arrow-down-alt', 'click', ->
+	$ppb.delegate '.ppb-edit-row .insert-row', 'click', ->
 		$row = $( this ).closest '.ppb-row'
 		$addRowDialog.callback = ( $t ) ->
 			$ppb.data 'draggingRowI', $t.index()
@@ -1618,7 +1681,7 @@ jQuery ($) ->
 		return
 	$('.ppb-edit-block').click ->
 		editorid = $(this).siblings('.mce-content-body').attr('id')
-		tinymce.get(editorid).focus()
+		if tinymce.get(editorid) then tinymce.get(editorid).focus()
 		return
 	$('#ppble-feat-img-prevu').click ->
 		event.preventDefault()
@@ -1698,9 +1761,18 @@ jQuery ($) ->
 		ppbData.grids[ppbRowI].style.row_height = '500'
 
 	window.ppbModules.onePager = ($t) ->
-		$t.find('.ppb-edit-block .dashicons-edit').click()
+		$t.find('.ppb-edit-block .settings-dialog').click()
 		$('a.ppb-tabs-anchors[href="#pootle-ppb-1-pager-tab"]').click()
 		ppbModules.heroSection $t
+
+	$tooltip = $ '#ppb-tooltip'
+	$body.on 'mouseenter', 'a.pbtn,.ppb-fa-icon', (e) ->
+			$tooltip.show().html( 'Double click to edit' ).css(
+				top: e.clientY,
+				left: e.clientX,
+			)
+	$body.on 'mouseleave', 'a.pbtn,.ppb-fa-icon', (e) ->
+			$tooltip.hide()
 
 	$body.on 'savingPPB', ->
 		ppbAjax.data.google_fonts = []
@@ -1708,4 +1780,4 @@ jQuery ($) ->
 			ppbAjax.data.google_fonts.push $(this).attr('data-font')
 
 	$('html').on 'pootlepb_le_content_updated', (e, $t) ->
-		ppbSkrollr.refresh $t.find('.ppb-col')
+		ppbSkrollr.refresh $t.find( '.ppb-col' );

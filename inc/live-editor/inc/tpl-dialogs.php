@@ -6,13 +6,13 @@ global $pootlepb_row_settings_tabs;
 
 $panel_tabs = array(
 	'-' => array(
-		'editor'           => array(
-			'label'    => 'Editor',
-			'priority' => 1,
-		),
 		'style'            => array(
 			'label'    => 'Style',
 			'class'    => 'pootle-style-fields',
+			'priority' => 1,
+		),
+		'editor'           => array(
+			'label'    => 'Editor',
 			'priority' => 2,
 		),
 		'advanced'            => array(
@@ -25,6 +25,14 @@ $panel_tabs = array(
 		),
 	)
 );
+
+add_filter( 'mce_buttons', function ( $buttons ) {
+	return array('formatselect','bold','italic','bullist','numlist','link','fullscreen','wp_adv',);
+} );
+
+add_filter( 'mce_buttons_2', function ( $buttons ) {
+	return 	array('strikethrough','hr','forecolor','pastetext','removeformat','charmap','outdent','indent','undo','redo', );
+} );
 
 foreach ( $this->addons as $k => $tab ) {
 	$panel_tabs[ $tab['label'] ][ $k ] = $tab;
@@ -42,38 +50,37 @@ ksort( $panel_tabs );
 						echo '<li class="ppb-separator"></li>';
 						continue;
 					}
-					echo "
-					<li>
-						<a class='ppb-tabs-anchors ppb-content-block-tab-$k' href='#pootle-$k-tab'>
-							$tab[label]
-						</a>
-					</li>
-					";
+					echo
+						"<li class='content-block-tab content-block-tab-$k'>" .
+							"<a class='ppb-tabs-anchors' href='#pootle-$k-tab'>$tab[label]</a>" .
+						'</li>';
 				}
 			}
 			?>
 		</ul>
-		<?php
-		//Output the tabs
-		foreach ( $panel_tabs as $tabs ) {
-			foreach ( $tabs as $k => $tab ) {
-				if ( empty( $tab['label'] ) ) {
-					continue;
-				}
-				if ( empty( $tab['class'] ) ) {
-					$tab['class'] = '';
-				}
+		<div class="content-wrap">
+			<a href="javascript:void(0)" class="back">Back</a>
+			<?php
+			//Output the tabs
+			foreach ( $panel_tabs as $tabs ) {
+				foreach ( $tabs as $k => $tab ) {
+					if ( empty( $tab['label'] ) ) {
+						continue;
+					}
+					if ( empty( $tab['class'] ) ) {
+						$tab['class'] = '';
+					}
 
-				echo "\n\n<div id='pootle-$k-tab' class='tab-contents pootle-style-fields $tab[class]'>";
-				echo "<h3>$tab[label]</h3>";
-				do_action( "pootlepb_content_block_{$k}_tab" );
-				pootlepb_block_dialog_fields_output( $k );
-				do_action( "pootlepb_content_block_{$k}_tab_after_fields" );
-				echo '</div>';
+					echo "\n\n<div id='pootle-$k-tab' class='tab-contents pootle-style-fields $tab[class]'>";
+					echo "<h3>$tab[label]</h3>";
+					do_action( "pootlepb_content_block_{$k}_tab" );
+					pootlepb_block_dialog_fields_output( $k );
+					do_action( "pootlepb_content_block_{$k}_tab_after_fields" );
+					echo '</div>';
+				}
 			}
-		}
-		?>
-
+			?>
+		</div>
 	</div>
 
 	<div id="pootlepb-confirm-delete" class="pootlepb-dialog">
@@ -114,24 +121,28 @@ $row_panel_tabs = array(
 			}
 			?>
 		</ul>
-		<?php
-		//Output the tab panels
-		foreach ( $row_panel_tabs as $k => $tab ) {
-			if ( empty( $tab['label'] ) ) {
-				continue;
-			}
-			?>
-			<div id="pootlepb-<?php echo $k; ?>-row-tab" class="pootlepb-row-tab">
-
-				<?php
-				do_action( "pootlepb_row_settings_{$k}_tab" );
-				pootlepb_row_dialog_fields_output( $k );
-				do_action( "pootlepb_row_settings_{$k}_tab_after_fields" );
-				?>
-
-			</div>
+		<div class="content-wrap">
+			<a href="javascript:void(0)" class="back">Back</a>
 			<?php
-		} ?>
+			//Output the tab panels
+			foreach ( $row_panel_tabs as $k => $tab ) {
+				if ( empty( $tab['label'] ) ) {
+					continue;
+				}
+				?>
+				<div id="pootlepb-<?php echo $k; ?>-row-tab" class="pootlepb-row-tab">
+
+					<?php
+					echo "<h3>$tab[label]</h3>";
+					do_action( "pootlepb_row_settings_{$k}_tab" );
+					pootlepb_row_dialog_fields_output( $k );
+					do_action( "pootlepb_row_settings_{$k}_tab_after_fields" );
+					?>
+
+				</div>
+				<?php
+			} ?>
+		</div>
 	</div>
 	<div class="pootlepb-dialog" id="pootlepb-add-row">
 		<label>
@@ -344,3 +355,4 @@ if ( $enabled_modules ) {
 		<span id="ppb-icon-preview"></span>
 	</label>
 </div>
+<div id="ppb-tooltip" style="display:none"></div>

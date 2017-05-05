@@ -88,7 +88,6 @@ function pootlepb_render_content_block_field( $key, $field ) {
 				echo '</label>';
 			}
 			?>
-			</select>
 			<?php
 			break;
 		case 'multi-select':
