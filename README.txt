@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.7.0
-Stable tag: 3.7.2
+Stable tag: 4.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -142,10 +142,29 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
-= 3.6.0 =
- * WP 4.7 compatibility and minor bug fixes
+= 4.0.0 =
+ * Enhancements and bug fixed
 
 == Changelog ==
+
+= 4.0.0 =
+* 2017-05-11
+* New - Content edit panel now shown as a sidebar and show preview live :)
+* New - Row styling panel now shown as sidebar and show live preview as well.
+* New - Content styling and content modules separated, now modules can only be dragged in content blocks.
+* New - Loader displayed when AJAX response is awaited.
+* New - Draggable handles redesigned to be more user friendly
+* New - Buttons and icons show editable tooltips
+* Fix - Title in blog customizer not showing ( z-index issue )
+* Fix - Photography addon and WooCommerce product gallery conflict
+* Tweak - `Save`/`Publish` and `Live Edit` made last items in admin bar.
+* Tweak - Live editor ajax callback cleared before calling.
+* Tweak - Live editor JS minified by task runner
+* Tweak - Content edit panel editor simplified
+* Tweak - Row styling icon always visible and first icon
+* Tweak - Row styling icon changed from paint brush to pencil
+* Tweak - Tour includes Drag and drop modules
+* Tweak - Hide unrendered dialogs html in live edit area
 
 = 3.7.2 =
 * 2017-03-17
