@@ -81,9 +81,6 @@ class pootle_page_builder_blog_customizer_Admin{
 	 * @since 	1.0.0
 	 */
 	public function content_block_fields( $fields ) {
-		if ( 'post' == get_post_type() ) {
-			return $fields;
-		}
 		$cats = array();
 		foreach( get_categories() as $cat ) {
 			$cats[ $cat->term_id ] = $cat->name;

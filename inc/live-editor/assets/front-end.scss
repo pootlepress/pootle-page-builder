@@ -345,6 +345,10 @@ body .ppb-dialog {
 	width: 300px !important;
 	overflow:hidden;
 
+	* {
+		box-sizing: border-box;
+	}
+
 	.ppb-tabs-nav,
 	.ppb-dialog-titlebar,
 	.content-wrap,

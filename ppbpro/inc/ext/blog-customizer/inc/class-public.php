@@ -24,6 +24,9 @@ class pootle_page_builder_blog_customizer_Public extends pootle_page_builder_blo
 	 */
 	private static $_instance = null;
 
+	/** @var int ID of post to exclude */
+	private $exclude_post = 0;
+
 	/**
 	 * Main pootle page builder blog customizer Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
@@ -84,7 +87,7 @@ class pootle_page_builder_blog_customizer_Public extends pootle_page_builder_blo
 	 */
 	public function show_posts( $info ) {
 		if ( 'post' == get_post_type() ) {
-			return;
+			$this->exclude_post = get_the_ID();
 		}
 		$set = json_decode( $info['info']['style'], true ); //Decode settings in JSON
 		$pc_sets = $this->get_custom_posts_settings( $set ); //Grab blog customizer settings
@@ -138,9 +141,10 @@ class pootle_page_builder_blog_customizer_Public extends pootle_page_builder_blo
 		}
 
 		$args = array(
-			'posts_per_page'    => $ppp,
-			'orderby'           => $set['orderby'],
-			'paged' => $paged
+			'posts_per_page' => $ppp,
+			'orderby'        => $set['orderby'],
+			'paged'          => $paged,
+			'post__not_in'   => [ $this->exclude_post ],
 		);
 
 		if( is_array( $set['cat'] ) ) {

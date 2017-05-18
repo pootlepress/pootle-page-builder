@@ -436,7 +436,6 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 				echo get_permalink( $id );
 			} else {
-
 				$the_query = new WP_Query( array(
 					'post_type' => 'any',
 					'post_status' => 'any',

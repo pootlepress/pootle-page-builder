@@ -21,7 +21,7 @@ final class Pootle_Page_Builder_Content_Block {
 	 * @since 0.1.0
 	 */
 	public function __construct() {
-		add_filter( 'pootlepb_content_block', 'do_shortcode' );
+		add_filter( 'pootlepb_content_block', array( $this, 'do_shortcode' ) );
 		add_filter( 'pootlepb_content_block', array( $this, 'auto_embed' ), 8 );
 		add_action( 'pootlepb_render_content_block', array( $this, 'open_block' ), 5, 6 );
 		add_action( 'pootlepb_render_content_block', array( $this, 'render_content_block' ), 50 );
@@ -36,6 +36,20 @@ final class Pootle_Page_Builder_Content_Block {
 		add_action( 'pootlepb_content_block_editor_tab', array( $this, 'panels_editor' ) );
 		add_action( 'pootlepb_content_block_woocommerce_tab', array( $this, 'wc_tab' ) );
 		add_action( 'wp_ajax_pootlepb_editor_form', array( $this, 'ajax_content_panel' ) );
+	}
+
+	/**
+	 * Renders shortcodes in content
+	 * @param string $text
+	 * @return string
+	 * @filter pootlepb_content_block
+	 * @since 0.1.0
+	 */
+	public function do_shortcode( $text ) {
+		if( preg_match( '/<p>\n?\[([^\]]+)\]\n?<\/p>/i', $text ) ) {
+			$text = str_replace( [ '<p>', '</p>' ], '', $text );
+		}
+		return do_shortcode( $text );
 	}
 
 	/**
