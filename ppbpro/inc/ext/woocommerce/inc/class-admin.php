@@ -129,7 +129,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 
 		$query = new WP_Query( array(
 			'post_type' => 'product',
-			'posts_per_page' => 50
+			'posts_per_page' => -1,
 		) );
 		if ( $query->have_posts() ) {
 			foreach ( $query->posts as $post ) {
