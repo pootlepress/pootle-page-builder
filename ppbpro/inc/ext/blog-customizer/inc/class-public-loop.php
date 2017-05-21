@@ -55,7 +55,7 @@ class pootle_page_builder_blog_customizer_Public_Loop{
 			$this->show_post( $set );
 			echo '</article>';
 		}
-		echo '</div>';
+		echo "</div><!-- #$this->loop_css_id -->";
 	}
 
 	/**

@@ -436,17 +436,17 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 				echo get_permalink( $id );
 			} else {
-				$the_query = new WP_Query( array(
+				query_posts( array(
 					'post_type' => 'any',
 					'post_status' => 'any',
 					'post__in' => array( $id ),
 					'ignore_sticky_posts' => 1,
 					) );
 
-				$the_query->have_posts();
-				if ( $the_query->have_posts() ) {
-					while ( $the_query->have_posts() ) {
-						$the_query->the_post();
+				if ( have_posts() ) {
+					$GLOBALS['wp_the_query'] = $GLOBALS['wp_query'];
+					while ( have_posts() ) {
+						the_post();
 
 						//$live_page_post = $this->savePostMeta( array( 'ID' => $id ) );
 
