@@ -348,7 +348,7 @@ body .ppb-dialog {
 	* {
 		box-sizing: border-box;
 	}
-	
+
 	.wp-picker-container * {
 		box-sizing: content-box;
 	}
@@ -1143,8 +1143,8 @@ body .ppb-dialog {
 .pootlepb-dialog input {
 	&[type="search"], &[type="text"], &[type="number"] {
 		margin: 2px 5px 2px 0;
-		padding: 0 7px;
-		line-height: 34px;
+		padding: 0 7px !important;
+		line-height: 34px !important;
 		color: #555;
 		background: #fff;
 		border: 1px solid #ccc !important;
