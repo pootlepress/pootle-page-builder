@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.7.0
-Stable tag: 4.0.0
+Stable tag: 4.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -152,6 +152,19 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * Enhancements and bug fixed
 
 == Changelog ==
+
+= 4.1.1 =
+* 2017-05-26
+* Fix - Color picker messed up
+
+= 4.1.0 =
+* 2017-05-26
+* Fix - Close live preview customizer sidebar not showing in some themes (`box-sizing` issue)
+* Fix - Ninja forms module not showing forms in drop down selector
+* Fix - WooCommerce addon products selection dropdown only shows 50 products
+* Tweak - Shortcodes now don't get wrapped in `<p>` tags
+* Tweak - Live editor page preview AJAX handler now creates resettable queries
+* Tweak - Blog customizer made more robust by design
 
 = 4.0.0 =
 * 2017-05-11
