@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.7.0
-Stable tag: 4.1.0
+Stable tag: 4.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -19,7 +19,7 @@ Pootle Pagebuilder is a front-end, drag and drop page builder that makes it easy
 
 > **If I was to use a page builder on one of my sites, Pootle Page Builder would be in the running for my top choice** -  *Pippin Williamson - WordPress guru*
 
-https://vimeo.com/181944652
+https://vimeo.com/215980602
 
 If you've ever been frustrated with WordPress then you're going to love how Pootle Pagebuilder gives you complete control over your page layouts.
 
@@ -43,21 +43,27 @@ With Pootle Pagebuilder you can:
 * Add CSS customizations (for advanced users)
 
 Basic operation
+
 https://vimeo.com/185787894
 
 Pixel perfect drag and drop
+
 https://vimeo.com/185792519
 
 Row animations
+
 https://vimeo.com/185800528
 
 Gradients
+
 https://vimeo.com/185803787
 
 Customizable Icons
+
 https://vimeo.com/185801458
 
 Elegant Accordions
+
 https://vimeo.com/185800527
 
 = Is there anything else you can tell me about Pootle Pagebuilder? =
@@ -146,15 +152,6 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * Enhancements and bug fixed
 
 == Changelog ==
-
-= 4.1.0 =
-* 2017-05-26
-* Fix - Close live preview customizer sidebar not showing in some themes (`box-sizing` issue)
-* Fix - Ninja forms module not showing forms in drop down selector
-* Fix - WooCommerce addon products selection dropdown only shows 50 products
-* Tweak - Shortcodes now don't get wrapped in `<p>` tags
-* Tweak - Live editor page preview AJAX handler now creates resettable queries
-* Tweak - Blog customizer made more robust by design
 
 = 4.0.0 =
 * 2017-05-11
