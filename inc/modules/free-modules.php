@@ -38,14 +38,14 @@ class pootle_page_builder_Unsplash {
 			'icon_class' => 'dashicons dashicons-archive',
 			'tab' => "#pootlepb-background-row-tab",
 			'callback' => 'heroSection',
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
 			'priority' => 5
 		);
 		$mods["unsplash"] = array(
 			'label' => 'Free photos',
 			'icon_class' => 'dashicons dashicons-camera',
 			'callback' => 'unsplash',
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
 			'tooltip' => 'All stock photos are sourced from Unsplash.com and are licensed under Creative Commons Zero which means you can copy, modify, distribute and use the photos for free, including commercial purposes, without asking permission from or providing attribution to the photographer or Unsplash',
 			'priority' => 15
 		);
@@ -53,21 +53,21 @@ class pootle_page_builder_Unsplash {
 			'label' => 'Image',
 			'icon_class' => 'dashicons dashicons-format-image',
 			'callback' => 'image',
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
 			'priority' => 15
 		);
 		$mods["icon"] = array(
 			'label' => 'Icon',
 			'icon_class' => 'dashicons dashicons-lightbulb',
 			'callback' => 'chooseIconDialog',
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
 			'priority' => 15
 		);
 		$mods["pbtn"] = array(
 			'label' => 'Button',
 			'icon_class' => 'dashicons dashicons-upload',
 			'callback' => 'button',
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
 			'priority' => 20
 		);
 		return $mods;

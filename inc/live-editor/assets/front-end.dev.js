@@ -408,15 +408,15 @@ jQuery(function($) {
         $(id).prevuRowInit();
       });
     },
-    addRow: function(callback, blockText) {
-      var block, cells, i, id, num_cells, row;
+    addRow: function(callback, blockData, rowStyle) {
+      var block, cells, defaultText, i, id, num_cells, row;
       window.ppbRowI = ppbData.grids.length;
       num_cells = parseInt($('#ppb-row-add-cols').val());
       logPPBData('Adding row');
       row = {
         id: window.ppbRowI,
         cells: num_cells,
-        style: {
+        style: 'object' === typeof rowStyle ? rowStyle : {
           background: '',
           background_image: '',
           background_image_repeat: '',
@@ -448,8 +448,9 @@ jQuery(function($) {
         grid: window.ppbRowI,
         weight: 1 / row.cells
       };
+      defaultText = typeof blockData === 'string' ? blockData : '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>';
       block = {
-        text: typeof blockText === 'string' ? blockText : '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>',
+        text: defaultText,
         info: {
           "class": 'Pootle_PB_Content_Block',
           grid: window.ppbRowI,
@@ -464,6 +465,10 @@ jQuery(function($) {
         id = ppbData.widgets.length;
         block.info.cell = i;
         block.info.id = id;
+        if (blockData[i]) {
+          block.text = typeof blockData[i].text === 'string' ? blockData[i].text : defaultText;
+          block.info.style = typeof blockData[i].style === 'string' ? blockData[i].style : '{}';
+        }
         ppbData.widgets.push($.extend(true, {}, block));
         i++;
       }
@@ -749,12 +754,16 @@ jQuery(function($) {
         $m = ui.draggable;
         $t = $(this);
         if ($t.hasClass('add-row')) {
-          $('#ppb-row-add-cols').val('1');
-          prevu.addRow((function($row) {
-            setTimeout((function() {
-              prevu.insertModule($row.find('.ppb-block').last(), $m);
-            }), 106);
-          }), '<p>&nbsp;</p>');
+          if ($m.data('row-callback') && typeof window.ppbModules[$m.data('row-callback')] === 'function') {
+            window.ppbModules[$m.data('row-callback')]();
+          } else {
+            $('#ppb-row-add-cols').val('1');
+            prevu.addRow((function($row) {
+              setTimeout((function() {
+                prevu.insertModule($row.find('.ppb-block').last(), $m);
+              }), 106);
+            }), '<p>&nbsp;</p>');
+          }
         } else {
           prevu.insertModule($t, $m);
         }
@@ -1894,13 +1903,6 @@ jQuery(function($) {
       ed.execCommand('mceInsertContent', false, $img);
     });
   };
-  window.ppbModules.designTemplate = function($t, ed) {
-    return $designTemplateDialog.ppbDialog('open');
-  };
-  $designTemplateDialog.on('click', '.ppb-tpl', applyDesignTemplate);
-  applyDesignTemplate = function() {
-    return {};
-  };
   window.ppbModules.button = function($t, ed) {
     ed.execCommand('pbtn_add_btn_cmd');
   };
@@ -1933,6 +1935,28 @@ jQuery(function($) {
       return ppbAjax.data.google_fonts.push($(this).attr('data-font'));
     });
   });
+  window.ppbModules.designTemplateRow = function($t, ed) {
+    return $designTemplateDialog.ppbDialog('open');
+  };
+  applyDesignTemplate = function(e) {
+    var $t, cells, id, style, tpl;
+    $t = $(e.target).closest('.ppb-tpl');
+    id = $t.data('id');
+    tpl = ppbDesignTpls[id];
+    style = tpl.style ? JSON.parse(tpl.style) : {};
+    style = style.style ? style.style : style;
+    cells = 1;
+    if (tpl.content) {
+      cells = tpl.content.length;
+    }
+    $('#ppb-row-add-cols').val(cells);
+    prevu.addRow((function($row) {
+      return setTimeout((function() {}), 106);
+    }), tpl.content, style);
+    $designTemplateDialog.ppbDialog('close');
+    return console.log('Applying template ' + id, tpl);
+  };
+  $designTemplateDialog.on('click', '.ppb-tpl', applyDesignTemplate);
   return $('html').on('pootlepb_le_content_updated', function(e, $t) {
     return ppbSkrollr.refresh($t.find('.ppb-col'));
   });

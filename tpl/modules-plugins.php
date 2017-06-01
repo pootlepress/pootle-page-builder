@@ -17,7 +17,7 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 	<h2>Free Module Plugins</h2>
 	<?php
 	foreach ( $pootlepb_modules as $slug => $plugin ) {
-		$card_classes = class_exists( $plugin['ActiveClass'] ) ? 'ppb-addon-card active' : 'ppb-addon-card';
+		$card_classes = class_exists( $plugin['active_class'] ) ? 'ppb-addon-card active' : 'ppb-addon-card';
 		?>
 		<div id="<?php echo $slug ?>" class="ppb-addon-card-wrap">
 			<div class="<?php echo $card_classes; ?>">
@@ -114,7 +114,7 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 				<?php
 			} else {
 				$plugin = $addon;
-				$card_classes = class_exists( $plugin['ActiveClass'] ) ? 'ppb-addon-card active' : 'ppb-addon-card';
+				$card_classes = class_exists( $plugin['active_class'] ) ? 'ppb-addon-card active' : 'ppb-addon-card';
 				?>
 				<div id="<?php echo $slug ?>" class="ppb-addon-card-wrap">
 					<div class="<?php echo $card_classes; ?>">

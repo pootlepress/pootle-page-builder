@@ -360,14 +360,14 @@ jQuery ($) ->
 				return
 #			$rowPanel.ppbDialog 'close'
 			return
-		addRow: (callback, blockText) ->
+		addRow: (callback, blockData, rowStyle) ->
 			window.ppbRowI = ppbData.grids.length
 			num_cells = parseInt($('#ppb-row-add-cols').val())
 			logPPBData 'Adding row'
 			row =
 				id: window.ppbRowI
 				cells: num_cells
-				style:
+				style: if 'object' == typeof rowStyle then rowStyle else
 					background: ''
 					background_image: ''
 					background_image_repeat: ''
@@ -396,8 +396,10 @@ jQuery ($) ->
 			cells =
 				grid: window.ppbRowI
 				weight: 1 / row.cells
+
+			defaultText =  if typeof blockData == 'string' then blockData else '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>'
 			block =
-				text: if typeof blockText == 'string' then blockText else '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>'
+				text: defaultText
 				info:
 					class: 'Pootle_PB_Content_Block'
 					grid: window.ppbRowI
@@ -410,6 +412,10 @@ jQuery ($) ->
 				id = ppbData.widgets.length
 				block.info.cell = i
 				block.info.id = id
+				if ( blockData[ i ] )
+					block.text = if typeof blockData[ i ].text == 'string' then blockData[ i ].text else defaultText
+					block.info.style = if typeof blockData[ i ].style == 'string' then blockData[ i ].style else '{}'
+
 				ppbData.widgets.push $.extend(true, {}, block)
 				i++
 			logPPBData 'Row added'
@@ -655,14 +661,17 @@ jQuery ($) ->
 				$m = ui.draggable
 				$t = $(this)
 				if $t.hasClass('add-row')
-					$('#ppb-row-add-cols').val '1'
-					prevu.addRow (($row) ->
-						setTimeout (->
-							prevu.insertModule $row.find('.ppb-block').last(), $m
+					if $m.data('row-callback') && typeof window.ppbModules[$m.data('row-callback')] == 'function'
+						window.ppbModules[ $m.data('row-callback') ]()
+					else
+						$('#ppb-row-add-cols').val '1'
+						prevu.addRow (($row) ->
+							setTimeout (->
+								prevu.insertModule $row.find('.ppb-block').last(), $m
+								return
+							), 106
 							return
-						), 106
-						return
-					), '<p>&nbsp;</p>'
+						), '<p>&nbsp;</p>'
 				else
 					prevu.insertModule $t, $m
 				return
@@ -1764,13 +1773,6 @@ jQuery ($) ->
 			return
 		return
 
-	window.ppbModules.designTemplate = ($t, ed) ->
-		$designTemplateDialog.ppbDialog 'open'
-
-	$designTemplateDialog.on 'click', '.ppb-tpl', applyDesignTemplate
-
-	applyDesignTemplate = () -> {}
-
 	window.ppbModules.button = ($t, ed) ->
 		ed.execCommand 'pbtn_add_btn_cmd'
 		return
@@ -1801,5 +1803,34 @@ jQuery ($) ->
 		$body.find('[data-font]').not('[data-font="%gfont"]').each ->
 			ppbAjax.data.google_fonts.push $(this).attr('data-font')
 
+	# Live templates
+
+	window.ppbModules.designTemplateRow = ($t, ed) ->
+			$designTemplateDialog.ppbDialog 'open'
+
+	applyDesignTemplate = ( e ) ->
+		$t = $( e.target ).closest( '.ppb-tpl' )
+		id = $t.data( 'id' )
+		tpl = ppbDesignTpls[ id ]
+		style = if tpl.style then JSON.parse( tpl.style ) else {}
+		style = if style.style then style.style else style
+		cells = 1
+		if tpl.content
+			cells = tpl.content.length
+
+		$('#ppb-row-add-cols').val cells
+
+		prevu.addRow ( ($row) ->
+			setTimeout ( () ->
+#				prevu.insertModule $row.find('.ppb-block').last(), $m
+			), 106
+		), tpl.content, style
+
+		$designTemplateDialog.ppbDialog 'close'
+		console.log 'Applying template ' + id, tpl
+
+	$designTemplateDialog.on 'click', '.ppb-tpl', applyDesignTemplate
+
+	# Content updated hook
 	$('html').on 'pootlepb_le_content_updated', (e, $t) ->
 		ppbSkrollr.refresh $t.find( '.ppb-col' );

@@ -296,16 +296,20 @@ if ( $enabled_modules ) {
 
 				$attr = "";
 
-				if ( empty( $module['only-new-row'] ) ) {
+				if ( empty( $module['only_new_row'] ) ) {
 					$classes .= ' ppb-module-existing-row';
 				}
 
-				if ( empty( $module['only-existing-row'] ) ) {
+				if ( empty( $module['only_existing_row'] ) ) {
 					$classes .= ' ppb-module-new-row';
 				}
 
 				if ( ! empty( $module['callback'] ) ) {
 					$attr .= " data-callback='$module[callback]'";
+				}
+
+				if ( ! empty( $module['row_callback'] ) ) {
+					$attr .= " data-row-callback='$module[row_callback]'";
 				}
 
 				if ( ! empty( $module['tab'] ) ) {
@@ -321,7 +325,7 @@ if ( $enabled_modules ) {
 					$tooltip = "<span  class='dashicons dashicons-editor-help tooltip-module' data-tooltip=\"$module[tooltip]\"></span>";
 				}
 
-				if ( ! empty( $module['ActiveClass'] ) && class_exists( $module['ActiveClass'] ) ) {
+				if ( ! empty( $module['active_class'] ) && class_exists( $module['active_class'] ) ) {
 					$classes .= ' ppb-module';
 					echo
 						"<div id='ppb-mod-$id' class='$classes' $attr>" .

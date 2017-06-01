@@ -1274,7 +1274,7 @@ $ppbpro_addons_data = array(
 		'AuthorURI'   => 'https://pootlepress.com',
 		'Author'      => 'pootlepress',
 		'Image'       => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
-		'ActiveClass' => 'WooBuilder',
+		'active_class' => 'WooBuilder',
 	),
 	'wc-shopbuilder'    => array(
 		'img'    => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
@@ -1324,7 +1324,7 @@ $ppbpro_addons_data = array(
 		'AuthorURI'   => 'https://pootlepress.com',
 		'Author'      => 'pootlepress',
 		'Image'       => 'https://image.flaticon.com/icons/svg/45/45696.svg',
-		'ActiveClass' => 'WooBuilder',
+		'active_class' => 'WooBuilder',
 	),
 );
 

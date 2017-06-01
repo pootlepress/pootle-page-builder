@@ -92,7 +92,7 @@ class pootle_page_builder_Ninja_Forms {
 			'icon_class' => 'dashicons dashicons-feedback',
 			'icon_html' => '',
 			'tab' => "#pootle-$this->token-tab",
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
 			'priority'    => 35,
 		);
 		return $mods;
@@ -106,7 +106,7 @@ class pootle_page_builder_Ninja_Forms {
 			'AuthorURI' => 'https://www.metaslider.com',
 			'Author' => 'Matcha Labs',
 			'Image' => "//ps.w.org/$this->slug/assets/icon-256x256.png?rev=1262610",
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
 		);
 		return $mods;
 

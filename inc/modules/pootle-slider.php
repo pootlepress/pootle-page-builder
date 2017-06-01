@@ -45,7 +45,7 @@ class pootle_page_builder_Pootle_Slider {
 				'icon_class' => 'dashicons dashicons-slides',
 				'tab' => "#pootlepb-background-row-tab",
 				'callback' => 'pootleSliderSlide',
-				'ActiveClass' => 'Pootle_Slider',
+				'active_class' => 'Pootle_Slider',
 				'priority' => 5
 			);
 
@@ -65,7 +65,7 @@ class pootle_page_builder_Pootle_Slider {
 				'icon_class' => 'dashicons dashicons-slides',
 				'tab' => "#pootle-pootle-slider-tab",
 				//'callback' => 'pootleSliderSlide',
-				'ActiveClass' => 'Pootle_Slider',
+				'active_class' => 'Pootle_Slider',
 				'priority' => 5
 			);
 		}
@@ -80,7 +80,7 @@ class pootle_page_builder_Pootle_Slider {
 			'AuthorURI' => 'https://www.pootlepress.com',
 			'Author' => 'pootlepress',
 			'Image' => "//ps.w.org/$this->slug/assets/icon-256x256.png?rev=1262610",
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
 		);
 		return $mods;
 
