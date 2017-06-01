@@ -35,6 +35,8 @@ final class Pootle_Page_Builder_Admin {
 	 */
 	protected function includes() {
 
+		/** Pootle Page Builder REST API endpoints */
+		require_once POOTLEPB_DIR . 'inc/class-rest.php';
 		/** Pootle Page Builder user interface */
 		require_once POOTLEPB_DIR . 'inc/class-panels-ui.php';
 		/** Content block - Editor panel and output */
