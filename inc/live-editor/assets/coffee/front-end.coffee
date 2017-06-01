@@ -88,6 +88,7 @@ jQuery ($) ->
 	$deletingWhat = $('#pootlepb-deleting-item')
 	$addRowDialog = $('#pootlepb-add-row')
 	$setTitleDialog = $('#pootlepb-set-title')
+	$designTemplateDialog = $('#pootlepb-design-templates')
 	$postSettingsDialog = $('#pootlepb-post-settings')
 	$ppbIpadColorDialog = $('#ppb-ipad-color-picker')
 	$iconPicker = $('#ppb-iconpicker')
@@ -647,7 +648,7 @@ jQuery ($) ->
 				$('a.ppb-tabs-anchors[href="' + tab + '"]').click()
 			return
 		moduleDroppable:
-			accept: '.ppb-module'
+			accept: '.ppb-module-existing-row'
 			activeClass: 'ppb-drop-module'
 			hoverClass: 'ppb-hover-module'
 			drop: (e, ui) ->
@@ -812,6 +813,14 @@ jQuery ($) ->
 		return
 
 	$setTitleDialog.ppbDialog dialogAttr
+
+	dialogAttr.buttons = Cancel: ->
+		$setTitleDialog.ppbDialog 'close'
+	dialogAttr.height = 700
+	dialogAttr.width = 700
+	dialogAttr.title = $designTemplateDialog.data('title')
+	$designTemplateDialog.ppbDialog dialogAttr
+
 	dialogAttr.height = 610
 	dialogAttr.width = 520
 	dialogAttr.title = 'Insert icon'
@@ -1715,7 +1724,13 @@ jQuery ($) ->
 	prevu.reset 'noSort'
 	# Modules
 	$mods.find('.ppb-module').draggable prevu.moduleDraggable
-	$ppb.find('.ppb-block, .ppb-live-add-object.add-row').droppable prevu.moduleDroppable
+
+
+
+	prevu.newRowModuleDroppable = jQuery.extend(true, {}, prevu.moduleDroppable )
+	prevu.newRowModuleDroppable.accept = '.ppb-module-new-row'
+
+	$ppb.find('.ppb-block, .ppb-live-add-object.add-row').droppable prevu.newRowModuleDroppable
 
 	window.ppbModules.image = ($t, ed) ->
 		prevu.insertImage()
@@ -1748,6 +1763,13 @@ jQuery ($) ->
 			ed.execCommand 'mceInsertContent', false, $img
 			return
 		return
+
+	window.ppbModules.designTemplate = ($t, ed) ->
+		$designTemplateDialog.ppbDialog 'open'
+
+	$designTemplateDialog.on 'click', '.ppb-tpl', applyDesignTemplate
+
+	applyDesignTemplate = () -> {}
 
 	window.ppbModules.button = ($t, ed) ->
 		ed.execCommand 'pbtn_add_btn_cmd'

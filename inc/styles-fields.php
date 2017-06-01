@@ -306,8 +306,9 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 			<button class="button upload-button">Select Image</button>
 			<span class="search-unsplash-wrap" style="display: none;">
 				<small>OR</small>
-				<input placeholder="Search Unsplash..." type="search">
-				<span class="dashicons dashicons-search unsplash-button">Search Unsplash</span>
+				<input placeholder="Search Free Photos..." type="search">
+				<span class="dashicons dashicons-search unsplash-button">Search Free Photos</span>
+				<span class="dashicons dashicons-editor-help tooltip-unsplash" data-tooltip="All stock photos are sourced from Unsplash.com and are licensed under Creative Commons Zero which means you can copy, modify, distribute and use the photos for free, including commercial purposes, without asking permission from or providing attribution to the photographer or Unsplash"></span>
 			</span>
 			<?php
 			break;
