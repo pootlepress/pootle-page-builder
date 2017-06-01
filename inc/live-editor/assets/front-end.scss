@@ -161,6 +161,7 @@
  */
 
 .panels-tooltip {
+	max-width: 430px;
 	position: absolute;
 	background: #1c1c1c;
 	background: rgba(0, 0, 0, 0.8);
@@ -1191,6 +1192,9 @@ body .ppb-dialog {
 		height: 34px;
 		width: 34px;
 		color: #aaa;
+		&.tooltip-unsplash {
+			right: -29px;
+		}
 	}
 }
 
@@ -1565,39 +1569,34 @@ a .ppb-module-disabled:after {
 	&:hover {
 		opacity: 1;
 	}
+	.tooltip-module {
+		position: absolute;
+		right: 5px;
+		top: 50%;
+		margin-top: -10px;
+	}
 }
 
-.ppb-module-disabled {
+.ppb-module-disabled, .ppb-module{
 	.icon, .label {
 		vertical-align: middle;
 		display: inline-block;
 		box-sizing: border-box;
 	}
-}
-
-.ppb-module {
-	.icon, .label {
-		vertical-align: middle;
-		display: inline-block;
-		box-sizing: border-box;
+	.label {
+		padding: 7px 7px 7px 0;
+		width: 80%;
+		font: 16px/1.6 sans-serif;
 	}
-}
-
-.ppb-module-disabled .label, .ppb-module .label {
-	padding: 7px 7px 7px 0;
-	width: 80%;
-	font: 16px/1.6 sans-serif;
-}
-
-.ppb-module-disabled .icon, .ppb-module .icon {
-	height: 50px;
-	line-height: 50px;
-	width: 20%;
-	text-align: center;
-}
-
-.ppb-module-disabled .icon:before, .ppb-module .icon:before {
-	font-size: 30px;
+	.icon {
+		height: 50px;
+		line-height: 50px;
+		width: 20%;
+		text-align: center;
+	}
+	.icon:before {
+		font-size: 30px;
+	}
 }
 
 .ppb-block.ppb-hover-module.ppb-drop-module:after {
@@ -1752,4 +1751,12 @@ pre.ace_editor.ace-tm {
 }
 .ppb-dialog .pootlepb-dialog {
 	display: block;
+}
+
+// Template design module
+.ppb-tpl {
+	float: left;
+	width: 32%;
+	margin: 1% 0 1% 1%;
+	cursor: pointer;
 }
