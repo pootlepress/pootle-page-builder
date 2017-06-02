@@ -13,7 +13,7 @@
  * @param newI
  * @returns Array
  */
-var logPPBData, ppbIpad, ppbPrevuDebug;
+var logPPBData, ppbIpad, ppbPrevuDebug, ppbTemplateFromRow;
 
 Array.prototype.ppbPrevuMove = function(oldI, newI) {
   this.splice(newI, 0, this.splice(oldI, 1)[0]);
@@ -1961,5 +1961,35 @@ jQuery(function($) {
     return ppbSkrollr.refresh($t.find('.ppb-col'));
   });
 });
+
+ppbTemplateFromRow = function(rowI, thumb) {
+  var cb, j, len, parseContent, ref, rowStyle, tpl;
+  if (!ppbData || !ppbData.grids || !ppbData.grids[rowI]) {
+    return {};
+  }
+  rowStyle = ppbData.grids[rowI].style;
+  if (!thumb) {
+    thumb = rowStyle.background_image || rowStyle.grad_image || rowStyle.bg_mobile_image;
+  }
+  parseContent = function(cb) {
+    return tpl.content.push({
+      style: cb.info.style,
+      text: cb.text
+    });
+  };
+  tpl = {
+    img: thumb,
+    content: [],
+    style: JSON.stringify(rowStyle)
+  };
+  ref = ppbData.widgets;
+  for (j = 0, len = ref.length; j < len; j++) {
+    cb = ref[j];
+    if (cb.info && parseInt(cb.info.grid) === parseInt(rowI)) {
+      parseContent(cb);
+    }
+  }
+  return JSON.stringify(tpl);
+};
 
 //# sourceMappingURL=front-end.dev.js.map

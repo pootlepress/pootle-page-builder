@@ -1754,9 +1754,13 @@ pre.ace_editor.ace-tm {
 }
 
 // Template design module
+#pootlepb-design-templates {
+	column-count: 3;
+	column-gap: 0;
+	padding: 7px;
+}
 .ppb-tpl {
-	float: left;
-	width: 32%;
-	margin: 1% 0 1% 1%;
+	display: inline-block;
+	margin: 7px;
 	cursor: pointer;
 }

@@ -1834,3 +1834,26 @@ jQuery ($) ->
 	# Content updated hook
 	$('html').on 'pootlepb_le_content_updated', (e, $t) ->
 		ppbSkrollr.refresh $t.find( '.ppb-col' );
+
+ppbTemplateFromRow = (rowI, thumb) ->
+	if ! ppbData || ! ppbData.grids || ! ppbData.grids[ rowI ] then return {}
+
+	rowStyle = ppbData.grids[ rowI ].style
+
+	if ! thumb
+		thumb = rowStyle.background_image || rowStyle.grad_image || rowStyle.bg_mobile_image
+
+	parseContent = ( cb ) ->
+		tpl.content.push(
+			style: cb.info.style
+			text: cb.text
+		)
+
+	tpl =
+		img: thumb
+		content: []
+		style: JSON.stringify rowStyle
+
+	parseContent cb for cb in ppbData.widgets when cb.info && parseInt( cb.info.grid ) is parseInt( rowI )
+
+	return JSON.stringify tpl
