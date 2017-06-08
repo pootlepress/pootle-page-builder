@@ -180,12 +180,13 @@ if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 		}
 
 		public function app_user_logged_in() {
+			$nonce = wp_create_nonce( 'ppb-ipad-live-edit' );
 			$redirect = filter_input( INPUT_GET, 'redirect' );
 			if ( isset( $_COOKIE['ppb-redirect'] ) ) {
 				$redirect = $_COOKIE['ppb-redirect'];
 			}
 
-			header( 'Location: ' . $redirect );
+			header( "Location: $redirect?nonce=$nonce" );
 		}
 
 		/**

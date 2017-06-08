@@ -112,11 +112,14 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		}
 
 		if ( isset( $_REQUEST['ppb-ipad'] ) ) {
+
+//			var_dump( $this->nonce, wp_verify_nonce( $this->nonce, 'ppb-ipad-live-edit' ) );
+
 			if ( stristr( $_SERVER['HTTP_USER_AGENT'], '(iPad;' ) ) {
 				setcookie( 'ppb-ipad', 'true' );
 			}
 			add_filter( 'show_admin_bar', '__return_false' );
-			if ( $this->nonce === get_transient( 'ppb-ipad-' . $user ) ) {
+			if ( wp_verify_nonce( $this->nonce, 'ppb-ipad-live-edit' ) ) {
 				$this->ipad = true;
 				$this->actions();
 				add_action( 'wp_head', array( $this, 'ipad_html' ) );

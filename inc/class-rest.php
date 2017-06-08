@@ -30,6 +30,7 @@ final class Pootle_Page_Builder_Rest_API {
 		$json  = array(
 			'site_url' => site_url(),
 			'posts'    => array(),
+			'nonce' => wp_create_nonce( 'ppb-ipad-live-edit' ),
 		);
 
 		foreach ( $query->posts as $post ) {

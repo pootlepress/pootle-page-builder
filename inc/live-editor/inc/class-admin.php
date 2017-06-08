@@ -213,7 +213,7 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 			}
 			exit;
 		}
-		if ( $nonce === get_transient( 'ppb-ipad-' . $ipad_user ) || wp_verify_nonce( $nonce, 'ppb-new-live-post' ) ) {
+		if ( wp_verify_nonce( $nonce, 'ppb-ipad-live-edit' ) || wp_verify_nonce( $nonce, 'ppb-new-live-post' ) ) {
 			$id = wp_insert_post( array(
 				'post_title'   => 'Untitled',
 				'post_content' => '',
