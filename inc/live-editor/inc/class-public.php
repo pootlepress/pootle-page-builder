@@ -229,7 +229,12 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		$ver = POOTLEPB_VERSION;
 		$url = $this->url . 'assets';
 		wp_enqueue_style( 'pootlepb-ui-styles', POOTLEPB_URL . 'css/ppb-jq-ui.css', array(), $ver );
-		wp_enqueue_style( 'ppb-panels-live-editor-css', "$url/front-end.css", array(), $ver );
+		wp_enqueue_style(
+			'ppb-panels-live-editor-css',
+			$this->ipad ? "$url/ipad-app.css" : "$url/front-end.css",
+			array(),
+			$ver
+		);
 		wp_enqueue_style( 'wp-color-picker' );
 	}
 

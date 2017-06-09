@@ -1,189 +1,3 @@
-<style>
-	.wp-picker-container .wp-picker-open + .wp-picker-input-wrap {
-		display: none;
-	}
-
-	.panel-grid:first-child{ margin-top:0 }
-	.pootle-live-editor.ppb-live-add-object.add-row {
-		position: fixed;
-		top:0;
-		left: 50vw;
-		width:1px;
-		height:1px;
-		overflow: hidden;
-	}
-
-	.panel-grid.tour-active .ppb-edit-row.tour-active span.dashicons-before:not(.dashicons-no):not(.dashicons-editor-code),
-	.panel-grid:hover .ppb-edit-row:hover span.dashicons-before:not(.dashicons-no):not(.dashicons-editor-code),
-	.ppb-block:hover .pootle-live-editor:hover span.dashicons-before,
-	.panel-grid.tour-active .ppb-block .pootle-live-editor.tour-active span.dashicons-before:not(.dashicons-move) {
-		display: none;
-	}
-
-	.panel-grid:hover .ppb-edit-row:hover span.dashicons-editor-code,
-	.ppb-block:hover .pootle-live-editor:hover span.dashicons-move {
-		display: inline-block;
-	}
-	.pootle-live-editor-active .ppb-tabs-nav {
-		font-size: 16px;
-	}
-	.ppb-tabs-panel .field > * {
-		font-size: 16px;
-		font-weight: 300;
-	}
-	.ppb-tabs-panel .field {
-		margin-top: 25px
-	}
-	.ppb-tabs-nav li {
-		margin: 16px 0;
-	}
-	.pootle-live-editor-active .mce-toolbar .mce-btn-group .mce-btn, .pootle-live-editor-active .qt-dfw {
-		margin: 3px
-	}
-	.pootle-live-editor-active .ppb-dialog .button,
-	.pootle-live-editor-active .ppb-dialog button,
-	.pootle-live-editor-active .ppb-dialog .ui-button.pootle-live-editor-active,
-	.pootle-live-editor-active .wp-color-result,
-	.pootle-live-editor-active .wp-color-result:after  {
-		font-size: 14px;
-		line-height: 34px;
-		height: 34px;
-		font-weight: 300;
-	}
-	.pootle-live-editor-active .ppb-dialog .ppb-dialog-buttonpane button.ui-button,
-	.pootle-live-editor-active .ppb-dialog [type="text"],
-	.pootle-live-editor-active .ppb-dialog [type="number"],
-	.pootle-live-editor-active .ppb-dialog .button,
-	.pootle-live-editor-active .ppb-dialog button,
-	.pootle-live-editor-active .ppb-dialog .ui-button.pootle-live-editor-active,
-	.pootle-live-editor-active .wp-color-result:after {
-		font-size: 16px;
-		padding: 9px 16px !important;
-		line-height: 16px;
-		height: auto;
-		font-weight: 300;
-	}
-	.pootle-live-editor-active .ppb-dialog [type="number"] {
-		width: 120px;
-		margin-right: 7px;
-	}
-	.mce-toolbar div.mce-btn button,
-	.mce-toolbar div.mce-btn button.mce-open {
-		padding: 7px 9px !important;
-	}
-	.ppb-dialog-titlebar {
-		font-weight: 300;
-	}
-	.pootle-live-editor-active .ppb-dialog [type="checkbox"] {
-		height: 20px;
-		width: 20px;
-		margin:5px 0;
-	}
-	.ppb-dialog .ui-button.ppb-dialog-titlebar-close {
-		padding: 2px !important;
-	}
-	.ui-resizable-handle.ui-resizable-w {
-		border: none;
-		padding: 7px;
-		margin-left: -7px;
-	}
-	.ui-resizable-handle.ui-resizable-w:before {
-		content: '';
-		display: block;
-		position: absolute;
-		top: 0;
-		bottom: 0;
-		margin-left: -1px;
-		border-right: 2px dotted #ef4832;
-		padding: 0;
-		cursor: ew-resize;
-	}
-	.ppb-full-blue-notice, #ppb-ipad-color-picker {
-		padding: 50px 50px;
-		position: fixed;
-		top: 0;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		width: 340px;
-		height: 340px;
-		z-index: 9999;
-		text-align: center;
-		margin: auto;
-		background: #fff;
-		display: none;
-	}
-	.ppb-full-blue-notice {
-		-webkit-box-sizing: border-box;
-		box-sizing: border-box;
-		background		: #009bf4;
-		height			: auto;
-		width			: auto;
-		padding			: 43% 0 0;
-	}
-	.fade-in-out {
-		-webkit-animation: fade-in-out 2.5s 1 both;
-		animation: fade-in-out 2.5s 1 both;
-	}
-	.ppb-full-blue-notice > .dashicons {
-		display: inline-block;
-	}
-	.ppb-full-blue-notice > *,
-	.ppb-full-blue-notice > .dashicons {
-		width: auto;
-		height: auto;
-		vertical-align: middle;
-		color: #fff;
-		font-size: 25px;
-		letter-spacing: 2px;
-	}
-	span.ppb-rotate.dashicons.dashicons-admin-generic:before {
-		padding: 0 0 0.0216em 0.052em;
-	}
-	.ppb-full-blue-notice .dashicons:before {
-		font-size: 160px;
-		color: inherit;
-		width: auto;
-		height: auto;
-		display: block;
-		line-height: 1;
-	}
-	#ppb-ipad-color-picker {
-		position: absolute;
-		top: 0;
-		bottom: auto;
-		width: 430px;
-		padding: 7px;
-		height: 340px;
-		-moz-box-sizing: content-box;
-		-webkit-box-sizing: content-box;
-		box-sizing: content-box;
-	}
-	.ppb-ipad-color-picker span {
-		display: block;
-		float:left;
-		width: 11%;
-		box-shadow: 1px 1px 3px rgba(0,0,0,0.25);
-		padding-top: 43px;
-		margin: 1.636%;
-	}
-	span.wp-picker-input-wrap .button,
-	a.wp-color-result.wp-picker-open {
-		display:none !important;
-	}
-	@-webkit-keyframes fade-in-out {
-		0%   { opacity: 0; -webkit-transform: translate3d(0,-25%,0) }
-		34%  { opacity: 1; -webkit-transform: none                  }
-		61%  { opacity: 1; -webkit-transform: none                  }
-		100% { opacity: 0; -webkit-transform: translate3d(0,25%,0)  }
-	}
-	@keyframes fade-in-out {
-		0%   { opacity: 0; transform: translate3d(0,-25%,0) }
-		34%  { opacity: 1; transform: none                  }
-		61%  { opacity: 1; transform: none                  }
-		100% { opacity: 0; transform: translate3d(0,25%,0)  }
-	}
-</style>
 <div id="ppb-ipad-updated-notice" class="ppb-full-blue-notice fade-in-out">
 	<span class="dashicons dashicons-yes"></span>
 	<h3>Changes Saved</h3>
@@ -236,3 +50,32 @@
 		<span style="background: #CC99FF" data-color="#CC99FF"></span>
 	</div>
 </div>
+
+<div class="pootle-bar">
+
+	<span class="back-placeholder"></span>
+
+	<span class="back dashicons dashicons-arrow-left-alt2">
+		<span>Back</span>
+	</span>
+
+	<span onclick="ppbIpad.AddRow()" class="new-row dashicons dashicons-plus">
+		<span>Row</span>
+	</span>
+
+	<span onclick="ppbIpad.StyleRow()" class="edit-row dashicons dashicons-admin-appearance">
+		<span>Row</span>
+	</span>
+
+	<span onclick="ppbIpad.StyleContent()" class="edit-content dashicons dashicons-edit">
+		<span>Content</span>
+	</span>
+
+	<span class="divider"></span>
+
+	<span onclick="ppbIpad.update()" class="update dashicons dashicons-screenoptions">
+		<span>Update</span>
+	</span>
+
+</div>
+<div class="pootle-bar-space"></div>
