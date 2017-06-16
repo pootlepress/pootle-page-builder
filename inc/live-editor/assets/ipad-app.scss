@@ -226,8 +226,19 @@ span.ppb-rotate.dashicons.dashicons-admin-generic:before {
 	margin: 1.636%;
 }
 
-div#pootlepb-modules-wrap {
-	top: 48px;
+.ppb-live-edit-object,
+#pootlepb-modules-wrap,
+.pootle-live-editor.ppb-live-edit-object.ppb-edit-block,
+.panel-grid .ppb-edit-row span.dashicons-before:not(.ui-sortable-handle),
+.panel-grid.tour-active .resize-cells ~ .ui-resizable-handle,
+.panel-grid:hover .resize-cells ~ .ui-resizable-handle,
+.ppb-row .panel-grid-cell .ui-draggable.ppb-block:hover .ui-resizable-handle {
+	display: none !important;
+}
+
+.panel-grid .ppb-edit-row span.dashicons-before.ui-sortable-handle {
+	display: block;
+	visibility: visible;
 }
 
 body {
@@ -242,7 +253,7 @@ body {
 	left: 0;
 	right: 0;
 	z-index: 9999;
-	text-align: right;
+	text-align: center;
 	font-size: 0;
 	> {
 		.divider,
@@ -250,23 +261,26 @@ body {
 			display: inline-block;
 			font-size: 25px;
 			line-height: 48px;
-			height: 48px;
 			width: auto;
+			height: auto;
 			margin-right: 0.75em;
+			text-align: center;
 			span {
 				font: 400 16px/48px sans-serif;
-				display: block;
 				float: right;
 				margin-left: 0.25em;
+				display: none;
 			}
 		}
 		.back {
 			float: left;
+			span {
+				display: inline-block;
+			}
 		}
-		.divider {
-			border-left:2px solid;
-			margin-right: 0.7em;
-		}
+	}
+	.update {
+		float: right;
 	}
 }
 

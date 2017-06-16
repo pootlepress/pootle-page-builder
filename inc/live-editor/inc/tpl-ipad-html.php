@@ -53,12 +53,51 @@
 
 <div class="pootle-bar">
 
-	<span class="back-placeholder"></span>
-
 	<span class="back dashicons dashicons-arrow-left-alt2">
 		<span>Back</span>
 	</span>
 
+	<span class="hero dashicons dashicons-archive">
+		<span>Hero</span>
+	</span>
+
+	<span class="cols2 dashicons dashicons-controls-pause">
+		<span>2 Cols</span>
+	</span>
+
+	<span class="cols3 dashicons dashicons-menu rot90">
+		<span>3 Cols</span>
+	</span>
+
+	<span class="background dashicons dashicons-admin-appearance">
+		<span>Background</span>
+	</span>
+
+	<span class="settings dashicons dashicons-admin-generic">
+		<span>Settings</span>
+	</span>
+
+	<span class="image dashicons dashicons-format-image">
+		<span>Insert image</span>
+	</span>
+
+	<span class="unsplash dashicons dashicons-images-alt2">
+		<span>Unsplash</span>
+	</span>
+
+	<span class="bold dashicons dashicons-editor-bold">
+		<span>Bold</span>
+	</span>
+
+	<span class="italics dashicons dashicons-editor-italic">
+		<span>Italics</span>
+	</span>
+
+	<span class="align dashicons dashicons-editor-aligncenter">
+		<span>Align</span>
+	</span>
+
+<!--
 	<span onclick="ppbIpad.AddRow()" class="new-row dashicons dashicons-plus">
 		<span>Row</span>
 	</span>
@@ -72,6 +111,7 @@
 	</span>
 
 	<span class="divider"></span>
+-->
 
 	<span onclick="ppbIpad.update()" class="update dashicons dashicons-screenoptions">
 		<span>Update</span>

@@ -288,12 +288,16 @@ body .ppb-dialog {
 	}
 }
 
+.rot90,
 .ppb-edit-row .dashicons-editor-code:before {
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
 	-ms-transform: rotate(90deg);
 	-o-transform: rotate(90deg);
 	transform: rotate(90deg);
+}
+
+.ppb-edit-row .dashicons-editor-code:before {
 	padding: 6px 5px 4px 5px;
 }
 
