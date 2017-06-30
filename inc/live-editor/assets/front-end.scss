@@ -1664,7 +1664,7 @@ a .ppb-module-disabled:after {
 	}
 }
 
-#ppb-loading-overlay, #ppb-loader {
+#ppb-loading, #ppb-loader {
 	position: fixed;
 	top: -9999px;
 	right: -9999px;
@@ -1674,7 +1674,7 @@ a .ppb-module-disabled:after {
 	margin: auto;
 }
 
-#ppb-loading-overlay {
+#ppb-loading {
 	background: rgba(0, 0, 0, 0.5);
 	display: none;
 }

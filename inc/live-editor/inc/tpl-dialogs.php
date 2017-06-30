@@ -352,7 +352,7 @@ if ( $enabled_modules ) {
 	<?php
 }
 ?>
-<div id="ppb-loading-overlay">
+<div id="ppb-loading">
 	<div id="ppb-loader"></div>
 </div>
 

@@ -80,6 +80,7 @@ class Pootle_PB_Module_Design_Template {
 		?>
 		<div class="pootlepb-dialog" id="pootlepb-design-templates" data-title="Choose a template...">
 		<?php
+		do_action( 'before_design_templates' );
 		foreach ( $this->tpls as $id => $tpl ) {
 			echo <<<HTML
 <div class="ppb-tpl" data-id="$id">
@@ -87,6 +88,7 @@ class Pootle_PB_Module_Design_Template {
 </div>
 HTML;
 		}
+		do_action( 'after_design_templates' );
 		?>
 		</div>
 		<?php

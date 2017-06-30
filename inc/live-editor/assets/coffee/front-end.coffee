@@ -95,7 +95,7 @@ jQuery ($) ->
 	$ppb = $('#pootle-page-builder')
 	$mods = $('#pootlepb-modules-wrap')
 	$body = $('body')
-	$loader = $('#ppb-loading-overlay')
+	$loader = $('#ppb-loading')
 	dialogAttr =
 		dialogClass: 'ppb-cool-panel'
 		autoOpen: false
