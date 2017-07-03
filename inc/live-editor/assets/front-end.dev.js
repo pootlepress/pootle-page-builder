@@ -13,7 +13,7 @@
  * @param newI
  * @returns Array
  */
-var logPPBData, ppbIpad, ppbPrevuDebug, ppbTemplateFromRow;
+var logPPBData, ppbIpad, ppbNotify, ppbPrevuDebug, ppbTemplateFromRow;
 
 Array.prototype.ppbPrevuMove = function(oldI, newI) {
   this.splice(newI, 0, this.splice(oldI, 1)[0]);
@@ -465,7 +465,7 @@ jQuery(function($) {
         id = ppbData.widgets.length;
         block.info.cell = i;
         block.info.id = id;
-        if (blockData[i]) {
+        if (blockData && blockData[i]) {
           block.text = typeof blockData[i].text === 'string' ? blockData[i].text : defaultText;
           block.info.style = typeof blockData[i].style === 'string' ? blockData[i].style : '{}';
         }
@@ -925,6 +925,7 @@ jQuery(function($) {
     ppbAjax.title = $('#ppble-live-page-title').val();
   };
   $setTitleDialog.ppbDialog(dialogAttr);
+  dialogAttr.close = false;
   dialogAttr.buttons = {
     Cancel: function() {
       return $setTitleDialog.ppbDialog('close');
@@ -1990,6 +1991,16 @@ ppbTemplateFromRow = function(rowI, thumb) {
     }
   }
   return JSON.stringify(tpl);
+};
+
+ppbNotify = function(notice) {
+  var $n;
+  $n = jQuery('#ppb-notify');
+  $n.html(notice);
+  $n.fadeIn();
+  return setTimeout(function() {
+    return $n.fadeOut();
+  }, 2000);
 };
 
 //# sourceMappingURL=front-end.dev.js.map

@@ -412,7 +412,7 @@ jQuery ($) ->
 				id = ppbData.widgets.length
 				block.info.cell = i
 				block.info.id = id
-				if ( blockData[ i ] )
+				if ( blockData && blockData[ i ] )
 					block.text = if typeof blockData[ i ].text == 'string' then blockData[ i ].text else defaultText
 					block.info.style = if typeof blockData[ i ].style == 'string' then blockData[ i ].style else '{}'
 
@@ -822,6 +822,8 @@ jQuery ($) ->
 		return
 
 	$setTitleDialog.ppbDialog dialogAttr
+
+	dialogAttr.close = false
 
 	dialogAttr.buttons = Cancel: ->
 		$setTitleDialog.ppbDialog 'close'
@@ -1857,3 +1859,13 @@ ppbTemplateFromRow = (rowI, thumb) ->
 	parseContent cb for cb in ppbData.widgets when cb.info && parseInt( cb.info.grid ) is parseInt( rowI )
 
 	return JSON.stringify tpl
+
+ppbNotify = ( notice ) ->
+	$n = jQuery( '#ppb-notify' )
+	$n.html( notice )
+	$n.fadeIn()
+	setTimeout(
+		() ->
+			$n.fadeOut()
+		, 2000
+	)

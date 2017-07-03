@@ -1757,10 +1757,49 @@ pre.ace_editor.ace-tm {
 #pootlepb-design-templates {
 	column-count: 3;
 	column-gap: 0;
-	padding: 7px;
+	padding: 1.4em 0.7em;
+	text-align: center;
+
+	.ppb-tpl {
+		display: inline-block;
+		cursor: pointer;
+		margin: 0 0.7em 1.4em;
+		-webkit-column-break-inside: avoid;
+		page-break-inside: avoid;
+		break-inside: avoid;
+		border: 1px solid #aaa;
+		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+		&:after {
+			transition: opacity 0.25s;
+			content: attr( data-id );
+			display: block;
+			padding: 16px;
+			font: 16px/16px sans-serif;
+			color: #333;
+			position: relative;
+		}
+
+		&:hover:after {
+			opacity: 0.5;
+		}
+
+		img {
+			width: 100%;
+			display: block;
+			margin: 0;
+		}
+	}
 }
-.ppb-tpl {
-	display: inline-block;
-	margin: 7px;
-	cursor: pointer;
+
+#ppb-notify {
+	position: fixed;
+	top: 2.5em;
+	left: 2.5em;
+	right: 2.5em;
+	padding: 1em;
+	background: #ef4832;
+	color: #fff;
+	z-index: 999999;
+	font: 25px sans-serif;
 }

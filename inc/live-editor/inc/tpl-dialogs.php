@@ -384,5 +384,7 @@ if ( $enabled_modules ) {
 </div>
 <div id="ppb-tooltip" style="display:none"></div>
 
+<div id="ppb-notify" style="display:none;"></div>
+
 <?php
 do_action( 'pootlepb_le_dialogs' );
