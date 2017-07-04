@@ -310,6 +310,10 @@ img.ppb-bg-parallax {
 	background: none !important;
 }
 
+.ppb-stretch-full-width.ppb-stretch-full-width-2 {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
 
 .ppb-row-accordion-toggle,
 .ppb-row-accordion-text {

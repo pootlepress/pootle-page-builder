@@ -157,7 +157,12 @@ $pootlepb_row_styling_fields = array(
 	//Layout
 	'full_width' => array (
 		'name' => 'Make row go full width',
-		'type' => 'checkbox',
+		'type' => 'select',
+		'options' => array(
+			'' => 'No',
+			'1'	=> 'Yes',
+			'2'	=> 'With content',
+		),
 		'tab' => 'layout',
 		'priority' => 1,
 	),

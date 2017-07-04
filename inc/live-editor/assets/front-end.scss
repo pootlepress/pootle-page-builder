@@ -56,7 +56,7 @@
 	left: 0;
 	position: absolute;
 	opacity: 0;
-	filter: Alpha(Opacity = 0);
+	filter: Alpha(Opacity=0);
 }
 
 .ppb-state-disabled {
@@ -210,7 +210,7 @@
 body .ppb-dialog {
 	font: 14px sans-serif;
 	color: #333;
-	h1, h2, h3, h4, h5 ,h6, p, a {
+	h1, h2, h3, h4, h5, h6, p, a {
 		font: inherit;
 		color: inherit;
 	}
@@ -236,7 +236,8 @@ body .ppb-dialog {
 }
 
 .pootle-live-editor.ppb-edit-row .dashicons-before {
-	&:before, &:hover:before {}
+	&:before, &:hover:before {
+	}
 }
 
 .pootlepb-dialog {
@@ -264,7 +265,6 @@ body .ppb-dialog {
 		background: #ef4832;
 	}
 }
-
 
 .ppb-state-active span {
 	font-weight: bold;
@@ -340,11 +340,11 @@ body .ppb-dialog {
 .ppb-cool-panel.ppb-dialog {
 	position: fixed;
 	left: 0 !important;
-	top: 0!important;
+	top: 0 !important;
 	bottom: 0;
 	right: auto;
 	width: 300px !important;
-	overflow:hidden;
+	overflow: hidden;
 
 	* {
 		box-sizing: border-box;
@@ -359,9 +359,9 @@ body .ppb-dialog {
 	.content-wrap,
 	.ppb-dialog-buttonpane {
 		position: absolute;
-		top:37px;
-		bottom:0;
-		left:0;
+		top: 37px;
+		bottom: 0;
+		left: 0;
 		width: 100%;
 	}
 
@@ -399,8 +399,8 @@ body .ppb-dialog {
 	}
 
 	.ppb-dialog-titlebar {
-		top:0;
-		bottom:auto;
+		top: 0;
+		bottom: auto;
 		height: 37px;
 	}
 
@@ -425,7 +425,7 @@ body .ppb-dialog {
 }
 
 .ppb-dialog.show-panel ~ .ppb-widget-overlay {
-	background: rgba(0,0,0,0);
+	background: rgba(0, 0, 0, 0);
 }
 
 .ppb-tabs-panel {
@@ -844,7 +844,7 @@ body .ppb-dialog {
 	left: 0;
 	position: absolute;
 	opacity: 0;
-	filter: Alpha(Opacity = 0);
+	filter: Alpha(Opacity=0);
 }
 
 .ppb-front {
@@ -977,7 +977,8 @@ body .ppb-dialog {
 }
 
 .pootle-live-editor.ppb-edit-row .dashicons-before {
-	&:before, &:hover:before {}
+	&:before, &:hover:before {
+	}
 }
 
 .pootlepb-dialog {
@@ -1137,7 +1138,7 @@ body .ppb-dialog {
 	box-shadow: 0 1px 0 #006799 !important;
 	color: #fff !important;
 	text-decoration: none;
-	text-shadow: 0 -1px 1px #006799,1px 0 1px #006799,0 1px 1px #006799,-1px 0 1px #006799 !important;
+	text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799 !important;
 	font-weight: 500;
 }
 
@@ -1233,7 +1234,8 @@ body .ppb-dialog {
 	h3 {
 		width: 169px;
 	}
-	label > span {}
+	label > span {
+	}
 }
 
 .ppble-img-prevu {
@@ -1577,7 +1579,7 @@ a .ppb-module-disabled:after {
 	}
 }
 
-.ppb-module-disabled, .ppb-module{
+.ppb-module-disabled, .ppb-module {
 	.icon, .label {
 		vertical-align: middle;
 		display: inline-block;
@@ -1730,7 +1732,7 @@ a .ppb-module-disabled:after {
 }
 
 pre.ace_editor.ace-tm {
-	height: calc( 100% - 88px );
+	height: calc(100% - 88px);
 }
 
 #ppb-tooltip {
@@ -1749,6 +1751,7 @@ pre.ace_editor.ace-tm {
 .pootlepb-dialog {
 	display: none;
 }
+
 .ppb-dialog .pootlepb-dialog {
 	display: block;
 }
@@ -1761,7 +1764,7 @@ pre.ace_editor.ace-tm {
 	text-align: center;
 
 	.ppb-tpl {
-		display: inline-block;
+		display: block;
 		cursor: pointer;
 		margin: 0 0.7em 1.4em;
 		-webkit-column-break-inside: avoid;
@@ -1772,7 +1775,7 @@ pre.ace_editor.ace-tm {
 
 		&:after {
 			transition: opacity 0.25s;
-			content: attr( data-id );
+			content: attr(data-id);
 			display: block;
 			padding: 16px;
 			font: 16px/16px sans-serif;
@@ -1792,14 +1795,26 @@ pre.ace_editor.ace-tm {
 	}
 }
 
-#ppb-notify {
+.ppb-notify {
 	position: fixed;
-	top: 2.5em;
+	top: 47vh;
 	left: 2.5em;
 	right: 2.5em;
-	padding: 1em;
-	background: #ef4832;
+	padding: 25px;
 	color: #fff;
 	z-index: 999999;
-	font: 25px sans-serif;
+	font: 20px sans-serif;
+	background: #ef4832 -14px 7px no-repeat url(wilson2.png);
+	transition: background 0.5s;
+	background-clip: border-box;
+	padding-left: 140px;
+	border: 2px solid rgba(0,0,0,0.25);
+	&:hover {
+		background-position-y: 16px;
+	}
+}
+
+.ppb-dialog[aria-describedby="pootlepb-design-templates"] .ppb-dialog-titlebar {
+	background: #2196f3 left bottom/ auto 90% no-repeat url(wilson2.png);
+	padding-left: 4em;
 }

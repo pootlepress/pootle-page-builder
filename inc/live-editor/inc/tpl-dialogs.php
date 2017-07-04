@@ -90,7 +90,6 @@ ksort( $panel_tabs );
 	</div>
 
 <?php
-$row_panel_tabs = apply_filters( 'pootlepb_le_row_block_tabs', $panel_tabs );
 
 $row_panel_tabs = array(
 	'background' => array(
@@ -107,6 +106,7 @@ $row_panel_tabs = array(
 	),
 );
 
+$row_panel_tabs = apply_filters( 'pootlepb_le_row_block_tabs', $row_panel_tabs );
 ?>
 	<div class="pootlepb-dialog" id="pootlepb-row-editor-panel">
 		<ul>
@@ -384,7 +384,7 @@ if ( $enabled_modules ) {
 </div>
 <div id="ppb-tooltip" style="display:none"></div>
 
-<div id="ppb-notify" style="display:none;"></div>
+<div id="ppb-notify" class="ppb-notify" style="display:none;"></div>
 
 <?php
 do_action( 'pootlepb_le_dialogs' );
