@@ -1761,24 +1761,24 @@ pre.ace_editor.ace-tm {
 	column-count: 3;
 	column-gap: 0;
 	padding: 1.4em 0.7em;
-	text-align: center;
+	text-align: left;
 
 	.ppb-tpl {
+		background: #fff;
 		display: block;
 		cursor: pointer;
 		margin: 0 0.7em 1.4em;
 		-webkit-column-break-inside: avoid;
 		page-break-inside: avoid;
 		break-inside: avoid;
-		border: 1px solid #aaa;
-		box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+		color: #777;
 		&:after {
 			transition: opacity 0.25s;
 			content: attr(data-id);
 			display: block;
-			padding: 16px;
-			font: 16px/16px sans-serif;
+			padding: 7px;
+			font: 14px/16px sans-serif;
 			color: #333;
 			position: relative;
 		}
