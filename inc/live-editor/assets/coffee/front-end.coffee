@@ -998,21 +998,23 @@ jQuery ($) ->
 		removeCells = []
 		removeBlocks = []
 		$t = $(this)
-		rowI = $t.closest('.pootle-live-editor').data('index')
+		rowI = parseInt $t.closest('.pootle-live-editor').data('index')
 
 		prevu.deleteCallback = ->
+			# Save current block and remove class
+			prevu.saveTmceBlock $( '.mce-edit-focus' ).removeClass( 'mce-edit-focus' )
 			ppbData.grids.splice rowI, 1
 			$.each ppbData.widgets, (i, v) ->
 				if v and v.info
-					if `rowI == v`.info.grid
+					if rowI == parseInt v.info.grid
 						removeBlocks.push i
 					else if rowI < v.info.grid
 						ppbData.widgets[i].info.grid--
 				return
 			$.each ppbData.grid_cells, (i, v) ->
 				if v
-					gi = parseInt(v.grid)
-					if `rowI == gi`
+					gi = parseInt v.grid
+					if rowI == gi
 						removeCells.push i
 					else if rowI < gi
 						ppbData.grid_cells[i].old_grid = gi

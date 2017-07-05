@@ -1114,12 +1114,13 @@ jQuery(function($) {
     removeCells = [];
     removeBlocks = [];
     $t = $(this);
-    rowI = $t.closest('.pootle-live-editor').data('index');
+    rowI = parseInt($t.closest('.pootle-live-editor').data('index'));
     prevu.deleteCallback = function() {
+      prevu.saveTmceBlock($('.mce-edit-focus').removeClass('mce-edit-focus'));
       ppbData.grids.splice(rowI, 1);
       $.each(ppbData.widgets, function(i, v) {
         if (v && v.info) {
-          if (rowI == v.info.grid) {
+          if (rowI === parseInt(v.info.grid)) {
             removeBlocks.push(i);
           } else if (rowI < v.info.grid) {
             ppbData.widgets[i].info.grid--;
@@ -1130,7 +1131,7 @@ jQuery(function($) {
         var gi;
         if (v) {
           gi = parseInt(v.grid);
-          if (rowI == gi) {
+          if (rowI === gi) {
             removeCells.push(i);
           } else if (rowI < gi) {
             ppbData.grid_cells[i].old_grid = gi;

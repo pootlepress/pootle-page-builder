@@ -46,7 +46,7 @@ class pootle_page_builder_Unsplash {
 			'icon_class' => 'dashicons dashicons-camera',
 			'callback' => 'unsplash',
 			'active_class' => $this->class,
-			'tooltip' => 'All stock photos are sourced from Unsplash.com and are licensed under Creative Commons Zero which means you can copy, modify, distribute and use the photos for free, including commercial purposes, without asking permission from or providing attribution to the photographer or Unsplash',
+			'tooltip' => 'All free photos are from Unsplash.com and can be used for free',
 			'priority' => 15
 		);
 		$mods["image"] = array(

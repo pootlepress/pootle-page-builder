@@ -156,12 +156,12 @@ $pootlepb_content_block_styling_fields = array(
 $pootlepb_row_styling_fields = array(
 	//Layout
 	'full_width' => array (
-		'name' => 'Make row go full width',
+		'name' => 'Row Layout',
 		'type' => 'select',
 		'options' => array(
-			'' => 'No',
-			'1'	=> 'Yes',
-			'2'	=> 'With content',
+			'' => 'Standard',
+			'1'	=> 'Full width',
+			'2'	=> 'Full width content',
 		),
 		'tab' => 'layout',
 		'priority' => 1,
