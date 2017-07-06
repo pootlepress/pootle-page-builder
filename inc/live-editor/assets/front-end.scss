@@ -1814,7 +1814,9 @@ pre.ace_editor.ace-tm {
 	}
 }
 
-.ppb-dialog[aria-describedby="pootlepb-design-templates"] .ppb-dialog-titlebar {
+.ppb-dialog[aria-describedby="pootlepb-design-templates"] .ppb-dialog-titlebar,
+.ppb-dialog-wilson .ppb-dialog-titlebar {
 	background: #2196f3 left bottom/ auto 90% no-repeat url(wilson2.png);
+	color: #fff;
 	padding-left: 4em;
 }
