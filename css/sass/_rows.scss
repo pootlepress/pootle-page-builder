@@ -1,0 +1,262 @@
+.panel-grid {
+	zoom: 1;
+	position: relative;
+	.panel-row-style {
+		position: relative;
+		overflow: hidden;
+		background-position: center;
+		&.ppb-row-effect-2 {
+			background-attachment: fixed;
+		}
+	}
+	&:before {
+		content: '';
+		display: block;
+	}
+	&:after {
+		clear: both;
+		content: '';
+		display: table;
+	}
+}
+
+.panel-grid-cell {
+	-ms-box-sizing: initial;
+	-moz-box-sizing: initial;
+	-webkit-box-sizing: initial;
+	box-sizing: initial;
+	min-height: 1em;
+	font-size: 15px;
+	&:first-child {
+		padding-left: 0 !important;
+	}
+	&:last-child {
+		padding-right: 0 !important;
+	}
+}
+
+.ppb-block {
+	box-sizing: content-box;
+	background: center/cover;
+}
+
+.panel-grid .panel p {
+	color: inherit;
+}
+
+.panel-grid-cell {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	min-height: inherit;
+	position: relative;
+	.panel {
+		min-height: 1em;
+		zoom: 1;
+		&:before {
+			content: '';
+			display: block;
+		}
+	}
+	> .panel {
+		border: none;
+		box-shadow: none !important;
+		background-color: initial;
+	}
+	.ppb-block {
+		&:after {
+			clear: both;
+			content: '';
+			display: table;
+		}
+		p {
+			color: inherit;
+		}
+	}
+	.panel.panel-last-child {
+		margin-bottom: 0;
+	}
+	.widget-title {
+		margin-top: 0;
+	}
+	.widget_woo_component .business {
+		.slider-pagination {
+			position: relative;
+			.flex-control-nav {
+				padding: 0;
+			}
+		}
+		#loopedSlider .slides {
+			padding: 0;
+			> li > img {
+				padding: 0;
+			}
+		}
+		ul.flex-direction-nav {
+			list-style-type: none;
+			li {
+				list-style-type: none;
+			}
+		}
+	}
+}
+
+.ppb-bg-video-container.hide-on-mobile {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	overflow: hidden;
+}
+
+.ppb-row-kenburns-wrap, .ppb-bg-video-container {
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	overflow: hidden;
+}
+
+.panel-row-style {
+	.ppb-row-kenburns, &.video-bg video.ppb-bg-video {
+		position: absolute;
+		top: -999px;
+		bottom: -999px;
+		left: -999px;
+		right: -999px;
+		min-width: 100%;
+		min-height: 100%;
+		width: auto;
+		height: auto;
+		overflow: hidden;
+		margin: auto;
+		object-fit: cover;
+	}
+}
+
+img {
+	&.ppb-row-kenburns {
+		-webkit-animation: 115s ppb_kenburns linear infinite;
+		animation: 115s ppb_kenburns linear infinite;
+	}
+	&.ppb-bg-parallax {
+		position: absolute;
+		left: -999px;
+		right: -999px;
+		margin: auto;
+		top: 0;
+		max-width: none;
+		width: auto;
+		height: auto;
+	}
+}
+
+@-webkit-keyframes ppb_kenburns {
+	0% {
+		-webkit-transform: scale(1.3) translate(-10%, 10%);
+	}
+
+	25% {
+		-webkit-transform: scale(1) translate(0, 0);
+	}
+
+	50% {
+		-webkit-transform: scale(1.3) translate(10%, 10%);
+	}
+
+	75% {
+		-webkit-transform: scale(1) translate(0, 0);
+	}
+
+	100% {
+		-webkit-transform: scale(1.3) translate(-10%, 10%);
+	}
+}
+
+@keyframes ppb_kenburns {
+	0% {
+		transform: scale(1.3) translate(-10%, 10%);
+	}
+
+	25% {
+		transform: scale(1) translate(0, 0);
+	}
+
+	50% {
+		transform: scale(1.3) translate(10%, 10%);
+	}
+
+	75% {
+		transform: scale(1) translate(0, 0);
+	}
+
+	100% {
+		transform: scale(1.3) translate(-10%, 10%);
+	}
+}
+
+
+// Overlay
+.panel-row-style {
+	&:before {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		content: "";
+		top: 0;
+		left: 0;
+		z-index: 0;
+	}
+	position: relative;
+	z-index: 10;
+}
+
+.panel-grid-cell-container {
+	position: relative;
+	z-index: 30;
+	/* row content needs to be on top of row background color */
+	min-height: inherit;
+}
+
+.ppb-full-width-no-bg {
+	background: none !important;
+	&:before {
+		background: none !important;
+	}
+}
+
+.ppb-stretch-full-width.ppb-stretch-full-width-2 {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+.ppb-fa-icon a {
+	text-decoration: none;
+	font-weight: normal;
+	box-shadow: none;
+	&[href] {
+		text-decoration: none;
+		font-weight: normal;
+		box-shadow: none;
+	}
+}
+
+.ppb-content-h-center {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.ppb-content-v-center {
+	margin-top: auto !important;
+	margin-bottom: auto !important;
+	top: 50%;
+	left: 0;
+	right: 0;
+	position: absolute;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+@import 'accordion';
