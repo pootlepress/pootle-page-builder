@@ -484,11 +484,11 @@ body .ppb-dialog {
 		.tooltip {
 			margin-top: 1em;
 			height: auto;
-			font: inherit;
+			//font: inherit;
 			text-align: left;
 		}
 		.tooltip:before {
-			content: attr(data-tooltip);
+			//content: attr(data-tooltip);
 			height: auto;
 		}
 
