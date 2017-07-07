@@ -163,7 +163,6 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		add_action( 'pootlepb_before_row', array( $this, 'edit_row' ), 7, 2 );
 		add_action( 'pootlepb_after_content_blocks', array( $this, 'column' ) );
 		add_action( 'pootlepb_after_pb', array( $this, 'add_row' ) );
-		add_action( 'pootlepb_after_pb', array( $this, 'preview_styles' ), 11 );
 		add_action( 'wp_footer', array( $this, 'dialogs' ), 7 );
 		add_filter( 'pootlepb_rag_adjust_elements', '__return_empty_array', 999 );
 		add_filter( 'body_class', array( $this, 'body_class' ) );
@@ -193,26 +192,6 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		$classes[] = get_post_type( $post );
 
 		return $classes;
-	}
-
-	/**
-	 * Print inline CSS
-	 * @since 0.1.0
-	 */
-	public function preview_styles() {
-		global $pootlepb_current_post;
-		if ( $this->post_id != $pootlepb_current_post ) return;
-		global $pootlepb_inline_css;
-
-		if ( empty( $pootlepb_inline_css ) ) {
-			$pootlepb_inline_css = '';
-		}
-		?>
-		<!----------Pootle Page Builder Inline Styles---------->
-		<style id="pootle-live-editor-styles" type="text/css"
-		       media="all"><?php echo $pootlepb_inline_css ?></style><?php
-
-		$pootlepb_inline_css = '';
 	}
 
 	/**
