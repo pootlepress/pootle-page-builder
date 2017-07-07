@@ -39,13 +39,6 @@
 	}
 }
 
-/* fix Canvas set ul tweets element within .entry with a padding left */
-
-.panel-grid-cell-container {
-	font-size: 0;
-	position: relative;
-}
-
 /* WooSlider slideshow in PB has margin in <p>, padding in <a>, and extra <br>  */
 
 .panel-grid-cell > .widget_wooslider_slideshow_slides > .wooslider > .wooslider-viewport > .slides > .slide {
