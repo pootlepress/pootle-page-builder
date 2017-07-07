@@ -3,18 +3,15 @@
 		display: none;
 	}
 	.ppb-match-col-hi {
-		.panel-grid-cell-container {
-			display: table;
-		}
 		.ppb-col {
-			display: table-cell !important;
-			height: 1px;
+			display: flex;
+			flex-direction: column;
+			flex-wrap: nowrap;
 		}
-		.ppb-block:first-of-type:last-of-type {
-			height: 100%;
-			-webkit-box-sizing: content-box;
-			-moz-box-sizing: content-box;
-			box-sizing: content-box;
+		.ppb-block {
+			margin-top: 0 !important;
+			margin-bottom: 0 !important;
+			flex: 1 0 auto;
 		}
 	}
 }
