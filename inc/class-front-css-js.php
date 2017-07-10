@@ -87,8 +87,9 @@ final class Pootle_Page_Builder_Front_Css_Js {
 			$cell_count = intval( $grid['cells'] );
 
 			$this->col_widths( $ci, $gi, $post_id, $cell_count, $panels_data );
-			$this->mobile_styles( $settings, $gi, $post_id );
 		}
+
+		$this->mobile_styles( $settings );
 
 		//Margin and padding
 		$this->grid_elements_margin_padding( $settings );
@@ -157,7 +158,7 @@ final class Pootle_Page_Builder_Front_Css_Js {
 	 *
 	 * @since 0.1.0
 	 */
-	private function mobile_styles( $settings, $gi, $post_id ) {
+	private function mobile_styles( $settings ) {
 
 		$panels_margin_bottom = $settings['margin-bottom'];
 		$panels_mobile_width  = apply_filters( 'pootlepb_rwd_mobile_width', $settings['mobile-width'] );
@@ -165,10 +166,26 @@ final class Pootle_Page_Builder_Front_Css_Js {
 		if ( $settings['responsive'] ) {
 			// Mobile Responsive
 
-			$this->css( 'float:none', '#pg-' . $post_id . '-' . $gi . ' .panel-grid-cell', $panels_mobile_width );
-			$this->css( 'width:100%', '#pg-' . $post_id . '-' . $gi . ' .panel-grid-cell', $panels_mobile_width );
+			$this->css( 'width:100%;flex: 1 0;', '#pootle-page-builder .panel-grid-cell-container .panel-grid-cell', $panels_mobile_width );
 
-			$this->css( 'margin-bottom: 1' . $panels_margin_bottom . 'px', '.panel-grid-cell:not(:last-child)', $panels_mobile_width );
+			$this->css( 'flex-direction: column;', '#pootle-page-builder .panel-grid-cell-container', $panels_mobile_width );
+
+			$this->css( 'margin-bottom: ' . $panels_margin_bottom . 'px', '.panel-grid-cell:not(:last-child)', $panels_mobile_width );
+
+			// .ppb-no-mobile-spacing
+			$this->css( 'padding: 0 !important; margin: 0 !important;', '.ppb-no-mobile-spacing', $panels_mobile_width );
+
+			// .hide-on-mobile
+			$this->css( 'display: none', '.hide-on-mobile', $panels_mobile_width );
+
+			// br.rwd
+			$this->css( 'display: block', 'br.rwd', $panels_mobile_width );
+
+			// .ppb-mobile-behaviour-2 Center content on mobile
+			$this->css(
+				'margin-left:auto!important;margin-right:auto!important;margin-top:auto!important;margin-bottom:auto!important',
+				'.ppb-mobile-behaviour-2.ppb-block', $panels_mobile_width
+			);
 
 			// Add CSS to prevent overflow on mobile resolution.
 			$panel_grid_css      = 'margin-left: 0 !important; margin-right: 0 !important;';

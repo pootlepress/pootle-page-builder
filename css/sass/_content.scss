@@ -1,0 +1,25 @@
+.ppb-block {
+	box-sizing: content-box;
+	background: center/cover;
+}
+
+.ppb-fa-icon a {
+	text-decoration: none;
+	font-weight: normal;
+	box-shadow: none;
+	&[href] {
+		text-decoration: none;
+		font-weight: normal;
+		box-shadow: none;
+	}
+}
+
+.ppb-content-h-center {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.ppb-content-v-center {
+	margin-top: auto !important;
+	margin-bottom: auto !important;
+}
