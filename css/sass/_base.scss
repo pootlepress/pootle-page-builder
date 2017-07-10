@@ -1,0 +1,10 @@
+#pootle-page-builder {
+	position: relative;
+}
+
+.ppb-full-width-no-bg {
+	background: none !important;
+	&:before {
+		background: none !important;
+	}
+}

@@ -7,8 +7,17 @@
  * @since 0.1.0
  * @developer http://wpdevelopment.me <shramee@wpdevelopment.me>
  */
-@import "sass/compat";
-@import 'sass/rows';
-@import 'sass/responsive';
-@import 'sass/animations';
 
+@import "sass/compat";
+
+@import 'sass/base';
+
+@import 'sass/rows';
+
+@import 'sass/cols';
+
+@import 'sass/accordion';
+
+@import 'sass/responsive';
+
+@import 'sass/animations';
