@@ -34,15 +34,16 @@ function pootlepb_block_dialog_fields_output( $tab = null ) {
 		}
 
 		echo "<div class='field field-" . $key . " field_type-" . $field['type'] . "'>";
-		echo '<label>' . esc_html( $field['name'] ) . '</label>';
+		echo '<label>' . esc_html( $field['name'] );
+		if ( isset( $field['help-text'] ) ) {
+			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
+		}
+		echo '</label>';
 
 		echo '<span>';
 		pootlepb_render_content_block_field( $key, $field );
 		echo '</span>';
 
-		if ( isset( $field['help-text'] ) ) {
-			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
-		}
 		echo '</div>';
 	}
 }
@@ -134,6 +135,7 @@ function pootlepb_render_content_block_field( $key, $field ) {
 		case 'upload':
 			?><input <?php echo $placeholder ?> dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="text"
 			         data-style-field-type="upload"/>
+			<span class="dashicons dashicons-no-alt" onclick="jQuery(this).siblings('input').val('').change();">Remove Image</span><br>
 			<button class="button upload-button">Select Image</button><?php
 			break;
 		case 'slider':
@@ -205,15 +207,15 @@ function pootlepb_row_dialog_fields_output( $tab = null ) {
 		echo '<div class="field field_' . esc_attr( $key ) . ' field_type_' . esc_attr( $field['type'] ) . '">';
 
 		echo '<label>' . esc_html( $field['name'] );
+
+		if ( isset( $field['help-text'] ) ) {
+			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
+		}
 		echo '</label>';
 
 		echo '<span>';
 		pootlepb_render_row_settings_field( $key, $field );
 		echo '</span>';
-
-		if ( isset( $field['help-text'] ) ) {
-			echo '<span class="dashicons dashicons-editor-help tooltip" data-tooltip="' . esc_html( $field['help-text'] ) . '"></span>';
-		}
 		echo '</div>';
 
 	}

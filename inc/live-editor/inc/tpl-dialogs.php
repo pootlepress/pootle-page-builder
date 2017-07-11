@@ -325,7 +325,7 @@ if ( $enabled_modules ) {
 					$tooltip = "<span  class='dashicons dashicons-editor-help tooltip-module' data-tooltip=\"$module[tooltip]\"></span>";
 				}
 
-				if ( ! empty( $module['active_class'] ) && class_exists( $module['active_class'] ) ) {
+				if ( empty( $module['active_class'] ) || class_exists( $module['active_class'] ) ) {
 					$classes .= ' ppb-module';
 					echo
 						"<div id='ppb-mod-$id' class='$classes' $attr>" .

@@ -479,10 +479,14 @@ body .ppb-dialog {
 			}
 			input[data-style-field-type="upload"] {
 				height: 115px;
-				background-position: center;
-				background-size: cover;
+				background: #fff center/cover no-repeat;
 				color: rgba(0, 0, 0, 0);
 				display: block;
+				//&:focus {
+				//	background-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) !important;
+				//	color: #555;
+				//	height: 36px;
+				//}
 			}
 			.dashicons:before {
 				font-size: 25px;
@@ -494,15 +498,18 @@ body .ppb-dialog {
 			}
 		}
 
-		&.field_type_checkbox > label + span {
-			position: absolute;
-			top: 0;
-			right: 1em;
-			width: auto;
+		&.field_type_checkbox > label {
+
+			+ span {
+				position: absolute;
+				top: 0;
+				right: 1em;
+				width: auto;
+			}
 		}
 
 		.tooltip {
-			margin-top: 1em;
+			margin-left: 1em;
 			height: auto;
 			//font: inherit;
 			text-align: left;

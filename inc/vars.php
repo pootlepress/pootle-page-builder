@@ -24,17 +24,25 @@ global
  * @since 0.1.0
  */
 $pootlepb_content_block_styling_fields = array(
+	'text-color'       => array(
+		'name' => 'Text color',
+		'type' => 'color',
+		'priority' => 1,
+		'css'  => 'color',
+		'tab' => 'style',
+	),
 	'background-image' => array(
 		'name' => 'Background Image',
 		'type' => 'upload',
-		'priority' => 1,
+		'priority' => 2,
 		'css'  => 'background-image:url(%s);',
+		'help-text' => 'Click on the image to manually edit or remove image URL.',
 		'tab' => 'style',
 	),
 	'background-color' => array(
 		'name' => 'Background color',
 		'type' => 'color',
-		'priority' => 1,
+		'priority' => 3,
 		'css'  => 'background-color',
 		'tab' => 'style',
 	),
@@ -44,14 +52,7 @@ $pootlepb_content_block_styling_fields = array(
 		'min'  => '0',
 		'max'  => '1',
 		'step' => '0.05',
-		'priority' => 2,
-		'tab' => 'style',
-	),
-	'text-color'       => array(
-		'name' => 'Text color',
-		'type' => 'color',
 		'priority' => 3,
-		'css'  => 'color',
 		'tab' => 'style',
 	),
 	'padding-mobile'          => array(
