@@ -36,7 +36,6 @@ $pootlepb_content_block_styling_fields = array(
 		'type' => 'upload',
 		'priority' => 2,
 		'css'  => 'background-image:url(%s);',
-		'help-text' => 'Click on the image to manually edit or remove image URL.',
 		'tab' => 'style',
 	),
 	'background-color' => array(
