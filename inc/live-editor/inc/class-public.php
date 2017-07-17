@@ -40,17 +40,15 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	private $ipad = false;
 
 	/**
-	 * Main Pootle Page Builder Live Editor Instance
-	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
-	 * @since 1.0.0
-	 * @return Pootle_Page_Builder_Live_Editor_Public instance
+	 * Constructor function.
+	 * @access  private
+	 * @since   1.0.0
 	 */
-	public static function instance() {
-		if ( null == self::$_instance ) {
-			self::$_instance = new self();
-		}
-
-		return self::$_instance;
+	private function __construct() {
+		$this->token   = Pootle_Page_Builder_Live_Editor::$token;
+		$this->url     = Pootle_Page_Builder_Live_Editor::$url;
+		$this->path    = Pootle_Page_Builder_Live_Editor::$path;
+		$this->version = Pootle_Page_Builder_Live_Editor::$version;
 	} // End instance()
 
 	/**
@@ -62,113 +60,35 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	}
 
 	/**
+	 * Main Pootle Page Builder Live Editor Instance
+	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
+	 * @since 1.0.0
+	 * @return Pootle_Page_Builder_Live_Editor_Public instance
+	 */
+	public static function instance() {
+		if ( null == self::$_instance ) {
+			self::$_instance = new self();
+		}
+
+		return self::$_instance;
+	}
+
+	/**
 	 * Check if live editor is active
 	 * @return bool Live editor active?
 	 */
 	public static function is_active() {
 		return Pootle_Page_Builder_Live_Editor_Public::instance()->_active;
-	}
-
-	/**
-	 * Constructor function.
-	 * @access  private
-	 * @since   1.0.0
-	 */
-	private function __construct() {
-		$this->token   = Pootle_Page_Builder_Live_Editor::$token;
-		$this->url     = Pootle_Page_Builder_Live_Editor::$url;
-		$this->path    = Pootle_Page_Builder_Live_Editor::$path;
-		$this->version = Pootle_Page_Builder_Live_Editor::$version;
 	} // End __construct()
 
 	function tinymce_plugin( $plugin_array ) {
 		$plugin_array['ppblink'] = $this->url . '/assets/ppblink.js';
+
 		return $plugin_array;
 	}
 
 	public function post_status() {
 		return get_post_status( $this->post_id );
-	}
-
-	/**
-	 * Adds the actions anf filter hooks for plugin
-	 * @since 1.1.0
-	 */
-	public function init_live_editing() {
-		global $post;
-
-		//Checking nonce
-		$nonce = filter_input( INPUT_GET, 'ppbLiveEditor' );
-		$this->nonce = $nonce ? $nonce : filter_input( INPUT_POST, 'nonce' );
-		$user = filter_input( INPUT_POST, 'user' );
-		$this->user = $user = $user ? $user : filter_input( INPUT_GET, 'user' );
-
-		//Post ID
-		$id            = $post ? $post->ID : filter_input( INPUT_POST, 'post' );
-		$this->post_id = $id;
-
-		if ( isset( $_COOKIE['ppb-ipad'] ) ) {
-			add_filter( 'show_admin_bar', '__return_false' );
-		}
-
-		if ( isset( $_REQUEST['ppb-ipad'] ) ) {
-			if ( stristr( $_SERVER['HTTP_USER_AGENT'], '(iPad;' ) ) {
-				setcookie( 'ppb-ipad', 'true' );
-			}
-			add_filter( 'show_admin_bar', '__return_false' );
-			if ( $this->nonce === get_transient( 'ppb-ipad-' . $user ) ) {
-				$this->ipad = true;
-				$this->actions();
-				add_action( 'wp_head', array( $this, 'ipad_html' ) );
-
-				return true;
-			}
-		} else if ( wp_verify_nonce( $this->nonce, 'ppb-live-edit-nonce' ) || wp_verify_nonce( $this->nonce, 'ppb-live-' . $id ) ) {
-			$this->actions();
-			return true;
-		} else {
-			return null;
-		}
-	}
-
-	public function actions() {
-		if ( ! function_exists( 'is_plugin_active' ) ) {
-			function is_plugin_active() {
-				return 0;
-			}
-		}
-
-		$this->_active = true;
-
-		do_action( 'pootlepb_live_editor_init' );
-
-		$this->addons = apply_filters( 'pootlepb_le_content_block_tabs', array() );
-
-		remove_filter( 'pootlepb_content_block', array(
-			$GLOBALS['Pootle_Page_Builder_Content_Block'],
-			'auto_embed'
-		), 8 );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 99 );
-		add_action( 'pootlepb_before_pb', array( $this, 'before_pb' ), 7, 4 );
-		add_action( 'pootlepb_render_content_block', array( $this, 'edit_content_block' ), 7, 4 );
-		add_action( 'pootlepb_render', array( $this, 'mark_active' ), 999 );
-		add_filter( 'mce_external_plugins', array( $this, 'tinymce_plugin' ) ); // PPBlink tmce plugin
-
-		if ( ! empty( $_GET['edit_title'] ) ) {
-			$this->edit_title = true;
-		}
-
-		add_filter( 'pootlepb_row_cell_attributes', array( $this, 'cell_attr' ), 10, 3 );
-		add_filter( 'pootlepb_content_block', array( $this, 'content' ), 5 );
-		add_action( 'pootlepb_before_row', array( $this, 'edit_row' ), 7, 2 );
-		add_action( 'pootlepb_after_content_blocks', array( $this, 'column' ) );
-		add_action( 'pootlepb_after_pb', array( $this, 'add_row' ) );
-		add_action( 'wp_footer', array( $this, 'dialogs' ), 7 );
-		add_filter( 'pootlepb_rag_adjust_elements', '__return_empty_array', 999 );
-		add_filter( 'body_class', array( $this, 'body_class' ) );
-		add_filter( 'post_class', array( $this, 'post_type_class' ), 10, 3 );
-
-		do_action( 'pootlepb_live_editor_after_init' );
 	}
 
 	/**
@@ -180,12 +100,15 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 */
 	public function body_class( $classes ) {
 		$classes[] = 'pootle-live-editor-active';
+
 		return $classes;
 	}
 
 	/**
 	 * Add post type class to post
+	 *
 	 * @param array $classes
+	 *
 	 * @return string Content
 	 */
 	public function post_type_class( $classes, $unused, $post ) {
@@ -207,21 +130,6 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		wp_enqueue_style( 'pootlepb-ui-styles', POOTLEPB_URL . 'css/ppb-jq-ui.css', array(), $ver );
 		wp_enqueue_style( 'ppb-panels-live-editor-css', "$url/front-end.css", array(), $ver );
 		wp_enqueue_style( 'wp-color-picker' );
-	}
-
-	/**
-	 * Wraps the content in .pootle-live-editor-realtime and convert short codes to strings
-	 *
-	 * @param string $content
-	 *
-	 * @return string Content
-	 */
-	public function content( $content ) {
-		if ( ! $this->_active ) return $content;
-
-		$content = str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), $content );
-
-		return "<div class='pootle-live-editor-realtime'>$content</div>";
 	}
 
 	protected function enqueue_scripts() {
@@ -285,7 +193,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		wp_enqueue_script( 'image-edit' );
 
 		if ( defined( 'NINJA_FORMS_URL' ) ) {
-			wp_enqueue_style( 'ninja-forms-display', NINJA_FORMS_URL .'css/ninja-forms-display.css?nf_ver=' . NF_PLUGIN_VERSION );
+			wp_enqueue_style( 'ninja-forms-display', NINJA_FORMS_URL . 'css/ninja-forms-display.css?nf_ver=' . NF_PLUGIN_VERSION );
 		}
 
 		do_action( 'pootlepb_enqueue_admin_scripts' );
@@ -309,14 +217,15 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		//Ajax
 		$ppbAjax = array(
+			'site'   => site_url(),
 			'url'    => admin_url( 'admin-ajax.php' ),
 			'action' => 'pootlepb_live_editor',
 			'post'   => $post->ID,
 			'nonce'  => $this->nonce,
-			'user' => $this->user,
+			'user'   => $this->user,
 		);
 		if ( $this->ipad ) {
-			$ppbAjax['ipad'] = 1;
+			$ppbAjax['ipad']     = 1;
 			$ppbAjax['ppb-ipad'] = 1;
 		}
 
@@ -337,28 +246,22 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	}
 
 	/**
-	 * Saves title, thumbnail, categories, tags etc. for post
-	 * @param array $live_page_post
-	 * @return array
+	 * Wraps the content in .pootle-live-editor-realtime and convert short codes to strings
+	 *
+	 * @param string $content
+	 *
+	 * @return string Content
 	 */
-	public function savePostMeta ( $live_page_post ) {
-		$id = $live_page_post['ID'];
-		if ( ! empty( $_POST['title'] ) ) {
-			$live_page_post['post_title'] = $_POST['title'];
-		}
-		if ( ! empty( $_POST['thumbnail'] ) ) {
-			set_post_thumbnail( $id, $_POST['thumbnail'] );
+	public function content( $content ) {
+		if ( ! $this->_active ) {
+			return $content;
 		}
 
-		if ( ! empty( $_POST['category'] ) ) {
-			wp_set_post_terms( $id, $_POST['category'], "category", false );
-		}
+		$content = str_replace( array( '[', ']' ), array( '&#91;', '&#93;' ), $content );
 
-		if ( ! empty( $_POST['tags'] ) ) {
-			wp_set_post_terms( $id, $_POST['tags'], "post_tag", false );
-		}
-		return $live_page_post;
+		return "<div class='pootle-live-editor-realtime'>$content</div>";
 	}
+
 	/**
 	 * Saves setting from front end via ajax
 	 * @since 1.1.0
@@ -389,6 +292,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 				/**
 				 * Fired before saving pootle page builder post meta
+				 *
 				 * @param array $ppb_data Page builder data
 				 * @param Int $post_id Post ID
 				 * @param WP_Post $post Post object
@@ -416,11 +320,11 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				echo get_permalink( $id );
 			} else {
 				query_posts( array(
-					'post_type' => 'any',
-					'post_status' => 'any',
-					'post__in' => array( $id ),
+					'post_type'           => 'any',
+					'post_status'         => 'any',
+					'post__in'            => array( $id ),
 					'ignore_sticky_posts' => 1,
-					) );
+				) );
 
 				if ( have_posts() ) {
 					$GLOBALS['wp_the_query'] = $GLOBALS['wp_query'];
@@ -443,6 +347,115 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	}
 
 	/**
+	 * Adds the actions anf filter hooks for plugin
+	 * @since 1.1.0
+	 */
+	public function init_live_editing() {
+		global $post;
+
+		//Checking nonce
+		$nonce       = filter_input( INPUT_GET, 'ppbLiveEditor' );
+		$this->nonce = $nonce ? $nonce : filter_input( INPUT_POST, 'nonce' );
+		$user        = filter_input( INPUT_POST, 'user' );
+		$this->user  = $user = $user ? $user : filter_input( INPUT_GET, 'user' );
+
+		//Post ID
+		$id            = $post ? $post->ID : filter_input( INPUT_POST, 'post' );
+		$this->post_id = $id;
+
+		if ( isset( $_COOKIE['ppb-ipad'] ) ) {
+			add_filter( 'show_admin_bar', '__return_false' );
+		}
+
+		if ( isset( $_REQUEST['ppb-ipad'] ) ) {
+			if ( stristr( $_SERVER['HTTP_USER_AGENT'], '(iPad;' ) ) {
+				setcookie( 'ppb-ipad', 'true' );
+			}
+			add_filter( 'show_admin_bar', '__return_false' );
+			if ( $this->nonce === get_transient( 'ppb-ipad-' . $user ) ) {
+				$this->ipad = true;
+				$this->actions();
+				add_action( 'wp_head', array( $this, 'ipad_html' ) );
+
+				return true;
+			}
+		} else if ( wp_verify_nonce( $this->nonce, 'ppb-live-edit-nonce' ) || wp_verify_nonce( $this->nonce, 'ppb-live-' . $id ) ) {
+			$this->actions();
+
+			return true;
+		} else {
+			return null;
+		}
+	}
+
+	public function actions() {
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			function is_plugin_active() {
+				return 0;
+			}
+		}
+
+		$this->_active = true;
+
+		do_action( 'pootlepb_live_editor_init' );
+
+		$this->addons = apply_filters( 'pootlepb_le_content_block_tabs', array() );
+
+		remove_filter( 'pootlepb_content_block', array(
+			$GLOBALS['Pootle_Page_Builder_Content_Block'],
+			'auto_embed'
+		), 8 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue' ), 99 );
+		add_action( 'pootlepb_before_pb', array( $this, 'before_pb' ), 7, 4 );
+		add_action( 'pootlepb_render_content_block', array( $this, 'edit_content_block' ), 7, 4 );
+		add_action( 'pootlepb_render', array( $this, 'mark_active' ), 999 );
+		add_filter( 'mce_external_plugins', array( $this, 'tinymce_plugin' ) ); // PPBlink tmce plugin
+
+		if ( ! empty( $_GET['edit_title'] ) ) {
+			$this->edit_title = true;
+		}
+
+		add_filter( 'pootlepb_row_cell_attributes', array( $this, 'cell_attr' ), 10, 3 );
+		add_filter( 'pootlepb_content_block', array( $this, 'content' ), 5 );
+		add_action( 'pootlepb_before_row', array( $this, 'edit_row' ), 7, 2 );
+		add_action( 'pootlepb_after_content_blocks', array( $this, 'column' ) );
+		add_action( 'pootlepb_after_pb', array( $this, 'add_row' ) );
+		add_action( 'wp_footer', array( $this, 'dialogs' ), 7 );
+		add_filter( 'pootlepb_rag_adjust_elements', '__return_empty_array', 999 );
+		add_filter( 'body_class', array( $this, 'body_class' ) );
+		add_filter( 'post_class', array( $this, 'post_type_class' ), 10, 3 );
+
+		do_action( 'pootlepb_live_editor_after_init' );
+	}
+
+	/**
+	 * Saves title, thumbnail, categories, tags etc. for post
+	 *
+	 * @param array $live_page_post
+	 *
+	 * @return array
+	 */
+	public function savePostMeta( $live_page_post ) {
+		$id = $live_page_post['ID'];
+		if ( ! empty( $_POST['title'] ) ) {
+			$live_page_post['post_title'] = $_POST['title'];
+		}
+		if ( ! empty( $_POST['thumbnail'] ) ) {
+			set_post_thumbnail( $id, $_POST['thumbnail'] );
+		}
+
+		if ( ! empty( $_POST['category'] ) ) {
+			wp_set_post_terms( $id, $_POST['category'], "category", false );
+		}
+
+		if ( ! empty( $_POST['tags'] ) ) {
+			wp_set_post_terms( $id, $_POST['tags'], "post_tag", false );
+		}
+
+		return $live_page_post;
+	}
+
+	/**
 	 * Reset panel index
 	 * @since 1.1.0
 	 */
@@ -459,10 +472,12 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * @since 1.1.0
 	 */
 	public function edit_row( $data, $gi = 0 ) {
-		if ( ! $this->_active || $this->post_id != get_the_ID() ) return;
+		if ( ! $this->_active || $this->post_id != get_the_ID() ) {
+			return;
+		}
 		?>
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-row" data-index="<?php echo $gi; ?>"
-		     data-i_bkp="<?php echo $gi; ?>">
+				 data-i_bkp="<?php echo $gi; ?>">
 			<span href="javascript:void(0)" title="Row Styling" class="dashicons-before settings-dialog dashicons-edit">
 				<span class="screen-reader-text">Edit Row</span>
 			</span>
@@ -473,7 +488,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
  			<span href="javascript:void(0)" title="Insert Row" class="dashicons-before insert-row dashicons-plus">
 				<span class="screen-reader-text">Insert row</span>
 			</span>
- 			*/?>
+ 			*/ ?>
 			<?php /*
 			<span href="javascript:void(0)" title="Duplicate Row" class="dashicons-before dashicons-admin-page">
 				<span class="screen-reader-text">Duplicate Row</span>
@@ -490,11 +505,13 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * Edit content block icons
 	 */
 	public function edit_content_block( $content_block ) {
-		if ( ! $this->_active ) return;
+		if ( ! $this->_active ) {
+			return;
+		}
 		?>
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-block"
-		     data-index="<?php echo $content_block['info']['id']; ?>"
-		     data-i_bkp="<?php echo $content_block['info']['id']; ?>">
+				 data-index="<?php echo $content_block['info']['id']; ?>"
+				 data-i_bkp="<?php echo $content_block['info']['id']; ?>">
 			<span href="javascript:void(0)" title="Drag content block" class="dashicons-before drag-handle dashicons-move">
 				<span class="screen-reader-text">Drag content block</span>
 			</span>
@@ -525,7 +542,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				</span>
 				<?php
 			}
-			*/?>
+			*/ ?>
 			<span href="javascript:void(0)" title="Delete Content" class="dashicons-before delete dashicons-no">
 				<span class="screen-reader-text">Delete Content</span>
 			</span>
@@ -554,8 +571,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		if ( ! $this->_active ) {
 			$this->_active = true;
 		}
+
 		return $pb_html;
 	}
+
 	/**
 	 * Edit content block icons
 	 */
@@ -576,7 +595,9 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	 * Edit content block icons
 	 */
 	public function column() {
-		if ( ! $this->_active ) return;
+		if ( ! $this->_active ) {
+			return;
+		}
 		/*
 				<div class="pootle-live-editor ppb-live-add-object add-content">
 					<span href="javascript:void(0)" title="Add Content" class="dashicons-before dashicons-plus">

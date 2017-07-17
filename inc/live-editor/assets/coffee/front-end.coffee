@@ -479,11 +479,10 @@ jQuery ($) ->
 			items: '> .panel-grid'
 			handle: '.ppb-edit-row .drag-handle'
 			start: (e, ui) ->
-				console.log( this );
-				$( this ).data 'draggingRowI', ui.item.index()
+				$( this ).data 'draggingRowI', $ppb.children( '.ppb-row' ).index( ui.item )
 				return
 			update: (e, ui) ->
-				prevu.syncRowPosition( $ppb.data( 'draggingRowI' ), ui.item.index() );
+				prevu.syncRowPosition( $ppb.data( 'draggingRowI' ), $ppb.children( '.ppb-row' ).index( ui.item ) );
 				return
 		resizableCells:
 			handles: 'w'
@@ -689,7 +688,7 @@ jQuery ($) ->
 				button: text: 'Insert in Content Block'
 				multiple: false)
 			prevu.insertImageFrame.on 'attach', ->
-				$('.setting[data-setting="url"]').before '<label class="setting" data-setting="url">' + '<span class="name">Size</span>' + '<input type="text" value="http://wp/ppb/wp-content/uploads/2016/02/p03hbzwm.jpg" readonly="">' + '</label>'
+				$('.setting[data-setting="url"]').before '<label class="setting" data-setting="url">' + '<span class="name">Size</span>' + '<input type="text" value="" readonly="">' + '</label>'
 				return
 			# When an image is selected, run a callback.
 			prevu.insertImageFrame.on 'select', ->
@@ -1348,7 +1347,7 @@ jQuery ($) ->
 		$('a').click (e) ->
 			e.preventDefault()
 			return
-	prevu.tmce.content_css = 'http://wp/ppb/wp-includes/css/dashicons.min.css?ver=4.4.2-alpha-36412'
+	prevu.tmce.content_css = ppbAjax.site + '/wp-includes/css/dashicons.min.css?ver=5.0.0'
 
 	prevu.tmce.setup = (editor) ->
 		editor.onDblClick.add (ed, e) ->
