@@ -226,10 +226,6 @@ final class Pootle_Page_Builder_Custom_Styles {
 			$attr['style'] .= 'min-height:0;display:none;';
 		}
 
-		if ( ! empty( $style['match_col_hi'] ) ) {
-			$attr['class'][] = 'ppb-match-col-hi';
-		}
-
 		return $attr;
 	}
 

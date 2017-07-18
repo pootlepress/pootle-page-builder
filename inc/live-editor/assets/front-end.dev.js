@@ -425,7 +425,6 @@ jQuery(function($) {
           background_toggle: '',
           bg_color_wrap: '',
           bg_image_wrap: '',
-          match_col_hi: '',
           bg_mobile_image: '',
           bg_overlay_color: '',
           bg_overlay_opacity: '0.5',
@@ -1986,7 +1985,7 @@ ppbTemplateFromRow = function(rowI, thumb) {
   ref = ppbData.widgets;
   for (j = 0, len = ref.length; j < len; j++) {
     cb = ref[j];
-    if (cb.info && parseInt(cb.info.grid) === parseInt(rowI)) {
+    if (cb && cb.info && parseInt(cb.info.grid) === parseInt(rowI)) {
       parseContent(cb);
     }
   }
@@ -2002,5 +2001,3 @@ ppbNotify = function(notice) {
     return $n.fadeOut();
   }, 2000);
 };
-
-//# sourceMappingURL=front-end.dev.js.map

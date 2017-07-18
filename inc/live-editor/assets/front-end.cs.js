@@ -424,7 +424,6 @@ jQuery(function($) {
           background_toggle: '',
           bg_color_wrap: '',
           bg_image_wrap: '',
-          match_col_hi: '',
           bg_mobile_image: '',
           bg_overlay_color: '',
           bg_overlay_opacity: '0.5',

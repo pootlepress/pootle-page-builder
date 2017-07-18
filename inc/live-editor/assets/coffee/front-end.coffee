@@ -376,7 +376,6 @@ jQuery ($) ->
 					background_toggle: ''
 					bg_color_wrap: ''
 					bg_image_wrap: ''
-					match_col_hi: ''
 					bg_mobile_image: ''
 					bg_overlay_color: ''
 					bg_overlay_opacity: '0.5'
@@ -1857,7 +1856,7 @@ ppbTemplateFromRow = (rowI, thumb) ->
 		content: []
 		style: JSON.stringify rowStyle
 
-	parseContent cb for cb in ppbData.widgets when cb.info && parseInt( cb.info.grid ) is parseInt( rowI )
+	parseContent cb for cb in ppbData.widgets when cb && cb.info && parseInt( cb.info.grid ) is parseInt( rowI )
 
 	return JSON.stringify tpl
 

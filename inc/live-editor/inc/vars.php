@@ -26,7 +26,6 @@ $ppble_new_live_page = array (
             'style' => array (
 				'background' => '',
 				'background_image' => '',
-	            'match_col_hi' => '',
                 'background_image_repeat' => '',
                 'background_image_size' => 'cover',
                 'background_parallax' => '',

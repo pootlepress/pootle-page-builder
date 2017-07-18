@@ -12,7 +12,7 @@ module.exports = function(grunt) {
 				files:  [
 					{
 						expand: true,
-						src: ['**/sass/*.scss'],
+						src: ['**/*.scss'],
 						ext: '.css',
 						rename: function( dest, src ) {
 							return src.replace( 'sass/', '' );
@@ -57,6 +57,7 @@ module.exports = function(grunt) {
 						expand: true,
 						src: ['**/*.coffee'],
 						ext: '.dev.js',
+						sourceMap: false,
 						rename: function( dest, src ) {
 							return src.replace( 'coffee/', '' );
 						},
