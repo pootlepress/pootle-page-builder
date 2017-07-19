@@ -2001,3 +2001,5 @@ ppbNotify = function(notice) {
     return $n.fadeOut();
   }, 2000);
 };
+
+//# sourceMappingURL=front-end.dev.js.map

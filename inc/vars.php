@@ -212,6 +212,13 @@ $pootlepb_row_styling_fields = array(
 		'type' => 'html',
 		'priority' => 1.6,
 	),
+	'match_col_hi'              => array(
+		'name' => 'Make columns the same height',
+		'type' => 'checkbox',
+		'tab' => 'layout',
+		'help-text' => 'Requires only one content block to be set in each column. Will not preview in live editor but it will work once published.',
+		'priority' => 2,
+	),
 	'animate_cols' => array(
 		'name' => __( 'Row animation', 'vantage' ),
 		'tab' => 'layout',
