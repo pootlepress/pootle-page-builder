@@ -1336,6 +1336,16 @@ $ppbpro_addons_data = array(
 		'Image'       => 'https://image.flaticon.com/icons/svg/45/45696.svg',
 		'active_class' => 'WooBuilder',
 	),
+	'pootle-cloud' => array(
+		'free'        => true,
+		'Name'        => 'Pootle cloud',
+		'Description' => 'PootleCloud will let you save your designs to the cloud so that you can reuse them, either on the website you are working on, or any Pootle Pagebuilder site :)',
+		'InstallURI'  => admin_url( "/plugin-install.php?s=Pootle+Cloud&tab=search&type=term" ),
+		'AuthorURI'   => 'https://pootlepress.com',
+		'Author'      => 'pootlepress',
+		'Image'       => 'https://pootle-cloud.firebaseapp.com/assets/default-wilson.jpg',
+		'active_class' => 'WooBuilder',
+	),
 );
 
 $pootlepb_gradient_css = array(
