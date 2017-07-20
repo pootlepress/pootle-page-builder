@@ -7,20 +7,27 @@ module.exports = function(grunt) {
 			dist: {
 				options: {
 					style : 'compressed',
-					//sourcemap: 'none'
+					sourcemap: 'none'
 				},
 				files:  [
-					{ // /css/*.scss files
+					{ // /**/*.scss files
 						expand: true,
-						src: ['/css/**/*.scss'],
-						ext: '.css',
-					},
-					{ // **/sass/*.scss, **/scss/*.scss
-						expand: true,
-						src: ['**/sass/*.scss','**/scss/*.scss'],
+						cwd: 'css',
+						dest: 'css',
+						src: ['**/*.scss'],
 						ext: '.css',
 						rename: function( dest, src ) {
-							return src.replace( 'scss/', '' ).replace( 'sass/', '' );
+							return dest + '/' + src.replace( 'scss/', '' ).replace( 'sass/', '' );
+						},
+					},
+					{ // /**/*.scss files
+						expand: true,
+						cwd: 'inc',
+						dest: 'inc',
+						src: ['**/*.scss'],
+						ext: '.css',
+						rename: function( dest, src ) {
+							return dest + '/' + src.replace( 'scss/', '' ).replace( 'sass/', '' );
 						},
 					},
 				],

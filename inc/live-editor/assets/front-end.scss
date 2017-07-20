@@ -1775,6 +1775,10 @@ pre.ace_editor.ace-tm {
 		break-inside: avoid;
 		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 		color: #777;
+
+		> div:first-of-type {
+			background: center bottom/cover url(https://pootle-cloud.firebaseapp.com/assets/default-wilson.jpg);
+		}
 		&:after {
 			transition: opacity 0.25s;
 			content: attr(data-id);
