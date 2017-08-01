@@ -85,6 +85,7 @@ class Pootle_PB_Module_Design_Template {
 			echo <<<HTML
 <div class="ppb-tpl" data-id="$id">
 <img src="$tpl[img]" alt="$id">
+<i class="fa fa-search"></i>
 </div>
 HTML;
 		}

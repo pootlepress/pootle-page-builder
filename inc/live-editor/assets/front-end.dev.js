@@ -929,8 +929,8 @@ jQuery(function($) {
       return $setTitleDialog.ppbDialog('close');
     }
   };
-  dialogAttr.height = 700;
-  dialogAttr.width = 700;
+  dialogAttr.height = window.innerHeight - 50;
+  dialogAttr.width = window.innerWidth - 50;
   dialogAttr.title = $designTemplateDialog.data('title');
   $designTemplateDialog.ppbDialog(dialogAttr);
   dialogAttr.height = 610;
