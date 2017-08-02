@@ -1668,7 +1668,7 @@ a .ppb-module-disabled:after {
 	}
 }
 
-#ppb-loading, #ppb-loader {
+#pootlepb-design-templates-preview-wrap, #ppb-loading, #ppb-loader {
 	position: fixed;
 	top: -9999px;
 	right: -9999px;
@@ -1691,6 +1691,20 @@ a .ppb-module-disabled:after {
 	border-top-color: #ef4832;
 	-webkit-animation: ppb-spin 1.6s linear infinite;
 	animation: ppb-spin 1.6s linear infinite;
+}
+
+#pootlepb-design-templates-preview-wrap {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	z-index: 999999;
+	overflow: auto;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.25);
+	img {
+		max-width: 880px;
+	}
 }
 
 #ppb-iconpicker {
@@ -1830,6 +1844,10 @@ pre.ace_editor.ace-tm {
 			+ .fa-search {
 				display: block;
 			}
+		}
+		.ppb-tpl-prev {
+			height: 160px;
+			min-width: 160px;
 		}
 
 	}

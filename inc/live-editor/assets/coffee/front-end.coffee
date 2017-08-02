@@ -89,6 +89,7 @@ jQuery ($) ->
 	$addRowDialog = $('#pootlepb-add-row')
 	$setTitleDialog = $('#pootlepb-set-title')
 	$designTemplateDialog = $('#pootlepb-design-templates')
+	$designTemplatePreview = $('#pootlepb-design-templates-preview-wrap')
 	$postSettingsDialog = $('#pootlepb-post-settings')
 	$ppbIpadColorDialog = $('#ppb-ipad-color-picker')
 	$iconPicker = $('#ppb-iconpicker')
@@ -1811,26 +1812,34 @@ jQuery ($) ->
 			$designTemplateDialog.ppbDialog 'open'
 
 	applyDesignTemplate = ( e ) ->
-		console.log( e.target );
-		$t = $( e.target ).closest( '.ppb-tpl' )
-		id = $t.data( 'id' )
-		tpl = ppbDesignTpls[id]
-		style = if tpl.style then JSON.parse( tpl.style ) else {}
-		style = if style.style then style.style else style
-		cells = 1
-		if tpl.content
-			cells = tpl.content.length
+		$target = $( e.target );
+		if $target.hasClass( 'fa-search' )
+			$designTemplatePreview.find( 'img' ).attr(
+				'src',
+				$target.siblings( 'img' ).attr( 'src' )
+			);
+			$designTemplatePreview.fadeIn( )
 
-		$( '#ppb-row-add-cols' ).val cells
+		else
+			$t = $target.closest( '.ppb-tpl' )
+			id = $t.data( 'id' )
+			tpl = ppbDesignTpls[id]
+			style = if tpl.style then JSON.parse( tpl.style ) else {}
+			style = if style.style then style.style else style
+			cells = 1
+			if tpl.content
+				cells = tpl.content.length
 
-		prevu.addRow ( ( $row ) ->
-			setTimeout ( ( ) ->
-#				prevu.insertModule $row.find('.ppb-block').last(), $m
-			), 106
-		), tpl.content, style
+			$( '#ppb-row-add-cols' ).val cells
 
-		$designTemplateDialog.ppbDialog 'close'
-		console.log 'Applying template ' + id, tpl
+			prevu.addRow ( ( $row ) ->
+				setTimeout ( ( ) ->
+	#				prevu.insertModule $row.find('.ppb-block').last(), $m
+				), 106
+			), tpl.content, style
+
+			$designTemplateDialog.ppbDialog 'close'
+			console.log 'Applying template ' + id, tpl
 
 	$designTemplateDialog.on 'click', '.ppb-tpl', applyDesignTemplate
 

@@ -64,7 +64,7 @@ logPPBData = function(a, b, c) {
 };
 
 jQuery(function($) {
-  var $addRowDialog, $body, $contentPanel, $deleteDialog, $deletingWhat, $designTemplateDialog, $iconPicker, $loader, $mods, $panels, $postSettingsDialog, $ppb, $ppbIpadColorDialog, $rowPanel, $setTitleDialog, $tooltip, applyDesignTemplate, dialogAttr, pickFaIcon, prevu;
+  var $addRowDialog, $body, $contentPanel, $deleteDialog, $deletingWhat, $designTemplateDialog, $designTemplatePreview, $iconPicker, $loader, $mods, $panels, $postSettingsDialog, $ppb, $ppbIpadColorDialog, $rowPanel, $setTitleDialog, $tooltip, applyDesignTemplate, dialogAttr, pickFaIcon, prevu;
   $.each(ppbData.grids, function(i, v) {
     ppbData.grids[i].id = i;
   });
@@ -97,6 +97,7 @@ jQuery(function($) {
   $addRowDialog = $('#pootlepb-add-row');
   $setTitleDialog = $('#pootlepb-set-title');
   $designTemplateDialog = $('#pootlepb-design-templates');
+  $designTemplatePreview = $('#pootlepb-design-templates-preview-wrap');
   $postSettingsDialog = $('#pootlepb-post-settings');
   $ppbIpadColorDialog = $('#ppb-ipad-color-picker');
   $iconPicker = $('#ppb-iconpicker');
@@ -1939,23 +1940,28 @@ jQuery(function($) {
     return $designTemplateDialog.ppbDialog('open');
   };
   applyDesignTemplate = function(e) {
-    var $t, cells, id, style, tpl;
-    console.log(e.target);
-    $t = $(e.target).closest('.ppb-tpl');
-    id = $t.data('id');
-    tpl = ppbDesignTpls[id];
-    style = tpl.style ? JSON.parse(tpl.style) : {};
-    style = style.style ? style.style : style;
-    cells = 1;
-    if (tpl.content) {
-      cells = tpl.content.length;
+    var $t, $target, cells, id, style, tpl;
+    $target = $(e.target);
+    if ($target.hasClass('fa-search')) {
+      $designTemplatePreview.find('img').attr('src', $target.siblings('img').attr('src'));
+      return $designTemplatePreview.fadeIn();
+    } else {
+      $t = $target.closest('.ppb-tpl');
+      id = $t.data('id');
+      tpl = ppbDesignTpls[id];
+      style = tpl.style ? JSON.parse(tpl.style) : {};
+      style = style.style ? style.style : style;
+      cells = 1;
+      if (tpl.content) {
+        cells = tpl.content.length;
+      }
+      $('#ppb-row-add-cols').val(cells);
+      prevu.addRow((function($row) {
+        return setTimeout((function() {}), 106);
+      }), tpl.content, style);
+      $designTemplateDialog.ppbDialog('close');
+      return console.log('Applying template ' + id, tpl);
     }
-    $('#ppb-row-add-cols').val(cells);
-    prevu.addRow((function($row) {
-      return setTimeout((function() {}), 106);
-    }), tpl.content, style);
-    $designTemplateDialog.ppbDialog('close');
-    return console.log('Applying template ' + id, tpl);
   };
   $designTemplateDialog.on('click', '.ppb-tpl', applyDesignTemplate);
   return $('html').on('pootlepb_le_content_updated', function(e, $t) {

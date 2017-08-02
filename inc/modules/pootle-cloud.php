@@ -104,8 +104,8 @@ HTML;
 			do_action( 'after_design_templates' );
 			?>
 		</div>
-		<div id="pootlepb-design-templates-preview-wrap">
-			<img src="" id="pootlepb-design-templates-preview">
+		<div onclick="jQuery(this).fadeOut();" style="display: none;" id="pootlepb-design-templates-preview-wrap">
+			<img src="">
 		</div>
 		<?php
 	}
