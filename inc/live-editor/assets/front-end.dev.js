@@ -1940,6 +1940,7 @@ jQuery(function($) {
   };
   applyDesignTemplate = function(e) {
     var $t, cells, id, style, tpl;
+    console.log(e.target);
     $t = $(e.target).closest('.ppb-tpl');
     id = $t.data('id');
     tpl = ppbDesignTpls[id];

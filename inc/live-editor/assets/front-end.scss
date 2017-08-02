@@ -1674,7 +1674,7 @@ a .ppb-module-disabled:after {
 	right: -9999px;
 	bottom: -9999px;
 	left: -9999px;
-	z-index: 9999;
+	z-index: 100000;
 	margin: auto;
 }
 
@@ -1760,14 +1760,19 @@ pre.ace_editor.ace-tm {
 
 // Template design module
 #pootlepb-design-templates {
-	column-count: 3;
-	column-gap: 0;
-	padding: 1.4em 0.7em;
 	text-align: left;
-
+	h2 {
+		padding: 16px 20px 0;
+		margin: 0;
+		border-top: 2px solid #eee;
+	}
+	.templates-wrap {
+		padding: 1.4em 0.7em;
+	}
 	.ppb-tpl {
 		background: #fff;
-		display: block;
+		position: relative;
+		display: inline-block;
 		cursor: pointer;
 		margin: 0 0.7em 1.4em;
 		-webkit-column-break-inside: avoid;
@@ -1789,17 +1794,44 @@ pre.ace_editor.ace-tm {
 			color: #333;
 			position: relative;
 		}
+		.fa-search {
+			display: none;
+			position: absolute;
+			padding: 0;
+			line-height: 35px;
+			width: 35px;
+			text-align: center;
+			top: 7px;
+			right: 7px;
+			background: rgba(0,0,0,0.5);
+			color: #fff;
+			border-radius: 50%;
+			opacity: 0.25;
+		}
 
-		&:hover:after {
-			opacity: 0.5;
+		&:hover {
+			&:after {
+				opacity: 0.5;
+			}
+			.fa-search {
+				opacity: 0.7;
+				&:hover {
+					opacity: 0.88;
+				}
+			}
 		}
 
 		img {
-			width: 100%;
+			height: 160px;
+			width: auto;
 			display: block;
 			margin: 0;
 			border-radius: 0;
+			+ .fa-search {
+				display: block;
+			}
 		}
+
 	}
 }
 

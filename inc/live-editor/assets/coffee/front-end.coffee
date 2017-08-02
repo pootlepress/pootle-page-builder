@@ -1811,19 +1811,20 @@ jQuery ($) ->
 			$designTemplateDialog.ppbDialog 'open'
 
 	applyDesignTemplate = ( e ) ->
+		console.log( e.target );
 		$t = $( e.target ).closest( '.ppb-tpl' )
 		id = $t.data( 'id' )
-		tpl = ppbDesignTpls[ id ]
+		tpl = ppbDesignTpls[id]
 		style = if tpl.style then JSON.parse( tpl.style ) else {}
 		style = if style.style then style.style else style
 		cells = 1
 		if tpl.content
 			cells = tpl.content.length
 
-		$('#ppb-row-add-cols').val cells
+		$( '#ppb-row-add-cols' ).val cells
 
-		prevu.addRow ( ($row) ->
-			setTimeout ( () ->
+		prevu.addRow ( ( $row ) ->
+			setTimeout ( ( ) ->
 #				prevu.insertModule $row.find('.ppb-block').last(), $m
 			), 106
 		), tpl.content, style
