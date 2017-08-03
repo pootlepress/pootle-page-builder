@@ -1948,6 +1948,10 @@ jQuery(function($) {
     } else {
       $t = $target.closest('.ppb-tpl');
       id = $t.data('id');
+      if ($t.hasClass('pro-inactive')) {
+        ppbNotify('Template ' + id + ' needs Pootle Pagebuilder Pro active.');
+        return;
+      }
       tpl = ppbDesignTpls[id];
       style = tpl.style ? JSON.parse(tpl.style) : {};
       style = style.style ? style.style : style;

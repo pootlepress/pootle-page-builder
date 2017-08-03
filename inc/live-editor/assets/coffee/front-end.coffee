@@ -1823,6 +1823,11 @@ jQuery ($) ->
 		else
 			$t = $target.closest( '.ppb-tpl' )
 			id = $t.data( 'id' )
+
+			if $t.hasClass( 'pro-inactive' )
+				ppbNotify 'Template ' + id + ' needs Pootle Pagebuilder Pro active.'
+				return;
+
 			tpl = ppbDesignTpls[id]
 			style = if tpl.style then JSON.parse( tpl.style ) else {}
 			style = if style.style then style.style else style

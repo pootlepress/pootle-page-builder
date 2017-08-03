@@ -102,6 +102,8 @@ jQuery( function ( $ ) {
 					.addClass( "ppb-dialog-content ppb-widget-content" )
 					.appendTo( this.uiDialog );
 
+			$( this.uiDialog ).css( 'position', 'fixed' );
+
 			this._createTitlebar();
 			this._createButtonPane();
 

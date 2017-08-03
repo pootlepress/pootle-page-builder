@@ -22,17 +22,7 @@ class Pootle_PB_Pootle_Cloud {
 	public $name = 'Pootle cloud template';
 	private $tpls = [];
 	private $tpl_cats = [];
-
-	/**
-	 * PootlePB_Meta_Slider constructor.
-	 */
-	public function __construct() {
-		add_action( 'pootlepb_le_dialogs', array( $this, 'dialog', ) );
-		add_action( 'pootlepb_enqueue_admin_scripts', array( $this, 'enqueue', ) );
-		add_action( 'pootlepb_modules_page', array( $this, 'module_plugin' ), 25 );
-		add_action( 'pootlepb_modules', array( $this, 'module' ) );
-
-	}
+	private $ppbPro = false;
 
 	/**
 	 * Gets Pootle_PB_Pootle_Cloud instance
@@ -45,6 +35,27 @@ class Pootle_PB_Pootle_Cloud {
 		}
 
 		return self::$_instance;
+	}
+
+	/**
+	 * PootlePB_Meta_Slider constructor.
+	 */
+	public function __construct() {
+		add_action( 'pootlepb_le_dialogs', array( $this, 'dialog', ) );
+		add_action( 'pootlepb_enqueue_admin_scripts', array( $this, 'enqueue', ) );
+		add_action( 'pootlepb_modules_page', array( $this, 'module_plugin' ), 25 );
+		add_action( 'pootlepb_modules', array( $this, 'module' ) );
+		add_action( 'init', array( $this, 'init' ) );
+	}
+
+	/**
+	 * Enqueues JS and CSS
+	 * @filter pootlepb_enqueue_admin_scripts
+	 */
+	public function init() {
+
+		$this->ppbPro = class_exists( 'Pootle_Page_Builder_Pro' );
+
 	}
 
 	/**
@@ -65,11 +76,28 @@ class Pootle_PB_Pootle_Cloud {
 			$response = wp_remote_retrieve_body( wp_remote_get( 'https://pagebuilder-9144f.firebaseio.com/categories.json' ) );
 			if ( $response ) {
 				$this->tpl_cats = json_decode( $response, 'assoc' );
+				$this->tpl_cats = [ 'Our picks' => $this->tpl_cats['Our picks'] ] + $this->tpl_cats;
 				set_transient( 'pootle_pb_live_design_templates', $this->tpls, DAY_IN_SECONDS * 2.5 );
 			}
 		}
 
 		wp_localize_script( 'pootle-live-editor', 'ppbDesignTpls', $this->tpls );
+	}
+
+	private function tpl_html( $id, $tpl ) {
+		$class = 'ppb-tpl';
+		$html = '';
+		if ( ! $this->ppbPro ) {
+			$class .= ' pro-inactive';
+		}
+		if ( ! empty( $tpl['pro'] ) ) {
+			$html .= "<span class='pro'>Pro</span>";
+		}
+		return
+			"<div class='$class' data-id='$id'>$html" .
+			"<img src='$tpl[img]' alt='$id'>" .
+			"<i class='fa fa-search'></i>" .
+			"</div>";
 	}
 
 	/**
@@ -89,13 +117,7 @@ class Pootle_PB_Pootle_Cloud {
 				<div class="templates-wrap">
 					<?php
 					foreach ( $tpls as $id => $_ ) {
-						$tpl = $this->tpls[ $id ];
-						echo <<<HTML
-<div class="ppb-tpl" data-id="$id">
-<img src="$tpl[img]" alt="$id">
-<i class="fa fa-search"></i>
-</div>
-HTML;
+						echo $this->tpl_html( $id, $this->tpls[ $id ] );
 					}
 					?>
 				</div>

@@ -1793,8 +1793,19 @@ pre.ace_editor.ace-tm {
 		page-break-inside: avoid;
 		break-inside: avoid;
 		box-shadow: 0 0 7px 1px rgba(0,0,0,0.5);
-		border-radius: 3px;
+		border-radius: 0;
 		color: #777;
+
+		.pro {
+			position: absolute;
+			background: #2196f3;
+			/* border: 1px solid #fff; */
+			color: #fff;
+			padding: 4px 7px;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			margin: 0;
+		}
 
 		> div:first-of-type {
 			background: center bottom/cover url(https://pootle-cloud.firebaseapp.com/assets/default-wilson.jpg);
@@ -1849,7 +1860,6 @@ pre.ace_editor.ace-tm {
 			height: 160px;
 			min-width: 160px;
 		}
-
 	}
 }
 
