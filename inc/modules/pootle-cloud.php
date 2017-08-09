@@ -66,8 +66,6 @@ class Pootle_PB_Pootle_Cloud {
 		$this->tpls     = get_transient( 'pootle_pb_live_design_templates' );
 		$this->tpl_cats = get_transient( 'pootle_pb_live_design_tpl_cats' );
 
-		var_dump( 'tpls', $this->tpls, 'tpl_cats', $this->tpl_cats );
-
 		if ( ! $this->tpls || ! $this->tpl_cats || isset( $_GET['force_get_templates'] ) ) {
 			$response = wp_remote_retrieve_body( wp_remote_get( 'https://pagebuilder-9144f.firebaseio.com/design-templates.json' ) );
 			if ( $response ) {
