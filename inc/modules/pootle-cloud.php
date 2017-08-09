@@ -81,8 +81,6 @@ class Pootle_PB_Pootle_Cloud {
 			}
 		}
 
-		var_dump( 'tpl_cats', $this->tpl_cats );
-
 		wp_localize_script( 'pootle-live-editor', 'ppbDesignTpls', $this->tpls );
 	}
 
