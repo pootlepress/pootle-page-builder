@@ -66,6 +66,8 @@ class Pootle_PB_Pootle_Cloud {
 		$this->tpls     = get_transient( 'pootle_pb_live_design_templates' );
 		$this->tpl_cats = get_transient( 'pootle_pb_live_design_tpl_cats' );
 
+		var_dump( 'tpls', $this->tpls, 'tpl_cats', $this->tpl_cats );
+
 		if ( ! $this->tpls || ! $this->tpl_cats || isset( $_GET['force_get_templates'] ) ) {
 			$response = wp_remote_retrieve_body( wp_remote_get( 'https://pagebuilder-9144f.firebaseio.com/design-templates.json' ) );
 			if ( $response ) {
@@ -77,14 +79,20 @@ class Pootle_PB_Pootle_Cloud {
 			if ( $response ) {
 				$this->tpl_cats = json_decode( $response, 'assoc' );
 				$this->tpl_cats = [ 'Our picks' => $this->tpl_cats['Our picks'] ] + $this->tpl_cats;
-				set_transient( 'pootle_pb_live_design_templates', $this->tpls, DAY_IN_SECONDS * 2.5 );
+				set_transient( 'pootle_pb_live_design_tpl_cats', $this->tpls, DAY_IN_SECONDS * 2.5 );
 			}
 		}
+
+		var_dump( 'tpl_cats', $this->tpl_cats );
 
 		wp_localize_script( 'pootle-live-editor', 'ppbDesignTpls', $this->tpls );
 	}
 
-	private function tpl_html( $id, $tpl ) {
+	private function tpl_html( $id ) {
+		if ( empty ( $this->tpls[ $id ] ) ) {
+			return '';
+		}
+		$tpl = $this->tpls[ $id ];
 		$class = 'ppb-tpl';
 		$html = '';
 		if ( ! $this->ppbPro ) {
@@ -116,8 +124,8 @@ class Pootle_PB_Pootle_Cloud {
 				</h2>
 				<div class="templates-wrap">
 					<?php
-					foreach ( $tpls as $id => $_ ) {
-						echo $this->tpl_html( $id, $this->tpls[ $id ] );
+					foreach ( $tpls as $index => $id ) {
+						echo $this->tpl_html( $id );
 					}
 					?>
 				</div>
