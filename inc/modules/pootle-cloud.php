@@ -91,10 +91,10 @@ class Pootle_PB_Pootle_Cloud {
 		$tpl = $this->tpls[ $id ];
 		$class = 'ppb-tpl';
 		$html = '';
-		if ( ! $this->ppbPro ) {
-			$class .= ' pro-inactive';
-		}
 		if ( ! empty( $tpl['pro'] ) ) {
+			if ( ! $this->ppbPro ) {
+				$class .= ' pro-inactive';
+			}
 			$html .= "<span class='pro'>Pro</span>";
 		}
 		return
