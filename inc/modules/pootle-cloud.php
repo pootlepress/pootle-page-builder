@@ -77,7 +77,7 @@ class Pootle_PB_Pootle_Cloud {
 			if ( $response ) {
 				$this->tpl_cats = json_decode( $response, 'assoc' );
 				$this->tpl_cats = [ 'Our picks' => $this->tpl_cats['Our picks'] ] + $this->tpl_cats;
-				set_transient( 'pootle_pb_live_design_tpl_cats', $this->tpls, DAY_IN_SECONDS * 2.5 );
+				set_transient( 'pootle_pb_live_design_tpl_cats', $this->tpl_cats, DAY_IN_SECONDS * 2.5 );
 			}
 		}
 
