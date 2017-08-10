@@ -24,6 +24,38 @@ class Pootle_PB_Pootle_Cloud {
 	private $tpl_cats = [];
 	private $ppbPro = false;
 
+	static function get_templates() {
+
+		$tpls     = get_transient( 'pootle_pb_live_design_templates' );
+
+		if ( ! $tpls || isset( $_GET['force_get_templates'] ) ) {
+			$response = wp_remote_retrieve_body( wp_remote_get( 'https://pagebuilder-9144f.firebaseio.com/design-templates.json' ) );
+			if ( $response ) {
+				$tpls = json_decode( $response, 'assoc' );
+				set_transient( 'pootle_pb_live_design_templates', $tpls, DAY_IN_SECONDS * 2.5 );
+			}
+		}
+
+		return $tpls;
+	}
+
+	static function get_categories() {
+
+		$categories = get_transient( 'pootle_pb_live_design_tpl_cats' );
+
+		if ( ! $categories || isset( $_GET['force_get_templates'] ) ) {
+
+			$response = wp_remote_retrieve_body( wp_remote_get( 'https://pagebuilder-9144f.firebaseio.com/categories.json' ) );
+			if ( $response ) {
+				$categories = json_decode( $response, 'assoc' );
+				$categories = [ 'Our picks' => $categories['Our picks'] ] + $categories;
+				set_transient( 'pootle_pb_live_design_tpl_cats', $categories, DAY_IN_SECONDS * 2.5 );
+			}
+		}
+
+		return $categories;
+	}
+
 	/**
 	 * Gets Pootle_PB_Pootle_Cloud instance
 	 * @return Pootle_PB_Pootle_Cloud instance
@@ -58,29 +90,17 @@ class Pootle_PB_Pootle_Cloud {
 
 	}
 
+	private function init_tpl_data() {
+		$this->tpls = self::get_templates();
+		$this->tpl_cats = self::get_categories();
+	}
+
 	/**
 	 * Enqueues JS and CSS
 	 * @filter pootlepb_enqueue_admin_scripts
 	 */
 	public function enqueue() {
-		$this->tpls     = get_transient( 'pootle_pb_live_design_templates' );
-		$this->tpl_cats = get_transient( 'pootle_pb_live_design_tpl_cats' );
-
-		if ( ! $this->tpls || ! $this->tpl_cats || isset( $_GET['force_get_templates'] ) ) {
-			$response = wp_remote_retrieve_body( wp_remote_get( 'https://pagebuilder-9144f.firebaseio.com/design-templates.json' ) );
-			if ( $response ) {
-				$this->tpls = json_decode( $response, 'assoc' );
-				set_transient( 'pootle_pb_live_design_templates', $this->tpls, DAY_IN_SECONDS * 2.5 );
-			}
-
-			$response = wp_remote_retrieve_body( wp_remote_get( 'https://pagebuilder-9144f.firebaseio.com/categories.json' ) );
-			if ( $response ) {
-				$this->tpl_cats = json_decode( $response, 'assoc' );
-				$this->tpl_cats = [ 'Our picks' => $this->tpl_cats['Our picks'] ] + $this->tpl_cats;
-				set_transient( 'pootle_pb_live_design_tpl_cats', $this->tpl_cats, DAY_IN_SECONDS * 2.5 );
-			}
-		}
-
+		$this->init_tpl_data();
 		wp_localize_script( 'pootle-live-editor', 'ppbDesignTpls', $this->tpls );
 	}
 
@@ -104,6 +124,26 @@ class Pootle_PB_Pootle_Cloud {
 			"</div>";
 	}
 
+	function templates_html() {
+		if ( ! $this->tpl_cats ) {
+			$this->init_tpl_data();
+		}
+		foreach ( $this->tpl_cats as $cat => $tpls ) {
+			?>
+			<h2>
+				<?php echo $cat; ?>
+			</h2>
+			<div class="templates-wrap">
+				<?php
+				foreach ( $tpls as $index => $id ) {
+					echo $this->tpl_html( $id );
+				}
+				?>
+			</div>
+			<?php
+		}
+	}
+
 	/**
 	 * Renders dialog html and JS
 	 * @filter pootlepb_le_dialogs
@@ -113,20 +153,7 @@ class Pootle_PB_Pootle_Cloud {
 		<div class="pootlepb-dialog" id="pootlepb-design-templates" data-title="Choose a template...">
 			<?php
 			do_action( 'before_design_templates' );
-			foreach ( $this->tpl_cats as $cat => $tpls ) {
-				?>
-				<h2>
-					<?php echo $cat; ?>
-				</h2>
-				<div class="templates-wrap">
-					<?php
-					foreach ( $tpls as $index => $id ) {
-						echo $this->tpl_html( $id );
-					}
-					?>
-				</div>
-				<?php
-			}
+			$this->templates_html();
 			do_action( 'after_design_templates' );
 			?>
 		</div>
