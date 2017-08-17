@@ -1775,8 +1775,8 @@ pre.ace_editor.ace-tm {
 // Template design module
 #pootlepb-design-templates {
 	text-align: left;
-	h2 {
-		padding: 16px 20px 0;
+	h2, h3, h4 {
+		padding: 0.5em 20px 0;
 		margin: 0;
 	}
 	.templates-wrap {
@@ -1788,14 +1788,13 @@ pre.ace_editor.ace-tm {
 		position: relative;
 		display: inline-block;
 		cursor: pointer;
-		margin: 0 0.7em 1.4em;
+		margin: 0 1.25em 2.5em;
 		-webkit-column-break-inside: avoid;
 		page-break-inside: avoid;
 		break-inside: avoid;
 		box-shadow: 0 0 7px 1px rgba(0,0,0,0.5);
 		border-radius: 0;
 		color: #777;
-
 		.pro {
 			position: absolute;
 			background: #2196f3;
@@ -1807,10 +1806,7 @@ pre.ace_editor.ace-tm {
 			margin: 0;
 		}
 
-		> div:first-of-type {
-			background: center bottom/cover url(https://pootle-cloud.firebaseapp.com/assets/default-wilson.jpg);
-		}
-		&:after {
+		.label {
 			transition: opacity 0.25s;
 			content: attr(data-id);
 			display: block;
@@ -1819,8 +1815,7 @@ pre.ace_editor.ace-tm {
 			color: #333;
 			position: relative;
 		}
-		.fa-search {
-			display: none;
+		.top-left-icon, .fa-search {
 			position: absolute;
 			padding: 0;
 			line-height: 35px;
@@ -1834,21 +1829,10 @@ pre.ace_editor.ace-tm {
 			opacity: 0.25;
 		}
 
-		&:hover {
-			&:after {
-				opacity: 0.5;
-			}
-			.fa-search {
-				opacity: 0.7;
-				&:hover {
-					opacity: 0.88;
-				}
-			}
-		}
-
 		img {
-			height: 160px;
+			height: 200px;
 			width: auto;
+			min-width: 100%;
 			display: block;
 			margin: 0;
 			border-radius: 0;
@@ -1856,10 +1840,39 @@ pre.ace_editor.ace-tm {
 				display: block;
 			}
 		}
-		.ppb-tpl-prev {
+		.ppb-tpl-bg {
+			background: center bottom/cover url(https://pootle-cloud.firebaseapp.com/assets/default-wilson.jpg);
 			height: 160px;
 			min-width: 160px;
 		}
+		.desc {
+			position: absolute;
+			top: calc( 100% - 25px );
+			min-height: 25px;
+			padding: 2px 5px;
+			background: #fff;
+			left: 0;
+			right: 0;
+			opacity: 0;
+			transition: all 0.5s;
+			box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+			font-size: 12px;
+			z-index: 2;
+		}
+
+		&:hover {
+			.top-left-icon, .fa-search {
+				opacity: 0.7;
+				&:hover {
+					opacity: 0.88;
+				}
+			}
+			.desc {
+				top: 99.7%;
+				opacity: 1;
+			}
+		}
+
 	}
 }
 

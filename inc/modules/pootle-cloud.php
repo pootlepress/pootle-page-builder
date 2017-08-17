@@ -120,6 +120,7 @@ class Pootle_PB_Pootle_Cloud {
 		return
 			"<div class='$class' data-id='$id'>$html" .
 			"<img src='$tpl[img]' alt='$id'>" .
+			"<div class='label'>$id</div>" .
 			"<i class='fa fa-search'></i>" .
 			"</div>";
 	}
