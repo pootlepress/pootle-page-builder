@@ -97,10 +97,17 @@ final class Pootle_Page_Builder_Content_Block {
 		//Classes for this content block
 		$attr['class'] = array( 'ppb-block' );
 		if ( ! empty( $styleArray['class'] ) ) { $attr['class'][] = $styleArray['class']; }
-		if ( empty( $styleArray['padding-mobile'] ) ) { $attr['class'][] = 'ppb-no-mobile-spacing'; }
+		if ( empty( $styleArray['padding-mobile'] ) ) {
+			$attr['class'][] = 'ppb-no-mobile-spacing';
+		} else {
+			$attr['class'][] = 'ppb-mobile-behaviour-' . $styleArray['padding-mobile'];
+		}
 
 		$styleWithSelector = ''; // Passed with reference
 		if ( ! empty( $styleArray ) ) {
+			$styleArray = wp_parse_args( $styleArray, [
+				'inline-css' => '',
+			] );
 			$this->set_inline_embed_styles( $attr, $styleWithSelector, $styleArray, $id ); // Get Styles
 		}
 
@@ -113,8 +120,8 @@ final class Pootle_Page_Builder_Content_Block {
 
 	/**
 	 * Sets content block embed and inline css
-	 * @param string $attr
-	 * @param array $styleWithSelector
+	 * @param array $attr
+	 * @param string $styleWithSelector
 	 * @param array $styleArray
 	 * @param string $id
 	 */
@@ -173,7 +180,7 @@ final class Pootle_Page_Builder_Content_Block {
 	/**
 	 * Fallback content block style renderer
 	 * @param string $inlineStyle
-	 * @param array $styleWithSelector
+	 * @param string $styleWithSelector
 	 * @param array $styleArray
 	 * @param string $id
 	 * @param string $key

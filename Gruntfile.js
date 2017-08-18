@@ -6,24 +6,28 @@ module.exports = function(grunt) {
 		sass: {
 			dist: {
 				options: {
-					style : 'compact',
-					//sourcemap: 'none'
+					style : 'compressed',
+					sourcemap: 'none'
 				},
 				files:  [
-					{
+					{ // /**/*.scss files
 						expand: true,
-						src: ['**/sass/*.scss'],
+						cwd: 'css',
+						dest: 'css',
+						src: ['**/*.scss'],
 						ext: '.css',
 						rename: function( dest, src ) {
-							return src.replace( 'sass/', '' );
+							return dest + '/' + src.replace( 'scss/', '' ).replace( 'sass/', '' );
 						},
 					},
-					{
+					{ // /**/*.scss files
 						expand: true,
-						src: ['**/scss/*.scss'],
+						cwd: 'inc',
+						dest: 'inc',
+						src: ['**/*.scss'],
 						ext: '.css',
 						rename: function( dest, src ) {
-							return src.replace( 'scss/', '' );
+							return dest + '/' + src.replace( 'scss/', '' ).replace( 'sass/', '' );
 						},
 					},
 				],

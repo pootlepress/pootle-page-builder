@@ -1,0 +1,64 @@
+/* Canvas Slider Compat */
+
+.panel-grid #tabs .list li {
+	list-style-type: none;
+}
+
+.panel-grid-cell > {
+	.widget_woo_component > .magazine {
+		ul {
+			clear: none;
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			> li {
+				list-style-type: none;
+			}
+		}
+		.flex-direction-nav {
+			height: 0;
+		}
+		> .pagination-wrap {
+			text-align: center;
+			> .flex-control-nav {
+				position: relative;
+				top: 10px;
+			}
+		}
+	}
+	.widget_pootle-text-widget ul {
+		list-style-position: outside;
+	}
+}
+
+/* fix Canvas set ol calendar element within .entry with a padding left */
+
+.entry > .panel-grid > .panel-row-style > .panel-grid-cell > .panel > {
+	ol.vcalendar, ul.tweets {
+		padding-left: 0;
+	}
+}
+
+/* WooSlider slideshow in PB has margin in <p>, padding in <a>, and extra <br>  */
+
+.panel-grid-cell > .widget_wooslider_slideshow_slides > .wooslider > .wooslider-viewport > .slides > .slide {
+	> .slide-content > .entry > p {
+		margin-bottom: 0;
+		> a {
+			padding: 0;
+		}
+	}
+	br {
+		display: none;
+	}
+}
+
+.panel-grid .widget {
+	ul, ol {
+		list-style-position: inside;
+	}
+}
+
+ul.wooTabs {
+	margin-bottom: 0 !important;
+}

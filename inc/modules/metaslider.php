@@ -101,7 +101,7 @@ HTML;
 			'icon_class' => 'dashicons dashicons-images-alt',
 			'icon_html' => '',
 			'tab' => '#pootle-metaslider-tab',
-			'ActiveClass' => 'MetaSliderPlugin',
+			'active_class' => 'MetaSliderPlugin',
 			'priority'    => 40,
 		);
 		return $mods;
@@ -115,7 +115,7 @@ HTML;
 			'AuthorURI' => 'https://www.metaslider.com',
 			'Author' => 'Matcha Labs',
 			'Image' => '//ps.w.org/ml-slider/assets/icon.svg?rev=1000654',
-			'ActiveClass' => 'MetaSliderPlugin',
+			'active_class' => 'MetaSliderPlugin',
 		);
 		return $mods;
 

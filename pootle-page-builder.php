@@ -116,12 +116,9 @@ if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 			add_action( 'admin_init', array( $this, 'ppb_compatibility' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-			add_action( 'wp_ajax_ppb_ipad_posts', array( $this, 'ipad_app_json' ) );
-			add_action( 'wp_ajax_nopriv_ppb_ipad_posts', array( $this, 'ipad_app_json' ) );
-			add_action( 'wp_ajax_ppb_ipad_login', array( $this, 'ipad_app_login' ) );
-			add_action( 'wp_ajax_nopriv_ppb_ipad_login', array( $this, 'ipad_app_login' ) );
+			add_action( 'wp_ajax_nopriv_ppb_app_user', array( $this, 'app_user_status' ) );
+			add_action( 'wp_ajax_ppb_app_user', array( $this, 'app_user_logged_in' ) );
 			add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
-
 			add_action( 'activated_plugin', array( $this, 'activation_redirect' ) );
 		}
 
@@ -176,74 +173,19 @@ if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 			return $this->ppb_posts;
 		}
 
-		/**
-		 * Return Query with all posts using ppb
-		 * @return WP_Query
-		 * @since 0.3.0
-		 */
-		public function ipad_app_json() {
-			$query = $this->ppb_posts();
-			$json  = array(
-				'site_url' => site_url(),
-				'posts'    => array(),
-
-			);
-
-			foreach ( $query->posts as $post ) {
-				$json['posts'][] = array(
-					'title'  => $post->post_title,
-					'link'   => get_permalink( $post ),
-					'type'   => $post->post_type,
-					'status' => $post->post_status,
-				);
-			}
-			echo json_encode( $json );
-			die();
+		public function app_user_status() {
+			setcookie( 'ppb-redirect', filter_input( INPUT_GET, 'redirect' ) );
+			header( 'Location: ' . site_url( '/wp-login.php' ) . '?redirect_to=' . admin_url( 'admin-ajax.php?action=ppb_app_user' ) );
+			exit();
 		}
 
-		public function ipad_app_login() {
-			if ( 'server' == $_REQUEST['log'] && 'ping' == $_REQUEST['pwd'] ) {
-				echo json_encode(
-					array(
-						'nonce'   => 'PootlePBresponse',
-						'message' => __( "Connected to server, type in your username and password to start building!" ),
-						'site'    => site_url(),
-					)
-				);
-				exit;
-			}
-			// Nonce is checked, get the POST data and sign user on
-			$user_signon = wp_signon( null, false );
-			if ( is_wp_error( $user_signon ) ) {
-				if ( username_exists( $_REQUEST['log'] ) ) {
-					echo json_encode(
-						array(
-							'nonce'   => 'Failed',
-							'message' => __( "Hi $_REQUEST[log], Your password doesn't match, please try again." ),
-						)
-					);
-				} else {
-					echo json_encode(
-						array(
-							'nonce'   => 'Failed',
-							'message' => __( "We don't recognise you $_REQUEST[log], Kindly check your user name." ),
-						)
-					);
-				}
-			} else {
-				if ( ! empty( $_POST['redirect_to'] ) ) {
-					header( "Location: $_POST[redirect_to]" );
-					exit;
-				}
-				$nonce = pootlepb_rand();
-				set_transient( 'ppb-ipad-' . filter_input( INPUT_POST, 'log' ), $nonce, 25 * HOUR_IN_SECONDS );
-				echo json_encode( array(
-					'nonce'   => $nonce,
-					'message' => __( 'Login successful, redirecting...' ),
-				) );
+		public function app_user_logged_in() {
+			$redirect = filter_input( INPUT_GET, 'redirect' );
+			if ( isset( $_COOKIE['ppb-redirect'] ) ) {
+				$redirect = $_COOKIE['ppb-redirect'];
 			}
 
-			exit();
+			header( 'Location: ' . $redirect );
 		}
 
 		/**
@@ -346,6 +288,7 @@ if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 			include 'run-on-uninstall.php';
 		}
 	} //class Pootle_Page_Builder
+	/** @var Pootle_Page_Builder $Pootle_Page_Builder Instance  */
 	global $Pootle_Page_Builder;
 
 	/** @var Pootle_Page_Builder $Pootle_Page_Builder Instance  */

@@ -1,0 +1,41 @@
+.panel-grid-cell-container {
+	padding-bottom: 1px;
+	position: relative;
+	z-index: 30;
+	min-height: inherit;
+	display: flex;
+}
+
+.ppb-col {
+	-webkit-box-sizing: initial;
+	box-sizing: initial;
+	font-size: 15px;
+	vertical-align: top;
+	width: 100%;
+	//min-height: inherit;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+
+	&:first-child {
+		padding-left: 0 !important;
+	}
+	&:last-child {
+		padding-right: 0 !important;
+	}
+	.ppb-block {
+		&:after {
+			clear: both;
+			content: '';
+			display: table;
+		}
+		p {
+			color: inherit;
+		}
+	}
+}
+
+.ppb-match-col-hi .ppb-block {
+	flex: 1 0 auto;
+}

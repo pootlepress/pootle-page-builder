@@ -90,7 +90,6 @@ ksort( $panel_tabs );
 	</div>
 
 <?php
-$row_panel_tabs = apply_filters( 'pootlepb_le_row_block_tabs', $panel_tabs );
 
 $row_panel_tabs = array(
 	'background' => array(
@@ -107,6 +106,7 @@ $row_panel_tabs = array(
 	),
 );
 
+$row_panel_tabs = apply_filters( 'pootlepb_le_row_block_tabs', $row_panel_tabs );
 ?>
 	<div class="pootlepb-dialog" id="pootlepb-row-editor-panel">
 		<ul>
@@ -296,8 +296,20 @@ if ( $enabled_modules ) {
 
 				$attr = "";
 
+				if ( empty( $module['only_new_row'] ) ) {
+					$classes .= ' ppb-module-existing-row';
+				}
+
+				if ( empty( $module['only_existing_row'] ) ) {
+					$classes .= ' ppb-module-new-row';
+				}
+
 				if ( ! empty( $module['callback'] ) ) {
 					$attr .= " data-callback='$module[callback]'";
+				}
+
+				if ( ! empty( $module['row_callback'] ) ) {
+					$attr .= " data-row-callback='$module[row_callback]'";
 				}
 
 				if ( ! empty( $module['tab'] ) ) {
@@ -308,14 +320,29 @@ if ( $enabled_modules ) {
 					$attr .= " data-style_data='$module[style_data]'";
 				}
 
-				if ( ! empty( $module['ActiveClass'] ) && class_exists( $module['ActiveClass'] ) ) {
+				$tooltip = '';
+				if ( ! empty( $module['tooltip'] ) ) {
+					$tooltip = "<span  class='dashicons dashicons-editor-help tooltip-module' data-tooltip=\"$module[tooltip]\"></span>";
+				}
+
+				if ( empty( $module['active_class'] ) || class_exists( $module['active_class'] ) ) {
 					$classes .= ' ppb-module';
-					echo "<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>";
+					echo
+						"<div id='ppb-mod-$id' class='$classes' $attr>" .
+							"<i class='icon $module[icon_class]'>$module[icon_html]</i>" .
+							"<div class='label'>$module[label]</div>" .
+							$tooltip .
+						'</div>';
 				} else {
+
 					$classes .= ' ppb-module-disabled';
 					echo
 						'<a target="_blank" href="' . admin_url( 'admin.php?page=page_builder_modules' ) . '">' .
-						"<div id='ppb-mod-$id' class='$classes' $attr><i class='icon $module[icon_class]'>$module[icon_html]</i><div class='label'>$module[label]</div></div>" .
+							"<div id='ppb-mod-$id' class='$classes' $attr>" .
+								"<i class='icon $module[icon_class]'>$module[icon_html]</i>" .
+								"<div class='label'>$module[label]</div>"	.
+								$tooltip .
+							'</div>' .
 						'</a>';
 				}
 			}
@@ -325,7 +352,7 @@ if ( $enabled_modules ) {
 	<?php
 }
 ?>
-<div id="ppb-loading-overlay">
+<div id="ppb-loading">
 	<div id="ppb-loader"></div>
 </div>
 
@@ -356,3 +383,8 @@ if ( $enabled_modules ) {
 	</label>
 </div>
 <div id="ppb-tooltip" style="display:none"></div>
+
+<div id="ppb-notify" class="ppb-notify" style="display:none;"></div>
+
+<?php
+do_action( 'pootlepb_le_dialogs' );

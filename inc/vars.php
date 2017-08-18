@@ -24,17 +24,24 @@ global
  * @since 0.1.0
  */
 $pootlepb_content_block_styling_fields = array(
+	'text-color'       => array(
+		'name' => 'Text color',
+		'type' => 'color',
+		'priority' => 1,
+		'css'  => 'color',
+		'tab' => 'style',
+	),
 	'background-image' => array(
 		'name' => 'Background Image',
 		'type' => 'upload',
-		'priority' => 1,
+		'priority' => 2,
 		'css'  => 'background-image:url(%s);',
 		'tab' => 'style',
 	),
 	'background-color' => array(
 		'name' => 'Background color',
 		'type' => 'color',
-		'priority' => 1,
+		'priority' => 3,
 		'css'  => 'background-color',
 		'tab' => 'style',
 	),
@@ -44,27 +51,31 @@ $pootlepb_content_block_styling_fields = array(
 		'min'  => '0',
 		'max'  => '1',
 		'step' => '0.05',
-		'priority' => 2,
+		'priority' => 3,
 		'tab' => 'style',
 	),
-	'text-color'       => array(
-		'name' => 'Text color',
-		'type' => 'color',
-		'priority' => 3,
-		'css'  => 'color',
+	'padding-mobile'          => array(
+		'name' => 'Mobile behaviour',
+		'type' => 'select',
+		'options' => array(
+			''  => 'Remove margin/padding',
+			'1' => 'Keep  margin/padding',
+			'2' => 'Center content block',
+		),
+		'priority' => 4,
 		'tab' => 'style',
 	),
 	'border'           => array(
 		'name' => 'Border',
 		'type' => 'border',
-		'priority' => 4,
+		'priority' => 5,
 		'css'  => 'border',
 		'tab' => 'style',
 	),
 	'padding'          => array(
 		'name' => 'Padding',
 		'type' => 'number',
-		'priority' => 5,
+		'priority' => 6,
 		'min'  => '0',
 		'max'  => '250',
 		'step' => '1',
@@ -75,7 +86,7 @@ $pootlepb_content_block_styling_fields = array(
 	'margin-top'          => array(
 		'name' => 'Top Margin',
 		'type' => 'number',
-		'priority' => 5,
+		'priority' => 7,
 		'min'  => '0',
 		'max'  => '700',
 		'step' => '1',
@@ -86,7 +97,7 @@ $pootlepb_content_block_styling_fields = array(
 	'margin-bottom'          => array(
 		'name' => 'Bottom Margin',
 		'type' => 'number',
-		'priority' => 5,
+		'priority' => 8,
 		'min'  => '0',
 		'max'  => '700',
 		'step' => '1',
@@ -97,7 +108,7 @@ $pootlepb_content_block_styling_fields = array(
 	'margin-left'          => array(
 		'name' => 'Left Margin',
 		'type' => 'number',
-		'priority' => 5,
+		'priority' => 9,
 		'min'  => '0',
 		'max'  => '700',
 		'step' => '1',
@@ -108,7 +119,7 @@ $pootlepb_content_block_styling_fields = array(
 	'width'          => array(
 		'name' => 'Width',
 		'type' => 'number',
-		'priority' => 5,
+		'priority' => 10,
 		'min'  => '0',
 		'max'  => '100',
 		'step' => '1',
@@ -116,16 +127,10 @@ $pootlepb_content_block_styling_fields = array(
 		'css'  => 'max-width',
 		'tab' => 'style',
 	),
-	'padding-mobile'          => array(
-		'name' => 'Keep custom margin and padding on mobile',
-		'type' => 'checkbox',
-		'priority' => 5,
-		'tab' => 'style',
-	),
 	'rounded-corners'  => array(
 		'name' => 'Rounded corners',
 		'type' => 'number',
-		'priority' => 6,
+		'priority' => 11,
 		'min'  => '0',
 		'max'  => '100',
 		'step' => '1',
@@ -136,14 +141,14 @@ $pootlepb_content_block_styling_fields = array(
 	'inline-css'       => array(
 		'name'     => 'Inline CSS styles',
 		'type'     => 'textarea',
-		'priority' => 7,
+		'priority' => 12,
 		'css'      => '',
 		'tab' => 'advanced',
 	),
 	'class'            => array(
 		'name'     => 'CSS Class',
 		'type'     => 'text',
-		'priority' => 8,
+		'priority' => 13,
 		'css'      => '',
 		'tab' => 'advanced',
 	),
@@ -156,8 +161,13 @@ $pootlepb_content_block_styling_fields = array(
 $pootlepb_row_styling_fields = array(
 	//Layout
 	'full_width' => array (
-		'name' => 'Make row go full width',
-		'type' => 'checkbox',
+		'name' => 'Row Layout',
+		'type' => 'select',
+		'options' => array(
+			'' => 'Standard',
+			'1'	=> 'Full width',
+			'2'	=> 'Full width content',
+		),
 		'tab' => 'layout',
 		'priority' => 1,
 	),
@@ -1274,7 +1284,7 @@ $ppbpro_addons_data = array(
 		'AuthorURI'   => 'https://pootlepress.com',
 		'Author'      => 'pootlepress',
 		'Image'       => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
-		'ActiveClass' => 'WooBuilder',
+		'active_class' => 'WooBuilder',
 	),
 	'wc-shopbuilder'    => array(
 		'img'    => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
@@ -1324,7 +1334,17 @@ $ppbpro_addons_data = array(
 		'AuthorURI'   => 'https://pootlepress.com',
 		'Author'      => 'pootlepress',
 		'Image'       => 'https://image.flaticon.com/icons/svg/45/45696.svg',
-		'ActiveClass' => 'WooBuilder',
+		'active_class' => 'WooBuilder',
+	),
+	'pootle-cloud' => array(
+		'free'        => true,
+		'Name'        => 'Pootle cloud',
+		'Description' => 'PootleCloud will let you save your designs to the cloud so that you can reuse them, either on the website you are working on, or any Pootle Pagebuilder site :)',
+		'InstallURI'  => admin_url( "/plugin-install.php?s=Pootle+Cloud&tab=search&type=term" ),
+		'AuthorURI'   => 'https://pootlepress.com',
+		'Author'      => 'pootlepress',
+		'Image'       => 'https://pootle-cloud.firebaseapp.com/assets/default-wilson.jpg',
+		'active_class' => 'WooBuilder',
 	),
 );
 

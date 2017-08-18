@@ -88,13 +88,15 @@ jQuery ($) ->
 	$deletingWhat = $('#pootlepb-deleting-item')
 	$addRowDialog = $('#pootlepb-add-row')
 	$setTitleDialog = $('#pootlepb-set-title')
+	$designTemplateDialog = $('#pootlepb-design-templates')
+	$designTemplatePreview = $('#pootlepb-design-templates-preview-wrap')
 	$postSettingsDialog = $('#pootlepb-post-settings')
 	$ppbIpadColorDialog = $('#ppb-ipad-color-picker')
 	$iconPicker = $('#ppb-iconpicker')
 	$ppb = $('#pootle-page-builder')
 	$mods = $('#pootlepb-modules-wrap')
 	$body = $('body')
-	$loader = $('#ppb-loading-overlay')
+	$loader = $('#ppb-loading')
 	dialogAttr =
 		dialogClass: 'ppb-cool-panel'
 		autoOpen: false
@@ -359,14 +361,14 @@ jQuery ($) ->
 				return
 #			$rowPanel.ppbDialog 'close'
 			return
-		addRow: (callback, blockText) ->
+		addRow: (callback, blockData, rowStyle) ->
 			window.ppbRowI = ppbData.grids.length
 			num_cells = parseInt($('#ppb-row-add-cols').val())
 			logPPBData 'Adding row'
 			row =
 				id: window.ppbRowI
 				cells: num_cells
-				style:
+				style: if 'object' == typeof rowStyle then rowStyle else
 					background: ''
 					background_image: ''
 					background_image_repeat: ''
@@ -375,7 +377,6 @@ jQuery ($) ->
 					background_toggle: ''
 					bg_color_wrap: ''
 					bg_image_wrap: ''
-					match_col_hi: ''
 					bg_mobile_image: ''
 					bg_overlay_color: ''
 					bg_overlay_opacity: '0.5'
@@ -395,8 +396,10 @@ jQuery ($) ->
 			cells =
 				grid: window.ppbRowI
 				weight: 1 / row.cells
+
+			defaultText =  if typeof blockData == 'string' then blockData else '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>'
 			block =
-				text: if typeof blockText == 'string' then blockText else '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>'
+				text: defaultText
 				info:
 					class: 'Pootle_PB_Content_Block'
 					grid: window.ppbRowI
@@ -409,6 +412,10 @@ jQuery ($) ->
 				id = ppbData.widgets.length
 				block.info.cell = i
 				block.info.id = id
+				if ( blockData && blockData[ i ] )
+					block.text = if typeof blockData[ i ].text == 'string' then blockData[ i ].text else defaultText
+					block.info.style = if typeof blockData[ i ].style == 'string' then blockData[ i ].style else '{}'
+
 				ppbData.widgets.push $.extend(true, {}, block)
 				i++
 			logPPBData 'Row added'
@@ -472,11 +479,10 @@ jQuery ($) ->
 			items: '> .panel-grid'
 			handle: '.ppb-edit-row .drag-handle'
 			start: (e, ui) ->
-				console.log( this );
-				$( this ).data 'draggingRowI', ui.item.index()
+				$( this ).data 'draggingRowI', $ppb.children( '.ppb-row' ).index( ui.item )
 				return
 			update: (e, ui) ->
-				prevu.syncRowPosition( $ppb.data( 'draggingRowI' ), ui.item.index() );
+				prevu.syncRowPosition( $ppb.data( 'draggingRowI' ), $ppb.children( '.ppb-row' ).index( ui.item ) );
 				return
 		resizableCells:
 			handles: 'w'
@@ -647,21 +653,24 @@ jQuery ($) ->
 				$('a.ppb-tabs-anchors[href="' + tab + '"]').click()
 			return
 		moduleDroppable:
-			accept: '.ppb-module'
+			accept: '.ppb-module-existing-row'
 			activeClass: 'ppb-drop-module'
 			hoverClass: 'ppb-hover-module'
 			drop: (e, ui) ->
 				$m = ui.draggable
 				$t = $(this)
 				if $t.hasClass('add-row')
-					$('#ppb-row-add-cols').val '1'
-					prevu.addRow (($row) ->
-						setTimeout (->
-							prevu.insertModule $row.find('.ppb-block').last(), $m
+					if $m.data('row-callback') && typeof window.ppbModules[$m.data('row-callback')] == 'function'
+						window.ppbModules[ $m.data('row-callback') ]()
+					else
+						$('#ppb-row-add-cols').val '1'
+						prevu.addRow (($row) ->
+							setTimeout (->
+								prevu.insertModule $row.find('.ppb-block').last(), $m
+								return
+							), 106
 							return
-						), 106
-						return
-					), '<p>&nbsp;</p>'
+						), '<p>&nbsp;</p>'
 				else
 					prevu.insertModule $t, $m
 				return
@@ -679,7 +688,7 @@ jQuery ($) ->
 				button: text: 'Insert in Content Block'
 				multiple: false)
 			prevu.insertImageFrame.on 'attach', ->
-				$('.setting[data-setting="url"]').before '<label class="setting" data-setting="url">' + '<span class="name">Size</span>' + '<input type="text" value="http://wp/ppb/wp-content/uploads/2016/02/p03hbzwm.jpg" readonly="">' + '</label>'
+				$('.setting[data-setting="url"]').before '<label class="setting" data-setting="url">' + '<span class="name">Size</span>' + '<input type="text" value="" readonly="">' + '</label>'
 				return
 			# When an image is selected, run a callback.
 			prevu.insertImageFrame.on 'select', ->
@@ -812,6 +821,16 @@ jQuery ($) ->
 		return
 
 	$setTitleDialog.ppbDialog dialogAttr
+
+	dialogAttr.close = false
+
+	dialogAttr.buttons = Cancel: ->
+		$setTitleDialog.ppbDialog 'close'
+	dialogAttr.height = window.innerHeight - 50
+	dialogAttr.width = window.innerWidth - 50
+	dialogAttr.title = $designTemplateDialog.data('title')
+	$designTemplateDialog.ppbDialog dialogAttr
+
 	dialogAttr.height = 610
 	dialogAttr.width = 520
 	dialogAttr.title = 'Insert icon'
@@ -978,21 +997,23 @@ jQuery ($) ->
 		removeCells = []
 		removeBlocks = []
 		$t = $(this)
-		rowI = $t.closest('.pootle-live-editor').data('index')
+		rowI = parseInt $t.closest('.pootle-live-editor').data('index')
 
 		prevu.deleteCallback = ->
+			# Save current block and remove class
+			prevu.saveTmceBlock $( '.mce-edit-focus' ).removeClass( 'mce-edit-focus' )
 			ppbData.grids.splice rowI, 1
 			$.each ppbData.widgets, (i, v) ->
 				if v and v.info
-					if `rowI == v`.info.grid
+					if rowI == parseInt v.info.grid
 						removeBlocks.push i
 					else if rowI < v.info.grid
 						ppbData.widgets[i].info.grid--
 				return
 			$.each ppbData.grid_cells, (i, v) ->
 				if v
-					gi = parseInt(v.grid)
-					if `rowI == gi`
+					gi = parseInt v.grid
+					if rowI == gi
 						removeCells.push i
 					else if rowI < gi
 						ppbData.grid_cells[i].old_grid = gi
@@ -1326,7 +1347,7 @@ jQuery ($) ->
 		$('a').click (e) ->
 			e.preventDefault()
 			return
-	prevu.tmce.content_css = 'http://wp/ppb/wp-includes/css/dashicons.min.css?ver=4.4.2-alpha-36412'
+	prevu.tmce.content_css = ppbAjax.site + '/wp-includes/css/dashicons.min.css?ver=5.0.0'
 
 	prevu.tmce.setup = (editor) ->
 		editor.onDblClick.add (ed, e) ->
@@ -1715,7 +1736,13 @@ jQuery ($) ->
 	prevu.reset 'noSort'
 	# Modules
 	$mods.find('.ppb-module').draggable prevu.moduleDraggable
-	$ppb.find('.ppb-block, .ppb-live-add-object.add-row').droppable prevu.moduleDroppable
+
+
+
+	prevu.newRowModuleDroppable = jQuery.extend(true, {}, prevu.moduleDroppable )
+	prevu.newRowModuleDroppable.accept = '.ppb-module-new-row'
+
+	$ppb.find('.ppb-block, .ppb-live-add-object.add-row').droppable prevu.newRowModuleDroppable
 
 	window.ppbModules.image = ($t, ed) ->
 		prevu.insertImage()
@@ -1779,5 +1806,81 @@ jQuery ($) ->
 		$body.find('[data-font]').not('[data-font="%gfont"]').each ->
 			ppbAjax.data.google_fonts.push $(this).attr('data-font')
 
+	# Live templates
+
+	window.ppbModules.designTemplateRow = ($t, ed) ->
+			$designTemplateDialog.ppbDialog 'open'
+
+	applyDesignTemplate = ( e ) ->
+		$target = $( e.target );
+		if $target.hasClass( 'fa-search' )
+			$designTemplatePreview.find( 'img' ).attr(
+				'src',
+				$target.siblings( 'img' ).attr( 'src' )
+			);
+			$designTemplatePreview.fadeIn( )
+
+		else
+			$t = $target.closest( '.ppb-tpl' )
+			id = $t.data( 'id' )
+
+			if $t.hasClass( 'pro-inactive' )
+				ppbNotify 'Template ' + id + ' needs <a href="https://www.pootlepress.com/pootle-pagebuilder-pro/" target="_blank">Pootle Pagebuilder Pro</a> active.'
+				return;
+
+			tpl = ppbDesignTpls[id]
+			style = if tpl.style then JSON.parse( tpl.style ) else {}
+			style = if style.style then style.style else style
+			cells = 1
+			if tpl.content
+				cells = tpl.content.length
+
+			$( '#ppb-row-add-cols' ).val cells
+
+			prevu.addRow ( ( $row ) ->
+				setTimeout ( ( ) ->
+	#				prevu.insertModule $row.find('.ppb-block').last(), $m
+				), 106
+			), tpl.content, style
+
+			$designTemplateDialog.ppbDialog 'close'
+			console.log 'Applying template ' + id, tpl
+
+	$designTemplateDialog.on 'click', '.ppb-tpl', applyDesignTemplate
+
+	# Content updated hook
 	$('html').on 'pootlepb_le_content_updated', (e, $t) ->
 		ppbSkrollr.refresh $t.find( '.ppb-col' );
+
+ppbTemplateFromRow = (rowI, thumb) ->
+	if ! ppbData || ! ppbData.grids || ! ppbData.grids[ rowI ] then return {}
+
+	rowStyle = ppbData.grids[ rowI ].style
+
+	if ! thumb
+		thumb = rowStyle.background_image || rowStyle.grad_image || rowStyle.bg_mobile_image
+
+	parseContent = ( cb ) ->
+		tpl.content.push(
+			style: cb.info.style
+			text: cb.text
+		)
+
+	tpl =
+		img: thumb
+		content: []
+		style: JSON.stringify rowStyle
+
+	parseContent cb for cb in ppbData.widgets when cb && cb.info && parseInt( cb.info.grid ) is parseInt( rowI )
+
+	return JSON.stringify tpl
+
+ppbNotify = ( notice ) ->
+	$n = jQuery( '#ppb-notify' )
+	$n.html( notice )
+	$n.fadeIn()
+	setTimeout(
+		() ->
+			$n.fadeOut()
+		, 2000
+	)

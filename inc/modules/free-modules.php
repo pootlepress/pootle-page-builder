@@ -38,35 +38,36 @@ class pootle_page_builder_Unsplash {
 			'icon_class' => 'dashicons dashicons-archive',
 			'tab' => "#pootlepb-background-row-tab",
 			'callback' => 'heroSection',
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
 			'priority' => 5
 		);
 		$mods["unsplash"] = array(
-			'label' => 'Unsplash image',
+			'label' => 'Free photos',
 			'icon_class' => 'dashicons dashicons-camera',
 			'callback' => 'unsplash',
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
+			'tooltip' => 'All free photos are from Unsplash.com and can be used for free',
 			'priority' => 15
 		);
 		$mods["image"] = array(
 			'label' => 'Image',
 			'icon_class' => 'dashicons dashicons-format-image',
 			'callback' => 'image',
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
 			'priority' => 15
 		);
 		$mods["icon"] = array(
 			'label' => 'Icon',
 			'icon_class' => 'dashicons dashicons-lightbulb',
 			'callback' => 'chooseIconDialog',
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
 			'priority' => 15
 		);
 		$mods["pbtn"] = array(
 			'label' => 'Button',
 			'icon_class' => 'dashicons dashicons-upload',
 			'callback' => 'button',
-			'ActiveClass' => $this->class,
+			'active_class' => $this->class,
 			'priority' => 20
 		);
 		return $mods;

@@ -159,21 +159,21 @@ class Pootle_Page_Builder_Pro_Admin {
 			'label'       => 'Photo Gallery',
 			'icon_class'  => 'dashicons dashicons-images-alt2',
 			'tab'         => '#pootle-ppb-photo-addon-tab',
-			'ActiveClass' => 'page_builder_photo_addon',
+			'active_class' => 'page_builder_photo_addon',
 			'priority'    => 10,
 		);
 		$modules['blog-posts'] = array(
 			'label'       => 'Blog posts',
 			'icon_class'  => 'dashicons dashicons-admin-post',
 			'tab'         => '#pootle-ppb-blog-customizer-tab',
-			'ActiveClass' => 'pootle_page_builder_blog_customizer',
+			'active_class' => 'pootle_page_builder_blog_customizer',
 			'priority'    => 25,
 		);
 		$modules['wc-products'] = array(
 			'label'       => 'WooCommerce',
 			'icon_class'  => 'dashicons dashicons-cart',
 			'tab'         => '#pootle-wc_prods-tab',
-			'ActiveClass' => 'pootle_page_builder_for_WooCommerce',
+			'active_class' => 'pootle_page_builder_for_WooCommerce',
 			'priority'    => 30,
 		);
 		$modules['one-pager'] = array(
@@ -181,7 +181,7 @@ class Pootle_Page_Builder_Pro_Admin {
 			'icon_class'  => 'dashicons dashicons-format-aside',
 			'tab'         => "#pootlepb-background-row-tab",
 			'callback'    => 'onePager',
-			'ActiveClass' => 'pootle_page_builder_one_pager',
+			'active_class' => 'pootle_page_builder_one_pager',
 			'priority'    => 30,
 		);
 		return $modules;

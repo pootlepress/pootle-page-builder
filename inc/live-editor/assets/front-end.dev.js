@@ -13,7 +13,7 @@
  * @param newI
  * @returns Array
  */
-var logPPBData, ppbIpad, ppbPrevuDebug;
+var logPPBData, ppbIpad, ppbNotify, ppbPrevuDebug, ppbTemplateFromRow;
 
 Array.prototype.ppbPrevuMove = function(oldI, newI) {
   this.splice(newI, 0, this.splice(oldI, 1)[0]);
@@ -64,7 +64,7 @@ logPPBData = function(a, b, c) {
 };
 
 jQuery(function($) {
-  var $addRowDialog, $body, $contentPanel, $deleteDialog, $deletingWhat, $iconPicker, $loader, $mods, $panels, $postSettingsDialog, $ppb, $ppbIpadColorDialog, $rowPanel, $setTitleDialog, $tooltip, dialogAttr, pickFaIcon, prevu;
+  var $addRowDialog, $body, $contentPanel, $deleteDialog, $deletingWhat, $designTemplateDialog, $designTemplatePreview, $iconPicker, $loader, $mods, $panels, $postSettingsDialog, $ppb, $ppbIpadColorDialog, $rowPanel, $setTitleDialog, $tooltip, applyDesignTemplate, dialogAttr, pickFaIcon, prevu;
   $.each(ppbData.grids, function(i, v) {
     ppbData.grids[i].id = i;
   });
@@ -96,13 +96,15 @@ jQuery(function($) {
   $deletingWhat = $('#pootlepb-deleting-item');
   $addRowDialog = $('#pootlepb-add-row');
   $setTitleDialog = $('#pootlepb-set-title');
+  $designTemplateDialog = $('#pootlepb-design-templates');
+  $designTemplatePreview = $('#pootlepb-design-templates-preview-wrap');
   $postSettingsDialog = $('#pootlepb-post-settings');
   $ppbIpadColorDialog = $('#ppb-ipad-color-picker');
   $iconPicker = $('#ppb-iconpicker');
   $ppb = $('#pootle-page-builder');
   $mods = $('#pootlepb-modules-wrap');
   $body = $('body');
-  $loader = $('#ppb-loading-overlay');
+  $loader = $('#ppb-loading');
   dialogAttr = {
     dialogClass: 'ppb-cool-panel',
     autoOpen: false,
@@ -407,15 +409,15 @@ jQuery(function($) {
         $(id).prevuRowInit();
       });
     },
-    addRow: function(callback, blockText) {
-      var block, cells, i, id, num_cells, row;
+    addRow: function(callback, blockData, rowStyle) {
+      var block, cells, defaultText, i, id, num_cells, row;
       window.ppbRowI = ppbData.grids.length;
       num_cells = parseInt($('#ppb-row-add-cols').val());
       logPPBData('Adding row');
       row = {
         id: window.ppbRowI,
         cells: num_cells,
-        style: {
+        style: 'object' === typeof rowStyle ? rowStyle : {
           background: '',
           background_image: '',
           background_image_repeat: '',
@@ -424,7 +426,6 @@ jQuery(function($) {
           background_toggle: '',
           bg_color_wrap: '',
           bg_image_wrap: '',
-          match_col_hi: '',
           bg_mobile_image: '',
           bg_overlay_color: '',
           bg_overlay_opacity: '0.5',
@@ -447,8 +448,9 @@ jQuery(function($) {
         grid: window.ppbRowI,
         weight: 1 / row.cells
       };
+      defaultText = typeof blockData === 'string' ? blockData : '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>';
       block = {
-        text: typeof blockText === 'string' ? blockText : '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>',
+        text: defaultText,
         info: {
           "class": 'Pootle_PB_Content_Block',
           grid: window.ppbRowI,
@@ -463,6 +465,10 @@ jQuery(function($) {
         id = ppbData.widgets.length;
         block.info.cell = i;
         block.info.id = id;
+        if (blockData && blockData[i]) {
+          block.text = typeof blockData[i].text === 'string' ? blockData[i].text : defaultText;
+          block.info.style = typeof blockData[i].style === 'string' ? blockData[i].style : '{}';
+        }
         ppbData.widgets.push($.extend(true, {}, block));
         i++;
       }
@@ -536,11 +542,10 @@ jQuery(function($) {
       items: '> .panel-grid',
       handle: '.ppb-edit-row .drag-handle',
       start: function(e, ui) {
-        console.log(this);
-        $(this).data('draggingRowI', ui.item.index());
+        $(this).data('draggingRowI', $ppb.children('.ppb-row').index(ui.item));
       },
       update: function(e, ui) {
-        prevu.syncRowPosition($ppb.data('draggingRowI'), ui.item.index());
+        prevu.syncRowPosition($ppb.data('draggingRowI'), $ppb.children('.ppb-row').index(ui.item));
       }
     },
     resizableCells: {
@@ -740,7 +745,7 @@ jQuery(function($) {
       }
     },
     moduleDroppable: {
-      accept: '.ppb-module',
+      accept: '.ppb-module-existing-row',
       activeClass: 'ppb-drop-module',
       hoverClass: 'ppb-hover-module',
       drop: function(e, ui) {
@@ -748,12 +753,16 @@ jQuery(function($) {
         $m = ui.draggable;
         $t = $(this);
         if ($t.hasClass('add-row')) {
-          $('#ppb-row-add-cols').val('1');
-          prevu.addRow((function($row) {
-            setTimeout((function() {
-              prevu.insertModule($row.find('.ppb-block').last(), $m);
-            }), 106);
-          }), '<p>&nbsp;</p>');
+          if ($m.data('row-callback') && typeof window.ppbModules[$m.data('row-callback')] === 'function') {
+            window.ppbModules[$m.data('row-callback')]();
+          } else {
+            $('#ppb-row-add-cols').val('1');
+            prevu.addRow((function($row) {
+              setTimeout((function() {
+                prevu.insertModule($row.find('.ppb-block').last(), $m);
+              }), 106);
+            }), '<p>&nbsp;</p>');
+          }
         } else {
           prevu.insertModule($t, $m);
         }
@@ -777,7 +786,7 @@ jQuery(function($) {
         multiple: false
       });
       prevu.insertImageFrame.on('attach', function() {
-        $('.setting[data-setting="url"]').before('<label class="setting" data-setting="url">' + '<span class="name">Size</span>' + '<input type="text" value="http://wp/ppb/wp-content/uploads/2016/02/p03hbzwm.jpg" readonly="">' + '</label>');
+        $('.setting[data-setting="url"]').before('<label class="setting" data-setting="url">' + '<span class="name">Size</span>' + '<input type="text" value="" readonly="">' + '</label>');
       });
       prevu.insertImageFrame.on('select', function() {
         var $img, ed, img;
@@ -915,6 +924,16 @@ jQuery(function($) {
     ppbAjax.title = $('#ppble-live-page-title').val();
   };
   $setTitleDialog.ppbDialog(dialogAttr);
+  dialogAttr.close = false;
+  dialogAttr.buttons = {
+    Cancel: function() {
+      return $setTitleDialog.ppbDialog('close');
+    }
+  };
+  dialogAttr.height = window.innerHeight - 50;
+  dialogAttr.width = window.innerWidth - 50;
+  dialogAttr.title = $designTemplateDialog.data('title');
+  $designTemplateDialog.ppbDialog(dialogAttr);
   dialogAttr.height = 610;
   dialogAttr.width = 520;
   dialogAttr.title = 'Insert icon';
@@ -1094,12 +1113,13 @@ jQuery(function($) {
     removeCells = [];
     removeBlocks = [];
     $t = $(this);
-    rowI = $t.closest('.pootle-live-editor').data('index');
+    rowI = parseInt($t.closest('.pootle-live-editor').data('index'));
     prevu.deleteCallback = function() {
+      prevu.saveTmceBlock($('.mce-edit-focus').removeClass('mce-edit-focus'));
       ppbData.grids.splice(rowI, 1);
       $.each(ppbData.widgets, function(i, v) {
         if (v && v.info) {
-          if (rowI == v.info.grid) {
+          if (rowI === parseInt(v.info.grid)) {
             removeBlocks.push(i);
           } else if (rowI < v.info.grid) {
             ppbData.widgets[i].info.grid--;
@@ -1110,7 +1130,7 @@ jQuery(function($) {
         var gi;
         if (v) {
           gi = parseInt(v.grid);
-          if (rowI == gi) {
+          if (rowI === gi) {
             removeCells.push(i);
           } else if (rowI < gi) {
             ppbData.grid_cells[i].old_grid = gi;
@@ -1453,7 +1473,7 @@ jQuery(function($) {
       e.preventDefault();
     });
   }
-  prevu.tmce.content_css = 'http://wp/ppb/wp-includes/css/dashicons.min.css?ver=4.4.2-alpha-36412';
+  prevu.tmce.content_css = ppbAjax.site + '/wp-includes/css/dashicons.min.css?ver=5.0.0';
   prevu.tmce.setup = function(editor) {
     editor.onDblClick.add(function(ed, e) {
       var $a, $i;
@@ -1853,7 +1873,9 @@ jQuery(function($) {
   prevu.resort();
   prevu.reset('noSort');
   $mods.find('.ppb-module').draggable(prevu.moduleDraggable);
-  $ppb.find('.ppb-block, .ppb-live-add-object.add-row').droppable(prevu.moduleDroppable);
+  prevu.newRowModuleDroppable = jQuery.extend(true, {}, prevu.moduleDroppable);
+  prevu.newRowModuleDroppable.accept = '.ppb-module-new-row';
+  $ppb.find('.ppb-block, .ppb-live-add-object.add-row').droppable(prevu.newRowModuleDroppable);
   window.ppbModules.image = function($t, ed) {
     prevu.insertImage();
   };
@@ -1914,9 +1936,81 @@ jQuery(function($) {
       return ppbAjax.data.google_fonts.push($(this).attr('data-font'));
     });
   });
+  window.ppbModules.designTemplateRow = function($t, ed) {
+    return $designTemplateDialog.ppbDialog('open');
+  };
+  applyDesignTemplate = function(e) {
+    var $t, $target, cells, id, style, tpl;
+    $target = $(e.target);
+    if ($target.hasClass('fa-search')) {
+      $designTemplatePreview.find('img').attr('src', $target.siblings('img').attr('src'));
+      return $designTemplatePreview.fadeIn();
+    } else {
+      $t = $target.closest('.ppb-tpl');
+      id = $t.data('id');
+      if ($t.hasClass('pro-inactive')) {
+        ppbNotify('Template ' + id + ' needs Pootle Pagebuilder Pro active.');
+        return;
+      }
+      tpl = ppbDesignTpls[id];
+      style = tpl.style ? JSON.parse(tpl.style) : {};
+      style = style.style ? style.style : style;
+      cells = 1;
+      if (tpl.content) {
+        cells = tpl.content.length;
+      }
+      $('#ppb-row-add-cols').val(cells);
+      prevu.addRow((function($row) {
+        return setTimeout((function() {}), 106);
+      }), tpl.content, style);
+      $designTemplateDialog.ppbDialog('close');
+      return console.log('Applying template ' + id, tpl);
+    }
+  };
+  $designTemplateDialog.on('click', '.ppb-tpl', applyDesignTemplate);
   return $('html').on('pootlepb_le_content_updated', function(e, $t) {
     return ppbSkrollr.refresh($t.find('.ppb-col'));
   });
 });
+
+ppbTemplateFromRow = function(rowI, thumb) {
+  var cb, j, len, parseContent, ref, rowStyle, tpl;
+  if (!ppbData || !ppbData.grids || !ppbData.grids[rowI]) {
+    return {};
+  }
+  rowStyle = ppbData.grids[rowI].style;
+  if (!thumb) {
+    thumb = rowStyle.background_image || rowStyle.grad_image || rowStyle.bg_mobile_image;
+  }
+  parseContent = function(cb) {
+    return tpl.content.push({
+      style: cb.info.style,
+      text: cb.text
+    });
+  };
+  tpl = {
+    img: thumb,
+    content: [],
+    style: JSON.stringify(rowStyle)
+  };
+  ref = ppbData.widgets;
+  for (j = 0, len = ref.length; j < len; j++) {
+    cb = ref[j];
+    if (cb && cb.info && parseInt(cb.info.grid) === parseInt(rowI)) {
+      parseContent(cb);
+    }
+  }
+  return JSON.stringify(tpl);
+};
+
+ppbNotify = function(notice) {
+  var $n;
+  $n = jQuery('#ppb-notify');
+  $n.html(notice);
+  $n.fadeIn();
+  return setTimeout(function() {
+    return $n.fadeOut();
+  }, 2000);
+};
 
 //# sourceMappingURL=front-end.dev.js.map

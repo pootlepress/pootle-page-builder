@@ -150,17 +150,6 @@ jQuery( function ( $ ) {
 
 		};
 
-		function ppbMatchColHi() {
-			$( '.ppb-match-col-hi' ).each( function () {
-				var $t = $( this ),
-					cols = $t.find( '.ppb-col' );
-				cols.css( 'height', 'auto' );
-				if ( $w.width() > 763 ) {
-					cols.css( 'height', cols.eq( 0 ).innerHeight() );
-				}
-			} );
-		};
-
 		/**
 		 * Calls all functions on resize event
 		 * @since 0.1.0
@@ -168,11 +157,9 @@ jQuery( function ( $ ) {
 		ppbCorrectOnResize = function () {
 			ppbFullWidth();
 			ppbParallax();
-			ppbMatchColHi();
 		};
 
 		$w.resize( ppbCorrectOnResize );
 		ppbCorrectOnResize();
-
 	} )
 } );

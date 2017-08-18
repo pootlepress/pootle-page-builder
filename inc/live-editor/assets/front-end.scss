@@ -56,7 +56,7 @@
 	left: 0;
 	position: absolute;
 	opacity: 0;
-	filter: Alpha(Opacity = 0);
+	filter: Alpha(Opacity=0);
 }
 
 .ppb-state-disabled {
@@ -161,6 +161,7 @@
  */
 
 .panels-tooltip {
+	max-width: 430px;
 	position: absolute;
 	background: #1c1c1c;
 	background: rgba(0, 0, 0, 0.8);
@@ -209,7 +210,7 @@
 body .ppb-dialog {
 	font: 14px sans-serif;
 	color: #333;
-	h1, h2, h3, h4, h5 ,h6, p, a {
+	h1, h2, h3, h4, h5, h6, p, a {
 		font: inherit;
 		color: inherit;
 	}
@@ -235,7 +236,8 @@ body .ppb-dialog {
 }
 
 .pootle-live-editor.ppb-edit-row .dashicons-before {
-	&:before, &:hover:before {}
+	&:before, &:hover:before {
+	}
 }
 
 .pootlepb-dialog {
@@ -263,7 +265,6 @@ body .ppb-dialog {
 		background: #ef4832;
 	}
 }
-
 
 .ppb-state-active span {
 	font-weight: bold;
@@ -339,11 +340,11 @@ body .ppb-dialog {
 .ppb-cool-panel.ppb-dialog {
 	position: fixed;
 	left: 0 !important;
-	top: 0!important;
+	top: 0 !important;
 	bottom: 0;
 	right: auto;
 	width: 300px !important;
-	overflow:hidden;
+	overflow: hidden;
 
 	* {
 		box-sizing: border-box;
@@ -358,9 +359,9 @@ body .ppb-dialog {
 	.content-wrap,
 	.ppb-dialog-buttonpane {
 		position: absolute;
-		top:37px;
-		bottom:0;
-		left:0;
+		top: 37px;
+		bottom: 0;
+		left: 0;
 		width: 100%;
 	}
 
@@ -398,8 +399,8 @@ body .ppb-dialog {
 	}
 
 	.ppb-dialog-titlebar {
-		top:0;
-		bottom:auto;
+		top: 0;
+		bottom: auto;
 		height: 37px;
 	}
 
@@ -424,7 +425,7 @@ body .ppb-dialog {
 }
 
 .ppb-dialog.show-panel ~ .ppb-widget-overlay {
-	background: rgba(0,0,0,0);
+	background: rgba(0, 0, 0, 0);
 }
 
 .ppb-tabs-panel {
@@ -443,6 +444,7 @@ body .ppb-dialog {
 		* {
 			vertical-align: middle;
 		}
+
 		.wp-picker-holder {
 			display: block;
 		}
@@ -463,6 +465,29 @@ body .ppb-dialog {
 				color: #e25c4e;
 				text-shadow: 0 0 1px #000;
 			}
+			select {
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+				padding: 0 25px 0 7px;
+				display: inline-block;
+				width: 200px;
+				line-height: 34px;
+				border-radius: 0;
+				background: 178px/12px no-repeat
+				url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAQAAADZc7J/AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAADdcAAA3XAUIom3gAAAAHdElNRQfhBwoMFR2R+C1aAAAAs0lEQVRIx+3MKw7CQBhF4ZMCevaGwlSjUCRoBKILwbEJEkxlQ/BdQBcxiEID03ncDsjeqv6Z78C8P271y+uSho4KI2FDRUdD+T4csa+vFhKGenh/AlgPv0rik1ssG7h+HeIJl1tucHdO4cSYWx6wHR39CR+37GDBWUj4+YUlKIkoTyeSPJ6QeCwh8nBC5moiwpVEgqcSAo8lRB5KTOC+xETuJjJ4n9jT0nLI4/0Kinw8T9wTDiQk6+dziScAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTctMDctMTBUMTI6MjE6MjkrMDI6MDDlcS1gAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE3LTA3LTEwVDEyOjIxOjI5KzAyOjAwlCyV3AAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAAASUVORK5CYII=);
+			}
+			input[data-style-field-type="upload"] {
+				height: 115px;
+				background: #fff center/cover no-repeat;
+				color: rgba(0, 0, 0, 0);
+				display: block;
+				//&:focus {
+				//	background-image: url(data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) !important;
+				//	color: #555;
+				//	height: 36px;
+				//}
+			}
 			.dashicons:before {
 				font-size: 25px;
 			}
@@ -473,21 +498,24 @@ body .ppb-dialog {
 			}
 		}
 
-		&.field_type_checkbox > label + span {
-			position: absolute;
-			top: 0;
-			right: 1em;
-			width: auto;
+		&.field_type_checkbox > label {
+
+			+ span {
+				position: absolute;
+				top: 0;
+				right: 1em;
+				width: auto;
+			}
 		}
 
 		.tooltip {
-			margin-top: 1em;
+			margin-left: 1em;
 			height: auto;
-			font: inherit;
+			//font: inherit;
 			text-align: left;
 		}
 		.tooltip:before {
-			content: attr(data-tooltip);
+			//content: attr(data-tooltip);
 			height: auto;
 		}
 
@@ -843,7 +871,7 @@ body .ppb-dialog {
 	left: 0;
 	position: absolute;
 	opacity: 0;
-	filter: Alpha(Opacity = 0);
+	filter: Alpha(Opacity=0);
 }
 
 .ppb-front {
@@ -976,7 +1004,8 @@ body .ppb-dialog {
 }
 
 .pootle-live-editor.ppb-edit-row .dashicons-before {
-	&:before, &:hover:before {}
+	&:before, &:hover:before {
+	}
 }
 
 .pootlepb-dialog {
@@ -1136,7 +1165,7 @@ body .ppb-dialog {
 	box-shadow: 0 1px 0 #006799 !important;
 	color: #fff !important;
 	text-decoration: none;
-	text-shadow: 0 -1px 1px #006799,1px 0 1px #006799,0 1px 1px #006799,-1px 0 1px #006799 !important;
+	text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799 !important;
 	font-weight: 500;
 }
 
@@ -1191,6 +1220,9 @@ body .ppb-dialog {
 		height: 34px;
 		width: 34px;
 		color: #aaa;
+		&.tooltip-unsplash {
+			right: -29px;
+		}
 	}
 }
 
@@ -1229,7 +1261,8 @@ body .ppb-dialog {
 	h3 {
 		width: 169px;
 	}
-	label > span {}
+	label > span {
+	}
 }
 
 .ppble-img-prevu {
@@ -1294,19 +1327,6 @@ body .ppb-dialog {
 	&.chosen-container-multi, &.chosen-container-single {
 		width: 340px !important;
 		/* or any value that fits your needs */
-	}
-}
-
-.ppb-row.ppb-match-col-hi {
-	.panel-grid-cell-container {
-		display: block;
-	}
-	.ppb-col {
-		display: inline-block !important;
-		height: auto;
-	}
-	.ppb-block:first-child:last-child {
-		height: auto;
 	}
 }
 
@@ -1521,10 +1541,6 @@ iframe[src*='/pootle-buttons/'] {
 	}
 }
 
-.ppb-row.ppb-match-col-hi .ppb-col {
-	height: auto !important;
-}
-
 .ppb-module-disabled, .ppb-module {
 	margin: 16px 16px 0;
 	border: 1px solid #ddd;
@@ -1565,39 +1581,34 @@ a .ppb-module-disabled:after {
 	&:hover {
 		opacity: 1;
 	}
+	.tooltip-module {
+		position: absolute;
+		right: 5px;
+		top: 50%;
+		margin-top: -10px;
+	}
 }
 
-.ppb-module-disabled {
+.ppb-module-disabled, .ppb-module {
 	.icon, .label {
 		vertical-align: middle;
 		display: inline-block;
 		box-sizing: border-box;
 	}
-}
-
-.ppb-module {
-	.icon, .label {
-		vertical-align: middle;
-		display: inline-block;
-		box-sizing: border-box;
+	.label {
+		padding: 7px 7px 7px 0;
+		width: 80%;
+		font: 16px/1.6 sans-serif;
 	}
-}
-
-.ppb-module-disabled .label, .ppb-module .label {
-	padding: 7px 7px 7px 0;
-	width: 80%;
-	font: 16px/1.6 sans-serif;
-}
-
-.ppb-module-disabled .icon, .ppb-module .icon {
-	height: 50px;
-	line-height: 50px;
-	width: 20%;
-	text-align: center;
-}
-
-.ppb-module-disabled .icon:before, .ppb-module .icon:before {
-	font-size: 30px;
+	.icon {
+		height: 50px;
+		line-height: 50px;
+		width: 20%;
+		text-align: center;
+	}
+	.icon:before {
+		font-size: 30px;
+	}
 }
 
 .ppb-block.ppb-hover-module.ppb-drop-module:after {
@@ -1629,14 +1640,6 @@ a .ppb-module-disabled:after {
 	}
 }
 
-.ppb-tabs-panel .field > span input[data-style-field-type="upload"] {
-	height: 115px;
-	background-position: center;
-	background-size: cover;
-	color: rgba(0, 0, 0, 0);
-	display: block;
-}
-
 .pootle-guides {
 	&:before, &:after {
 		content: '';
@@ -1665,17 +1668,17 @@ a .ppb-module-disabled:after {
 	}
 }
 
-#ppb-loading-overlay, #ppb-loader {
+#pootlepb-design-templates-preview-wrap, #ppb-loading, #ppb-loader {
 	position: fixed;
 	top: -9999px;
 	right: -9999px;
 	bottom: -9999px;
 	left: -9999px;
-	z-index: 9999;
+	z-index: 100000;
 	margin: auto;
 }
 
-#ppb-loading-overlay {
+#ppb-loading {
 	background: rgba(0, 0, 0, 0.5);
 	display: none;
 }
@@ -1688,6 +1691,20 @@ a .ppb-module-disabled:after {
 	border-top-color: #ef4832;
 	-webkit-animation: ppb-spin 1.6s linear infinite;
 	animation: ppb-spin 1.6s linear infinite;
+}
+
+#pootlepb-design-templates-preview-wrap {
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	z-index: 999999;
+	overflow: auto;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.25);
+	img {
+		max-width: 880px;
+	}
 }
 
 #ppb-iconpicker {
@@ -1731,7 +1748,7 @@ a .ppb-module-disabled:after {
 }
 
 pre.ace_editor.ace-tm {
-	height: calc( 100% - 88px );
+	height: calc(100% - 88px);
 }
 
 #ppb-tooltip {
@@ -1750,6 +1767,142 @@ pre.ace_editor.ace-tm {
 .pootlepb-dialog {
 	display: none;
 }
+
 .ppb-dialog .pootlepb-dialog {
 	display: block;
+}
+
+// Template design module
+#pootlepb-design-templates {
+	text-align: left;
+	h2, h3, h4 {
+		padding: 0.5em 20px 0;
+		margin: 0;
+	}
+	.templates-wrap {
+		padding: 1.4em 0.7em;
+		border-bottom: 2px solid #eee;
+	}
+	.ppb-tpl {
+		background: #fff;
+		position: relative;
+		display: inline-block;
+		cursor: pointer;
+		margin: 0 1.25em 2.5em;
+		-webkit-column-break-inside: avoid;
+		page-break-inside: avoid;
+		break-inside: avoid;
+		box-shadow: 0 0 7px 1px rgba(0,0,0,0.5);
+		border-radius: 0;
+		color: #777;
+		.pro {
+			position: absolute;
+			background: #2196f3;
+			/* border: 1px solid #fff; */
+			color: #fff;
+			padding: 4px 7px;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			margin: 0;
+		}
+
+		.label {
+			transition: opacity 0.25s;
+			content: attr(data-id);
+			display: block;
+			padding: 7px;
+			font: 14px/16px sans-serif;
+			color: #333;
+			position: relative;
+		}
+		.top-left-icon, .fa-search {
+			position: absolute;
+			padding: 0;
+			line-height: 35px;
+			width: 35px;
+			text-align: center;
+			top: 7px;
+			right: 7px;
+			background: rgba(0,0,0,0.5);
+			color: #fff;
+			border-radius: 50%;
+			opacity: 0.25;
+		}
+
+		img {
+			height: 200px;
+			width: auto;
+			min-width: 100%;
+			display: block;
+			margin: 0;
+			border-radius: 0;
+			+ .fa-search {
+				display: block;
+			}
+		}
+		.ppb-tpl-bg {
+			background: center bottom/cover url(https://pootle-cloud.firebaseapp.com/assets/default-wilson.jpg);
+			height: 200px;
+			min-width: 200px;
+		}
+		.desc {
+			position: absolute;
+			top: calc( 100% - 25px );
+			min-height: 25px;
+			padding: 2px 5px;
+			background: #fff;
+			left: 0;
+			right: 0;
+			opacity: 0;
+			transition: all 0.5s;
+			box-shadow: 0 3px 5px rgba(0,0,0,0.5);
+			font-size: 12px;
+			z-index: 2;
+		}
+
+		&:hover {
+			.top-left-icon, .fa-search {
+				opacity: 0.7;
+				&:hover {
+					opacity: 0.88;
+				}
+			}
+			.desc {
+				top: 99.7%;
+				opacity: 1;
+			}
+		}
+
+	}
+}
+
+.ppb-notify {
+	position: fixed;
+	top: 47vh;
+	left: 2.5em;
+	right: 2.5em;
+	padding: 25px;
+	color: #fff;
+	z-index: 999999;
+	font: 20px sans-serif;
+	background: #ef4832 -14px 7px no-repeat url(wilson2.png);
+	transition: background 0.5s;
+	background-clip: border-box;
+	padding-left: 140px;
+	border: 2px solid rgba(0,0,0,0.25);
+	a {
+		color: inherit;
+		border-bottom: 1px dashed;
+		text-decoration: none;
+	}
+	&:hover {
+		background-position-y: 16px;
+	}
+}
+
+.ppb-dialog[aria-describedby="pootlepb-design-templates"] .ppb-dialog-titlebar,
+.ppb-dialog-wilson .ppb-dialog-titlebar {
+	background: #2196f3 left bottom/ auto 90% no-repeat url(wilson2.png);
+	color: #fff;
+	padding-left: 4em;
 }

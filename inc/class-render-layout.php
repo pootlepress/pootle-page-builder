@@ -148,11 +148,21 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 		global $pootlepb_inline_css;
 		$pootlepb_inline_css .= $GLOBALS['Pootle_Page_Builder_Front_Css_Js']->panels_generate_css( $post_id, $panels_data );
 
-		echo '<div id="pootle-page-builder">';
+		?>
+		<div id="pootle-page-builder">
+			<!----------Pootle Page Builder Inline Styles---------->
+			<style id="pootle-live-editor-styles" type="text/css" media="all">
+				<?php echo $pootlepb_inline_css ?>
+			</style>
+			<?php
 
-		$this->output_rows( $grids, $panels_data, $post_id );
+			$pootlepb_inline_css = '';
 
-		echo '</div>';
+			$this->output_rows( $grids, $panels_data, $post_id );
+
+			?>
+		</div>
+		<?
 
 		$html = ob_get_clean();
 
