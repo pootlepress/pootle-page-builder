@@ -1825,7 +1825,7 @@ jQuery ($) ->
 			id = $t.data( 'id' )
 
 			if $t.hasClass( 'pro-inactive' )
-				ppbNotify 'Template ' + id + ' needs Pootle Pagebuilder Pro active.'
+				ppbNotify 'Template ' + id + ' needs <a href="https://www.pootlepress.com/pootle-pagebuilder-pro/" target="_blank">Pootle Pagebuilder Pro</a> active.'
 				return;
 
 			tpl = ppbDesignTpls[id]
