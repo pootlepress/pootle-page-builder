@@ -144,7 +144,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'name' => __( 'Add', 'ppb-woocommerce' ),
 			'tab' => 'wc_prods',
 			'type' => 'select',
-			'priority' => 1,
+			'priority' => 5,
 			'options' => array(
 				''                      => 'Please choose...',
 				'product_categories'    => 'Product categories',
@@ -162,7 +162,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'name' => __( 'Display as', 'ppb-woocommerce' ),
 			'tab' => 'wc_prods',
 			'type' => 'select',
-			'priority' => 1,
+			'priority' => 10,
 			'options' => array(
 				''         => 'Grid',
 				'carousel' => 'Carousel',
@@ -174,7 +174,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'tab' => 'wc_prods',
 			'type' => 'multi-select',
 			'options' => $p_cats,
-			'priority' => 2,
+			'priority' => 15,
 			'default' => '',
 		);
 		$f['wc_prods-catids'] = array(
@@ -182,7 +182,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'tab' => 'wc_prods',
 			'type' => 'multi-select',
 			'options' => $c_cats,
-			'priority' => 2,
+			'priority' => 20,
 			'default' => '',
 		);
 		$f['wc_prods-attribute'] = array(
@@ -190,7 +190,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'tab' => 'wc_prods',
 			'type' => 'select',
 			'options' => $this->wc_attributes,
-			'priority' => 2,
+			'priority' => 25,
 			'default' => '',
 		);
 		$f['wc_prods-filter'] = array(
@@ -198,7 +198,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'tab' => 'wc_prods',
 			'type' => 'multi-select',
 			'options' => array(),
-			'priority' => 2,
+			'priority' => 30,
 			'default' => '',
 		);
 		$f['wc_prods-ids'] = array(
@@ -206,14 +206,14 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'tab' => 'wc_prods',
 			'type' => 'multi-select',
 			'options' => $products,
-			'priority' => 2,
+			'priority' => 35,
 			'default' => '',
 		);
 		$f['wc_prods-per_page'] = array(
 			'name' => __( 'Number of products', 'ppb-woocommerce' ),
 			'tab' => 'wc_prods',
 			'type' => 'number',
-			'priority' => 3,
+			'priority' => 40,
 			'min'  => '1',
 			'max'  => '25',
 			'step' => '1',
@@ -222,7 +222,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'name' => __( 'Number of columns', 'ppb-woocommerce' ),
 			'tab' => 'wc_prods',
 			'type' => 'number',
-			'priority' => 4,
+			'priority' => 45,
 			'min'  => '1',
 			'max'  => '4',
 			'step' => '1',
@@ -231,7 +231,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'name' => __( 'Order By', 'ppb-woocommerce' ),
 			'tab' => 'wc_prods',
 			'type' => 'select',
-			'priority' => 5,
+			'priority' => 50,
 			'options' => array(
 				''      => 'Default',
 				'title'      => 'Title',
@@ -246,7 +246,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'name' => __( 'Order', 'ppb-woocommerce' ),
 			'tab' => 'wc_prods',
 			'type' => 'select',
-			'priority' => 6,
+			'priority' => 55,
 			'options' => array(
 				''      => 'Default',
 				'asc' => 'Ascending',
@@ -260,15 +260,15 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'selector' => 'li.product .price',
 			'css' => 'display:none;ignore',
 			'type' => 'checkbox',
-			'priority' => 7,
+			'priority' => 60,
 		);
 		$f['wc_prods-hide_title'] = array(
 			'name' => __( 'Hide product name', 'ppb-woocommerce' ),
 			'tab' => 'wc_prods',
-			'selector' => 'li.product h3',
-			'css' => 'display:none;ignore',
+			'selector' => 'li.product h3, li.product h2',
+			'css' => 'display:none!important;ignore',
 			'type' => 'checkbox',
-			'priority' => 7,
+			'priority' => 65,
 		);
 		$f['wc_prods-star_rating'] = array(
 			'name' => __( 'Hide ratings', 'ppb-woocommerce' ),
@@ -276,7 +276,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'selector' => 'li.product .star-rating',
 			'css' => 'display:none;ignore',
 			'type' => 'checkbox',
-			'priority' => 7,
+			'priority' => 70,
 		);
 		$f['wc_prods-hide_add_to_cart'] = array(
 			'name' => __( 'Hide add to cart', 'ppb-woocommerce' ),
@@ -284,7 +284,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			'selector' => 'li.product .add_to_cart_button',
 			'css' => 'display:none;ignore',
 			'type' => 'checkbox',
-			'priority' => 7,
+			'priority' => 75,
 		);
 		return $f;
 	}
