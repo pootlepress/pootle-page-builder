@@ -180,7 +180,7 @@ class Pootle_PB_Pootle_Cloud {
 			'callback'     => 'designTemplate',
 			'row_callback' => 'designTemplateRow',
 			'active_class' => $this->class,
-			'priority'     => 35,
+			'priority'     => 3,
 			'only_new_row' => true,
 		);
 

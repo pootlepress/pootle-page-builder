@@ -1452,6 +1452,10 @@ iframe[src*='/pootle-buttons/'] {
 	}
 }
 
+.mce-panel.mce-floatpanel {
+	z-index: 999999 !important;
+}
+
 .mce-tinymce.mce-tinymce-inline .mce-btn-group {
 	&.ppb-tmce-btn-grp-toggle-fields {
 		position: absolute;
