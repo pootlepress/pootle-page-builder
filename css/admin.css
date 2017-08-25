@@ -9,6 +9,11 @@ html {
     overflow-y: scroll; /* This fixes the tooltips */
 }
 
+/* TMCE panels should appear on top */
+.mce-panel.mce-floatpanel {
+    z-index: 999999 !important;
+}
+
 /* The Panel Type List */
 .panel-type-list {
     margin: 0 -5px 10px -5px;
