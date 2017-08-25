@@ -41,13 +41,14 @@ function ppbpro_get_templates() {
 	return get_option( 'ppbpro-templates', array() );
 }
 function ppbpro_query_templates( $tpls ) {
-	$url = 'http://pootlepress.github.io/pootle-page-builder/templates.json';
+	$url   = 'http://pootlepress.github.io/pootle-page-builder/templates.json';
 	$qtpls = json_decode( file_get_contents( $url ), 'Array' );
-	if ( $qtpls ) {
-		update_option( 'ppbpro-templates', wp_parse_args( $qtpls, $tpls ) );
-		// Save the API response so we don't have to call again until tomorrow.
-		set_transient( 'ppbpro-templates-updated-recently', 1, DAY_IN_SECONDS );
+	if ( ! $qtpls ) {
+		$qtpls = array();
 	}
+	update_option( 'ppbpro-templates', wp_parse_args( $qtpls, $tpls ) );
+	// Save the API response so we don't have to call again until tomorrow.
+	set_transient( 'ppbpro-templates-updated-recently', 1, DAY_IN_SECONDS );
 }
 /**
  * Returns template page customizer data
