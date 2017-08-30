@@ -409,10 +409,11 @@ jQuery(function($) {
         $(id).prevuRowInit();
       });
     },
-    addRow: function(callback, blockData, rowStyle) {
-      var block, cells, defaultText, i, id, num_cells, row;
+    addRow: function(callback, blockData, rowStyle, cellWidths) {
+      var block, cells, defaultText, firstCellI, i, id, num_cells, num_content, row, startCellI;
       window.ppbRowI = ppbData.grids.length;
       num_cells = parseInt($('#ppb-row-add-cols').val());
+      cellWidths = cellWidths ? cellWidths : [];
       logPPBData('Adding row');
       row = {
         id: window.ppbRowI,
@@ -446,9 +447,12 @@ jQuery(function($) {
       ppbData.grids.push(row);
       cells = {
         grid: window.ppbRowI,
-        weight: 1 / row.cells
+        weight: 1 / num_cells
       };
       defaultText = typeof blockData === 'string' ? blockData : '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>';
+      if (!typeof blockData === 'object') {
+        blockData = [];
+      }
       block = {
         text: defaultText,
         info: {
@@ -458,19 +462,37 @@ jQuery(function($) {
         }
       };
       i = 0;
-      while (i < row.cells) {
+      startCellI = null;
+      while (i < num_cells) {
         id = ppbData.grid_cells.length;
+        if (!typeof firstCellI === 'number') {
+          firstCellI = id;
+        }
         cells.id = id;
+        cells.weight = 1 / num_cells;
+        if (cellWidths[i]) {
+          if (cellWidths[i].weight) {
+            cells.weight = cellWidths[i].weight;
+          } else if (typeof cellWidths[i] === 'number') {
+            cells.weight = cellWidths[i];
+          }
+        }
         ppbData.grid_cells.push($.extend(true, {}, cells));
+        i++;
+      }
+      num_content = Math.max(num_cells, blockData.length);
+      while (i < num_content) {
         id = ppbData.widgets.length;
-        block.info.cell = i;
+        block.info.cell = startCellI + i;
         block.info.id = id;
-        if (blockData && blockData[i]) {
+        if (blockData[i]) {
           block.text = typeof blockData[i].text === 'string' ? blockData[i].text : defaultText;
           block.info.style = typeof blockData[i].style === 'string' ? blockData[i].style : '{}';
+          if (typeof blockData[i].cell !== 'undefined') {
+            block.info.cell = startCellI + blockData[i].cell;
+          }
         }
         ppbData.widgets.push($.extend(true, {}, block));
-        i++;
       }
       logPPBData('Row added');
       $addRowDialog.ppbDialog('close');
@@ -1956,15 +1978,16 @@ jQuery(function($) {
       style = tpl.style ? JSON.parse(tpl.style) : {};
       style = style.style ? style.style : style;
       cells = 1;
-      if (tpl.content) {
+      if (tpl.cell) {
+        cells = tpl.cell.length;
+      } else if (tpl.content) {
         cells = tpl.content.length;
       }
       $('#ppb-row-add-cols').val(cells);
       prevu.addRow((function($row) {
         return setTimeout((function() {}), 106);
-      }), tpl.content, style);
-      $designTemplateDialog.ppbDialog('close');
-      return console.log('Applying template ' + id, tpl);
+      }), tpl.content, style, tpl.cell);
+      return $designTemplateDialog.ppbDialog('close');
     }
   };
   $designTemplateDialog.on('click', '.ppb-tpl', applyDesignTemplate);
@@ -1974,30 +1997,47 @@ jQuery(function($) {
 });
 
 ppbTemplateFromRow = function(rowI, thumb) {
-  var cb, j, len, parseContent, ref, rowStyle, tpl;
+  var cb, cell, firstCellI, j, k, len, len1, parseCell, parseContent, ref, ref1, rowStyle, tpl;
   if (!ppbData || !ppbData.grids || !ppbData.grids[rowI]) {
     return {};
   }
+  rowI = parseInt(rowI);
   rowStyle = ppbData.grids[rowI].style;
+  firstCellI = null;
   if (!thumb) {
     thumb = rowStyle.background_image || rowStyle.grad_image || rowStyle.bg_mobile_image;
   }
+  tpl = {
+    img: thumb,
+    content: [],
+    cell: [],
+    style: JSON.stringify(rowStyle)
+  };
   parseContent = function(cb) {
+    if (!typeof firstCellI === 'number') {
+      firstCellI = cb.info.cell;
+    }
     return tpl.content.push({
+      cell: cb.info.cell - firstCellI,
       style: cb.info.style,
       text: cb.text
     });
   };
-  tpl = {
-    img: thumb,
-    content: [],
-    style: JSON.stringify(rowStyle)
+  parseCell = function(cell) {
+    return tpl.cell.push(cell.weight);
   };
   ref = ppbData.widgets;
   for (j = 0, len = ref.length; j < len; j++) {
     cb = ref[j];
-    if (cb && cb.info && parseInt(cb.info.grid) === parseInt(rowI)) {
+    if (cb && cb.info && parseInt(cb.info.grid) === rowI) {
       parseContent(cb);
+    }
+  }
+  ref1 = ppbData.grid_cells;
+  for (k = 0, len1 = ref1.length; k < len1; k++) {
+    cell = ref1[k];
+    if (cell && parseInt(cell.grid) === rowI) {
+      parseCell(cell);
     }
   }
   return JSON.stringify(tpl);

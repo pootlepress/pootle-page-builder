@@ -361,9 +361,10 @@ jQuery ($) ->
 				return
 #			$rowPanel.ppbDialog 'close'
 			return
-		addRow: (callback, blockData, rowStyle) ->
+		addRow: (callback, blockData, rowStyle, cellWidths) ->
 			window.ppbRowI = ppbData.grids.length
 			num_cells = parseInt($('#ppb-row-add-cols').val())
+			cellWidths = if cellWidths then cellWidths else []
 			logPPBData 'Adding row'
 			row =
 				id: window.ppbRowI
@@ -392,12 +393,18 @@ jQuery ($) ->
 					margin_top: '0'
 					row_height: '0'
 					style: ''
+
 			ppbData.grids.push row
+
 			cells =
 				grid: window.ppbRowI
-				weight: 1 / row.cells
+				weight: 1 / num_cells
 
 			defaultText =  if typeof blockData == 'string' then blockData else '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>'
+
+			if ( ! typeof blockData == 'object' )
+				blockData = []
+
 			block =
 				text: defaultText
 				info:
@@ -405,19 +412,40 @@ jQuery ($) ->
 					grid: window.ppbRowI
 					style: '{"background-color":"","background-transparency":"","text-color":"","border-width":"","border-color":"","padding":"","rounded-corners":"","inline-css":"","class":"","wc_prods-add":"","wc_prods-attribute":"","wc_prods-filter":null,"wc_prods-ids":null,"wc_prods-category":null,"wc_prods-per_page":"","wc_prods-columns":"","wc_prods-orderby":"","wc_prods-order":""}'
 			i = 0
-			while i < row.cells
+			startCellI = null
+
+			while i < num_cells
 				id = ppbData.grid_cells.length
+
+				if ( ! typeof firstCellI == 'number' )
+					firstCellI = id
+
 				cells.id = id
+				cells.weight = 1 / num_cells
+
+				if ( cellWidths[i] )
+					if ( cellWidths[i].weight )
+						cells.weight = cellWidths[i].weight
+					else if typeof cellWidths[i] == 'number'
+						cells.weight = cellWidths[i]
+
 				ppbData.grid_cells.push $.extend(true, {}, cells)
+				i++
+
+			num_content = Math.max( num_cells, blockData.length )
+
+			while i < num_content
 				id = ppbData.widgets.length
-				block.info.cell = i
+				block.info.cell = startCellI + i
 				block.info.id = id
-				if ( blockData && blockData[ i ] )
+				if ( blockData[ i ] )
 					block.text = if typeof blockData[ i ].text == 'string' then blockData[ i ].text else defaultText
 					block.info.style = if typeof blockData[ i ].style == 'string' then blockData[ i ].style else '{}'
+					if ( typeof blockData[ i ].cell != 'undefined' )
+						block.info.cell = startCellI + blockData[ i ].cell
 
 				ppbData.widgets.push $.extend(true, {}, block)
-				i++
+
 			logPPBData 'Row added'
 			$addRowDialog.ppbDialog 'close'
 			prevu.sync ($r, qry, html) ->
@@ -1832,7 +1860,9 @@ jQuery ($) ->
 			style = if tpl.style then JSON.parse( tpl.style ) else {}
 			style = if style.style then style.style else style
 			cells = 1
-			if tpl.content
+			if tpl.cell
+				cells = tpl.cell.length
+			else if tpl.content
 				cells = tpl.content.length
 
 			$( '#ppb-row-add-cols' ).val cells
@@ -1841,10 +1871,8 @@ jQuery ($) ->
 				setTimeout ( ( ) ->
 	#				prevu.insertModule $row.find('.ppb-block').last(), $m
 				), 106
-			), tpl.content, style
-
+			), tpl.content, style, tpl.cell
 			$designTemplateDialog.ppbDialog 'close'
-			console.log 'Applying template ' + id, tpl
 
 	$designTemplateDialog.on 'click', '.ppb-tpl', applyDesignTemplate
 
@@ -1855,23 +1883,36 @@ jQuery ($) ->
 ppbTemplateFromRow = (rowI, thumb) ->
 	if ! ppbData || ! ppbData.grids || ! ppbData.grids[ rowI ] then return {}
 
+	rowI = parseInt( rowI )
+
 	rowStyle = ppbData.grids[ rowI ].style
+	firstCellI = null;
 
 	if ! thumb
 		thumb = rowStyle.background_image || rowStyle.grad_image || rowStyle.bg_mobile_image
 
+	tpl =
+		img: thumb
+		content: []
+		cell: []
+		style: JSON.stringify rowStyle
+
 	parseContent = ( cb ) ->
+		if ( ! typeof firstCellI == 'number' )
+			firstCellI = cb.info.cell
+
 		tpl.content.push(
+			cell: cb.info.cell - firstCellI #start at 0
 			style: cb.info.style
 			text: cb.text
 		)
 
-	tpl =
-		img: thumb
-		content: []
-		style: JSON.stringify rowStyle
+	parseCell = ( cell ) ->
+		tpl.cell.push cell.weight
 
-	parseContent cb for cb in ppbData.widgets when cb && cb.info && parseInt( cb.info.grid ) is parseInt( rowI )
+	parseContent cb for cb in ppbData.widgets when cb && cb.info && parseInt( cb.info.grid ) is rowI
+
+	parseCell cell for cell in ppbData.grid_cells when cell && parseInt( cell.grid ) is rowI
 
 	return JSON.stringify tpl
 
