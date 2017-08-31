@@ -452,8 +452,6 @@ jQuery ($) ->
 			prevu.sync ($r, qry, html) ->
 				$ro = $r.find('#pg-' + qry.post + '-' + window.ppbRowI)
 				$cols = $ro.find('.panel-grid-cell-container > .panel-grid-cell')
-				$cols.css 'width', (100 - num_cells + 1) / num_cells + '%'
-				# Columns width
 				$('.ppb-block.active, .ppb-row.active').removeClass 'active'
 				$ro.find('.pootle-live-editor-realtime:eq(0)').parents('.ppb-block, .ppb-row').addClass 'active'
 				$('.pootle-live-editor.add-row').before $ro
