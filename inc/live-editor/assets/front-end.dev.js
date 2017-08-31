@@ -2021,7 +2021,7 @@ ppbTemplateFromRow = function(rowI, thumb) {
     });
   };
   parseCell = function(cell) {
-    return tpl.cell.push(cell.weight);
+    return tpl.cell.push(parseFloat(cell.weight));
   };
   ref = ppbData.widgets;
   for (j = 0, len = ref.length; j < len; j++) {

@@ -1903,7 +1903,7 @@ ppbTemplateFromRow = (rowI, thumb) ->
 		)
 
 	parseCell = ( cell ) ->
-		tpl.cell.push cell.weight
+		tpl.cell.push parseFloat( cell.weight )
 
 	parseContent cb for cb in ppbData.widgets when cb && cb.info && parseInt( cb.info.grid ) is rowI
 
