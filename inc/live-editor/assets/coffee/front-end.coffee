@@ -432,7 +432,7 @@ jQuery ($) ->
 				i++
 				ppbData.grid_cells.push $.extend(true, {}, cells)
 
-			num_content = Math.max( num_cells, blockData.length )
+			num_content = if blockData.length then blockData.length else num_cells;
 
 			i = 0
 			while i < num_content

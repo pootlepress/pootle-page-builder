@@ -480,7 +480,7 @@ jQuery(function($) {
         i++;
         ppbData.grid_cells.push($.extend(true, {}, cells));
       }
-      num_content = Math.max(num_cells, blockData.length);
+      num_content = blockData.length ? blockData.length : num_cells;
       i = 0;
       while (i < num_content) {
         id = ppbData.widgets.length;
