@@ -1998,13 +1998,12 @@ jQuery(function($) {
 });
 
 ppbTemplateFromRow = function(rowI, thumb) {
-  var cb, cell, firstCellI, j, k, len, len1, parseCell, parseContent, ref, ref1, rowStyle, tpl;
+  var cb, cell, j, k, len, len1, parseCell, parseContent, ref, ref1, rowStyle, tpl;
   if (!ppbData || !ppbData.grids || !ppbData.grids[rowI]) {
     return {};
   }
   rowI = parseInt(rowI);
   rowStyle = ppbData.grids[rowI].style;
-  firstCellI = null;
   if (!thumb) {
     thumb = rowStyle.background_image || rowStyle.grad_image || rowStyle.bg_mobile_image;
   }
@@ -2015,11 +2014,8 @@ ppbTemplateFromRow = function(rowI, thumb) {
     style: JSON.stringify(rowStyle)
   };
   parseContent = function(cb) {
-    if (typeof firstCellI !== 'number') {
-      firstCellI = cb.info.cell;
-    }
     return tpl.content.push({
-      cell: cb.info.cell - firstCellI,
+      cell: cb.info.cell,
       style: cb.info.style,
       text: cb.text
     });

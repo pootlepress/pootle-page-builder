@@ -1885,7 +1885,6 @@ ppbTemplateFromRow = (rowI, thumb) ->
 	rowI = parseInt( rowI )
 
 	rowStyle = ppbData.grids[ rowI ].style
-	firstCellI = null;
 
 	if ! thumb
 		thumb = rowStyle.background_image || rowStyle.grad_image || rowStyle.bg_mobile_image
@@ -1897,11 +1896,8 @@ ppbTemplateFromRow = (rowI, thumb) ->
 		style: JSON.stringify rowStyle
 
 	parseContent = ( cb ) ->
-		if ( typeof firstCellI != 'number' )
-			firstCellI = cb.info.cell
-
 		tpl.content.push(
-			cell: cb.info.cell - firstCellI #start at 0
+			cell: cb.info.cell
 			style: cb.info.style
 			text: cb.text
 		)
