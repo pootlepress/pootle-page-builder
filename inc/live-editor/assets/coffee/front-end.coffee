@@ -402,7 +402,7 @@ jQuery ($) ->
 
 			defaultText =  if typeof blockData == 'string' then blockData else '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>'
 
-			if ( ! typeof blockData == 'object' )
+			if ( typeof blockData != 'object' )
 				blockData = []
 
 			block =
@@ -412,12 +412,12 @@ jQuery ($) ->
 					grid: window.ppbRowI
 					style: '{"background-color":"","background-transparency":"","text-color":"","border-width":"","border-color":"","padding":"","rounded-corners":"","inline-css":"","class":"","wc_prods-add":"","wc_prods-attribute":"","wc_prods-filter":null,"wc_prods-ids":null,"wc_prods-category":null,"wc_prods-per_page":"","wc_prods-columns":"","wc_prods-orderby":"","wc_prods-order":""}'
 			i = 0
-			startCellI = null
+			firstCellI = null
 
 			while i < num_cells
 				id = ppbData.grid_cells.length
 
-				if ( ! typeof firstCellI == 'number' )
+				if ( typeof firstCellI != 'number' )
 					firstCellI = id
 
 				cells.id = id
@@ -429,21 +429,22 @@ jQuery ($) ->
 					else if typeof cellWidths[i] == 'number'
 						cells.weight = cellWidths[i]
 
-				ppbData.grid_cells.push $.extend(true, {}, cells)
 				i++
+				ppbData.grid_cells.push $.extend(true, {}, cells)
 
 			num_content = Math.max( num_cells, blockData.length )
 
+			i = 0
 			while i < num_content
 				id = ppbData.widgets.length
-				block.info.cell = startCellI + i
+				block.info.cell = i
 				block.info.id = id
 				if ( blockData[ i ] )
 					block.text = if typeof blockData[ i ].text == 'string' then blockData[ i ].text else defaultText
 					block.info.style = if typeof blockData[ i ].style == 'string' then blockData[ i ].style else '{}'
 					if ( typeof blockData[ i ].cell != 'undefined' )
-						block.info.cell = startCellI + blockData[ i ].cell
-
+						block.info.cell = blockData[ i ].cell
+				i++
 				ppbData.widgets.push $.extend(true, {}, block)
 
 			logPPBData 'Row added'
@@ -1898,7 +1899,7 @@ ppbTemplateFromRow = (rowI, thumb) ->
 		style: JSON.stringify rowStyle
 
 	parseContent = ( cb ) ->
-		if ( ! typeof firstCellI == 'number' )
+		if ( typeof firstCellI != 'number' )
 			firstCellI = cb.info.cell
 
 		tpl.content.push(

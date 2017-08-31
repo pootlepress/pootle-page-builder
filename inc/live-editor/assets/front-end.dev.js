@@ -410,7 +410,7 @@ jQuery(function($) {
       });
     },
     addRow: function(callback, blockData, rowStyle, cellWidths) {
-      var block, cells, defaultText, firstCellI, i, id, num_cells, num_content, row, startCellI;
+      var block, cells, defaultText, firstCellI, i, id, num_cells, num_content, row;
       window.ppbRowI = ppbData.grids.length;
       num_cells = parseInt($('#ppb-row-add-cols').val());
       cellWidths = cellWidths ? cellWidths : [];
@@ -450,7 +450,7 @@ jQuery(function($) {
         weight: 1 / num_cells
       };
       defaultText = typeof blockData === 'string' ? blockData : '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>';
-      if (!typeof blockData === 'object') {
+      if (typeof blockData !== 'object') {
         blockData = [];
       }
       block = {
@@ -462,10 +462,10 @@ jQuery(function($) {
         }
       };
       i = 0;
-      startCellI = null;
+      firstCellI = null;
       while (i < num_cells) {
         id = ppbData.grid_cells.length;
-        if (!typeof firstCellI === 'number') {
+        if (typeof firstCellI !== 'number') {
           firstCellI = id;
         }
         cells.id = id;
@@ -477,21 +477,23 @@ jQuery(function($) {
             cells.weight = cellWidths[i];
           }
         }
-        ppbData.grid_cells.push($.extend(true, {}, cells));
         i++;
+        ppbData.grid_cells.push($.extend(true, {}, cells));
       }
       num_content = Math.max(num_cells, blockData.length);
+      i = 0;
       while (i < num_content) {
         id = ppbData.widgets.length;
-        block.info.cell = startCellI + i;
+        block.info.cell = i;
         block.info.id = id;
         if (blockData[i]) {
           block.text = typeof blockData[i].text === 'string' ? blockData[i].text : defaultText;
           block.info.style = typeof blockData[i].style === 'string' ? blockData[i].style : '{}';
           if (typeof blockData[i].cell !== 'undefined') {
-            block.info.cell = startCellI + blockData[i].cell;
+            block.info.cell = blockData[i].cell;
           }
         }
+        i++;
         ppbData.widgets.push($.extend(true, {}, block));
       }
       logPPBData('Row added');
@@ -2014,7 +2016,7 @@ ppbTemplateFromRow = function(rowI, thumb) {
     style: JSON.stringify(rowStyle)
   };
   parseContent = function(cb) {
-    if (!typeof firstCellI === 'number') {
+    if (typeof firstCellI !== 'number') {
       firstCellI = cb.info.cell;
     }
     return tpl.content.push({
