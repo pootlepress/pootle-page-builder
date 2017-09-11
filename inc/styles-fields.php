@@ -136,7 +136,14 @@ function pootlepb_render_content_block_field( $key, $field ) {
 			?><input <?php echo $placeholder ?> dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="text"
 			         data-style-field-type="upload"/>
 			<span class="dashicons dashicons-no-alt" onclick="jQuery(this).siblings('input').val('').change();">Remove Image</span><br>
-			<button class="button upload-button">Select Image</button><?php
+			<button class="button upload-button">Select Image</button>
+			<small>OR</small>
+			<span class="search-unsplash-wrap" style="display: none;">
+				<input placeholder="Search Free Photos..." type="search">
+				<span class="dashicons dashicons-search unsplash-button">Search Free Photos</span>
+				<span class="dashicons dashicons-editor-help tooltip-unsplash" data-tooltip="All stock photos are sourced from Unsplash.com and are licensed under Creative Commons Zero which means you can copy, modify, distribute and use the photos for free, including commercial purposes, without asking permission from or providing attribution to the photographer or Unsplash"></span>
+			</span>
+			<?php
 			break;
 		case 'slider':
 			$field = wp_parse_args( $field, array(

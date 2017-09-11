@@ -122,7 +122,7 @@
 			var
 				$t = $( this ),
 				$searchField = $t.siblings( 'input[type="search"]' ),
-				$textField = $t.closest('.field_type_upload').find( 'input[data-style-field-type="upload"]' );
+				$textField = $t.closest('.field_type-upload, .field_type_upload').find( 'input[data-style-field-type="upload"]' );
 			if ( ! $searchField.is(':visible') ) {
 				$searchField.show();
 				return;
