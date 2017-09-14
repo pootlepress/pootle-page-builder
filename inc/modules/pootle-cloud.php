@@ -24,7 +24,11 @@ class Pootle_PB_Pootle_Cloud {
 	private $tpl_cats = [];
 	private $ppbPro = false;
 
-	static function get_templates() {
+	static function user_templates() {
+		return get_option( 'pcld_user_tpls', [] );
+	}
+
+	static function pp_templates() {
 
 		$tpls     = get_transient( 'pootle_pb_live_design_templates' );
 
@@ -78,6 +82,21 @@ class Pootle_PB_Pootle_Cloud {
 		add_action( 'pootlepb_modules_page', array( $this, 'module_plugin' ), 25 );
 		add_action( 'pootlepb_modules', array( $this, 'module' ) );
 		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'wp_ajax_pcld_save_tpls', array( $this, 'save_cloud_tpls' ) );
+	}
+
+	function save_cloud_tpls() {
+		if ( ! empty( $_POST['tpls'] ) ) {
+			$tpls = $_POST['tpls'];
+
+			if ( ! is_array( $tpls ) ) {
+				$tpls = json_decode( $tpls, 'array' );
+			}
+
+			if ( $tpls ) {
+				update_option( 'pcld_user_tpls', $tpls );
+			}
+		}
 	}
 
 	/**
@@ -91,7 +110,7 @@ class Pootle_PB_Pootle_Cloud {
 	}
 
 	private function init_tpl_data() {
-		$this->tpls = self::get_templates();
+		$this->tpls = self::pp_templates();
 		$this->tpl_cats = self::get_categories();
 	}
 
