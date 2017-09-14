@@ -188,6 +188,7 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 	 * @since 1.1.0
 	 */
 	public function new_live_page() {
+
 		$requested_post_type = filter_input( INPUT_GET, 'post_type' );
 		$post_type           = $requested_post_type ? $requested_post_type : 'page';
 
@@ -213,7 +214,13 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 			}
 			exit;
 		}
-		if ( $nonce === get_transient( 'ppb-ipad-' . $ipad_user ) || wp_verify_nonce( $nonce, 'ppb-new-live-post' ) ) {
+		$mobile_editing = wp_verify_nonce( $nonce, 'ppb-mobile-editing' );
+
+		if ( $mobile_editing && is_user_logged_in() ) {
+			@header( 'X-Frame-Options: ALLOW-FROM localhost:4200' );
+		}
+
+		if ( $mobile_editing || wp_verify_nonce( $nonce, 'ppb-new-live-post' ) ) {
 			$id = wp_insert_post( array(
 				'post_title'   => 'Untitled',
 				'post_content' => '',
@@ -255,13 +262,9 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 					$_GET['tour'] = $_GET['tour'] ? $_GET['tour'] : 1;
 					$plink .= "tour=$_GET[tour]&";
 				}
-				if ( isset( $_GET['ppb-ipad'] ) ) {
-					if ( ! get_option( 'pootlepb_ipad_tour_done' ) ) {
-						update_option( 'pootlepb_ipad_tour_done', 'done' );
-						$plink .= 'tour=ipad&';
-					}
+				if ( $mobile_editing ) {
 
-					header( "Location: {$plink}ppb-ipad&user={$ipad_user}&ppbLiveEditor={$nonce}&edit_title=true" );
+					header( "Location: {$plink}ppb-mobile-editing={$nonce}" );
 					exit();
 				}
 
