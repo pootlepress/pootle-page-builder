@@ -1343,8 +1343,8 @@ $ppbpro_addons_data = array(
 		'InstallURI'  => admin_url( "/plugin-install.php?s=Pootle+Cloud&tab=search&type=term" ),
 		'AuthorURI'   => 'https://pootlepress.com',
 		'Author'      => 'pootlepress',
-		'Image'       => 'https://pootle-cloud.firebaseapp.com/assets/default-wilson.jpg',
-		'active_class' => 'WooBuilder',
+		'Image'       => 'https://ps.w.org/pootle-cloud/assets/icon-256x256.jpg?rev=1733741',
+		'active_class' => 'Pootle_Cloud',
 	),
 );
 
