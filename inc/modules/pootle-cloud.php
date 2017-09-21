@@ -79,7 +79,6 @@ class Pootle_PB_Pootle_Cloud {
 	public function __construct() {
 		add_action( 'pootlepb_le_dialogs', array( $this, 'dialog', ) );
 		add_action( 'pootlepb_enqueue_admin_scripts', array( $this, 'enqueue', ) );
-		add_action( 'pootlepb_modules_page', array( $this, 'module_plugin' ), 25 );
 		add_action( 'pootlepb_modules', array( $this, 'module' ) );
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'wp_ajax_pcld_save_tpls', array( $this, 'save_cloud_tpls' ) );
@@ -206,6 +205,12 @@ class Pootle_PB_Pootle_Cloud {
 		return $mods;
 	}
 
+	/**
+	 * Adds Pootle cloud plugin entry to modules admin page
+	 * Not used since v5.0.beta8
+	 * @param $mods
+	 * @return mixed
+	 */
 	public function module_plugin( $mods ) {
 		$mods[ $this->token ] = array(
 			'Name'         => $this->name,
