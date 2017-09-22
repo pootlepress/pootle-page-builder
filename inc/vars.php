@@ -1339,8 +1339,8 @@ $ppbpro_addons_data = array(
 	'pootle-cloud' => array(
 		'free'        => true,
 		'Name'        => 'Pootle cloud',
-		'Description' => 'PootleCloud will let you save your designs to the cloud so that you can reuse them, either on the website you are working on, or any Pootle Pagebuilder site :)',
-		'InstallURI'  => admin_url( "/plugin-install.php?s=Pootle+Cloud&tab=search&type=term" ),
+		'Description' => 'Pootle cloud will let you save your designs to the cloud so that you can reuse them, either on the website you are working on, or any Pootle Pagebuilder site :)',
+		'InstallURI'  => admin_url( "/plugin-install.php?s=Pootle+cloud&tab=search&type=term" ),
 		'AuthorURI'   => 'https://pootlepress.com',
 		'Author'      => 'pootlepress',
 		'Image'       => 'https://ps.w.org/pootle-cloud/assets/icon-256x256.jpg?rev=1733741',
