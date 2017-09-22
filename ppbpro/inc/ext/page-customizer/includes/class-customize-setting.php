@@ -17,6 +17,8 @@
  */
 class Shramee_Post_Meta_Customize_Setting extends WP_Customize_Setting {
 
+	protected static $cookie_set = false;
+
 	/**
 	 * @access public
 	 * @var string
@@ -130,7 +132,7 @@ class Shramee_Post_Meta_Customize_Setting extends WP_Customize_Setting {
 
 	protected function update( $value ) {
 
-		$post_id = empty( $_GET['post_id'] ) ? $_COOKIE['shramee_post_meta_customize_setting_post_id'] : $_GET['post_id'];
+		$post_id = $_COOKIE['shramee_post_meta_customize_setting_post_id'];
 
 		$options = get_post_meta( $post_id, $this->id_data['base'], true );
 
@@ -155,12 +157,11 @@ class Shramee_Post_Meta_Customize_Setting extends WP_Customize_Setting {
 	 * @return mixed The value.
 	 */
 	public function value() {
-		if ( empty( $_GET['post_id'] ) ) {
-			return '';
-		}
+		if ( empty( $_GET['post_id'] ) ) { return ''; }
 
-		if ( ! headers_sent() ) {
+		if ( ! self::$cookie_set ) {
 			setcookie( 'shramee_post_meta_customize_setting_post_id', $_GET['post_id'] );
+			self::$cookie_set = true;
 		}
 
 		$values = get_post_meta(
