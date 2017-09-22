@@ -116,8 +116,6 @@ if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 			add_action( 'admin_init', array( $this, 'ppb_compatibility' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
 			add_action( 'admin_notices', array( $this, 'admin_notices' ) );
-			add_action( 'wp_ajax_nopriv_ppb_app_user', array( $this, 'app_user_status' ) );
-			add_action( 'wp_ajax_ppb_app_user', array( $this, 'app_user_logged_in' ) );
 			add_action( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'plugin_action_links' ) );
 			add_action( 'activated_plugin', array( $this, 'activation_redirect' ) );
 		}
@@ -171,21 +169,6 @@ if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 			}
 
 			return $this->ppb_posts;
-		}
-
-		public function app_user_status() {
-			setcookie( 'ppb-redirect', filter_input( INPUT_GET, 'redirect' ) );
-			header( 'Location: ' . site_url( '/wp-login.php' ) . '?redirect_to=' . admin_url( 'admin-ajax.php?action=ppb_app_user' ) );
-			exit();
-		}
-
-		public function app_user_logged_in() {
-			$redirect = filter_input( INPUT_GET, 'redirect' );
-			if ( isset( $_COOKIE['ppb-redirect'] ) ) {
-				$redirect = $_COOKIE['ppb-redirect'];
-			}
-
-			header( 'Location: ' . $redirect );
 		}
 
 		/**
