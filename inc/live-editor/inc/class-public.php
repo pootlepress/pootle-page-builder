@@ -170,6 +170,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		$suff = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? 'dev.js' : 'min.js';
 		wp_enqueue_script( 'pootle-live-editor', "$url/front-end.$suff", array(
+			'pootle-page-builder-front-js',
+			'masonry',
 			'ppb-ui',
 			'ppble-sd',
 			'ppb-fields',

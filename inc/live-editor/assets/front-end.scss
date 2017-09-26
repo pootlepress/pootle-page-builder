@@ -1784,21 +1784,25 @@ pre.ace_editor.ace-tm {
 		margin: 0;
 	}
 	.templates-wrap {
-		padding: 1.4em 0.7em;
+		padding: 1.4em 0;
 		border-bottom: 2px solid #eee;
+		&:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
 	}
 	.ppb-tpl {
 		background: #fff;
 		position: relative;
-		display: inline-block;
+		display: block;
 		cursor: pointer;
-		margin: 0 1.25em 2.5em;
-		-webkit-column-break-inside: avoid;
-		page-break-inside: avoid;
-		break-inside: avoid;
+		margin: 2.5em 0 0 2.5em;
 		box-shadow: 0 0 7px 1px rgba(0,0,0,0.5);
 		border-radius: 0;
 		color: #777;
+		width: calc( 33.33% - 3.33em );
+		float: left;
 		.pro {
 			position: absolute;
 			background: #2196f3;
@@ -1834,9 +1838,8 @@ pre.ace_editor.ace-tm {
 		}
 
 		img {
-			height: 200px;
-			width: auto;
-			min-width: 100%;
+			width: 100%;
+			height: auto;
 			display: block;
 			margin: 0;
 			border-radius: 0;
@@ -1909,4 +1912,13 @@ pre.ace_editor.ace-tm {
 	background: #2196f3 left bottom/ auto 90% no-repeat url(wilson2.png);
 	color: #fff;
 	padding-left: 4em;
+}
+
+@media (min-width:1400px) {
+	#pootlepb-design-templates {
+		.ppb-tpl {
+			margin: 2em 0 0 2em;
+			width: calc(25% - 2.5em);
+		}
+	}
 }
