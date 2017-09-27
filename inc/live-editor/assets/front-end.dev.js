@@ -315,7 +315,7 @@ jQuery(function($) {
       }
       panels.addInputFieldEventHandlers($contentPanel);
       dt = ppbData.widgets[window.ppbPanelI];
-      st = JSON.parse(dt.info.style.replace(/\\(.)/mg, "$1"));
+      st = JSON.parse(dt.info.style);
       panels.setStylesToFields($contentPanel, st);
       tinyMCE.get('ppbeditor').setContent(dt.text);
       $('html').trigger('pootlepb_admin_editor_panel_done', [$contentPanel, st]);
@@ -323,7 +323,7 @@ jQuery(function($) {
     savePanel: function() {
       var $t, st;
       ppbData.widgets[window.ppbPanelI].text = tinyMCE.get('ppbeditor').getContent();
-      st = JSON.parse(ppbData.widgets[window.ppbPanelI].info.style.replace(/\\(.)/mg, "$1"));
+      st = JSON.parse(ppbData.widgets[window.ppbPanelI].info.style);
       st = panels.getStylesFromFields($contentPanel, st);
       ppbData.widgets[window.ppbPanelI].info.style = JSON.stringify(st);
       $t = $('.ppb-block.active');
@@ -1980,7 +1980,7 @@ jQuery(function($) {
         return;
       }
       tpl = ppbDesignTpls[id];
-      style = tpl.style ? JSON.parse(tpl.style.replace(/\\(.)/mg, "$1")) : {};
+      style = tpl.style ? JSON.parse(tpl.style) : {};
       style = style.style ? style.style : style;
       cells = 1;
       if (tpl.cell) {
