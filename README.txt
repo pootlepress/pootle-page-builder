@@ -155,6 +155,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 = 5.0.0 =
 * 2017-09-28
+* New - Layouts more flexible and robust (use newer tech)
 * New - Mobile behaviour for rows and columns
 * New - Full width content option for rows
 * New - Frontend styles optimization
@@ -168,6 +169,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 * Dev - Live editor JS notification function `ppbNotify( 'Message' )`
 * Dev - Modules support property `only_new_row` and `only_existing_row`, by default can be applied to both
 * Dev - Modules `activeClass` property renamed to `active_class`
+* Dev - Layouts now done with CSS3 FLEXBOX
 
 = 4.1.1 =
 * 2017-05-26
