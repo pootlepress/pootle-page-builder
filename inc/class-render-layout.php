@@ -162,7 +162,7 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 
 			?>
 		</div>
-		<?
+		<?php
 
 		$html = ob_get_clean();
 
