@@ -217,7 +217,8 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 		$mobile_editing = wp_verify_nonce( $nonce, 'ppb-mobile-editing' );
 
 		if ( $mobile_editing && is_user_logged_in() ) {
-			@header( 'X-Frame-Options: ALLOW-FROM localhost:4200' );
+			$mobile_app_url = apply_filters( 'pootlepb_mobile_app_url', 'localhost:4200' );
+			@header( "X-Frame-Options: ALLOW-FROM $mobile_app_url" );
 		}
 
 		if ( $mobile_editing || wp_verify_nonce( $nonce, 'ppb-new-live-post' ) ) {
