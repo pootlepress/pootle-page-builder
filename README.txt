@@ -8,7 +8,7 @@ Author URI: http://www.pootlepress.com
 Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
-Tested up to: 4.7.0
+Tested up to: 4.9.alpha
 Stable tag: 4.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -148,10 +148,26 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Upgrade Notice ==
 
-= 4.0.0 =
- * Enhancements and bug fixed
+= 5.0.0 =
+ * This is a major release, Please backup your site before updating.
 
 == Changelog ==
+
+= 5.0.0 =
+* 2017-09-28
+* New - Mobile behaviour for rows and columns
+* New - Full width content option for rows
+* New - Frontend styles optimization
+* New - Design templates for rows (Pootle Cloud)
+* New - Content block image fields support free images from Unsplash
+* Tweak - All CSS minified for faster loading
+* Tweak - Front end CSS now compiled from SASS
+* Tweak - Freemius SDK updated to v1.2.1.7.1
+* Fix - Page customizer not working on some servers
+* Dev - Live editor JS `prevu.addRow()` new parameters `callback, blockData, rowStyle, cellWidths`
+* Dev - Live editor JS notification function `ppbNotify( 'Message' )`
+* Dev - Modules support property `only_new_row` and `only_existing_row`, by default can be applied to both
+* Dev - Modules `activeClass` property renamed to `active_class`
 
 = 4.1.1 =
 * 2017-05-26
