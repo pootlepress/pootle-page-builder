@@ -1,5 +1,6 @@
 <?php
 $editing = ! empty( $_GET['edit_button'] );
+$assets_url = esc_attr( $_GET['assets_url'] );
 ?>
 <!DOCTYPE html>
 <html>
@@ -327,9 +328,9 @@ $editing = ! empty( $_GET['edit_button'] );
 	</footer>
 
 	<?php wp_print_footer_scripts(); ?>
-	<script src="<?php echo $_GET['assets_url'] . 'alpha-color.js' ?>"></script>
-	<link rel="stylesheet" href="<?php echo $_GET['assets_url'] . 'dashicons-select.css' ?>">
-	<script src="<?php echo $_GET['assets_url'] . 'dashicons-select.js?v=1.0.1' ?>"></script>
+	<script src="<?php echo $assets_url . 'alpha-color.js' ?>"></script>
+	<link rel="stylesheet" href="<?php echo $assets_url . 'dashicons-select.css' ?>">
+	<script src="<?php echo $assets_url . 'dashicons-select.js?v=1.0.1' ?>"></script>
 
 	<script>
 		( function ( $ ) {
