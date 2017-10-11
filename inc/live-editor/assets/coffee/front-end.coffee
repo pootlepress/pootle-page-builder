@@ -1411,6 +1411,9 @@ jQuery ($) ->
 		editor.on 'change', (e) ->
 			prevu.saveTmceBlock $(e.target.targetElm)
 			return
+		editor.on 'blur', (e) ->
+			prevu.saveTmceBlock $(e.target.targetElm)
+			return
 		editor.on 'focus', (e) ->
 			$t = $(e.target.targetElm)
 			$('.ppb-block.active, .ppb-row.active').removeClass 'active'
@@ -1814,7 +1817,7 @@ jQuery ($) ->
 	window.ppbModules.heroSection = ($t) ->
 		$tlbr = $t.closest('.panel-grid').find('.ppb-edit-row')
 		$tlbr.find('.ui-sortable-handle').click()
-		ppbData.grids[ppbRowI].style.full_width = true
+		ppbData.grids[ppbRowI].style.full_width = 1
 		ppbData.grids[ppbRowI].style.background_toggle = '.bg_image'
 		ppbData.grids[ppbRowI].style.row_height = '500'
 

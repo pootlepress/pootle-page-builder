@@ -1539,6 +1539,9 @@ jQuery(function($) {
     editor.on('change', function(e) {
       prevu.saveTmceBlock($(e.target.targetElm));
     });
+    editor.on('blur', function(e) {
+      prevu.saveTmceBlock($(e.target.targetElm));
+    });
     editor.on('focus', function(e) {
       var $t;
       $t = $(e.target.targetElm);
@@ -1938,7 +1941,7 @@ jQuery(function($) {
     var $tlbr;
     $tlbr = $t.closest('.panel-grid').find('.ppb-edit-row');
     $tlbr.find('.ui-sortable-handle').click();
-    ppbData.grids[ppbRowI].style.full_width = true;
+    ppbData.grids[ppbRowI].style.full_width = 1;
     ppbData.grids[ppbRowI].style.background_toggle = '.bg_image';
     return ppbData.grids[ppbRowI].style.row_height = '500';
   };
