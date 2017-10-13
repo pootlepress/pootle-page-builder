@@ -34,7 +34,7 @@ logPPBData = (a, b, c) ->
 		if !v or !v.info
 			log.content.push 'Content ' + i + ' undefined info'
 		else
-			log.content.push 'Content ' + i + ' in Grid: ' + v.info.grid + ' Cell: ' + v.info.cell + ' Text: \'' + $(v.text).text().substring(0, 16) + '\''
+			log.content.push 'Content ' + i + ' in Grid: ' + v.info.grid + ' Cell: ' + v.info.cell + ' Text: \'' + $('<div>' + v.text + '</div>').text().substring(0, 16) + '\''
 		return
 	$.each ppbData.grid_cells, (i, v) ->
 		log.cells.push 'Cell ' + i + ' in Grid: ' + v.grid + ' with Weight: ' + v.weight

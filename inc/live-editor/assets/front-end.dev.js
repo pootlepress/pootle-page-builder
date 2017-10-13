@@ -40,7 +40,7 @@ logPPBData = function(a, b, c) {
     if (!v || !v.info) {
       log.content.push('Content ' + i + ' undefined info');
     } else {
-      log.content.push('Content ' + i + ' in Grid: ' + v.info.grid + ' Cell: ' + v.info.cell + ' Text: \'' + $(v.text).text().substring(0, 16) + '\'');
+      log.content.push('Content ' + i + ' in Grid: ' + v.info.grid + ' Cell: ' + v.info.cell + ' Text: \'' + $('<div>' + v.text + '</div>').text().substring(0, 16) + '\'');
     }
   });
   $.each(ppbData.grid_cells, function(i, v) {
