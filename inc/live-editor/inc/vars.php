@@ -9,7 +9,9 @@
 $ppble_new_live_page = array (
 	'widgets' => array (
 		array (
-			'text' => "<h2>Hello<!--USER-->,</h2><p>I am your first row, go ahead, edit me and make me cool...</p>",
+			'text' =>
+				'<h2>' . sprintf( __( 'Hello %s,', 'pootle-page-builder' ), '<!--USER-->' ) . '</h2>' .
+				'<p>' . __( 'I am your first row, go ahead, edit me and make me cool...', 'pootle-page-builder' ) . '</p>',
 			'info' => array (
 				'class' => 'Pootle_PB_Content_Block',
 				'grid' => 0,

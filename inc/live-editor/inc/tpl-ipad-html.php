@@ -186,11 +186,11 @@
 </style>
 <div id="ppb-ipad-updated-notice" class="ppb-full-blue-notice fade-in-out">
 	<span class="dashicons dashicons-yes"></span>
-	<h3>Changes Saved</h3>
+	<h3><?php _e( 'Changes Saved', 'pootle-page-builder' ); ?></h3>
 </div>
 <div id="ppb-ipad-notice" class="ppb-full-blue-notice">
 	<span class="ppb-rotate dashicons dashicons-admin-generic"></span>
-	<h2>Saving changes and loading preview...</h2>
+	<h2><?php _e( 'Saving changes and loading preview...', 'pootle-page-builder' ); ?></h2>
 </div>
 <div id="ppb-ipad-color-picker">
 	<!--<h3>Choose Color</h3>-->

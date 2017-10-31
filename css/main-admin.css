@@ -28,7 +28,6 @@ div.pootle.updated {
     text-indent: -1000px;
 }
 #toplevel_page_page_builder a.wp-first-item:before {
-    content: 'Home';
     position: absolute;
     text-indent: 1000px;
 }

@@ -14,7 +14,7 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 
 ?>
 <div class="ppb-modules modules-free">
-	<h2>Free Module Plugins</h2>
+	<h2><?php _e( 'Free Module Plugins', 'pootle-page-builder' ); ?></h2>
 	<?php
 	foreach ( $pootlepb_modules as $slug => $plugin ) {
 		$card_classes = class_exists( $plugin['active_class'] ) ? 'ppb-addon-card active' : 'ppb-addon-card';
@@ -59,7 +59,7 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 	<div class="clear"></div>
 </div>
 <div class="ppb-modules modules-pro">
-	<h2>Pro Module Addons</h2>
+	<h2><?php _e( 'Pro Module Addons', 'pootle-page-builder' ); ?></h2>
 
 	<form method="post" action="options.php">
 		<?php
@@ -129,7 +129,7 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 							</div>
 							<div class="desc ppb-addon-description">
 								<p class="ppb-addon-description"><?php echo strip_tags( $plugin['Description'], '<a>' ); ?></p>
-								<cite><?php echo "By <a href='$plugin[AuthorURI]'>$plugin[Author]</a>"; ?></cite>
+								<cite><?php printf( __( 'By %s', 'pootle-page-builder' ), "<a href='$plugin[AuthorURI]'>$plugin[Author]</a>" ); ?></cite>
 							</div>
 						</div>
 						<div class="ppb-addon-footer">
@@ -137,12 +137,12 @@ $active_addons = get_option( 'ppbpro_active_addons', array( 'blog-customizer', '
 								<?php
 								if ( strpos( $card_classes, 'active' ) ) {
 									echo '<span class="dashicons dashicons-yes"></span>';
-									_e( 'This addon is active!', 'ppbpro' );
+									_e( 'This addon is active!', 'pootle-page-builder' );
 								} else if ( is_dir( WP_PLUGIN_DIR . '/' . $slug ) ) {
 									$activate_url = admin_url( "plugins.php" );
-									echo "<a href='$activate_url' target='_blank' class='button pootle right'>" . __( 'Activate' ) . "</a>";
+									echo "<a href='$activate_url' target='_blank' class='button pootle right'>" . __( 'Activate', 'pootle-page-builder' ) . "</a>";
 								} else {
-									echo "<a href='$plugin[InstallURI]' class='button pootle right'>" . __( 'Install' ) . "</a>";
+									echo "<a href='$plugin[InstallURI]' class='button pootle right'>" . __( 'Install', 'pootle-page-builder' ) . "</a>";
 								}
 								?>
 								<div class="clear"></div>

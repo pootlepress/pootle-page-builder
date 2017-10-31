@@ -4,7 +4,7 @@ class pootle_page_builder_Pootle_Slider {
 	public $token = 'pootle_slider';
 	public $slug = 'pootle-slider';
 	public $class = 'Pootle_Slider';
-	public $name = 'Pootle Slider';
+	public $name;
 
 	/** @var pootle_page_builder_Pootle_Slider Instance */
 	private static $_instance = null;
@@ -25,6 +25,7 @@ class pootle_page_builder_Pootle_Slider {
 	 * PootlePB_Meta_Slider constructor.
 	 */
 	function __construct() {
+		$this->name = __( 'Pootle Slider', 'pootle-page-builder' );
 		add_action( 'init', array( $this, 'init', ) );
 	}
 
@@ -75,7 +76,7 @@ class pootle_page_builder_Pootle_Slider {
 	public function module_plugin( $mods ) {
 		$mods[ $this->slug ] = array(
 			'Name' => $this->name,
-			'Description' => 'Adds awesome sliders to the pootle page builder',
+			'Description' => 'Adds awesome sliders to the Pootle Pagebuilder',
 			'InstallURI' => admin_url( "/plugin-install.php?s=$this->name&tab=search&type=term" ),
 			'AuthorURI' => 'https://www.pootlepress.com',
 			'Author' => 'pootlepress',

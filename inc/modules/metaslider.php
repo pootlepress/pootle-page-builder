@@ -2,7 +2,7 @@
 class pootle_page_builder_Meta_Slider {
 
 	public $token = 'metaslider';
-	protected $choices = array( '' => 'Please choose...' );
+	protected $choices;
 
 	/** @var pootle_page_builder_Meta_Slider Instance */
 	private static $_instance = null;
@@ -26,6 +26,7 @@ class pootle_page_builder_Meta_Slider {
 	 * PootlePB_Meta_Slider constructor.
 	 */
 	function __construct() {
+		$this->choices = array( '' => __( 'Please choose...', 'pootle-page-builder' ) );
 		add_action( 'init', array( $this, 'init', ) );
 	}
 
@@ -52,7 +53,7 @@ class pootle_page_builder_Meta_Slider {
 
 	public function tab( $tabs ) {
 		$tabs[ $this->token ] = array(
-			'label' => 'Meta Slider',
+			'label' => __( 'Meta Slider', 'pootle-page-builder' ),
 			'priority' => 5,
 		);
 		return $tabs;
@@ -61,7 +62,7 @@ class pootle_page_builder_Meta_Slider {
 	public function fields( $fields ) {
 
 		$fields[ $this->token ] = array(
-			'name' => 'Choose slider',
+			'name' => __( 'Choose slider', 'pootle-page-builder' ),
 			'type' => 'select',
 			'options' => $this->choices,
 			'priority' => 1,
@@ -97,7 +98,7 @@ HTML;
 
 	public function module( $mods ) {
 		$mods['metaslider-slider'] = array(
-			'label' => 'Metaslider - Slider',
+			'label' => __( 'Metaslider - Slider', 'pootle-page-builder' ),
 			'icon_class' => 'dashicons dashicons-images-alt',
 			'icon_html' => '',
 			'tab' => '#pootle-metaslider-tab',
@@ -109,8 +110,8 @@ HTML;
 
 	public function module_plugin( $mods ) {
 		$mods['ml-slider'] = array(
-			'Name' => 'Meta slider',
-			'Description' => 'Adds awesome meta slider module',
+			'Name' => __( 'Meta slider', 'pootle-page-builder' ),
+			'Description' => __( 'Adds awesome meta slider module', 'pootle-page-builder' ),
 			'InstallURI' => admin_url( "/plugin-install.php?s=Meta Slider&tab=search&type=term" ),
 			'AuthorURI' => 'https://www.metaslider.com',
 			'Author' => 'Matcha Labs',

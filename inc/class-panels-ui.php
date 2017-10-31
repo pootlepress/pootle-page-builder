@@ -41,7 +41,7 @@ final class Pootle_Page_Builder_Admin_UI {
 	 */
 	public function metabox() {
 		foreach ( pootlepb_settings( 'post-types' ) as $type ) {
-			add_meta_box( 'pootlepb-panels', __( 'Page Builder', 'ppb-panels' ), array(
+			add_meta_box( 'pootlepb-panels', __( 'Page Builder', 'pootle-page-builder' ), array(
 				$this,
 				'metabox_render'
 			), $type, 'advanced', 'high' );
@@ -68,8 +68,12 @@ final class Pootle_Page_Builder_Admin_UI {
 		$screen = get_current_screen();
 		if ( in_array( $screen->id, pootlepb_settings( 'post-types' ) ) ) {
 			wp_enqueue_script( 'pootlepb-ui' );
+			wp_localize_script( 'pootlepb-ui', 'ppbL10n', array(
+				'defaultEditor'              => __( 'Default Editor', 'pootle-page-builder' ),
+			) );
 			wp_enqueue_style( 'pootlepb-ui-styles' );
 			wp_enqueue_style( 'pootlepb-admin', POOTLEPB_URL . 'css/admin.css', array(), POOTLEPB_VERSION );
+
 			wp_enqueue_style( 'ppb-chosen-style', POOTLEPB_URL . 'js/chosen/chosen.css' );
 			wp_enqueue_style( 'wp-jquery-ui-dialog' );
 			do_action( 'pootlepb_enqueue_admin_styles' );
@@ -253,17 +257,17 @@ final class Pootle_Page_Builder_Admin_UI {
 	 */
 	protected function get_layout_from_post( $page, $panels_data, &$layouts ) {
 
-		$name = empty( $page->post_title ) ? __( 'Untitled', 'ppb-panels' ) : $page->post_title;
+		$name = empty( $page->post_title ) ? __( 'Untitled', 'pootle-page-builder' ) : $page->post_title;
 
 		if ( $page->post_status != 'publish' ) {
-			$name .= ' ( ' . __( 'Unpublished', 'ppb-panels' ) . ' )';
+			$name .= ' ( ' . __( 'Unpublished', 'pootle-page-builder' ) . ' )';
 		}
 
 		if ( current_user_can( 'edit_post', $page->ID ) ) {
 
 			$layouts[ 'post-' . $page->ID ] = wp_parse_args(
 				array(
-					'name' => sprintf( __( 'Clone Page: %s', 'ppb-panels' ), $name )
+					'name' => sprintf( __( 'Clone Page: %s', 'pootle-page-builder' ), $name )
 				),
 				$panels_data
 			);

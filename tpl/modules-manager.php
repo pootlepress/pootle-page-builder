@@ -11,7 +11,7 @@
 	$ppb_modules = apply_filters( 'pootlepb_modules', array() );
 
 	$default_module_args = array(
-		'label'      => 'Unlabeled Module',
+		'label'      => __( 'Unlabeled Module', 'pootle-page-builder' ),
 		'icon_class' => 'dashicons dashicons-star-filled',
 		'icon_html'  => '',
 	);
@@ -35,8 +35,8 @@
 	settings_fields( 'ppbpro_modules' );
 	settings_errors(); ?>
 	<div class="ppb-modules modules-disabled" style="float: right;">
-		<h2 class="subhead-follows">Disabled Modules</h2>
-		<h3>Drag modules here to remove them from live editor.</h3>
+		<h2 class="subhead-follows"><?php _e( 'Disabled Modules', 'pootle-page-builder' ); ?></h2>
+		<h3><?php _e( 'Drag modules here to remove them from live editor.', 'pootle-page-builder' ); ?></h3>
 		<div id="pootlepb-modules-wrap">
 			<div class="ppb-disabled-modules-list">
 				<?php
@@ -54,8 +54,8 @@
 		</div>
 	</div>
 	<div class="ppb-modules modules-enabled">
-		<h2 class="subhead-follows">Enabled Modules</h2>
-		<h3>These addons will be available in live editor.</h3>
+		<h2 class="subhead-follows"><?php _e( 'Enabled Modules', 'pootle-page-builder' ); ?></h2>
+		<h3><?php _e( 'These addons will be available in live editor.', 'pootle-page-builder' ); ?></h3>
 		<div id="pootlepb-modules-wrap">
 			<div class="ppb-enabled-modules-list">
 				<?php

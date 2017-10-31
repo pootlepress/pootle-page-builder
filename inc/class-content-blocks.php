@@ -310,26 +310,23 @@ final class Pootle_Page_Builder_Content_Block {
 			     tabindex="-1" role="dialog" aria-describedby="ppb-id-7" aria-labelledby="ppb-id-8">
 				<div
 					class="ppb-dialog-titlebar ppb-widget-header ppb-corner-all ppb-helper-clearfix ui-draggable-handle">
-					<span id="ppb-id-8" class="ppb-dialog-title"> Editor </span>
+					<span id="ppb-id-8" class="ppb-dialog-title"> <?php _e( 'Editor', 'pootle-page-builder' ); ?> </span>
 					<button
 						class="ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only ppb-dialog-titlebar-close"
 						title="Close" type="button"><span class=
 						                                  "ui-button-icon-primary ui-icon ppb-icon-closethick"></span><span
-							class="ui-button-text">Close</span></button>
+							class="ui-button-text"><?php _e( 'Close', 'pootle-page-builder' ); ?></span></button>
 				</div>
-				<div
-					class="panel-dialog dialog-form widget-dialog-pootle_pb_content_block ppb-dialog-content ppb-widget-content"
-					id="ppb-id-7">
-					<?php
-					require POOTLEPB_DIR . 'tpl/content-block-panel.php';
-					?>
+				<div id="ppb-id-7"
+					class="panel-dialog dialog-form widget-dialog-pootle_pb_content_block ppb-dialog-content ppb-widget-content">
+					<?php require POOTLEPB_DIR . 'tpl/content-block-panel.php'; ?>
 				</div>
 				<div class="ppb-dialog-buttonpane ppb-widget-content ppb-helper-clearfix">
 					<div class="ppb-dialog-buttonset">
 						<button type="button"
 						        class="button pootle stop ppb-button ppb-widget ppb-state-default ppb-corner-all ppb-button-text-only"
 						        role="button">
-							<span class="ppb-button-text">Done</span>
+							<span class="ppb-button-text"><?php _e( 'Done', 'pootle-page-builder' ); ?></span>
 						</button>
 					</div>
 				</div>
@@ -344,7 +341,10 @@ final class Pootle_Page_Builder_Content_Block {
 	 */
 	public function wc_tab() {
 		?>
-		Using WooCommerce? <a href="<?php echo esc_url( admin_url( 'admin.php?page=page_builder_addons' ) ); ?>">Check out our WooCommerce add-on for page builder</a>
+		<?php _e( 'Using WooCommerce?', 'pootle-page-builder' ); ?>
+		<a href="<?php echo esc_url( admin_url( 'admin.php?page=page_builder_addons' ) ); ?>">
+			<?php _e( 'Check out our WooCommerce add-on for page builder', 'pootle-page-builder' ); ?>
+		</a>
 	<?php
 	}
 }

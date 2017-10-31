@@ -6,151 +6,151 @@
  */
 
 global
-	$pootlepb_content_block_styling_fields,
-	$pootlepb_row_styling_fields,
-	$pootlepb_font,
-	$pootlepb_ui_i18n,
-	$pootlepb_ui_js_deps,
-	$pootlepb_color_i18n,
-	$pootlepb_color_deps,
-	$pootlepb_content_block_tabs,
-	$pootlepb_row_settings_tabs,
-	$ppbpro_addons_data,
-	$pootlepb_modules,
-	$pootlepb_gradient_css;
+$pootlepb_content_block_styling_fields,
+$pootlepb_row_styling_fields,
+$pootlepb_font,
+$pootlepb_ui_i18n,
+$pootlepb_ui_js_deps,
+$pootlepb_color_i18n,
+$pootlepb_color_deps,
+$pootlepb_content_block_tabs,
+$pootlepb_row_settings_tabs,
+$ppbpro_addons_data,
+$pootlepb_modules,
+$pootlepb_gradient_css;
 
 /**
  * Content block styling fields
  * @since 0.1.0
  */
 $pootlepb_content_block_styling_fields = array(
-	'text-color'       => array(
-		'name' => 'Text color',
-		'type' => 'color',
+	'text-color'              => array(
+		'name'     => __( 'Text color', 'pootle-page-builder' ),
+		'type'     => 'color',
 		'priority' => 1,
-		'css'  => 'color',
-		'tab' => 'style',
+		'css'      => 'color',
+		'tab'      => 'style',
 	),
-	'background-image' => array(
-		'name' => 'Background Image',
-		'type' => 'upload',
+	'background-image'        => array(
+		'name'     => __( 'Background Image', 'pootle-page-builder' ),
+		'type'     => 'upload',
 		'priority' => 2,
-		'css'  => 'background-image:url(%s);',
-		'tab' => 'style',
+		'css'      => 'background-image:url(%s);',
+		'tab'      => 'style',
 	),
-	'background-color' => array(
-		'name' => 'Background color',
-		'type' => 'color',
+	'background-color'        => array(
+		'name'     => __( 'Background color', 'pootle-page-builder' ),
+		'type'     => 'color',
 		'priority' => 3,
-		'css'  => 'background-color',
-		'tab' => 'style',
+		'css'      => 'background-color',
+		'tab'      => 'style',
 	),
 	'background-transparency' => array(
-		'name' => 'Background color transparency',
-		'type' => 'slider',
-		'min'  => '0',
-		'max'  => '1',
-		'step' => '0.05',
+		'name'     => __( 'Background color transparency', 'pootle-page-builder' ),
+		'type'     => 'slider',
+		'min'      => '0',
+		'max'      => '1',
+		'step'     => '0.05',
 		'priority' => 3,
-		'tab' => 'style',
+		'tab'      => 'style',
 	),
 	'padding-mobile'          => array(
-		'name' => 'Mobile behaviour',
-		'type' => 'select',
-		'options' => array(
-			''  => 'Remove margin/padding',
-			'1' => 'Keep  margin/padding',
-			'2' => 'Center content block',
+		'name'     => __( 'Mobile behaviour', 'pootle-page-builder' ),
+		'type'     => 'select',
+		'options'  => array(
+			''  => __( 'Remove margin/padding', 'pootle-page-builder' ),
+			'1' => __( 'Keep  margin/padding', 'pootle-page-builder' ),
+			'2' => __( 'Center content block', 'pootle-page-builder' ),
 		),
 		'priority' => 4,
-		'tab' => 'style',
+		'tab'      => 'style',
 	),
-	'border'           => array(
-		'name' => 'Border',
-		'type' => 'border',
+	'border'                  => array(
+		'name'     => __( 'Border', 'pootle-page-builder' ),
+		'type'     => 'border',
 		'priority' => 5,
-		'css'  => 'border',
-		'tab' => 'style',
+		'css'      => 'border',
+		'tab'      => 'style',
 	),
-	'padding'          => array(
-		'name' => 'Padding',
-		'type' => 'number',
+	'padding'                 => array(
+		'name'     => __( 'Padding', 'pootle-page-builder' ),
+		'type'     => 'number',
 		'priority' => 6,
-		'min'  => '0',
-		'max'  => '250',
-		'step' => '1',
-		'unit' => 'px',
-		'css'  => 'padding',
-		'tab' => 'style',
+		'min'      => '0',
+		'max'      => '250',
+		'step'     => '1',
+		'unit'     => 'px',
+		'css'      => 'padding',
+		'tab'      => 'style',
 	),
-	'margin-top'          => array(
-		'name' => 'Top Margin',
-		'type' => 'number',
+	'margin-top'              => array(
+		'name'     => __( 'Top Margin', 'pootle-page-builder' ),
+		'type'     => 'number',
 		'priority' => 7,
-		'min'  => '0',
-		'max'  => '700',
-		'step' => '1',
-		'unit' => 'px',
-		'css'  => 'margin-top',
-		'tab' => 'style',
+		'min'      => '0',
+		'max'      => '700',
+		'step'     => '1',
+		'unit'     => 'px',
+		'css'      => 'margin-top',
+		'tab'      => 'style',
 	),
-	'margin-bottom'          => array(
-		'name' => 'Bottom Margin',
-		'type' => 'number',
+	'margin-bottom'           => array(
+		'name'     => __( 'Bottom Margin', 'pootle-page-builder' ),
+		'type'     => 'number',
 		'priority' => 8,
-		'min'  => '0',
-		'max'  => '700',
-		'step' => '1',
-		'unit' => 'px',
-		'css'  => 'margin-bottom',
-		'tab' => 'style',
+		'min'      => '0',
+		'max'      => '700',
+		'step'     => '1',
+		'unit'     => 'px',
+		'css'      => 'margin-bottom',
+		'tab'      => 'style',
 	),
-	'margin-left'          => array(
-		'name' => 'Left Margin',
-		'type' => 'number',
+	'margin-left'             => array(
+		'name'     => __( 'Left Margin', 'pootle-page-builder' ),
+		'type'     => 'number',
 		'priority' => 9,
-		'min'  => '0',
-		'max'  => '700',
-		'step' => '1',
-		'unit' => 'px',
-		'css'  => 'margin-left',
-		'tab' => 'style',
+		'min'      => '0',
+		'max'      => '700',
+		'step'     => '1',
+		'unit'     => 'px',
+		'css'      => 'margin-left',
+		'tab'      => 'style',
 	),
-	'width'          => array(
-		'name' => 'Width',
-		'type' => 'number',
+	'width'                   => array(
+		'name'     => __( 'Width', 'pootle-page-builder' ),
+		'type'     => 'number',
 		'priority' => 10,
-		'min'  => '0',
-		'max'  => '100',
-		'step' => '1',
-		'unit' => 'px',
-		'css'  => 'max-width',
-		'tab' => 'style',
+		'min'      => '0',
+		'max'      => '100',
+		'step'     => '1',
+		'unit'     => 'px',
+		'css'      => 'max-width',
+		'tab'      => 'style',
 	),
-	'rounded-corners'  => array(
-		'name' => 'Rounded corners',
-		'type' => 'number',
+	'rounded-corners'         => array(
+		'name'     => __( 'Rounded corners', 'pootle-page-builder' ),
+		'type'     => 'number',
 		'priority' => 11,
-		'min'  => '0',
-		'max'  => '100',
-		'step' => '1',
-		'unit' => 'px',
-		'css'  => 'border-radius',
-		'tab' => 'style',
+		'min'      => '0',
+		'max'      => '100',
+		'step'     => '1',
+		'unit'     => 'px',
+		'css'      => 'border-radius',
+		'tab'      => 'style',
 	),
-	'inline-css'       => array(
-		'name'     => 'Inline CSS styles',
+	'inline-css'              => array(
+		'name'     => __( 'Inline CSS styles', 'pootle-page-builder' ),
 		'type'     => 'textarea',
 		'priority' => 12,
 		'css'      => '',
-		'tab' => 'advanced',
+		'tab'      => 'advanced',
 	),
-	'class'            => array(
-		'name'     => 'CSS Class',
+	'class'                   => array(
+		'name'     => __( 'CSS Class', 'pootle-page-builder' ),
 		'type'     => 'text',
 		'priority' => 13,
 		'css'      => '',
-		'tab' => 'advanced',
+		'tab'      => 'advanced',
 	),
 );
 
@@ -160,348 +160,347 @@ $pootlepb_content_block_styling_fields = array(
  */
 $pootlepb_row_styling_fields = array(
 	//Layout
-	'full_width' => array (
-		'name' => 'Row Layout',
-		'type' => 'select',
-		'options' => array(
-			'' => 'Standard',
-			'1'	=> 'Full width',
-			'2'	=> 'Full width content',
+	'full_width'  => array(
+		'name'     => __( 'Row Layout', 'pootle-page-builder' ),
+		'type'     => 'select',
+		'options'  => array(
+			''  => __( 'Standard', 'pootle-page-builder' ),
+			'1' => __( 'Full width', 'pootle-page-builder' ),
+			'2' => __( 'Full width content', 'pootle-page-builder' ),
 		),
-		'tab' => 'layout',
+		'tab'      => 'layout',
 		'priority' => 1,
 	),
-	'full_height' => array (
-		'name' => 'Make row go full height',
-		'type' => 'checkbox',
-		'tab' => 'layout',
+	'full_height' => array(
+		'name'     => __( 'Make row go full height', 'pootle-page-builder' ),
+		'type'     => 'checkbox',
+		'tab'      => 'layout',
 		'priority' => 1.06,
 	),
-	'accordion'              => array(
-		'name' => 'Make accordion',
-		'type' => 'checkbox',
-		'help-text' => 'Keeps the row hidden by default with an icon above it to show the row.',
-		'tab' => 'layout',
-		'priority' => 1.15,
+	'accordion'   => array(
+		'name'      => __( 'Make accordion', 'pootle-page-builder' ),
+		'type'      => 'checkbox',
+		'help-text' => __( 'Keeps the row hidden by default with an icon above it to show the row.', 'pootle-page-builder' ),
+		'tab'       => 'layout',
+		'priority'  => 1.15,
 	),
 
 	'accordion_sec_wrap' => array(
-		'name' => '<div class="accordion_section" style="display: none">',
-		'tab' => 'layout',
-		'type' => 'html',
+		'name'     => '<div class="accordion_section" style="display: none">',
+		'tab'      => 'layout',
+		'type'     => 'html',
 		'priority' => 1.24,
 	),
 
 	'accordion_text' => array(
-		'name' => __( 'Accordion text', 'vantage' ),
-		'tab' => 'layout',
-		'type' => 'text',
-		'help-text' => 'Text displayed above accordion open icon.',
-		'priority' => 1.33,
+		'name'      => __( 'Accordion text', 'vantage' ),
+		'tab'       => 'layout',
+		'type'      => 'text',
+		'help-text' => __( 'Text displayed above accordion open icon.', 'pootle-page-builder' ),
+		'priority'  => 1.33,
 	),
 
-	'accordion_text_color' => array(
-		'name' => __( 'Accordion text Color', 'vantage' ),
-		'tab' => 'layout',
-		'type' => 'color',
+	'accordion_text_color'     => array(
+		'name'     => __( 'Accordion text Color', 'vantage' ),
+		'tab'      => 'layout',
+		'type'     => 'color',
 		'priority' => 1.42,
 	),
 	'accordion_sec_wrap_close' => array(
-		'name' => '</div>',
-		'tab' => 'layout',
-		'type' => 'html',
+		'name'     => '</div>',
+		'tab'      => 'layout',
+		'type'     => 'html',
 		'priority' => 1.6,
 	),
-	'match_col_hi'              => array(
-		'name' => 'Make columns the same height',
-		'type' => 'checkbox',
-		'tab' => 'layout',
-		'help-text' => 'Requires only one content block to be set in each column. Will not preview in live editor but it will work once published.',
-		'priority' => 2,
+	'match_col_hi'             => array(
+		'name'      => __( 'Make columns the same height', 'pootle-page-builder' ),
+		'type'      => 'checkbox',
+		'tab'       => 'layout',
+		'help-text' => __( 'Requires only one content block to be set in each column. Will not preview in live editor but it will work once published.', 'pootle-page-builder' ),
+		'priority'  => 2,
 	),
-	'animate_cols' => array(
-		'name' => __( 'Row animation', 'vantage' ),
-		'tab' => 'layout',
-		'type' => 'select',
+	'animate_cols'             => array(
+		'name'     => __( 'Row animation', 'vantage' ),
+		'tab'      => 'layout',
+		'type'     => 'select',
 		'priority' => 2.5,
-		'options' => array(
-			'' => 'None',
-			'FadeInLeft'	=> 'Fade In Left',
-			'FadeInRight'	=> 'Fade In Right',
-			'FadeInUp'	=> 'Fade In Up',
-			'FadeInDown'	=> 'Fade In Down',
+		'options'  => array(
+			''            => __( 'None', 'pootle-page-builder' ),
+			'FadeInLeft'  => __( 'Fade In Left', 'pootle-page-builder' ),
+			'FadeInRight' => __( 'Fade In Right', 'pootle-page-builder' ),
+			'FadeInUp'    => __( 'Fade In Up', 'pootle-page-builder' ),
+			'FadeInDown'  => __( 'Fade In Down', 'pootle-page-builder' ),
 		),
-		'default' => '1',
+		'default'  => '1',
 	),
-	'row_height'              => array(
-		'name'      => __( 'Minimum Row Height', 'ppb-panels' ),
-		'unit' => 'px',
+	'row_height'               => array(
+		'name'      => __( 'Minimum Row Height', 'pootle-page-builder' ),
+		'unit'      => 'px',
 		'type'      => 'number',
-		'tab' => 'layout',
-		'priority' => 3,
+		'tab'       => 'layout',
+		'priority'  => 3,
 		'default'   => '',
-		'help-text' => 'Minimum height row should have even when content is less. With more content it will stretch to contain all content and this setting will have no effect.',
+		'help-text' => __( 'Minimum height row should have even when content is less. With more content it will stretch to contain all content and this setting will have no effect.', 'pootle-page-builder' ),
 	),
-	'hide_row'                => array(
-		'name' => 'Hide row',
-		'type' => 'checkbox',
-		'tab' => 'layout',
+	'hide_row'                 => array(
+		'name'     => __( 'Hide row', 'pootle-page-builder' ),
+		'type'     => 'checkbox',
+		'tab'      => 'layout',
 		'priority' => 4,
 	),
-	'margin_top'           => array(
-		'name' => 'Row Top Margin',
-		'unit' => 'px',
-		'type' => 'number',
-		'tab' => 'layout',
+	'margin_top'               => array(
+		'name'     => __( 'Row Top Margin', 'pootle-page-builder' ),
+		'unit'     => 'px',
+		'type'     => 'number',
+		'tab'      => 'layout',
 		'priority' => 5,
 	),
-	'margin_bottom'           => array(
-		'name' => 'Row Bottom Margin',
-		'unit' => 'px',
-		'type'      => 'number',
-		'tab' => 'layout',
+	'margin_bottom'            => array(
+		'name'     => __( 'Row Bottom Margin', 'pootle-page-builder' ),
+		'unit'     => 'px',
+		'type'     => 'number',
+		'tab'      => 'layout',
 		'priority' => 6,
 	),
-	'col_gutter' => array(
-		'name' => __( 'Gutters', 'vantage' ),
-		'tab' => 'layout',
-		'type' => 'select',
+	'col_gutter'               => array(
+		'name'     => __( 'Gutters', 'vantage' ),
+		'tab'      => 'layout',
+		'type'     => 'select',
 		'priority' => 7,
-		'options' => array(
-			'0' => 'None',
-			'0.5' => 'Small',
-			'1' => 'Medium',
-			'2' => 'Large',
-			'4' => 'Extra large',
+		'options'  => array(
+			'0'   => __( 'None', 'pootle-page-builder' ),
+			'0.5' => __( 'Small', 'pootle-page-builder' ),
+			'1'   => __( 'Medium', 'pootle-page-builder' ),
+			'2'   => __( 'Large', 'pootle-page-builder' ),
+			'4'   => __( 'Extra large', 'pootle-page-builder' ),
 		),
-		'default' => '1',
+		'default'  => '1',
 	),
 
 	//Background
-	'background_toggle' => array(
-		'name' => __( 'Set Background', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'select',
+	'background_toggle'        => array(
+		'name'     => __( 'Set Background', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'select',
 		'priority' => 1,
-		'options' => array(
-			'' => 'Please choose...',
-			'.bg_color' => 'Background color',
-			'.bg_grad'  => 'Background Gradient',
-			'.bg_image' => 'Background image',
-			'.bg_video' => 'Background video',
+		'options'  => array(
+			''          => __( 'Please choose...', 'pootle-page-builder' ),
+			'.bg_color' => __( 'Background color', 'pootle-page-builder' ),
+			'.bg_grad'  => __( 'Background Gradient', 'pootle-page-builder' ),
+			'.bg_image' => __( 'Background image', 'pootle-page-builder' ),
+			'.bg_video' => __( 'Background video', 'pootle-page-builder' ),
 		),
-		'default' => '',
+		'default'  => '',
 	),
 
 // Color wrap
-	'bg_color_wrap' => array(
-		'name' => '<div class="bg_section bg_color">',
-		'tab' => 'background',
-		'type' => 'html',
+	'bg_color_wrap'            => array(
+		'name'     => '<div class="bg_section bg_color">',
+		'tab'      => 'background',
+		'type'     => 'html',
 		'priority' => 2,
 	),
 
-	'background' => array(
-		'name' => __( 'Background Color', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'color',
+	'background'   => array(
+		'name'     => __( 'Background Color', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'color',
 		'priority' => 2.5,
 	),
 // Gradient wrap
 	'bg_grad_wrap' => array(
-		'name' => '</div><div class="bg_section bg_grad">',
-		'tab' => 'background',
-		'type' => 'html',
+		'name'     => '</div><div class="bg_section bg_grad">',
+		'tab'      => 'background',
+		'type'     => 'html',
 		'priority' => 2.77,
 	),
 
 	'bg_grad_prevu' => array(
-		'name' =>
+		'name'     =>
 			'<div class="field field_type_select"><label>Gradient Presets</label><span>' .
-			'<select id="row_grad_preset">' . <<<OPTIONS
-				<option value="" selected="selected">Choose a preset...</option>
-				<option value="#f7ff00,#db36a4">Alihossein</option>
-				<option value="#1A2980,#26D0CE">Aqua</option>
-				<option value="#AA076B,#61045F">Aubergine</option>
-				<option value="#DAD299,#B0DAB9">Autumn</option>
-				<option value="#00C9FF,#92FE9D">Back To Earth</option>
-				<option value="#ECE9E6,#FFFFFF">Clouds</option>
-				<option value="#f857a6,#ff5858">Day Tripper</option>
-				<option value="#2C3E50,#FD746C">Dusk</option>
-				<option value="#43cea2,#185a9d">Endless River</option>
-				<option value="#000428,#004e92">Frost</option>
-				<option value="#fd746c,#ff9068">Haikus</option>
-				<option value="#42275a,#734b6d">Mauve</option>
-				<option value="#141E30,#243B55">Royal</option>
-				<option value="#1CD8D2,#93EDC7">Sea Blizz</option>
-				<option value="#fe8c00,#f83600">SoundCloud</option>
-				<option value="#FF512F,#F09819">Sunrise</option>
-OPTIONS
-			. '</select></span></div>' .
+			'<select id="row_grad_preset">' .
+			'<option value="" selected="selected">' . __( 'Choose a preset...', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#f7ff00,#db36a4">' . __( 'Alihossein', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#1A2980,#26D0CE">' . __( 'Aqua', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#AA076B,#61045F">' . __( 'Aubergine', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#DAD299,#B0DAB9">' . __( 'Autumn', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#00C9FF,#92FE9D">' . __( 'Back To Earth', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#ECE9E6,#FFFFFF">' . __( 'Clouds', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#f857a6,#ff5858">' . __( 'Day Tripper', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#2C3E50,#FD746C">' . __( 'Dusk', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#43cea2,#185a9d">' . __( 'Endless River', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#000428,#004e92">' . __( 'Frost', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#fd746c,#ff9068">' . __( 'Haikus', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#42275a,#734b6d">' . __( 'Mauve', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#141E30,#243B55">' . __( 'Royal', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#1CD8D2,#93EDC7">' . __( 'Sea Blizz', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#fe8c00,#f83600">' . __( 'SoundCloud', 'pootle-page-builder' ) . '</option>' .
+			'<option value="#FF512F,#F09819">' . __( 'Sunrise', 'pootle-page-builder' ) . '</option>' .
+			'</select></span></div>' .
 			'<canvas style="display: none;margin:auto;" width="160" height="90" class="bg-grad-prevu"></canvas>',
-		'tab' =>
+		'tab'      =>
 			'background',
-		'type' =>
+		'type'     =>
 			'html',
 		'priority' =>
 			2.779,
 	),
 
 	'grad_type' => array(
-		'name' => __( 'Gradient Type', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'select',
+		'name'     => __( 'Gradient Type', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'select',
 		'priority' => 3.13,
-		'options' => array(
-			'' => 'Linear',
-			'radial' => 'Radial',
-			'slant'  => 'Slanting',
+		'options'  => array(
+			''       => __( 'Linear', 'pootle-page-builder' ),
+			'radial' => __( 'Radial', 'pootle-page-builder' ),
+			'slant'  => __( 'Slanting', 'pootle-page-builder' ),
 		),
-		'default' => '',
+		'default'  => '',
 	),
 	'grad_col1' => array(
-		'name' => __( 'First Color', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'color',
+		'name'     => __( 'First Color', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'color',
 		'priority' => 3.22,
 	),
 
 	'grad_col2' => array(
-		'name' => __( 'Second Color', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'color',
+		'name'     => __( 'Second Color', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'color',
 		'priority' => 3.31,
 	),
 
 	'grad_opacity' => array(
-		'name' => 'Gradient transparency',
-		'min' => '0',
-		'max' => '1',
-		'step' => '0.02',
-		'default' => '0.88',
-		'tab' => 'background',
-		'type' => 'slider',
+		'name'     => __( 'Gradient transparency', 'pootle-page-builder' ),
+		'min'      => '0',
+		'max'      => '1',
+		'step'     => '0.02',
+		'default'  => '0.88',
+		'tab'      => 'background',
+		'type'     => 'slider',
 		'priority' => 3.4,
 	),
 
-	'grad_image' => array(
-		'name' => __( 'Image under gradient', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'upload',
+	'grad_image'    => array(
+		'name'     => __( 'Image under gradient', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'upload',
 		'priority' => 3.49,
 	),
 // Image wrap
 	'bg_image_wrap' => array(
-		'name' => '</div><div class="bg_section bg_image">',
-		'tab' => 'background',
-		'type' => 'html',
+		'name'     => '</div><div class="bg_section bg_image">',
+		'tab'      => 'background',
+		'type'     => 'html',
 		'priority' => 4.99,
 	),
 
 	'background_image' => array(
-		'name' => __( 'Background Image', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'upload',
+		'name'     => __( 'Background Image', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'upload',
 		'priority' => 5,
 	),
 
 	'bg_overlay_opacity' => array(
-		'name' => 'Overlay color transparency',
-		'min' => '0',
-		'max' => '1',
-		'step' => '0.02',
-		'default' => '0.5',
-		'tab' => 'background',
-		'type' => 'slider',
+		'name'     => __( 'Overlay color transparency', 'pootle-page-builder' ),
+		'min'      => '0',
+		'max'      => '1',
+		'step'     => '0.02',
+		'default'  => '0.5',
+		'tab'      => 'background',
+		'type'     => 'slider',
 		'priority' => 10,
 	),
 
-	'background_parallax' => array(
-		'name' => __( 'Row effect (e.g parallax)', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'select',
-		'options' => array(
-			''	=> 'None',
-			'1'	=> 'Parallax',
-			'2'	=> 'Fixed parallax',
-			'3'	=> 'Ken burns',
+	'background_parallax'   => array(
+		'name'     => __( 'Row effect (e.g parallax)', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'select',
+		'options'  => array(
+			''  => __( 'None', 'pootle-page-builder' ),
+			'1' => __( 'Parallax', 'pootle-page-builder' ),
+			'2' => __( 'Fixed parallax', 'pootle-page-builder' ),
+			'3' => __( 'Ken burns', 'pootle-page-builder' ),
 		),
 		'priority' => 7,
 	),
 	'background_image_size' => array(
-		'name' => __( 'Background Image Size', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'select',
+		'name'     => __( 'Background Image Size', 'vantage' ),
+		'tab'      => 'background',
+		'type'     => 'select',
 		'priority' => 8,
-		'options' => array(
-			''          => 'No setting',
-			'100% auto' => '100% width',
-			'cover'     => 'Cover',
+		'options'  => array(
+			''          => __( 'No setting', 'pootle-page-builder' ),
+			'100% auto' => __( '100% width', 'pootle-page-builder' ),
+			'cover'     => __( 'Cover', 'pootle-page-builder' ),
 		),
-		'default' => 'cover',
+		'default'  => 'cover',
 	),
-	'bg_overlay_color' => array(
-		'name' => 'Overlay color on image',
-		'tab' => 'background',
-		'type' => 'color',
+	'bg_overlay_color'      => array(
+		'name'     => __( 'Overlay color on image', 'pootle-page-builder' ),
+		'tab'      => 'background',
+		'type'     => 'color',
 		'priority' => 9,
 	),
-	'bg_overlay_opacity' => array(
-		'name' => 'Overlay color transparency',
-		'min' => '0',
-		'max' => '1',
-		'step' => '0.02',
-		'default' => '0.5',
-		'tab' => 'background',
-		'type' => 'slider',
+	'bg_overlay_opacity'    => array(
+		'name'     => __( 'Overlay color transparency', 'pootle-page-builder' ),
+		'min'      => '0',
+		'max'      => '1',
+		'step'     => '0.02',
+		'default'  => '0.5',
+		'tab'      => 'background',
+		'type'     => 'slider',
 		'priority' => 10,
 	),
 
 	'bg_video_wrap' => array(
-		'name' => '</div><div class="bg_section bg_video">',
-		'tab' => 'background',
-		'type' => 'html',
+		'name'     => '</div><div class="bg_section bg_video">',
+		'tab'      => 'background',
+		'type'     => 'html',
 		'priority' => 11,
 	),
 
-	'bg_video' => array(
-		'name' => __( 'Background Video', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'uploadVid',
+	'bg_video'        => array(
+		'name'      => __( 'Background Video', 'vantage' ),
+		'tab'       => 'background',
+		'type'      => 'uploadVid',
 		'help-text' => "Background videos autoplay & therefore only work on desktop browsers",
-		'priority' => 12,
+		'priority'  => 12,
 	),
 	'bg_mobile_image' => array(
-		'name' => __( 'Responsive Image', 'vantage' ),
-		'tab' => 'background',
-		'type' => 'upload',
-		'priority' => 13,
+		'name'      => __( 'Responsive Image', 'vantage' ),
+		'tab'       => 'background',
+		'type'      => 'upload',
+		'priority'  => 13,
 		'help-text' => "Select an image to display instead of the background video for mobile devices",
 	),
 
 	'bg_wrap_close' => array(
-		'name' => '</div>',
-		'tab' => 'background',
-		'type' => 'html',
+		'name'     => '</div>',
+		'tab'      => 'background',
+		'type'     => 'html',
 		'priority' => 14,
 	),
 
-	'style' => array(
-		'name' => __( 'Inline CSS Styles', 'ppb-panels' ),
-		'tab' => 'advanced',
-		'type' => 'textarea',
+	'style'     => array(
+		'name'     => __( 'Inline CSS Styles', 'pootle-page-builder' ),
+		'tab'      => 'advanced',
+		'type'     => 'textarea',
 		'priority' => 1,
 	),
-	'class' => array(
-		'name' => __( 'Row CSS Class', 'ppb-panels' ),
-		'tab' => 'advanced',
-		'type' => 'text',
+	'class'     => array(
+		'name'     => __( 'Row CSS Class', 'pootle-page-builder' ),
+		'tab'      => 'advanced',
+		'type'     => 'text',
 		'priority' => 2,
 	),
 	'col_class' => array(
-		'name'    => __( 'Column CSS Class', 'ppb-panels' ),
-		'tab' => 'advanced',
-		'type'    => 'text',
+		'name'     => __( 'Column CSS Class', 'pootle-page-builder' ),
+		'tab'      => 'advanced',
+		'type'     => 'text',
 		'priority' => 3,
 	),
 );
@@ -1192,22 +1191,22 @@ $pootlepb_font = array(
 
 $pootlepb_ui_i18n = array(
 	'buttons'  => array(
-		'insert'    => __( 'Insert', 'ppb-panels' ),
-		'cancel'    => __( 'cancel', 'ppb-panels' ),
-		'delete'    => __( 'Delete', 'ppb-panels' ),
-		'duplicate' => __( 'Duplicate', 'ppb-panels' ),
-		'style'     => __( 'Style', 'ppb-panels' ),
-		'edit'      => __( 'Edit', 'ppb-panels' ),
-		'done'      => __( 'Done', 'ppb-panels' ),
-		'undo'      => __( 'Want to undo?', 'ppb-panels' ),
-		'add'       => __( 'Add', 'ppb-panels' ),
+		'insert'    => __( 'Insert', 'pootle-page-builder' ),
+		'cancel'    => __( 'cancel', 'pootle-page-builder' ),
+		'delete'    => __( 'Delete', 'pootle-page-builder' ),
+		'duplicate' => __( 'Duplicate', 'pootle-page-builder' ),
+		'style'     => __( 'Style', 'pootle-page-builder' ),
+		'edit'      => __( 'Edit', 'pootle-page-builder' ),
+		'done'      => __( 'Done', 'pootle-page-builder' ),
+		'undo'      => __( 'Want to undo?', 'pootle-page-builder' ),
+		'add'       => __( 'Add', 'pootle-page-builder' ),
 	),
 	'messages' => array(
-		'deleteColumns' => __( 'Columns deleted', 'ppb-panels' ),
-		'deleteWidget'  => __( 'Content deleted', 'ppb-panels' ),
-		'confirmLayout' => __( 'Are you sure you want to load this layout? It will overwrite your current page.', 'ppb-panels' ),
-		'editWidget'    => __( 'Edit %s Widget', 'ppb-panels' ),
-		'styleWidget'   => __( 'Style Widget', 'ppb-panels' )
+		'deleteColumns' => __( 'Columns deleted', 'pootle-page-builder' ),
+		'deleteWidget'  => __( 'Content deleted', 'pootle-page-builder' ),
+		'confirmLayout' => __( 'Are you sure you want to load this layout? It will overwrite your current page.', 'pootle-page-builder' ),
+		'editWidget'    => __( 'Edit %s Widget', 'pootle-page-builder' ),
+		'styleWidget'   => __( 'Style Widget', 'pootle-page-builder' )
 	),
 );
 
@@ -1223,10 +1222,10 @@ $pootlepb_ui_js_deps = array(
 );
 
 $pootlepb_color_i18n = array(
-	'clear'         => __( 'Clear' ),
-	'defaultString' => __( 'Default' ),
-	'pick'          => __( 'Select Color' ),
-	'current'       => __( 'Current Color' ),
+	'clear'         => __( 'Clear', 'pootle-page-builder' ),
+	'defaultString' => __( 'Default', 'pootle-page-builder' ),
+	'pick'          => __( 'Select Color', 'pootle-page-builder' ),
+	'current'       => __( 'Current Color', 'pootle-page-builder' ),
 );
 
 $pootlepb_color_deps = array(
@@ -1236,18 +1235,18 @@ $pootlepb_color_deps = array(
 );
 
 $pootlepb_content_block_tabs = array(
-	'editor' => array(
-		'label' => 'Editor',
+	'editor'           => array(
+		'label'    => __( 'Editor', 'pootle-page-builder' ),
 		'priority' => 1,
 	),
-	'style' => array(
-		'label' => 'Style',
-		'class' => 'pootle-style-fields',
+	'style'            => array(
+		'label'    => __( 'Style', 'pootle-page-builder' ),
+		'class'    => 'pootle-style-fields',
 		'priority' => 2,
 	),
-	'advanced' => array(
-		'label' => 'Advanced',
-		'class' => 'pootle-style-fields',
+	'advanced'         => array(
+		'label'    => __( 'Advanced', 'pootle-page-builder' ),
+		'class'    => 'pootle-style-fields',
 		'priority' => 3,
 	),
 	'editor-separator' => array(
@@ -1257,94 +1256,93 @@ $pootlepb_content_block_tabs = array(
 
 $pootlepb_row_settings_tabs = array(
 	'background' => array(
-		'label' => 'Background',
+		'label'    => __( 'Background', 'pootle-page-builder' ),
 		'priority' => 1,
 	),
-	'layout' => array(
-		'label' => 'Layout',
+	'layout'     => array(
+		'label'    => __( 'Layout', 'pootle-page-builder' ),
 		'priority' => 2,
 	),
-	'advanced' => array(
-		'label' => 'Advanced',
+	'advanced'   => array(
+		'label'    => __( 'Advanced', 'pootle-page-builder' ),
 		'priority' => 10,
 	),
 );
 
 $pootlepb_modules = array(
-	'ninja-forms' => array(
-	),
+	'ninja-forms' => array(),
 );
 
 $ppbpro_addons_data = array(
 	'wc-productbuilder' => array(
-		'free'        => true,
-		'Name'        => 'WooCommerce builder (Product)',
-		'Description' => 'Take total control of your WooCommerce product page, requires WooCommerce builder (Shop)',
-		'InstallURI'  => admin_url( "/plugin-install.php?s=Woobuilder&tab=search&type=term" ),
-		'AuthorURI'   => 'https://pootlepress.com',
-		'Author'      => 'pootlepress',
-		'Image'       => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
-		'active_class' => 'WooBuilder',
+		'free'         => true,
+		'Name'         => __( 'WooCommerce builder (Product)', 'pootle-page-builder' ),
+		'Description'  => __( 'Take total control of your WooCommerce product page, requires WooCommerce builder (Shop)', 'pootle-page-builder' ),
+		'InstallURI'   => admin_url( "/plugin-install.php?s=Woobuilder&tab=search&type=term" ),
+		'AuthorURI'    => 'https://pootlepress.com',
+		'Author'       => 'pootlepress',
+		'Image'        => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
+		'active_class' => __( 'WooBuilder', 'pootle-page-builder' ),
 	),
 	'wc-shopbuilder'    => array(
 		'img'    => 'https://pootlepress.github.io/pootle-page-builder/module-icons/woocommerce.jpg',
 		'path'   => 'woocommerce',
 		'plugin' => array(
-			'Name'        => 'WooCommerce builder (Shop)',
-			'Description' => 'pootle page builder for WooCommerce brings powerful WooCommerce features into page builder. Create stunning pages featuring your products by id, category, attribute, best-selling, top rated and on-sale, plus use pootle page builder on product pages and with WooCommerce Tab Manager.',
+			'Name'        => __( 'WooCommerce builder (Shop)', 'pootle-page-builder' ),
+			'Description' => __( 'Pootle Pagebuilder for WooCommerce brings powerful WooCommerce features into page builder. Create stunning pages featuring your products by id, category, attribute, best-selling, top rated and on-sale, plus use Pootle Pagebuilder on product pages and with WooCommerce Tab Manager.', 'pootle-page-builder' ),
 		),
 	),
 	'blog-customizer'   => array(
 		'img'    => 'https://pootlepress.github.io/pootle-page-builder/module-icons/blog-customizer.jpg',
 		'path'   => 'blog-customizer',
 		'plugin' => array(
-			'Name'        => 'pootle page builder blog customizer',
-			'Description' => 'Blog customizer for pootle page builder helps you create a beautiful blog page',
+			'Name'        => __( 'pootle page builder blog customizer', 'pootle-page-builder' ),
+			'Description' => __( 'Blog customizer for Pootle Pagebuilder helps you create a beautiful blog page', 'pootle-page-builder' ),
 		),
 	),
 	'page-customizer'   => array(
 		'img'    => 'https://pootlepress.github.io/pootle-page-builder/module-icons/page-customizer.png',
 		'path'   => 'page-customizer',
 		'plugin' => array(
-			'Name'        => 'Page customizer',
-			'Description' => 'Page customizer adds options for individual pages. Add a fullscreen background video, change page background image and color, change header background image and color. Hide header, titles, breadcrumbs, sidebar and footer. Mobile options to change background image and color for phones and tablets.',
+			'Name'        => __( 'Page customizer', 'pootle-page-builder' ),
+			'Description' => __( 'Page customizer adds options for individual pages. Add a fullscreen background video, change page background image and color, change header background image and color. Hide header, titles, breadcrumbs, sidebar and footer. Mobile options to change background image and color for phones and tablets.', 'pootle-page-builder' ),
 		),
 	),
 	'photography'       => array(
 		'img'    => 'https://pootlepress.github.io/pootle-page-builder/module-icons/photography.jpg',
 		'path'   => 'photography',
 		'plugin' => array(
-			'Name'        => 'Pootle page builder Photography add on',
-			'Description' => 'Create stunning slideshows and galleries in minutes.',
+			'Name'        => __( 'Pootle page builder Photography add on', 'pootle-page-builder' ),
+			'Description' => __( 'Create stunning slideshows and galleries in minutes.', 'pootle-page-builder' ),
 		),
 	),
 	'one-pager'         => array(
 		'img'    => 'https://pootlepress.github.io/pootle-page-builder/module-icons/one-pager.png',
 		'path'   => 'one-pager',
 		'plugin' => array(
-			'Name'        => 'pootle page builder one pager',
-			'Description' => 'pootle page builder one pager helps you to create beautiful one page websites with any theme.',
+			'Name'        => __( 'pootle page builder one pager', 'pootle-page-builder' ),
+			'Description' => __( 'pootle page builder one pager helps you to create beautiful one page websites with any theme.', 'pootle-page-builder' ),
 		),
 	),
-	'business-pack' => array(
-		'free'        => true,
-		'Name'        => 'Pootle Pagebuilder Business Pack',
-		'Description' => 'Add Tabs, Accordions, Testimonials, Incrementing numbers and Google Maps easily in Pootle Pagebuilder Pro.',
-		'InstallURI'  => admin_url( "/plugin-install.php?s=Pootle+Pagebuilder+Business&tab=search&type=term" ),
-		'AuthorURI'   => 'https://pootlepress.com',
-		'Author'      => 'pootlepress',
-		'Image'       => 'https://image.flaticon.com/icons/svg/45/45696.svg',
-		'active_class' => 'WooBuilder',
+	'business-pack'     => array(
+		'free'         => true,
+		'Name'         => __( 'Pootle Pagebuilder Business Pack', 'pootle-page-builder' ),
+		'Description'  => __( 'Add Tabs, Accordions, Testimonials, Incrementing numbers and Google Maps easily in Pootle Pagebuilder Pro.', 'pootle-page-builder' ),
+		'InstallURI'   => admin_url( "/plugin-install.php?s=Pootle+Pagebuilder+Business&tab=search&type=term" ),
+		'AuthorURI'    => 'https://pootlepress.com',
+		'Author'       => 'pootlepress',
+		'Image'        => 'https://image.flaticon.com/icons/svg/45/45696.svg',
+		'active_class' => __( 'WooBuilder', 'pootle-page-builder' ),
 	),
-	'pootle-cloud' => array(
-		'free'        => true,
-		'Name'        => 'Pootle cloud',
-		'Description' => 'Pootle cloud will let you save your designs to the cloud so that you can reuse them, either on the website you are working on, or any Pootle Pagebuilder site :)',
-		'InstallURI'  => admin_url( "/plugin-install.php?s=Pootle+cloud&tab=search&type=term" ),
-		'AuthorURI'   => 'https://pootlepress.com',
-		'Author'      => 'pootlepress',
-		'Image'       => 'https://ps.w.org/pootle-cloud/assets/icon-256x256.jpg?rev=1733741',
-		'active_class' => 'Pootle_Cloud',
+	'pootle-cloud'      => array(
+		'free'         => true,
+		'Name'         => __( 'Pootle cloud', 'pootle-page-builder' ),
+		'Description'  => __( 'Pootle cloud will let you save your designs to the cloud so that you can reuse them, either on the website you are working on, or any Pootle Pagebuilder site :)', 'pootle-page-builder' ),
+		'InstallURI'   => admin_url( "/plugin-install.php?s=Pootle+cloud&tab=search&type=term" ),
+		'AuthorURI'    => 'https://pootlepress.com',
+		'Author'       => 'pootlepress',
+		'Image'        => 'https://ps.w.org/pootle-cloud/assets/icon-256x256.jpg?rev=1733741',
+		'active_class' => __( 'Pootle_Cloud', 'pootle-page-builder' ),
 	),
 );
 

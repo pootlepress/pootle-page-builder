@@ -114,7 +114,7 @@ final class Pootle_Page_Builder_Admin {
 		if ( 'post' == $screen->base && in_array( $screen->id, pootlepb_settings( 'post-types' ) ) ) {
 			$screen->add_help_tab( array(
 				'id'       => 'panels-help-tab', //unique id for the tab
-				'title'    => __( 'Page Builder', 'ppb-panels' ), //unique visible title for the tab
+				'title'    => __( 'Page Builder', 'pootle-page-builder' ), //unique visible title for the tab
 				'callback' => array( $this, 'render_help_tab' )
 			) );
 		}
@@ -222,15 +222,15 @@ final class Pootle_Page_Builder_Admin {
 	 * @since 0.1.0
 	 */
 	public function admin_menu() {
-		add_menu_page( 'Home', 'Page Builder', 'manage_options', 'page_builder', array(
+		add_menu_page( __( 'Home', 'pootle-page-builder' ), __( 'Page Builder', 'pootle-page-builder' ), 'manage_options', 'page_builder', array(
 			$this,
 			'menu_page',
 		), 'dashicons-screenoptions', '20.509' );
-		add_submenu_page( 'page_builder', 'Settings', 'Settings', 'manage_options', 'page_builder_settings', array(
+		add_submenu_page( 'page_builder', __( 'Settings', 'pootle-page-builder' ), __( 'Settings', 'pootle-page-builder' ), 'manage_options', 'page_builder_settings', array(
 			$this,
 			'menu_page',
 		) );
-		add_submenu_page( 'page_builder', 'Modules', 'Modules', 'manage_options', 'page_builder_modules', array(
+		add_submenu_page( 'page_builder', __( 'Modules', 'pootle-page-builder' ), __( 'Modules', 'pootle-page-builder' ), 'manage_options', 'page_builder_modules', array(
 			$this,
 			'menu_page',
 		) );
@@ -254,25 +254,25 @@ final class Pootle_Page_Builder_Admin {
 		register_setting( 'ppbpro_modules', 'ppb_enabled_addons' );
 		register_setting( 'ppbpro_modules', 'ppb_disabled_addons' );
 
-		add_settings_section( 'display', __( 'Display', 'ppb-panels' ), '__return_false', 'pootlepage-display' );
+		add_settings_section( 'display', __( 'Display', 'pootle-page-builder' ), '__return_false', 'pootlepage-display' );
 
 		// The display fields
-		add_settings_field( 'responsive', __( 'Responsive', 'ppb-panels' ), array(
+		add_settings_field( 'responsive', __( 'Responsive', 'pootle-page-builder' ), array(
 			$this,
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'responsive' ) );
 		//Mobile width
-		add_settings_field( 'mobile-width', __( 'Mobile Width', 'ppb-panels' ), array(
+		add_settings_field( 'mobile-width', __( 'Mobile Width', 'pootle-page-builder' ), array(
 			$this,
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'mobile-width' ) );
 		// Module panel position
-		add_settings_field( 'modules-position', __( 'Modules insert panel position', 'ppb-panels' ), array(
+		add_settings_field( 'modules-position', __( 'Modules insert panel position', 'pootle-page-builder' ), array(
 			$this,
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'modules-position' ) );
 		// The display fields
-		add_settings_field( 'hard-uninstall', __( 'Delete ALL data on uninstall', 'ppb-panels' ), array(
+		add_settings_field( 'hard-uninstall', __( 'Delete ALL data on uninstall', 'pootle-page-builder' ), array(
 			$this,
 			'options_field_generic',
 		), 'pootlepage-display', 'display', array( 'type' => 'hard-uninstall' ) );
@@ -322,30 +322,30 @@ final class Pootle_Page_Builder_Admin {
 			case 'hard-uninstall' :
 				?><label><input type="checkbox" name="pootlepb-hard-uninstall" id="pootlepb-hard-uninstall"
 				                <?php checked( get_option( 'pootlepb-hard-uninstall' ) ) ?>
-				                value="1"/> <?php _e( 'Enabled', 'ppb-panels' ) ?></label>
+				                value="1"/> <?php _e( 'Enabled', 'pootle-page-builder' ) ?></label>
 				<?php
 				break;
 			case 'responsive' :
 				?><label><input type="checkbox"
 				                <?php echo $name ?> <?php checked( $value ) ?>
-				                value="1"/> <?php _e( 'Enabled', 'ppb-panels' ) ?></label><?php
+				                value="1"/> <?php _e( 'Enabled', 'pootle-page-builder' ) ?></label><?php
 				break;
 			case 'modules-position' :
 				?>
 				<label>
 					<input type="radio" <?php echo $name ?> <?php checked( 'left', $value ) ?> value="left"/>
-					<?php _e( 'Left', 'ppb-panels' ) ?>
+					<?php _e( 'Left', 'pootle-page-builder' ) ?>
 				</label>
 				<label>
 					<input type="radio" <?php echo $name ?> <?php checked( 'right', $value ) ?> value="right"/>
-					<?php _e( 'Right', 'ppb-panels' ) ?>
+					<?php _e( 'Right', 'pootle-page-builder' ) ?>
 				</label>
 				<?php
 				break;
 			case 'mobile-width' :
 				?><input type="text" <?php echo $name ?>
 				         value="<?php echo esc_attr( $value ) ?>"
-				         class="small-text" /> <?php _e( 'px', 'ppb-panels' ) ?><?php
+				         class="small-text" />px<?php
 				break;
 		}
 

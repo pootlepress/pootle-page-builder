@@ -17,7 +17,7 @@ Array::ppbPrevuMove = (oldI, newI) ->
 	@splice newI, 0, @splice(oldI, 1)[0]
 	this
 
-ppbPrevuDebug = 1
+ppbPrevuDebug = 0
 ppbIpad = {}
 
 # Comment the code below to log console
@@ -102,7 +102,7 @@ jQuery ($) ->
 		autoOpen: false
 		draggable: false
 		resizable: false
-		title: 'Edit content block'
+		title: ppbL10n.editConBlk
 		height: $(window).height() - 50
 		width: $(window).width() - 50
 		buttons: Done: -> return
@@ -115,7 +115,7 @@ jQuery ($) ->
 		syncAjax: ->
 			jQuery.post ppbAjax.url, ppbAjax, (response) ->
 				if !response.replace(RegExp(' ', 'g'), '')
-					console.log 'Error: No response from server at ' + ppbAjax.url
+					console.error ppbL10n.noRespFromSrvAt.replace( '%s', ppbAjax.url )
 					return
 				$response = $($.parseHTML(response, document, true))
 				if 'function' == typeof prevu.ajaxCallback
@@ -135,7 +135,7 @@ jQuery ($) ->
 				$loader.fadeOut 250
 				return
 		sync: (callback, publish) ->
-			logPPBData 'Before sync'
+			logPPBData ppbL10n.b4Sync
 			prevu.ajaxCallback = callback
 			prevu.unSavedChanges = true
 			prevu.saveTmceBlock $('.mce-edit-focus')
@@ -166,7 +166,7 @@ jQuery ($) ->
 					return
 			else
 				delete ppbAjax.publish
-			logPPBData 'After sync'
+			logPPBData ppbL10n.frSync
 			prevu.syncAjax()
 			return
 		reset: (nosort) ->
@@ -365,7 +365,7 @@ jQuery ($) ->
 			window.ppbRowI = ppbData.grids.length
 			num_cells = parseInt($('#ppb-row-add-cols').val())
 			cellWidths = if cellWidths then cellWidths else []
-			logPPBData 'Adding row'
+			logPPBData ppbL10n.addingRow
 			row =
 				id: window.ppbRowI
 				cells: num_cells
@@ -447,7 +447,7 @@ jQuery ($) ->
 				i++
 				ppbData.widgets.push $.extend(true, {}, block)
 
-			logPPBData 'Row added'
+			logPPBData ppbL10n.rowAdded
 			$addRowDialog.ppbDialog 'close'
 			prevu.sync ($r, qry, html) ->
 				$ro = $r.find('#pg-' + qry.post + '-' + window.ppbRowI)
@@ -501,7 +501,7 @@ jQuery ($) ->
 			prevu.sync ->
 				prevu.reset 'noSort'
 				return
-			logPPBData 'Moved row ' + olI + ' => ' + newI
+			logPPBData ppbL10n.movedRow + ' ' + olI + ' => ' + newI
 		rowsSortable:
 			items: '> .panel-grid'
 			handle: '.ppb-edit-row .drag-handle'
@@ -711,11 +711,11 @@ jQuery ($) ->
 				library: type: 'image'
 				displaySettings: true
 				displayUserSettings: false
-				title: 'Choose Image'
-				button: text: 'Insert in Content Block'
+				title: ppbL10n.chooseImg
+				button: text: ppbL10n.insertInConBlk
 				multiple: false)
 			prevu.insertImageFrame.on 'attach', ->
-				$('.setting[data-setting="url"]').before '<label class="setting" data-setting="url">' + '<span class="name">Size</span>' + '<input type="text" value="" readonly="">' + '</label>'
+				$('.setting[data-setting="url"]').before '<label class="setting" data-setting="url">' + '<span class="name">' + ppbL10n.size + '</span>' + '<input type="text" value="" readonly="">' + '</label>'
 				return
 			# When an image is selected, run a callback.
 			prevu.insertImageFrame.on 'select', ->
@@ -786,7 +786,7 @@ jQuery ($) ->
 	dialogAttr.close = prevu.closeSidePanel() # Returns callback
 	$contentPanel.ppbTabs().ppbDialog dialogAttr
 
-	dialogAttr.title = 'Edit row'
+	dialogAttr.title = ppbL10n.editRow
 	dialogAttr.open = prevu.openSidePanel( prevu.editRow )
 	dialogAttr.buttons.Done = prevu.saveRow
 	$rowPanel.ppbTabs( {
@@ -811,7 +811,7 @@ jQuery ($) ->
 
 	panels.addInputFieldEventHandlers $rowPanel
 
-	dialogAttr.title = 'Add row'
+	dialogAttr.title = ppbL10n.addRow
 	dialogAttr.dialogClass = dialogAttr.open = null
 	dialogAttr.buttons.Done = () ->
 		prevu.addRow $addRowDialog.callback
@@ -821,17 +821,17 @@ jQuery ($) ->
 	dialogAttr.width = 340
 	$addRowDialog.ppbDialog dialogAttr
 
-	dialogAttr.title = 'Are you sure'
-	dialogAttr.buttons =
-		'Yes': ->
-			if 'function' == typeof prevu.deleteCallback
-				prevu.deleteCallback()
-			delete prevu.deleteCallback
-			$deleteDialog.ppbDialog 'close'
-			return
-		'Cancel': ->
-			$deleteDialog.ppbDialog 'close'
-			return
+	dialogAttr.title = ppbL10n.ruSure
+	dialogAttr.buttons = {};
+	dialogAttr.buttons[ppbL10n.yes] = ->
+		if 'function' == typeof prevu.deleteCallback
+			prevu.deleteCallback( )
+		delete prevu.deleteCallback
+		$deleteDialog.ppbDialog 'close'
+		return
+	dialogAttr.buttons[ppbL10n.cancel] = ->
+		$deleteDialog.ppbDialog 'close'
+		return
 	dialogAttr.height = if ppbAjax.ipad then 241 else 200
 	dialogAttr.width = 430
 	$deleteDialog.ppbDialog dialogAttr
@@ -864,10 +864,10 @@ jQuery ($) ->
 
 	dialogAttr.height = 610
 	dialogAttr.width = 520
-	dialogAttr.title = 'Insert icon'
+	dialogAttr.title = ppbL10n.insertIcon
 	dialogAttr.buttons = [
 		{
-			text: 'Remove icon'
+			text: ppbL10n.removeIcon
 			class: 'ui-button-link'
 			click: ->
 				if 'function' == typeof pickFaIcon.callback
@@ -883,7 +883,7 @@ jQuery ($) ->
 
 		}
 		{
-			text: 'Insert'
+			text: ppbL10n.insert
 			click: ->
 				$iconPicker.ppbDialog 'close'
 				iclas = $iconPicker.clas.val()
@@ -951,7 +951,7 @@ jQuery ($) ->
 		dialogAttr.height = 700
 		dialogAttr.height = if ppbAjax.ipad then 529 else 502
 		dialogAttr.width = 610
-		dialogAttr.title = 'Post settings'
+		dialogAttr.title = ppbL10n.postSetting
 
 		dialogAttr.close = ->
 			ppbAjax.category = $postSettingsDialog.find('.post-category').val()
@@ -1182,7 +1182,7 @@ jQuery ($) ->
 	ppbIpad.StyleRow = ->
 		$row = $('.panel-grid.active')
 		if $row.length != 1
-			alert 'Please select a row by touching any of it\'s content blocks to start editing.'
+			alert ppbL10n.selectRowByTouchingContent
 			return
 		$editBar = $row.children('.pootle-live-editor')
 		window.ppbRowI = $editBar.data('index')
@@ -1192,7 +1192,7 @@ jQuery ($) ->
 	ppbIpad.StyleContent = ->
 		$block = $('.ppb-block.active')
 		if $block.length != 1
-			alert 'Please select a content block to start editing.'
+			alert ppbL10n.selectConBlkToEdit
 			return
 		$editBar = $block.children('.pootle-live-editor')
 		window.ppbPanelI = $editBar.data('index')
@@ -1202,7 +1202,7 @@ jQuery ($) ->
 	ppbIpad.insertImage = ->
 		$block = $('.ppb-block.active')
 		if $block.length != 1
-			alert 'Please select a content block to start editing.'
+			alert ppbL10n.selectConBlkToEdit
 			return
 		prevu.activeEditor = $block.children('.pootle-live-editor-realtime')
 		tinymce.execCommand 'mceFocus', false, prevu.activeEditor.attr('id')
@@ -1210,7 +1210,7 @@ jQuery ($) ->
 		return
 
 	ppbIpad.preview = ->
-		prevu.sync null, 'Publish'
+		prevu.sync null, ppbL10n.publish
 		return
 
 	ppbIpad.postSettings = ->
@@ -1230,41 +1230,41 @@ jQuery ($) ->
 		prevu.unSavedChanges = true
 		prevu.saveTmceBlock $('.mce-edit-focus')
 		ppbAjax.data = ppbData
-		ppbAjax.publish = 'Publish'
+		ppbAjax.publish = ppbL10n.publish
 		prevu.noRedirect = 1
 		if ppbAjax.title
 			butt = [
 				{
-					text: 'Save Draft'
+					text: ppbL10n.saveDraft
 					click: ->
 						$setTitleDialog.ppbDialog 'close'
 						try
 							webkit.messageHandlers.heySwift.postMessage 'updatedLoadingPreview'
 						catch err
-							console.log 'The native context does not exist yet'
+							console.log ppbL10n.notiveContextDoesntExist
 						ppbIpad.notice.show 0
-						ppbAjax.publish = 'Save Draft'
+						ppbAjax.publish = ppbL10n.saveDraft
 						prevu.syncAjax()
 						return
 
 				}
 				{
-					text: 'Publish'
+					text: ppbL10n.publish
 					icons: primary: 'ipad-publish'
 					click: ->
 						$setTitleDialog.ppbDialog 'close'
 						try
 							webkit.messageHandlers.heySwift.postMessage 'updatedLoadingPreview'
 						catch err
-							console.log 'The native context does not exist yet'
+							console.log ppbL10n.notiveContextDoesntExist
 						ppbIpad.notice.show 0
-						ppbAjax.publish = 'Publish'
+						ppbAjax.publish = ppbL10n.publish
 						prevu.syncAjax()
 						return
 
 				}
 			]
-			$setTitleDialog.parent().data 'action', 'Publish'
+			$setTitleDialog.parent().data 'action', ppbL10n.publish
 			$setTitleDialog.ppbDialog 'option', 'buttons', butt
 			$setTitleDialog.ppbDialog 'open'
 			return
@@ -1272,7 +1272,7 @@ jQuery ($) ->
 			try
 				webkit.messageHandlers.heySwift.postMessage 'updatedLoadingPreview'
 			catch err
-				console.log 'The native context does not exist yet'
+				console.log ppbL10n.notiveContextDoesntExist
 			ppbIpad.notice.show 0
 		prevu.syncAjax()
 		return
@@ -1329,7 +1329,7 @@ jQuery ($) ->
 		data = id.split('-')
 		$t.closest('.panel-grid-cell').addClass 'this-cell-is-waiting'
 		ppbData.widgets.push
-			text: '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>'
+			text: '<h2>' + ppbL10n.hiThere + '</h2><p>' + '</p>'
 			info:
 				class: 'Pootle_PB_Content_Block'
 				grid: data[2]
@@ -1429,17 +1429,17 @@ jQuery ($) ->
 			items = [
 				{
 					icon: 'alignleft'
-					tooltip: 'Align left'
+					tooltip: ppbL10n.alignLeft
 					value: 'alignleft'
 				}
 				{
 					icon: 'aligncenter'
-					tooltip: 'Align center'
+					tooltip: ppbL10n.alignCenter
 					value: 'aligncenter'
 				}
 				{
 					icon: 'alignright'
-					tooltip: 'Align right'
+					tooltip: ppbL10n.alignRight
 					value: 'alignright'
 				}
 			]
@@ -1476,7 +1476,7 @@ jQuery ($) ->
 		editor.addButton 'shrameeFonts', ->
 			items = [
 				{
-					text: 'Default'
+					text: ppbL10n.default
 					value: 'inherit'
 				}
 				{
@@ -1602,7 +1602,7 @@ jQuery ($) ->
 			]
 			{
 				type: 'listbox'
-				text: 'Font'
+				text: ppbL10n.font
 				icon: false
 				minWidth: 70
 				classes: 'shramee-fonts-control'
@@ -1638,7 +1638,7 @@ jQuery ($) ->
 								return false
 							return
 						if !value
-							$('.mce-shramee-fonts-control').find('.mce-txt').html 'Font'
+							$('.mce-shramee-fonts-control').find('.mce-txt').html ppbL10n.font
 							value = 'inherit'
 						self.state.set 'value', value
 						return
@@ -1648,26 +1648,26 @@ jQuery ($) ->
 		editor.addButton 'ppbFontStyles', ->
 			items = [
 				{
-					text: 'Elegant shadow'
+					text: ppbL10n.elegantShadow
 					value: 'ppbfost-elegant-shadow'
 				}
 				{
-					text: 'Deep shadow'
+					text: ppbL10n.deepShadow
 					value: 'ppbfost-deep-shadow'
 				}
 				{
-					text: 'Inset shadow'
+					text: ppbL10n.insetShadow
 					value: 'ppbfost-inset-shadow'
 				}
 				{
-					text: 'Retro shadow'
+					text: ppbL10n.retroShadow
 					value: 'ppbfost-retro-shadow'
 				}
 			]
 			lastVal = ''
 			{
 				type: 'listbox'
-				text: 'Font Style'
+				text: ppbL10n.fontStyle
 				icon: false
 				minWidth: 70
 				classes: 'ppbFoStField'
@@ -1697,7 +1697,7 @@ jQuery ($) ->
 								return false
 							return
 						if !value
-							$('.mce-ppbFoStField').find('.mce-txt').html 'Font Style'
+							$('.mce-ppbFoStField').find('.mce-txt').html ppbL10n.fontStyle
 							value = 'inherit'
 						lastVal = value
 						self.state.set 'value', value
@@ -1722,17 +1722,17 @@ jQuery ($) ->
 		$(this).prevuRowInit()
 		return
 	$('[href="#ppb-live-update-changes"]').click ->
-		prevu.sync null, 'Save Draft'
+		prevu.sync null, ppbL10n.saveDraft
 		return
 	$('[href="#ppb-live-post-settings"]').click ->
 		$postSettingsDialog.ppbDialog('option', 'buttons', Done: ->
 			$postSettingsDialog.ppbDialog 'close'
-			prevu.sync 'Publish'
+			prevu.sync ppbL10n.publish
 			return
 		).ppbDialog 'open'
 		return
 	$('[href="#ppb-live-publish-changes"]').click ->
-		prevu.sync null, 'Publish'
+		prevu.sync null, ppbL10n.publish
 		return
 	$('.ppb-edit-block').click ->
 		editorid = $(this).siblings('.mce-content-body').attr('id')
@@ -1746,8 +1746,8 @@ jQuery ($) ->
 			return
 		# Create the media frame.
 		ppbFeaturedImageFrame = wp.media.frames.ppbFeaturedImageFrame = wp.media(
-			title: 'Featured Image'
-			button: text: 'Set Featured Image'
+			title: ppbL10n.featImg
+			button: text: ppbL10n.setFeatImg
 			multiple: false)
 		# When an image is selected, run a callback.
 		ppbFeaturedImageFrame.on 'select', ->
@@ -1763,7 +1763,7 @@ jQuery ($) ->
 
 	window.onbeforeunload = (e) ->
 		if prevu.unSavedChanges
-			return 'You have unsaved changes! Click \'Update\' in admin bar to save.\n\nYour changes will be lost if you dan\'t save.'
+			return ppbL10n.youHaveUnsaveChanges
 		return
 
 	prevu.resort()
@@ -1828,7 +1828,7 @@ jQuery ($) ->
 
 	$tooltip = $ '#ppb-tooltip'
 	$body.on 'mouseenter', 'a.pbtn,.ppb-fa-icon', (e) ->
-			$tooltip.show().html( 'Double click to edit' ).css(
+			$tooltip.show().html( ppbL10n.dblClkToEdit ).css(
 				top: e.clientY,
 				left: e.clientX,
 			)
@@ -1859,7 +1859,7 @@ jQuery ($) ->
 			id = $t.data( 'id' )
 
 			if $t.hasClass( 'pro-inactive' )
-				ppbNotify 'Template ' + id + ' needs <a href="https://www.pootlepress.com/pootle-pagebuilder-pro/" target="_blank">Pootle Pagebuilder Pro</a> active.'
+				ppbNotify ppbL10n.tplNeedsPPBPro.replace( '%tpl%', id )
 				return;
 
 			tpl = ppbDesignTpls[id]

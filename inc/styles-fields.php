@@ -135,13 +135,13 @@ function pootlepb_render_content_block_field( $key, $field ) {
 		case 'upload':
 			?><input <?php echo $placeholder ?> dialog-field="<?php echo esc_attr( $key ) ?>" class="content-block-<?php echo esc_attr( $key ) ?>" type="text"
 			         data-style-field-type="upload"/>
-			<span class="dashicons dashicons-no-alt" onclick="jQuery(this).siblings('input').val('').change();">Remove Image</span><br>
-			<button class="button upload-button">Select Image</button>
-			<small>OR</small>
+			<span class="dashicons dashicons-no-alt" onclick="jQuery(this).siblings('input').val('').change();"><?php _e( 'Remove Image', 'pootle-page-builder' ); ?></span><br>
+			<button class="button upload-button"><?php _e( 'Select Image', 'pootle-page-builder' ); ?></button>
+			<small><?php _e( 'OR', 'pootle-page-builder' ); ?></small>
 			<span class="search-unsplash-wrap" style="display: none;">
-				<input placeholder="Search Free Photos..." type="search">
-				<span class="dashicons dashicons-search unsplash-button">Search Free Photos</span>
-				<span class="dashicons dashicons-editor-help tooltip-unsplash" data-tooltip="All stock photos are sourced from Unsplash.com and are licensed under Creative Commons Zero which means you can copy, modify, distribute and use the photos for free, including commercial purposes, without asking permission from or providing attribution to the photographer or Unsplash"></span>
+				<input placeholder="<?php _e( 'Search Free Photos...', 'pootle-page-builder' ); ?>" type="search">
+				<span class="dashicons dashicons-search unsplash-button"><?php _e( 'Search Free Photos', 'pootle-page-builder' ); ?></span>
+				<span class="dashicons dashicons-editor-help tooltip-unsplash" data-tooltip="<?php _e( 'All stock photos are sourced from Unsplash.com and are licensed under Creative Commons Zero which means you can copy, modify, distribute and use the photos for free, including commercial purposes, without asking permission from or providing attribution to the photographer or Unsplash', 'pootle-page-builder' ); ?>"></span>
 			</span>
 			<?php
 			break;
@@ -311,13 +311,15 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]" value=""
 			         data-style-field="<?php echo esc_attr( $key ) ?>"
 			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
-			<span class="dashicons dashicons-no-alt" onclick="jQuery(this).siblings('input').val('').change();">Remove Image</span><br>
-			<button class="button upload-button">Select Image</button>
-			<small>OR</small>
+			<span class="dashicons dashicons-no-alt" onclick="jQuery(this).siblings('input').val('').change();"><?php _e( 'Remove Image', 'pootle-page-builder' ); ?></span><br>
+			<button class="button upload-button"><?php _e( 'Select Image', 'pootle-page-builder' ); ?></button>
+			<small><?php _e( 'OR', 'pootle-page-builder' ); ?></small>
 			<span class="search-unsplash-wrap" style="display: none;">
-				<input placeholder="Search Free Photos..." type="search">
-				<span class="dashicons dashicons-search unsplash-button">Search Free Photos</span>
-				<span class="dashicons dashicons-editor-help tooltip-unsplash" data-tooltip="All stock photos are sourced from Unsplash.com and are licensed under Creative Commons Zero which means you can copy, modify, distribute and use the photos for free, including commercial purposes, without asking permission from or providing attribution to the photographer or Unsplash"></span>
+				<input placeholder="<?php _e( 'Search Free Photos...', 'pootle-page-builder' ); ?>" type="search">
+				<span class="dashicons dashicons-search unsplash-button"><?php _e( 'Search Free Photos', 'pootle-page-builder' ); ?></span>
+				<span class="dashicons dashicons-editor-help tooltip-unsplash" data-tooltip="<?php _e( 'All stock photos are sourced from Unsplash.com and are licensed under Creative Commons Zero which means you can copy, modify, distribute and use the photos for free, including commercial purposes, without asking permission from or providing attribution to the photographer or Unsplash', 'pootle-page-builder' ); ?>"></span>
+
+
 			</span>
 			<?php
 			break;
@@ -326,7 +328,7 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]"
 			         data-style-field="<?php echo esc_attr( $key ) ?>"
 			         data-style-field-type="<?php echo esc_attr( $field['type'] ) ?>" />
-			<button class="button video-upload-button">Select Video</button><?php
+			<button class="button video-upload-button"><?php _e( 'Select Video', 'pootle-page-builder' ); ?></button><?php
 			break;
 		case 'textarea':
 			?><textarea <?php echo $placeholder ?> name="panelsStyle[<?php echo esc_attr( $key ) ?>]"

@@ -34,7 +34,7 @@ class pootle_page_builder_Unsplash {
 
 	public function module( $mods ) {
 		$mods["hero-section"] = array(
-			'label' => 'Hero Section',
+			'label' => __( 'Hero Section', 'pootle-page-builder' ),
 			'icon_class' => 'dashicons dashicons-archive',
 			'tab' => "#pootlepb-background-row-tab",
 			'callback' => 'heroSection',
@@ -42,29 +42,29 @@ class pootle_page_builder_Unsplash {
 			'priority' => 5
 		);
 		$mods["unsplash"] = array(
-			'label' => 'Free photos',
+			'label' => __( 'Free photos', 'pootle-page-builder' ),
 			'icon_class' => 'dashicons dashicons-camera',
 			'callback' => 'unsplash',
 			'active_class' => $this->class,
-			'tooltip' => 'All free photos are from Unsplash.com and can be used for free',
+			'tooltip' => __( 'All free photos are from Unsplash.com and can be used for free', 'pootle-page-builder' ),
 			'priority' => 15
 		);
 		$mods["image"] = array(
-			'label' => 'Image',
+			'label' => __( 'Image', 'pootle-page-builder' ),
 			'icon_class' => 'dashicons dashicons-format-image',
 			'callback' => 'image',
 			'active_class' => $this->class,
 			'priority' => 15
 		);
 		$mods["icon"] = array(
-			'label' => 'Icon',
+			'label' => __( 'Icon', 'pootle-page-builder' ),
 			'icon_class' => 'dashicons dashicons-lightbulb',
 			'callback' => 'chooseIconDialog',
 			'active_class' => $this->class,
 			'priority' => 15
 		);
 		$mods["pbtn"] = array(
-			'label' => 'Button',
+			'label' => __( 'Button', 'pootle-page-builder' ),
 			'icon_class' => 'dashicons dashicons-upload',
 			'callback' => 'button',
 			'active_class' => $this->class,

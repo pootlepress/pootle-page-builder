@@ -212,6 +212,10 @@ if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 			), POOTLEPB_VERSION );
 			wp_register_style( 'pootlepb-ui-styles', POOTLEPB_URL . 'css/ppb-jq-ui.css', array() );
 			wp_enqueue_style( 'pootlepage-main-admin', plugin_dir_url( __FILE__ ) . 'css/main-admin.css', array(), POOTLEPB_VERSION );
+			wp_add_inline_style(
+				'pootlepage-main-admin',
+				'#toplevel_page_page_builder a.wp-first-item:before {content: "' . __( 'Home', 'pootle-page-builder' ) . '";}'
+			);
 
 			$page = filter_input( INPUT_GET, 'page' );
 			if ( $pagenow == 'admin.php' && false !== strpos( $page, 'page_builder' ) ) {

@@ -474,7 +474,7 @@ jQuery(function ($) {
 
             $('#content-resize-handle').show();
         }).end()
-        .prepend('<a id="content-tmce-editor" class="button pootle-switch-editor">Default Editor</a>')
+        .prepend('<a id="content-tmce-editor" class="button pootle-switch-editor">' + ppbL10n.defaultEditor + '</a>')
         .prepend(
         $('<a id="content-panels" class="button pootle switch-panels">Page Builder</a>')
             .click(function () {

@@ -10,7 +10,7 @@
  * @since 0.1.0
  */
 function pootlepb_panels_row_styles( $styles ) {
-	$styles['wide-grey'] = __( 'Wide Grey', 'vantage' );
+	$styles['wide-grey'] = __( 'Wide Grey', 'pootle-page-builder' );
 
 	return $styles;
 }

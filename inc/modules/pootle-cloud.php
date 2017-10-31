@@ -19,7 +19,7 @@ class Pootle_PB_Pootle_Cloud {
 	/** @var string Main plugin class, Module is greyed out if this class is not present */
 	public $class = 'Pootle_PB_Pootle_Cloud';
 	/** @var string Module name */
-	public $name = 'Pootle cloud template';
+	public $name;
 	private $tpls = [];
 	private $tpl_cats = [];
 	private $ppbPro = false;
@@ -77,6 +77,7 @@ class Pootle_PB_Pootle_Cloud {
 	 * PootlePB_Meta_Slider constructor.
 	 */
 	public function __construct() {
+		$this->name = __( 'Pootle cloud template', 'pootle-page-builder' );
 		add_action( 'pootlepb_le_dialogs', array( $this, 'dialog', ) );
 		add_action( 'pootlepb_enqueue_admin_scripts', array( $this, 'enqueue', ) );
 		add_action( 'pootlepb_modules', array( $this, 'module' ) );
@@ -214,7 +215,7 @@ class Pootle_PB_Pootle_Cloud {
 	public function module_plugin( $mods ) {
 		$mods[ $this->token ] = array(
 			'Name'         => $this->name,
-			'Description'  => 'Save and use templates across all your Pootle Pagebuilder site with Pootle Cloud!',
+			'Description'  => __( 'Save and use templates across all your Pootle Pagebuilder site with Pootle Cloud!', 'pootle-page-builder' ),
 			'InstallURI'   => admin_url( "/plugin-install.php?s=$this->name&tab=search&type=term" ),
 			'AuthorURI'    => 'https://www.pootlepress.com',
 			'Author'       => 'pootlepress',

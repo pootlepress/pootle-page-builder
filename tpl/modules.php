@@ -6,14 +6,14 @@
  * @since 0.1.0
  */
 $tabs = array(
-	'plugins' => 'Modules',
-	'manager' => 'Manager',
+	'plugins' => __( 'Modules', 'pootle-page-builder' ),
+	'manager' => __( 'Manager', 'pootle-page-builder' ),
 );
 $current = filter_input( INPUT_GET, 'tab' );
 $current = array_key_exists( $current, $tabs ) ? $current : 'plugins';
 ?>
 <div class="wrap">
-	<h1>Pootle Page Builder Modules</h1>
+	<h1><?php _e( 'Pootle Page Builder Modules', 'pootle-page-builder' ); ?></h1>
 	<h2 class="nav-tab-wrapper">
 		<?php
 		foreach ( $tabs as $tab => $name ) {

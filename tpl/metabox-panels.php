@@ -9,7 +9,7 @@ $layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 
 $buttons = array( 'grid-add' => 'Add Row' );
 if ( ! empty( $layouts ) ) {
-	$buttons['prebuilt-set'] = 'Use Existing Page Layout';
+	$buttons['prebuilt-set'] = __( 'Use Existing Page Layout', 'pootle-page-builder' );
 }
 
 $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
@@ -27,7 +27,7 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 	<?php
 		foreach ( $buttons as $id => $name ) { ?>
 			<button class="<?php echo $id ?> add-button ed_button button button-small">
-				<?php _e( $name, 'ppb-panels' ) ?>
+				<?php _e( $name, 'pootle-page-builder' ) ?>
 			</button>
 		<?php }
 	?>
@@ -36,13 +36,13 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 	</div>
 
 	<?php // The add row dialog ?>
-	<div id="grid-add-dialog" data-title="<?php esc_attr_e( 'Add Row', 'ppb-panels' ) ?>"
+	<div id="grid-add-dialog" data-title="<?php esc_attr_e( 'Add Row', 'pootle-page-builder' ) ?>"
 	     class="panels-admin-dialog" style="text-align: center">
 		<p>
 			<label>
 				<strong>
-					<?php _e( 'How many columns do you want your row to have? ', 'ppb-panels' ) ?><br>
-					(<?php _e( 'You can adjust the widths later', 'ppb-panels' ) ?>)
+					<?php _e( 'How many columns do you want your row to have? ', 'pootle-page-builder' ) ?><br>
+					(<?php _e( 'You can adjust the widths later', 'pootle-page-builder' ) ?>)
 				</strong>
 			</label>
 		</p>
@@ -57,7 +57,7 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 		//Get first name if set
 		$username = '';
 		if ( ! empty( $current_user->user_firstname ) ) {
-			$username = " {$current_user->user_firstname}";
+			$username = $current_user->user_firstname;
 		}
 
 		//Get user's visit count
@@ -66,11 +66,11 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 		//Set welcome message
 		if ( empty( $visit_count ) || empty( $layouts ) ) {
 			$visit_count = 0;
-			$message = "Welcome to Page Builder{$username}! Click the 'Add Row' button above to start building your page.";
+			$message = sprintf( __( "Welcome to Page Builder %s! Click the 'Add Row' button above to start building your page.", 'pootle-pafe-builder' ), $username );
 		} elseif ( 1 == $visit_count ) {
-			$message = "Welcome back to Page Builder{$username}! You can now also use existing pages as a template to start your page and save you time!";
+			$message = sprintf( __( 'Welcome back to Page Builder %s! You can now also use existing pages as a template to start your page and save you time!', 'pootle-pafe-builder' ), $username );
 		} else {
-			$message = "Welcome to Page Builder{$username}! You know what to do.";
+			$message = sprintf( __( 'Welcome to Page Builder %s! You know what to do.', 'pootle-pafe-builder' ), $username );
 		}
 
 		//Print the message
@@ -89,12 +89,12 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 
 		?>
 
-	<div id="remove-row-dialog" data-title="<?php esc_attr_e( "Remove Row", 'ppb-panels' ) ?>"
+	<div id="remove-row-dialog" data-title="<?php esc_attr_e( "Remove Row", 'pootle-page-builder' ) ?>"
 	     class="panels-admin-dialog">
 		<p>Are you sure?</p>
 	</div>
 
-	<div id="remove-widget-dialog" data-title="<?php esc_attr_e( "Delete Content", 'ppb-panels' ) ?>"
+	<div id="remove-widget-dialog" data-title="<?php esc_attr_e( "Delete Content", 'pootle-page-builder' ) ?>"
 	     class="panels-admin-dialog">
 		<p>Are you sure?</p>
 	</div>
@@ -103,18 +103,18 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 
 	<?php if ( ! empty( $layouts ) ) : ?>
 		<div id="grid-prebuilt-dialog"
-		     data-title="<?php esc_attr_e( 'Use Existing Page Layout', 'ppb-panels' ) ?>"
+		     data-title="<?php esc_attr_e( 'Use Existing Page Layout', 'pootle-page-builder' ) ?>"
 		     class="panels-admin-dialog">
-			<p><label><strong><?php _e( 'Page Layout', 'ppb-panels' ) ?></strong></label></p>
+			<p><label><strong><?php _e( 'Page Layout', 'pootle-page-builder' ) ?></strong></label></p>
 
 			<p>
 				<select type="text" id="grid-prebuilt-input" name="prebuilt_layout" style="width:580px;"
-				        placeholder="<?php esc_attr_e( 'Select Layout', 'ppb-panels' ) ?>">
+				        placeholder="<?php esc_attr_e( 'Select Layout', 'pootle-page-builder' ) ?>">
 					<option class="empty" <?php selected( true ) ?> value=""></option>
 					<?php foreach ( $layouts as $id => $data ) : ?>
 						<option id="panel-prebuilt-<?php echo esc_attr( $id ) ?>"
 						        data-layout-id="<?php echo esc_attr( $id ) ?>" class="prebuilt-layout">
-							<?php echo isset( $data['name'] ) ? $data['name'] : __( 'Untitled Layout', 'ppb-panels' ) ?>
+							<?php echo isset( $data['name'] ) ? $data['name'] : __( 'Untitled Layout', 'pootle-page-builder' ) ?>
 						</option>
 					<?php endforeach; ?>
 				</select>
@@ -123,36 +123,36 @@ $buttons = apply_filters( 'pootlepb_add_to_panel_buttons', $buttons );
 	<?php endif; ?>
 
 	<?php // The styles dialog ?>
-	<div id="grid-styles-dialog" data-title="<?php esc_attr_e( 'Row Visual Style', 'ppb-panels' ) ?>"
+	<div id="grid-styles-dialog" data-title="<?php esc_attr_e( 'Row Visual Style', 'pootle-page-builder' ) ?>"
 	     class="panels-admin-dialog">
 			<?php require POOTLEPB_DIR . 'tpl/row-settings-panel.php'; ?>
 	</div>
 
-	<div id="content-loss-dialog" data-title="<?php esc_attr_e( 'Changing to Page Builder', 'ppb-panels' ) ?>"
-	     data-button-i-know="<?php esc_attr_e( "I know what I'm doing", 'ppb-panels' ) ?>"
-	     data-button-stop="<?php esc_attr_e( "Yep, I'll stop and create a new page", 'ppb-panels' ) ?>"
+	<div id="content-loss-dialog" data-title="<?php esc_attr_e( 'Changing to Page Builder', 'pootle-page-builder' ) ?>"
+	     data-button-i-know="<?php esc_attr_e( "I know what I'm doing", 'pootle-page-builder' ) ?>"
+	     data-button-stop="<?php esc_attr_e( "Yep, I'll stop and create a new page", 'pootle-page-builder' ) ?>"
 	     class="panels-admin-dialog">
 		<p>
-			<?php _e( 'Slow down tiger! Do you realise that changing to Page Builder for this page will make all your page content disappear forever?', 'ppb-panels' ) ?>
+			<?php _e( 'Slow down tiger! Do you realise that changing to Page Builder for this page will make all your page content disappear forever?', 'pootle-page-builder' ) ?>
 			<br><br>
-			<?php _e( 'Why not create a new page instead?', 'ppb-panels' ) ?>
+			<?php _e( 'Why not create a new page instead?', 'pootle-page-builder' ) ?>
 		</p>
 	</div>
 
 	<div id="layout-loss-dialog"
-	     data-title="<?php esc_attr_e( 'Changing to the default editor', 'ppb-panels' ) ?>"
-	     data-button-i-know="<?php esc_attr_e( "I know what I'm doing", 'ppb-panels' ) ?>"
-	     data-button-stop="<?php esc_attr_e( "I love Page Builder, keep me here", 'ppb-panels' ) ?>"
+	     data-title="<?php esc_attr_e( 'Changing to the default editor', 'pootle-page-builder' ) ?>"
+	     data-button-i-know="<?php esc_attr_e( "I know what I'm doing", 'pootle-page-builder' ) ?>"
+	     data-button-stop="<?php esc_attr_e( "I love Page Builder, keep me here", 'pootle-page-builder' ) ?>"
 	     class="panels-admin-dialog">
 		<p>
-			<?php _e( "Ummm... if you go back to the default editor you'll loose all your content. Are you sure you want to loose all that hard work you've done?", 'ppb-panels' ) ?>
+			<?php _e( "Ummm... if you go back to the default editor you'll loose all your content. Are you sure you want to loose all that hard work you've done?", 'pootle-page-builder' ) ?>
 		</p>
 	</div>
 	<div id="no-empty-col-dialog"
-	     data-title="<?php esc_attr_e( 'No empty column found', 'ppb-panels' ) ?>"
+	     data-title="<?php esc_attr_e( 'No empty column found', 'pootle-page-builder' ) ?>"
 	     class="panels-admin-dialog">
 		<p>
-			<?php _e( "You can only remove an empty column, please move or delete content from the column you wish to remove.", 'ppb-panels' ) ?>
+			<?php _e( "You can only remove an empty column, please move or delete content from the column you wish to remove.", 'pootle-page-builder' ) ?>
 		</p>
 	</div>
 

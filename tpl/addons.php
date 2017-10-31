@@ -41,7 +41,7 @@ $sxml = simplexml_load_string( $xml );
 
 ?>
 <div class="wrap">
-	<h2>Pootle Page Builder Add-ons</h2>
+	<h2><?php _e( 'Pootle Page Builder Add-ons', 'pootle-page-builder' ); ?></h2>
 	<?php settings_errors();
 
 	foreach ( $sxml as $plugins ) {

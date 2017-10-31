@@ -4,11 +4,11 @@ class pootle_page_builder_Ninja_Forms {
 	public $token = 'ninja_forms';
 	public $slug = 'ninja-forms';
 	public $class = 'Ninja_Forms';
-	public $name = 'Ninja Form';
+	public $name;
 
 	/** @var pootle_page_builder_Ninja_Forms Instance */
 	private static $_instance = null;
-	protected $choices = array( '' => 'Please choose...' );
+	protected $choices;
 
 	/**
 	 * Gets pootle_page_builder_Ninja_Forms instance
@@ -26,6 +26,8 @@ class pootle_page_builder_Ninja_Forms {
 	 * PootlePB_Meta_Slider constructor.
 	 */
 	function __construct() {
+		$this->name = __( 'Ninja Form', 'pootle-page-builder' );
+		$this->choices = array( '' => __( 'Please choose...', 'pootle-page-builder' ) );
 		add_action( 'init', array( $this, 'init', ) );
 	}
 
@@ -70,7 +72,7 @@ class pootle_page_builder_Ninja_Forms {
 
 	public function fields( $fields ) {
 		$fields[ $this->token ] = array(
-			'name' => 'Form ID',
+			'name' => __( 'Form ID', 'pootle-page-builder' ),
 			'type' => 'select',
 			'options' => $this->choices,
 			'priority' => 1,
@@ -101,7 +103,7 @@ class pootle_page_builder_Ninja_Forms {
 	public function module_plugin( $mods ) {
 		$mods[ $this->slug ] = array(
 			'Name' => $this->name,
-			'Description' => 'Adds awesome ninja form module',
+			'Description' => __( 'Adds awesome ninja form module', 'pootle-page-builder' ),
 			'InstallURI' => admin_url( "/plugin-install.php?s=$this->name&tab=search&type=term" ),
 			'AuthorURI' => 'https://www.metaslider.com',
 			'Author' => 'Matcha Labs',

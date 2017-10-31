@@ -7,16 +7,16 @@ global $pootlepb_row_settings_tabs;
 $panel_tabs = array(
 	'-' => array(
 		'style'            => array(
-			'label'    => 'Style',
+			'label'    => __( 'Style', 'pootle-page-builder' ),
 			'class'    => 'pootle-style-fields',
 			'priority' => 1,
 		),
 		'editor'           => array(
-			'label'    => 'Editor',
+			'label'    => __( 'Editor', 'pootle-page-builder' ),
 			'priority' => 2,
 		),
 		'advanced'            => array(
-			'label'    => 'Advanced',
+			'label'    => __( 'Advanced', 'pootle-page-builder' ),
 			'class'    => 'pootle-style-fields',
 			'priority' => 2,
 		),
@@ -59,7 +59,7 @@ ksort( $panel_tabs );
 			?>
 		</ul>
 		<div class="content-wrap">
-			<a href="javascript:void(0)" class="back">Back</a>
+			<a href="javascript:void(0)" class="back"><?php _e( 'Back', 'pootle-page-builder' ); ?></a>
 			<?php
 			//Output the tabs
 			foreach ( $panel_tabs as $tabs ) {
@@ -93,15 +93,15 @@ ksort( $panel_tabs );
 
 $row_panel_tabs = array(
 	'background' => array(
-		'label'    => 'Background',
+		'label'    => __( 'Background', 'pootle-page-builder' ),
 		'priority' => 1,
 	),
 	'layout'     => array(
-		'label'    => 'Layout',
+		'label'    => __( 'Layout', 'pootle-page-builder' ),
 		'priority' => 2,
 	),
 	'advanced'   => array(
-		'label'    => 'Advanced',
+		'label'    => __( 'Advanced', 'pootle-page-builder' ),
 		'priority' => 10,
 	),
 );
@@ -122,7 +122,7 @@ $row_panel_tabs = apply_filters( 'pootlepb_le_row_block_tabs', $row_panel_tabs )
 			?>
 		</ul>
 		<div class="content-wrap">
-			<a href="javascript:void(0)" class="back">Back</a>
+			<a href="javascript:void(0)" class="back"><?php _e( 'Back', 'pootle-page-builder' ); ?></a>
 			<?php
 			//Output the tab panels
 			foreach ( $row_panel_tabs as $k => $tab ) {
@@ -150,10 +150,10 @@ $row_panel_tabs = apply_filters( 'pootlepb_le_row_block_tabs', $row_panel_tabs )
 			<input max="10" min="1" id="ppb-row-add-cols" type="number" value="1">
 		</label>
 	</div>
-	<div class="pootlepb-dialog" id="pootlepb-set-title" data-title="Set title of the <?php echo get_post_type() ?>">
+	<div class="pootlepb-dialog" id="pootlepb-set-title" data-title="<?php printf( __( 'Set title of the %s', 'pootle-page-builder' ), get_post_type() ); ?>">
 		<label>
-			<p>Please set the title for the <?php echo get_post_type() ?></p>
-			<input id="ppble-live-page-title" type="text" placeholder="Untitled" value="<?php get_the_title() !== 'Untitled' ? the_title() : null ?>">
+			<p><?php _e( 'Please set the title for the page', 'pootle-page-builder' ); ?></p>
+			<input id="ppble-live-page-title" type="text" placeholder="<?php _e( 'Untitled', 'pootle-page-builder' ); ?>" value="<?php get_the_title() !== __( 'Untitled', 'pootle-page-builder' ) ? the_title() : null ?>">
 		</label>
 	</div>
 
@@ -175,9 +175,9 @@ if ( get_post_type() == 'post' ) {
 	}
 
 	?>
-	<div class="pootlepb-dialog" id="pootlepb-post-settings" data-title="Set title of the <?php get_post_type() ?>">
+	<div class="pootlepb-dialog" id="pootlepb-post-settings" data-title="<?php printf( __( 'Set title of the %s', 'pootle-page-builder' ), get_post_type() ); ?>">
 		<label>
-			<h3>Featured image</h3>
+			<h3><?php _e( 'Featured image', 'pootle-page-builder' ); ?></h3>
 			<span>
 			<div id="ppble-feat-img-wrapper">
 				<div style="background-image: url('<?php the_post_thumbnail_url() ?>');" class="ppble-img-prevu"
@@ -187,7 +187,7 @@ if ( get_post_type() == 'post' ) {
 			</span>
 		</label>
 		<label>
-			<h3>Categories</h3>
+			<h3><?php _e( 'Categories', 'pootle-page-builder' ); ?></h3>
 			<span>
 			<select multiple="multiple" class="post-category">
 				<?php
@@ -204,7 +204,7 @@ if ( get_post_type() == 'post' ) {
 			</span>
 		</label>
 		<label>
-			<h3>Tags</h3>
+			<h3><?php _e( 'Tags', 'pootle-page-builder' ); ?></h3>
 			<span>
 			<select multiple="multiple" class="post-tags">
 				<?php
@@ -235,7 +235,7 @@ if ( 'post' == get_post_type() ) {
 }
 
 $default_module_args = array(
-	'label'      => 'Unlabeled Module',
+	'label'      => __( 'Unlabeled Module', 'pootle-page-builder' ),
 	'icon_class' => 'dashicons dashicons-star-filled',
 	'icon_html'  => '',
 );
@@ -287,7 +287,7 @@ if ( $enabled_modules ) {
 			foreach ( $ppb_modules as $module ) {
 				$id     = $module['id'];
 				$module = wp_parse_args( $module, array(
-					'label'      => 'Unlabeled Module',
+					'label'      => __( 'Unlabeled Module', 'pootle-page-builder' ),
 					'icon_class' => 'dashicons dashicons-star-filled',
 					'icon_html'  => '',
 				) );
@@ -358,27 +358,27 @@ if ( $enabled_modules ) {
 
 <div id="ppb-iconpicker" style="display: none;">
 	<label>
-		<span>Choose icon</span>
+		<span><?php _e( 'Choose icon', 'pootle-page-builder' ); ?></span>
 		<input id="ppb-icon-choose" type="hidden">
 	</label>
 	<label>
-		<span>Icon size</span>
+		<span><?php _e( 'Icon size', 'pootle-page-builder' ); ?></span>
 		<input id="ppb-icon-size" value="160" type="number" min="25" max="295" step="5"> px
 	</label>
 	<label>
-		<span>Icon color</span>
+		<span><?php _e( 'Icon color', 'pootle-page-builder' ); ?></span>
 		<input id="ppb-icon-color" value="#999" type="text">
 	</label>
 	<label>
-		<span>Icon link</span>
+		<span><?php _e( 'Icon link', 'pootle-page-builder' ); ?></span>
 		<input id="ppb-icon-link" type="url">
 	</label>
 	<label>
-		<span>Display inline</span>
+		<span><?php _e( 'Display inline', 'pootle-page-builder' ); ?></span>
 		<input id="ppb-icon-inline" type="checkbox">
 	</label>
 	<label>
-		<span>Preview</span>
+		<span><?php _e( 'Preview', 'pootle-page-builder' ); ?></span>
 		<span id="ppb-icon-preview"></span>
 	</label>
 </div>

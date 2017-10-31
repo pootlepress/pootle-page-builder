@@ -61,21 +61,22 @@ final class Pootle_Page_Builder_Render_Layout extends Pootle_Page_Builder_Render
 	 */
 	public function content_filter( $content ) {
 
-		$postID = apply_filters( 'pootlepb_the_content_id', get_the_ID() );
+		if ( is_single() || is_page() ) {
+			$postID = apply_filters( 'pootlepb_the_content_id', get_the_ID() );
 
-		$pass = apply_filters( 'pootlepb_the_content_pass', in_array( get_post_type(), pootlepb_settings( 'post-types' ) ) );
+			$pass = apply_filters( 'pootlepb_the_content_pass', in_array( get_post_type(), pootlepb_settings( 'post-types' ) ) );
 
-		if ( ! $pass ) {
-			return $content;
+			if ( ! $pass ) {
+				return $content;
+			}
+
+			$post          = get_post( $postID );
+			$panel_content = $this->panels_render( $post->ID );
+
+			if ( ! empty( $panel_content ) ) {
+				$content = $panel_content;
+			}
 		}
-
-		$post          = get_post( $postID );
-		$panel_content = $this->panels_render( $post->ID );
-
-		if ( ! empty( $panel_content ) ) {
-			$content = $panel_content;
-		}
-
 		return $content;
 	}
 

@@ -100,13 +100,13 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 		$admin_bar->add_menu( array(
 			'parent' => 'new-content',
 			'id'     => 'ppb-new-live-page',
-			'title'  => 'Live Page',
+			'title'  => __( 'Live Page', 'pootle-page-builder' ),
 			'href'   => $new_live_page_url
 		) );
 		$admin_bar->add_menu( array(
 			'parent' => 'new-content',
 			'id'     => 'ppb-new-live-post',
-			'title'  => 'Live Post',
+			'title'  => __( 'Live Post', 'pootle-page-builder' ),
 			'href'   => $new_live_page_url . '&post_type=post'
 		) );
 
@@ -115,10 +115,10 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 				$args = array(
 //					'parent' => 'top-secondary',
 					'id'    => 'ppb-publish',
-					'title' => 'Save/Publish',
+					'title' => __( 'Save/Publish', 'pootle-page-builder' ),
 					'href'  => '#ppb-live-save-publish',
 					'meta'  => array(
-						'title' => __( 'Save and publish your changes.' ),
+						'title' => __( 'Save and publish your changes.', 'pootle-page-builder' ),
 					),
 				);
 				$admin_bar->add_menu( $args );
@@ -128,27 +128,27 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 				if ( 'post' == get_post_type() ) {
 					$args['id']    = 'ppb-live-post-settings';
 					$args['href']  = '#ppb-live-post-settings';
-					$args['title'] = 'Post settings';
+					$args['title'] = __( 'Post settings', 'pootle-page-builder' );
 					$admin_bar->add_menu( $args );
 				}
 
 				$args['id']     = 'ppb-live-update-changes';
 				$args['href']   = '#ppb-live-update-changes';
-				$args['title']  = 'Save';
+				$args['title']  = __( 'Save', 'pootle-page-builder' );
 				$admin_bar->add_menu( $args );
 
 				$args['id']    = 'ppb-live-publish-changes';
 				$args['href']  = '#ppb-live-publish-changes';
-				$args['title'] = 'Publish';
+				$args['title'] = __( 'Publish', 'pootle-page-builder' );
 				$admin_bar->add_menu( $args );
 			} else {
 				$args = array(
 //					'parent' => 'top-secondary',
 					'id'    => 'ppb-publish',
-					'title' => 'Update',
+					'title' => __( 'Update', 'pootle-page-builder' ),
 					'href'  => '#ppb-live-update-changes',
 					'meta'  => array(
-						'title' => __( 'Save and publish your changes.' ),
+						'title' => __( 'Save and publish your changes.', 'pootle-page-builder' ),
 					),
 				);
 				$admin_bar->add_menu( $args );
@@ -166,10 +166,10 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 			$nonce_url = wp_nonce_url( get_the_permalink( $post->ID ), 'ppb-live-' . $post->ID, 'ppbLiveEditor' );
 			$args      = array(
 				'id'    => 'pootle-live-editor',
-				'title' => 'Live edit',
+				'title' => __( 'Live edit', 'pootle-page-builder' ),
 				'href'  => $nonce_url,
 				'meta'  => array(
-					'title' => __( 'Live edit this page with pootle page builder' ),
+					'title' => __( 'Live edit this page with Pootle Pagebuilder', 'pootle-page-builder' ),
 				),
 			);
 			$admin_bar->add_menu( $args );
@@ -179,9 +179,7 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 	/**
 	 * Filters the row actions
 	 */
-	public function post_row_actions() {
-
-	}
+	public function post_row_actions() {}
 
 	/**
 	 * Saves setting from front end via ajax
@@ -281,7 +279,10 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 			}
 		} else {
 			?>
-			<h1>Sorry,<br>Nonce validation failed...</h1>
+			<h1>
+				<?php _e( 'Sorry,', 'pootle-page-builder' ); ?><br>
+				<?php _e( 'Nonce validation failed...', 'pootle-page-builder' ); ?>
+			</h1>
 			<?php
 		}
 		die();

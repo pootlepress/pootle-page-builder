@@ -7,7 +7,7 @@
 ?>
 
 <div class="wrap">
-	<h2>Pootle Page Builder</h2>
+	<h2><?php _e( 'Pootle Page Builder', 'pootle-page-builder' ); ?></h2>
 	<?php settings_errors(); ?>
 
 	<?php
@@ -19,7 +19,7 @@
 	?>
 
 	<h2 class="nav-tab-wrapper">
-		<a href="?page=page_builder_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>">General</a>
+		<a href="?page=page_builder_settings&tab=general" class="nav-tab <?php echo $active_tab == 'general' ? 'nav-tab-active' : ''; ?>"><?php _e( 'General', 'pootle-page-builder' ); ?></a>
 	</h2>
 		<form action='options.php' method="POST">
 			<?php

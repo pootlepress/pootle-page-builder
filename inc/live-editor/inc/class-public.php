@@ -235,14 +235,59 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			$ppbAjax['title'] = get_the_title();
 		}
 		wp_localize_script( 'pootle-live-editor', 'ppbAjax', $ppbAjax );
+
 		wp_localize_script( 'pootle-live-editor', 'ppbModules', array() );
+
+		wp_localize_script( 'pootle-live-editor', 'ppbL10n', array(
+			'choseImg'                   => __( 'Choose Image', 'pootle-page-builder' ),
+			'insertInConBlk'             => __( 'Insert in Content Block', 'pootle-page-builder' ),
+			'size'                       => __( 'Size', 'pootle-page-builder' ),
+			'editRow'                    => __( 'Edit row', 'pootle-page-builder' ),
+			'addRow'                     => __( 'Add row', 'pootle-page-builder' ),
+			'ruSure'                     => __( 'Are you sure', 'pootle-page-builder' ),
+			'yes'                        => __( 'Yes', 'pootle-page-builder' ),
+			'cancel'                     => __( 'Cancel', 'pootle-page-builder' ),
+			'b4Sync'                     => __( 'Before sync', 'pootle-page-builder' ),
+			'frSync'                     => __( 'After sync', 'pootle-page-builder' ),
+			'addingRow'                  => __( 'Adding row', 'pootle-page-builder' ),
+			'rowAdded'                   => __( 'Row added', 'pootle-page-builder' ),
+			'insertIcon'                 => __( 'Insert icon', 'pootle-page-builder' ),
+			'removeIcon'                 => __( 'Remove icon', 'pootle-page-builder' ),
+			'insert'                     => __( 'Insert', 'pootle-page-builder' ),
+			'postSetting'                => __( 'Post settings', 'pootle-page-builder' ),
+			'selectRowByTouchingContent' => __( 'Please select a row by touching any of it\'s content blocks to start editing.', 'pootle-page-builder' ),
+			'selectConBlkToEdit'         => __( 'Please select a content block to start editing.', 'pootle-page-builder' ),
+			'publish'                    => __( 'Publish', 'pootle-page-builder' ),
+			'saveDraft'                  => __( 'Save Draft', 'pootle-page-builder' ),
+			'notiveContextDoesntExist'   => __( 'The native context does not exist yet', 'pootle-page-builder' ),
+			'alignLeft'                  => __( 'Align left', 'pootle-page-builder' ),
+			'alignCenter'                => __( 'Align center', 'pootle-page-builder' ),
+			'alignRight'                 => __( 'Align right', 'pootle-page-builder' ),
+			'default'                    => __( 'Default', 'pootle-page-builder' ),
+			'font'                       => __( 'Font', 'pootle-page-builder' ),
+			'elegantShadow'              => __( 'Elegant shadow', 'pootle-page-builder' ),
+			'deepShadow'                 => __( 'Deep shadow', 'pootle-page-builder' ),
+			'insetShadow'                => __( 'Inset shadow', 'pootle-page-builder' ),
+			'retroShadow'                => __( 'Retro shadow', 'pootle-page-builder' ),
+			'fontStyle'                  => __( 'Font Style', 'pootle-page-builder' ),
+			'featImg'                    => __( 'Featured Image', 'pootle-page-builder' ),
+			'setFeatImg'                 => __( 'Set Featured Image', 'pootle-page-builder' ),
+			'youHaveUnsaveChanges'       => __( "You have unsaved changes! Click 'Update' in admin bar to save.\n\nYour changes will be lost if you dan't save.", 'pootle-page-builder' ),
+			'editConBlk'                 => __( 'Edit content block', 'pootle-page-builder' ),
+			'noRespFromSrvAt'            => __( 'No response from server at %s', 'pootle-page-builder' ),
+			'movedRow'                   => __( 'Moved row', 'pootle-page-builder' ),
+			'dblClkToEdit'               => __( 'Double click to edit', 'pootle-page-builder' ),
+			'tplNeedsPPBPro'             => sprintf( __( 'Template %s needs %sPootle Pagebuilder Pro%s active.', 'pootle-page-builder' ), '%tpl%', '<a href="https://www.pootlepress.com/pootle-pagebuilder-pro/" target="_blank">', '</a>' ),
+			'hiThere'                    => __( 'Hi there,', 'pootle-page-builder' ),
+			'ImNewConBlkMakeMeCool'      => __( 'I am a new content block, go ahead, edit me and make me cool...', 'pootle-page-builder' )
+		) );
 
 		//Colorpicker
 		$colorpicker_l10n = array(
-			'clear'         => __( 'Clear' ),
-			'defaultString' => __( 'Default' ),
-			'pick'          => __( 'Select Color' ),
-			'current'       => __( 'Current Color' ),
+			'clear'         => __( 'Clear', 'pootle-page-builder' ),
+			'defaultString' => __( 'Default', 'pootle-page-builder' ),
+			'pick'          => __( 'Select Color', 'pootle-page-builder' ),
+			'current'       => __( 'Current Color', 'pootle-page-builder' ),
 		);
 		wp_localize_script( 'pp-pb-color-picker', 'wpColorPicker_i18n', $colorpicker_l10n );
 	}
@@ -481,23 +526,23 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-row" data-index="<?php echo $gi; ?>"
 				 data-i_bkp="<?php echo $gi; ?>">
 			<span href="javascript:void(0)" title="Row Styling" class="dashicons-before settings-dialog dashicons-edit">
-				<span class="screen-reader-text">Edit Row</span>
+				<span class="screen-reader-text"><?php _e( 'Edit Row', 'pootle-page-builder' ); ?></span>
 			</span>
 			<span href="javascript:void(0)" title="Row Sorting" class="dashicons-before drag-handle dashicons-editor-code">
-				<span class="screen-reader-text">Sort row</span>
+				<span class="screen-reader-text"><?php _e( 'Sort row', 'pootle-page-builder' ); ?></span>
 			</span>
 			<?php /*
  			<span href="javascript:void(0)" title="Insert Row" class="dashicons-before insert-row dashicons-plus">
-				<span class="screen-reader-text">Insert row</span>
+				<span class="screen-reader-text"><?php _e( 'Insert row', 'pootle-page-builder' ); ?></span>
 			</span>
  			*/ ?>
 			<?php /*
 			<span href="javascript:void(0)" title="Duplicate Row" class="dashicons-before dashicons-admin-page">
-				<span class="screen-reader-text">Duplicate Row</span>
+				<span class="screen-reader-text"><?php _e( 'Duplicate Row', 'pootle-page-builder' ); ?></span>
 			</span>
 			*/ ?>
 			<span href="javascript:void(0)" title="Delete Row" class="dashicons-before dashicons-no">
-				<span class="screen-reader-text">Delete Row</span>
+				<span class="screen-reader-text"><?php _e( 'Delete Row', 'pootle-page-builder' ); ?></span>
 			</span>
 		</div>
 		<?php
@@ -515,10 +560,10 @@ class Pootle_Page_Builder_Live_Editor_Public {
 				 data-index="<?php echo $content_block['info']['id']; ?>"
 				 data-i_bkp="<?php echo $content_block['info']['id']; ?>">
 			<span href="javascript:void(0)" title="Drag content block" class="dashicons-before drag-handle dashicons-move">
-				<span class="screen-reader-text">Drag content block</span>
+				<span class="screen-reader-text"><?php _e( 'Drag content block', 'pootle-page-builder' ); ?></span>
 			</span>
 			<span href="javascript:void(0)" title="Edit Content" class="dashicons-before settings-dialog dashicons-edit">
-				<span class="screen-reader-text">Edit Content Block</span>
+				<span class="screen-reader-text"><?php _e( 'Edit Content Block', 'pootle-page-builder' ); ?></span>
 			</span>
 			<?php /*
 			<span href="javascript:void(0)" title="Insert image" class="dashicons-before dashicons-format-image">
@@ -546,7 +591,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			}
 			*/ ?>
 			<span href="javascript:void(0)" title="Delete Content" class="dashicons-before delete dashicons-no">
-				<span class="screen-reader-text">Delete Content</span>
+				<span class="screen-reader-text"><?php _e( 'Delete Content', 'pootle-page-builder' ); ?></span>
 			</span>
 		</div>
 		<div class="ui-resizable-handle ui-resizable-e">
@@ -587,7 +632,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		?>
 		<div class="pootle-live-editor  ppb-live-add-object add-row">
 			<span href="javascript:void(0)" title="Add row" class="dashicons-before dashicons-plus">
-				<span class="screen-reader-text">Add row</span>
+				<span class="screen-reader-text"><?php _e( 'Add row', 'pootle-page-builder' ); ?></span>
 			</span>
 		</div>
 		<?php
@@ -603,7 +648,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		/*
 				<div class="pootle-live-editor ppb-live-add-object add-content">
 					<span href="javascript:void(0)" title="Add Content" class="dashicons-before dashicons-plus">
-						<span class="screen-reader-text">Add Content</span>
+						<span class="screen-reader-text"><?php _e( 'Add Content', 'pootle-page-builder' ); ?></span>
 					</span>
 				</div>
 				*/ ?>

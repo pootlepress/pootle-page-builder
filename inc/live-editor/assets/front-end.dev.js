@@ -20,7 +20,7 @@ Array.prototype.ppbPrevuMove = function(oldI, newI) {
   return this;
 };
 
-ppbPrevuDebug = 1;
+ppbPrevuDebug = 0;
 
 ppbIpad = {};
 
@@ -110,7 +110,7 @@ jQuery(function($) {
     autoOpen: false,
     draggable: false,
     resizable: false,
-    title: 'Edit content block',
+    title: ppbL10n.editConBlk,
     height: $(window).height() - 50,
     width: $(window).width() - 50,
     buttons: {
@@ -127,7 +127,7 @@ jQuery(function($) {
       return jQuery.post(ppbAjax.url, ppbAjax, function(response) {
         var $response, callback;
         if (!response.replace(RegExp(' ', 'g'), '')) {
-          console.log('Error: No response from server at ' + ppbAjax.url);
+          console.error(ppbL10n.noRespFromSrvAt.replace('%s', ppbAjax.url));
           return;
         }
         $response = $($.parseHTML(response, document, true));
@@ -154,7 +154,7 @@ jQuery(function($) {
     },
     sync: function(callback, publish) {
       var butt;
-      logPPBData('Before sync');
+      logPPBData(ppbL10n.b4Sync);
       prevu.ajaxCallback = callback;
       prevu.unSavedChanges = true;
       prevu.saveTmceBlock($('.mce-edit-focus'));
@@ -186,7 +186,7 @@ jQuery(function($) {
       } else {
         delete ppbAjax.publish;
       }
-      logPPBData('After sync');
+      logPPBData(ppbL10n.frSync);
       prevu.syncAjax();
     },
     reset: function(nosort) {
@@ -414,7 +414,7 @@ jQuery(function($) {
       window.ppbRowI = ppbData.grids.length;
       num_cells = parseInt($('#ppb-row-add-cols').val());
       cellWidths = cellWidths ? cellWidths : [];
-      logPPBData('Adding row');
+      logPPBData(ppbL10n.addingRow);
       row = {
         id: window.ppbRowI,
         cells: num_cells,
@@ -496,7 +496,7 @@ jQuery(function($) {
         i++;
         ppbData.widgets.push($.extend(true, {}, block));
       }
-      logPPBData('Row added');
+      logPPBData(ppbL10n.rowAdded);
       $addRowDialog.ppbDialog('close');
       prevu.sync(function($r, qry, html) {
         var $cols, $ro;
@@ -559,7 +559,7 @@ jQuery(function($) {
       prevu.sync(function() {
         prevu.reset('noSort');
       });
-      return logPPBData('Moved row ' + olI + ' => ' + newI);
+      return logPPBData(ppbL10n.movedRow + ' ' + olI + ' => ' + newI);
     },
     rowsSortable: {
       items: '> .panel-grid',
@@ -802,14 +802,14 @@ jQuery(function($) {
         },
         displaySettings: true,
         displayUserSettings: false,
-        title: 'Choose Image',
+        title: ppbL10n.chooseImg,
         button: {
-          text: 'Insert in Content Block'
+          text: ppbL10n.insertInConBlk
         },
         multiple: false
       });
       prevu.insertImageFrame.on('attach', function() {
-        $('.setting[data-setting="url"]').before('<label class="setting" data-setting="url">' + '<span class="name">Size</span>' + '<input type="text" value="" readonly="">' + '</label>');
+        $('.setting[data-setting="url"]').before('<label class="setting" data-setting="url">' + '<span class="name">' + ppbL10n.size + '</span>' + '<input type="text" value="" readonly="">' + '</label>');
       });
       prevu.insertImageFrame.on('select', function() {
         var $img, ed, img;
@@ -891,7 +891,7 @@ jQuery(function($) {
   dialogAttr.buttons.Done = prevu.savePanel;
   dialogAttr.close = prevu.closeSidePanel();
   $contentPanel.ppbTabs().ppbDialog(dialogAttr);
-  dialogAttr.title = 'Edit row';
+  dialogAttr.title = ppbL10n.editRow;
   dialogAttr.open = prevu.openSidePanel(prevu.editRow);
   dialogAttr.buttons.Done = prevu.saveRow;
   $rowPanel.ppbTabs({
@@ -909,7 +909,7 @@ jQuery(function($) {
     });
   }, 700);
   panels.addInputFieldEventHandlers($rowPanel);
-  dialogAttr.title = 'Add row';
+  dialogAttr.title = ppbL10n.addRow;
   dialogAttr.dialogClass = dialogAttr.open = null;
   dialogAttr.buttons.Done = function() {
     prevu.addRow($addRowDialog.callback);
@@ -918,18 +918,17 @@ jQuery(function($) {
   dialogAttr.height = ppbAjax.ipad ? 268 : 232;
   dialogAttr.width = 340;
   $addRowDialog.ppbDialog(dialogAttr);
-  dialogAttr.title = 'Are you sure';
-  dialogAttr.buttons = {
-    'Yes': function() {
-      if ('function' === typeof prevu.deleteCallback) {
-        prevu.deleteCallback();
-      }
-      delete prevu.deleteCallback;
-      $deleteDialog.ppbDialog('close');
-    },
-    'Cancel': function() {
-      $deleteDialog.ppbDialog('close');
+  dialogAttr.title = ppbL10n.ruSure;
+  dialogAttr.buttons = {};
+  dialogAttr.buttons[ppbL10n.yes] = function() {
+    if ('function' === typeof prevu.deleteCallback) {
+      prevu.deleteCallback();
     }
+    delete prevu.deleteCallback;
+    $deleteDialog.ppbDialog('close');
+  };
+  dialogAttr.buttons[ppbL10n.cancel] = function() {
+    $deleteDialog.ppbDialog('close');
   };
   dialogAttr.height = ppbAjax.ipad ? 241 : 200;
   dialogAttr.width = 430;
@@ -963,10 +962,10 @@ jQuery(function($) {
   delete dialogAttr.open;
   dialogAttr.height = 610;
   dialogAttr.width = 520;
-  dialogAttr.title = 'Insert icon';
+  dialogAttr.title = ppbL10n.insertIcon;
   dialogAttr.buttons = [
     {
-      text: 'Remove icon',
+      text: ppbL10n.removeIcon,
       "class": 'ui-button-link',
       click: function() {
         if ('function' === typeof pickFaIcon.callback) {
@@ -982,7 +981,7 @@ jQuery(function($) {
         $iconPicker.ppbDialog('close');
       }
     }, {
-      text: 'Insert',
+      text: ppbL10n.insert,
       click: function() {
         var attr, iclas, icolr, icon, ilink, isize, style;
         $iconPicker.ppbDialog('close');
@@ -1056,7 +1055,7 @@ jQuery(function($) {
     dialogAttr.height = 700;
     dialogAttr.height = ppbAjax.ipad ? 529 : 502;
     dialogAttr.width = 610;
-    dialogAttr.title = 'Post settings';
+    dialogAttr.title = ppbL10n.postSetting;
     dialogAttr.close = function() {
       ppbAjax.category = $postSettingsDialog.find('.post-category').val();
       ppbAjax.tags = $postSettingsDialog.find('.post-tags').val();
@@ -1308,7 +1307,7 @@ jQuery(function($) {
     var $editBar, $row;
     $row = $('.panel-grid.active');
     if ($row.length !== 1) {
-      alert('Please select a row by touching any of it\'s content blocks to start editing.');
+      alert(ppbL10n.selectRowByTouchingContent);
       return;
     }
     $editBar = $row.children('.pootle-live-editor');
@@ -1319,7 +1318,7 @@ jQuery(function($) {
     var $block, $editBar;
     $block = $('.ppb-block.active');
     if ($block.length !== 1) {
-      alert('Please select a content block to start editing.');
+      alert(ppbL10n.selectConBlkToEdit);
       return;
     }
     $editBar = $block.children('.pootle-live-editor');
@@ -1330,7 +1329,7 @@ jQuery(function($) {
     var $block;
     $block = $('.ppb-block.active');
     if ($block.length !== 1) {
-      alert('Please select a content block to start editing.');
+      alert(ppbL10n.selectConBlkToEdit);
       return;
     }
     prevu.activeEditor = $block.children('.pootle-live-editor-realtime');
@@ -1338,7 +1337,7 @@ jQuery(function($) {
     prevu.insertImage();
   };
   ppbIpad.preview = function() {
-    prevu.sync(null, 'Publish');
+    prevu.sync(null, ppbL10n.publish);
   };
   ppbIpad.postSettings = function() {
     prevu.postSettings();
@@ -1354,12 +1353,12 @@ jQuery(function($) {
     prevu.unSavedChanges = true;
     prevu.saveTmceBlock($('.mce-edit-focus'));
     ppbAjax.data = ppbData;
-    ppbAjax.publish = 'Publish';
+    ppbAjax.publish = ppbL10n.publish;
     prevu.noRedirect = 1;
     if (ppbAjax.title) {
       butt = [
         {
-          text: 'Save Draft',
+          text: ppbL10n.saveDraft,
           click: function() {
             var err, error;
             $setTitleDialog.ppbDialog('close');
@@ -1367,14 +1366,14 @@ jQuery(function($) {
               webkit.messageHandlers.heySwift.postMessage('updatedLoadingPreview');
             } catch (error) {
               err = error;
-              console.log('The native context does not exist yet');
+              console.log(ppbL10n.notiveContextDoesntExist);
             }
             ppbIpad.notice.show(0);
-            ppbAjax.publish = 'Save Draft';
+            ppbAjax.publish = ppbL10n.saveDraft;
             prevu.syncAjax();
           }
         }, {
-          text: 'Publish',
+          text: ppbL10n.publish,
           icons: {
             primary: 'ipad-publish'
           },
@@ -1385,15 +1384,15 @@ jQuery(function($) {
               webkit.messageHandlers.heySwift.postMessage('updatedLoadingPreview');
             } catch (error) {
               err = error;
-              console.log('The native context does not exist yet');
+              console.log(ppbL10n.notiveContextDoesntExist);
             }
             ppbIpad.notice.show(0);
-            ppbAjax.publish = 'Publish';
+            ppbAjax.publish = ppbL10n.publish;
             prevu.syncAjax();
           }
         }
       ];
-      $setTitleDialog.parent().data('action', 'Publish');
+      $setTitleDialog.parent().data('action', ppbL10n.publish);
       $setTitleDialog.ppbDialog('option', 'buttons', butt);
       $setTitleDialog.ppbDialog('open');
       return;
@@ -1402,7 +1401,7 @@ jQuery(function($) {
         webkit.messageHandlers.heySwift.postMessage('updatedLoadingPreview');
       } catch (error) {
         err = error;
-        console.log('The native context does not exist yet');
+        console.log(ppbL10n.notiveContextDoesntExist);
       }
       ppbIpad.notice.show(0);
     }
@@ -1464,7 +1463,7 @@ jQuery(function($) {
     data = id.split('-');
     $t.closest('.panel-grid-cell').addClass('this-cell-is-waiting');
     ppbData.widgets.push({
-      text: '<h2>Hi there,</h2><p>I am a new content block, go ahead, edit me and make me cool...</p>',
+      text: '<h2>' + ppbL10n.hiThere + '</h2><p>' + '</p>',
       info: {
         "class": 'Pootle_PB_Content_Block',
         grid: data[2],
@@ -1560,15 +1559,15 @@ jQuery(function($) {
       items = [
         {
           icon: 'alignleft',
-          tooltip: 'Align left',
+          tooltip: ppbL10n.alignLeft,
           value: 'alignleft'
         }, {
           icon: 'aligncenter',
-          tooltip: 'Align center',
+          tooltip: ppbL10n.alignCenter,
           value: 'aligncenter'
         }, {
           icon: 'alignright',
-          tooltip: 'Align right',
+          tooltip: ppbL10n.alignRight,
           value: 'alignright'
         }
       ];
@@ -1610,7 +1609,7 @@ jQuery(function($) {
       var items;
       items = [
         {
-          text: 'Default',
+          text: ppbL10n["default"],
           value: 'inherit'
         }, {
           text: 'Georgia',
@@ -1706,7 +1705,7 @@ jQuery(function($) {
       ];
       return {
         type: 'listbox',
-        text: 'Font',
+        text: ppbL10n.font,
         icon: false,
         minWidth: 70,
         classes: 'shramee-fonts-control',
@@ -1753,7 +1752,7 @@ jQuery(function($) {
               }
             });
             if (!value) {
-              $('.mce-shramee-fonts-control').find('.mce-txt').html('Font');
+              $('.mce-shramee-fonts-control').find('.mce-txt').html(ppbL10n.font);
               value = 'inherit';
             }
             self.state.set('value', value);
@@ -1765,23 +1764,23 @@ jQuery(function($) {
       var items, lastVal;
       items = [
         {
-          text: 'Elegant shadow',
+          text: ppbL10n.elegantShadow,
           value: 'ppbfost-elegant-shadow'
         }, {
-          text: 'Deep shadow',
+          text: ppbL10n.deepShadow,
           value: 'ppbfost-deep-shadow'
         }, {
-          text: 'Inset shadow',
+          text: ppbL10n.insetShadow,
           value: 'ppbfost-inset-shadow'
         }, {
-          text: 'Retro shadow',
+          text: ppbL10n.retroShadow,
           value: 'ppbfost-retro-shadow'
         }
       ];
       lastVal = '';
       return {
         type: 'listbox',
-        text: 'Font Style',
+        text: ppbL10n.fontStyle,
         icon: false,
         minWidth: 70,
         classes: 'ppbFoStField',
@@ -1821,7 +1820,7 @@ jQuery(function($) {
               }
             });
             if (!value) {
-              $('.mce-ppbFoStField').find('.mce-txt').html('Font Style');
+              $('.mce-ppbFoStField').find('.mce-txt').html(ppbL10n.fontStyle);
               value = 'inherit';
             }
             lastVal = value;
@@ -1853,18 +1852,18 @@ jQuery(function($) {
     $(this).prevuRowInit();
   });
   $('[href="#ppb-live-update-changes"]').click(function() {
-    prevu.sync(null, 'Save Draft');
+    prevu.sync(null, ppbL10n.saveDraft);
   });
   $('[href="#ppb-live-post-settings"]').click(function() {
     $postSettingsDialog.ppbDialog('option', 'buttons', {
       Done: function() {
         $postSettingsDialog.ppbDialog('close');
-        prevu.sync('Publish');
+        prevu.sync(ppbL10n.publish);
       }
     }).ppbDialog('open');
   });
   $('[href="#ppb-live-publish-changes"]').click(function() {
-    prevu.sync(null, 'Publish');
+    prevu.sync(null, ppbL10n.publish);
   });
   $('.ppb-edit-block').click(function() {
     var editorid;
@@ -1881,9 +1880,9 @@ jQuery(function($) {
       return;
     }
     ppbFeaturedImageFrame = wp.media.frames.ppbFeaturedImageFrame = wp.media({
-      title: 'Featured Image',
+      title: ppbL10n.featImg,
       button: {
-        text: 'Set Featured Image'
+        text: ppbL10n.setFeatImg
       },
       multiple: false
     });
@@ -1897,7 +1896,7 @@ jQuery(function($) {
   });
   window.onbeforeunload = function(e) {
     if (prevu.unSavedChanges) {
-      return 'You have unsaved changes! Click \'Update\' in admin bar to save.\n\nYour changes will be lost if you dan\'t save.';
+      return ppbL10n.youHaveUnsaveChanges;
     }
   };
   prevu.resort();
@@ -1952,7 +1951,7 @@ jQuery(function($) {
   };
   $tooltip = $('#ppb-tooltip');
   $body.on('mouseenter', 'a.pbtn,.ppb-fa-icon', function(e) {
-    return $tooltip.show().html('Double click to edit').css({
+    return $tooltip.show().html(ppbL10n.dblClkToEdit).css({
       top: e.clientY,
       left: e.clientX
     });
@@ -1979,7 +1978,7 @@ jQuery(function($) {
       $t = $target.closest('.ppb-tpl');
       id = $t.data('id');
       if ($t.hasClass('pro-inactive')) {
-        ppbNotify('Template ' + id + ' needs <a href="https://www.pootlepress.com/pootle-pagebuilder-pro/" target="_blank">Pootle Pagebuilder Pro</a> active.');
+        ppbNotify(ppbL10n.tplNeedsPPBPro.replace('%tpl%', id));
         return;
       }
       tpl = ppbDesignTpls[id];
