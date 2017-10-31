@@ -192,7 +192,7 @@ if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 				require_once POOTLEPB_DIR . 'inc/pootle-buttons/pootle-button.php';
 			}
 
-			load_plugin_textdomain( 'ppb-panels', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+			load_plugin_textdomain( 'pootle-page-builder', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 			if ( defined( 'WPSEO_VERSION' ) && 0 > version_compare( WPSEO_VERSION, 3 ) ) {
 				add_filter( 'wpseo_pre_analysis_post_content', 'pootlepb_wp_seo_filter', 10, 2 );
 			}

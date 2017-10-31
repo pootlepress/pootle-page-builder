@@ -1,0 +1,2261 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Pootle Pagebuilder\n"
+"POT-Creation-Date: 2017-10-31 15:09+0530\n"
+"PO-Revision-Date: 2017-10-31 15:08+0530\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: pootle-page-builder.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: inc/addon-manager/class-manager.php:93
+msgid "Activation"
+msgstr ""
+
+#: inc/addon-manager/class-manager.php:94
+msgid "Deactivation"
+msgstr ""
+
+#: inc/addon-manager/class-manager.php:321
+msgid "Your "
+msgstr ""
+
+#: inc/addon-manager/class-manager.php:340
+#, php-format
+msgid ""
+"<b>Warning!</b> You're blocking external requests which means you won't be "
+"able to get %s updates. Please add %s to %s."
+msgstr ""
+
+#: inc/addon-manager/inc/class-menu.php:164
+#: inc/addon-manager/inc/class-menu.php:168
+msgid "Save Changes"
+msgstr ""
+
+#: inc/addon-manager/inc/class-menu.php:185
+msgid "API License Activation"
+msgstr ""
+
+#: inc/addon-manager/inc/class-menu.php:186
+msgid "API License Key Status"
+msgstr ""
+
+#: inc/addon-manager/inc/class-menu.php:190
+msgid "API License Key"
+msgstr ""
+
+#: inc/addon-manager/inc/class-menu.php:194
+msgid "API License email"
+msgstr ""
+
+#: inc/addon-manager/inc/class-menu.php:204
+msgid "API License Deactivation"
+msgstr ""
+
+#: inc/addon-manager/inc/class-menu.php:205
+msgid "Deactivate API License Key"
+msgstr ""
+
+#: inc/addon-manager/inc/class-menu.php:294
+msgid "Plugin activated. "
+msgstr ""
+
+#: inc/addon-manager/inc/class-menu.php:300
+msgid "Connection failed to the License Key API server. Try again later."
+msgstr ""
+
+#: inc/addon-manager/inc/class-menu.php:367
+msgid ""
+"The license could not be deactivated. Use the License Deactivation tab to "
+"manually deactivate the license before activating a new license."
+msgstr ""
+
+#: inc/addon-manager/inc/class-menu.php:400
+msgid "Plugin license deactivated. "
+msgstr ""
+
+#: inc/addon-manager/inc/class-menu.php:420
+msgid "Deactivates an API License Key so it can be used on another blog."
+msgstr ""
+
+#: inc/addon-manager/inc/class-plugin-update.php:272
+#, php-format
+msgid ""
+"The license key for %s has expired. You can reactivate or purchase a license "
+"key from your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: inc/addon-manager/inc/class-plugin-update.php:283
+#, php-format
+msgid ""
+"The subscription for %s is on-hold. You can reactivate the subscription from "
+"your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: inc/addon-manager/inc/class-plugin-update.php:294
+#, php-format
+msgid ""
+"The subscription for %s has been cancelled. You can renew the subscription "
+"from your account <a href=\"%s\" target=\"_blank\">dashboard</a>. A new "
+"license key will be emailed to you after your order has been completed."
+msgstr ""
+
+#: inc/addon-manager/inc/class-plugin-update.php:305
+#, php-format
+msgid ""
+"The subscription for %s has expired. You can reactivate the subscription "
+"from your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: inc/addon-manager/inc/class-plugin-update.php:316
+#, php-format
+msgid ""
+"The subscription for %s has been suspended. You can reactivate the "
+"subscription from your account <a href=\"%s\" target=\"_blank\">dashboard</"
+"a>."
+msgstr ""
+
+#: inc/addon-manager/inc/class-plugin-update.php:327
+#, php-format
+msgid ""
+"The subscription for %s is still pending. You can check on the status of the "
+"subscription from your account <a href=\"%s\" target=\"_blank\">dashboard</"
+"a>."
+msgstr ""
+
+#: inc/addon-manager/inc/class-plugin-update.php:338
+#, php-format
+msgid ""
+"The subscription for %s has been placed in the trash and will be deleted "
+"soon. You can purchase a new subscription from your account <a href=\"%s\" "
+"target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: inc/addon-manager/inc/class-plugin-update.php:349
+#, php-format
+msgid ""
+"A subscription for %s could not be found. You can purchase a subscription "
+"from your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: inc/addon-manager/inc/class-plugin-update.php:360
+#, php-format
+msgid ""
+"A license key for %s could not be found. Maybe you forgot to enter a license "
+"key when setting up %s, or the key was deactivated in your account. You can "
+"reactivate or purchase a license key from your account <a href=\"%s\" target="
+"\"_blank\">dashboard</a>."
+msgstr ""
+
+#: inc/addon-manager/inc/class-plugin-update.php:371
+#, php-format
+msgid ""
+"Download permission for %s has been revoked possibly due to a license key or "
+"subscription expiring. You can reactivate or purchase a license key from "
+"your account <a href=\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: inc/addon-manager/inc/class-plugin-update.php:382
+#, php-format
+msgid ""
+"%s has not been activated. Go to the settings page and enter the license key "
+"and license email to activate %s."
+msgstr ""
+
+#: inc/addon-manager/inc/class-plugin-update.php:393
+#, php-format
+msgid ""
+"You changed the subscription for %s, so you will need to enter your new API "
+"License Key in the settings page. The License Key should have arrived in "
+"your email inbox, if not you can get it by logging into your account <a href="
+"\"%s\" target=\"_blank\">dashboard</a>."
+msgstr ""
+
+#: inc/class-admin.php:92
+msgid ""
+"Never miss an important update - Opt-in to our security and feature updates "
+"notifications, and non-sensitive diagnostic tracking with freemius.com"
+msgstr ""
+
+#: inc/class-admin.php:117 inc/class-admin.php:225 inc/class-panels-ui.php:44
+#: inc/revisions.php:67
+msgid "Page Builder"
+msgstr ""
+
+#: inc/class-admin.php:130
+msgid ""
+"You can use Pootle Page Builder to create amazing pages, use addons to "
+"extend functionality."
+msgstr ""
+
+#: inc/class-admin.php:131
+msgid "The page layouts are responsive and fully customizable."
+msgstr ""
+
+#: inc/class-admin.php:225 pootle-page-builder.php:217
+msgid "Home"
+msgstr ""
+
+#: inc/class-admin.php:229 tpl/welcome.php:27
+msgid "Settings"
+msgstr ""
+
+#: inc/class-admin.php:233 tpl/modules.php:9
+msgid "Modules"
+msgstr ""
+
+#: inc/class-admin.php:257
+msgid "Display"
+msgstr ""
+
+#: inc/class-admin.php:260
+msgid "Responsive"
+msgstr ""
+
+#: inc/class-admin.php:265
+msgid "Mobile Width"
+msgstr ""
+
+#: inc/class-admin.php:270
+msgid "Modules insert panel position"
+msgstr ""
+
+#: inc/class-admin.php:275
+msgid "Delete ALL data on uninstall"
+msgstr ""
+
+#: inc/class-admin.php:325 inc/class-admin.php:331
+msgid "Enabled"
+msgstr ""
+
+#: inc/class-admin.php:337
+msgid "Left"
+msgstr ""
+
+#: inc/class-admin.php:341
+msgid "Right"
+msgstr ""
+
+#: inc/class-content-blocks.php:313 inc/live-editor/inc/tpl-dialogs.php:15
+#: inc/vars.php:1239
+msgid "Editor"
+msgstr ""
+
+#: inc/class-content-blocks.php:318
+msgid "Close"
+msgstr ""
+
+#: inc/class-content-blocks.php:329 inc/vars.php:1200
+msgid "Done"
+msgstr ""
+
+#: inc/class-content-blocks.php:344
+msgid "Using WooCommerce?"
+msgstr ""
+
+#: inc/class-content-blocks.php:346
+msgid "Check out our WooCommerce add-on for page builder"
+msgstr ""
+
+#: inc/class-panels-ui.php:72
+msgid "Default Editor"
+msgstr ""
+
+#: inc/class-panels-ui.php:260 inc/live-editor/inc/tpl-dialogs.php:156
+msgid "Untitled"
+msgstr ""
+
+#: inc/class-panels-ui.php:263
+msgid "Unpublished"
+msgstr ""
+
+#: inc/class-panels-ui.php:270
+#, php-format
+msgid "Clone Page: %s"
+msgstr ""
+
+#: inc/funcs.php:46
+msgid "Hex Value"
+msgstr ""
+
+#: inc/live-editor/inc/class-admin.php:103
+msgid "Live Page"
+msgstr ""
+
+#: inc/live-editor/inc/class-admin.php:109
+msgid "Live Post"
+msgstr ""
+
+#: inc/live-editor/inc/class-admin.php:118
+msgid "Save/Publish"
+msgstr ""
+
+#: inc/live-editor/inc/class-admin.php:121
+#: inc/live-editor/inc/class-admin.php:151
+msgid "Save and publish your changes."
+msgstr ""
+
+#: inc/live-editor/inc/class-admin.php:131
+#: inc/live-editor/inc/class-public.php:257
+msgid "Post settings"
+msgstr ""
+
+#: inc/live-editor/inc/class-admin.php:137
+msgid "Save"
+msgstr ""
+
+#: inc/live-editor/inc/class-admin.php:142
+#: inc/live-editor/inc/class-public.php:260
+msgid "Publish"
+msgstr ""
+
+#: inc/live-editor/inc/class-admin.php:148
+msgid "Update"
+msgstr ""
+
+#: inc/live-editor/inc/class-admin.php:169
+msgid "Live edit"
+msgstr ""
+
+#: inc/live-editor/inc/class-admin.php:172
+msgid "Live edit this page with Pootle Pagebuilder"
+msgstr ""
+
+#: inc/live-editor/inc/class-admin.php:283
+msgid "Sorry,"
+msgstr ""
+
+#: inc/live-editor/inc/class-admin.php:284
+msgid "Nonce validation failed..."
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:242
+msgid "Choose Image"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:243
+msgid "Insert in Content Block"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:244
+msgid "Size"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:245
+msgid "Edit row"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:246
+#: inc/live-editor/inc/class-public.php:635
+msgid "Add row"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:247
+msgid "Are you sure"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:248
+msgid "Yes"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:249
+msgid "Cancel"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:250
+msgid "Before sync"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:251
+msgid "After sync"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:252
+msgid "Adding row"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:253
+msgid "Row added"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:254
+msgid "Insert icon"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:255
+msgid "Remove icon"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:256 inc/vars.php:1194
+msgid "Insert"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:258
+msgid ""
+"Please select a row by touching any of it's content blocks to start editing."
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:259
+msgid "Please select a content block to start editing."
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:261
+msgid "Save Draft"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:262
+msgid "The native context does not exist yet"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:263
+msgid "Align left"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:264
+msgid "Align center"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:265
+msgid "Align right"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:266
+#: inc/live-editor/inc/class-public.php:288 inc/vars.php:1226
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:18
+#: ppbpro/inc/ext/photography/inc/class-admin.php:183
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:242
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:257
+msgid "Default"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:267
+msgid "Font"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:268
+msgid "Elegant shadow"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:269
+msgid "Deep shadow"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:270
+msgid "Inset shadow"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:271
+msgid "Retro shadow"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:272
+msgid "Font Style"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:273
+msgid "Featured Image"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:274
+msgid "Set Featured Image"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:275
+msgid ""
+"You have unsaved changes! Click 'Update' in admin bar to save.\n"
+"\n"
+"Your changes will be lost if you dan't save."
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:276
+msgid "Edit content block"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:277
+#, php-format
+msgid "No response from server at %s"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:278
+msgid "Moved row"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:279
+msgid "Double click to edit"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:280
+#, php-format
+msgid "Template %s needs %sPootle Pagebuilder Pro%s active."
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:281
+msgid "Hi there,"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:282
+msgid "I am a new content block, go ahead, edit me and make me cool..."
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:287 inc/vars.php:1225
+msgid "Clear"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:289 inc/vars.php:1227
+msgid "Select Color"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:290 inc/vars.php:1228
+msgid "Current Color"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:529
+msgid "Edit Row"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:532
+msgid "Sort row"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:545
+msgid "Delete Row"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:563
+msgid "Drag content block"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:566
+msgid "Edit Content Block"
+msgstr ""
+
+#: inc/live-editor/inc/class-public.php:594 tpl/metabox-panels.php:97
+msgid "Delete Content"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:10 inc/vars.php:1198 inc/vars.php:1243
+msgid "Style"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:19
+#: inc/live-editor/inc/tpl-dialogs.php:104 inc/vars.php:1248 inc/vars.php:1267
+msgid "Advanced"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:62
+#: inc/live-editor/inc/tpl-dialogs.php:125
+msgid "Back"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:96 inc/vars.php:1259
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:14
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:15
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:27
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:35
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:42
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:49
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:57
+msgid "Background"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:100 inc/vars.php:1263
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:139
+msgid "Layout"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:153
+#: inc/live-editor/inc/tpl-dialogs.php:178
+#, php-format
+msgid "Set title of the %s"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:155
+msgid "Please set the title for the page"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:180
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:194
+msgid "Featured image"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:190
+#: ppbpro/inc/ext/photography/inc/class-admin.php:93
+msgid "Categories"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:207
+msgid "Tags"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:238
+#: inc/live-editor/inc/tpl-dialogs.php:290 tpl/modules-manager.php:14
+msgid "Unlabeled Module"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:361
+msgid "Choose icon"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:365
+msgid "Icon size"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:369
+msgid "Icon color"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:373
+msgid "Icon link"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:377
+msgid "Display inline"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-dialogs.php:381
+msgid "Preview"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-ipad-html.php:189
+msgid "Changes Saved"
+msgstr ""
+
+#: inc/live-editor/inc/tpl-ipad-html.php:193
+msgid "Saving changes and loading preview..."
+msgstr ""
+
+#: inc/live-editor/inc/vars.php:13
+#, php-format
+msgid "Hello %s,"
+msgstr ""
+
+#: inc/live-editor/inc/vars.php:14
+msgid "I am your first row, go ahead, edit me and make me cool..."
+msgstr ""
+
+#: inc/modules/free-modules.php:37
+msgid "Hero Section"
+msgstr ""
+
+#: inc/modules/free-modules.php:45
+msgid "Free photos"
+msgstr ""
+
+#: inc/modules/free-modules.php:49
+msgid "All free photos are from Unsplash.com and can be used for free"
+msgstr ""
+
+#: inc/modules/free-modules.php:53
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:20
+msgid "Image"
+msgstr ""
+
+#: inc/modules/free-modules.php:60
+msgid "Icon"
+msgstr ""
+
+#: inc/modules/free-modules.php:67
+msgid "Button"
+msgstr ""
+
+#: inc/modules/metaslider.php:29 inc/modules/ninja-forms.php:30
+#: inc/vars.php:287 ppbpro/inc/ext/blog-customizer/inc/class-admin.php:115
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:155
+msgid "Please choose..."
+msgstr ""
+
+#: inc/modules/metaslider.php:56
+msgid "Meta Slider"
+msgstr ""
+
+#: inc/modules/metaslider.php:65
+msgid "Choose slider"
+msgstr ""
+
+#: inc/modules/metaslider.php:101
+msgid "Metaslider - Slider"
+msgstr ""
+
+#: inc/modules/metaslider.php:113
+msgid "Meta slider"
+msgstr ""
+
+#: inc/modules/metaslider.php:114
+msgid "Adds awesome meta slider module"
+msgstr ""
+
+#: inc/modules/ninja-forms.php:29
+msgid "Ninja Form"
+msgstr ""
+
+#: inc/modules/ninja-forms.php:75
+msgid "Form ID"
+msgstr ""
+
+#: inc/modules/ninja-forms.php:106
+msgid "Adds awesome ninja form module"
+msgstr ""
+
+#: inc/modules/pootle-cloud.php:80
+msgid "Pootle cloud template"
+msgstr ""
+
+#: inc/modules/pootle-cloud.php:218
+msgid ""
+"Save and use templates across all your Pootle Pagebuilder site with Pootle "
+"Cloud!"
+msgstr ""
+
+#: inc/modules/pootle-slider.php:28
+msgid "Pootle Slider"
+msgstr ""
+
+#: inc/revisions.php:68
+msgid "Page Builder Panels"
+msgstr ""
+
+#: inc/styles-fields.php:138 inc/styles-fields.php:314
+msgid "Remove Image"
+msgstr ""
+
+#: inc/styles-fields.php:139 inc/styles-fields.php:315
+msgid "Select Image"
+msgstr ""
+
+#: inc/styles-fields.php:140 inc/styles-fields.php:316
+msgid "OR"
+msgstr ""
+
+#: inc/styles-fields.php:142 inc/styles-fields.php:318
+msgid "Search Free Photos..."
+msgstr ""
+
+#: inc/styles-fields.php:143 inc/styles-fields.php:319
+msgid "Search Free Photos"
+msgstr ""
+
+#: inc/styles-fields.php:144 inc/styles-fields.php:320
+msgid ""
+"All stock photos are sourced from Unsplash.com and are licensed under "
+"Creative Commons Zero which means you can copy, modify, distribute and use "
+"the photos for free, including commercial purposes, without asking "
+"permission from or providing attribution to the photographer or Unsplash"
+msgstr ""
+
+#: inc/styles-fields.php:331
+msgid "Select Video"
+msgstr ""
+
+#: inc/vantage-extra.php:13
+msgid "Wide Grey"
+msgstr ""
+
+#: inc/vars.php:28 ppbpro/inc/ext/blog-customizer/inc/class-admin.php:173
+msgid "Text color"
+msgstr ""
+
+#: inc/vars.php:35 inc/vars.php:401
+msgid "Background Image"
+msgstr ""
+
+#: inc/vars.php:42 inc/vars.php:288
+msgid "Background color"
+msgstr ""
+
+#: inc/vars.php:49
+msgid "Background color transparency"
+msgstr ""
+
+#: inc/vars.php:58
+msgid "Mobile behaviour"
+msgstr ""
+
+#: inc/vars.php:61
+msgid "Remove margin/padding"
+msgstr ""
+
+#: inc/vars.php:62
+msgid "Keep  margin/padding"
+msgstr ""
+
+#: inc/vars.php:63
+msgid "Center content block"
+msgstr ""
+
+#: inc/vars.php:69 ppbpro/inc/ext/blog-customizer/inc/class-admin.php:213
+msgid "Border"
+msgstr ""
+
+#: inc/vars.php:76
+msgid "Padding"
+msgstr ""
+
+#: inc/vars.php:87
+msgid "Top Margin"
+msgstr ""
+
+#: inc/vars.php:98
+msgid "Bottom Margin"
+msgstr ""
+
+#: inc/vars.php:109
+msgid "Left Margin"
+msgstr ""
+
+#: inc/vars.php:120
+msgid "Width"
+msgstr ""
+
+#: inc/vars.php:131 ppbpro/inc/ext/blog-customizer/inc/class-admin.php:229
+msgid "Rounded corners"
+msgstr ""
+
+#: inc/vars.php:142
+msgid "Inline CSS styles"
+msgstr ""
+
+#: inc/vars.php:149
+msgid "CSS Class"
+msgstr ""
+
+#: inc/vars.php:164
+msgid "Row Layout"
+msgstr ""
+
+#: inc/vars.php:167
+msgid "Standard"
+msgstr ""
+
+#: inc/vars.php:168
+msgid "Full width"
+msgstr ""
+
+#: inc/vars.php:169
+msgid "Full width content"
+msgstr ""
+
+#: inc/vars.php:175
+msgid "Make row go full height"
+msgstr ""
+
+#: inc/vars.php:181
+msgid "Make accordion"
+msgstr ""
+
+#: inc/vars.php:183
+msgid "Keeps the row hidden by default with an icon above it to show the row."
+msgstr ""
+
+#: inc/vars.php:196
+msgid "Accordion text"
+msgstr ""
+
+#: inc/vars.php:199
+msgid "Text displayed above accordion open icon."
+msgstr ""
+
+#: inc/vars.php:204
+msgid "Accordion text Color"
+msgstr ""
+
+#: inc/vars.php:216
+msgid "Make columns the same height"
+msgstr ""
+
+#: inc/vars.php:219
+msgid ""
+"Requires only one content block to be set in each column. Will not preview "
+"in live editor but it will work once published."
+msgstr ""
+
+#: inc/vars.php:223
+msgid "Row animation"
+msgstr ""
+
+#: inc/vars.php:228 inc/vars.php:271 inc/vars.php:423
+msgid "None"
+msgstr ""
+
+#: inc/vars.php:229
+msgid "Fade In Left"
+msgstr ""
+
+#: inc/vars.php:230
+msgid "Fade In Right"
+msgstr ""
+
+#: inc/vars.php:231
+msgid "Fade In Up"
+msgstr ""
+
+#: inc/vars.php:232
+msgid "Fade In Down"
+msgstr ""
+
+#: inc/vars.php:237
+msgid "Minimum Row Height"
+msgstr ""
+
+#: inc/vars.php:243
+msgid ""
+"Minimum height row should have even when content is less. With more content "
+"it will stretch to contain all content and this setting will have no effect."
+msgstr ""
+
+#: inc/vars.php:246
+msgid "Hide row"
+msgstr ""
+
+#: inc/vars.php:252
+msgid "Row Top Margin"
+msgstr ""
+
+#: inc/vars.php:259
+msgid "Row Bottom Margin"
+msgstr ""
+
+#: inc/vars.php:266
+msgid "Gutters"
+msgstr ""
+
+#: inc/vars.php:272
+msgid "Small"
+msgstr ""
+
+#: inc/vars.php:273 ppbpro/inc/ext/photography/inc/class-admin.php:110
+msgid "Medium"
+msgstr ""
+
+#: inc/vars.php:274 ppbpro/inc/ext/photography/inc/class-admin.php:111
+msgid "Large"
+msgstr ""
+
+#: inc/vars.php:275
+msgid "Extra large"
+msgstr ""
+
+#: inc/vars.php:282
+msgid "Set Background"
+msgstr ""
+
+#: inc/vars.php:289
+msgid "Background Gradient"
+msgstr ""
+
+#: inc/vars.php:290
+msgid "Background image"
+msgstr ""
+
+#: inc/vars.php:291
+msgid "Background video"
+msgstr ""
+
+#: inc/vars.php:305
+msgid "Background Color"
+msgstr ""
+
+#: inc/vars.php:322
+msgid "Choose a preset..."
+msgstr ""
+
+#: inc/vars.php:323
+msgid "Alihossein"
+msgstr ""
+
+#: inc/vars.php:324
+msgid "Aqua"
+msgstr ""
+
+#: inc/vars.php:325
+msgid "Aubergine"
+msgstr ""
+
+#: inc/vars.php:326
+msgid "Autumn"
+msgstr ""
+
+#: inc/vars.php:327
+msgid "Back To Earth"
+msgstr ""
+
+#: inc/vars.php:328
+msgid "Clouds"
+msgstr ""
+
+#: inc/vars.php:329
+msgid "Day Tripper"
+msgstr ""
+
+#: inc/vars.php:330
+msgid "Dusk"
+msgstr ""
+
+#: inc/vars.php:331
+msgid "Endless River"
+msgstr ""
+
+#: inc/vars.php:332
+msgid "Frost"
+msgstr ""
+
+#: inc/vars.php:333
+msgid "Haikus"
+msgstr ""
+
+#: inc/vars.php:334
+msgid "Mauve"
+msgstr ""
+
+#: inc/vars.php:335
+msgid "Royal"
+msgstr ""
+
+#: inc/vars.php:336
+msgid "Sea Blizz"
+msgstr ""
+
+#: inc/vars.php:337
+msgid "SoundCloud"
+msgstr ""
+
+#: inc/vars.php:338
+msgid "Sunrise"
+msgstr ""
+
+#: inc/vars.php:350
+msgid "Gradient Type"
+msgstr ""
+
+#: inc/vars.php:355
+msgid "Linear"
+msgstr ""
+
+#: inc/vars.php:356
+msgid "Radial"
+msgstr ""
+
+#: inc/vars.php:357
+msgid "Slanting"
+msgstr ""
+
+#: inc/vars.php:362
+msgid "First Color"
+msgstr ""
+
+#: inc/vars.php:369
+msgid "Second Color"
+msgstr ""
+
+#: inc/vars.php:376
+msgid "Gradient transparency"
+msgstr ""
+
+#: inc/vars.php:387
+msgid "Image under gradient"
+msgstr ""
+
+#: inc/vars.php:408 inc/vars.php:449
+msgid "Overlay color transparency"
+msgstr ""
+
+#: inc/vars.php:419
+msgid "Row effect (e.g parallax)"
+msgstr ""
+
+#: inc/vars.php:424
+msgid "Parallax"
+msgstr ""
+
+#: inc/vars.php:425
+msgid "Fixed parallax"
+msgstr ""
+
+#: inc/vars.php:426
+msgid "Ken burns"
+msgstr ""
+
+#: inc/vars.php:431
+msgid "Background Image Size"
+msgstr ""
+
+#: inc/vars.php:436
+msgid "No setting"
+msgstr ""
+
+#: inc/vars.php:437
+msgid "100% width"
+msgstr ""
+
+#: inc/vars.php:438
+msgid "Cover"
+msgstr ""
+
+#: inc/vars.php:443
+msgid "Overlay color on image"
+msgstr ""
+
+#: inc/vars.php:467 ppbpro/inc/ext/page-customizer/includes/vars.php:28
+msgid "Background Video"
+msgstr ""
+
+#: inc/vars.php:474
+msgid "Responsive Image"
+msgstr ""
+
+#: inc/vars.php:489
+msgid "Inline CSS Styles"
+msgstr ""
+
+#: inc/vars.php:495
+msgid "Row CSS Class"
+msgstr ""
+
+#: inc/vars.php:501
+msgid "Column CSS Class"
+msgstr ""
+
+#: inc/vars.php:1195
+msgid "cancel"
+msgstr ""
+
+#: inc/vars.php:1196
+msgid "Delete"
+msgstr ""
+
+#: inc/vars.php:1197
+msgid "Duplicate"
+msgstr ""
+
+#: inc/vars.php:1199
+msgid "Edit"
+msgstr ""
+
+#: inc/vars.php:1201
+msgid "Want to undo?"
+msgstr ""
+
+#: inc/vars.php:1202 ppbpro/inc/ext/woocommerce/inc/class-admin.php:150
+msgid "Add"
+msgstr ""
+
+#: inc/vars.php:1205
+msgid "Columns deleted"
+msgstr ""
+
+#: inc/vars.php:1206
+msgid "Content deleted"
+msgstr ""
+
+#: inc/vars.php:1207
+msgid ""
+"Are you sure you want to load this layout? It will overwrite your current "
+"page."
+msgstr ""
+
+#: inc/vars.php:1208
+#, php-format
+msgid "Edit %s Widget"
+msgstr ""
+
+#: inc/vars.php:1209
+msgid "Style Widget"
+msgstr ""
+
+#: inc/vars.php:1279
+msgid "WooCommerce builder (Product)"
+msgstr ""
+
+#: inc/vars.php:1280
+msgid ""
+"Take total control of your WooCommerce product page, requires WooCommerce "
+"builder (Shop)"
+msgstr ""
+
+#: inc/vars.php:1285 inc/vars.php:1335
+msgid "WooBuilder"
+msgstr ""
+
+#: inc/vars.php:1291
+msgid "WooCommerce builder (Shop)"
+msgstr ""
+
+#: inc/vars.php:1292
+msgid ""
+"Pootle Pagebuilder for WooCommerce brings powerful WooCommerce features into "
+"page builder. Create stunning pages featuring your products by id, category, "
+"attribute, best-selling, top rated and on-sale, plus use Pootle Pagebuilder "
+"on product pages and with WooCommerce Tab Manager."
+msgstr ""
+
+#: inc/vars.php:1299
+msgid "pootle page builder blog customizer"
+msgstr ""
+
+#: inc/vars.php:1300
+msgid ""
+"Blog customizer for Pootle Pagebuilder helps you create a beautiful blog page"
+msgstr ""
+
+#: inc/vars.php:1307
+msgid "Page customizer"
+msgstr ""
+
+#: inc/vars.php:1308
+msgid ""
+"Page customizer adds options for individual pages. Add a fullscreen "
+"background video, change page background image and color, change header "
+"background image and color. Hide header, titles, breadcrumbs, sidebar and "
+"footer. Mobile options to change background image and color for phones and "
+"tablets."
+msgstr ""
+
+#: inc/vars.php:1315
+msgid "Pootle page builder Photography add on"
+msgstr ""
+
+#: inc/vars.php:1316
+msgid "Create stunning slideshows and galleries in minutes."
+msgstr ""
+
+#: inc/vars.php:1323
+msgid "pootle page builder one pager"
+msgstr ""
+
+#: inc/vars.php:1324
+msgid ""
+"pootle page builder one pager helps you to create beautiful one page "
+"websites with any theme."
+msgstr ""
+
+#: inc/vars.php:1329
+msgid "Pootle Pagebuilder Business Pack"
+msgstr ""
+
+#: inc/vars.php:1330
+msgid ""
+"Add Tabs, Accordions, Testimonials, Incrementing numbers and Google Maps "
+"easily in Pootle Pagebuilder Pro."
+msgstr ""
+
+#: inc/vars.php:1339
+msgid "Pootle cloud"
+msgstr ""
+
+#: inc/vars.php:1340
+msgid ""
+"Pootle cloud will let you save your designs to the cloud so that you can "
+"reuse them, either on the website you are working on, or any Pootle "
+"Pagebuilder site :)"
+msgstr ""
+
+#: inc/vars.php:1345
+msgid "Pootle_Cloud"
+msgstr ""
+
+#: ppbpro/class-ppbpro.php:139
+#, php-format
+msgid ""
+"Pootle Page Builder Pro requires Pootle Pagebuilder,%sClick here%s to "
+"install Pootle Pagebuilder."
+msgstr ""
+
+#: ppbpro/class-ppbpro.php:140
+msgid "Install Pootle Pagebuilder"
+msgstr ""
+
+#: ppbpro/class-ppbpro.php:193
+#, php-format
+msgid ""
+"Welcome to Pootle Pagebuilder pro. Go to Pootle Pagebuilder pro %saddons page"
+"%s to toggle addons."
+msgstr ""
+
+#: ppbpro/class-ppbpro.php:195
+msgid "Hi there!"
+msgstr ""
+
+#: ppbpro/class-ppbpro.php:197
+msgid "Add ons Page"
+msgstr ""
+
+#: ppbpro/inc/class-admin.php:51
+msgid "Templates"
+msgstr ""
+
+#: ppbpro/inc/class-admin.php:123
+msgid "CSS for Row Elements"
+msgstr ""
+
+#: ppbpro/inc/class-admin.php:124
+msgid "Styles with selector here..."
+msgstr ""
+
+#: ppbpro/inc/class-admin.php:141
+msgid "Photo Gallery"
+msgstr ""
+
+#: ppbpro/inc/class-admin.php:148
+msgid "Blog posts"
+msgstr ""
+
+#: ppbpro/inc/class-admin.php:155
+msgid "WooCommerce"
+msgstr ""
+
+#: ppbpro/inc/class-admin.php:162
+msgid "One Pager Section"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:73
+msgid "Posts"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:95
+msgid "Show posts"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:102
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:179
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:187
+msgid "Category"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:105
+msgid "Leave blank to use all categories"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:111
+msgid "Order by"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:116
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:244
+msgid "Date"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:117
+msgid "Post ID"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:118
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:247
+msgid "Random"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:119
+msgid "Most comments"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:125
+msgid "Show posts with featured images only"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:132
+msgid "Show posts pagination"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:152
+msgid "<div class=\"ppb-custo-layout-options\">"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:159
+msgid "Title font size"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:182
+msgid "Text Position"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:186
+msgid "Center middle"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:187
+msgid "Center bottom"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:188
+msgid "Left bottom"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:198
+msgid "Square"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:199
+msgid "Rectangle"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:200
+msgid "Circle"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:206
+msgid "Show excerpt"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:222
+msgid "Add gutters"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:236
+msgid "Show date"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:240
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:253
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:265
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:279
+msgid "Do not show"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:241
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:254
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:266
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:280
+msgid "Show above title"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:242
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:255
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:267
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:281
+msgid "Show below title"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:243
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:256
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:268
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:282
+msgid "Show below except"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:249
+msgid "Show author"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:262
+msgid "Show categories"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:275
+msgid "Show comments"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:288
+msgid "</div><!--.ppb-custo-layout-options-->"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:304
+msgid "across"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-admin.php:309
+msgid "down"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-public.php:110
+msgid "Previous"
+msgstr ""
+
+#: ppbpro/inc/ext/blog-customizer/inc/class-public.php:113
+msgid "Next"
+msgstr ""
+
+#: ppbpro/inc/ext/one-pager/inc/class-admin.php:52
+msgid "One Pager"
+msgstr ""
+
+#: ppbpro/inc/ext/one-pager/inc/class-admin.php:65
+msgid "One pager menu item"
+msgstr ""
+
+#: ppbpro/inc/ext/one-pager/inc/class-admin.php:107
+msgid "Add to Menu"
+msgstr ""
+
+#: ppbpro/inc/ext/one-pager/inc/class-admin.php:219
+msgid "Section name"
+msgstr ""
+
+#: ppbpro/inc/ext/one-pager/inc/class-admin.php:220
+msgid "Name your section"
+msgstr ""
+
+#: ppbpro/inc/ext/one-pager/inc/class-admin.php:226
+msgid "Navigation offset"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/class-public-styles.php:127
+msgid "Sorry, your browser does not support HTML5 video."
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:19
+msgid "Color"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:21
+msgid "Video"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:36
+msgid "Responsive image"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:43
+msgid "Page background image"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:50
+msgid "Background attachment"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:58
+msgid "Page background color"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:66
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:73
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:80
+msgid "Header"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:67
+msgid "Hide header"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:74
+msgid "Header background image"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:81
+msgid "Header background color"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:89
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:96
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:103
+msgid "Content"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:90
+msgid "Hide breadcrumbs"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:97
+msgid "Hide sidebar"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:104
+msgid "Hide title"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:112
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:119
+msgid "Footer"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:113
+msgid "Hide footer"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:120
+msgid "Footer background color"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:128
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:135
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:142
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:149
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:156
+msgid "Mobile"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:129
+msgid "Page background image for Mobile view"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:136
+msgid "Page background color for Mobile view"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:143
+msgid "Hide footer in Mobile view"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:150
+msgid "Hide header in Mobile view"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/includes/vars.php:157
+msgid "Hide sidebar in Mobile view"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/init.php:170
+#: ppbpro/inc/ext/page-customizer/init.php:179
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/init.php:212
+msgid "Page Customizer"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/init.php:227
+msgid "Customize Page"
+msgstr ""
+
+#: ppbpro/inc/ext/page-customizer/init.php:230
+msgid "Customize this page in customizer"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:56
+msgid "Photos"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:76
+msgid "Show"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:79
+msgid "Please choose"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:80
+msgid "Slider"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:81
+msgid "Gallery"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:87
+msgid "Source"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:90
+msgid "Media library"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:91
+msgid "Unsplash"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:92
+msgid "Recent Posts"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:94
+msgid "Taxonomy"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:100
+msgid "Max slides"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:106
+msgid "Image size"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:109
+msgid "Thumbnail"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:117
+msgid "Slider animation"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:120
+msgid "Fade"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:121
+msgid "Slide"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:122
+msgid "Ken Burns"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:123
+msgid "Ribbon"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:129
+#: ppbpro/inc/ext/photography/inc/class-admin.php:201
+msgid "Stretch to full width of screen"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:135
+msgid "Slider navigation arrows"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:141
+msgid "Slider pagination"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:147
+#: ppbpro/inc/ext/photography/inc/class-admin.php:207
+msgid "Show title"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:153
+msgid "Autoplay speed"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:156
+msgid "Default 5000ms."
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:161
+msgid "Animation speed"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:164
+msgid "Default 500ms."
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:169
+msgid "Gallery type"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:172
+msgid "Normal Grid"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:173
+msgid "Masonry"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:174
+msgid "Photo Listing"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:180
+msgid "Columns"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:210
+msgid "Never"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:211
+msgid "Always"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:212
+msgid "On mouse over"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:226
+msgid "Link"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:229
+msgid "No link"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:230
+msgid "Large image"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:231
+msgid "Lightbox"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:232
+msgid "Post page"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:238
+msgid "Link Target"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:241
+msgid "Same window"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:242
+msgid "New window"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:278
+msgid "Select Images"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:282
+msgid "Search Unsplash"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:298
+msgid "Choose..."
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:310
+msgid "No public custom taxonomies found!"
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:319
+#, php-format
+msgid "Choose Some %s..."
+msgstr ""
+
+#: ppbpro/inc/ext/photography/inc/class-admin.php:323
+#, php-format
+msgid "No %s found!..."
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:58
+msgid "Please Choose..."
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:105
+msgid "Products"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:145
+msgid "No products found"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:156
+msgid "Product categories"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:157
+msgid "Individual products"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:158
+msgid "Products by category"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:159
+msgid "Products on sale"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:160
+msgid "Best selling products"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:161
+msgid "Featured products"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:162
+msgid "Top rated products"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:163
+msgid "Products by attribute"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:168
+msgid "Display as"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:173
+msgid "Grid"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:174
+msgid "Carousel"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:195
+msgid "Attribute"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:203
+msgid "Filters"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:211
+msgid "Product IDs"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:219
+msgid "Number of products"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:228
+msgid "Number of columns"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:237
+msgid "Order By"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:243
+msgid "Title"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:245
+msgid "Menu Order"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:246
+msgid "ID"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:252
+msgid "Order"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:258
+msgid "Ascending"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:259
+msgid "Descending"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:264
+msgid "Hide price"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:272
+msgid "Hide product name"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:280
+msgid "Hide ratings"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:288
+msgid "Hide add to cart"
+msgstr ""
+
+#: ppbpro/inc/ext/woocommerce/inc/class-admin.php:308
+msgid ""
+"WooCommerce needs to be installed and activated for pootle page builder add "
+"on to work."
+msgstr ""
+
+#: ppbpro/inc/tpl-addons.php:22
+msgid "Pootle Page Builder Pro"
+msgstr ""
+
+#: ppbpro/inc/tpl-addons.php:49 tpl/modules-plugins.php:132
+#, php-format
+msgid "By %s"
+msgstr ""
+
+#: ppbpro/inc/tpl-addons.php:56 tpl/modules-plugins.php:46
+#: tpl/modules-plugins.php:97 tpl/modules-plugins.php:143
+msgid "Activate"
+msgstr ""
+
+#: ppbpro/inc/tpl-addons.php:62 tpl/modules-plugins.php:103
+#: tpl/modules-plugins.php:140
+msgid "This addon is active!"
+msgstr ""
+
+#: ppbpro/inc/tpl-addons.php:64 tpl/modules-plugins.php:105
+msgid "Hit \"Save Changes\" to activate!"
+msgstr ""
+
+#: ppbpro/inc/tpl-addons.php:68 tpl/modules-plugins.php:109
+msgid "Deactivate"
+msgstr ""
+
+#: ppbpro/inc/tpl-templates.php:82
+msgid "Starter Templates"
+msgstr ""
+
+#: ppbpro/inc/tpl-templates.php:91
+msgid "Add Page with this template"
+msgstr ""
+
+#: tpl/add.php:11
+msgid "If you are not automatically redirected."
+msgstr ""
+
+#: tpl/add.php:13
+msgid "Click Here to Create New page with Pootle Page Builder."
+msgstr ""
+
+#: tpl/addons.php:44
+msgid "Pootle Page Builder Add-ons"
+msgstr ""
+
+#: tpl/metabox-panels.php:12 tpl/metabox-panels.php:106
+msgid "Use Existing Page Layout"
+msgstr ""
+
+#: tpl/metabox-panels.php:39
+msgid "Add Row"
+msgstr ""
+
+#: tpl/metabox-panels.php:44
+msgid "How many columns do you want your row to have? "
+msgstr ""
+
+#: tpl/metabox-panels.php:45
+msgid "You can adjust the widths later"
+msgstr ""
+
+#: tpl/metabox-panels.php:69
+#, php-format
+msgid ""
+"Welcome to Page Builder %s! Click the 'Add Row' button above to start "
+"building your page."
+msgstr ""
+
+#: tpl/metabox-panels.php:71
+#, php-format
+msgid ""
+"Welcome back to Page Builder %s! You can now also use existing pages as a "
+"template to start your page and save you time!"
+msgstr ""
+
+#: tpl/metabox-panels.php:73
+#, php-format
+msgid "Welcome to Page Builder %s! You know what to do."
+msgstr ""
+
+#: tpl/metabox-panels.php:92
+msgid "Remove Row"
+msgstr ""
+
+#: tpl/metabox-panels.php:108
+msgid "Page Layout"
+msgstr ""
+
+#: tpl/metabox-panels.php:112
+msgid "Select Layout"
+msgstr ""
+
+#: tpl/metabox-panels.php:117
+msgid "Untitled Layout"
+msgstr ""
+
+#: tpl/metabox-panels.php:126
+msgid "Row Visual Style"
+msgstr ""
+
+#: tpl/metabox-panels.php:131
+msgid "Changing to Page Builder"
+msgstr ""
+
+#: tpl/metabox-panels.php:132 tpl/metabox-panels.php:144
+msgid "I know what I'm doing"
+msgstr ""
+
+#: tpl/metabox-panels.php:133
+msgid "Yep, I'll stop and create a new page"
+msgstr ""
+
+#: tpl/metabox-panels.php:136
+msgid ""
+"Slow down tiger! Do you realise that changing to Page Builder for this page "
+"will make all your page content disappear forever?"
+msgstr ""
+
+#: tpl/metabox-panels.php:138
+msgid "Why not create a new page instead?"
+msgstr ""
+
+#: tpl/metabox-panels.php:143
+msgid "Changing to the default editor"
+msgstr ""
+
+#: tpl/metabox-panels.php:145
+msgid "I love Page Builder, keep me here"
+msgstr ""
+
+#: tpl/metabox-panels.php:148
+msgid ""
+"Ummm... if you go back to the default editor you'll loose all your content. "
+"Are you sure you want to loose all that hard work you've done?"
+msgstr ""
+
+#: tpl/metabox-panels.php:152
+msgid "No empty column found"
+msgstr ""
+
+#: tpl/metabox-panels.php:155
+msgid ""
+"You can only remove an empty column, please move or delete content from the "
+"column you wish to remove."
+msgstr ""
+
+#: tpl/modules-manager.php:38
+msgid "Disabled Modules"
+msgstr ""
+
+#: tpl/modules-manager.php:39
+msgid "Drag modules here to remove them from live editor."
+msgstr ""
+
+#: tpl/modules-manager.php:57
+msgid "Enabled Modules"
+msgstr ""
+
+#: tpl/modules-manager.php:58
+msgid "These addons will be available in live editor."
+msgstr ""
+
+#: tpl/modules-plugins.php:17
+msgid "Free Module Plugins"
+msgstr ""
+
+#: tpl/modules-plugins.php:43
+msgid "This module is active!"
+msgstr ""
+
+#: tpl/modules-plugins.php:48 tpl/modules-plugins.php:145
+msgid "Install"
+msgstr ""
+
+#: tpl/modules-plugins.php:62
+msgid "Pro Module Addons"
+msgstr ""
+
+#: tpl/modules.php:10
+msgid "Manager"
+msgstr ""
+
+#: tpl/modules.php:16
+msgid "Pootle Page Builder Modules"
+msgstr ""
+
+#: tpl/settings.php:10
+msgid "Pootle Page Builder"
+msgstr ""
+
+#: tpl/settings.php:22
+msgid "General"
+msgstr ""
+
+#: tpl/welcome.php:14
+msgid "Welcome to Pootle Pagebuilder"
+msgstr ""
+
+#: tpl/welcome.php:17
+msgid ""
+"Thank you for using Pootle Pagebuilder. The aim of Pootle Pagebuilder is to "
+"help you create compelling WordPress pages more easily. We hope you like it."
+msgstr ""
+
+#: tpl/welcome.php:25
+msgid "Tour"
+msgstr ""
+
+#: tpl/welcome.php:28
+msgid "Docs"
+msgstr ""
+
+#: tpl/welcome.php:29
+#, php-format
+msgid "Version %s"
+msgstr ""
+
+#: tpl/welcome.php:34
+msgid "Free features"
+msgstr ""
+
+#: tpl/welcome.php:37
+msgid "Basic usage"
+msgstr ""
+
+#: tpl/welcome.php:39
+msgid "Adding drag and drop modules into page"
+msgstr ""
+
+#: tpl/welcome.php:41
+msgid "Adding a hero photo to the top of your page"
+msgstr ""
+
+#: tpl/welcome.php:43
+msgid "Snap to grid for pixel perfect layout"
+msgstr ""
+
+#: tpl/welcome.php:45
+msgid "Row Animations"
+msgstr ""
+
+#: tpl/welcome.php:47
+msgid "Background image effects (parallax)"
+msgstr ""
+
+#: tpl/welcome.php:49
+msgid "Gradient backgrounds"
+msgstr ""
+
+#: tpl/welcome.php:51
+msgid "Accordians"
+msgstr ""
+
+#: tpl/welcome.php:53
+msgid "Adding icons"
+msgstr ""
+
+#: tpl/welcome.php:57
+msgid "Pro features"
+msgstr ""
+
+#: tpl/welcome.php:59
+msgid "WooCommerce Builder (for individual products)"
+msgstr ""
+
+#: tpl/welcome.php:61
+msgid "WooCommerce Builder (for your shop pages)"
+msgstr ""
+
+#: tpl/welcome.php:63
+msgid "Blog and Posts customizer"
+msgstr ""
+
+#: tpl/welcome.php:65
+msgid "Create landing pages, sale pages and squeeze pages"
+msgstr ""
+
+#: tpl/welcome.php:67
+msgid "One Page websites"
+msgstr ""
+
+#: tpl/welcome.php:69
+msgid "Pootle slider"
+msgstr ""
+
+#: tpl/welcome.php:71
+msgid "Pro slideshows and galleries"
+msgstr ""
+
+#: tpl/welcome.php:73
+msgid "Starter templates"
+msgstr ""
+
+#: wp-sdk/includes/class-fs-plugin-updater.php:565
+msgid "Unable to connect to the filesystem. Please confirm your credentials."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Pootle Pagebuilder"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+#. Author URI of the plugin/theme
+msgid "http://pootlepress.com/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Pootle Pagebuilder is a front-end, drag and drop page builder that makes it "
+"easy to create beautiful WordPress pages and posts."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Pootlepress"
+msgstr ""
