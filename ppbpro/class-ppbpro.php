@@ -135,10 +135,13 @@ class Pootle_Page_Builder_Pro extends Pootle_Page_Builder_Pro_Framework {
 		?>
 		<div id="message" class="error">
 			<p>
-				Pootle Page Builder Pro requires pootle page builder,
-				<a href="<?php echo admin_url() ?>/plugin-install.php?tab=plugin-information&amp;plugin=pootle-page-builder&amp;TB_iframe=true&amp;width=772&amp;height=429" class="thickbox" aria-label="Install pootle page builder" data-title="pootle page builder">
-					Click here
-				</a> to install pootle page builder.
+				<?php printf(
+					_e( 'Pootle Page Builder Pro requires Pootle Pagebuilder,%sClick here%s to install Pootle Pagebuilder.', 'pootle-page-builder' ),
+					'<a class="thickbox" aria-label="' . __( 'Install Pootle Pagebuilder', 'pootle-page-builder' ) . '" data-title="Pootle Pagebuilder" ' .
+					 'href="' . admin_url() . '/plugin-install.php?tab=plugin-information&amp;plugin=pootle-page-builder&amp;TB_iframe=true&amp;width=772&amp;height=429">',
+					'</a>'
+					); ?>
+
 			</p>
 		</div>
 		<?php
@@ -187,11 +190,11 @@ class Pootle_Page_Builder_Pro extends Pootle_Page_Builder_Pro_Framework {
 	 */
 	public function activated() {
 		$url = admin_url( 'admin.php?page=page_builder_pro' );
-		$welcome = 'Welcome to pootle page builder pro. Go to pootle page builder pro %saddons page%s to toggle addons.';
+		$welcome = __( 'Welcome to Pootle Pagebuilder pro. Go to Pootle Pagebuilder pro %saddons page%s to toggle addons.', 'pootle-page-builder' );
 		$msg =
-			'<h3>' . __( 'Hi there!' ) . '</h3>' .
-			sprintf( __( $welcome ), "<a href='$url'>", '</a>' ) .
-			"\n\n<a class='button pootle' href='$url'>" . __( 'Add ons Page' ) . '</a>';
+			'<h3>' . __( 'Hi there!', 'pootle-page-builder' ) . '</h3>' .
+			sprintf( $welcome, "<a href='$url'>", '</a>' ) .
+			"\n\n<a class='button pootle' href='$url'>" . __( 'Add ons Page', 'pootle-page-builder' ) . '</a>';
 
 
 		$notices = get_option( 'pootlepb_admin_notices', array() );

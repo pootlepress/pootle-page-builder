@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Pootle Post Builder Addon main class
  * @static string $token Plugin token
@@ -7,14 +8,7 @@
  * @static string $path Plugin root dir path
  * @static string $version Plugin version
  */
-class PPB_Post_Builder_Addon{
-
-	/**
-	 * @var 	PPB_Post_Builder_Addon Instance
-	 * @access  private
-	 * @since 	1.0.0
-	 */
-	private static $_instance = null;
+class PPB_Post_Builder_Addon {
 
 	/**
 	 * @var     string Token
@@ -22,34 +16,55 @@ class PPB_Post_Builder_Addon{
 	 * @since   1.0.0
 	 */
 	public static $token;
-
 	/**
 	 * @var     string Version
 	 * @access  public
 	 * @since   1.0.0
 	 */
 	public static $version;
-
 	/**
-	 * @var 	string Plugin main __FILE__
+	 * @var  string Plugin main __FILE__
 	 * @access  public
-	 * @since 	1.0.0
+	 * @since  1.0.0
 	 */
 	public static $file;
-
 	/**
-	 * @var 	string Plugin directory url
+	 * @var  string Plugin directory url
 	 * @access  public
-	 * @since 	1.0.0
+	 * @since  1.0.0
 	 */
 	public static $url;
-
 	/**
-	 * @var 	string Plugin directory path
+	 * @var  string Plugin directory path
 	 * @access  public
-	 * @since 	1.0.0
+	 * @since  1.0.0
 	 */
 	public static $path;
+	/**
+	 * @var  PPB_Post_Builder_Addon Instance
+	 * @access  private
+	 * @since  1.0.0
+	 */
+	private static $_instance = null;
+
+	/**
+	 * Constructor function.
+	 *
+	 * @param string $file __FILE__ of the main plugin
+	 *
+	 * @access  private
+	 * @since   1.0.0
+	 */
+	private function __construct( $file ) {
+
+		self::$token   = 'ppb-post-builder';
+		self::$file    = $file;
+		self::$url     = plugin_dir_url( $file );
+		self::$path    = plugin_dir_path( $file );
+		self::$version = '1.0.0';
+
+		add_action( 'init', array( $this, 'init' ) );
+	} // End instance()
 
 	/**
 	 * Main Pootle Post Builder Addon Instance
@@ -63,24 +78,8 @@ class PPB_Post_Builder_Addon{
 		if ( null == self::$_instance ) {
 			self::$_instance = new self( $file );
 		}
+
 		return self::$_instance;
-	} // End instance()
-
-	/**
-	 * Constructor function.
-	 * @param string $file __FILE__ of the main plugin
-	 * @access  private
-	 * @since   1.0.0
-	 */
-	private function __construct( $file ) {
-
-		self::$token   =   'ppb-post-builder';
-		self::$file    =   $file;
-		self::$url     =   plugin_dir_url( $file );
-		self::$path    =   plugin_dir_path( $file );
-		self::$version =   '1.0.0';
-
-		add_action( 'init', array( $this, 'init' ) );
 	} // End __construct()
 
 	/**
@@ -111,7 +110,9 @@ class PPB_Post_Builder_Addon{
 
 	/**
 	 * Adds chosen post types to pb supported post types
+	 *
 	 * @param array $post_types
+	 *
 	 * @action pootlepb_builder_post_types
 	 * @return array
 	 */
@@ -123,13 +124,16 @@ class PPB_Post_Builder_Addon{
 
 	/**
 	 * Marks this add on as active on
+	 *
 	 * @param array $active Active add ons
+	 *
 	 * @return array Active add ons
 	 * @since 1.0.0
 	 */
 	public function add_on_active( $active ) {
 		// To allows ppb add ons page to fetch name, description etc.
 		$active[ self::$token ] = self::$file;
+
 		return $active;
 	}
 }

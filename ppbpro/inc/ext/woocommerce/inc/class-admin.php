@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Pootle Slider Admin class
  * @property string $token Plugin token
@@ -6,65 +7,65 @@
  * @property string $path Plugin root dir path
  * @property string $version Plugin version
  */
-class pootle_page_builder_for_WooCommerce_Admin{
+class pootle_page_builder_for_WooCommerce_Admin {
+	/**
+	 * @var  pootle_page_builder_for_WooCommerce_Admin Instance
+	 * @access  private
+	 * @since  1.0.0
+	 */
+	private static $_instance = null;
 	/** Plugin token */
 	public $token;
-
 	/** Plugin url */
 	public $url;
-
 	/** Plugin path */
 	public $path;
-
 	/** Plugin version */
 	public $version;
-
 	/** Plugin version */
 	public $wc_attributes;
 
 	/**
-	 * @var 	pootle_page_builder_for_WooCommerce_Admin Instance
+	 * Constructor function.
 	 * @access  private
-	 * @since 	1.0.0
+	 * @since  1.0.0
 	 */
-	private static $_instance = null;
+	private function __construct() {
+		$this->token   = pootle_page_builder_for_WooCommerce::$token;
+		$this->url     = pootle_page_builder_for_WooCommerce::$url;
+		$this->path    = pootle_page_builder_for_WooCommerce::$path;
+		$this->version = pootle_page_builder_for_WooCommerce::$version;
+	} // End instance()
 
 	/**
 	 * Main Pootle Slider Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
 	 * @return pootle_page_builder_for_WooCommerce instance
-	 * @since 	1.0.0
+	 * @since  1.0.0
 	 */
 	public static function instance() {
 		if ( null == self::$_instance ) {
 			self::$_instance = new self();
 		}
-		return self::$_instance;
-	} // End instance()
 
-	/**
-	 * Constructor function.
-	 * @access  private
-	 * @since 	1.0.0
-	 */
-	private function __construct() {
-		$this->token   =   pootle_page_builder_for_WooCommerce::$token;
-		$this->url     =   pootle_page_builder_for_WooCommerce::$url;
-		$this->path    =   pootle_page_builder_for_WooCommerce::$path;
-		$this->version =   pootle_page_builder_for_WooCommerce::$version;
+		return self::$_instance;
 	} // End __construct()
 
 	public function admin_enqueue() {
 		wp_enqueue_script( $this->token . '-admin-js', $this->url . '/assets/admin.js', array( 'jquery' ) );
 
 		//Getting attributes and filters
-		$this->wc_attributes = array( '' => 'Please Choose...' );
-		$filters = array();
-		foreach( get_object_taxonomies( 'product', 'object' ) as $tax ) {
+		$this->wc_attributes = array( '' => __( 'Please Choose...', 'pootle-page-builder' ) );
+		$filters             = array();
+		foreach ( get_object_taxonomies( 'product', 'object' ) as $tax ) {
 			if ( 0 === strpos( $tax->name, 'pa_' ) ) {
 
 				$this->wc_attributes[ $tax->name ] = $tax->labels->name;
-				foreach( get_categories( array( 'type' => 'product', 'taxonomy' => $tax->name, 'hide_empty' => false ) ) as $term ) {
+				foreach ( get_categories( array( 'type'       => 'product',
+																				 'taxonomy'   => $tax->name,
+																				 'hide_empty' => false
+				) ) as $term
+				) {
 					$filters[ $tax->name ][ $term->slug ] = $term->name;
 				}
 			}
@@ -77,7 +78,9 @@ class pootle_page_builder_for_WooCommerce_Admin{
 
 	/**
 	 * Adds wc post types to pb supported post types
+	 *
 	 * @param $posts
+	 *
 	 * @action pootlepb_builder_post_types
 	 * @return array
 	 */
@@ -99,16 +102,19 @@ class pootle_page_builder_for_WooCommerce_Admin{
 	 */
 	public function add_tab( $tabs ) {
 		$tabs['wc_prods'] = array(
-			'label'    => 'Products',
+			'label'    => __( 'Products', 'pootle-page-builder' ),
 			'priority' => 2,
-			'icon'    => 'dashicons-cart',
+			'icon'     => 'dashicons-cart',
 		);
+
 		return $tabs;
 	}
 
 	/**
 	 * Adds wc_prods content block fields
+	 *
 	 * @param array $f Fields
+	 *
 	 * @return array Tabs
 	 */
 	public function content_block_fields( $f ) {
@@ -120,172 +126,173 @@ class pootle_page_builder_for_WooCommerce_Admin{
 		$p_cats = array();
 		$c_cats = array();
 
-		foreach( get_categories( array( 'type' => 'product', 'taxonomy' => 'product_cat' ) ) as $cat ) {
-			$p_cats[ $cat->slug ] = $cat->name;
+		foreach ( get_categories( array( 'type' => 'product', 'taxonomy' => 'product_cat' ) ) as $cat ) {
+			$p_cats[ $cat->slug ]    = $cat->name;
 			$c_cats[ $cat->term_id ] = $cat->name;
 		}
 
 		$products = array();
 
 		$query = new WP_Query( array(
-			'post_type' => 'product',
-			'posts_per_page' => -1,
+			'post_type'      => 'product',
+			'posts_per_page' => - 1,
 		) );
 		if ( $query->have_posts() ) {
 			foreach ( $query->posts as $post ) {
 				$products[ $post->ID ] = $post->post_title;
 			}
 		} else {
-			$products[''] = 'No products found';
+			$products[''] = __( 'No products found', 'pootle-page-builder' );
 		}
 		wp_reset_postdata();
 
-		$f['wc_prods-add'] = array(
-			'name' => __( 'Add', 'ppb-woocommerce' ),
-			'tab' => 'wc_prods',
-			'type' => 'select',
+		$f['wc_prods-add']              = array(
+			'name'     => __( 'Add', 'pootle-page-builder' ),
+			'tab'      => 'wc_prods',
+			'type'     => 'select',
 			'priority' => 5,
-			'options' => array(
-				''                      => 'Please choose...',
-				'product_categories'    => 'Product categories',
-				'products'              => 'Individual products',
-				'product_category'      => 'Products by category',
-				'sale_products'         => 'Products on sale',
-				'best_selling_products' => 'Best selling products',
-				'featured_products'     => 'Featured products',
-				'top_rated_products'    => 'Top rated products',
-				'product_attribute'     => 'Products by attribute',
+			'options'  => array(
+				''                      => __( 'Please choose...', 'pootle-page-builder' ),
+				'product_categories'    => __( 'Product categories', 'pootle-page-builder' ),
+				'products'              => __( 'Individual products', 'pootle-page-builder' ),
+				'product_category'      => __( 'Products by category', 'pootle-page-builder' ),
+				'sale_products'         => __( 'Products on sale', 'pootle-page-builder' ),
+				'best_selling_products' => __( 'Best selling products', 'pootle-page-builder' ),
+				'featured_products'     => __( 'Featured products', 'pootle-page-builder' ),
+				'top_rated_products'    => __( 'Top rated products', 'pootle-page-builder' ),
+				'product_attribute'     => __( 'Products by attribute', 'pootle-page-builder' ),
 			),
-			'default' => '',
+			'default'  => '',
 		);
-		$f['wc_prods-display'] = array(
-			'name' => __( 'Display as', 'ppb-woocommerce' ),
-			'tab' => 'wc_prods',
-			'type' => 'select',
+		$f['wc_prods-display']          = array(
+			'name'     => __( 'Display as', 'ppb-woocommerce' ),
+			'tab'      => 'wc_prods',
+			'type'     => 'select',
 			'priority' => 10,
-			'options' => array(
-				''         => 'Grid',
-				'carousel' => 'Carousel',
+			'options'  => array(
+				''         => __( 'Grid', 'pootle-page-builder' ),
+				'carousel' => __( 'Carousel', 'pootle-page-builder' ),
 			),
-			'default' => '',
+			'default'  => '',
 		);
-		$f['wc_prods-category'] = array(
-			'name' => __( 'Category', 'vantage' ),
-			'tab' => 'wc_prods',
-			'type' => 'multi-select',
-			'options' => $p_cats,
+		$f['wc_prods-category']         = array(
+			'name'     => __( 'Category', 'vantage' ),
+			'tab'      => 'wc_prods',
+			'type'     => 'multi-select',
+			'options'  => $p_cats,
 			'priority' => 15,
-			'default' => '',
+			'default'  => '',
 		);
-		$f['wc_prods-catids'] = array(
-			'name' => __( 'Category', 'vantage' ),
-			'tab' => 'wc_prods',
-			'type' => 'multi-select',
-			'options' => $c_cats,
+		$f['wc_prods-catids']           = array(
+			'name'     => __( 'Category', 'vantage' ),
+			'tab'      => 'wc_prods',
+			'type'     => 'multi-select',
+			'options'  => $c_cats,
 			'priority' => 20,
-			'default' => '',
+			'default'  => '',
 		);
-		$f['wc_prods-attribute'] = array(
-			'name' => __( 'Attribute', 'vantage' ),
-			'tab' => 'wc_prods',
-			'type' => 'select',
-			'options' => $this->wc_attributes,
+		$f['wc_prods-attribute']        = array(
+			'name'     => __( 'Attribute', 'vantage' ),
+			'tab'      => 'wc_prods',
+			'type'     => 'select',
+			'options'  => $this->wc_attributes,
 			'priority' => 25,
-			'default' => '',
+			'default'  => '',
 		);
-		$f['wc_prods-filter'] = array(
-			'name' => __( 'Filters', 'vantage' ),
-			'tab' => 'wc_prods',
-			'type' => 'multi-select',
-			'options' => array(),
+		$f['wc_prods-filter']           = array(
+			'name'     => __( 'Filters', 'vantage' ),
+			'tab'      => 'wc_prods',
+			'type'     => 'multi-select',
+			'options'  => array(),
 			'priority' => 30,
-			'default' => '',
+			'default'  => '',
 		);
-		$f['wc_prods-ids'] = array(
-			'name' => __( 'Product IDs', 'vantage' ),
-			'tab' => 'wc_prods',
-			'type' => 'multi-select',
-			'options' => $products,
+		$f['wc_prods-ids']              = array(
+			'name'     => __( 'Product IDs', 'vantage' ),
+			'tab'      => 'wc_prods',
+			'type'     => 'multi-select',
+			'options'  => $products,
 			'priority' => 35,
-			'default' => '',
+			'default'  => '',
 		);
-		$f['wc_prods-per_page'] = array(
-			'name' => __( 'Number of products', 'ppb-woocommerce' ),
-			'tab' => 'wc_prods',
-			'type' => 'number',
+		$f['wc_prods-per_page']         = array(
+			'name'     => __( 'Number of products', 'ppb-woocommerce' ),
+			'tab'      => 'wc_prods',
+			'type'     => 'number',
 			'priority' => 40,
-			'min'  => '1',
-			'max'  => '25',
-			'step' => '1',
+			'min'      => '1',
+			'max'      => '25',
+			'step'     => '1',
 		);
-		$f['wc_prods-columns'] = array(
-			'name' => __( 'Number of columns', 'ppb-woocommerce' ),
-			'tab' => 'wc_prods',
-			'type' => 'number',
+		$f['wc_prods-columns']          = array(
+			'name'     => __( 'Number of columns', 'ppb-woocommerce' ),
+			'tab'      => 'wc_prods',
+			'type'     => 'number',
 			'priority' => 45,
-			'min'  => '1',
-			'max'  => '4',
-			'step' => '1',
+			'min'      => '1',
+			'max'      => '4',
+			'step'     => '1',
 		);
-		$f['wc_prods-orderby'] = array(
-			'name' => __( 'Order By', 'ppb-woocommerce' ),
-			'tab' => 'wc_prods',
-			'type' => 'select',
+		$f['wc_prods-orderby']          = array(
+			'name'     => __( 'Order By', 'ppb-woocommerce' ),
+			'tab'      => 'wc_prods',
+			'type'     => 'select',
 			'priority' => 50,
-			'options' => array(
-				''      => 'Default',
-				'title'      => 'Title',
-				'date'       => 'Date',
-				'menu_order' => 'Menu Order',
-				'id'         => 'ID',
-				'rand'       => 'Random',
+			'options'  => array(
+				''           => __( 'Default', 'pootle-page-builder' ),
+				'title'      => __( 'Title', 'pootle-page-builder' ),
+				'date'       => __( 'Date', 'pootle-page-builder' ),
+				'menu_order' => __( 'Menu Order', 'pootle-page-builder' ),
+				'id'         => __( 'ID', 'pootle-page-builder' ),
+				'rand'       => __( 'Random', 'pootle-page-builder' ),
 			),
-			'default' => '',
+			'default'  => '',
 		);
-		$f['wc_prods-order'] = array(
-			'name' => __( 'Order', 'ppb-woocommerce' ),
-			'tab' => 'wc_prods',
-			'type' => 'select',
+		$f['wc_prods-order']            = array(
+			'name'     => __( 'Order', 'ppb-woocommerce' ),
+			'tab'      => 'wc_prods',
+			'type'     => 'select',
 			'priority' => 55,
-			'options' => array(
-				''      => 'Default',
-				'asc' => 'Ascending',
-				'desc' => 'Descending',
+			'options'  => array(
+				''     => __( 'Default', 'pootle-page-builder' ),
+				'asc'  => __( 'Ascending', 'pootle-page-builder' ),
+				'desc' => __( 'Descending', 'pootle-page-builder' ),
 			),
-			'default' => '',
+			'default'  => '',
 		);
-		$f['wc_prods-hide_price'] = array(
-			'name' => __( 'Hide price', 'ppb-woocommerce' ),
-			'tab' => 'wc_prods',
+		$f['wc_prods-hide_price']       = array(
+			'name'     => __( 'Hide price', 'ppb-woocommerce' ),
+			'tab'      => 'wc_prods',
 			'selector' => 'li.product .price',
-			'css' => 'display:none;ignore',
-			'type' => 'checkbox',
+			'css'      => 'display:none;ignore',
+			'type'     => 'checkbox',
 			'priority' => 60,
 		);
-		$f['wc_prods-hide_title'] = array(
-			'name' => __( 'Hide product name', 'ppb-woocommerce' ),
-			'tab' => 'wc_prods',
+		$f['wc_prods-hide_title']       = array(
+			'name'     => __( 'Hide product name', 'ppb-woocommerce' ),
+			'tab'      => 'wc_prods',
 			'selector' => 'li.product h3, li.product h2',
-			'css' => 'display:none!important;ignore',
-			'type' => 'checkbox',
+			'css'      => 'display:none!important;ignore',
+			'type'     => 'checkbox',
 			'priority' => 65,
 		);
-		$f['wc_prods-star_rating'] = array(
-			'name' => __( 'Hide ratings', 'ppb-woocommerce' ),
-			'tab' => 'wc_prods',
+		$f['wc_prods-star_rating']      = array(
+			'name'     => __( 'Hide ratings', 'ppb-woocommerce' ),
+			'tab'      => 'wc_prods',
 			'selector' => 'li.product .star-rating',
-			'css' => 'display:none;ignore',
-			'type' => 'checkbox',
+			'css'      => 'display:none;ignore',
+			'type'     => 'checkbox',
 			'priority' => 70,
 		);
 		$f['wc_prods-hide_add_to_cart'] = array(
-			'name' => __( 'Hide add to cart', 'ppb-woocommerce' ),
-			'tab' => 'wc_prods',
+			'name'     => __( 'Hide add to cart', 'ppb-woocommerce' ),
+			'tab'      => 'wc_prods',
 			'selector' => 'li.product .add_to_cart_button',
-			'css' => 'display:none;ignore',
-			'type' => 'checkbox',
+			'css'      => 'display:none;ignore',
+			'type'     => 'checkbox',
 			'priority' => 75,
 		);
+
 		return $f;
 	}
 
@@ -298,7 +305,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			?>
 			<div class="field">
 				<b>
-					WooCommerce needs to be installed and activated for pootle page builder add on to work.
+					<?php _e( 'WooCommerce needs to be installed and activated for pootle page builder add on to work.', 'pootle-page-builder' ); ?>
 				</b>
 			</div>
 			<?php

@@ -48,7 +48,7 @@ class Pootle_Page_Builder_Pro_Admin {
 	 */
 	public function admin_menu() {
 		remove_submenu_page( 'page_builder', 'page_builder_addons' );
-		add_submenu_page( 'page_builder', 'Templates', 'Templates', 'manage_options', 'page_builder_templates', array(
+		add_submenu_page( 'page_builder', __( 'Templates', 'pootle-page-builder' ), __( 'Templates', 'pootle-page-builder' ), 'manage_options', 'page_builder_templates', array(
 			$this,
 			'templates',
 		) );
@@ -61,7 +61,7 @@ class Pootle_Page_Builder_Pro_Admin {
 	}
 
 	/**
-	 * Modifies templateß
+	 * Modifies template
 	 * @param array $otpl Original template data
 	 * @return array Template data
 	 */
@@ -78,24 +78,6 @@ class Pootle_Page_Builder_Pro_Admin {
 		} else {
 			return $otpl;
 		}
-	}
-
-	/**
-	 * Adds row settings panel fields
-	 * @param array $fields Fields to output in row settings panel
-	 * @return array Tabs
-	 * @filter pootlepb_row_settings_fields
-	 * @since 	1.0.0
-	 */
-	public function row_settings_fields( $fields ) {
-		$fields[ $this->token . '_sample_color' ] = array(
-			'name' => 'Sample color',
-			'type' => 'color',
-			'priority' => 1,
-			'tab' => $this->token,
-			'help-text' => 'This is a sample boilerplate field, Sets 12px outline color.'
-		);
-		return $fields;
 	}
 
 	/**
@@ -138,8 +120,8 @@ class Pootle_Page_Builder_Pro_Admin {
 	 */
 	function row_fields( $fields ) {
 		$fields[ 'ppbpro-row-css' ] = array(
-			'name' => 'CSS for Row Elements',
-			'placeholder' => 'Styles with selector here...',
+			'name' => __( 'CSS for Row Elements', 'pootle-page-builder' ),
+			'placeholder' => __( 'Styles with selector here...', 'pootle-page-builder' ),
 			'type' => 'textarea',
 			'priority' => 1,
 			'tab' => 'advanced',
@@ -156,28 +138,28 @@ class Pootle_Page_Builder_Pro_Admin {
 	 */
 	function modules( $modules ) {
 		$modules['photo-gallery'] = array(
-			'label'       => 'Photo Gallery',
+			'label'       => __( 'Photo Gallery', 'pootle-page-builder' ),
 			'icon_class'  => 'dashicons dashicons-images-alt2',
 			'tab'         => '#pootle-ppb-photo-addon-tab',
 			'active_class' => 'page_builder_photo_addon',
 			'priority'    => 10,
 		);
 		$modules['blog-posts'] = array(
-			'label'       => 'Blog posts',
+			'label'       => __( 'Blog posts', 'pootle-page-builder' ),
 			'icon_class'  => 'dashicons dashicons-admin-post',
 			'tab'         => '#pootle-ppb-blog-customizer-tab',
 			'active_class' => 'pootle_page_builder_blog_customizer',
 			'priority'    => 25,
 		);
 		$modules['wc-products'] = array(
-			'label'       => 'WooCommerce',
+			'label'       => __( 'WooCommerce', 'pootle-page-builder' ),
 			'icon_class'  => 'dashicons dashicons-cart',
 			'tab'         => '#pootle-wc_prods-tab',
 			'active_class' => 'pootle_page_builder_for_WooCommerce',
 			'priority'    => 30,
 		);
 		$modules['one-pager'] = array(
-			'label'       => 'One Pager Section',
+			'label'       => __( 'One Pager Section', 'pootle-page-builder' ),
 			'icon_class'  => 'dashicons dashicons-format-aside',
 			'tab'         => "#pootlepb-background-row-tab",
 			'callback'    => 'onePager',

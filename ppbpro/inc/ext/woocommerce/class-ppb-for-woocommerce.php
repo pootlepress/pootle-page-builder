@@ -95,7 +95,6 @@ class pootle_page_builder_for_WooCommerce{
 		self::$version = '1.1.0';
 
 		add_action( 'init', array( $this, 'init' ) );
-		add_action( 'admin_init', array( $this, 'check_ppb_version' ) );
 	} // End __construct()
 
 	/**
@@ -172,18 +171,5 @@ class pootle_page_builder_for_WooCommerce{
 		$active[ self::$token ] = self::$file;
 
 		return $active;
-	}
-
-	/**
-	 * Activation hook
-	 * @param array $active Active add ons
-	 * @return array Active add ons
-	 * @since 1.0.0
-	 */
-	public function check_ppb_version() {
-		if ( ! defined( 'POOTLEPB_VERSION' ) || version_compare( POOTLEPB_VERSION, '0.3.0', '<' ) ) {
-			deactivate_plugins( plugin_basename( self::$file ) );
-			wp_die( "We can't activate pootle page builder for WooCommmerce unless pootle page builder version 0.3+ is installed <br>" . '<a href="' . admin_url( '/plugins.php' ) . '"> Back </a>' );
-		}
 	}
 }

@@ -19,7 +19,7 @@ if ( class_exists( 'Pootle_Page_Builder_Pro' ) ) {
 
 ?>
 <div class="wrap">
-	<h2>Pootle Page Builder Pro</h2>
+	<h2><?php _e( 'Pootle Page Builder Pro', 'pootle-page-builder' ); ?></h2>
 
 	<form method="post" action="options.php">
 		<?php
@@ -46,7 +46,7 @@ if ( class_exists( 'Pootle_Page_Builder_Pro' ) ) {
 						</div>
 						<div class="desc ppb-addon-description">
 							<p class="ppb-addon-description"><?php echo strip_tags( $plugin['Description'], '<a>' ); ?></p>
-							<cite>By <a href="//pootlepress.com">pootlepress</a></cite>
+							<cite><?php printf( __( 'By %s', 'pootle-page-builder' ), '<a href="//pootlepress.com">pootlepress</a>' ); ?></cite>
 						</div>
 					</div>
 					<div class="ppb-addon-footer">
@@ -59,13 +59,13 @@ if ( class_exists( 'Pootle_Page_Builder_Pro' ) ) {
 								<span class="dashicons dashicons-yes"></span>
 								<?php
 								if ( $active ) {
-									_e( 'This addon is active!', 'ppbpro' );
+									_e( 'This addon is active!', 'pootle-page-builder' );
 								} else {
-									_e( 'Hit "Save Changes" to activate!', 'ppbpro' );
+									_e( 'Hit "Save Changes" to activate!', 'pootle-page-builder' );
 								}
 								?>
 							</p>
-							<a class="button deactivate"><?php _e( 'Deactivate' ) ?></a>
+							<a class="button deactivate"><?php _e( 'Deactivate', 'pootle-page-builder' ) ?></a>
 						</div>
 					</div>
 				</div>

@@ -124,7 +124,7 @@ class Pootle_Page_Customizer_Public {
 				echo "<source src='{$videoUrl}' type='video/mp4'>";
 				echo "<source src='{$videoUrl}' type='video/webm'>";
 				?>
-				Sorry, your browser does not support HTML5 video.
+				<?php _e( 'Sorry, your browser does not support HTML5 video.', 'pootle-page-builder' ); ?>
 			</video>
 			<?php
 		}

@@ -107,10 +107,10 @@ class pootle_page_builder_blog_customizer_Public extends pootle_page_builder_blo
 				if ( $query->max_num_pages > 1 && $pc_sets['pagination'] ) { ?>
 					<nav class="ppb-posts-prev-next-posts">
 						<div class="prev-posts-link">
-							<?php echo get_next_posts_link( 'Previous', $query->max_num_pages ); // older posts link ?>
+							<?php echo get_next_posts_link( __( 'Previous', 'pootle-page-builder' ), $query->max_num_pages ); // older posts link ?>
 						</div>
 						<div class="next-posts-link">
-							<?php echo get_previous_posts_link( 'Next' ); // newer posts link ?>
+							<?php echo get_previous_posts_link( __( 'Next', 'pootle-page-builder' ) ); // newer posts link ?>
 						</div>
 					</nav>
 				<?php }
