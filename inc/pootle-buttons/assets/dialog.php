@@ -232,6 +232,35 @@ $assets_url = esc_attr( $_GET['assets_url'] );
 			display: block;
 		}
 
+		.wp-picker-container {
+			display: inline-block;
+		}
+
+		a.wp-color-result.button:after {
+			content: attr(title);
+			background: #f7f7f7;
+			border-radius: 0 2px 2px 0;
+			border-left: 1px solid #ccc;
+			color: #555;
+			display: block;
+			line-height: 22px;
+			padding: 0 6px;
+			text-align: center;
+			position: relative;
+		}
+
+		a.wp-color-result.button {
+			position: relative;
+			font-size: 11px;
+		}
+
+		@media screen and (max-width: 782px) {
+			.wp-picker-container a.wp-color-result.button:after {
+				padding: 0 10px;
+				font-size: inherit;
+				line-height: inherit;
+			}
+		}
 	</style>
 	<?php
 	wp_enqueue_script( 'wp-color-picker' );

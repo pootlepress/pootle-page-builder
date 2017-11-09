@@ -18,3 +18,11 @@ a.wp-color-result.button:after {
 a.wp-color-result.button {
 	position: relative;
 }
+
+@media screen and (max-width: 782px) {
+	.wp-picker-container a.wp-color-result.button:after {
+		padding: 0 10px;
+		font-size: inherit;
+		line-height: inherit;
+	}
+}
