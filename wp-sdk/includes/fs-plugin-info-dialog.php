@@ -510,7 +510,6 @@
 
 			$_with_banner = '';
 
-//	var_dump($api->banners);
 			if ( ! empty( $api->banners ) && ( ! empty( $api->banners['low'] ) || ! empty( $api->banners['high'] ) ) ) {
 				$_with_banner = 'with-banner';
 				$low          = empty( $api->banners['low'] ) ? $api->banners['high'] : $api->banners['low'];

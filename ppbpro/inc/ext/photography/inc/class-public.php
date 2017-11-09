@@ -56,11 +56,11 @@ class page_builder_photo_addon_Public{
 		$url = $this->url;
 		wp_enqueue_script( 'ppb-masonry', $url . '/assets/masonry.pkgd.min.js', array( 'jquery' ) );
 		wp_enqueue_script( 'ppb-imgloaded', $url . '/assets/imagesloaded.pkgd.min.js', array( 'jquery' ) );
-		wp_enqueue_script( 'ppb-flex-slider', $url . '/assets/jquery.flexslider.min.js', array( 'jquery' ) );
+		wp_enqueue_script( 'flexslider', $url . '/assets/jquery.flexslider.min.js', array( 'jquery' ) );
 
 		wp_enqueue_style( $token . '-css', $url . '/assets/front-end.css' );
 		wp_enqueue_script( $token . '-js', $url . '/assets/front-end.js',
-			array( 'ppb-masonry', 'ppb-flex-slider', 'ppb-imgloaded', 'jquery' ) );
+			array( 'ppb-masonry', 'flexslider', 'ppb-imgloaded', 'jquery' ) );
 	}
 
 	/**

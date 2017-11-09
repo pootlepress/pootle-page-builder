@@ -3,7 +3,7 @@
 
     var ColorPicker,
     // html stuff
-        _before = '<a tabindex="0" class="wp-color-result" />',
+        _before = '<a tabindex="0" class="wp-color-result button" />',
         _after = '<div class="wp-picker-holder" />',
         _wrap = '<div class="wp-picker-container" />',
         _button = '<input type="button" class="button button-small hidden" />';

@@ -1,0 +1,145 @@
+/* Modules Slide in */
+
+#pootlepb-modules-wrap {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: -340px;
+	width: 340px;
+	background: #eee;
+	z-index: 9999;
+	transition: left 0.25s, right 0.25s;
+	&.position-right {
+		left: auto;
+		right: -340px;
+	}
+	-webkit-box-shadow: 2px 1px 1px rgba(0, 0, 0, 0.25);
+	box-shadow: 2px 1px 1px rgba(0, 0, 0, 0.25);
+	> .dashicons-screenoptions {
+		-webkit-box-shadow: 2px 1px 1px rgba(0, 0, 0, 0.25);
+		box-shadow: 2px 1px 1px rgba(0, 0, 0, 0.25);
+	}
+}
+
+.admin-bar #pootlepb-modules-wrap {
+	top: 32px;
+}
+
+#pootlepb-modules-wrap {
+	&.toggle {
+		left: 0;
+	}
+	&.position-right.toggle {
+		left: auto;
+		right: 0;
+	}
+	> .dashicons-screenoptions, #pootlepb-modules {
+		position: absolute;
+		top: 0;
+		left: 100%;
+		background: inherit;
+		height: auto;
+		width: auto;
+		padding: 7px 5px 5px;
+		cursor: pointer;
+	}
+	&.position-right > .dashicons-screenoptions {
+		right: 100%;
+		left: auto;
+	}
+	#pootlepb-modules {
+		left: 0;
+		bottom: 0;
+		right: 0;
+	}
+	&.toggle #pootlepb-modules {
+		overflow: auto;
+	}
+	> .dashicons-screenoptions:before {
+		font-size: 30px;
+		height: auto;
+		width: auto;
+	}
+}
+
+.ppb-module-disabled, .ppb-module {
+	margin: 16px 16px 0;
+	border: 1px solid #ddd;
+	border-bottom-color: #bbb;
+	border-right-color: #bbb;
+	background: #fff;
+	color: #333;
+	font-size: 0;
+	opacity: 0.79;
+	cursor: -webkit-grab;
+	cursor: -moz-grab;
+	position: relative;
+	width: 300px;
+}
+
+.ppb-module-disabled:after {
+	display: block;
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #ccc;
+	opacity: 0.34;
+	cursor: default;
+}
+
+a .ppb-module-disabled:after {
+	cursor: pointer;
+}
+
+.ppb-module {
+	&:active {
+		cursor: -webkit-grabbing;
+		cursor: -moz-grabbing;
+	}
+	&:hover {
+		opacity: 1;
+	}
+	.tooltip-module {
+		position: absolute;
+		right: 5px;
+		top: 50%;
+		margin-top: -10px;
+	}
+}
+
+.ppb-module-disabled, .ppb-module {
+	.icon, .label {
+		vertical-align: middle;
+		display: inline-block;
+		box-sizing: border-box;
+	}
+	.label {
+		padding: 7px 7px 7px 0;
+		width: 80%;
+		font: 16px/1.6 sans-serif;
+	}
+	.icon {
+		height: 50px;
+		line-height: 50px;
+		width: 20%;
+		text-align: center;
+	}
+	.icon:before {
+		font-size: 30px;
+	}
+}
+
+.ppb-block.ppb-hover-module.ppb-drop-module:after {
+	display: block;
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 9;
+	background: rgba(239, 72, 50, 0.25);
+}
