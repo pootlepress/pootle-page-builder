@@ -1059,13 +1059,13 @@ jQuery(function($) {
     dialogAttr.width = 610;
     dialogAttr.title = 'Post settings';
     dialogAttr.close = function() {
+      $loader.fadeOut(250);
       ppbAjax.category = $postSettingsDialog.find('.post-category').val();
       ppbAjax.tags = $postSettingsDialog.find('.post-tags').val();
     };
     dialogAttr.buttons.Done = function() {
       $postSettingsDialog.ppbDialog('close');
       prevu.syncAjax();
-      $loader.fadeOut(250);
     };
     $postSettingsDialog.ppbDialog(dialogAttr);
   }
@@ -1493,15 +1493,10 @@ jQuery(function($) {
   prevu.tmce.inline = true;
   prevu.tmce.theme = 'ppbprevu';
   prevu.tmce.fontsize_formats = '10px 12px 14px 16px 20px 25px 30px 35px 40px 50px 70px 100px';
-  if (!ppbAjax.ipad) {
-    prevu.tmce.toolbar = ['h1', 'h2', 'h3', 'h4', 'shrameeFonts', 'fontsizeselect', 'blockquote', 'forecolor', 'ppblink', 'bold', 'italic', 'alignleft', 'aligncenter', 'alignright', 'ppbInsertImage'];
-    $postSettingsDialog.find('select').chosen();
-  } else {
-    prevu.tmce.plugins = prevu.tmce.plugins.replace('wpeditimage,', '').replace('wplink,', 'ppblink,');
-    $('a').click(function(e) {
-      e.preventDefault();
-    });
-  }
+  prevu.tmce.toolbar = ['h1', 'h2', 'h3', 'h4', 'shrameeFonts', 'fontsizeselect', 'blockquote', 'forecolor', 'ppblink', 'bold', 'italic', 'alignleft', 'aligncenter', 'alignright', 'ppbInsertImage'];
+  prevu.tmce.plugins = prevu.tmce.plugins.replace('wpeditimage,', '').replace('wplink,', 'ppblink,');
+  console.log(prevu.tmce.plugins);
+  $postSettingsDialog.find('select').chosen();
   prevu.tmce.content_css = ppbAjax.site + '/wp-includes/css/dashicons.min.css?ver=5.0.0';
   prevu.tmce.setup = function(editor) {
     editor.onDblClick.add(function(ed, e) {

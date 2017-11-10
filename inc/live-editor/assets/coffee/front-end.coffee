@@ -1356,30 +1356,29 @@ jQuery ($) ->
 	prevu.tmce.inline = true
 	prevu.tmce.theme = 'ppbprevu'
 	prevu.tmce.fontsize_formats = '10px 12px 14px 16px 20px 25px 30px 35px 40px 50px 70px 100px'
-	if !ppbAjax.ipad
-		prevu.tmce.toolbar = [
-			'h1'
-			'h2'
-			'h3'
-			'h4'
-			'shrameeFonts'
-			'fontsizeselect'
-			'blockquote'
-			'forecolor'
-			'ppblink'
-			'bold'
-			'italic'
-			'alignleft'
-			'aligncenter'
-			'alignright'
-			'ppbInsertImage'
-		]
-		$postSettingsDialog.find('select').chosen()
-	else
-		prevu.tmce.plugins = prevu.tmce.plugins.replace('wpeditimage,', '').replace('wplink,', 'ppblink,')
-		$('a').click (e) ->
-			e.preventDefault()
-			return
+
+	prevu.tmce.toolbar = [
+		'h1'
+		'h2'
+		'h3'
+		'h4'
+		'shrameeFonts'
+		'fontsizeselect'
+		'blockquote'
+		'forecolor'
+		'ppblink'
+		'bold'
+		'italic'
+		'alignleft'
+		'aligncenter'
+		'alignright'
+		'ppbInsertImage'
+	]
+
+	prevu.tmce.plugins = prevu.tmce.plugins.replace('wpeditimage,', '').replace('wplink,', 'ppblink,')
+	console.log prevu.tmce.plugins
+	$postSettingsDialog.find('select').chosen()
+
 	prevu.tmce.content_css = ppbAjax.site + '/wp-includes/css/dashicons.min.css?ver=5.0.0'
 
 	prevu.tmce.setup = (editor) ->
