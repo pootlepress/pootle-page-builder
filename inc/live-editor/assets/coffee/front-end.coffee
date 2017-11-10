@@ -1353,7 +1353,7 @@ jQuery ($) ->
 	prevu.tmce.verify_html = false
 	prevu.tmce.inline = true
 	prevu.tmce.theme = 'ppbprevu'
-	prevu.tmce.fontsize_formats = '20px 25px 30px 35px 40px 50px 70px 100px'
+	prevu.tmce.fontsize_formats = '10px 12px 14px 16px 20px 25px 30px 35px 40px 50px 70px 100px'
 	if !ppbAjax.ipad
 		prevu.tmce.toolbar = [
 			'h1'
