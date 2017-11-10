@@ -1065,6 +1065,7 @@ jQuery(function($) {
     dialogAttr.buttons.Done = function() {
       $postSettingsDialog.ppbDialog('close');
       prevu.syncAjax();
+      $loader.fadeOut(250);
     };
     $postSettingsDialog.ppbDialog(dialogAttr);
   }

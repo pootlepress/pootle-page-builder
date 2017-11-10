@@ -955,6 +955,7 @@ jQuery ($) ->
 		dialogAttr.title = 'Post settings'
 
 		dialogAttr.close = ->
+			$loader.fadeOut 250
 			ppbAjax.category = $postSettingsDialog.find('.post-category').val()
 			ppbAjax.tags = $postSettingsDialog.find('.post-tags').val()
 			return
