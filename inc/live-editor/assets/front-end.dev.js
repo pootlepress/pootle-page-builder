@@ -945,6 +945,7 @@ jQuery(function($) {
   dialogAttr.title = $setTitleDialog.data('title');
   dialogAttr.close = function() {
     ppbAjax.title = $('#ppble-live-page-title').val();
+    $loader.fadeOut(250);
   };
   $setTitleDialog.ppbDialog(dialogAttr);
   dialogAttr.close = false;

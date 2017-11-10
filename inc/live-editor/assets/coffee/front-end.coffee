@@ -845,6 +845,7 @@ jQuery ($) ->
 
 	dialogAttr.close = ->
 		ppbAjax.title = $('#ppble-live-page-title').val()
+		$loader.fadeOut 250
 		return
 
 	$setTitleDialog.ppbDialog dialogAttr
