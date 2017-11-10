@@ -14,11 +14,26 @@ a.wp-color-result.button {
 	}
 }
 
+div.wp-picker-container div.wp-picker-holder * {
+	box-sizing: content-box;
+}
+
 @media screen and (max-width: 782px) {
 	.wp-picker-container a.wp-color-result.button:after {
 		padding: 0 10px;
 		font-size: inherit;
 		line-height: inherit;
+	}
+}
+
+.ppb-tabs-panel .field > span .wp-picker-container {
+	* {
+		font-size: 11px !important;
+	}
+	.wp-picker-input-wrap input {
+		font-size: 12px !important;
+		line-height: 22px !important;
+		margin: 0 7px 0 0;
 	}
 }
 
