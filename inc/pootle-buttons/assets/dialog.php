@@ -252,6 +252,8 @@ $assets_url = esc_attr( $_GET['assets_url'] );
 		a.wp-color-result.button {
 			position: relative;
 			font-size: 11px;
+			padding: 0 0 0 30px;
+			height: auto;
 		}
 
 		@media screen and (max-width: 782px) {
