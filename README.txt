@@ -8,8 +8,8 @@ Author URI: http://www.pootlepress.com
 Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
-Tested up to: 4.9.alpha
-Stable tag: 5.0.0
+Tested up to: 4.9.RC3
+Stable tag: 5.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -152,6 +152,20 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * This is a major release, Please backup your site before updating.
 
 == Changelog ==
+
+= 5.1.0 =
+* 2017-11-15
+* New - WordPress 4.9 compatibility
+* New - New font size options
+* FIX - PAGE CUSTOMIZER NOT WORKING ON SOME SERVER CONFIGURATIONS
+* Fix - Hero module  not full width by default
+* Fix - Live editor not saving sometimes
+* Fix - Console error when updating (`'&nbsp' not recognised`)
+* Fix - Closing page title dialog keeps loading forever
+* Fix - Color picker looks good on Windows chrome as well
+* Tweak - Page customizer link url encoded
+* Tweak - Alpha color picker fixed for WP v4.9
+* Tweak - Escaping assets url in pootle button
 
 = 5.0.0 =
 * 2017-09-28
