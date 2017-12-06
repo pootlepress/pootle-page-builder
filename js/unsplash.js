@@ -89,17 +89,18 @@ function ShrameeUnsplashImageDialog( $ ) {
 		$btn.click( function ( e ) {
 			e.preventDefault();
 			var
-				url = 'https://api.unsplash.com/photos/search?client_id=6e7fb4dfb5dfbdcd500ce33d8a6fed84ea535704a33aa57efd9e60b9a032a5bb&per_page=25&query=',
+				url = 'https://api.unsplash.com/search/photos?client_id=6e7fb4dfb5dfbdcd500ce33d8a6fed84ea535704a33aa57efd9e60b9a032a5bb&per_page=25&query=',
 				qry = $f.val().replace( ' ', ',' );
 
 			$imgs.html( '<h4>Searching images...</h4>' );
 			$.ajax( url + qry )
-				.done( function ( json ) {
+				.done( function ( resp ) {
+					var images = resp && resp.results ? resp.results : [];
 					$imgs.html( '' );
-					if ( ! json || ! json.length ) {
+					if ( ! images || ! images.length ) {
 						$imgs.html( '<p>Couldn\'t find any images matching <b>' + qry + '</b>...</p>' );
 					}
-					$.each( json, function ( i, v ) {
+					$.each( images, function ( i, v ) {
 						$imgs
 							.append(
 								$( '<div/>' )
