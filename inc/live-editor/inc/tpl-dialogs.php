@@ -4,6 +4,8 @@
  */
 global $pootlepb_row_settings_tabs;
 
+wp_reset_postdata();
+
 $panel_tabs = array(
 	'-' => array(
 		'style'            => array(

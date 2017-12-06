@@ -107,9 +107,13 @@
 		$this.find( 'input[data-style-field-type="upload"]' ).off( 'change' ).change( function() {
 			var $t = $( this );
 			if ( $t.val() ) {
+				var url = $t.val();
+				if ( url == 'post-image' ) {
+					url = $('[data-featured-img-url]').data('featured-img-url');
+				}
 				$t
 					.show()
-					.css( 'background-image', 'url("' + $t.val() + '")' )
+					.css( 'background-image', 'url("' + url + '")' )
 					.siblings('.dashicons').show();
 			} else {
 				$t
@@ -117,7 +121,12 @@
 					.siblings('.dashicons').hide();
 			}
 		} );
-		$this.find( '.unsplash-button' ).attr( 'style', '' ).on( 'click', function ( e ) {
+		$this.find( '.post-image-button' ).on( 'click', function ( e ) {
+			var
+				$textField = $(this).closest('.field_type-upload, .field_type_upload').find( 'input[data-style-field-type="upload"]' );;
+			$textField.val( 'post-image' ).change();
+		} );
+		$this.find( '.unsplash-button' ).on( 'click', function ( e ) {
 			e.preventDefault();
 			var
 				$t = $( this ),

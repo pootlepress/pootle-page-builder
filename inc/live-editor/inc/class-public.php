@@ -60,6 +60,14 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	}
 
 	/**
+	 * Get post id of current pagebuilder post
+	 * @return int Post ID
+	 */
+	public static function get_post_id() {
+		return self::$_instance->post_id;
+	}
+
+	/**
 	 * Main Pootle Page Builder Live Editor Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
 	 * @since 1.0.0

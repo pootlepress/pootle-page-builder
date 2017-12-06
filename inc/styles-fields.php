@@ -307,6 +307,7 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 			}
 			break;
 		case 'upload':
+			$featured_img = get_the_post_thumbnail_url( Pootle_Page_Builder_Live_Editor_Public::get_post_id(), 'medium' );
 			?><input <?php echo $placeholder ?> type="text" id="pp-pb-<?php esc_attr_e( $key ) ?>"
 			         name="panelsStyle[<?php echo esc_attr( $key ) ?>]" value=""
 			         data-style-field="<?php echo esc_attr( $key ) ?>"
@@ -319,7 +320,14 @@ function pootlepb_render_row_settings_field( $key, $field ) {
 				<span class="dashicons dashicons-search unsplash-button">Search Free Photos</span>
 				<span class="dashicons dashicons-editor-help tooltip-unsplash" data-tooltip="All stock photos are sourced from Unsplash.com and are licensed under Creative Commons Zero which means you can copy, modify, distribute and use the photos for free, including commercial purposes, without asking permission from or providing attribution to the photographer or Unsplash"></span>
 			</span>
+			<div style='clear:both'></div>
+			<?php if ( $featured_img ): ?>
+			<small style="">OR</small>
+			<button class="post-image-button" data-featured-img-url="<?php echo $featured_img ?>">
+				<span class="dashicons dashicons-format-image"></span>  Use <?php echo get_post_type() ?> Image
+			</button>
 			<?php
+			endif;
 			break;
 		case 'uploadVid':
 			?><input <?php echo $placeholder ?> type="text" id="pp-pb-<?php esc_attr_e( $key ) ?>"

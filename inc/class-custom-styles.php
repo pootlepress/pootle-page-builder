@@ -166,7 +166,12 @@ final class Pootle_Page_Builder_Custom_Styles {
 		}
 
 		if ( ! empty( $style['background_image'] ) ) {
-			$attr['style'] .= 'background-image: url( ' . esc_url( $style['background_image'] ) . ' ); ';
+			$url = esc_url( $style['background_image'] );
+			if ( $style['background_image'] == 'post-image' ) {
+				$url = get_the_post_thumbnail_url( null, 'large' );
+			}
+			$attr['style'] .= 'background-image: url( ' . esc_url( $url ) . ' ); ';
+
 			$attr = $this->row_bg_img_size( $attr, $style );
 			$attr = $this->row_bg_img_repeat( $attr, $style );
 		}
