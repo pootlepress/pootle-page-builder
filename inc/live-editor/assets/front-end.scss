@@ -453,6 +453,8 @@ body .ppb-dialog {
 			}
 			.dashicons {
 				font-size: 0 !important;
+				width: auto;
+				height: auto;
 			}
 			input[data-style-field-type="upload"] + .dashicons {
 				position: relative;
