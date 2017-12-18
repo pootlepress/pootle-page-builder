@@ -22,7 +22,7 @@
 				var selected_text = ed.selection.getContent();
 				ed.windowManager.open( {
 					title: '',
-					url : pbtn.dialogUrl + '&assets_url=' + ass_url + '&text=' + selected_text,
+					url : pbtn.dialogUrl + '&assets_url=' + encodeURIComponent( ass_url ) + '&text=' + selected_text,
 					width : 700,
 					height : 610
 				}, { plugin_url : pbtn.ass_url, editor : ed } );
