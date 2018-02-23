@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.9.RC3
-Stable tag: 5.1.0
+Stable tag: 5.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -149,9 +149,16 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 == Upgrade Notice ==
 
 = 5.0.0 =
- * This is a major release, Please backup your site before updating.
+ * 5.0.0 is a major release, Please backup your site before updating from 4.x.x
 
 == Changelog ==
+
+= 5.2.0 =
+* New - Featured image row background
+* Fix - Freemius cURL error
+* Tweak - Unsplash new API tweaks
+* Tweak - Escape assets url in Pootle Button (broken on some sites)
+* Tweak - Use https for querying templates
 
 = 5.1.0 =
 * 2017-11-15
