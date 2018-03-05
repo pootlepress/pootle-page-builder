@@ -1,15 +1,4 @@
 <?php
-/**
- * Plugin Name: pootle button
- * Plugin URI: http://pootlepress.com/
- * Description: A cool plugin to add delicious buttons in WordPress editor
- * Version: 1.1.1
- * Author: pootlepress
- * Author URI: http://pootlepress.com/
- * License: GPL version 3
- * @developer http://wpdevelopment.me <shramee@wpdevelopment.me>
- */
-
 add_action( 'admin_head', 'pbtn_l10n' );
 add_action( 'wp_head', 'pbtn_l10n' );
 function pbtn_l10n() {

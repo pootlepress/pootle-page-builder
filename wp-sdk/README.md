@@ -111,7 +111,7 @@ To add a function which will only be available in your premium plugin version, s
 
 ```php
 <?php
-    class Storefront_Pro_Product_Table {
+    class My_Plugin {
         function init() {
             ...
 
