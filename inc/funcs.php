@@ -176,19 +176,20 @@ function pootlepb_is_panel( $can_edit = false, $post = false ) {
 /**
  * Check if we're currently viewing a panel.
  *
- * @param WP_Post|int|bool $post Also check if the user can edit this page
+ * @param WP_Post|int|bool $post_id Also check if the user can edit this page
  *
  * @return bool
  * @since 0.1.0
  */
-function pootlepb_uses_pb( $post = false ) {
-	if ( ! $post ) {
-		$post = get_the_ID();
-	} else if ( $post instanceof WP_Post ) {
-		$post = $post->ID;
+function pootlepb_uses_pb( $post_id = false ) {
+	if ( ! $post_id ) {
+		global $post;
+		$post_id = $post->ID;
+	} else if ( $post_id instanceof WP_Post ) {
+		$post_id = $post_id->ID;
 	}
 	// Check if this is a panel
-	$ppb_data = get_post_meta( $post, 'panels_data', true );
+	$ppb_data = get_post_meta( $post_id, 'panels_data', true );
 	return ! empty( $ppb_data['grids'] );
 }
 

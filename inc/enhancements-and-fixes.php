@@ -128,38 +128,10 @@ function ppb_fs() {
 	return $ppb_fs;
 }
 
-add_action( 'admin_print_scripts-edit.php', function() {
-	add_action( 'admin_footer', 'pootlepb_override_gutenberg_add_new', 99 );
-} );
-
-function pootlepb_override_gutenberg_add_new() {
-	wp_enqueue_script( 'jquery' );
-	?>
-	<script>
-		jQuery( function( $ ) {
-			var
-				$newBtn = $( '#split-page-title-action' ),
-				$a = $newBtn.find( '.dropdown' ).find( 'a' ),
-				$clsscA = $a.filter( '[href*="classic-editor"]' ),
-				$gutenA = $a.not( '[href*="classic-editor"]' ),
-				clsscLabel = $clsscA.text(),
-				gutenLabel = $gutenA.text(),
-				gutenbgURL = $clsscA.attr( 'href' );
-
-			if ( gutenbgURL ) {
-				gutenbgURL = gutenbgURL.replace( 'classic-editor', 'gutenberg-editor' );
-				$clsscA.text( gutenLabel ).attr( 'href', gutenbgURL );
-				$gutenA.text( clsscLabel );
-			}
-		} );
-	</script>
-	<?php
-}
-
 add_filter( 'replace_editor', 'pootlepb_override_gutenberg_init', 7 );
 
 function pootlepb_override_gutenberg_init( $enable ) {
-	if ( ! isset( $_GET[ 'gutenberg-editor' ] ) ) {
+	if ( pootlepb_uses_pb() ) {
 		$_GET[ 'classic-editor' ] = true;
 		return false;
 	}
