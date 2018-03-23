@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 4.9.4
-Stable tag: 5.2.0
+Stable tag: 5.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -153,7 +153,14 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 
 == Changelog ==
 
+= 5.3.0 =
+* 2018-03-23
+* New - Gutenberg compatibility
+* Tweak - Pages always responsive
+* Minor UI tweaks
+
 = 5.2.0 =
+* 2018-02-23
 * New - Featured image row background
 * Fix - Freemius cURL error
 * Tweak - Unsplash new API tweaks
