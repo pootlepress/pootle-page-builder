@@ -163,7 +163,7 @@ final class Pootle_Page_Builder_Front_Css_Js {
 		$panels_margin_bottom = $settings['margin-bottom'];
 		$panels_mobile_width  = apply_filters( 'pootlepb_rwd_mobile_width', $settings['mobile-width'] );
 
-		if ( $settings['responsive'] ) {
+		if ( $panels_mobile_width ) {
 			// Mobile Responsive
 
 			$this->css( 'width:100%;flex: 1 0;', '#pootle-page-builder .panel-grid-cell-container .panel-grid-cell', $panels_mobile_width );

@@ -258,7 +258,7 @@ function pootlepb_settings( $key = '' ) {
 
 	$settings = wp_parse_args( $settings, array(
 		'post-types'       => pootlepb_posts(), // Supported post types
-		'responsive'       => ! isset( $set['responsive'] ) ? true : $set['responsive'] == '1', // RWD?
+		'responsive'       => true, // Always responsive
 		'mobile-width'     => ! isset( $set['mobile-width'] ) ? 780 : $set['mobile-width'],      // Width for RWD
 		'margin-bottom'    => ! isset( $set['margin-bottom'] ) ? 0 : $set['margin-bottom'],     // for cell
 		'margin-sides'     => ! isset( $set['margin-sides'] ) ? 10 : $set['margin-sides'],      // for cells

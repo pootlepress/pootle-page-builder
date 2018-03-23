@@ -246,36 +246,19 @@ final class Pootle_Page_Builder_Admin {
 	 */
 	public function options_init() {
 		register_setting( 'pootlepage-add-ons', 'pootlepb_add_ons' );
-		register_setting( 'pootlepage-display', 'pootlepb_display', array(
-			$this,
-			'pootlepb_options_sanitize_display',
-		) );
+		register_setting( 'pootlepage-display', 'pootlepb_display' );
 		register_setting( 'pootlepage-display', 'pootlepb-hard-uninstall' );
 		register_setting( 'ppbpro_modules', 'ppb_enabled_addons' );
 		register_setting( 'ppbpro_modules', 'ppb_disabled_addons' );
 
 		add_settings_section( 'display', __( 'Display', 'ppb-panels' ), '__return_false', 'pootlepage-display' );
 
-		// The display fields
-		add_settings_field( 'responsive', __( 'Responsive', 'ppb-panels' ), array(
-			$this,
-			'options_field_generic',
-		), 'pootlepage-display', 'display', array( 'type' => 'responsive' ) );
 		//Mobile width
-		add_settings_field( 'mobile-width', __( 'Mobile Width', 'ppb-panels' ), array(
-			$this,
-			'options_field_generic',
-		), 'pootlepage-display', 'display', array( 'type' => 'mobile-width' ) );
-		// Module panel position
-		add_settings_field( 'modules-position', __( 'Modules insert panel position', 'ppb-panels' ), array(
-			$this,
-			'options_field_generic',
-		), 'pootlepage-display', 'display', array( 'type' => 'modules-position' ) );
-		// The display fields
-		add_settings_field( 'hard-uninstall', __( 'Delete ALL data on uninstall', 'ppb-panels' ), array(
-			$this,
-			'options_field_generic',
-		), 'pootlepage-display', 'display', array( 'type' => 'hard-uninstall' ) );
+		$settings_field_cb = array( $this, 'options_field_generic', );
+
+		add_settings_field( 'mobile-width', __( 'Mobile Width', 'ppb-panels' ), $settings_field_cb, 'pootlepage-display', 'display', array( 'type' => 'mobile-width' ) );
+		add_settings_field( 'modules-position', __( 'Modules insert panel position', 'ppb-panels' ), $settings_field_cb, 'pootlepage-display', 'display', array( 'type' => 'modules-position' ) );
+		add_settings_field( 'hard-uninstall', __( 'Delete ALL data on uninstall', 'ppb-panels' ), $settings_field_cb, 'pootlepage-display', 'display', array( 'type' => 'hard-uninstall' ) );
 	}
 
 	/**
@@ -325,11 +308,6 @@ final class Pootle_Page_Builder_Admin {
 				                value="1"/> <?php _e( 'Enabled', 'ppb-panels' ) ?></label>
 				<?php
 				break;
-			case 'responsive' :
-				?><label><input type="checkbox"
-				                <?php echo $name ?> <?php checked( $value ) ?>
-				                value="1"/> <?php _e( 'Enabled', 'ppb-panels' ) ?></label><?php
-				break;
 			case 'modules-position' :
 				?>
 				<label>
@@ -355,27 +333,13 @@ final class Pootle_Page_Builder_Admin {
 	}
 
 	/**
-	 * Sanitize display options
-	 *
-	 * @param $vals
-	 *
-	 * @return mixed
-	 * @since 0.1.0
-	 */
-	public function pootlepb_options_sanitize_display( $vals ) {
-		//Enable Responsive media queries
-		$vals['responsive']      = ! empty( $vals['responsive'] );
-		return $vals;
-	}
-
-	/**
 	 * Filters the row actions
 	 * @filter post_row_actions
 	 */
 	public function post_row_actions( $actions, $post ) {
 
 		if( in_array( $post->post_type, $this->post_types ) && pootlepb_uses_pb( $post ) ) {
-			
+
 			$nonce_url = wp_nonce_url( get_the_permalink( $post->ID ), 'ppb-live-edit-nonce', 'ppbLiveEditor' );
 			$actions['live-edit'] = '<a href="' . $nonce_url . '" aria-label="Edit “Home”">Live Edit</a>';
 		}
