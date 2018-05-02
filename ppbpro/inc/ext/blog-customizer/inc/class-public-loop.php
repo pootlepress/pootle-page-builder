@@ -221,7 +221,7 @@ class pootle_page_builder_blog_customizer_Public_Loop{
 
 		//Excerpt
 		if ( ! empty( $set['show-excerpt'] ) ) {
-			echo '<div class="excerpt"><p>' . substr( get_the_excerpt(), 0, 300 ) . '</p></div>';
+			echo '<div class="excerpt"><p>' . get_the_excerpt() . '</p></div>';
 		}
 
 		//Below excerpt meta area
