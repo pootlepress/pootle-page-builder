@@ -1661,7 +1661,7 @@ jQuery( function ( $ ) {
 					var self = this;
 
 					editor.on( 'nodeChange', function ( event ) {
-						each( event.parents, function ( node ) {
+						$.each( event.parents, function ( k, node ) {
 							self.active( ! ! editor.formatter.matchNode( node, nameLower ) );
 						} );
 					} );
