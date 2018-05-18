@@ -89,11 +89,6 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		return Pootle_Page_Builder_Live_Editor_Public::instance()->_active;
 	} // End __construct()
 
-	function tinymce_plugin( $plugin_array ) {
-		$plugin_array['ppblink'] = $this->url . '/assets/ppblink.js';
-
-		return $plugin_array;
-	}
 
 	public function post_status() {
 		return get_post_status( $this->post_id );
@@ -172,7 +167,6 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		wp_enqueue_script( 'ppb-ui-tooltip', "$ppb_js/ui.admin.tooltip.js" );
 		wp_enqueue_script( 'ppble-tmce-view', "$url/tmce.view.js" );
-		wp_enqueue_script( 'ppble-tmce-theme', "$url/tmce.theme.js", array( 'ppble-tmce-view' ) );
 
 		wp_enqueue_script( 'ppble-sd', "$url/showdown.min.js", array( 'ppb-ui', 'ppb-fields', ), $ver );
 
@@ -419,7 +413,6 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		add_action( 'pootlepb_before_pb', array( $this, 'before_pb' ), 7, 4 );
 		add_action( 'pootlepb_render_content_block', array( $this, 'edit_content_block' ), 7, 4 );
 		add_action( 'pootlepb_render', array( $this, 'mark_active' ), 999 );
-		add_filter( 'mce_external_plugins', array( $this, 'tinymce_plugin' ) ); // PPBlink tmce plugin
 
 		if ( ! empty( $_GET['edit_title'] ) ) {
 			$this->edit_title = true;

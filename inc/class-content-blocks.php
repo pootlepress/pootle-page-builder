@@ -271,6 +271,7 @@ final class Pootle_Page_Builder_Content_Block {
 				'default_editor' => 'tmce',
 				'editor_height' => 400,
 				'tinymce'        => array(
+					'toolbar1' => 'formatselect,bold,italic,bullist,numlist,link,fullscreen,wp_adv,alignleft,aligncenter,alignright,blockquote',
 					'force_p_newlines' => false,
 					'height' => 400,
 				)

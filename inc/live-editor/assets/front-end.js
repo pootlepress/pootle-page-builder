@@ -1516,29 +1516,27 @@ jQuery( function ( $ ) {
 		} );
 		prevu.reset();
 	} );
+
 	prevu.tmce.selector = '.pootle-live-editor-realtime:not(.mce-content-body)';
 	prevu.tmce.verify_html = false;
 	prevu.tmce.inline = true;
-	prevu.tmce.theme = 'ppbprevu';
 	prevu.tmce.fontsize_formats = '10px 12px 14px 16px 20px 25px 30px 35px 40px 50px 70px 100px';
+//	prevu.tmce.theme = 'ppbprevu';
 	prevu.tmce.toolbar = [
 		'h1',
 		'h2',
 		'h3',
-		'h4',
 		'shrameeFonts',
 		'fontsizeselect',
-		'blockquote',
 		'forecolor',
-		'ppblink',
+		'link',
 		'bold',
-		'italic',
 		'alignleft',
 		'aligncenter',
 		'alignright',
-		'ppbInsertImage'
 	];
-	prevu.tmce.plugins = prevu.tmce.plugins.replace( 'wpeditimage,', '' ).replace( 'wplink,', 'ppblink,' );
+
+	prevu.tmce.plugins = prevu.tmce.plugins.replace( 'wpeditimage,', '' );
 	console.log( prevu.tmce.plugins );
 	$postSettingsDialog.find( 'select' ).chosen();
 	prevu.tmce.content_css = ppbAjax.site + '/wp-includes/css/dashicons.min.css?ver=5.0.0';
@@ -1590,13 +1588,6 @@ jQuery( function ( $ ) {
 			$t = $( e.target.targetElm );
 			$( '.ppb-block.active, .ppb-row.active' ).removeClass( 'active' );
 			$t.parents( '.ppb-block, .ppb-row' ).addClass( 'active' );
-		} );
-		editor.addButton( 'ppbInsertImage', {
-			text: '',
-			icon: 'dashicons dashicons-format-image',
-			onclick: function () {
-				ppbIpad.insertImage();
-			}
 		} );
 		editor.addButton( 'ppbAlign', function () {
 			var items;
@@ -1650,6 +1641,34 @@ jQuery( function ( $ ) {
 				}
 			};
 		} );
+
+		$.each( {
+			H1 : 'Heading 1',
+			H2 : 'Heading 2',
+			H3 : 'Heading 3',
+			H4 : 'Heading 4',
+			H5 : 'Heading 5',
+			H6 : 'Heading 6',
+		}, function ( name, text ) {
+			var nameLower = name.toLowerCase();
+			editor.addButton( nameLower, {
+				tooltip : text,
+				text : name,
+				onclick : function () {
+					editor.formatter.toggle( nameLower );
+				},
+				onPostRender : function () {
+					var self = this;
+
+					editor.on( 'nodeChange', function ( event ) {
+						each( event.parents, function ( node ) {
+							self.active( ! ! editor.formatter.matchNode( node, nameLower ) );
+						} );
+					} );
+				}
+			} );
+		} );
+
 		editor.addButton( 'shrameeFonts', function () {
 			var items;
 			items = [
@@ -1876,22 +1895,21 @@ jQuery( function ( $ ) {
 			};
 		} );
 	};
-	prevu.tmce.formats = {
-		shrameeFontFormat: {
-			inline: 'span',
-			classes: 'ppb-google-font',
-			attributes: {
-				'data-font': '%gfont'
-			},
-			styles: {
-				fontFamily: '%font'
-			}
+	prevu.tmce.formats.shrameeFontFormat = {
+		inline: 'span',
+		classes: 'ppb-google-font',
+		attributes: {
+			'data-font': '%gfont'
 		},
-		ppbFoStFormat: {
-			block: 'h2',
-			classes: '%value'
+		styles: {
+			fontFamily: '%font'
 		}
 	};
+	prevu.tmce.formats.ppbFoStFormat = {
+		block: 'h2',
+		classes: '%value'
+	};
+
 	tinymce.init( prevu.tmce );
 	$ppb.sortable( prevu.rowsSortable );
 	$ppb.find( '.panel-grid' ).each( function () {

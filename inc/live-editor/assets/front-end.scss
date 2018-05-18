@@ -1202,6 +1202,35 @@ body .ppb-dialog {
 	.button, button, .ui-button {
 		background: #eee;
 	}
+	.wp-switch-editor {
+		box-sizing: content-box;
+	}
+}
+
+.mce-shramee-fonts-control {
+	i.mce-caret {
+		border-left: 4px solid #ef4732;
+		border-right: 4px solid #ef4732;
+		box-shadow: 0 0 0 5px #ef4732;
+	}
+	&:focus, &:hover, &.mce-active {
+		background-color: #bf3929;
+		i.mce-caret {
+			border-color: #bf3929;
+			border-top-color: #fff;
+			border-bottom-color: #fff;
+			box-shadow: 0 0 0 3px #bf3929;
+		}
+	}
+}
+
+.mce-panel div.mce-active i.mce-caret {
+	border-bottom: 6px solid #fff;
+}
+
+.mce-shramee-fonts-control button {
+	width: 100px;
+	overflow: hidden;
 }
 
 .search-unsplash-wrap {

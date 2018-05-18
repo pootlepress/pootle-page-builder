@@ -282,9 +282,13 @@ if ( $enabled_modules ) {
 	<div id="pootlepb-modules-wrap" class="position-<?php echo $side ?>">
 		<div class="dashicons dashicons-screenoptions" onclick="jQuery(this).parent().toggleClass('toggle')"></div>
 		<div id="pootlepb-modules">
+			<p class="desc">
 			<?php
+			_e( 'Drag a module anywhere onto your page to use. To edit module settings just re-drag the module over where you first added it.', 'ppb-panels' );
+			?>
+			</p>
 
-			pootlepb_prioritize_array( $ppb_modules );
+			<?php pootlepb_prioritize_array( $ppb_modules );
 
 			foreach ( $ppb_modules as $module ) {
 				$id     = $module['id'];
