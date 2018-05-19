@@ -8,8 +8,8 @@ Author URI: http://www.pootlepress.com
 Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
-Tested up to: 4.9.4
-Stable tag: 5.3.0
+Tested up to: 4.9.6
+Stable tag: 5.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -152,6 +152,13 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * 5.0.0 is a major release, Please backup your site before updating from 4.x.x
 
 == Changelog ==
+
+= 5.4.0 =
+* 2018-05-19
+* New - WordPress 4.9.6 compatibility
+* New - Gutenberg compatibility
+* New - Blog customizer (PRO) posts improved
+* Tweak - UI tweaks to improve UX
 
 = 5.3.0 =
 * 2018-03-23
