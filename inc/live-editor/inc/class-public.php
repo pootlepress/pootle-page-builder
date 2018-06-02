@@ -481,7 +481,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		?>
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-row" data-index="<?php echo $gi; ?>"
 				 data-i_bkp="<?php echo $gi; ?>">
-			<span href="javascript:void(0)" title="Row Styling" class="dashicons-before settings-dialog dashicons-edit">
+			<span href="javascript:void(0)" title="Row Styling" class="dashicons-before settings-dialog dashicons-admin-generic">
 				<span class="screen-reader-text">Edit Row</span>
 			</span>
 			<span href="javascript:void(0)" title="Row Sorting" class="dashicons-before drag-handle dashicons-editor-code">
@@ -518,7 +518,7 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			<span href="javascript:void(0)" title="Drag content block" class="dashicons-before drag-handle dashicons-move">
 				<span class="screen-reader-text">Drag content block</span>
 			</span>
-			<span href="javascript:void(0)" title="Edit Content" class="dashicons-before settings-dialog dashicons-edit">
+			<span href="javascript:void(0)" title="Edit Content" class="dashicons-before settings-dialog dashicons-admin-generic">
 				<span class="screen-reader-text">Edit Content Block</span>
 			</span>
 			<?php /*
