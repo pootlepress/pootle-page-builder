@@ -1017,14 +1017,13 @@ body .ppb-dialog {
 	.dashicons-before:before, .pootle-live-editor-addons .addon-label {
 		color: #ef4832;
 		padding: 5px;
-		background: rgba(255, 205, 205, 0.5);
+		background: #ffcdcd;
 	}
 	.dashicons-before {
 		&:before {
 			font-size: 25px;
 			width: 25px;
 			height: 25px;
-			width: 25px;
 			padding: 5px;
 			-webkit-border-radius: 50%;
 			-moz-border-radius: 50%;
@@ -1035,6 +1034,35 @@ body .ppb-dialog {
 			color: #fff;
 			background: #ef4832;
 		}
+	}
+}
+
+.ppb-insert-row {
+	border: 1px solid #ffcdcd;
+	top: 0;
+	left: 0;
+	right: 0;
+	cursor: pointer;
+	&:hover {
+		top: -1px;
+		border: 2px solid #ef4832;
+		:before {
+			color: #fff;
+			background: #ef4832;
+		}
+	}
+	.dashicons-before {
+		left: 50%;
+		position: absolute;
+		transform: translate(-50%, -50%);
+		&:before {
+			line-height: 1.2;
+		}
+	}
+
+	.panel-grid:hover & {
+		visibility: visible;
+		z-index: 9997;
 	}
 }
 

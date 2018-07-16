@@ -525,6 +525,9 @@ jQuery( function ( $ ) {
 			$focussedContent = $( '.mce-edit-focus' );
 			prevu.saveTmceBlock( $focussedContent );
 			$focussedContent.removeClass( 'mce-edit-focus' );
+
+			console.log( 'Moving row #' + olI + ' to #' + newI );
+
 			if ( newI == olI ) {
 				return;
 			}
@@ -1106,6 +1109,19 @@ jQuery( function ( $ ) {
 	$ppb.delegate( '.ppb-edit-row .dashicons-before', 'click', function () {
 		window.ppbRowI = $( this ).closest( '.pootle-live-editor' ).data( 'index' );
 	} );
+
+	$ppb.delegate( '.ppb-insert-row', 'click', function () {
+		var $row = $( this ).closest( '.ppb-row' );
+		$addRowDialog.callback = function ( $t ) {
+			$ppb.data( 'draggingRowI', $ppb.children( '.ppb-row' ).index( $t ) );
+			$t.insertBefore( $row );
+			$ppb.sortable( 'refresh' );
+			console.log( $ppb.data( 'draggingRowI' ), $ppb.children( '.ppb-row' ).index( $t ) );
+			prevu.syncRowPosition( $ppb.data( 'draggingRowI' ), $ppb.children( '.ppb-row' ).index( $t ) );
+		};
+		$addRowDialog.ppbDialog( 'open' );
+	} );
+
 	$ppb.delegate( '.ppb-edit-row .settings-dialog', 'click', function () {
 		$rowPanel.ppbDialog( 'open' );
 	} );
@@ -1255,9 +1271,8 @@ jQuery( function ( $ ) {
 		prevu.insertImage();
 	} );
 	$ppb.delegate( '.pootle-live-editor.add-row .dashicons-plus', 'click', function () {
-		var $lastRow;
+		var $lastRow = $( '.panel-grid:last-child' );
 		$addRowDialog.ppbDialog( 'open' );
-		$lastRow = $( '.panel-grid:last-child' );
 		if ( $lastRow.length ) {
 			$( 'html, body' ).animate( {
 				scrollTop: $lastRow.height() + $lastRow.offset().top
@@ -1487,6 +1502,7 @@ jQuery( function ( $ ) {
 			tinymce.activeEditor.execCommand( 'JustifyRight' );
 		}
 	};
+
 	$ppb.delegate( '.pootle-live-editor.add-content .dashicons-plus', 'click', function () {
 		var $t, data, id;
 		$t = $( this );

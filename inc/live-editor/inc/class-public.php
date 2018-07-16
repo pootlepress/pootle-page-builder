@@ -479,6 +479,11 @@ class Pootle_Page_Builder_Live_Editor_Public {
 			return;
 		}
 		?>
+		<div class="pootle-live-editor ppb-live-edit-object ppb-insert-row" data-index="<?php echo $gi; ?>"data-i_bkp="<?php echo $gi; ?>">
+			<span href="javascript:void(0)" title="Insert Row" class="dashicons-before dashicons-plus">
+				<span class="screen-reader-text">Insert Row</span>
+			</span>
+		</div>
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-row" data-index="<?php echo $gi; ?>"
 				 data-i_bkp="<?php echo $gi; ?>">
 			<span href="javascript:void(0)" title="Row Styling" class="dashicons-before settings-dialog dashicons-admin-generic">
