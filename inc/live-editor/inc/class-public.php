@@ -182,6 +182,11 @@ class Pootle_Page_Builder_Live_Editor_Public {
 
 		if ( isset( $_REQUEST['tour'] ) ) {
 			wp_enqueue_style( 'pootle-live-editor-tour-css', "$url/tour.css", array(), $ver );
+			wp_add_inline_style(
+				'pootle-live-editor-tour-css',
+				'#ppb-tour-dialog[slide-number="0"]{width: 560px;max-width: 100vw}' .
+				'#ppb-tour-dialog[slide-number="0"] iframe {height: 300px;margin: 7px 0}'
+			);
 			if ( $_REQUEST['tour'] == 'ipad' ) {
 				wp_enqueue_script( 'pootle-live-editor-tour', "$url/tour-ipad.js", array( 'jquery', ), $ver );
 			} else {
