@@ -12,7 +12,7 @@
  * @param newI
  * @returns Array
  */
-var logPPBData, ppbIpad, ppbNotify, ppbPrevuDebug, ppbTemplateFromRow;
+var logPPBData, ppbNotify, ppbPrevuDebug, ppbTemplateFromRow;
 
 Array.prototype.ppbPrevuMove = function ( oldI, newI ) {
 	this.splice( newI, 0, this.splice( oldI, 1 )[0] );
@@ -20,8 +20,6 @@ Array.prototype.ppbPrevuMove = function ( oldI, newI ) {
 };
 
 ppbPrevuDebug = 1;
-
-ppbIpad = {};
 
 logPPBData = function ( a, b, c ) {
 	var $, log;
@@ -525,8 +523,6 @@ jQuery( function ( $ ) {
 			$focussedContent = $( '.mce-edit-focus' );
 			prevu.saveTmceBlock( $focussedContent );
 			$focussedContent.removeClass( 'mce-edit-focus' );
-
-			console.log( 'Moving row #' + olI + ' to #' + newI );
 
 			if ( newI == olI ) {
 				return;
@@ -1116,7 +1112,6 @@ jQuery( function ( $ ) {
 			$ppb.data( 'draggingRowI', $ppb.children( '.ppb-row' ).index( $t ) );
 			$t.insertBefore( $row );
 			$ppb.sortable( 'refresh' );
-			console.log( $ppb.data( 'draggingRowI' ), $ppb.children( '.ppb-row' ).index( $t ) );
 			prevu.syncRowPosition( $ppb.data( 'draggingRowI' ), $ppb.children( '.ppb-row' ).index( $t ) );
 		};
 		$addRowDialog.ppbDialog( 'open' );
@@ -1344,115 +1339,6 @@ jQuery( function ( $ ) {
 			), 520 );
 		}
 	} );
-	ppbIpad.updatedNotice = $( '#ppb-ipad-updated-notice' );
-	ppbIpad.notice = $( '#ppb-ipad-notice' );
-	ppbIpad.AddRow = function () {
-		$addRowDialog.ppbDialog( 'open' );
-	};
-	ppbIpad.StyleRow = function () {
-		var $editBar, $row;
-		$row = $( '.panel-grid.active' );
-		if ( $row.length !== 1 ) {
-			alert( 'Please select a row by touching any of it\'s content blocks to start editing.' );
-			return;
-		}
-		$editBar = $row.children( '.pootle-live-editor' );
-		window.ppbRowI = $editBar.data( 'index' );
-		$rowPanel.ppbDialog( 'open' );
-	};
-	ppbIpad.StyleContent = function () {
-		var $block, $editBar;
-		$block = $( '.ppb-block.active' );
-		if ( $block.length !== 1 ) {
-			alert( 'Please select a content block to start editing.' );
-			return;
-		}
-		$editBar = $block.children( '.pootle-live-editor' );
-		window.ppbPanelI = $editBar.data( 'index' );
-		$contentPanel.ppbDialog( 'open' );
-	};
-	ppbIpad.insertImage = function () {
-		var $block;
-		$block = $( '.ppb-block.active' );
-		if ( $block.length !== 1 ) {
-			alert( 'Please select a content block to start editing.' );
-			return;
-		}
-		prevu.activeEditor = $block.children( '.pootle-live-editor-realtime' );
-		tinymce.execCommand( 'mceFocus', false, prevu.activeEditor.attr( 'id' ) );
-		prevu.insertImage();
-	};
-	ppbIpad.preview = function () {
-		prevu.sync( null, 'Publish' );
-	};
-	ppbIpad.postSettings = function () {
-		prevu.postSettings();
-	};
-	ppbIpad.AddRow = function () {
-		$addRowDialog.ppbDialog( 'open' );
-	};
-	ppbIpad.Update = function () {
-		var butt, err, error;
-		prevu.ajaxCallback = function ( no1, no2, url ) {
-			window.location = url + '?ppb-ipad=preview';
-		};
-		prevu.unSavedChanges = true;
-		prevu.saveTmceBlock( $( '.mce-edit-focus' ) );
-		ppbAjax.data = ppbData;
-		ppbAjax.publish = 'Publish';
-		prevu.noRedirect = 1;
-		if ( ppbAjax.title ) {
-			butt = [
-				{
-					text: 'Save Draft',
-					click: function () {
-						var err, error;
-						$setTitleDialog.ppbDialog( 'close' );
-						try {
-							webkit.messageHandlers.heySwift.postMessage( 'updatedLoadingPreview' );
-						} catch ( error ) {
-							err = error;
-							console.log( 'The native context does not exist yet' );
-						}
-						ppbIpad.notice.show( 0 );
-						ppbAjax.publish = 'Save Draft';
-						prevu.syncAjax();
-					}
-				}, {
-					text: 'Publish',
-					icons: {
-						primary: 'ipad-publish'
-					},
-					click: function () {
-						var err, error;
-						$setTitleDialog.ppbDialog( 'close' );
-						try {
-							webkit.messageHandlers.heySwift.postMessage( 'updatedLoadingPreview' );
-						} catch ( error ) {
-							err = error;
-							console.log( 'The native context does not exist yet' );
-						}
-						ppbIpad.notice.show( 0 );
-						ppbAjax.publish = 'Publish';
-						prevu.syncAjax();
-					}
-				}
-			];
-			$setTitleDialog.parent().data( 'action', 'Publish' );
-			$setTitleDialog.ppbDialog( 'option', 'buttons', butt );
-			$setTitleDialog.ppbDialog( 'open' );
-			return;
-		} else {
-			try {
-				webkit.messageHandlers.heySwift.postMessage( 'updatedLoadingPreview' );
-			} catch ( error ) {
-				err = error;
-				console.log( 'The native context does not exist yet' );
-			}
-			ppbIpad.notice.show( 0 );
-		}
-		prevu.syncAjax();
-	};
 	$ppbIpadColorDialog.delegate( '.ppb-ipad-color-picker span', 'mousedown', function ( e ) {
 		e.preventDefault();
 		return false;
@@ -1462,46 +1348,6 @@ jQuery( function ( $ ) {
 		tinymce.activeEditor.execCommand( 'ForeColor', false, $( this ).data( 'color' ) );
 		$ppbIpadColorDialog.hide();
 	} );
-	ppbIpad.format = {
-		H1: function () {
-			tinymce.activeEditor.execCommand( 'mceToggleFormat', false, 'h1' );
-		},
-		H2: function () {
-			tinymce.activeEditor.execCommand( 'mceToggleFormat', false, 'h2' );
-		},
-		H3: function () {
-			tinymce.activeEditor.execCommand( 'mceToggleFormat', false, 'h3' );
-		},
-		H4: function () {
-			tinymce.activeEditor.execCommand( 'mceToggleFormat', false, 'h4' );
-		},
-		Quote: function () {
-			tinymce.activeEditor.execCommand( 'mceBlockQuote' );
-		},
-		Color: function () {
-			var posTop;
-			posTop = Math.max( $( window ).scrollTop(), $( '.ppb-block.active' ).offset().top );
-			$ppbIpadColorDialog.show().css( 'top', posTop );
-		},
-		Link: function () {
-			tinymce.activeEditor.execCommand( 'PPB_Link' );
-		},
-		Bold: function () {
-			tinymce.activeEditor.execCommand( 'Bold' );
-		},
-		Italic: function () {
-			tinymce.activeEditor.execCommand( 'Italic' );
-		},
-		Left: function () {
-			tinymce.activeEditor.execCommand( 'JustifyLeft' );
-		},
-		Center: function () {
-			tinymce.activeEditor.execCommand( 'JustifyCenter' );
-		},
-		Right: function () {
-			tinymce.activeEditor.execCommand( 'JustifyRight' );
-		}
-	};
 
 	$ppb.delegate( '.pootle-live-editor.add-content .dashicons-plus', 'click', function () {
 		var $t, data, id;
@@ -1553,7 +1399,6 @@ jQuery( function ( $ ) {
 	];
 
 	prevu.tmce.plugins = prevu.tmce.plugins.replace( 'wpeditimage,', '' );
-	console.log( prevu.tmce.plugins );
 	$postSettingsDialog.find( 'select' ).chosen();
 	prevu.tmce.content_css = ppbAjax.site + '/wp-includes/css/dashicons.min.css?ver=5.0.0';
 	prevu.tmce.setup = function ( editor ) {
