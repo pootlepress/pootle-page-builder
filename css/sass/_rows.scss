@@ -102,3 +102,9 @@ img.ppb-bg-parallax {
 	padding-left: 0 !important;
 	padding-right: 0 !important;
 }
+
+@media (max-width: 767px ) {
+	.panel-row-style.ppb-row-effect-2 {
+		background-attachment: scroll;
+	}
+}
