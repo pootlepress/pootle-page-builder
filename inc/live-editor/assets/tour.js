@@ -118,7 +118,7 @@ jQuery( function ( $ ) {
 			{
 				el      : '.ppb-live-add-object.add-row',
 				head    : 'Pootle Pagebuilder Tour',
-				content : '<div class="embed-vimeo" style="text-align: center;"><iframe src="https://player.vimeo.com/video/215980602" width="640" height="360" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe></div>' +
+				content : '<div class="embed-vimeo" style="text-align: center;"><iframe src="https://player.vimeo.com/video/217173171" width="640" height="360" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe></div>' +
 									'Welcome to our 1 minute tour. Click ‘Next’ to be guided around your page and learn what you can do with Pootle Pagebuilder.'
 			},
 			{

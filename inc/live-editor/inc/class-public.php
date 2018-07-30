@@ -525,37 +525,12 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-block"
 				 data-index="<?php echo $content_block['info']['id']; ?>"
 				 data-i_bkp="<?php echo $content_block['info']['id']; ?>">
-			<span href="javascript:void(0)" title="Drag content block" class="dashicons-before drag-handle dashicons-move">
-				<span class="screen-reader-text">Drag content block</span>
-			</span>
 			<span href="javascript:void(0)" title="Edit Content" class="dashicons-before settings-dialog dashicons-admin-generic">
 				<span class="screen-reader-text">Edit Content Block</span>
 			</span>
-			<?php /*
-			<span href="javascript:void(0)" title="Insert image" class="dashicons-before dashicons-format-image">
-				<span class="screen-reader-text">Insert image</span>
+			<span href="javascript:void(0)" title="Drag content block" class="dashicons-before drag-handle dashicons-move">
+				<span class="screen-reader-text">Drag content block</span>
 			</span>
-			<?php
-			if ( ! empty( $this->addons ) ) {
-				?>
-				<span href="javascript:void(0)" title="Addons"
-				      class="dashicons-before dashicons-admin-plugins pootle-live-editor-addons">
-					<span class="screen-reader-text">Add ons</span>
-					<span class="pootle-live-editor-addons-list">
-					<?php
-					foreach ( $this->addons as $id => $addon ) {
-						$addon = wp_parse_args( $addon, array( 'icon' => 'dashicons-star-filled', ) );
-						echo
-							"<span href='javascript:void(0)' data-id='$id' title='$addon[label]' class='pootle-live-editor-addon dashicons-before $addon[icon]'>" .
-							"<span class='addon-text'><span class='addon-label'>$addon[label]</span></span>" .
-							"</span>";
-					}
-					?>
-					</span>
-				</span>
-				<?php
-			}
-			*/ ?>
 			<span href="javascript:void(0)" title="Delete Content" class="dashicons-before delete dashicons-no">
 				<span class="screen-reader-text">Delete Content</span>
 			</span>
