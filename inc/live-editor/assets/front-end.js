@@ -643,7 +643,7 @@ jQuery( function ( $ ) {
 				if ( roMinHi ) {
 					$ro.find( '.panel-grid-cell-container, .ppb-col' ).not( '.ppb-block *' ).css( 'min-height', roMinHi );
 				}
-				$t.find( '.ppb-edit-block .dashicons-before:first' ).click();
+				$t.find( '.ppb-edit-block .drag-handle' ).click();
 				ui.position.left = parseInt( $t.css( 'margin-left' ) );
 				ui.position.top = parseInt( $t.css( 'margin-top' ) );
 			},
@@ -720,7 +720,7 @@ jQuery( function ( $ ) {
 			start: function ( e, ui ) {
 				var $t;
 				$t = $( this );
-				$t.find( '.ppb-edit-block .dashicons-before:first' ).click();
+				$t.find( '.ppb-edit-block .drag-handle' ).click();
 				$t.css( {
 					maxWidth: 9999
 				} );
@@ -909,7 +909,10 @@ jQuery( function ( $ ) {
 		}
 	};
 	prevu.showdown = new showdown.Converter;
-	dialogAttr.open = prevu.openSidePanel( prevu.editPanel );
+	dialogAttr.open = function () {
+		console.log( 'Content panel opened' );
+		prevu.openSidePanel( prevu.editPanel );
+	};
 	dialogAttr.buttons.Done = prevu.savePanel;
 	dialogAttr.close = prevu.closeSidePanel();
 	$contentPanel.ppbTabs().ppbDialog( dialogAttr );
