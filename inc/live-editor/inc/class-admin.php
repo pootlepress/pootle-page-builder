@@ -341,8 +341,8 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 					<b>Double tap</b> to open content block settings.
 				</span>
 			</span>
-			<span title="Edit Content" class="dashicons-before dashicons-edit">
-				<span class="screen-reader-text">Edit Content Block</span>
+			<span title="Content styling" class="dashicons-before dashicons-edit">
+				<span class="screen-reader-text">Content block styling</span>
 			</span>
 			<span title="Insert Image" class="dashicons-before dashicons-format-image">
 				<span class="screen-reader-text">Insert Image</span>

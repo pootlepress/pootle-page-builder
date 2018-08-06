@@ -364,6 +364,7 @@ jQuery( function ( $ ) {
 			st = dt.style;
 			$rowPanel.find( '[data-style-field]' ).each( function () {
 				var $t, key;
+
 				$t = $( this );
 				key = $t.attr( 'data-style-field' );
 				if ( 'undefined' === typeof st[key] ) {
@@ -911,7 +912,7 @@ jQuery( function ( $ ) {
 	prevu.showdown = new showdown.Converter;
 	dialogAttr.open = function () {
 		console.log( 'Content panel opened' );
-		prevu.openSidePanel( prevu.editPanel );
+		prevu.openSidePanel( prevu.editPanel )();
 	};
 	dialogAttr.buttons.Done = prevu.savePanel;
 	dialogAttr.close = prevu.closeSidePanel();
