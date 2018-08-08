@@ -525,8 +525,8 @@ class Pootle_Page_Builder_Live_Editor_Public {
 		<div class="pootle-live-editor ppb-live-edit-object ppb-edit-block"
 				 data-index="<?php echo $content_block['info']['id']; ?>"
 				 data-i_bkp="<?php echo $content_block['info']['id']; ?>">
-			<span href="javascript:void(0)" title="Edit Content" class="dashicons-before settings-dialog dashicons-admin-generic">
-				<span class="screen-reader-text">Edit Content Block</span>
+			<span href="javascript:void(0)" title="Content styling" class="dashicons-before settings-dialog dashicons-admin-generic">
+				<span class="screen-reader-text">Style Content Block</span>
 			</span>
 			<span href="javascript:void(0)" title="Drag content block" class="dashicons-before drag-handle dashicons-move">
 				<span class="screen-reader-text">Drag content block</span>
