@@ -110,7 +110,7 @@ function ppb_fs() {
 
 		$ppb_fs = fs_dynamic_init( array(
 			'id'             => '269',
-			'slug'           => 'pootle-page-builder',
+			'slug'           => 'ppb-panels',
 			'public_key'     => 'pk_cb4e7b7932169240ac86c3fb01dd5',
 			'is_premium'     => true,
 			'has_paid_plans' => true,

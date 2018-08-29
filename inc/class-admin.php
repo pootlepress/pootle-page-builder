@@ -89,7 +89,7 @@ final class Pootle_Page_Builder_Admin {
 	) {
 		return sprintf(
 			__fs( 'hey-x' ) . '<br>' .
-			__( 'Never miss an important update - Opt-in to our security and feature updates notifications, and non-sensitive diagnostic tracking with freemius.com', 'pootle-page-builder' ),
+			__( 'Never miss an important update - Opt-in to our security and feature updates notifications, and non-sensitive diagnostic tracking with freemius.com', 'ppb-panels' ),
 			$user_first_name,
 			'<b>' . $plugin_title . '</b>',
 			'<b>' . $user_login . '</b>',

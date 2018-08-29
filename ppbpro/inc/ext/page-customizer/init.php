@@ -209,7 +209,7 @@ final class Pootle_Page_Customizer {
 		$this->load_plugin_textdomain();
 		$this->get_meta_fields();
 
-		new Lib_Customizer_Postmeta( $this->token, __( 'Page Customizer', 'pootle-page-builder' ), $this->fields );
+		new Lib_Customizer_Postmeta( $this->token, __( 'Page Customizer', 'ppb-panels' ), $this->fields );
 		new Pootle_Page_Customizer_Public( $this->token );
 
 		add_action( 'customize_controls_enqueue_scripts', array( $this, 'customizer_script' ) );
@@ -225,10 +225,10 @@ final class Pootle_Page_Customizer {
 			$url = urlencode( get_permalink( $post->ID ) . "?post_id={$post->ID}" );
 			$args = array(
 				'id'    => 'page-custo-link',
-				'title' => __( 'Customize Page', 'pootle-page-builder' ),
+				'title' => __( 'Customize Page', 'ppb-panels' ),
 				'href'  => admin_url( "customize.php?post_id={$post->ID}&autofocus[panel]=lib-pootle-page-customizer&url=" . $url ),
 				'meta'  => array(
-					'title' => __( 'Customize this page in customizer', 'pootle-page-builder' ), // Text will be shown on hovering
+					'title' => __( 'Customize this page in customizer', 'ppb-panels' ), // Text will be shown on hovering
 				),
 			);
 			$admin_bar->add_menu( $args );
