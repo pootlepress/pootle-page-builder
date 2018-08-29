@@ -1,7 +1,12 @@
 .ppb-block {
 	box-sizing: content-box;
 	background: center/cover;
+	* {
+		z-index: 1;
+		position: relative;
+	}
 	&[style*='background-image:']:before {
+		z-index: 0;
 		position: absolute;
 		top: 0;
 		left: 0;
