@@ -1,6 +1,15 @@
 .ppb-block {
 	box-sizing: content-box;
 	background: center/cover;
+	&[style*='background-image:']:before {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: inherit;
+		content: '';
+	}
 }
 
 .ppb-fa-icon a {
