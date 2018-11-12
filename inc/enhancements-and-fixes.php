@@ -137,3 +137,12 @@ function pootlepb_override_gutenberg_init( $enable ) {
 	}
 	return $enable;
 }
+
+add_filter( 'use_block_editor_for_post', 'pootlepb_use_block_editor_for_post', 25, 2 );
+
+function pootlepb_use_block_editor_for_post( $use_block_editor, $post ) {
+	if ( pootlepb_uses_pb( $post ) ) {
+		$use_block_editor = false;
+	}
+	return $use_block_editor;
+}
