@@ -1,7 +1,7 @@
 .ppb-block {
 	box-sizing: content-box;
 	background: center/cover;
-	* {
+	> * {
 		z-index: 1;
 		position: relative;
 	}

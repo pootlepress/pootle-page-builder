@@ -7,7 +7,7 @@
 	left: -340px;
 	width: 340px;
 	background: #eee;
-	z-index: 9999;
+	z-index: 999999;
 	transition: left 0.25s, right 0.25s;
 	&.position-right {
 		left: auto;
