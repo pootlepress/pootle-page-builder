@@ -41,11 +41,9 @@ final class Pootle_Page_Builder_Admin_UI {
 	 */
 	public function metabox() {
 		foreach ( pootlepb_settings( 'post-types' ) as $type ) {
-			if ( ! defined( 'GUTENBERG_VERSION' ) || pootlepb_uses_pb() ) {
-				add_meta_box( 'pootlepb-panels', __( 'Page Builder', 'ppb-panels' ), array(
-					$this,
-					'metabox_render'
-				), $type, 'advanced', 'high' );
+			if ( ! function_exists( 'register_block_type' ) || pootlepb_uses_pb() ) {
+				add_meta_box( 'pootlepb-panels', __( 'Page Builder', 'ppb-panels' ),
+					array( $this, 'metabox_render' ), $type, 'advanced', 'high' );
 			}
 		}
 	}
