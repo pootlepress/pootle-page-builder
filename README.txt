@@ -8,8 +8,8 @@ Author URI: http://www.pootlepress.com
 Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
-Tested up to: 4.9.6
-Stable tag: 5.4.0
+Tested up to: 5.0.0
+Stable tag: 5.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -152,6 +152,19 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * 5.0.0 is a major release, Please backup your site before updating from 4.x.x
 
 == Changelog ==
+
+= 5.5.0 =
+* 2018-12-05
+* New - WordPress 5.0.0 compatibility
+* New - Option to add a row above an existing row
+* New - Allow content block color overlay on image
+* Fix - Overlay for Ken burns
+* Fix - Mobile parallax pictures super zoomed
+* Fix - z-index issue affect external plugins content like Gravity forms
+* Tweak - Edit icons changed to settings icon
+* Tweak - Intro tour improved
+* Tweak - Front end JS cleaned
+* Tweak - Post builder (PRO) pagination fix
 
 = 5.4.0 =
 * 2018-05-19
