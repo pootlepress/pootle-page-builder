@@ -25,7 +25,7 @@ final class Pootle_Page_Builder_Admin_UI {
 	 */
 	public function __construct() {
 
-		add_action( 'add_meta_boxes', array( $this, 'metabox' ) );
+		add_action( 'add_meta_boxes', array( $this, 'metabox' ), 10, 2 );
 		add_action( 'admin_print_styles-post-new.php', array( $this, 'enqueue_styles' ) );
 		add_action( 'admin_print_styles-post.php', array( $this, 'enqueue_styles' ) );
 		add_action( 'admin_print_styles-post-new.php', array( $this, 'enqueue_scripts' ) );
@@ -39,9 +39,9 @@ final class Pootle_Page_Builder_Admin_UI {
 	 * Callback to register the Panels Metaboxes
 	 * @since 0.1.0
 	 */
-	public function metabox() {
+	public function metabox( $post_type, $post ) {
 		foreach ( pootlepb_settings( 'post-types' ) as $type ) {
-			if ( ! function_exists( 'register_block_type' ) || pootlepb_uses_pb() ) {
+			if ( ! ( function_exists( 'use_block_editor_for_post' ) && use_block_editor_for_post( $post ) ) || pootlepb_uses_pb() ) {
 				add_meta_box( 'pootlepb-panels', __( 'Page Builder', 'ppb-panels' ),
 					array( $this, 'metabox_render' ), $type, 'advanced', 'high' );
 			}
