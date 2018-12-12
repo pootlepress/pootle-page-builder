@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 5.0.0
-Stable tag: 5.5.0
+Stable tag: 5.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -152,6 +152,11 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
  * 5.0.0 is a major release, Please backup your site before updating from 4.x.x
 
 == Changelog ==
+
+= 5.5.1 =
+* 2018-12-12
+* Fix - Classic editor compatibility
+* Fix - Yoast SEO compatibility
 
 = 5.5.0 =
 * 2018-12-05
