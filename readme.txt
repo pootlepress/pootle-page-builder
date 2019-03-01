@@ -1,4 +1,4 @@
-=== Pootle Pagebuilder ===
+=== Pootle Pagebuilder - WordPress Page builder ===
 
 Contributors: pootlepress, shramee, jamesmarsland
 Plugin Name: pootle page builder
