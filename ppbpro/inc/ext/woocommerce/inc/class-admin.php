@@ -32,7 +32,7 @@ class pootle_page_builder_for_WooCommerce_Admin{
 	/**
 	 * Main Pootle Slider Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
-	 * @return pootle_page_builder_for_WooCommerce instance
+	 * @return self instance
 	 * @since 	1.0.0
 	 */
 	public static function instance() {
@@ -304,5 +304,19 @@ class pootle_page_builder_for_WooCommerce_Admin{
 			<?php
 			return;
 		}
+	}
+
+	public function admin_init() {
+		register_setting( 'pootlepage-display', 'ppb_wc_shop' );
+		add_settings_field( 'ppb_wc_shop', __( 'Enable Page Builder Shop', 'ppb-panels' ), [ $this, 'render_shop_field' ], 'pootlepage-display', 'display' );
+	}
+
+	public function render_shop_field() {
+		?>
+		<label>
+			<input type="checkbox" name="ppb_wc_shop" id="ppb_wc_shop" <?php checked( get_option( 'ppb_wc_shop' ) ) ?> value="1"/>
+			<?php _e( 'Enabled', 'ppb-panels' ) ?>
+		</label>
+		<?php
 	}
 }

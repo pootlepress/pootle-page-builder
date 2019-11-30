@@ -8,7 +8,7 @@ Author URI: http://www.pootlepress.com
 Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
-Tested up to: 5.0.0
+Tested up to: 5.3.0
 Stable tag: 5.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -133,7 +133,7 @@ We encourage everyone to contribute their ideas, thoughts and code snippets. Thi
 5. Row display settings / Background video
 
 6. Row display settings / Layout
-
+t
 7. Modules
 
 8. WooCommerce module (pro version only)

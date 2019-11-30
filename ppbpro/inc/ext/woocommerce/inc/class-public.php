@@ -7,7 +7,7 @@
  * @property string $path Plugin root dir path
  * @property string $version Plugin version
  */
-class pootle_page_builder_for_WooCommerce_Public{
+class pootle_page_builder_for_WooCommerce_Public {
 
 	private $i = 1;
 	private $id = '';
@@ -33,7 +33,7 @@ class pootle_page_builder_for_WooCommerce_Public{
 	 * Main Pootle Slider Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.
 	 * @since 1.0.0
-	 * @return pootle_page_builder_for_WooCommerce instance
+	 * @return self instance
 	 */
 	public static function instance() {
 		if ( null == self::$_instance ) {
@@ -67,6 +67,31 @@ class pootle_page_builder_for_WooCommerce_Public{
 		wp_enqueue_style( 'owl-carousel-css', 'https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css' );
 		wp_enqueue_script( 'owl-carousel-js', 'https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js', array( 'jquery' ) );
 	} // End enqueue()
+
+	public function maybe_clear_shop_content() {
+		// @TODO check if shop page uses ppb
+		if ( get_option( 'ppb_wc_shop' ) && is_shop() ) {
+			?>
+			<style>
+				.woocommerce-products-header {
+					padding: 0 !important;
+				}
+				.woocommerce-products-header ~ * {
+					display: none;
+				}
+			</style>
+			<?php
+			$GLOBALS['woocommerce_loop']['total'] = 0;
+			remove_all_actions( 'woocommerce_before_main_content' );
+			remove_all_actions( 'woocommerce_archive_description' );
+			remove_all_actions( 'woocommerce_before_shop_loop' );
+			remove_all_actions( 'woocommerce_shop_loop' );
+			remove_all_actions( 'woocommerce_after_shop_loop' );
+			remove_all_actions( 'woocommerce_no_products_found' );
+			remove_all_actions( 'woocommerce_after_main_content' );
+			remove_all_actions( 'woocommerce_sidebar' );
+		}
+	}
 
 	/**
 	 * Handles the rendering of the tabs

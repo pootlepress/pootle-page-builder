@@ -96,6 +96,7 @@ class pootle_page_builder_for_WooCommerce{
 
 		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'check_ppb_version' ) );
+
 	} // End __construct()
 
 	/**
@@ -140,6 +141,9 @@ class pootle_page_builder_for_WooCommerce{
 		add_filter( 'pootlepb_content_block_fields', array( $this->admin, 'content_block_fields' ) );
 		//Add our awesome stuff
 		add_action( 'pootlepb_content_block_wc_prods_tab_after_fields', array( $this->admin, 'wc_required_notice' ) );
+		// Adds shop replace setting
+		add_action( 'admin_init', array( $this->admin, 'admin_init' ) );
+
 
 	}
 
@@ -157,6 +161,8 @@ class pootle_page_builder_for_WooCommerce{
 		add_filter( 'woocommerce_tab_manager_tab_panel_content', array( $this->public, 'wc_tabs_filter' ), 7, 3 );
 		//Add the products to content block
 		add_action( 'pootlepb_render_content_block', array( $this->public, 'render_products' ), 52 );
+		// Process PPB shop page
+		add_action( 'woocommerce_archive_description', array( $this->public, 'maybe_clear_shop_content' ), 99 );
 
 	} // End enqueue()
 
