@@ -70,7 +70,7 @@ class pootle_page_builder_for_WooCommerce_Public {
 
 	public function maybe_clear_shop_content() {
 		// @TODO check if shop page uses ppb
-		if ( get_option( 'ppb_wc_shop' ) && is_shop() ) {
+		if ( get_option( 'ppb_wc_shop' ) && function_exists( 'is_shop' ) && is_shop() ) {
 			?>
 			<style>
 				.woocommerce-products-header {
@@ -89,7 +89,9 @@ class pootle_page_builder_for_WooCommerce_Public {
 			remove_all_actions( 'woocommerce_after_shop_loop' );
 			remove_all_actions( 'woocommerce_no_products_found' );
 			remove_all_actions( 'woocommerce_after_main_content' );
-			remove_all_actions( 'woocommerce_sidebar' );
+			add_action( 'woocommerce_before_main_content', 'storefront_before_content', 10 );
+			add_action( 'woocommerce_after_main_content', 'storefront_after_content', 10 );
+//			remove_all_actions( 'woocommerce_sidebar' );
 		}
 	}
 
