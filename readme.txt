@@ -9,7 +9,7 @@ Author: PootlePress
 Donate link:
 Requires at least: 4.1.0
 Tested up to: 5.4.0
-Stable tag: 5.5.2
+Stable tag: 5.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -152,6 +152,10 @@ t
  * 5.0.0 is a major release, Please backup your site before updating from 4.x.x
 
 == Changelog ==
+
+= 5.6.0 =
+* 2020-05-04
+* Tweak - Font awesome picker FA5 icons
 
 = 5.5.2 =
 * 2019-03-01
