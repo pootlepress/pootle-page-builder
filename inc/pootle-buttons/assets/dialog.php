@@ -359,6 +359,10 @@ $assets_url = esc_attr( $_GET['assets_url'] );
 	</footer>
 
 	<?php wp_print_footer_scripts(); ?>
+	<script>
+		wpColorPicker_i18n={"clear":"Clear","defaultString":"Default","pick":"Select Color","current":"Current Color"};
+		wpColorPickerL10n=wpColorPicker_i18n;
+	</script>
 	<script src="<?php echo $assets_url . 'alpha-color.js' ?>"></script>
 	<link rel="stylesheet" href="<?php echo $assets_url . 'dashicons-select.css' ?>">
 	<script src="<?php echo $assets_url . 'dashicons-select.js?v=1.0.1' ?>"></script>
