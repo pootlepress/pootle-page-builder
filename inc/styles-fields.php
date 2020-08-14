@@ -458,7 +458,9 @@ function pootlepb_style_sanitize_data( $panels_data ) {
 			switch ( $attr['type'] ) {
 				case 'checkbox':
 					// Convert the checkbox value to true or false.
-					$panels_data['grids'][ $i ]['style'][ $name ] = ! empty( $panels_data['grids'][ $i ]['style'][ $name ] );
+					if ( empty( $panels_data['grids'][ $i ]['style'][ $name ] ) ) {
+						unset( $panels_data['grids'][ $i ]['style'][ $name ] );
+					}
 					break;
 
 				case 'number':
@@ -472,7 +474,7 @@ function pootlepb_style_sanitize_data( $panels_data ) {
 				case 'select' :
 					// Make sure the value is in the options
 					if ( ! in_array( $panels_data['grids'][ $i ]['style'][ $name ], array_keys( $attr['options'] ) ) ) {
-						$panels_data['grids'][ $i ]['style'][ $name ] = false;
+						unset( $panels_data['grids'][ $i ]['style'][ $name ] );
 					}
 					break;
 			}
