@@ -51,7 +51,8 @@ class pootle_page_builder_blog_customizer_Admin{
 		wp_enqueue_style( $token . '-admin-css', $url . '/assets/admin.css' );
 		wp_enqueue_script( $token . '-admin-js', $url . '/assets/admin.js', array( 'jquery' ) );
 
-		wp_localize_script( $token . '-admin-js', 'ppbPostCustomizerUrl', $this->url );
+		// wp_localize_script( $token . '-admin-js', 'ppbPostCustomizerUrl', $this->url );
+		wp_add_inline_script($token . '-admin-js', 'var ppbPostCustomizerUrl = ' . json_encode($this->url) . ';', 'before');
 	}
 
 	/**

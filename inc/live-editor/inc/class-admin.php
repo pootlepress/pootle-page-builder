@@ -55,7 +55,8 @@ class Pootle_Page_Builder_Live_Editor_Admin {
 
 		// Live preview nonce
 		$nonce_url = wp_nonce_url( get_the_permalink( $post->ID ), 'ppb-live-' . $post->ID, 'ppbLiveEditor' );
-		wp_localize_script( 'pootle-live-editor-js', 'live_editor_url', $nonce_url );
+		// wp_localize_script( 'pootle-live-editor-js', 'live_editor_url', $nonce_url );
+		wp_add_inline_script('pootle-live-editor-js', 'var live_editor_url = ' . json_encode($nonce_url) . ';', 'before');
 	}
 
 	/**
