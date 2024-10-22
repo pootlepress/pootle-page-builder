@@ -1,6 +1,6 @@
 {
   "name": "pootle-page-builder",
-  "version": "4.1.1",
+  "version": "5.7.3",
   "description": "",
   "author": "Shramee",
   "license": "GPL-3.0",
@@ -11,16 +11,23 @@
     "autoprefixer"
   ],
   "devDependencies": {
+    "@wordpress/env": "^10.10.0",
+    "bestzip": "^2.2.1",
     "grunt": "~0.4.5",
-    "grunt-newer": "1",
     "grunt-autoprefixer": "~3.0.4",
     "grunt-contrib-coffee": "^1.0.0",
     "grunt-contrib-sass": "~1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
-    "grunt-contrib-watch": "~1.0.0"
+    "grunt-contrib-watch": "~1.0.0",
+    "grunt-newer": "1"
   },
-  "dependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server:start": "npx wp-env start",
+    "server:stop": "npx wp-env stop",
+    "server:destroy": "npx wp-env destroy",
+    "zip": "npm run zip:mkdir && bestzip $npm_package_name.$npm_package_version.zip ./$npm_package_name/* && npm run zip:rmdir",
+    "zip:mkdir": "mkdir $npm_package_name && cp -r css inc js lang ppbpro tpl wp-sdk pootle-page-builder.php readme.txt run-on-uninstall.php license.txt ./$npm_package_name",
+    "zip:rmdir": "rm -r ./$npm_package_name"
   }
 }

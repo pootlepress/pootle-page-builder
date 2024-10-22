@@ -3,3 +3,11 @@ node_modules/*
 wp-sdk/assets/img/pootle-page-builder.png
 
 wp-sdk/assets/img/storefront-pro.png
+node_modules/*
+node_modules/
+.wp-env.json
+package.json
+package-lock.json
+*.zip
+**/.DS_Store
+.DS_Store

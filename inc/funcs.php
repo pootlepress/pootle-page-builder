@@ -182,7 +182,7 @@ function pootlepb_is_panel( $can_edit = false, $post = false ) {
  * @since 0.1.0
  */
 function pootlepb_uses_pb( $post_id = false ) {
-	if ( ! $post_id ) {
+	if ( ! $post_id && isset($post->ID) ) {
 		global $post;
 		$post_id = $post->ID;
 	} else if ( $post_id instanceof WP_Post ) {
@@ -289,7 +289,7 @@ function pootlepb_posts() {
  */
 function pootlepb_priority_cmp( $a, $b ) {
 
-	return $a['priority'] > $b['priority'];
+	return $a['priority'] > $b['priority'] ? 1 : - 1;
 }
 
 /**

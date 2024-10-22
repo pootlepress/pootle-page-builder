@@ -118,15 +118,12 @@ function ppb_fs() {
 			'has_premium_version' => true,
 			'has_addons'          => false,
 			'has_paid_plans'      => true,
-			'hide_trial'          => true,
+			'is_org_compliant'    => false,
 			'menu'                => array(
 				'slug'       => 'page_builder',
 				'first-path' => 'admin.php?page=page_builder',
 				'contact'    => false,
 			),
-			// Set the SDK to work in a sandbox mode (for development & testing).
-			// IMPORTANT: MAKE SURE TO REMOVE SECRET KEY BEFORE DEPLOYMENT.
-			'secret_key'          => 'sk_Ps6;5x%cnDM:eoqhd2~<*vvr[}OoZ',
 		) );
 	}
 

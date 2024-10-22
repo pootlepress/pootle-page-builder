@@ -21,6 +21,11 @@ class page_builder_photo_addon_Public{
 	protected $method;
 	protected $id = 0;
 
+	public string $token;
+	public string $url;
+	public string $path;
+	public string $version;
+
 	/**
 	 * Main Pootle page builder Photography add on Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.

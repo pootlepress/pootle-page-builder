@@ -15,6 +15,11 @@ class Pootle_Page_Builder_Pro_Admin {
 	 */
 	private static $_instance = null;
 
+	public string $token;
+	public string $url;
+	public string $path;
+	public string $version;
+
 	/**
 	 * Main Pootle Page Builder Pro Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.

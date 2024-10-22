@@ -38,6 +38,13 @@ class Pootle_Page_Builder_Live_Editor_Public {
 	private $user;
 	private $nonce;
 	private $ipad = false;
+	private $pi;
+
+	public string $token;
+	public string $url;
+	public string $path;
+	public string $version;
+
 
 	/**
 	 * Constructor function.

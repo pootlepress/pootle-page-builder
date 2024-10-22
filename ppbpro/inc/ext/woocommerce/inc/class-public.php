@@ -29,6 +29,11 @@ class pootle_page_builder_for_WooCommerce_Public {
 	 */
 	private static $_instance = null;
 
+	public string $token;
+	public string $url;
+	public string $path;
+	public string $version;
+
 	/**
 	 * Main Pootle Slider Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.

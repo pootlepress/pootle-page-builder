@@ -23,6 +23,11 @@ class pootle_page_builder_one_pager_Public{
 	 */
 	private $sections = array();
 
+	public string $token;
+	public string $url;
+	public string $path;
+	public string $version;
+
 	/**
 	 * Main pootle page builder one pager Instance
 	 * Ensures only one instance of Storefront_Extension_Boilerplate is loaded or can be loaded.

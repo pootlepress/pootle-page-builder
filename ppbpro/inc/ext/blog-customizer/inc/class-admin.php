@@ -15,6 +15,11 @@ class pootle_page_builder_blog_customizer_Admin{
 	 */
 	private static $_instance = null;
 
+	public string $token;
+	public string $url;
+	public string $path;
+	public string $version;
+
 	/**
 	 * Main pootle page builder blog customizer Instance
 	 * @return pootle_page_builder_blog_customizer_Admin instance
