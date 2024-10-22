@@ -26,7 +26,7 @@
     "server:start": "npx wp-env start",
     "server:stop": "npx wp-env stop",
     "server:destroy": "npx wp-env destroy",
-    "zip": "npm run zip:mkdir && bestzip $npm_package_name.$npm_package_version.zip ./$npm_package_name/* && npm run zip:rmdir",
+    "zip": "npm run zip:mkdir && bestzip $npm_package_name-premium.$npm_package_version.zip ./$npm_package_name/* && npm run zip:rmdir",
     "zip:mkdir": "mkdir $npm_package_name && cp -r css inc js lang ppbpro tpl wp-sdk pootle-page-builder.php readme.txt run-on-uninstall.php license.txt ./$npm_package_name",
     "zip:rmdir": "rm -r ./$npm_package_name"
   }
