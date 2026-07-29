@@ -7,9 +7,10 @@ Tags: page builder, pagebuilder, pootlepress, pootle page builder, pootlepagebui
 Author URI: http://www.pootlepress.com
 Author: PootlePress
 Donate link:
-Requires at least: 4.1.0
-Tested up to: 6.0.0
-Stable tag: 5.7.4
+Requires at least: 6.0
+Tested up to: 7.0
+Requires PHP: 7.4
+Stable tag: 5.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -152,6 +153,11 @@ t
  * 5.0.0 is a major release, Please backup your site before updating from 4.x.x
 
 == Changelog ==
+
+= 5.8.0 =
+* Fix - Removed unused legacy licence-manager code that contained a file PHP 7.1+ cannot parse
+* Tweak - Freemius SDK updated to 2.13.4
+* Tweak - Tested with WordPress 7.0 and PHP 8.4
 
 = 5.7.4 =
 * 2025-02-11
