@@ -275,6 +275,12 @@ final class Pootle_Page_Builder_Admin_UI {
 	 * @since 0.1.0
 	 */
 	public function ajax_action_prebuilt() {
+		// The comment below always said "layouts the current user could edit",
+		// but nothing ever checked. Make it true.
+		if ( ! current_user_can( 'edit_posts' ) ) {
+			wp_send_json_error( array( 'message' => 'Permission denied.' ), 403 );
+		}
+
 		// Get any layouts that the current user could edit.
 		$layouts = apply_filters( 'pootlepb_prebuilt_layouts', array() );
 

@@ -85,6 +85,15 @@ class Pootle_PB_Pootle_Cloud {
 	}
 
 	function save_cloud_tpls() {
+		// Writes straight to an option. Nothing in the plugin calls this, but
+		// while it stays registered it must not be open to every logged in user.
+		if (
+			! check_ajax_referer( 'pcld_save_tpls', 'nonce', false ) ||
+			! current_user_can( 'edit_theme_options' )
+		) {
+			wp_send_json_error( array( 'message' => 'Permission denied.' ), 403 );
+		}
+
 		if ( ! empty( $_POST['tpls'] ) ) {
 			$tpls = $_POST['tpls'];
 

@@ -3,7 +3,7 @@
  * Plugin Name: Pootle Pagebuilder - WordPress Page builder
  * Plugin URI: http://pootlepress.com/
  * Description: Pootle Pagebuilder is a front-end, drag and drop page builder that makes it easy to create beautiful WordPress pages and posts.
- * Version: 5.8.0
+ * Version: 5.8.1
  * Requires at least: 6.0
  * Requires PHP: 7.4
  * Tested up to: 7.0
@@ -17,7 +17,7 @@
 if ( ! class_exists( 'Pootle_Page_Builder' ) ) {
 
 	/** Pootle page builder current version */
-	define( 'POOTLEPB_VERSION', '5.8.0' );
+	define( 'POOTLEPB_VERSION', '5.8.1' );
 	/** Pootle page builder __FILE__ */
 	define( 'POOTLEPB_BASE_FILE', __FILE__ );
 	/** Pootle page builder plugin directory path */

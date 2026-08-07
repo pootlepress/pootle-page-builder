@@ -10,7 +10,7 @@ Donate link:
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 5.8.0
+Stable tag: 5.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -153,6 +153,11 @@ t
  * 5.0.0 is a major release, Please backup your site before updating from 4.x.x
 
 == Changelog ==
+
+= 5.8.1 =
+* Security: the cloud template save endpoint now requires a nonce and the capability to edit theme options. Previously any logged in user could write arbitrary data into a site option.
+* Security: the prebuilt layouts endpoint now checks that the user can edit posts, which is what it always claimed to do.
+
 
 = 5.8.0 =
 * Fix - Removed unused legacy licence-manager code that contained a file PHP 7.1+ cannot parse
